@@ -1,6 +1,7 @@
 package room
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"math/rand"
@@ -9,6 +10,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/os/gtimer"
 	"github.com/gogf/gf/v2/util/gconv"
 )
 
@@ -34,28 +37,34 @@ const (
 	AI
 )
 
+const (
+	OutCard = 10 //出牌最大时间
+)
+
 // 玩家结构体
 type Player struct {
-	ID     int
-	Cards  []Card
-	Name   string
-	RoomID string     // 玩家所在房间ID
-	Type   PlayerType // 玩家类型（人类或AI）
+	ID       int
+	Cards    []Card
+	Name     string
+	RoomID   string     // 玩家所在房间ID
+	Type     PlayerType // 玩家类型（人类或AI）
+	OutCards []Card     //玩家单次打出的牌
 }
 
 // 房间结构体
 type Room struct {
-	ID        string
-	Players   []*Player
-	Deck      []Card
-	Landlord  *Player
-	Farmers   []*Player
-	Current   int    // 当前出牌玩家索引
-	LastCards []Card // 上一手牌
-	Turn      int    // 轮次
-	IsPlaying bool   // 房间是否正在游戏中
-	MsgChan   chan RoomMsg
-	MsgCard   chan RoomMsg
+	ID          string
+	Players     []*Player
+	Deck        []Card
+	Landlord    *Player
+	Farmers     []*Player
+	Current     int    // 当前出牌玩家索引
+	LastCards   []Card // 上一手牌
+	Turn        int    // 轮次
+	IsPlaying   bool   // 房间是否正在游戏中
+	MsgChan     chan RoomMsg
+	Rgtimer     *gtimer.Timer
+	OutStarTime int //出牌开始时间
 }
 
 // 房间管理器
@@ -97,7 +106,7 @@ func (rm *RoomManager) CreateRoom(player *Player, aiCount int) *Room {
 		Players:   []*Player{player},
 		IsPlaying: false,
 		MsgChan:   make(chan RoomMsg),
-		MsgCard:   make(chan RoomMsg),
+		Rgtimer:   gtimer.New(),
 	}
 
 	// 添加AI机器人
@@ -591,113 +600,171 @@ func PlayOneGame(room *Room) {
 	// showPlayerCards(room.Landlord)
 
 	// 游戏主循环
-	passCount := 0
-	for {
-		// 检查游戏是否结束
-		over, winner := isGameOver(room)
-		if over {
-			if winner.ID == room.Landlord.ID {
-				fmt.Printf("\n游戏结束！地主%s获胜！\n", winner.Name)
-			} else {
-				fmt.Printf("\n游戏结束！农民获胜！恭喜%s！\n", winner.Name)
-			}
-			break
-		}
+	// passCount := 0
+	room.Rgtimer.Add(context.Background(), 100*time.Millisecond, room.GameLoop)
 
-		currentPlayer := room.Players[room.Current]
-		fmt.Printf("\n%s的回合 (当前手牌数: %d)\n", currentPlayer.Name, len(currentPlayer.Cards))
-		showPlayerCards(currentPlayer)
-		fmt.Printf("上一手牌: %s\n", showCards(room.LastCards))
-		fmt.Print("请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
+	// for {
+	// 	// 检查游戏是否结束
+	// 	over, winner := isGameOver(room)
+	// 	if over {
+	// 		if winner.ID == room.Landlord.ID {
+	// 			fmt.Printf("\n游戏结束！地主%s获胜！\n", winner.Name)
+	// 		} else {
+	// 			fmt.Printf("\n游戏结束！农民获胜！恭喜%s！\n", winner.Name)
+	// 		}
+	// 		break
+	// 	}
 
-		var input string
-		var indices []int
+	// 	currentPlayer := room.Players[room.Current]
+	// 	fmt.Printf("\n%s的回合 (当前手牌数: %d)\n", currentPlayer.Name, len(currentPlayer.Cards))
+	// 	showPlayerCards(currentPlayer)
+	// 	fmt.Printf("上一手牌: %s\n", showCards(room.LastCards))
+	// 	fmt.Print("请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
 
-		select {
-		case parseCard := <-room.MsgChan:
-			fmt.Println(parseCard)
-		case <-time.After(10 * time.Second):
-			fmt.Println("\n时间到，已超时")
-			//此时无人做庄
-		}
-		return
-		if currentPlayer.Type == AI {
-			// AI决策
-			time.Sleep(1 * time.Second) // 模拟思考时间
-			indices = aiDecideCards(currentPlayer, room.LastCards)
+	// 	var input string
+	// 	var indices []int
 
-			// 转换为输入格式
-			if len(indices) == 0 {
-				input = "0"
-			} else {
-				parts := make([]string, len(indices))
-				for i, idx := range indices {
-					parts[i] = strconv.Itoa(idx + 1) // 转换为1-based索引
-				}
-				input = strings.Join(parts, ",")
-			}
-			fmt.Println(input)
-		} else {
-			// 人类玩家输入
-			// fmt.Scanln(&input)
-			// input = strings.TrimSpace(input)
+	// 	if currentPlayer.Type == AI {
+	// 		// AI决策
+	// 		time.Sleep(1 * time.Second) // 模拟思考时间
+	// 		indices = aiDecideCards(currentPlayer, room.LastCards)
 
-			// indices = parseCardIndices(input, len(currentPlayer.Cards))
-			// if indices == nil {
-			// 	fmt.Println("输入无效，请重新输入")
-			// 	continue
-			// }
+	// 		// 转换为输入格式
+	// 		if len(indices) == 0 {
+	// 			input = "0"
+	// 		} else {
+	// 			parts := make([]string, len(indices))
+	// 			for i, idx := range indices {
+	// 				parts[i] = strconv.Itoa(idx + 1) // 转换为1-based索引
+	// 			}
+	// 			input = strings.Join(parts, ",")
+	// 		}
+	// 		fmt.Println(input)
+	// 	} else {
+	// 		// 人类玩家输入
+	// 		// fmt.Scanln(&input)
+	// 		// input = strings.TrimSpace(input)
 
-			// 使用select等待输入或超时
-			select {
-			case parseCard := <-room.MsgChan:
-				fmt.Println(parseCard)
-			case <-time.After(10 * time.Second):
-				fmt.Println("\n时间到，已超时")
-				//此时无人做庄
-			}
-		}
+	// 		// indices = parseCardIndices(input, len(currentPlayer.Cards))
+	// 		// if indices == nil {
+	// 		// 	fmt.Println("输入无效，请重新输入")
+	// 		// 	continue
+	// 		// }
 
-		selectedCards := getSelectedCards(currentPlayer, indices)
+	// 		// 使用select等待输入或超时
+	// 		select {
+	// 		case parseCard := <-room.MsgChan:
+	// 			fmt.Println(parseCard)
+	// 		case <-time.After(10 * time.Second):
+	// 			fmt.Println("\n时间到，已超时")
+	// 			//此时无人做庄
+	// 		}
+	// 	}
 
-		// 验证牌型
-		cardType, valid := isValidCardType(selectedCards)
-		if !valid {
-			fmt.Println("牌型无效，请重新选择")
-			continue
-		}
+	// 	selectedCards := getSelectedCards(currentPlayer, indices)
 
-		// 验证是否能压过上一手牌
-		if !compareCards(room.LastCards, selectedCards) {
-			fmt.Println("不能压过上一手牌，请重新选择")
-			continue
-		}
+	// 	// 验证牌型
+	// 	cardType, valid := isValidCardType(selectedCards)
+	// 	if !valid {
+	// 		fmt.Println("牌型无效，请重新选择")
+	// 		continue
+	// 	}
 
-		// 如果是不出牌
-		if len(selectedCards) == 0 {
-			fmt.Printf("%s不出\n", currentPlayer.Name)
-			passCount++
+	// 	// 验证是否能压过上一手牌
+	// 	if !compareCards(room.LastCards, selectedCards) {
+	// 		fmt.Println("不能压过上一手牌，请重新选择")
+	// 		continue
+	// 	}
 
-			// 如果三家都不出，重置上一手牌
-			if passCount >= 2 {
-				room.LastCards = []Card{}
-				passCount = 0
-			}
-		} else {
-			// 出牌
-			fmt.Printf("%s出了: %s (%s)\n", currentPlayer.Name, showCards(selectedCards), cardType)
-			removeCards(currentPlayer, indices)
-			room.LastCards = selectedCards
-			passCount = 0
-		}
+	// 	// 如果是不出牌
+	// 	if len(selectedCards) == 0 {
+	// 		fmt.Printf("%s不出\n", currentPlayer.Name)
+	// 		passCount++
 
-		// 下一个玩家
-		room.Current = (room.Current + 1) % 3
-		room.Turn++
-	}
+	// 		// 如果三家都不出，重置上一手牌
+	// 		if passCount >= 2 {
+	// 			room.LastCards = []Card{}
+	// 			passCount = 0
+	// 		}
+	// 	} else {
+	// 		// 出牌
+	// 		fmt.Printf("%s出了: %s (%s)\n", currentPlayer.Name, showCards(selectedCards), cardType)
+	// 		removeCards(currentPlayer, indices)
+	// 		room.LastCards = selectedCards
+	// 		passCount = 0
+	// 	}
+
+	// 	// 下一个玩家
+	// 	room.Current = (room.Current + 1) % 3
+	// 	room.Turn++
+	// }
 
 	// 游戏结束，更新房间状态
 	room.IsPlaying = false
+}
+
+// 房间循环定时器
+func (room *Room) GameLoop(ctx context.Context) {
+	// 检查游戏是否结束
+	over, winner := isGameOver(room)
+	if over {
+		if winner.ID == room.Landlord.ID {
+			fmt.Printf("\n游戏结束！地主%s获胜！\n", winner.Name)
+		} else {
+			fmt.Printf("\n游戏结束！农民获胜！恭喜%s！\n", winner.Name)
+		}
+		room.Rgtimer.Close()
+	}
+
+	currentPlayer := room.Players[room.Current]
+	fmt.Printf("\n%s的回合 (当前手牌数: %d)\n", currentPlayer.Name, len(currentPlayer.Cards))
+	showPlayerCards(currentPlayer)
+	fmt.Printf("上一手牌: %s\n", showCards(room.LastCards))
+	fmt.Print("请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
+
+	var input string
+	var indices []int
+	var selectedCards []Card
+	if currentPlayer.Type == AI {
+		// AI决策
+		time.Sleep(1 * time.Second) // 模拟思考时间
+		indices = aiDecideCards(currentPlayer, room.LastCards)
+		selectedCards = getSelectedCards(currentPlayer, indices)
+		// 转换为输入格式
+		if len(indices) == 0 {
+			input = "0"
+		} else {
+			parts := make([]string, len(indices))
+			for i, idx := range indices {
+				parts[i] = strconv.Itoa(idx + 1) // 转换为1-based索引
+			}
+			input = strings.Join(parts, ",")
+		}
+		fmt.Println(input)
+	} else {
+		//记录开始出牌时间
+		now := int(time.Now().Unix())
+		if room.OutStarTime == 0 {
+			room.OutStarTime = now
+		}
+		if len(currentPlayer.OutCards) <= 0 && now-room.OutStarTime < OutCard {
+			return
+		} else {
+			if len(currentPlayer.OutCards) > 0 {
+				g.Log().Debug(ctx, currentPlayer.OutCards)
+			}
+
+			// selectedCards = getSelectedCards(currentPlayer, indices)
+		}
+
+		if now-room.OutStarTime >= OutCard {
+			indices = make([]int, 0) //超过出牌时间过
+		}
+
+	}
+	room.Current = int(Human)
+	g.Log().Debug(ctx, selectedCards)
+
 }
 
 // 显示房间列表

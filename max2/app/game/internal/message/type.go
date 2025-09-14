@@ -1,9 +1,9 @@
 package message
 
 type ChatMsg struct {
-	Type string      `json:"type" v:"required"`
-	Data interface{} `json:"data" v:"required"`
-	From string      `json:"name" v:""`
+	Type string `json:"type" v:"required"`
+	Data string `json:"data" v:"required"`
+	From string `json:"name" v:""`
 }
 
 type PlayData struct {

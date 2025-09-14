@@ -124,18 +124,15 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 			}()
 			room.PlayOneGame(roomInfo)
 		case consts.PlayCard:
-			var roomId string
+			player := &room.Player{}
 			for _, v := range rm.PlayerList {
 				if v.ID == pid {
-					roomId = v.RoomID
+					player = v
 					break
 				}
 			}
-			roomInfo := rm.Rooms[roomId]
-			roomInfo.MsgCard <- room.RoomMsg{
-				Type: "playCard",
-				Data: gconv.String("data"),
-			}
+			json.Unmarshal([]byte(msg.Data), &player.OutCards)
+
 		}
 	}
 
