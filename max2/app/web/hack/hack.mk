@@ -60,9 +60,7 @@ deploy: cli.install
 	kustomize build > $(ROOT_DIR)/temp/kustomize.yaml;\
 	kubectl   apply -f $(ROOT_DIR)/temp/kustomize.yaml; \
 	if [ $(DEPLOY_NAME) != "" ]; then \
-		kubectl patch \
-		-n $(NAMESPACE) deployment/$(DEPLOY_NAME) \
-		-p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"$(shell date +%s)\"}}}}}"; \
+		kubectl patch -n $(NAMESPACE) deployment/$(DEPLOY_NAME) -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"$(shell date +%s)\"}}}}}"; \
 	fi;
 
 

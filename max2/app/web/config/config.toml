@@ -1,0 +1,7 @@
+[viewer]
+    paths       = ["template"]
+    defaultFile = "index.html"
+    delimiters  =  ["${", "}"]
+    [viewer.data]
+        name    = "gf"
+        version = "1.10.0"

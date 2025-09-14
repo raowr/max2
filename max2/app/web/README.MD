@@ -1,5 +1,4 @@
-# GoFrame Template For MonoRepo
+# GoFrame Template For SingleRepo
 
 Quick Start: 
 - https://goframe.org/quick
-- https://goframe.org/docs/design/project-mono-repo
