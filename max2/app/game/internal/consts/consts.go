@@ -5,6 +5,7 @@ import "time"
 const (
 	InitRoom             = "initRoom"
 	Play                 = "play"
+	PlayCard             = "playCard"
 	ChatSessionName      = "ChatName"
 	ChatSessionNameTemp  = "ChatNameTemp"
 	ChatSessionNameError = "ChatNameError"

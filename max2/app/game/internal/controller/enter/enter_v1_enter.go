@@ -76,7 +76,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 			playerName := "美女"
 			humanPlayer := rm.CreatePlayer(playerName, room.Human)
 			pid = humanPlayer.ID
-			aiCount := 1
+			aiCount := 2
 			roomInfo := rm.CreateRoom(humanPlayer, aiCount)
 			players, _ := json.Marshal(roomInfo.Players)
 
@@ -113,20 +113,29 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 				}
 			}
 			roomInfo := rm.Rooms[roomId]
-			var roomMsg room.RoomMsg
 			go func() {
-				select {
-				case roomMsg = <-roomInfo.MsgChan:
-					msgData := message.ChatMsg{
-						Type: roomMsg.Type,
-						Data: roomMsg.Data,
-						From: gconv.String(pid),
-					}
-					_ = c.write(ws, msgData)
+				roomMsg := <-roomInfo.MsgChan
+				msgData := message.ChatMsg{
+					Type: roomMsg.Type,
+					Data: roomMsg.Data,
+					From: gconv.String(pid),
 				}
+				_ = c.write(ws, msgData)
 			}()
 			room.PlayOneGame(roomInfo)
-
+		case consts.PlayCard:
+			var roomId string
+			for _, v := range rm.PlayerList {
+				if v.ID == pid {
+					roomId = v.RoomID
+					break
+				}
+			}
+			roomInfo := rm.Rooms[roomId]
+			roomInfo.MsgCard <- room.RoomMsg{
+				Type: "playCard",
+				Data: gconv.String("data"),
+			}
 		}
 	}
 

@@ -55,6 +55,7 @@ type Room struct {
 	Turn      int    // 轮次
 	IsPlaying bool   // 房间是否正在游戏中
 	MsgChan   chan RoomMsg
+	MsgCard   chan RoomMsg
 }
 
 // 房间管理器
@@ -96,6 +97,7 @@ func (rm *RoomManager) CreateRoom(player *Player, aiCount int) *Room {
 		Players:   []*Player{player},
 		IsPlaying: false,
 		MsgChan:   make(chan RoomMsg),
+		MsgCard:   make(chan RoomMsg),
 	}
 
 	// 添加AI机器人
@@ -123,7 +125,7 @@ func (rm *RoomManager) JoinRoom(player *Player, roomID string) bool {
 	}
 
 	// 检查房间是否已满
-	if len(room.Players) >= 3 {
+	if len(room.Players) >= 4 {
 		return false
 	}
 
@@ -611,6 +613,14 @@ func PlayOneGame(room *Room) {
 		var input string
 		var indices []int
 
+		select {
+		case parseCard := <-room.MsgChan:
+			fmt.Println(parseCard)
+		case <-time.After(10 * time.Second):
+			fmt.Println("\n时间到，已超时")
+			//此时无人做庄
+		}
+		return
 		if currentPlayer.Type == AI {
 			// AI决策
 			time.Sleep(1 * time.Second) // 模拟思考时间
@@ -629,13 +639,22 @@ func PlayOneGame(room *Room) {
 			fmt.Println(input)
 		} else {
 			// 人类玩家输入
-			fmt.Scanln(&input)
-			input = strings.TrimSpace(input)
+			// fmt.Scanln(&input)
+			// input = strings.TrimSpace(input)
 
-			indices = parseCardIndices(input, len(currentPlayer.Cards))
-			if indices == nil {
-				fmt.Println("输入无效，请重新输入")
-				continue
+			// indices = parseCardIndices(input, len(currentPlayer.Cards))
+			// if indices == nil {
+			// 	fmt.Println("输入无效，请重新输入")
+			// 	continue
+			// }
+
+			// 使用select等待输入或超时
+			select {
+			case parseCard := <-room.MsgChan:
+				fmt.Println(parseCard)
+			case <-time.After(10 * time.Second):
+				fmt.Println("\n时间到，已超时")
+				//此时无人做庄
 			}
 		}
 
