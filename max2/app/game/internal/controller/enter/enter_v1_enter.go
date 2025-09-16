@@ -124,14 +124,29 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 			}()
 			room.PlayOneGame(roomInfo)
 		case consts.PlayCard:
+			var roomId string
 			player := &room.Player{}
 			for _, v := range rm.PlayerList {
 				if v.ID == pid {
 					player = v
+					roomId = v.RoomID
 					break
 				}
 			}
-			json.Unmarshal([]byte(msg.Data), &player.OutCards)
+			err := json.Unmarshal([]byte(msg.Data), &player.OutCards)
+			if err != nil {
+				g.Log().Error(ctx, err)
+			}
+			roomInfo := rm.Rooms[roomId]
+			go func() {
+				roomMsg := <-roomInfo.MsgChan
+				msgData := message.ChatMsg{
+					Type: roomMsg.Type,
+					Data: roomMsg.Data,
+					From: gconv.String(pid),
+				}
+				_ = c.write(ws, msgData)
+			}()
 
 		}
 	}

@@ -23,6 +23,7 @@ var (
 					enter.NewV1(),
 				)
 			})
+			s.SetPort(8000)
 			s.Run()
 			return nil
 		},
