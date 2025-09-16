@@ -122,6 +122,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 				}
 				_ = c.write(ws, msgData)
 			}()
+			roomInfo.IsPlaying = true
 			room.PlayOneGame(roomInfo)
 		case consts.PlayCard:
 			var roomId string

@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/gogf/gf/v2/util/grand"
 	"math/rand"
 	"sort"
 	"strconv"
@@ -38,7 +39,7 @@ const (
 )
 
 const (
-	OutCard = 10 //出牌最大时间
+	OutCard = 2 //出牌最大时间
 )
 
 // 玩家结构体
@@ -49,6 +50,7 @@ type Player struct {
 	RoomID   string     // 玩家所在房间ID
 	Type     PlayerType // 玩家类型（人类或AI）
 	OutCards []Card     //玩家单次打出的牌
+	Must     bool       //是否必须要出牌
 }
 
 // 房间结构体
@@ -108,6 +110,7 @@ func (rm *RoomManager) CreateRoom(player *Player, aiCount int) *Room {
 		MsgChan:   make(chan RoomMsg),
 		Rgtimer:   gtimer.New(),
 	}
+	room.Rgtimer.Stop() //先停止
 
 	// 添加AI机器人
 	for i := 0; i < aiCount; i++ {
@@ -196,7 +199,7 @@ func generateRoomID() string {
 // 初始化一副牌
 func initDeck() []Card {
 	var deck []Card
-	suits := []string{"方块", "梅花", "红桃", "黑桃"}
+	suits := []string{"♦", "♣", "♥", "♠"}
 	values := []string{"3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2"}
 
 	for suit, suitName := range suits {
@@ -278,10 +281,12 @@ func bidLandlord(room *Room) {
 		for _, card := range v.Cards {
 			if card.Suit == 0 && card.Value == 3 {
 				currentPlayer = v.ID
+				//必须出牌
+				v.Must = true
 			}
 		}
 	}
-	// 地主先出牌
+	// ♦3先出牌
 	room.Current = currentPlayer
 }
 
@@ -454,7 +459,7 @@ func aiDecideCards(player *Player, lastCards []Card) []int {
 	// 如果上一手没牌，尝试出最小的牌组
 
 	// 生成所有可能的有效牌组合
-	possiblePlays := generateAllPossiblePlays(player.Cards)
+	possiblePlays := generateAllPossiblePlays(player.Must, player.Cards)
 
 	// 过滤掉不能压过上一手的牌
 	validPlays := []struct {
@@ -497,7 +502,7 @@ func isBetterPlay(currentBest, candidate []Card) bool {
 }
 
 // 生成所有可能的有效牌组合（简化版）
-func generateAllPossiblePlays(cards []Card) []struct {
+func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
 	indices []int
 	cards   []Card
 } {
@@ -506,11 +511,16 @@ func generateAllPossiblePlays(cards []Card) []struct {
 		cards   []Card
 	}
 
-	// 添加不出牌选项
-	plays = append(plays, struct {
-		indices []int
-		cards   []Card
-	}{[]int{}, []Card{}})
+	// 添加不出牌选项,不是必须出牌才添加不出牌选项
+	if !isMust {
+		//随机选择不出
+		if grand.Meet(2, 4) {
+			plays = append(plays, struct {
+				indices []int
+				cards   []Card
+			}{[]int{}, []Card{}})
+		}
+	}
 
 	// 单牌
 	for i, card := range cards {
@@ -601,7 +611,8 @@ func PlayOneGame(room *Room) {
 
 	// 游戏主循环
 	// passCount := 0
-	room.Rgtimer.Add(context.Background(), 100*time.Millisecond, room.GameLoop)
+	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
+	room.Rgtimer.Start()
 
 }
 
@@ -612,29 +623,44 @@ func (room *Room) GameLoop(ctx context.Context) {
 	// 检查游戏是否结束
 	over, winner := isGameOver(room)
 	if over {
-		if winner.ID == room.Landlord.ID {
-			fmt.Printf("\n游戏结束！地主%s获胜！\n", winner.Name)
-		} else {
-			fmt.Printf("\n游戏结束！农民获胜！恭喜%s！\n", winner.Name)
-		}
+		go func() {
+			room.MsgChan <- RoomMsg{
+				Type: "over",
+				Data: gconv.String(winner),
+			}
+		}()
 		room.Rgtimer.Close()
 		room.IsPlaying = false
+		fmt.Printf("\n游戏结束！恭喜%s！获胜\n", winner.Name)
 	}
 
 	currentPlayer := room.Players[room.Current]
 	fmt.Printf("\n%s的回合 (当前手牌数: %d)\n", currentPlayer.Name, len(currentPlayer.Cards))
 	showPlayerCards(currentPlayer)
 	fmt.Printf("上一手牌: %s\n", showCards(room.LastCards))
-	fmt.Print("请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
+	fmt.Println("请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
+	fmt.Println("----------------------------------------------------")
 
 	var input string
 	var indices []int
 	var selectedCards []Card
 	if currentPlayer.Type == AI {
-		// AI决策
-		time.Sleep(1 * time.Second) // 模拟思考时间
+		// AI决策，随机秒数
+		//thingTime := grand.N(1,5)
+		//time.Sleep(time.Duration(thingTime) * time.Second) // 模拟思考时间
+		//记录开始出牌时间
+		now := int(time.Now().Unix())
+		if room.OutStarTime == 0 {
+			room.OutStarTime = now
+		}
+		thinkTime := grand.N(1, 2) //模拟思考秒数
+		if now-room.OutStarTime < thinkTime {
+			return
+		}
+		room.OutStarTime = 0
 		indices = aiDecideCards(currentPlayer, room.LastCards)
 		selectedCards = getSelectedCards(currentPlayer, indices)
+
 		// 转换为输入格式
 		if len(indices) == 0 {
 			input = "0"
@@ -666,7 +692,11 @@ func (room *Room) GameLoop(ctx context.Context) {
 		if now-room.OutStarTime >= OutCard {
 			indices = make([]int, 0) //超过出牌时间过
 		}
-
+		if currentPlayer.Must { //如果是必出牌最小的一张
+			indices = append(indices, 0)
+			selectedCards = getSelectedCards(currentPlayer, indices)
+		}
+		room.OutStarTime = 0
 	}
 	// 验证牌型
 	cardType, valid := isValidCardType(selectedCards)
@@ -694,7 +724,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		}
 		passCount++
 		// 如果三家都不出，重置上一手牌
-		if passCount >= 2 {
+		if passCount >= 3 {
 			room.LastCards = []Card{}
 			passCount = 0
 		}
@@ -719,10 +749,22 @@ func (room *Room) GameLoop(ctx context.Context) {
 				}
 			}()
 		}
+		//其他人改为非必出
+		for _, v := range room.Players {
+			if v.ID == currentPlayer.ID {
+				v.Must = true //谁出牌，谁就暂定是必出
+			} else {
+				v.Must = false //其他人可以不出牌
+			}
+		}
 		removeCards(currentPlayer, indices)
 		room.LastCards = selectedCards
 		passCount = 0
 	}
+
+	// 下一个玩家
+	room.Current = (room.Current + 1) % 4
+	room.Turn++
 
 }
 
