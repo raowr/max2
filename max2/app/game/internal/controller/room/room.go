@@ -4,12 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/gogf/gf/v2/util/grand"
 	"math/rand"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/gogf/gf/v2/util/grand"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtimer"
@@ -110,6 +111,7 @@ func (rm *RoomManager) CreateRoom(player *Player, aiCount int) *Room {
 		MsgChan:   make(chan RoomMsg),
 		Rgtimer:   gtimer.New(),
 	}
+	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
 	room.Rgtimer.Stop() //先停止
 
 	// 添加AI机器人
@@ -611,7 +613,6 @@ func PlayOneGame(room *Room) {
 
 	// 游戏主循环
 	// passCount := 0
-	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
 	room.Rgtimer.Start()
 
 }
@@ -626,11 +627,12 @@ func (room *Room) GameLoop(ctx context.Context) {
 		go func() {
 			room.MsgChan <- RoomMsg{
 				Type: "over",
-				Data: gconv.String(winner),
+				Data: gconv.String("\n游戏结束！恭喜" + winner.Name + "！获胜"),
 			}
 		}()
-		room.Rgtimer.Close()
+		room.Rgtimer.Stop()
 		room.IsPlaying = false
+		room.LastCards = make([]Card, 0)
 		fmt.Printf("\n游戏结束！恭喜%s！获胜\n", winner.Name)
 	}
 
@@ -706,7 +708,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 	}
 	// 验证是否能压过上一手牌
 	if !compareCards(room.LastCards, selectedCards) {
-		fmt.Println("不能压过上一手牌，请重新选择")
+		fmt.Println("不能压过上5一手牌，请重新选择")
 		return
 	}
 
@@ -744,7 +746,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 					CardType: cardType,
 				})
 				room.MsgChan <- RoomMsg{
-					Type: "pass",
+					Type: "outCard",
 					Data: gconv.String(data),
 				}
 			}()

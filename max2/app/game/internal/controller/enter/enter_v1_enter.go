@@ -114,13 +114,15 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 			}
 			roomInfo := rm.Rooms[roomId]
 			go func() {
-				roomMsg := <-roomInfo.MsgChan
-				msgData := message.ChatMsg{
-					Type: roomMsg.Type,
-					Data: roomMsg.Data,
-					From: gconv.String(pid),
+				for {
+					roomMsg := <-roomInfo.MsgChan
+					msgData := message.ChatMsg{
+						Type: roomMsg.Type,
+						Data: roomMsg.Data,
+						From: gconv.String(pid),
+					}
+					_ = c.write(ws, msgData)
 				}
-				_ = c.write(ws, msgData)
 			}()
 			roomInfo.IsPlaying = true
 			room.PlayOneGame(roomInfo)
@@ -148,7 +150,6 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 				}
 				_ = c.write(ws, msgData)
 			}()
-
 		}
 	}
 

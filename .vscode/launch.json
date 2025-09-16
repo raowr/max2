@@ -9,7 +9,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "C:/Users/rao/go/src/game1/max2/app/game"
+            "program": "D:/gowork/max2/max2/app/game"
         }
 
     ]
