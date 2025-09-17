@@ -52,6 +52,7 @@ type Player struct {
 	Type     PlayerType // 玩家类型（人类或AI）
 	OutCards []Card     //玩家单次打出的牌
 	Must     bool       //是否必须要出牌
+	Win      int64      //奖励
 }
 
 // 房间结构体
@@ -564,14 +565,21 @@ func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
 	return plays
 }
 
-// 检查游戏是否结束
-func isGameOver(room *Room) (bool, *Player) {
+// 检查游戏是否结束,算奖，输家剩几张牌，就输多少积分
+// 赢玩家剩余多少张牌，就赢多少积分
+func isGameOver(room *Room) (isOver bool, winer *Player) {
+	var win int64 = 0
 	for _, player := range room.Players {
+		win += int64(len(player.Cards))
 		if len(player.Cards) == 0 {
-			return true, player
+			isOver = true
+			winer = player
 		}
 	}
-	return false, nil
+	if winer != nil {
+		winer.Win = win
+	}
+	return isOver, winer
 }
 
 // 玩一局游戏
@@ -632,13 +640,15 @@ func (room *Room) GameLoop(ctx context.Context) {
 		go func() {
 			room.MsgChan <- RoomMsg{
 				Type: "over",
-				Data: gconv.String("\n游戏结束！恭喜" + winner.Name + "！获胜"),
+				Data: gconv.String("\n游戏结束！恭喜"+winner.Name+"！获胜,赢得:"+gconv.String(winner.Win)) + " 积分",
 			}
 		}()
 		room.Rgtimer.Stop()
 		room.IsPlaying = false
 		room.LastCards = make([]Card, 0)
 		fmt.Printf("\n游戏结束！恭喜%s！获胜\n", winner.Name)
+		//游戏结束开始算奖
+
 	}
 
 	currentPlayer := room.Players[room.Current]

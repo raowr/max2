@@ -147,8 +147,15 @@ function startSakura() {
 
 window.onresize = function() {
     var canvasSnow = document.getElementById('canvas_snow');
-    canvasSnow.width = window.innerWidth;
-    canvasSnow.height = window.innerHeight;
+    if (canvasSnow) {  // 只有当元素存在时才执行后续操作
+        this.setTimeout(()=>{
+            canvasSnow.width = window.innerWidth;
+            canvasSnow.height = window.innerHeight;
+        },500)
+
+    } else {
+        console.warn('未找到canvas_snow元素，无法设置尺寸');
+    }
 }
 
 img.onload = function() {

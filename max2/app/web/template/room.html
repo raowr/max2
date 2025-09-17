@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<title>斗地主 | madmic</title>
+<title>2仔大 | madmic</title>
     <meta charset="UTF-8"> 
 <head>
 <script type="application/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="application/javascript" src="js/yinghua.js"></script>
+<script src="js/vue.global.js"></script>
 
 </head>
-        <body style="padding:0;margin:0;overflow:hidden;height: 100%;" >   
+        <body style="padding:0;margin:0;overflow:hidden;height: 100%;" >
+        <div id="app">    
         <div style="position:absolute; width:100%; height:100%; z-index:-5; left:0; top:0;">
-<img  src="img/bg/indoor.png" height="100%" width="100%" style="left:0; top:0;">
+<img  src="img/bg/indoor.png" height="100%" width="100%" style="left:0; top:0;"  alt="室内场景背景图"  >
 </div>
 
 <!-- 返回-->
@@ -21,14 +23,17 @@
 <!-- 玩家位置-->  
 <div>
     <!-- 房主位置--> 
-<img  src="img/ui/frame_gold.png"  style="position: absolute;left:14%; top:15%;">  
-<img  src="img/ui/character_bg.png"  style="position: absolute;left:14%; top:15%;">
+<img  src="img/ui/frame_gold.png"  style="position: absolute;left:5%; top:15%;width: 15%;" alt="返回按钮背景图"/>  
+<img  src="img/ui/character_bg.png"  style="position: absolute;left:5%; top:15%;width: 15%;" alt="返回按钮背景图"/>
 <!-- 玩家2位置--> 
-<img  src="img/ui/frame_gold.png"  style="position: absolute;left:35%; top:15%;">  
-<img  src="img/ui/character_bg.png"  style="position: absolute;left:35%; top:15%;">
+<img  src="img/ui/frame_gold.png"  style="position: absolute;left:23%; top:15%;width: 15%;"/>  
+<img  src="img/ui/character_bg.png"  style="position: absolute;left:23%; top:15%;width: 15%;"/>
 <!-- 玩家3位置--> 
-<img  src="img/ui/frame_gold.png"  style="position: absolute;left:56%; top:15%;">  
-<img  src="img/ui/character_bg.png"  style="position: absolute;left:56%; top:15%;">
+<img  src="img/ui/frame_gold.png"  style="position: absolute;left:41%; top:15%;width: 15%;"/>  
+<img  src="img/ui/character_bg.png"  style="position: absolute;left:41%; top:15%;width: 15%;"/>
+<!-- 玩家4位置-->
+<img  src="img/ui/frame_gold.png"  style="position: absolute;left:60%; top:15%;width: 15%;"/>  
+<img  src="img/ui/character_bg.png"  style="position: absolute;left:60%; top:15%;width: 15%;"/>
 </div>
   <!-- 开始/准备按钮--> 
   <div id="kaishi">
@@ -98,7 +103,7 @@
 
     
 
-
+</div> 
         </body>
 	
 
@@ -221,13 +226,151 @@ setInterval(function(){
           }
         }
     }
-    xmlhttp2.open("GET","server.php",true);
-    xmlhttp2.send();
+    // xmlhttp2.open("GET","server.php",true);
+    // xmlhttp2.send();
 
 
     },1000);
 	
 
 
+    </script>
+
+     <script>
+        // 创建Vue实例
+        const { createApp } = Vue;
+        
+        createApp({
+            data() {
+                return {
+                    // WebSocket实例
+                    ws: null,
+                    // 连接状态
+                    isConnected: false,
+                    // 连接中状态
+                    isConnecting: false,
+                    // 消息列表
+                    messages: [],
+                    // 输入的消息
+                    messageInput: '',
+                    // WebSocket服务器地址，根据实际情况修改
+                    wsServerUrl: 'ws://127.0.0.1:8000/enter'
+                }
+            },
+            created(){
+                this.toggleConnection();
+                setTimeout(() => {
+                    this.sendMessage()
+                }, 1000);
+            },
+            methods: {
+                // 切换连接状态
+                toggleConnection() {
+                    if (this.isConnected) {
+                        this.disconnect();
+                    } else {
+                        this.connect();
+                    }
+                },
+                
+                // 连接到WebSocket服务器
+                connect() {
+                    // 避免重复连接
+                    if (this.isConnected || this.isConnecting) return;
+                    
+                    this.isConnecting = true;
+                    
+                    try {
+                        this.ws = new WebSocket(this.wsServerUrl);
+                        
+                        // 连接成功回调
+                        this.ws.onopen = () => {
+                            console.log('WebSocket连接已建立');
+                            this.isConnected = true;
+                            this.isConnecting = false;
+                            this.addMessage('已成功连接到服务器', false);
+                        };
+                        
+                        // 接收消息回调
+                        this.ws.onmessage = (event) => {
+                            console.log('收到消息:', event.data);
+                            this.addMessage(event.data, false);
+                        };
+                        
+                        // 连接关闭回调
+                        this.ws.onclose = (event) => {
+                            console.log(`WebSocket连接已关闭，代码: ${event.code}, 原因: ${event.reason}`);
+                            this.isConnected = false;
+                            this.isConnecting = false;
+                            this.addMessage(`连接已关闭: ${event.reason || '未知原因'}`, false);
+                            
+                            // 如果不是主动关闭（代码1000），尝试重连
+                            if (event.code !== 1000) {
+                                setTimeout(() => {
+                                    this.connect();
+                                }, 3000);
+                            }
+                        };
+                        
+                        // 错误处理
+                        this.ws.onerror = (error) => {
+                            console.error('WebSocket错误:', error);
+                            this.isConnecting = false;
+                            this.addMessage(`发生错误: 请检查服务器是否可用`, false);
+                        };
+                    } catch (error) {
+                        console.error('连接WebSocket失败:', error);
+                        this.isConnecting = false;
+                        this.addMessage(`连接失败: ${error.message}`, false);
+                    }
+                },
+                
+                // 断开连接
+                disconnect() {
+                    if (this.ws) {
+                        // 1000代码表示正常关闭
+                        this.ws.close(1000, '客户端主动关闭连接');
+                        this.ws = null;
+                    }
+                },
+                
+                // 发送消息
+                sendMessage() {
+                    this.messageInput = '{"type":"initRoom","data":"","name":""}'
+                    if (!this.isConnected || !this.messageInput.trim()) return;
+                    
+                    try {
+                        this.ws.send(this.messageInput);
+                        this.addMessage(this.messageInput, true);
+                        this.messageInput = ''; // 清空输入框
+                    } catch (error) {
+                        console.error('发送消息失败:', error);
+                        this.addMessage(`发送失败: ${error.message}`, false);
+                    }
+                },
+                
+                // 添加消息到列表
+                addMessage(content, isOwn) {
+                    const time = new Date().toLocaleTimeString();
+                    this.messages.push({
+                        content,
+                        isOwn,
+                        time
+                    });
+                    
+                    // 自动滚动到底部
+                    this.$nextTick(() => {
+                        const messageContainer = document.querySelector('.border.rounded-lg.h-80');
+                        if (messageContainer) {
+                            messageContainer.scrollTop = messageContainer.scrollHeight;
+                        }
+                    });
+                }
+            },
+            // 实例销毁时断开连接
+            beforeUnmount() {
+                this.disconnect();
+            }
+        }).mount('#app');
     </script>
 </html>

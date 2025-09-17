@@ -10,6 +10,13 @@
             "request": "launch",
             "mode": "auto",
             "program": "D:/gowork/max2/max2/app/game"
+        },
+                {
+            "name": "Launch Package",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "D:/gowork/max2/max2/app/web"
         }
 
     ]
