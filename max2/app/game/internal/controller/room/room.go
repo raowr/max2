@@ -243,7 +243,12 @@ func dealCards(deck []Card, players []*Player) {
 	// 对每个玩家的牌进行排序
 	for _, player := range players {
 		sort.Slice(player.Cards, func(i, j int) bool {
-			return player.Cards[i].Value < player.Cards[j].Value
+			if player.Cards[i].Value != player.Cards[j].Value {
+				return player.Cards[i].Value < player.Cards[j].Value
+			} else {
+				return player.Cards[i].Suit < player.Cards[j].Suit
+			}
+
 		})
 	}
 
