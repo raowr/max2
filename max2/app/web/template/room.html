@@ -115,7 +115,7 @@
             width: 100%;
             position: relative;
             height: 80%;
-            padding-top: 130%; /* 保持宽高比 */
+            padding-top: 150%; /* 增加高度，从130%增加到150% */
         }
 
         .player-bg-container {
@@ -131,12 +131,12 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 45%; /* 内容区域占框高度的45% */
+            height: 50%; /* 增加内容区域高度 */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
-            padding-bottom: 10%;
+            padding-bottom: 12%;
             z-index: 5;
         }
 
@@ -148,27 +148,41 @@
         }
 
         .player-avatar {
-            width: 40%;
-            margin-bottom: 5%;
+            width: 45%; /* 稍微增大头像 */
+            margin-bottom: 6%;
             z-index: 2;
+        }
+
+        /* 名称容器 - 新增 */
+        .player-name-container {
+            position: relative;
+            width: 90%;
+            margin-bottom: 4%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .player-nameplate {
-            width: 90%;
+            width: 100%;
             z-index: 2;
-            margin-bottom: 2%;
         }
 
         .player-name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 90%;
             text-align: center;
-            font-size: 1.2vw;
+            font-size: 1.3vw; /* 稍微增大字体 */
             z-index: 3;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            margin-bottom: 3%;
+            font-weight: bold;
+            color: #fff;
         }
 
         .player-stars {
@@ -179,8 +193,8 @@
         }
 
         .player-stars img {
-            height: 15px;
-            margin: 0 2px;
+            height: 18px; /* 增大星星大小 */
+            margin: 0 3px;
         }
 
         .player-ready {
@@ -189,7 +203,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 4;
-            width: 40%;
+            width: 45%; /* 增大准备图标 */
             display: none;
         }
 
@@ -201,9 +215,9 @@
         /* 房主标识位置 */
         .room-owner-badge {
             position: absolute;
-            top: -10px;
-            left: -10px;
-            width: 40%;
+            top: -12px;
+            left: -12px;
+            width: 45%; /* 增大房主标识 */
             z-index: 10;
         }
 
@@ -324,7 +338,11 @@
         /* Responsive adjustments */
         @media (max-width: 1200px) {
             .player-name {
-                font-size: 1.4vw;
+                font-size: 1.5vw;
+            }
+
+            .player-frame {
+                padding-top: 145%;
             }
         }
 
@@ -347,7 +365,11 @@
             }
 
             .player-name {
-                font-size: 1.8vw;
+                font-size: 1.9vw;
+            }
+
+            .player-frame {
+                padding-top: 140%;
             }
         }
 
@@ -361,7 +383,7 @@
             }
 
             .player-name {
-                font-size: 2.5vw;
+                font-size: 2.6vw;
             }
 
             .header {
@@ -374,20 +396,28 @@
                 margin-top: 10px;
             }
 
-            /* 移动端调整房主标识大小 */
+            /* 移动端调整 */
             .room-owner-badge {
-                width: 35%;
-                top: -8px;
-                left: -8px;
+                width: 38%;
+                top: -10px;
+                left: -10px;
             }
 
             .player-avatar {
-                width: 35%;
+                width: 40%;
             }
 
             .player-content {
-                height: 50%;
-                padding-bottom: 8%;
+                height: 52%;
+                padding-bottom: 10%;
+            }
+
+            .player-frame {
+                padding-top: 135%;
+            }
+
+            .player-stars img {
+                height: 16px;
             }
         }
     </style>
@@ -424,12 +454,16 @@
                             <img src="img/ui/character_bg.png" alt="玩家背景" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                         </div>
 
-                        <!-- 玩家内容现在在玩家框内部 -->
+                        <!-- 玩家内容在玩家框内部 -->
                         <div class="player-content">
                             <div class="player-inner">
                                 <img :src="player.avatar" class="player-avatar" alt="玩家头像">
-                                <img src="img/ui/namebg.png" class="player-nameplate" alt="名称背景">
-                                <div class="player-name">{{ player.name }}</div>
+
+                                <!-- 名称容器 - 名称叠在背景上面 -->
+                                <div class="player-name-container">
+                                    <img src="img/ui/namebg.png" class="player-nameplate" alt="名称背景">
+                                    <div class="player-name">{{ player.name }}</div>
+                                </div>
 
                                 <div class="player-stars">
                                     <img v-for="n in 3" :key="n"
@@ -497,7 +531,7 @@
                     {
                         id: 1,
                         name: '玩家一',
-                        avatar: 'img/touxiang/bighead #15212.png',
+                        avatar: 'img/avatars/player1.png',
                         stars: 3,
                         ready: false,
                         isOwner: true
@@ -505,7 +539,7 @@
                     {
                         id: 2,
                         name: '玩家二',
-                        avatar: 'img/touxiang/bighead #15223.png',
+                        avatar: 'img/avatars/player2.png',
                         stars: 2,
                         ready: false,
                         isOwner: false
@@ -513,7 +547,7 @@
                     {
                         id: 3,
                         name: '等待中...',
-                        avatar: 'img/touxiang/bighead #15239.png',
+                        avatar: '',
                         stars: 0,
                         ready: false,
                         isOwner: false
@@ -521,7 +555,7 @@
                     {
                         id: 4,
                         name: '等待中...',
-                        avatar: 'img/touxiang/bighead #15255.png',
+                        avatar: '',
                         stars: 0,
                         ready: false,
                         isOwner: false
@@ -707,7 +741,7 @@
             },
 
             handlePlayerLeft(playerId) {
-                const playerIndex = this.players.findIndex(p => p.id === playerId);
+                const playerIndex = the.players.findIndex(p => p.id === playerId);
                 if (playerIndex !== -1) {
                     // Reset the player slot
                     this.players[playerIndex] = {
