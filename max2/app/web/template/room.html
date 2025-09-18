@@ -114,41 +114,52 @@
         .player-frame {
             width: 100%;
             position: relative;
+            height: 80%;
+            padding-top: 130%; /* 保持宽高比 */
         }
 
-        .player-content {
-            position: relative;
-            width: 100%;
-            padding-top: 130%; /* Maintain aspect ratio */
-        }
-
-        .player-inner {
+        .player-bg-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+        }
+
+        .player-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 45%; /* 内容区域占框高度的45% */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 10%;
+            z-index: 5;
+        }
+
+        .player-inner {
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .player-avatar {
-            width: 80%;
-            margin-top: 10%;
+            width: 40%;
+            margin-bottom: 5%;
             z-index: 2;
         }
 
         .player-nameplate {
             width: 90%;
-            position: absolute;
-            bottom: 15%;
             z-index: 2;
+            margin-bottom: 2%;
         }
 
         .player-name {
-            position: absolute;
-            bottom: 17%;
             width: 90%;
             text-align: center;
             font-size: 1.2vw;
@@ -157,11 +168,10 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            margin-bottom: 3%;
         }
 
         .player-stars {
-            position: absolute;
-            bottom: 8%;
             display: flex;
             justify-content: center;
             width: 90%;
@@ -188,12 +198,13 @@
             animation: pulse 1.5s infinite;
         }
 
+        /* 房主标识位置 */
         .room-owner-badge {
             position: absolute;
-            top: 0;
-            left: 10%;
-            width: 30%;
-            z-index: 5;
+            top: -10px;
+            left: -10px;
+            width: 40%;
+            z-index: 10;
         }
 
         .controls-section {
@@ -362,6 +373,22 @@
                 position: static;
                 margin-top: 10px;
             }
+
+            /* 移动端调整房主标识大小 */
+            .room-owner-badge {
+                width: 35%;
+                top: -8px;
+                left: -8px;
+            }
+
+            .player-avatar {
+                width: 35%;
+            }
+
+            .player-content {
+                height: 50%;
+                padding-bottom: 8%;
+            }
         }
     </style>
 </head>
@@ -388,28 +415,31 @@
             <!-- Players Section -->
             <div class="players-section">
                 <div class="player-card" v-for="(player, index) in players" :key="index">
+                    <!-- 房主标识 -->
+                    <img v-if="player.isOwner" src="img/ui/roomowner.png" class="room-owner-badge" alt="房主标志">
+
                     <div class="player-frame">
-                        <img src="img/ui/frame_gold.png" alt="玩家框" style="width: 100%;">
-                        <img src="img/ui/character_bg.png" alt="玩家背景" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                    </div>
+                        <div class="player-bg-container">
+                            <img src="img/ui/frame_gold.png" alt="玩家框" style="width: 100%; height: 100%;">
+                            <img src="img/ui/character_bg.png" alt="玩家背景" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                        </div>
 
-                    <div class="player-content">
-                        <div class="player-inner">
-                            <img :src="player.avatar" class="player-avatar" alt="玩家头像">
-                            <img src="img/ui/namebg.png" class="player-nameplate" alt="名称背景">
-                            <div class="player-name">{{ player.name }}</div>
+                        <!-- 玩家内容现在在玩家框内部 -->
+                        <div class="player-content">
+                            <div class="player-inner">
+                                <img :src="player.avatar" class="player-avatar" alt="玩家头像">
+                                <img src="img/ui/namebg.png" class="player-nameplate" alt="名称背景">
+                                <div class="player-name">{{ player.name }}</div>
 
-                            <div class="player-stars">
-                                <img v-for="n in 3" :key="n"
-                                     :src="n <= player.stars ? 'img/ui/star.png' : 'img/ui/star_dark.png'"
-                                     alt="星星">
+                                <div class="player-stars">
+                                    <img v-for="n in 3" :key="n"
+                                         :src="n <= player.stars ? 'img/ui/star.png' : 'img/ui/star_dark.png'"
+                                         alt="星星">
+                                </div>
+
+                                <img src="img/ui/ready.png" class="player-ready"
+                                     :class="{ active: player.ready }" alt="准备状态">
                             </div>
-
-                            <img src="img/ui/ready.png" class="player-ready"
-                                 :class="{ active: player.ready }" alt="准备状态">
-
-                            <img v-if="player.isOwner" src="img/ui/roomowner.png"
-                                 class="room-owner-badge" alt="房主标志">
                         </div>
                     </div>
                 </div>
@@ -467,7 +497,7 @@
                     {
                         id: 1,
                         name: '玩家一',
-                        avatar: 'img/avatars/player1.png',
+                        avatar: 'img/touxiang/bighead #15212.png',
                         stars: 3,
                         ready: false,
                         isOwner: true
@@ -475,7 +505,7 @@
                     {
                         id: 2,
                         name: '玩家二',
-                        avatar: 'img/avatars/player2.png',
+                        avatar: 'img/touxiang/bighead #15223.png',
                         stars: 2,
                         ready: false,
                         isOwner: false
@@ -483,7 +513,7 @@
                     {
                         id: 3,
                         name: '等待中...',
-                        avatar: '',
+                        avatar: 'img/touxiang/bighead #15239.png',
                         stars: 0,
                         ready: false,
                         isOwner: false
@@ -491,7 +521,7 @@
                     {
                         id: 4,
                         name: '等待中...',
-                        avatar: '',
+                        avatar: 'img/touxiang/bighead #15255.png',
                         stars: 0,
                         ready: false,
                         isOwner: false
