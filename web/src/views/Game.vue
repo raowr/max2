@@ -1,35 +1,12 @@
 <template>
   <div class="game">
-    <!--player1 牌 -->
-    <!-- <div class="player1_card">
-      <img id="" src='@/assets/img/1.png' width='100px' height='120px' style='position: absolute; top:78%; left: 12%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/2.png' width='90px' height='120px' style='position: absolute; top:78%; left: 18%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/3.png' width='90px' height='120px' style='position: absolute; top:78%; left: 23%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/4.png' width='90px' height='120px' style='position: absolute; top:78%; left: 31%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/5.png' width='90px' height='120px' style='position: absolute; top:78%; left: 37%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/6.png' width='90px' height='120px' style='position: absolute; top:78%; left: 47%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/7.png' width='90px' height='120px' style='position: absolute; top:78%; left: 54%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/8.png' width='90px' height='120px' style='position: absolute; top:78%; left: 61%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/9.png' width='90px' height='120px' style='position: absolute; top:78%; left: 68%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/10.png' width='90px' height='120px' style='position: absolute; top:78%; left: 75%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/11.png' width='90px' height='120px' style='position: absolute; top:78%; left: 82%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/12.png' width='90px' height='120px' style='position: absolute; top:78%; left: 89%;'
-        onclick="select(this,1)" alt="">
-      <img id="" src='@/assets/img/13.png' width='90px' height='120px' style='position: absolute; top:78%; left: 91%;'
-        onclick="select(this,1)" alt="">
-    </div> -->
-    <!--player1 牌结束 -->
+
+  <!--弃牌堆 -->
+    <div >
+    <img id="" src='@/assets/img/1.png' width='7%' height='120px' style='position: absolute; top: 30%;left:27%'>
+    
+    </div>
+     <!--弃牌堆结束 -->
 
 <!--player1 牌 -->
 <div class="player1_card" style="position: absolute; top:78%; left: 2%; right: 2%; display: flex; justify-content: center;">
@@ -147,11 +124,23 @@
 <script setup>
 import { ref,  onMounted } from 'vue'
 import { audioManager } from '@/utils/audio'
+import { websocket } from '@/utils/websocket'
 
 onMounted(() => {
   audioManager.preload('bgm', 'src/assets/music/game_bg1.mp3')
    audioManager.playBGM('bgm')
+   websocket.send({"type":"play","data":"","name":""})
+   websocket.on('message', handleMessage)
 })
+
+const handleMessage = (data) => {
+  // 处理接收到的消息
+  console.log('Received message:', data)
+  if(data.type == "over"){
+    // 重复玩
+     websocket.send({"type":"play","data":"","name":""})
+  }
+}
 
 const selectedCards = ref([])  // 改为数组存储选中状态
 
