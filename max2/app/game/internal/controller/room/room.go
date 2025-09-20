@@ -29,6 +29,7 @@ type Card struct {
 	Value int    // 牌值 3-15，分别对应3-A
 	Suit  int    // 花色 0-3 方块、梅花、红桃、黑桃
 	Name  string // 牌的名称
+	Id    int    //牌的id
 }
 
 // 玩家类型
@@ -204,13 +205,15 @@ func initDeck() []Card {
 	var deck []Card
 	suits := []string{"♦", "♣", "♥", "♠"}
 	values := []string{"3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2"}
-
-	for suit, suitName := range suits {
-		for i, valueName := range values {
+	cardId := 0
+	for i, valueName := range values {
+		for suit, suitName := range suits {
+			cardId++
 			card := Card{
 				Value: 3 + i,
 				Suit:  suit,
 				Name:  suitName + valueName,
+				Id:    cardId,
 			}
 			deck = append(deck, card)
 		}
