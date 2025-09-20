@@ -1,0 +1,700 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"sort"
+	"strconv"
+	"strings"
+	"time"
+)
+
+// 牌的结构体
+type Card struct {
+	Value int    // 牌值 3-15，分别对应3-A，16是小王，17是大王
+	Suit  int    // 花色 0-3 方块、梅花、红桃、黑桃
+	Name  string // 牌的名称
+}
+
+// 玩家结构体
+type Player struct {
+	ID     int
+	Cards  []Card
+	Name   string
+	RoomID string // 玩家所在房间ID
+}
+
+// 房间结构体
+type Room struct {
+	ID        string
+	Players   []*Player
+	Deck      []Card
+	Landlord  *Player
+	Farmers   []*Player
+	Current   int    // 当前出牌玩家索引
+	LastCards []Card // 上一手牌
+	Turn      int    // 轮次
+	IsPlaying bool   // 房间是否正在游戏中
+}
+
+// 房间管理器
+type RoomManager struct {
+	Rooms      map[string]*Room
+	PlayerList map[int]*Player
+}
+
+// 创建新的房间管理器
+func NewRoomManager() *RoomManager {
+	return &RoomManager{
+		Rooms:      make(map[string]*Room),
+		PlayerList: make(map[int]*Player),
+	}
+}
+
+// 创建新房间
+func (rm *RoomManager) CreateRoom(player *Player) *Room {
+	// 生成唯一房间ID
+	roomID := generateRoomID()
+	
+	// 创建新房间
+	room := &Room{
+		ID:        roomID,
+		Players:   []*Player{player},
+		IsPlaying: false,
+	}
+	
+	// 将玩家加入房间
+	player.RoomID = roomID
+	
+	// 保存房间
+	rm.Rooms[roomID] = room
+	
+	return room
+}
+
+// 加入房间
+func (rm *RoomManager) JoinRoom(player *Player, roomID string) bool {
+	room, exists := rm.Rooms[roomID]
+	if !exists {
+		return false
+	}
+	
+	// 检查房间是否已满
+	if len(room.Players) >= 3 {
+		return false
+	}
+	
+	// 检查房间是否正在游戏中
+	if room.IsPlaying {
+		return false
+	}
+	
+	// 将玩家加入房间
+	room.Players = append(room.Players, player)
+	player.RoomID = roomID
+	
+	return true
+}
+
+// 离开房间
+func (rm *RoomManager) LeaveRoom(player *Player) {
+	if player.RoomID == "" {
+		return
+	}
+	
+	room, exists := rm.Rooms[player.RoomID]
+	if !exists {
+		return
+	}
+	
+	// 从房间中移除玩家
+	for i, p := range room.Players {
+		if p.ID == player.ID {
+			room.Players = append(room.Players[:i], room.Players[i+1:]...)
+			break
+		}
+	}
+	
+	// 清空玩家的房间ID
+	player.RoomID = ""
+	
+	// 如果房间为空，删除房间
+	if len(room.Players) == 0 {
+		delete(rm.Rooms, room.ID)
+	} else if room.IsPlaying {
+		// 如果游戏正在进行中且玩家离开，结束当前游戏
+		room.IsPlaying = false
+		fmt.Printf("玩家 %s 已离开房间，游戏结束\n", player.Name)
+	}
+}
+
+// 生成唯一房间ID
+func generateRoomID() string {
+	rand.Seed(time.Now().UnixNano())
+	const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	result := make([]byte, 6)
+	for i := range result {
+		result[i] = chars[rand.Intn(len(chars))]
+	}
+	return string(result)
+}
+
+// 初始化一副牌
+func initDeck() []Card {
+	var deck []Card
+	suits := []string{"方块", "梅花", "红桃", "黑桃"}
+	values := []string{"3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2"}
+
+	for suit, suitName := range suits {
+		for i, valueName := range values {
+			card := Card{
+				Value: 3 + i,
+				Suit:  suit,
+				Name:  suitName + valueName,
+			}
+			deck = append(deck, card)
+		}
+	}
+
+	// 添加大小王
+	deck = append(deck, Card{Value: 16, Suit: 4, Name: "小王"})
+	deck = append(deck, Card{Value: 17, Suit: 4, Name: "大王"})
+
+	return deck
+}
+
+// 洗牌
+func shuffleDeck(deck []Card) {
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(len(deck), func(i, j int) {
+		deck[i], deck[j] = deck[j], deck[i]
+	})
+}
+
+// 清空玩家手中的牌
+func clearPlayerCards(players []*Player) {
+	for _, player := range players {
+		player.Cards = []Card{}
+	}
+}
+
+// 发牌
+func dealCards(deck []Card, players []*Player) []Card {
+	// 留3张底牌
+	for i := 0; i < len(deck)-3; i++ {
+		players[i%3].Cards = append(players[i%3].Cards, deck[i])
+	}
+
+	// 对每个玩家的牌进行排序
+	for _, player := range players {
+		sort.Slice(player.Cards, func(i, j int) bool {
+			return player.Cards[i].Value < player.Cards[j].Value
+		})
+	}
+
+	// 返回底牌
+	return deck[len(deck)-3:]
+}
+
+// 显示玩家的牌
+func showPlayerCards(player *Player) {
+	fmt.Printf("%s的牌: ", player.Name)
+	for i, card := range player.Cards {
+		fmt.Printf("%d.%s ", i+1, card.Name)
+	}
+	fmt.Println()
+}
+
+// 叫地主
+func bidLandlord(room *Room) {
+	fmt.Println("\n开始叫地主...")
+	currentPlayer := 0
+	passCount := 0
+
+	for passCount < 2 {
+		player := room.Players[currentPlayer]
+		fmt.Printf("%s, 是否叫地主? (1: 叫地主, 0: 不叫) ", player.Name)
+
+		var input string
+		fmt.Scanln(&input)
+		input = strings.TrimSpace(input)
+
+		if input == "1" {
+			room.Landlord = player
+			fmt.Printf("%s成为地主!\n", player.Name)
+
+			// 给地主发底牌
+			for _, card := range room.Deck {
+				room.Landlord.Cards = append(room.Landlord.Cards, card)
+			}
+
+			// 重新排序地主的牌
+			sort.Slice(room.Landlord.Cards, func(i, j int) bool {
+				return room.Landlord.Cards[i].Value < room.Landlord.Cards[j].Value
+			})
+
+			// 确定农民
+			room.Farmers = []*Player{}
+			for _, p := range room.Players {
+				if p.ID != room.Landlord.ID {
+					room.Farmers = append(room.Farmers, p)
+				}
+			}
+
+			// 地主先出牌
+			room.Current = currentPlayer
+			return
+		} else if input == "0" {
+			fmt.Printf("%s不叫\n", player.Name)
+			passCount++
+		} else {
+			fmt.Println("输入无效，请输入1或0")
+			continue
+		}
+
+		currentPlayer = (currentPlayer + 1) % 3
+	}
+
+	// 如果前两人都不叫，第三人自动成为地主
+	room.Landlord = room.Players[currentPlayer]
+	fmt.Printf("%s成为地主!\n", room.Landlord.Name)
+
+	// 给地主发底牌
+	for _, card := range room.Deck {
+		room.Landlord.Cards = append(room.Landlord.Cards, card)
+	}
+
+	// 重新排序地主的牌
+	sort.Slice(room.Landlord.Cards, func(i, j int) bool {
+		return room.Landlord.Cards[i].Value < room.Landlord.Cards[j].Value
+	})
+
+	// 确定农民
+	room.Farmers = []*Player{}
+	for _, p := range room.Players {
+		if p.ID != room.Landlord.ID {
+			room.Farmers = append(room.Farmers, p)
+		}
+	}
+
+	// 地主先出牌
+	room.Current = currentPlayer
+}
+
+// 解析玩家输入的牌索引
+func parseCardIndices(input string, maxIndex int) []int {
+	if input == "0" {
+		return []int{} // 不出牌
+	}
+
+	parts := strings.Split(input, ",")
+	var indices []int
+
+	for _, part := range parts {
+		idx, err := strconv.Atoi(part)
+		if err != nil || idx < 1 || idx > maxIndex {
+			return nil // 无效输入
+		}
+		indices = append(indices, idx-1) // 转换为0-based索引
+	}
+
+	// 去重并排序
+	uniqueIndices := make(map[int]bool)
+	for _, idx := range indices {
+		uniqueIndices[idx] = true
+	}
+	indices = []int{}
+	for idx := range uniqueIndices {
+		indices = append(indices, idx)
+	}
+	sort.Ints(indices)
+
+	return indices
+}
+
+// 从玩家手中获取选中的牌
+func getSelectedCards(player *Player, indices []int) []Card {
+	var selected []Card
+	for _, idx := range indices {
+		selected = append(selected, player.Cards[idx])
+	}
+	return selected
+}
+
+// 从玩家手中移除牌
+func removeCards(player *Player, indices []int) {
+	// 按降序排序索引，以便从后往前删除
+	sort.Sort(sort.Reverse(sort.IntSlice(indices)))
+
+	for _, idx := range indices {
+		// 移除指定索引的牌
+		player.Cards = append(player.Cards[:idx], player.Cards[idx+1:]...)
+	}
+}
+
+// 判断牌型是否有效
+func isValidCardType(cards []Card) (string, bool) {
+	if len(cards) == 0 {
+		return "pass", true // 不出牌
+	}
+
+	// 单牌
+	if len(cards) == 1 {
+		return "single", true
+	}
+
+	// 对子
+	if len(cards) == 2 {
+		if cards[0].Value == cards[1].Value {
+			return "pair", true
+		}
+		// 王炸
+		if (cards[0].Value == 16 && cards[1].Value == 17) ||
+			(cards[0].Value == 17 && cards[1].Value == 16) {
+			return "bomb_2", true
+		}
+		return "", false
+	}
+
+	// 三张
+	if len(cards) == 3 {
+		if cards[0].Value == cards[1].Value && cards[1].Value == cards[2].Value {
+			return "triple", true
+		}
+		return "", false
+	}
+
+	// 炸弹（四张相同）
+	if len(cards) == 4 {
+		if cards[0].Value == cards[1].Value &&
+			cards[1].Value == cards[2].Value &&
+			cards[2].Value == cards[3].Value {
+			return "bomb_4", true
+		}
+		return "", false
+	}
+
+	// 顺子 (5张或更多连续的牌)
+	if len(cards) >= 5 {
+		// 检查是否包含2或大小王
+		for _, card := range cards {
+			if card.Value >= 15 || card.Value == 16 || card.Value == 17 {
+				return "", false
+			}
+		}
+
+		// 检查是否连续
+		values := make([]int, len(cards))
+		for i, card := range cards {
+			values[i] = card.Value
+		}
+		sort.Ints(values)
+
+		for i := 1; i < len(values); i++ {
+			if values[i] != values[i-1]+1 {
+				return "", false
+			}
+		}
+		return "straight", true
+	}
+
+	// 其他牌型可以在这里继续实现...
+	return "", false
+}
+
+// 比较牌的大小
+func compareCards(last []Card, current []Card) bool {
+	if len(last) == 0 {
+		return true // 上一手没牌，当前任何有效牌型都可以出
+	}
+
+	if len(current) == 0 {
+		return true // 不出牌
+	}
+
+	lastType, _ := isValidCardType(last)
+	currentType, _ := isValidCardType(current)
+
+	// 王炸最大
+	if currentType == "bomb_2" {
+		return true
+	}
+
+	// 炸弹可以打非炸弹
+	if currentType == "bomb_4" && lastType != "bomb_2" && lastType != "bomb_4" {
+		return true
+	}
+
+	// 炸弹之间比大小
+	if currentType == "bomb_4" && lastType == "bomb_4" {
+		return getMaxValue(current) > getMaxValue(last)
+	}
+
+	// 相同牌型且长度相同才能比较
+	if lastType == currentType && len(last) == len(current) {
+		return getMaxValue(current) > getMaxValue(last)
+	}
+
+	return false
+}
+
+// 获取牌组中的最大值
+func getMaxValue(cards []Card) int {
+	maxVal := 0
+	for _, card := range cards {
+		if card.Value > maxVal {
+			maxVal = card.Value
+		}
+	}
+	return maxVal
+}
+
+// 显示牌组
+func showCards(cards []Card) string {
+	if len(cards) == 0 {
+		return "不出"
+	}
+
+	var names []string
+	for _, card := range cards {
+		names = append(names, card.Name)
+	}
+	return strings.Join(names, " ")
+}
+
+// 检查游戏是否结束
+func isGameOver(room *Room) (bool, *Player) {
+	for _, player := range room.Players {
+		if len(player.Cards) == 0 {
+			return true, player
+		}
+	}
+	return false, nil
+}
+
+// 玩一局游戏
+func playOneGame(room *Room) {
+	fmt.Printf("\n===== 房间 %s 游戏开始 =====", room.ID)
+
+	// 初始化游戏
+	room.Deck = initDeck()
+	
+	// 洗牌
+	shuffleDeck(room.Deck)
+
+	// 清空玩家手牌
+	clearPlayerCards(room.Players)
+
+	// 发牌，返回底牌
+	room.Deck = dealCards(room.Deck, room.Players)
+
+	// 显示玩家的牌（除了底牌）
+	for _, player := range room.Players {
+		showPlayerCards(player)
+	}
+
+	// 叫地主
+	bidLandlord(room)
+
+	fmt.Println("\n底牌是:", showCards(room.Deck))
+	fmt.Println("地主是:", room.Landlord.Name)
+	fmt.Println("游戏开始!")
+
+	// 显示地主的牌
+	showPlayerCards(room.Landlord)
+
+	// 游戏主循环
+	passCount := 0
+	for {
+		// 检查游戏是否结束
+		over, winner := isGameOver(room)
+		if over {
+			if winner.ID == room.Landlord.ID {
+				fmt.Printf("\n游戏结束！地主%s获胜！\n", winner.Name)
+			} else {
+				fmt.Printf("\n游戏结束！农民获胜！恭喜%s！\n", winner.Name)
+			}
+			break
+		}
+
+		currentPlayer := room.Players[room.Current]
+		fmt.Printf("\n%s的回合 (当前手牌数: %d)\n", currentPlayer.Name, len(currentPlayer.Cards))
+		showPlayerCards(currentPlayer)
+		fmt.Printf("上一手牌: %s\n", showCards(room.LastCards))
+		fmt.Print("请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
+
+		var input string
+		fmt.Scanln(&input)
+		input = strings.TrimSpace(input)
+
+		indices := parseCardIndices(input, len(currentPlayer.Cards))
+		if indices == nil {
+			fmt.Println("输入无效，请重新输入")
+			continue
+		}
+
+		selectedCards := getSelectedCards(currentPlayer, indices)
+
+		// 验证牌型
+		cardType, valid := isValidCardType(selectedCards)
+		if !valid {
+			fmt.Println("牌型无效，请重新选择")
+			continue
+		}
+
+		// 验证是否能压过上一手牌
+		if !compareCards(room.LastCards, selectedCards) {
+			fmt.Println("不能压过上一手牌，请重新选择")
+			continue
+		}
+
+		// 如果是不出牌
+		if len(selectedCards) == 0 {
+			fmt.Printf("%s不出\n", currentPlayer.Name)
+			passCount++
+
+			// 如果三家都不出，重置上一手牌
+			if passCount >= 2 {
+				room.LastCards = []Card{}
+				passCount = 0
+			}
+		} else {
+			// 出牌
+			fmt.Printf("%s出了: %s (%s)\n", currentPlayer.Name, showCards(selectedCards), cardType)
+			removeCards(currentPlayer, indices)
+			room.LastCards = selectedCards
+			passCount = 0
+		}
+
+		// 下一个玩家
+		room.Current = (room.Current + 1) % 3
+		room.Turn++
+	}
+	
+	// 游戏结束，更新房间状态
+	room.IsPlaying = false
+}
+
+// 显示房间列表
+func showRooms(rm *RoomManager) {
+	fmt.Println("\n===== 房间列表 =====")
+	if len(rm.Rooms) == 0 {
+		fmt.Println("暂无可用房间")
+		return
+	}
+	
+	for id, room := range rm.Rooms {
+		status := "等待中"
+		if room.IsPlaying {
+			status = "游戏中"
+		}
+		fmt.Printf("房间ID: %s, 玩家数: %d/3, 状态: %s\n", id, len(room.Players), status)
+	}
+}
+
+// 开始游戏主程序
+func startGame() {
+	fmt.Println("欢迎来到斗地主游戏！")
+	rm := NewRoomManager()
+	playerID := 0
+	
+	// 创建第一个玩家
+	fmt.Print("请输入你的名字: ")
+	var playerName string
+	fmt.Scanln(&playerName)
+	player := &Player{ID: playerID, Name: playerName}
+	rm.PlayerList[playerID] = player
+	playerID++
+	
+	for {
+		fmt.Println("\n===== 主菜单 =====")
+		fmt.Println("1. 创建房间")
+		fmt.Println("2. 加入房间")
+		fmt.Println("3. 查看房间列表")
+		fmt.Println("4. 退出游戏")
+		
+		if player.RoomID != "" {
+			room := rm.Rooms[player.RoomID]
+			fmt.Printf("\n你当前在房间 %s 中，已有 %d/3 名玩家\n", room.ID, len(room.Players))
+			fmt.Println("5. 离开房间")
+			if len(room.Players) == 3 && !room.IsPlaying {
+				fmt.Println("6. 开始游戏")
+			}
+		}
+		
+		fmt.Print("请选择操作: ")
+		var input string
+		fmt.Scanln(&input)
+		input = strings.TrimSpace(input)
+		
+		switch input {
+		case "1":
+			if player.RoomID != "" {
+				fmt.Println("你已经在一个房间中，请先离开当前房间")
+				break
+			}
+			room := rm.CreateRoom(player)
+			fmt.Printf("房间创建成功！房间ID: %s\n", room.ID)
+			fmt.Println("等待其他玩家加入...")
+			
+		case "2":
+			if player.RoomID != "" {
+				fmt.Println("你已经在一个房间中，请先离开当前房间")
+				break
+			}
+			fmt.Print("请输入房间ID: ")
+			var roomID string
+			fmt.Scanln(&roomID)
+			success := rm.JoinRoom(player, roomID)
+			if success {
+				room := rm.Rooms[roomID]
+				fmt.Printf("成功加入房间 %s！当前房间有 %d/3 名玩家\n", roomID, len(room.Players))
+			} else {
+				fmt.Println("加入房间失败，房间不存在或已满或正在游戏中")
+			}
+			
+		case "3":
+			showRooms(rm)
+			
+		case "4":
+			// 退出前离开房间
+			if player.RoomID != "" {
+				rm.LeaveRoom(player)
+			}
+			fmt.Println("谢谢游玩，再见！")
+			return
+			
+		case "5":
+			if player.RoomID == "" {
+				fmt.Println("你不在任何房间中")
+				break
+			}
+			rm.LeaveRoom(player)
+			fmt.Println("已离开房间")
+			
+		case "6":
+			if player.RoomID == "" {
+				fmt.Println("你不在任何房间中")
+				break
+			}
+			room := rm.Rooms[player.RoomID]
+			if len(room.Players) != 3 {
+				fmt.Println("玩家不足3人，无法开始游戏")
+				break
+			}
+			if room.IsPlaying {
+				fmt.Println("游戏已经开始")
+				break
+			}
+			room.IsPlaying = true
+			playOneGame(room)
+			
+		default:
+			fmt.Println("无效的操作，请重新选择")
+		}
+	}
+}
+
+func main() {
+	startGame()
+}

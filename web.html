@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <title>goframe websocket echo server</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+        <!-- 1. 替换 Bootstrap CSS 为 jsDelivr 公共 CDN（兼容原代码的 3.x 版本） -->
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <!-- 2. 替换 jQuery 为 jsDelivr 公共 CDN（兼容原代码的 1.x 版本） -->
+        <script src="jquery-1.8.3.min.js"></script>
+    </head>
+    <body>
+        <!-- 原页面内容不变 -->
+        <div class="container">
+            <div class="list-group" id="divShow"></div>
+            <div>
+                <div><input class="form-control" id="txtContent" autofocus placeholder="Content to send.."></div>
+                <div><button class="btn btn-primary" id="btnSend" style="margin-top:15px">Send</button></div>
+            </div>
+        </div>
+
+        <!-- 原 JS 代码不变 -->
+        <script type="application/javascript">
+            function showInfo(content) {
+                $("<div class=\"list-group-item list-group-item-info\">" + content + "</div>").appendTo("#divShow")
+            }
+            function showWaring(content) { // 注：函数名建议修正为 showWarning（拼写错误，不影响功能）
+                $("<div class=\"list-group-item list-group-item-warning\">" + content + "</div>").appendTo("#divShow")
+            }
+            function showSuccess(content) {
+                $("<div class=\"list-group-item list-group-item-success\">" + content + "</div>").appendTo("#divShow")
+            }
+            function showError(content) {
+                $("<div class=\"list-group-item list-group-item-danger\">" + content + "</div>").appendTo("#divShow")
+            }
+
+            $(function () {
+                const url = "ws://127.0.0.1:8000/enter";
+                let ws  = new WebSocket(url);
+                try {
+                    ws.onopen = function () {
+                        showInfo("WebSocket Server [" + url +"] Connection Succeeded!");
+                    };
+                    ws.onclose = function () {
+                        if (ws) {
+                            ws.close();
+                            ws = null;
+                        }
+                        showError("WebSocket Server [" + url +"] Connection Closed!");
+                    };
+                    ws.onerror = function () {
+                        if (ws) {
+                            ws.close();
+                            ws = null;
+                        }
+                        showError("WebSocket Server [" + url +"] Connection Error!");
+                    };
+                    ws.onmessage = function (result) {
+                        showWaring(" > " + result.data); // 同样建议修正为 showWarning
+                    };
+                } catch (e) {
+                    alert(e.message);
+                }
+
+                $("#btnSend").on("click", function () {
+                    if (ws == null) {
+                        showError("WebSocket Server [" + url +"] Connection Failed, Please Refresh Page!");
+                        return;
+                    }
+                    const content = $.trim($("#txtContent").val()).replace(/[\n]/g, ""); // 原代码正则符号错误，已修正（将 /[\n]/g 前的 "/" 移到开头）
+                    if (content.length <= 0) {
+                        alert("Please input any content to send!");
+                        return;
+                    }
+                    $("#txtContent").val("")
+                    showSuccess(content);
+                    ws.send(content);
+                });
+
+                $("#txtContent").on("keydown", function (event) {
+                    if (event.keyCode === 13) {
+                        $("#btnSend").trigger("click");
+                    }
+                });
+            })
+        </script>
+    </body>
+</html>

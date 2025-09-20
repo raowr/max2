@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2仔大 | madmic - 游戏房间</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/yinghua.js"></script>
+    <script src="js/vue.global.js"></script>
+    <style>
+        :root {
+            --primary-color: #ffae4c;
+            --secondary-color: #5d4037;
+            --accent-gold: #ffd700;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-overlay: rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            font-family: 'Microsoft YaHei', sans-serif;
+            color: var(--text-light);
+        }
+
+        #app {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            left: 0;
+            top: 0;
+        }
+
+        .background-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .room-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 20px;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .back-btn img {
+            height: 80px;
+        }
+
+        .room-title {
+            position: absolute;
+            left: 110px;
+            top: 15px;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            gap: 20px;
+        }
+
+        .players-section {
+            flex: 3;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2%;
+            justify-content: flex-start;
+        }
+
+        .player-card {
+            width: 23.5%;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .player-frame {
+            width: 100%;
+            position: relative;
+            height: 80%;
+            padding-top: 150%; /* 增加高度，从130%增加到150% */
+        }
+
+        .player-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .player-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%; /* 增加内容区域高度 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 12%;
+            z-index: 5;
+        }
+
+        .player-inner {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .player-avatar {
+            width: 45%; /* 稍微增大头像 */
+            margin-bottom: 6%;
+            z-index: 2;
+        }
+
+        /* 名称容器 - 新增 */
+        .player-name-container {
+            position: relative;
+            width: 90%;
+            margin-bottom: 4%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .player-nameplate {
+            width: 100%;
+            z-index: 2;
+        }
+
+        .player-name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            text-align: center;
+            font-size: 1.3vw; /* 稍微增大字体 */
+            z-index: 3;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .player-stars {
+            display: flex;
+            justify-content: center;
+            width: 90%;
+            z-index: 3;
+        }
+
+        .player-stars img {
+            height: 18px; /* 增大星星大小 */
+            margin: 0 3px;
+        }
+
+        .player-ready {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            width: 45%; /* 增大准备图标 */
+            display: none;
+        }
+
+        .player-ready.active {
+            display: block;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* 房主标识位置 */
+        .room-owner-badge {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 45%; /* 增大房主标识 */
+            z-index: 10;
+        }
+
+        .controls-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-width: 250px;
+        }
+
+        .game-info {
+            background: var(--bg-overlay);
+            border-radius: 10px;
+            padding: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .room-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: url('img/ui/btn_small.png') center/cover no-repeat;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--primary-color);
+            font-size: 25px;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+            color: #ffc107;
+        }
+
+        .ready-btn-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .ready-btn {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .ready-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .connection-status {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 100;
+        }
+
+        .connected {
+            background-color: rgba(76, 175, 80, 0.8);
+        }
+
+        .disconnected {
+            background-color: rgba(244, 67, 54, 0.8);
+        }
+
+        .connecting {
+            background-color: rgba(255, 193, 7, 0.8);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+            100% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .player-card {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .player-card:nth-child(2) { animation-delay: 0.1s; }
+        .player-card:nth-child(3) { animation-delay: 0.2s; }
+        .player-card:nth-child(4) { animation-delay: 0.3s; }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .player-name {
+                font-size: 1.5vw;
+            }
+
+            .player-frame {
+                padding-top: 145%;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .controls-section {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .game-info {
+                flex: 2;
+            }
+
+            .room-actions {
+                flex: 1;
+            }
+
+            .player-name {
+                font-size: 1.9vw;
+            }
+
+            .player-frame {
+                padding-top: 140%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .players-section {
+                gap: 10px;
+            }
+
+            .player-card {
+                width: 48%;
+            }
+
+            .player-name {
+                font-size: 2.6vw;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .room-title {
+                position: static;
+                margin-top: 10px;
+            }
+
+            /* 移动端调整 */
+            .room-owner-badge {
+                width: 38%;
+                top: -10px;
+                left: -10px;
+            }
+
+            .player-avatar {
+                width: 40%;
+            }
+
+            .player-content {
+                height: 52%;
+                padding-bottom: 10%;
+            }
+
+            .player-frame {
+                padding-top: 135%;
+            }
+
+            .player-stars img {
+                height: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!-- Background -->
+    <div class="background-container">
+        <img src="img/bg/indoor.png" alt="室内场景背景图">
+    </div>
+
+    <!-- Room Container -->
+    <div class="room-container">
+        <!-- Header with back button -->
+        <div class="header">
+            <div class="back-btn" @click="goHome">
+                <img src="img/ui/img_return1_bg.png" alt="返回按钮背景">
+                <img src="img/ui/img_return1.png" alt="返回" style="position: absolute; left: 0; top: 0;">
+                <img src="img/ui/txt_friendroom.png" alt="好友房间" class="room-title">
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Players Section -->
+            <div class="players-section">
+                <div class="player-card" v-for="(player, index) in players" :key="index">
+                    <!-- 房主标识 -->
+                    <img v-if="player.isOwner" src="img/ui/roomowner.png" class="room-owner-badge" alt="房主标志">
+
+                    <div class="player-frame">
+                        <div class="player-bg-container">
+                            <img src="img/ui/frame_gold.png" alt="玩家框" style="width: 100%; height: 100%;">
+                            <img src="img/ui/character_bg.png" alt="玩家背景" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                        </div>
+
+                        <!-- 玩家内容在玩家框内部 -->
+                        <div class="player-content">
+                            <div class="player-inner">
+                                <img :src="player.avatar" class="player-avatar" alt="玩家头像">
+
+                                <!-- 名称容器 - 名称叠在背景上面 -->
+                                <div class="player-name-container">
+                                    <img src="img/ui/namebg.png" class="player-nameplate" alt="名称背景">
+                                    <div class="player-name">{{ player.name }}</div>
+                                </div>
+
+                                <div class="player-stars">
+                                    <img v-for="n in 3" :key="n"
+                                         :src="n <= player.stars ? 'img/ui/star.png' : 'img/ui/star_dark.png'"
+                                         alt="星星">
+                                </div>
+
+                                <img src="img/ui/ready.png" class="player-ready"
+                                     :class="{ active: player.ready }" alt="准备状态">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls and Info Section -->
+            <div class="controls-section">
+                <div class="game-info">
+                    <div class="info-item">
+                        <div class="info-label">游戏模式</div>
+                        <div class="info-value">{{ gameType }}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">奖励</div>
+                        <div class="info-value">{{ gameReward }}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">房间号</div>
+                        <div class="info-value">{{ roomId }}</div>
+                    </div>
+                </div>
+
+                <div class="room-actions">
+                    <div class="action-btn" @click="addComputer">
+                        添加电脑
+                    </div>
+                    <div class="action-btn" @click="customizeAvatar">
+                        调整装扮
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ready Button -->
+        <div class="ready-btn-container">
+            <img src="img/ui/btn_ready.png" class="ready-btn" alt="准备" @click="toggleReady">
+        </div>
+
+        <!-- Connection Status Indicator -->
+        <div class="connection-status" :class="connectionStatusClass">
+            {{ connectionStatusText }}
+        </div>
+    </div>
+</div>
+
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                players: [
+                    {
+                        id: 1,
+                        name: '玩家一',
+                        avatar: 'img/avatars/player1.png',
+                        stars: 3,
+                        ready: false,
+                        isOwner: true
+                    },
+                    {
+                        id: 2,
+                        name: '玩家二',
+                        avatar: 'img/avatars/player2.png',
+                        stars: 2,
+                        ready: false,
+                        isOwner: false
+                    },
+                    {
+                        id: 3,
+                        name: '等待中...',
+                        avatar: '',
+                        stars: 0,
+                        ready: false,
+                        isOwner: false
+                    },
+                    {
+                        id: 4,
+                        name: '等待中...',
+                        avatar: '',
+                        stars: 0,
+                        ready: false,
+                        isOwner: false
+                    }
+                ],
+                gameType: '经典模式',
+                gameReward: '100金币',
+                roomId: '123456',
+
+                // WebSocket related
+                ws: null,
+                isConnected: false,
+                isConnecting: false,
+                reconnectAttempts: 0,
+                maxReconnectAttempts: 5
+            }
+        },
+        computed: {
+            connectionStatusClass() {
+                return {
+                    'connected': this.isConnected,
+                    'disconnected': !this.isConnected && !this.isConnecting,
+                    'connecting': this.isConnecting
+                };
+            },
+            connectionStatusText() {
+                if (this.isConnected) return '已连接';
+                if (this.isConnecting) return '连接中...';
+                return '已断开';
+            }
+        },
+        mounted() {
+            this.initWebSocket();
+            this.startStatusCheck();
+        },
+        beforeUnmount() {
+            this.disconnectWebSocket();
+            clearInterval(this.statusCheckInterval);
+        },
+        methods: {
+            goHome() {
+                window.location.href = 'index.html';
+            },
+
+            toggleReady() {
+                // Find the current player (assuming first player for demo)
+                const player = this.players[0];
+                player.ready = !player.ready;
+
+                // Send ready status to server
+                if (this.isConnected) {
+                    this.sendWebSocketMessage({
+                        type: 'playerReady',
+                        playerId: player.id,
+                        ready: player.ready
+                    });
+                }
+            },
+
+            addComputer() {
+                // Find an empty slot
+                const emptySlot = this.players.find(p => p.name === '等待中...');
+                if (emptySlot) {
+                    emptySlot.name = '电脑玩家';
+                    emptySlot.avatar = 'img/avatars/computer.png';
+                    emptySlot.stars = 1;
+
+                    // Notify server
+                    if (this.isConnected) {
+                        this.sendWebSocketMessage({
+                            type: 'addComputer',
+                            position: emptySlot.id
+                        });
+                    }
+                } else {
+                    alert('房间已满，无法添加电脑玩家');
+                }
+            },
+
+            customizeAvatar() {
+                alert('装扮调整功能即将开放！');
+            },
+
+            initWebSocket() {
+                // WebSocket server URL - replace with your actual server URL
+                const wsServerUrl = 'ws://127.0.0.1:8000/enter';
+
+                this.isConnecting = true;
+
+                try {
+                    this.ws = new WebSocket(wsServerUrl);
+
+                    this.ws.onopen = () => {
+                        console.log('WebSocket连接已建立');
+                        this.isConnected = true;
+                        this.isConnecting = false;
+                        this.reconnectAttempts = 0;
+
+                        // Send initial room data
+                        this.sendWebSocketMessage({
+                            type: 'initRoom',
+                            roomId: this.roomId,
+                            players: this.players,
+                            gameType: this.gameType,
+                            gameReward: this.gameReward
+                        });
+                    };
+
+                    this.ws.onmessage = (event) => {
+                        console.log('收到消息:', event.data);
+                        this.handleWebSocketMessage(event.data);
+                    };
+
+                    this.ws.onclose = (event) => {
+                        console.log('WebSocket连接关闭:', event.code, event.reason);
+                        this.isConnected = false;
+                        this.isConnecting = false;
+
+                        // Attempt to reconnect
+                        if (this.reconnectAttempts < this.maxReconnectAttempts) {
+                            this.reconnectAttempts++;
+                            setTimeout(() => this.initWebSocket(), 3000);
+                        }
+                    };
+
+                    this.ws.onerror = (error) => {
+                        console.error('WebSocket错误:', error);
+                        this.isConnecting = false;
+                    };
+                } catch (error) {
+                    console.error('创建WebSocket连接失败:', error);
+                    this.isConnecting = false;
+                }
+            },
+
+            disconnectWebSocket() {
+                if (this.ws) {
+                    this.ws.close(1000, '页面关闭');
+                    this.ws = null;
+                }
+            },
+
+            sendWebSocketMessage(message) {
+                if (this.isConnected && this.ws) {
+                    this.ws.send(JSON.stringify(message));
+                }
+            },
+
+            handleWebSocketMessage(data) {
+                try {
+                    const message = JSON.parse(data);
+
+                    switch (message.type) {
+                        case 'playerJoined':
+                            this.handlePlayerJoined(message.player);
+                            break;
+                        case 'playerLeft':
+                            this.handlePlayerLeft(message.playerId);
+                            break;
+                        case 'playerReady':
+                            this.handlePlayerReady(message.playerId, message.ready);
+                            break;
+                        case 'gameStarting':
+                            this.handleGameStart();
+                            break;
+                        case 'roomUpdate':
+                            this.updateRoomState(message.roomState);
+                            break;
+                        default:
+                            console.log('未知消息类型:', message.type);
+                    }
+                } catch (error) {
+                    console.error('处理WebSocket消息出错:', error, data);
+                }
+            },
+
+            handlePlayerJoined(playerData) {
+                // Find an empty slot for the new player
+                const emptySlotIndex = this.players.findIndex(p => p.name === '等待中...');
+                if (emptySlotIndex !== -1) {
+                    this.players[emptySlotIndex] = playerData;
+                }
+            },
+
+            handlePlayerLeft(playerId) {
+                const playerIndex = the.players.findIndex(p => p.id === playerId);
+                if (playerIndex !== -1) {
+                    // Reset the player slot
+                    this.players[playerIndex] = {
+                        id: playerId,
+                        name: '等待中...',
+                        avatar: '',
+                        stars: 0,
+                        ready: false,
+                        isOwner: false
+                    };
+                }
+            },
+
+            handlePlayerReady(playerId, readyStatus) {
+                const player = this.players.find(p => p.id === playerId);
+                if (player) {
+                    player.ready = readyStatus;
+                }
+            },
+
+            handleGameStart() {
+                alert('游戏开始了！');
+                window.location.href = 'game.php';
+            },
+
+            updateRoomState(roomState) {
+                if (roomState.players) {
+                    this.players = roomState.players;
+                }
+
+                if (roomState.gameType) {
+                    this.gameType = roomState.gameType;
+                }
+
+                if (roomState.gameReward) {
+                    this.gameReward = roomState.gameReward;
+                }
+            },
+
+            startStatusCheck() {
+                // Simulate periodic status checks
+                this.statusCheckInterval = setInterval(() => {
+                    if (!this.isConnected && this.reconnectAttempts < this.maxReconnectAttempts) {
+                        this.initWebSocket();
+                    }
+                }, 5000);
+            }
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>
