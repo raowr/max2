@@ -1,30 +1,31 @@
 <template>
   <div class="game">
 
-<!--弃牌堆 -->
-    <div >
-    <img id="" src='@/assets/img/1.png' width='7%' height='120px' style='position: absolute; top: 30%;left:27%'>
-    
-</div>
-<!--弃牌堆结束 -->
+    <div class="msg" style="position: absolute; top: 1%; left: 6%; transform: translateX(-50%);color:gold;">
+      {{state.lastmsg}}
+    </div>
 
-<!--player1 牌 -->
-<div class="player1_card" style="position: absolute; top:78%; left: 2%; right: 2%; display: flex; justify-content: center;">
-  <img 
-    v-for="n in 13" 
-    :key="n" 
-    :src="'src/assets/img/'+n+'.png'"
-    :style="{
+    <!--弃牌堆 -->
+    <!-- 通过 left: 50% + transform: translateX(-50%) 实现水平居中 -->
+    <div
+      style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); display: flex; align-items: center;">
+      <img v-for="card in state.outCards" :key="card.Id" :src="'src/assets/img/cards/'+card.Id+'.png'"
+        style="width: 100%; height: 140px; margin-right: -4%; transition: transform 0.3s ease;">
+    </div>
+    <!--弃牌堆结束 -->
+
+    <!--player1 牌 -->
+    <div class="player1_card"
+      style="position: absolute; top:78%; left: 2%; right: 2%; display: flex; justify-content: center;">
+      <img v-for="card in state.cards" :key="card.Id" :src="'src/assets/img/cards/'+card.Id+'.png'" :style="{
       width: '7%',
       height: '120px',
       marginRight: '-1%',
-      transform: selectedCards.includes(n) ? 'translateY(-20px)' : 'translateX(calc(-1% * (13 - ' + n + ')))',
-      zIndex: selectedCards.includes(n) ? 10 : 1,
+      transform: selectedCards.includes(card.Id) ? 'translateY(-20px)' : 'translateX(calc(-1% * (13 - ' + card.Id + ')))',
+      zIndex: selectedCards.includes(card.Id) ? 10 : 1,
       transition: 'transform 0.3s ease'
-    }"
-    @click="toggleCard(n)"
-  >
-</div>
+    }" @click="toggleCard(card.Id)">
+    </div>
 
     <!--player1 信息 -->
 
@@ -40,140 +41,104 @@
 
     <!--player1 信息结束 -->
 
-    <!--player4 信息 -->
+    <!--player2 信息 -->
     <div style="position: absolute;top:30%;right:5%;">
-          <!-- 修改为圆形倒计时 -->
-    <div v-if="state.countdownPlayer == 4" style="position: absolute; top: -5%; left: 34%; transform: translateX(-50%); z-index: 999; text-align: center">
-      <svg :width="100" :height="100">
-        <circle 
-          cx="50" 
-          cy="50" 
-          r="45" 
-          stroke="#eee" 
-          stroke-width="8" 
-          fill="transparent"
-        />
-        <circle
-          cx="50"
-          cy="50"
-          r="45"
-          :stroke="countdownPlayer4 > 10 ? '#4CAF50' : '#ff5722'"
-          stroke-width="8"
-          fill="transparent"
-          :style="{
+      <!-- 修改为圆形倒计时 -->
+      <div v-if="state.countdownPlayer == 2"
+        style="position: absolute; top: -5%; left: 34%; transform: translateX(-50%); z-index: 999; text-align: center">
+        <svg :width="100" :height="100">
+          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer2 > 10 ? '#4CAF50' : '#ff5722'" stroke-width="8"
+            fill="transparent" :style="{
             strokeDasharray: 283,
-            strokeDashoffset: 283 * (1 - countdownPlayer4/30),
+            strokeDashoffset: 283 * (1 - countdownPlayer2/30),
             transition: 'stroke-dashoffset 1s linear'
-          }"
-        />
-      </svg>
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+          }" />
+        </svg>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
                  font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
-        {{ countdownPlayer4 }}
+          {{ countdownPlayer2 }}
+        </div>
       </div>
-    </div>
       <img src="@/assets/img/ui/chatlog.png" width="90px">
       <img src="@/assets/img/touxiang/bighead15419.png" width="90px"
         style="position: absolute;bottom:42.2%;left:3.1%;border-radius: 25px;">
       <div style="width:140px;height:40px;text-align:center;">
-        <p style="z-index:1;font-size:16px; color:white;">帅哥4</p>
-      </div>
-      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-70%;top:-2%'>
-      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:74%;left:-60%;">剩10张</p>
-    </div>
-
-    <!--player4 信息结束 -->
-
-    <!--player2 信息 -->
-    <div style="position: absolute;top:30%;left:3%;">
-          <!-- 修改为圆形倒计时 -->
-    <div v-if="state.countdownPlayer == 2" style="position: absolute; top: -4%; left: 40%; transform: translateX(-50%); z-index: 999; text-align: center">
-      <svg :width="100" :height="100">
-        <circle 
-          cx="50" 
-          cy="50" 
-          r="45" 
-          stroke="#eee" 
-          stroke-width="8" 
-          fill="transparent"
-        />
-        <circle
-          cx="50"
-          cy="50"
-          r="45"
-          :stroke="countdownPlayer2 > 10 ? '#4CAF50' : '#ff5722'"
-          stroke-width="8"
-          fill="transparent"
-          :style="{
-            strokeDasharray: 283,
-            strokeDashoffset: 283 * (1 - countdownPlayer2/30),
-            transition: 'stroke-dashoffset 1s linear'
-          }"
-        />
-      </svg>
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                 font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
-        {{ countdownPlayer2 }}
-      </div>
-    </div>
-      <img src="@/assets/img/ui/chatlog.png" width="90px">
-      <img src="@/assets/img/touxiang/bighead15339.png" width="85px"
-        style="position: absolute;bottom:42.2%;left:3.1%;border-radius: 25px;">
-      <div style="width:100px;height:40px;text-align:center;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥2</p>
       </div>
-      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:110%;top:0%'>
-      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:67%;left:130%;width: 60px;">剩10张</p>
+      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-70%;top:-2%'>
+      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:74%;left:-60%;">剩{{state.player2CardsNum}}张
+      </p>
     </div>
 
     <!--player2 信息结束 -->
 
+    <!--player4 信息 -->
+    <div style="position: absolute;top:30%;left:3%;">
+      <!-- 修改为圆形倒计时 -->
+      <div v-if="state.countdownPlayer == 4"
+        style="position: absolute; top: -4%; left: 40%; transform: translateX(-50%); z-index: 999; text-align: center">
+        <svg :width="100" :height="100">
+          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer4 > 10 ? '#4CAF50' : '#ff5722'" stroke-width="8"
+            fill="transparent" :style="{
+            strokeDasharray: 283,
+            strokeDashoffset: 283 * (1 - countdownPlayer4/30),
+            transition: 'stroke-dashoffset 1s linear'
+          }" />
+        </svg>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                 font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
+          {{ countdownPlayer4 }}
+        </div>
+      </div>
+      <img src="@/assets/img/ui/chatlog.png" width="90px">
+      <img src="@/assets/img/touxiang/bighead15339.png" width="85px"
+        style="position: absolute;bottom:42.2%;left:3.1%;border-radius: 25px;">
+      <div style="width:100px;height:40px;text-align:center;">
+        <p style="z-index:1;font-size:16px; color:white;">帅哥4</p>
+      </div>
+      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:110%;top:0%'>
+      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:67%;left:130%;width: 60px;">
+        剩{{state.player4CardsNum}}张</p>
+    </div>
+
+    <!--player4 信息结束 -->
+
     <!--player3 信息 -->
-    <div style="position: absolute;top:5%;left:40%;width: 90px;" >
-          <!-- 修改为圆形倒计时 -->
-    <div v-if="state.countdownPlayer == 3" style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
-      <svg :width="100" :height="100">
-        <circle 
-          cx="50" 
-          cy="50" 
-          r="45" 
-          stroke="#eee" 
-          stroke-width="8" 
-          fill="transparent"
-        />
-        <circle
-          cx="50"
-          cy="50"
-          r="45"
-          :stroke="countdownPlayer3 > 10 ? '#4CAF50' : '#ff5722'"
-          stroke-width="8"
-          fill="transparent"
-          :style="{
+    <div style="position: absolute;top:5%;left:40%;width: 90px;">
+      <!-- 修改为圆形倒计时 -->
+      <div v-if="state.countdownPlayer == 3"
+        style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
+        <svg :width="100" :height="100">
+          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer3 > 10 ? '#4CAF50' : '#ff5722'" stroke-width="8"
+            fill="transparent" :style="{
             strokeDasharray: 283,
             strokeDashoffset: 283 * (1 - countdownPlayer3/30),
             transition: 'stroke-dashoffset 1s linear'
-          }"
-        />
-      </svg>
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+          }" />
+        </svg>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
                  font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
-        {{ countdownPlayer3 }}
+          {{ countdownPlayer3 }}
+        </div>
       </div>
-    </div>
       <div width="90px"
         style="background-image: url('src/assets/img/ui/chatlog.png'); background-size:90px;position: absolute;width: 90px;height: 90px;">
         <img src="@/assets/img/touxiang/bighead15729.png" width="90px"
           style="bottom:31.2%;left:3.1%;border-radius: 25px;">
       </div>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:120px;'>
-      <p style="position: absolute;font-size:16px; color:white;top:90px;left:135px;width: 60px;">剩10张</p>
+      <p style="position: absolute;font-size:16px; color:white;top:90px;left:135px;width: 60px;">
+        剩{{state.player3CardsNum}}张</p>
       <div style="position: absolute;width:105px;height:40px;text-align:center;top:90px;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥3</p>
       </div>
 
     </div>
 
-    <!--player4 信息结束 -->
+    <!--player3 信息结束 -->
 
     <!--玩家身份信息 -->
     <div style="width:140px;height:40px;text-align:center;position: absolute;bottom:27%;left:3%;">
@@ -191,29 +156,16 @@
 
 
     <!-- 修改为圆形倒计时 -->
-    <div v-if="state.countdownPlayer == 1" style="position: absolute; top: 58%; left: 68%; transform: translateX(-50%); z-index: 999; text-align: center">
+    <div v-if="state.countdownPlayer == 1"
+      style="position: absolute; top: 58%; left: 68%; transform: translateX(-50%); z-index: 999; text-align: center">
       <svg :width="100" :height="100">
-        <circle 
-          cx="50" 
-          cy="50" 
-          r="45" 
-          stroke="#eee" 
-          stroke-width="8" 
-          fill="transparent"
-        />
-        <circle
-          cx="50"
-          cy="50"
-          r="45"
-          :stroke="countdownPlayer1 > 10 ? '#4CAF50' : '#ff5722'"
-          stroke-width="8"
-          fill="transparent"
-          :style="{
+        <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+        <circle cx="50" cy="50" r="45" :stroke="countdownPlayer1 > 10 ? '#4CAF50' : '#ff5722'" stroke-width="8"
+          fill="transparent" :style="{
             strokeDasharray: 283,
             strokeDashoffset: 283 * (1 - countdownPlayer1/30),
             transition: 'stroke-dashoffset 1s linear'
-          }"
-        />
+          }" />
       </svg>
       <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
                  font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
@@ -221,21 +173,22 @@
       </div>
     </div>
 
-    <!-- 先手出牌时的功能 !-->
-    <img src='@/assets/img/btn_chupai.png' style='position: absolute;top:60%;left:35%' onclick='chupai()'>
-    <!-- 先手出牌时的功能 !-->
+
 
 
     <!-- 后手出牌时的功能 !-->
-    <img src='@/assets/img/btn_chupai.png' style='position: absolute;top:60%;left:35%' onclick='chupai()'>
-    <img src='@/assets/img/btn_bujiao2.png' style='position: absolute;top:60%;left: 48%' onclick='buyao()'>
+    <div v-if="state.countdownPlayer == 1">
+      <img v-if="checkOut()" src='@/assets/img/btn_chupai.png' style='position: absolute;top:60%;left:47%'
+        @click='chupai()'>
+      <img v-else src='@/assets/img/btn_chupai_hui.png' style='position: absolute;top:60%;left:47%'>
+
+      <img src='@/assets/img/btn_bujiao2.png' style='position: absolute;top:60%;left: 31%' onclick='buyao()'>
+    </div>
+
     <!-- 后手出牌时的功能 !-->
 
 
-    <!-- 要不起不能出牌时的功能 !-->
-    <img src='@/assets/img/btn_chupai_hui.png' style='position: absolute;top:60%;left:35%'>
-    <img src='@/assets/img/btn_bujiao2.png' style='position: absolute;top:60%;left: 48%' onclick='buyao()'>
-    <!-- 要不起不能出牌时的功能 !-->
+
 
   </div>
 </template>
@@ -245,7 +198,13 @@ import { ref,  reactive,onMounted,onBeforeUnmount  } from 'vue'
 import { audioManager } from '@/utils/audio'
 import { websocket } from '@/utils/websocket'
 const state = reactive({
-  countdownPlayer:1
+  countdownPlayer:0,
+  cards:[],
+  player2CardsNum:13,
+  player3CardsNum:13,
+  player4CardsNum:13,
+  outCards:[],
+  lastmsg:"",
 })
 
 onMounted(() => {
@@ -253,15 +212,102 @@ onMounted(() => {
    audioManager.playBGM('bgm')
    websocket.send({"type":"play","data":"","name":""})
    websocket.on('message', handleMessage)
-   startCountdown(1)
 })
 
 const handleMessage = (data) => {
   // 处理接收到的消息
   console.log('Received message:', data)
+  if (data.type == "showCard") {
+    data = JSON.parse(data.data)
+    //玩家牌排序
+    state.cards = data.cards.sort((a, b) => b.Id - a.Id);
+    //重置牌数
+    state.player2CardsNum = 13
+    state.player3CardsNum = 13
+    state.player4CardsNum = 13
+    //先出牌的开始倒计时
+    startCountdown(data.current+1)
+  }
+  if(data.type == "outCard"){
+    data = JSON.parse(data.data)
+        // 刷新玩家牌数
+        let cardsMsg = ""
+    switch (data.pid) {
+      case 0:
+        if(data.code == 0){
+          startCountdown(2)
+          state.outCards=(data.cards)
+          
+          for(let i=0;i<data.cards.length;i++){
+            cardsMsg += data.cards[i].Name + " "
+          }
+          state.lastmsg = "玩家1出了：" + cardsMsg
+        }
+        break
+      case 1:
+        state.player2CardsNum = data.cards_num
+        state.outCards=(data.cards)
+        startCountdown(3)
+        for(let i=0;i<data.cards.length;i++){
+          cardsMsg += data.cards[i].Name + " "
+        }
+        state.lastmsg = "玩家2出了：" + cardsMsg
+        break
+      case 2:
+        state.player3CardsNum = data.cards_num
+        state.outCards=(data.cards)
+        startCountdown(4)
+        for(let i=0;i<data.cards.length;i++){
+          cardsMsg += data.cards[i].Name + " "
+        }
+        state.lastmsg = "玩家3出了：" + cardsMsg
+        break
+      case 3:
+        state.player4CardsNum = data.cards_num
+        state.outCards=(data.cards)
+        startCountdown(1)
+        for(let i=0;i<data.cards.length;i++){
+          cardsMsg += data.cards[i].Name + " "
+        }
+        state.lastmsg = "玩家4出了：" + cardsMsg
+        break
+    }
+    // 刷新弃牌堆
+    // state.outCards=(data.cards)
+    //如果是玩家出牌，减去玩家打出去的牌
+    if (data.pid == 0 && data.code == 0) {
+      // 过滤掉state.cards中存在于data.cards的牌
+      state.cards = state.cards.filter(item =>
+        !data.cards.some(card => card.Id === item.Id)  // 取反some的结果，排除包含的牌
+      );
+    }
+  }
+  if (data.type == "pass") {
+    data = JSON.parse(data.data)
+    switch (data.pid) {
+      case 0:
+        startCountdown(2)
+        break
+      case 1:
+        startCountdown(3)
+        break
+      case 2:
+        startCountdown(4)
+        break
+      case 3:
+        startCountdown(1)
+        break
+    }
+
+  }
   if(data.type == "over"){
+    data = JSON.parse(data.data)
+    state.lastmsg = "游戏结束，玩家" + data.win + "胜利"
+    //重置弃牌
+    state.outCards = []
     // 重复玩
      websocket.send({"type":"play","data":"","name":""})
+
   }
 }
 
@@ -275,6 +321,14 @@ const toggleCard = (n) => {
   } else {
     // 添加新选中项（保留旧项）
     selectedCards.value.push(n)
+  }
+}
+
+const checkOut = () => {
+  if (selectedCards.value.length === 0) {
+    return false
+  }else{
+    return true
   }
 }
 
@@ -307,7 +361,7 @@ const startCountdown = (pid) => {
           // 触发超时逻辑
           console.log('出牌超时')
           state.countdownPlayer = 0
-          startCountdown(2)
+          // startCountdown(2)
         }
       }, 1000)
 
@@ -326,7 +380,7 @@ const startCountdown = (pid) => {
           // 触发超时逻辑
           console.log('出牌超时')
           state.countdownPlayer = 0
-          startCountdown(3)
+          // startCountdown(3)
         }
       }, 1000)
       break
@@ -344,7 +398,7 @@ const startCountdown = (pid) => {
           // 触发超时逻辑
           console.log('出牌超时')
           state.countdownPlayer = 0
-          startCountdown(4)
+          // startCountdown(4)
         }
       }, 1000)
       break
@@ -362,7 +416,7 @@ const startCountdown = (pid) => {
           // 触发超时逻辑
           console.log('出牌超时')
           state.countdownPlayer = 0
-          startCountdown(1)
+          // startCountdown(1)
         }
       }, 1000)
       break
@@ -378,6 +432,31 @@ const resetCountdown = () => {
 onBeforeUnmount(() => {
   clearInterval(timer)
 })
+
+const chupai = () => {
+  if (selectedCards.value.length === 0) {
+    return false
+  }else{
+    let cards =[]
+    selectedCards.value.forEach(item => {
+      state.cards.forEach(card => {
+        if(card.Id == item){
+          cards.push(card)
+        }
+      })
+    })
+    let data = {
+      type: "playCard",
+      data: JSON.stringify({
+        pid: state.countdownPlayer-1,
+        cards: cards,
+      }),
+    }
+    // console.log(data)
+    websocket.send(data)
+    selectedCards.value = []
+  }
+}
 
 </script>
 

@@ -41,7 +41,7 @@ const (
 )
 
 const (
-	OutCard = 2 //出牌最大时间
+	OutCard = 10 //出牌最大时间
 )
 
 // 玩家结构体
@@ -601,12 +601,22 @@ func PlayOneGame(room *Room) {
 	// 发牌，每位玩家13张牌
 	dealCards(room.Deck, room.Players)
 
+	// 确定谁先出牌，既方块3在谁那
+	bidLandlord(room)
+
 	// 显示玩家的牌（除了底牌）
 	for _, player := range room.Players {
 		//只能显示自己的牌
 		if player.ID == int(Human) {
-			data, _ := json.Marshal(player.Cards)
+			room.Landlord = player
 			go func() {
+				data, _ := json.Marshal(struct {
+					Cards   []Card `json:"cards"`
+					Current int    `json:"current"`
+				}{
+					Cards:   room.Landlord.Cards,
+					Current: room.Current,
+				})
 				room.MsgChan <- RoomMsg{
 					Type: "showCard",
 					Data: gconv.String(data),
@@ -616,9 +626,6 @@ func PlayOneGame(room *Room) {
 		}
 		showPlayerCards(player)
 	}
-
-	// 确定谁先出牌，既方块3在谁那
-	bidLandlord(room)
 
 	// fmt.Println("\n底牌是:", showCards(room.Deck))
 	// fmt.Println("地主是:", room.Landlord.Name)
@@ -704,29 +711,60 @@ func (room *Room) GameLoop(ctx context.Context) {
 			if len(currentPlayer.OutCards) > 0 {
 				g.Log().Debug(ctx, currentPlayer.OutCards)
 				selectedCards = currentPlayer.OutCards
+				//获取出牌索引
+				for _, outCard := range currentPlayer.OutCards {
+					for j, card := range currentPlayer.Cards {
+						if outCard.Id == card.Id {
+							indices = append(indices, j)
+							break
+						}
+					}
+				}
 			}
 
 			// selectedCards = getSelectedCards(currentPlayer, indices)
 		}
 
 		if now-room.OutStarTime >= OutCard {
-			indices = make([]int, 0) //超过出牌时间过
+			indices = make([]int, 0)
+			selectedCards = make([]Card, 0)                             //超过出牌时间过
+			if len(currentPlayer.OutCards) <= 0 && currentPlayer.Must { //如果是必出牌最小的一张
+				indices = append(indices, 0)
+				selectedCards = getSelectedCards(currentPlayer, indices)
+			}
 		}
-		if currentPlayer.Must { //如果是必出牌最小的一张
-			indices = append(indices, 0)
-			selectedCards = getSelectedCards(currentPlayer, indices)
-		}
-		room.OutStarTime = 0
+
 	}
+	code := 0
 	// 验证牌型
 	cardType, valid := isValidCardType(selectedCards)
 	if !valid {
 		fmt.Println("牌型无效，请重新选择")
-		return
+		code = 1
+
 	}
 	// 验证是否能压过上一手牌
 	if !compareCards(room.LastCards, selectedCards) {
 		fmt.Println("不能压过上5一手牌，请重新选择")
+		code = 1
+
+	}
+	if code != 0 {
+		//通知出牌失败
+		go func() {
+			data, _ := json.Marshal(struct {
+				Pid  int `json:"pid"`
+				Code int `json:"code"` //0成功,非零失败
+			}{
+				Pid:  currentPlayer.ID,
+				Code: code,
+			})
+			room.MsgChan <- RoomMsg{
+				Type: "outCard",
+				Data: gconv.String(data),
+			}
+		}()
+		currentPlayer.OutCards = make([]Card, 0)
 		return
 	}
 
@@ -734,14 +772,17 @@ func (room *Room) GameLoop(ctx context.Context) {
 	if len(selectedCards) == 0 {
 		fmt.Printf("%s不出\n", currentPlayer.Name)
 		//通知用户,某位机器人不出牌，
-		if currentPlayer.Type == AI {
-			go func() {
-				room.MsgChan <- RoomMsg{
-					Type: "pass",
-					Data: gconv.String(currentPlayer.ID),
-				}
-			}()
-		}
+		go func() {
+			data, _ := json.Marshal(struct {
+				Pid int `json:"pid"`
+			}{
+				Pid: currentPlayer.ID,
+			})
+			room.MsgChan <- RoomMsg{
+				Type: "pass",
+				Data: gconv.String(data),
+			}
+		}()
 		passCount++
 		// 如果三家都不出，重置上一手牌
 		if passCount >= 3 {
@@ -751,24 +792,6 @@ func (room *Room) GameLoop(ctx context.Context) {
 	} else {
 		// 出牌
 		fmt.Printf("%s出了: %s (%s)\n", currentPlayer.Name, showCards(selectedCards), cardType)
-		//通知用户,某位机器人不出牌，
-		if currentPlayer.Type == AI {
-			go func() {
-				data, _ := json.Marshal(struct {
-					Pid      int    `json:"pid"`
-					Cards    []Card `json:"cards"`
-					CardType string `json:"card_type"`
-				}{
-					Pid:      currentPlayer.ID,
-					Cards:    selectedCards,
-					CardType: cardType,
-				})
-				room.MsgChan <- RoomMsg{
-					Type: "outCard",
-					Data: gconv.String(data),
-				}
-			}()
-		}
 		//其他人改为非必出
 		for _, v := range room.Players {
 			if v.ID == currentPlayer.ID {
@@ -780,8 +803,29 @@ func (room *Room) GameLoop(ctx context.Context) {
 		removeCards(currentPlayer, indices)
 		room.LastCards = selectedCards
 		passCount = 0
+		//通知用户,出牌，
+		go func() {
+			data, _ := json.Marshal(struct {
+				Pid      int    `json:"pid"`
+				Cards    []Card `json:"cards"`
+				CardType string `json:"card_type"`
+				CardsNum int    `json:"cards_num"` //剩余牌数
+				Code     int    `json:"code"`      //0成功,非零失败
+			}{
+				Pid:      currentPlayer.ID,
+				Cards:    selectedCards,
+				CardType: cardType,
+				CardsNum: len(currentPlayer.Cards),
+				Code:     0,
+			})
+			room.MsgChan <- RoomMsg{
+				Type: "outCard",
+				Data: gconv.String(data),
+			}
+		}()
 	}
-
+	room.OutStarTime = 0 //人类出牌时间恢复为0
+	currentPlayer.OutCards = make([]Card, 0)
 	// 下一个玩家
 	room.Current = (room.Current + 1) % 4
 	room.Turn++
