@@ -139,6 +139,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 			data := struct {
 				Pid   int         `json:"pid"`
 				Cards []room.Card `json:"cards"`
+				Pass  int         `json:"pass"`
 			}{}
 			err := json.Unmarshal([]byte(msg.Data), &data)
 			if err != nil {
@@ -150,6 +151,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 				return nil, fmt.Errorf("pid not equal")
 			}
 			player.OutCards = data.Cards
+			player.Pass = data.Pass
 			roomInfo := rm.Rooms[roomId]
 			go func() {
 				roomMsg := <-roomInfo.MsgChan

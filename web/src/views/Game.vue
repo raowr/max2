@@ -178,11 +178,39 @@
 
     <!-- 后手出牌时的功能 !-->
     <div v-if="state.countdownPlayer == 1">
-      <img v-if="checkOut()" src='@/assets/img/btn_chupai.png' style='position: absolute;top:60%;left:47%'
-        @click='chupai()'>
+      <!-- 修改：出牌按钮添加按下缩小效果 -->
+      <img 
+        v-if="checkOut()" 
+        src='@/assets/img/btn_chupai.png' 
+        :style="{
+          position: 'absolute',
+          top: '60%',
+          left: '47%',
+          transform: isChupaiBtnPressed ? 'scale(0.9)' : 'scale(1)',  // 按下缩小至90%
+          transition: 'transform 0.1s ease'  // 平滑过渡动画
+        }" 
+        @click='chupai()'
+        @mousedown="isChupaiBtnPressed = true" 
+        @mouseup="isChupaiBtnPressed = false"   
+        @mouseleave="isChupaiBtnPressed = false"  
+      >
       <img v-else src='@/assets/img/btn_chupai_hui.png' style='position: absolute;top:60%;left:47%'>
 
-      <img src='@/assets/img/btn_bujiao2.png' style='position: absolute;top:60%;left: 31%' onclick='buyao()'>
+      <img 
+        
+        src='@/assets/img/btn_bujiao2.png' 
+        :style="{
+          position: 'absolute',
+          top: '60%',
+          left: '31%',
+          transform: isPassBtnPressed ? 'scale(0.9)' : 'scale(1)',  // 按下时缩小到90%
+          transition: 'transform 0.1s ease'  // 平滑过渡动画
+        }" 
+        @click='pass()'
+        @mousedown="isPassBtnPressed = true"
+        @mouseup="isPassBtnPressed = false"
+        @mouseleave="isPassBtnPressed = false"
+      >
     </div>
 
     <!-- 后手出牌时的功能 !-->
@@ -205,7 +233,11 @@ const state = reactive({
   player4CardsNum:13,
   outCards:[],
   lastmsg:"",
+  mustPid:0,
 })
+const isPassBtnPressed = ref(false)  // 添加：跟踪按钮按下状态
+const isChupaiBtnPressed = ref(false)  // 添加：跟踪"出牌"按钮按下状态
+
 
 onMounted(() => {
   audioManager.preload('bgm', 'src/assets/music/game_bg1.mp3')
@@ -227,6 +259,8 @@ const handleMessage = (data) => {
     state.player4CardsNum = 13
     //先出牌的开始倒计时
     startCountdown(data.current+1)
+    //如果必出是玩家，记录下必出玩家的pid
+    state.mustPid = data.current
   }
   if(data.type == "outCard"){
     data = JSON.parse(data.data)
@@ -235,9 +269,9 @@ const handleMessage = (data) => {
     switch (data.pid) {
       case 0:
         if(data.code == 0){
-          startCountdown(2)
-          state.outCards=(data.cards)
-          
+          state.must = data.must
+          // state.outCards=(data.cards)
+          // startCountdown(2)
           for(let i=0;i<data.cards.length;i++){
             cardsMsg += data.cards[i].Name + " "
           }
@@ -246,8 +280,8 @@ const handleMessage = (data) => {
         break
       case 1:
         state.player2CardsNum = data.cards_num
-        state.outCards=(data.cards)
-        startCountdown(3)
+        // state.outCards=(data.cards)
+        // startCountdown(3)
         for(let i=0;i<data.cards.length;i++){
           cardsMsg += data.cards[i].Name + " "
         }
@@ -255,8 +289,8 @@ const handleMessage = (data) => {
         break
       case 2:
         state.player3CardsNum = data.cards_num
-        state.outCards=(data.cards)
-        startCountdown(4)
+        // state.outCards=(data.cards)
+        // startCountdown(4)
         for(let i=0;i<data.cards.length;i++){
           cardsMsg += data.cards[i].Name + " "
         }
@@ -264,14 +298,17 @@ const handleMessage = (data) => {
         break
       case 3:
         state.player4CardsNum = data.cards_num
-        state.outCards=(data.cards)
-        startCountdown(1)
+        // state.outCards=(data.cards)
+        // startCountdown(1)
         for(let i=0;i<data.cards.length;i++){
           cardsMsg += data.cards[i].Name + " "
         }
         state.lastmsg = "玩家4出了：" + cardsMsg
+        //如果必出是玩家
         break
     }
+
+    
     // 刷新弃牌堆
     // state.outCards=(data.cards)
     //如果是玩家出牌，减去玩家打出去的牌
@@ -281,28 +318,24 @@ const handleMessage = (data) => {
         !data.cards.some(card => card.Id === item.Id)  // 取反some的结果，排除包含的牌
       );
     }
+    //如果成功再改内容
+    if (data.code == 0) {
+      state.outCards = (data.cards)
+      startCountdown(data.current + 1)
+      //如果必出是玩家，记录下必出玩家的pid
+      state.mustPid = data.mustPid
+    }
+
   }
   if (data.type == "pass") {
     data = JSON.parse(data.data)
-    switch (data.pid) {
-      case 0:
-        startCountdown(2)
-        break
-      case 1:
-        startCountdown(3)
-        break
-      case 2:
-        startCountdown(4)
-        break
-      case 3:
-        startCountdown(1)
-        break
-    }
+    data.mustPid = data.mustPid
+    startCountdown(data.current+1)
 
   }
   if(data.type == "over"){
     data = JSON.parse(data.data)
-    state.lastmsg = "游戏结束，玩家" + data.win + "胜利"
+    state.lastmsg = "游戏结束，玩家: " + data.winName + "胜利,赢得:" + data.point + "积分"
     //重置弃牌
     state.outCards = []
     // 重复玩
@@ -456,6 +489,18 @@ const chupai = () => {
     websocket.send(data)
     selectedCards.value = []
   }
+}
+
+//不出牌
+const pass = () => {
+  let data = {
+    type: "playCard",
+    data: JSON.stringify({
+      pid: state.countdownPlayer-1,
+      pass: 1,
+    }),
+  }
+  websocket.send(data)
 }
 
 </script>
