@@ -19,7 +19,7 @@ var (
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			s := g.Server()
-			s.AddSearchPath("D:/gowork/max2/max2/app/web/template")
+			s.AddSearchPath("D:/gojob/src/slot2/max2/app/web/template")
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.Bind(
