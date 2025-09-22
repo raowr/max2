@@ -277,6 +277,12 @@ const handleMessage = (data) => {
             cardsMsg += data.cards[i].Name + " "
           }
           state.lastmsg = "玩家1出了：" + cardsMsg
+
+          // 过滤掉state.cards中存在于data.cards的牌
+          state.cards = state.cards.filter(item =>
+               !data.cards.some(card => card.Id === item.Id)  // 取反some的结果，排除包含的牌
+          );
+          selectedCards.value = []
         }
         break
       case 1:
@@ -309,17 +315,6 @@ const handleMessage = (data) => {
         break
     }
 
-    
-    // 刷新弃牌堆
-    // state.outCards=(data.cards)
-    //如果是玩家出牌，减去玩家打出去的牌
-    if (data.pid == 0 && data.code == 0) {
-      // 过滤掉state.cards中存在于data.cards的牌
-      state.cards = state.cards.filter(item =>
-        !data.cards.some(card => card.Id === item.Id)  // 取反some的结果，排除包含的牌
-      );
-      selectedCards.value = []
-    }
     //如果成功再改内容
     if (data.code == 0) {
       state.outCards = (data.cards)
