@@ -270,7 +270,7 @@ const handleMessage = (data) => {
       case 0:
         if(data.code == 0){
           // state.must = data.must
-          selectedCards.value = []
+          // selectedCards.value = []
           // state.outCards=(data.cards)
           // startCountdown(2)
           for(let i=0;i<data.cards.length;i++){
@@ -318,6 +318,7 @@ const handleMessage = (data) => {
       state.cards = state.cards.filter(item =>
         !data.cards.some(card => card.Id === item.Id)  // 取反some的结果，排除包含的牌
       );
+      selectedCards.value = []
     }
     //如果成功再改内容
     if (data.code == 0) {
