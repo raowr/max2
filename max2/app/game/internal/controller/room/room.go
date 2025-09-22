@@ -498,6 +498,8 @@ func aiDecideCards(player *Player, lastCards []Card) []int {
 			bestPlay = play
 		}
 	}
+	//如果玩家剩下一张牌，优先出5张组合的，再出对子，最后单牌从大到小出牌
+	//尽可能找出更多的组合牌
 
 	return bestPlay.indices
 }
