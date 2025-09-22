@@ -71,6 +71,7 @@ type Room struct {
 	MsgChan     chan RoomMsg
 	Rgtimer     *gtimer.Timer
 	OutStarTime int //出牌开始时间
+	passCount   int //不出次数
 }
 
 // 房间管理器
@@ -641,8 +642,6 @@ func PlayOneGame(room *Room) {
 
 }
 
-var passCount = 0
-
 // 房间循环定时器
 func (room *Room) GameLoop(ctx context.Context) {
 	// 检查游戏是否结束
@@ -676,7 +675,6 @@ func (room *Room) GameLoop(ctx context.Context) {
 	showPlayerCards(currentPlayer)
 	fmt.Printf("上一手牌: %s\n", showCards(room.LastCards))
 	fmt.Println("请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
-	fmt.Println("----------------------------------------------------")
 
 	var input string
 	var indices []int
@@ -715,6 +713,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 		if room.OutStarTime == 0 {
 			room.OutStarTime = now
 		}
+
+		//玩家不操作逻辑
 		if len(currentPlayer.OutCards) <= 0 && //玩家还没出牌
 			now-room.OutStarTime < OutCard && //还在倒计时中
 			currentPlayer.Pass == 0 { //玩家还没不出
@@ -736,7 +736,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 			// selectedCards = getSelectedCards(currentPlayer, indices)
 		}
-
+		//倒计时结束，自动出牌逻辑
 		if now-room.OutStarTime >= OutCard {
 			indices = make([]int, 0)
 			selectedCards = make([]Card, 0)                             //超过出牌时间过
@@ -745,6 +745,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 				selectedCards = getSelectedCards(currentPlayer, indices)
 			}
 		}
+		//玩家点不出逻辑
 		if currentPlayer.Pass == 1 {
 			currentPlayer.Pass = 0
 			if currentPlayer.Must {
@@ -799,11 +800,11 @@ func (room *Room) GameLoop(ctx context.Context) {
 		fmt.Printf("%s不出\n", currentPlayer.Name)
 		//通知用户,某位机器人不出牌，
 		msgType = "pass"
-		passCount++
+		room.passCount++
 		// 如果三家都不出，重置上一手牌
-		if passCount >= 3 {
+		if room.passCount >= 3 {
 			room.LastCards = []Card{}
-			passCount = 0
+			room.passCount = 0
 		}
 	} else {
 		// 出牌
@@ -819,7 +820,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		}
 		removeCards(currentPlayer, indices)
 		room.LastCards = selectedCards
-		passCount = 0
+		room.passCount = 0
 	}
 	room.OutStarTime = 0 //人类出牌时间恢复为0
 	currentPlayer.OutCards = make([]Card, 0)

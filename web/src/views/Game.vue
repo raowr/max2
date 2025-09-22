@@ -197,7 +197,7 @@
       <img v-else src='@/assets/img/btn_chupai_hui.png' style='position: absolute;top:60%;left:47%'>
 
       <img 
-        
+        v-if="state.mustPid != 0"
         src='@/assets/img/btn_bujiao2.png' 
         :style="{
           position: 'absolute',
