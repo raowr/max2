@@ -26,10 +26,12 @@ type RoomMsg struct {
 
 // 牌的结构体
 type Card struct {
-	Value int    // 牌值 3-15，分别对应3-A
-	Suit  int    // 花色 0-3 方块、梅花、红桃、黑桃
-	Name  string // 牌的名称
-	Id    int    //牌的id
+	Value    int    // 牌值 3-15，分别对应3-A
+	Suit     int    // 花色 0-3 方块、梅花、红桃、黑桃
+	Name     string // 牌的名称
+	Id       int    //牌的id
+	Rank     string //牌的点数
+	SuitName string //花色名称
 }
 
 // 玩家类型
@@ -212,10 +214,12 @@ func initDeck() []Card {
 		for suit, suitName := range suits {
 			cardId++
 			card := Card{
-				Value: 3 + i,
-				Suit:  suit,
-				Name:  suitName + valueName,
-				Id:    cardId,
+				Value:    3 + i,
+				Suit:     suit,
+				Name:     suitName + valueName,
+				Id:       cardId,
+				Rank:     valueName,
+				SuitName: suitName,
 			}
 			deck = append(deck, card)
 		}
@@ -374,14 +378,6 @@ func isValidCardType(cards []Card) (string, bool) {
 	}
 
 	//顺子(5张点数连续的牌,花色不同)
-
-	//花色(5张相同的花色)
-
-	//福禄(3带2)
-
-	//4条(4带1)
-
-	//同花顺(5张点数连续的牌,花色相同)
 	if len(cards) == 5 {
 
 		// 检查是否连续
@@ -398,6 +394,14 @@ func isValidCardType(cards []Card) (string, bool) {
 		}
 		return "straight", true
 	}
+
+	//花色(5张相同的花色)
+
+	//福禄(3带2)
+
+	//4条(4带1)
+
+	//同花顺(5张点数连续的牌,花色相同)
 
 	// 其他牌型可以在这里继续实现...
 	return "", false
@@ -529,7 +533,7 @@ func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
 	// 添加不出牌选项,不是必须出牌才添加不出牌选项
 	if !isMust {
 		//随机选择不出
-		if grand.Meet(2, 4) {
+		if grand.Meet(1, 4) {
 			plays = append(plays, struct {
 				indices []int
 				cards   []Card
@@ -560,15 +564,65 @@ func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
 	// 这里可以扩展更多牌型的生成逻辑
 
 	//顺子(5张点数连续的牌,花色不同)
+	straights := findAllStraights(cards)
+	if len(straights) > 0 {
+		for _, straight := range straights {
+			indices := make([]int, len(straight))
+			for i := range straight {
+				indices[i] = i
+			}
+			plays = append(plays, struct {
+				indices []int
+				cards   []Card
+			}{indices, straight})
+		}
+	}
+
+	fmt.Printf("找到 %d 个顺子:\n", len(straights))
+	for i, straight := range straights {
+		fmt.Printf("顺子 %d: ", i+1)
+		for j, card := range straight {
+			if j > 0 {
+				fmt.Print(" - ")
+			}
+			fmt.Printf("%s%s", card.Rank, card.Suit)
+		}
+		fmt.Println()
+	}
 
 	//花色(5张相同的花色)
+	flushes := findAllFlushes(cards)
+	if len(flushes) > 0 {
+		for _, flush := range flushes {
+			indices := make([]int, len(flush))
+			for i := range flush {
+				indices[i] = i
+			}
+			plays = append(plays, struct {
+				indices []int
+				cards   []Card
+			}{indices, flush})
+		}
+	}
 
 	//福禄(3带2)
+	flushesEfficient := findAllFlushesEfficient(cards)
+	if len(flushesEfficient) > 0 {
+		for _, flush := range flushesEfficient {
+			indices := make([]int, len(flush))
+			for i := range flush {
+				indices[i] = i
+			}
+			plays = append(plays, struct {
+				indices []int
+				cards   []Card
+			}{indices, flush})
+		}
+	}
 
 	//4条(4带1)
 
 	//同花顺(5张点数连续的牌,花色相同)
-
 	return plays
 }
 
