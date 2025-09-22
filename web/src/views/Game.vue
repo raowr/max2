@@ -269,7 +269,8 @@ const handleMessage = (data) => {
     switch (data.pid) {
       case 0:
         if(data.code == 0){
-          state.must = data.must
+          // state.must = data.must
+          selectedCards.value = []
           // state.outCards=(data.cards)
           // startCountdown(2)
           for(let i=0;i<data.cards.length;i++){
@@ -329,7 +330,7 @@ const handleMessage = (data) => {
   }
   if (data.type == "pass") {
     data = JSON.parse(data.data)
-    data.mustPid = data.mustPid
+    state.mustPid = data.mustPid
     startCountdown(data.current+1)
 
   }
@@ -487,7 +488,7 @@ const chupai = () => {
     }
     // console.log(data)
     websocket.send(data)
-    selectedCards.value = []
+    // selectedCards.value = []
   }
 }
 
