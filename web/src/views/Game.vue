@@ -157,22 +157,27 @@
 
     <!-- 修改为圆形倒计时 -->
     <div v-if="state.countdownPlayer == 1"
-      style="position: absolute; top: 58%; left: 68%; transform: translateX(-50%); z-index: 999; text-align: center">
-      <svg :width="100" :height="100">
-        <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
-        <circle cx="50" cy="50" r="45" :stroke="countdownPlayer1 > 10 ? '#4CAF50' : '#ff5722'" stroke-width="8"
-          fill="transparent" :style="{
-            strokeDasharray: 283,
-            strokeDashoffset: 283 * (1 - countdownPlayer1/30),
+      style="position: absolute; top: 59%; left: 51%; transform: translateX(-50%); z-index: 999; text-align: center">
+      <!-- 尺寸从100调整为80（80%） -->
+      <svg :width="80" :height="80">
+        <!-- 圆形半径从45调整为36（45*0.8），背景圆改为实心深灰色 -->
+        <circle cx="40" cy="40" r="36" stroke="#eee" stroke-width="8" fill="#555" />  <!-- 实心背景 -->
+        <!-- 进度圆改为实心，颜色随倒计时变化 -->
+        <circle cx="40" cy="40" r="36" 
+          :stroke="countdownPlayer1 > 10 ? '#4CAF50' : '#ff5722'" 
+          :fill="countdownPlayer1 > 10 ? '#81C784' : '#FF9800'"  
+          stroke-width="8"
+          :style="{
+            strokeDasharray: 226.19,
+            strokeDashoffset: 226.19 * (1 - countdownPlayer1/30),
             transition: 'stroke-dashoffset 1s linear'
           }" />
       </svg>
       <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                 font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
+                 font-size: 26px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">  <!-- 字体从19px放大到26px -->
         {{ countdownPlayer1 }}
       </div>
     </div>
-
 
 
 
@@ -185,7 +190,7 @@
         :style="{
           position: 'absolute',
           top: '60%',
-          left: '47%',
+          left: '54%',
           transform: isChupaiBtnPressed ? 'scale(0.9)' : 'scale(1)',  // 按下缩小至90%
           transition: 'transform 0.1s ease'  // 平滑过渡动画
         }" 
@@ -194,7 +199,7 @@
         @mouseup="isChupaiBtnPressed = false"   
         @mouseleave="isChupaiBtnPressed = false"  
       >
-      <img v-else src='@/assets/img/btn_chupai_hui.png' style='position: absolute;top:60%;left:47%'>
+      <img v-else src='@/assets/img/btn_chupai_hui.png' style='position: absolute;top:60%;left:54%'>
 
       <img 
         v-if="state.mustPid != 0"
@@ -202,7 +207,7 @@
         :style="{
           position: 'absolute',
           top: '60%',
-          left: '31%',
+          left: '32%',
           transform: isPassBtnPressed ? 'scale(0.9)' : 'scale(1)',  // 按下时缩小到90%
           transition: 'transform 0.1s ease'  // 平滑过渡动画
         }" 
