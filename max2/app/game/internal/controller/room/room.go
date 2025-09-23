@@ -391,22 +391,7 @@ func isValidCardType(cards []Card) (string, bool) {
 
 // 比较牌的大小
 func compareCards(last []Card, current []Card) bool {
-	if len(last) == 0 {
-		return true // 上一手没牌，当前任何有效牌型都可以出
-	}
-
-	if len(current) == 0 {
-		return true // 不出牌
-	}
-
-	lastType, _ := isValidCardType(last)
-	currentType, _ := isValidCardType(current)
-
-	// 相同牌型且长度相同才能比较
-	if lastType == currentType && len(last) == len(current) {
-		return getMaxValue(current) > getMaxValue(last)
-	}
-	return false
+	return getMaxValue(current) > getMaxValue(last)
 }
 
 // 获取牌组中的最大值
@@ -435,20 +420,28 @@ func showCards(cards []Card) string {
 }
 
 // AI出牌决策
-//player Ai玩家
-//Landlord 人类玩家
-func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) []int {
+// player Ai玩家
+// Landlord 人类玩家
+func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) (pokerHandType int, indices []int) {
 
 	//新做法
 	//情况1：如果AI是大就是必出的，选择出最小牌所在的牌组
-	//情况2：当玩家牌数大于5时，和情况1相同做法，如果玩家等于5张，选择小于5张出牌，如果玩家牌数小于5张，优先出比玩家剩余牌数的牌组
-	//情况3：玩家剩余一张牌时，AI也剩余全是单牌，优先重大到小出牌，即顶牌
+	//情况2：当玩家牌数大于5时，和情况1相同做法，如果玩家等于5张，选择小于5张出牌，如果玩家牌数小于5张，优先出比玩家剩余牌数多的牌组
+	//情况3：玩家剩余一张牌时，优先出牌组，AI也剩余全是单牌，优先重大到小出牌，即顶牌
 	//情况4：AI出牌选择相同牌型最小的牌组出
 
-	pokerHands := 0 //记录牌型
 	playCards := make([]Card, 0)
 	//正常情况,正常出牌，但要比上一家大，而且牌型相同
 	if len(lastCards) > 0 {
+		for pokerHand, v := range player.handPattern {
+			if pokerHand == lastPH && compareCards(lastCards, v[0]) {
+				//存在有上一家出牌的牌型，且当前牌型和上一家牌型相同
+				// 检查当前牌组是否能比上一家大
+				playCards = v[0]
+				pokerHandType = pokerHand
+				break
+			}
+		}
 
 	}
 	//情况1
@@ -474,53 +467,55 @@ func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) []int
 				}
 			}
 			if findCard {
-				pokerHands = pokerHand
+				pokerHandType = pokerHand
 				break
 			}
 		}
-	}
-	//情况2
 
-	//返回牌ID
-	indices := make([]int, 0)
+	}
+	//情况2,玩家牌数等于5张时
+	if len(landlord.Cards) == 5 {
+		pokerHandCards := make([]Card, 0)
+		for pokerHand, v := range player.handPattern {
+			if pokerHand <= PAIR {
+				for _, v1 := range v {
+					pokerHandCards = append(pokerHandCards, v1...)
+				}
+			}
+		}
+		var minCardId int
+		if len(pokerHandCards) > 0 {
+			minCardId = pokerHandCards[0].Id //最小牌id
+			for _, v := range pokerHandCards {
+				if v.Id < minCardId {
+					minCardId = v.Id
+				}
+			}
+		}
+		for pokerHand, v := range player.handPattern {
+			if pokerHand <= PAIR {
+				for _, v1 := range v {
+					for _, v2 := range v1 {
+						if v2.Id == minCardId {
+							playCards = v1
+							pokerHandType = pokerHand
+							break
+						}
+					}
+				}
+			}
+		}
+	}
+	//情况2,玩家牌数小于5张时,优先出比玩家剩余牌数多的牌组,从多的往少的找
+	if len(landlord.Cards) < 5 {
+
+	}
+
 	for _, v := range playCards {
 		indices = append(indices, v.Id)
 	}
-	return indices
 
-	// 简单AI策略：尝试找出能压过上一手的最小牌组
-	// 如果上一手没牌，尝试出最小的牌组
-
-	// 生成所有可能的有效牌组合
-	possiblePlays := generateAllPossiblePlays(player.Must, player.Cards)
-
-	validPlays := []struct {
-		indices []int
-		cards   []Card
-	}{}
-
-	for _, play := range possiblePlays {
-		if compareCards(lastCards, play.cards) {
-			validPlays = append(validPlays, play)
-		}
-	}
-
-	// 如果没有可以出的牌，返回空（不出）
-	if len(validPlays) == 0 {
-		return []int{}
-	}
-
-	// 简单策略：优先出最小的牌组
-	bestPlay := validPlays[0]
-	for _, play := range validPlays[1:] {
-		if isBetterPlay(bestPlay.cards, play.cards) {
-			bestPlay = play
-		}
-	}
-	//如果玩家剩下一张牌，优先出5张组合的，再出对子，最后单牌从大到小出牌
-	//尽可能找出更多的组合牌
-
-	return bestPlay.indices
+	return
 }
 
 // 判断是否是更好的出牌（用于AI决策）
