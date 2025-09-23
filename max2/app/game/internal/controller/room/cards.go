@@ -1,74 +1,46 @@
 package room
 
 import (
-	"fmt"
 	"sort"
 )
 
-type Card struct {
-	Suit string // 花色: ♠, ♥, ♦, ♣
-	Rank int    // 牌面: 3-14 (3-10, 11=J, 12=Q, 13=K, 14=A, 15=2)
-}
-
-const (
-	SINGLE   = iota + 1 // 单牌
-	PAIR                // 对子
-	STRAIGHT            // 顺子
-	SUIT                // 花色
-	THREE               // 3带2
-	FOUR                // 4带1
-	FLUSH               // 同花顺
-)
-
-type PokerSolver struct {
-	cards       []Card
-	handPattern map[int][][]Card
-}
-
-func NewPokerSolver(cards []Card) *PokerSolver {
-	return &PokerSolver{
-		cards:       cards,
-		handPattern: make(map[int][][]Card),
-	}
-}
-
 // 按牌面排序
-func (ps *PokerSolver) sortByRank() {
-	sort.Slice(ps.cards, func(i, j int) bool {
-		return ps.cards[i].Rank < ps.cards[j].Rank
+func (ps *Player) sortByRank() {
+	sort.Slice(ps.Cards, func(i, j int) bool {
+		return ps.Cards[i].Rank < ps.Cards[j].Rank
 	})
 }
 
 // 按花色排序
-func (ps *PokerSolver) sortBySuit() {
-	sort.Slice(ps.cards, func(i, j int) bool {
-		if ps.cards[i].Suit == ps.cards[j].Suit {
-			return ps.cards[i].Rank < ps.cards[j].Rank
+func (ps *Player) sortBySuit() {
+	sort.Slice(ps.Cards, func(i, j int) bool {
+		if ps.Cards[i].Suit == ps.Cards[j].Suit {
+			return ps.Cards[i].Rank < ps.Cards[j].Rank
 		}
-		return ps.cards[i].Suit < ps.cards[j].Suit
+		return ps.Cards[i].Suit < ps.Cards[j].Suit
 	})
 }
 
 // 统计牌面数量
-func (ps *PokerSolver) countRanks() map[int]int {
+func (ps *Player) countRanks() map[int]int {
 	count := make(map[int]int)
-	for _, card := range ps.cards {
+	for _, card := range ps.Cards {
 		count[card.Rank]++
 	}
 	return count
 }
 
 // 统计花色数量
-func (ps *PokerSolver) countSuits() map[string]int {
+func (ps *Player) countSuits() map[string]int {
 	count := make(map[string]int)
-	for _, card := range ps.cards {
+	for _, card := range ps.Cards {
 		count[card.Suit]++
 	}
 	return count
 }
 
 // 查找同花顺
-func (ps *PokerSolver) findFlushes() {
+func (ps *Player) findFlushes() {
 	ps.sortBySuit()
 
 	suits := ps.countSuits()
@@ -76,7 +48,7 @@ func (ps *PokerSolver) findFlushes() {
 		if count >= 5 {
 			// 收集该花色的所有牌
 			var suitedCards []Card
-			for _, card := range ps.cards {
+			for _, card := range ps.Cards {
 				if card.Suit == currentSuit {
 					suitedCards = append(suitedCards, card)
 				}
@@ -88,7 +60,7 @@ func (ps *PokerSolver) findFlushes() {
 	}
 }
 
-func (ps *PokerSolver) findStraightInSuit(cards []Card, cardSuit string) {
+func (ps *Player) findStraightInSuit(cards []Card, cardSuit string) {
 	if len(cards) < 5 {
 		return
 	}
@@ -128,7 +100,7 @@ func (ps *PokerSolver) findStraightInSuit(cards []Card, cardSuit string) {
 }
 
 // 查找4带1
-func (ps *PokerSolver) findFours() {
+func (ps *Player) findFours() {
 	rankCount := ps.countRanks()
 
 	for rank, count := range rankCount {
@@ -137,11 +109,11 @@ func (ps *PokerSolver) findFours() {
 			var fourCards []Card
 			var otherCards []Card
 
-			for i := 0; i < len(ps.cards); i++ {
-				if ps.cards[i].Rank == rank {
-					fourCards = append(fourCards, ps.cards[i])
+			for i := 0; i < len(ps.Cards); i++ {
+				if ps.Cards[i].Rank == rank {
+					fourCards = append(fourCards, ps.Cards[i])
 				} else {
-					otherCards = append(otherCards, ps.cards[i])
+					otherCards = append(otherCards, ps.Cards[i])
 				}
 			}
 
@@ -156,7 +128,7 @@ func (ps *PokerSolver) findFours() {
 }
 
 // 查找3带2
-func (ps *PokerSolver) findThrees() {
+func (ps *Player) findThrees() {
 	rankCount := ps.countRanks()
 
 	for rank, count := range rankCount {
@@ -165,7 +137,7 @@ func (ps *PokerSolver) findThrees() {
 			var threeCards []Card
 			var pairCards []Card
 
-			for _, card := range ps.cards {
+			for _, card := range ps.Cards {
 				if card.Rank == rank {
 					threeCards = append(threeCards, card)
 				}
@@ -176,7 +148,7 @@ func (ps *PokerSolver) findThrees() {
 				if c >= 2 && r != rank {
 					pairCards = nil
 					pairCount := 0
-					for _, card := range ps.cards {
+					for _, card := range ps.Cards {
 						if card.Rank == r && pairCount < 2 {
 							pairCards = append(pairCards, card)
 							pairCount++
@@ -195,13 +167,13 @@ func (ps *PokerSolver) findThrees() {
 }
 
 // 查找同花
-func (ps *PokerSolver) findSuits() {
+func (ps *Player) findSuits() {
 	suits := ps.countSuits()
 
 	for currentSuit, count := range suits {
 		if count >= 5 {
 			var suitedCards []Card
-			for _, card := range ps.cards {
+			for _, card := range ps.Cards {
 				if card.Suit == currentSuit {
 					suitedCards = append(suitedCards, card)
 				}
@@ -221,15 +193,15 @@ func (ps *PokerSolver) findSuits() {
 }
 
 // 查找顺子
-func (ps *PokerSolver) findStraights() {
-	if len(ps.cards) < 5 {
+func (ps *Player) findStraights() {
+	if len(ps.Cards) < 5 {
 		return
 	}
 
 	// 去重并排序
 	uniqueRanks := make(map[int]bool)
 	var sortedRanks []int
-	for _, card := range ps.cards {
+	for _, card := range ps.Cards {
 		if !uniqueRanks[card.Rank] {
 			uniqueRanks[card.Rank] = true
 			sortedRanks = append(sortedRanks, card.Rank)
@@ -254,7 +226,7 @@ func (ps *PokerSolver) findStraights() {
 			for rank := sortedRanks[i]; rank <= sortedRanks[i+4]; rank++ {
 				usedRanks[rank] = true
 				// 找到第一张该牌面的牌
-				for _, card := range ps.cards {
+				for _, card := range ps.Cards {
 					if card.Rank == rank && !containsCard(straightCards, card) {
 						straightCards = append(straightCards, card)
 						break
@@ -271,13 +243,13 @@ func (ps *PokerSolver) findStraights() {
 }
 
 // 查找对子
-func (ps *PokerSolver) findPairs() {
+func (ps *Player) findPairs() {
 	rankCount := ps.countRanks()
 
 	for rank, count := range rankCount {
 		if count == 2 {
 			var pairCards []Card
-			for _, card := range ps.cards {
+			for _, card := range ps.Cards {
 				if card.Rank == rank {
 					pairCards = append(pairCards, card)
 				}
@@ -292,10 +264,10 @@ func (ps *PokerSolver) findPairs() {
 }
 
 // 处理单牌（考虑2的数量）
-func (ps *PokerSolver) findSingles() {
+func (ps *Player) findSingles() {
 	// 统计2的数量
 	twoCount := 0
-	for _, card := range ps.cards {
+	for _, card := range ps.Cards {
 		if card.Rank == 15 { // 2的Rank为15
 			twoCount++
 		}
@@ -307,7 +279,7 @@ func (ps *PokerSolver) findSingles() {
 		var twos []Card
 
 		// 分离2和其他单牌
-		for _, card := range ps.cards {
+		for _, card := range ps.Cards {
 			if card.Rank == 15 {
 				twos = append(twos, card)
 			} else {
@@ -328,14 +300,14 @@ func (ps *PokerSolver) findSingles() {
 		}
 	} else {
 		// 没有2，所有剩余牌都是单牌
-		for _, card := range ps.cards {
+		for _, card := range ps.Cards {
 			ps.handPattern[SINGLE] = append(ps.handPattern[SINGLE], []Card{card})
 		}
 	}
 }
 
 // 移除已使用的牌
-func (ps *PokerSolver) removeCards(toRemove []Card) {
+func (ps *Player) removeCards(toRemove []Card) {
 	var newCards []Card
 	removeMap := make(map[Card]bool)
 
@@ -343,13 +315,13 @@ func (ps *PokerSolver) removeCards(toRemove []Card) {
 		removeMap[card] = true
 	}
 
-	for _, card := range ps.cards {
+	for _, card := range ps.Cards {
 		if !removeMap[card] {
 			newCards = append(newCards, card)
 		}
 	}
 
-	ps.cards = newCards
+	ps.Cards = newCards
 }
 
 // 检查牌是否在数组中
@@ -363,7 +335,7 @@ func containsCard(cards []Card, target Card) bool {
 }
 
 // 主要处理函数
-func (ps *PokerSolver) Solve() map[int][][]Card {
+func (ps *Player) Solve() map[int][][]Card {
 	// 按照优先级顺序查找牌型
 	ps.findFlushes()   // 同花顺
 	ps.findFours()     // 4带1
@@ -374,87 +346,4 @@ func (ps *PokerSolver) Solve() map[int][][]Card {
 	ps.findSingles()   // 单牌
 
 	return ps.handPattern
-}
-
-// 打印结果
-func (ps *PokerSolver) PrintResult() {
-	patterns := []struct {
-		name string
-		code int
-	}{
-		{"同花顺", FLUSH},
-		{"4带1", FOUR},
-		{"3带2", THREE},
-		{"同花", SUIT},
-		{"顺子", STRAIGHT},
-		{"对子", PAIR},
-		{"单牌", SINGLE},
-	}
-
-	for _, pattern := range patterns {
-		if hands, exists := ps.handPattern[pattern.code]; exists && len(hands) > 0 {
-			fmt.Printf("%s (%d组):\n", pattern.name, len(hands))
-			for i, hand := range hands {
-				fmt.Printf("  第%d组: ", i+1)
-				for _, card := range hand {
-					fmt.Printf("%s%s ", card.Suit, rankToString(card.Rank))
-				}
-				fmt.Println()
-			}
-		}
-	}
-
-	fmt.Printf("\n剩余牌数: %d\n", len(ps.cards))
-}
-
-// 辅助函数：将数字转换为牌面显示
-func rankToString(rank int) string {
-	switch rank {
-	case 11:
-		return "J"
-	case 12:
-		return "Q"
-	case 13:
-		return "K"
-	case 14:
-		return "A"
-	case 15:
-		return "2"
-	default:
-		return fmt.Sprintf("%d", rank)
-	}
-}
-
-// 示例使用
-func main() {
-	// 创建示例牌组
-	cards := []Card{
-		{"♠", 3}, {"♥", 3}, {"♦", 3}, {"♣", 4},
-		{"♠", 4}, {"♥", 5}, {"♦", 5}, {"♣", 6},
-		{"♠", 6}, {"♥", 7}, {"♦", 7}, {"♣", 8},
-		{"♠", 15}, // 2
-	}
-
-	solver := NewPokerSolver(cards)
-	result := solver.Solve()
-
-	fmt.Println("扑克牌型分析结果:")
-	solver.PrintResult()
-
-	// 输出整理后的handPattern
-	fmt.Println("\nhandPattern内容:")
-	for patternType, hands := range result {
-		fmt.Printf("牌型%d: ", patternType)
-		for i, hand := range hands {
-			fmt.Printf("第%d组[", i+1)
-			for j, card := range hand {
-				fmt.Printf("%s%s", card.Suit, rankToString(card.Rank))
-				if j < len(hand)-1 {
-					fmt.Printf(",")
-				}
-			}
-			fmt.Printf("] ")
-		}
-		fmt.Println()
-	}
 }

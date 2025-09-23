@@ -27,10 +27,10 @@ type RoomMsg struct {
 // 牌的结构体
 type Card struct {
 	Value    int    // 牌值 3-15，分别对应3-A
-	Suit     int    // 花色 0-3 方块、梅花、红桃、黑桃
+	Suit     string // 花色 0-3 方块、梅花、红桃、黑桃
 	Name     string // 牌的名称
 	Id       int    //牌的id
-	Rank     string //牌的点数
+	Rank     int    //牌的点数
 	SuitName string //花色名称
 }
 
@@ -47,13 +47,13 @@ const (
 )
 
 const (
-	single   = iota + 1 //单牌
-	pair                //对子
-	straight            //顺子
-	suit                //花色
-	three               //3带2
-	four                //4带1
-	flush               //同花顺
+	SINGLE   = iota + 1 // 单牌
+	PAIR                // 对子
+	STRAIGHT            // 顺子
+	SUIT                // 花色
+	THREE               // 3带2
+	FOUR                // 4带1
+	FLUSH               // 同花顺
 )
 
 // 玩家结构体
@@ -222,14 +222,14 @@ func initDeck() []Card {
 	values := []string{"3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2"}
 	cardId := 0
 	for i, valueName := range values {
-		for suit, suitName := range suits {
+		for _, suitName := range suits {
 			cardId++
 			card := Card{
 				Value:    3 + i,
-				Suit:     suit,
+				Suit:     suitName,
 				Name:     suitName + valueName,
 				Id:       cardId,
-				Rank:     valueName,
+				Rank:     3 + i,
 				SuitName: suitName,
 			}
 			deck = append(deck, card)
@@ -277,7 +277,7 @@ func bidLandlord(room *Room) {
 	currentPlayer := 0
 	for _, v := range room.Players {
 		for _, card := range v.Cards {
-			if card.Suit == 0 && card.Value == 3 {
+			if card.Id == 1 {
 				currentPlayer = v.ID
 				//必须出牌
 				v.Must = true
@@ -407,14 +407,8 @@ func compareCards(last []Card, current []Card) bool {
 
 	// 相同牌型且长度相同才能比较
 	if lastType == currentType && len(last) == len(current) {
-		if getMaxValue(current) > getMaxValue(last) {
-			return true
-		} else if getMaxValue(current) == getMaxValue(last) {
-			//比较花色
-			return getMaxSuit(current) > getMaxSuit(last)
-		}
+		return getMaxValue(current) > getMaxValue(last)
 	}
-
 	return false
 }
 
@@ -424,18 +418,6 @@ func getMaxValue(cards []Card) int {
 	for _, card := range cards {
 		if card.Id > maxVal {
 			maxVal = card.Id
-		}
-	}
-	//相同点数牌，继续判断花色
-	return maxVal
-}
-
-// 获取牌组中的最大花色
-func getMaxSuit(cards []Card) int {
-	maxVal := 0
-	for _, card := range cards {
-		if card.Suit > maxVal {
-			maxVal = card.Suit
 		}
 	}
 	//相同点数牌，继续判断花色
