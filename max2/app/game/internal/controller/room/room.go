@@ -51,7 +51,7 @@ const (
 	PAIR                // 对子
 	STRAIGHT            // 顺子
 	SUIT                // 花色
-	THREE               // 3带2
+	THREE               // 3带2(葫芦)
 	FOUR                // 4带1
 	FLUSH               // 同花顺
 )
@@ -79,6 +79,7 @@ type Room struct {
 	Farmers     []*Player
 	Current     int    // 当前出牌玩家索引
 	LastCards   []Card // 上一手牌
+	LastPH      int    //上一手牌型
 	Turn        int    // 轮次
 	IsPlaying   bool   // 房间是否正在游戏中
 	MsgChan     chan RoomMsg
@@ -434,7 +435,9 @@ func showCards(cards []Card) string {
 }
 
 // AI出牌决策
-func aiDecideCards(player *Player, lastCards []Card) []int {
+//player Ai玩家
+//Landlord 人类玩家
+func aiDecideCards(player, landlord *Player, lastCards []Card) []int {
 
 	//新做法
 	//情况1：如果AI是大就是必出的，选择出最小牌所在的牌组
@@ -442,13 +445,55 @@ func aiDecideCards(player *Player, lastCards []Card) []int {
 	//情况3：玩家剩余一张牌时，AI也剩余全是单牌，优先重大到小出牌，即顶牌
 	//情况4：AI出牌选择相同牌型最小的牌组出
 
+	pokerHands := 0 //记录牌型
+	playCards := make([]Card, 0)
+	//正常情况,正常出牌，但要比上一家大，而且牌型相同
+	if len(lastCards) > 0 {
+
+	}
+	//情况1
+	if player.Must || len(lastCards) <= 0 {
+		minCardId := player.Cards[0].Id //最小牌id
+		for _, card := range player.Cards {
+			if card.Id < minCardId {
+				minCardId = card.Id
+			}
+		}
+		findCard := false
+		for pokerHand, v := range player.handPattern {
+			for _, v1 := range v {
+				for _, v2 := range v1 {
+					if v2.Id == minCardId {
+						findCard = true
+						break
+					}
+				}
+				if findCard {
+					playCards = v1
+					break
+				}
+			}
+			if findCard {
+				pokerHands = pokerHand
+				break
+			}
+		}
+	}
+	//情况2
+
+	//返回牌ID
+	indices := make([]int, 0)
+	for _, v := range playCards {
+		indices = append(indices, v.Id)
+	}
+	return indices
+
 	// 简单AI策略：尝试找出能压过上一手的最小牌组
 	// 如果上一手没牌，尝试出最小的牌组
 
 	// 生成所有可能的有效牌组合
 	possiblePlays := generateAllPossiblePlays(player.Must, player.Cards)
 
-	// 过滤掉不能压过上一手的牌
 	validPlays := []struct {
 		indices []int
 		cards   []Card

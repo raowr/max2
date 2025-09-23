@@ -347,3 +347,172 @@ func (ps *Player) Solve() map[int][][]Card {
 
 	return ps.handPattern
 }
+
+// 判断两张牌的牌型
+func judgeTwoCards(cards []Card) int {
+	if len(cards) != 2 {
+		return 0
+	}
+
+	// 检查是否是对子
+	if cards[0].Rank == cards[1].Rank {
+		return PAIR
+	}
+
+	return 0 // 两张不同牌面的牌不是有效牌型
+}
+
+// 判断五张牌的牌型
+func judgeFiveCards(cards []Card) int {
+	if len(cards) != 5 {
+		return 0
+	}
+
+	// 检查同花顺
+	if isFlush(cards) && isStraight(cards) {
+		return FLUSH
+	}
+
+	// 检查四条
+	if isFourOfAKind(cards) {
+		return FOUR
+	}
+
+	// 检查葫芦（3带2）
+	if isFullHouse(cards) {
+		return THREE
+	}
+
+	// 检查同花
+	if isFlush(cards) {
+		return SUIT
+	}
+
+	// 检查顺子
+	if isStraight(cards) {
+		return STRAIGHT
+	}
+
+	return 0 // 不是有效牌型
+}
+
+// 统计牌面数量
+func countRanks(cards []Card) map[int]int {
+	count := make(map[int]int)
+	for _, card := range cards {
+		count[card.Rank]++
+	}
+	return count
+}
+
+// 统计花色数量
+func countSuits(cards []Card) map[string]int {
+	count := make(map[string]int)
+	for _, card := range cards {
+		count[card.Suit]++
+	}
+	return count
+}
+
+// 判断是否是同花
+func isFlush(cards []Card) bool {
+	if len(cards) < 5 {
+		return false
+	}
+
+	suits := countSuits(cards)
+	for _, count := range suits {
+		if count >= 5 {
+			// 检查是否至少有5张同花色
+			firstSuit := cards[0].Suit
+			for _, card := range cards {
+				if card.Suit != firstSuit {
+					return false
+				}
+			}
+			return true
+		}
+	}
+	return false
+}
+
+// 判断是否是顺子
+func isStraight(cards []Card) bool {
+	if len(cards) < 5 {
+		return false
+	}
+
+	// 获取唯一的牌面值并排序
+	uniqueRanks := make(map[int]bool)
+	var ranks []int
+	for _, card := range cards {
+		if !uniqueRanks[card.Rank] {
+			uniqueRanks[card.Rank] = true
+			ranks = append(ranks, card.Rank)
+		}
+	}
+
+	if len(ranks) < 5 {
+		return false
+	}
+
+	sort.Ints(ranks)
+
+	// 检查连续5张牌
+	for i := 0; i <= len(ranks)-5; i++ {
+		isConsecutive := true
+		for j := 0; j < 4; j++ {
+			if ranks[i+j+1]-ranks[i+j] != 1 {
+				isConsecutive = false
+				break
+			}
+		}
+		if isConsecutive {
+			return true
+		}
+	}
+
+	return false
+}
+
+// 判断是否是四条
+func isFourOfAKind(cards []Card) bool {
+	if len(cards) != 5 {
+		return false
+	}
+
+	rankCount := countRanks(cards)
+	hasFour := false
+	hasOne := false
+
+	for _, count := range rankCount {
+		if count == 4 {
+			hasFour = true
+		} else if count == 1 {
+			hasOne = true
+		}
+	}
+
+	return hasFour && hasOne
+}
+
+// 判断是否是葫芦（3带2）
+func isFullHouse(cards []Card) bool {
+	if len(cards) != 5 {
+		return false
+	}
+
+	rankCount := countRanks(cards)
+	hasThree := false
+	hasTwo := false
+
+	for _, count := range rankCount {
+		if count == 3 {
+			hasThree = true
+		} else if count == 2 {
+			hasTwo = true
+		}
+	}
+
+	return hasThree && hasTwo
+}
