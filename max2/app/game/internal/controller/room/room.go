@@ -48,15 +48,15 @@ const (
 
 // 玩家结构体
 type Player struct {
-	ID       int
-	Cards    []Card
-	Name     string
-	RoomID   string     // 玩家所在房间ID
-	Type     PlayerType // 玩家类型（人类或AI）
-	OutCards []Card     //玩家单次打出的牌
-	Must     bool       //是否必须要出牌
-	Win      int64      //奖励,
-	Pass     int        //是否跳过
+	ID         int
+	Cards      []Card
+	Name       string
+	RoomID     string     // 玩家所在房间ID
+	Type       PlayerType // 玩家类型（人类或AI）
+	OutCardIds []int      //玩家单次打出的牌id
+	Must       bool       //是否必须要出牌
+	Win        int64      //奖励,
+	Pass       int        //是否跳过
 }
 
 // 房间结构体
@@ -271,23 +271,6 @@ func showPlayerCards(player *Player) {
 		fmt.Printf("%d.%s ", i+1, card.Name)
 	}
 	fmt.Println()
-}
-
-// AI叫地主决策
-func aiDecideBidLandlord(player *Player) bool {
-	// 简单策略：根据手中大牌数量决定是否叫地主
-	highCards := 0
-	for _, card := range player.Cards {
-		if card.Value >= 14 || card.Value == 16 || card.Value == 17 {
-			highCards++
-		}
-	}
-
-	// 有3张以上大牌则叫地主，否则有30%概率叫地主
-	if highCards >= 3 {
-		return true
-	}
-	return rand.Float64() < 0.3
 }
 
 // 确定谁先出牌
@@ -553,7 +536,7 @@ func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
 	}
 
 	// 单牌
-	for i, card := range cards {
+	for _, card := range cards {
 		plays = append(plays, struct {
 			indices []int
 			cards   []Card
@@ -627,12 +610,16 @@ func PlayOneGame(room *Room) {
 		//只能显示自己的牌
 		if player.ID == int(Human) {
 			room.Landlord = player
+			cards := make([]int, 0)
+			for _, card := range room.Landlord.Cards {
+				cards = append(cards, card.Id)
+			}
 			go func() {
 				data, _ := json.Marshal(struct {
-					Cards   []Card `json:"cards"`
-					Current int    `json:"current"`
+					Cards   []int `json:"cards"`
+					Current int   `json:"current"`
 				}{
-					Cards:   room.Landlord.Cards,
+					Cards:   cards,
 					Current: room.Current,
 				})
 				room.MsgChan <- RoomMsg{
@@ -719,23 +706,16 @@ func (room *Room) GameLoop(ctx context.Context) {
 		}
 
 		//玩家不操作逻辑
-		if len(currentPlayer.OutCards) <= 0 && //玩家还没出牌
+		if len(currentPlayer.OutCardIds) <= 0 && //玩家还没出牌
 			now-room.OutStarTime < OutCard && //还在倒计时中
 			currentPlayer.Pass == 0 { //玩家还没不出
 			return
 		} else {
-			if len(currentPlayer.OutCards) > 0 {
-				g.Log().Debug(ctx, currentPlayer.OutCards)
-				selectedCards = currentPlayer.OutCards
+			if len(currentPlayer.OutCardIds) > 0 {
+				g.Log().Debug(ctx, currentPlayer.OutCardIds)
+				selectedCards = getSelectedCards(currentPlayer, indices)
 				//获取出牌索引
-				for _, outCard := range currentPlayer.OutCards {
-					for _, card := range currentPlayer.Cards {
-						if outCard.Id == card.Id {
-							indices = append(indices, card.Id)
-							break
-						}
-					}
-				}
+				indices = currentPlayer.OutCardIds
 			}
 
 			// selectedCards = getSelectedCards(currentPlayer, indices)
@@ -743,8 +723,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 		//倒计时结束，自动出牌逻辑
 		if now-room.OutStarTime >= OutCard {
 			indices = make([]int, 0)
-			selectedCards = make([]Card, 0)                             //超过出牌时间过
-			if len(currentPlayer.OutCards) <= 0 && currentPlayer.Must { //如果是必出牌最小的一张
+			selectedCards = make([]Card, 0)                               //超过出牌时间过
+			if len(currentPlayer.OutCardIds) <= 0 && currentPlayer.Must { //如果是必出牌最小的一张
 				minCardId := currentPlayer.Cards[0].Id  //最小牌ID
 				for _, v := range currentPlayer.Cards { //找出最小牌Id
 					if v.Id < minCardId {
@@ -765,7 +745,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 				} //未超时不做处理,上面已经处理
 			} else {
 				//玩家不出
-				currentPlayer.OutCards = make([]Card, 0)
+				currentPlayer.OutCardIds = make([]int, 0)
 				indices = make([]int, 0)
 				selectedCards = make([]Card, 0)
 			}
@@ -801,7 +781,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 				Data: gconv.String(data),
 			}
 		}()
-		currentPlayer.OutCards = make([]Card, 0)
+		currentPlayer.OutCardIds = make([]int, 0)
 		return
 	}
 	var msgType = ""
@@ -833,7 +813,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.passCount = 0
 	}
 	room.OutStarTime = 0 //人类出牌时间恢复为0
-	currentPlayer.OutCards = make([]Card, 0)
+	currentPlayer.OutCardIds = make([]int, 0)
 	// 下一个玩家
 	room.Current = (room.Current + 1) % 4
 	room.Turn++
@@ -849,7 +829,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 	go func() {
 		data, _ := json.Marshal(struct {
 			Pid      int    `json:"pid"`
-			Cards    []Card `json:"cards"`
+			CardIds  []int  `json:"cardIds"`
 			CardType string `json:"card_type"`
 			CardsNum int    `json:"cards_num"` //剩余牌数
 			Code     int    `json:"code"`      //0成功,非零失败
@@ -857,7 +837,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 			MustPid  int    `json:"mustPid"`   //必须出牌的玩家ID
 		}{
 			Pid:      currentPlayer.ID,
-			Cards:    selectedCards,
+			CardIds:  indices,
 			CardType: cardType,
 			CardsNum: len(currentPlayer.Cards),
 			Code:     0,

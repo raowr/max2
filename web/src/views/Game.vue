@@ -9,7 +9,7 @@
     <!-- 通过 left: 50% + transform: translateX(-50%) 实现水平居中 -->
     <div
       style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); display: flex; align-items: center;">
-      <img v-for="card in state.outCards" :key="card.Id" :src="'src/assets/img/cards/'+card.Id+'.png'"
+      <img v-for="cardId in state.outCards" :key="cardId" :src="'src/assets/img/cards/'+cardId+'.png'"
         style="width: 100%; height: 140px; margin-right: -4%; transition: transform 0.3s ease;">
     </div>
     <!--弃牌堆结束 -->
@@ -17,14 +17,14 @@
     <!--player1 牌 -->
     <div class="player1_card"
       style="position: absolute; top:78%; left: 2%; right: 2%; display: flex; justify-content: center;">
-      <img v-for="card in state.cards" :key="card.Id" :src="'src/assets/img/cards/'+card.Id+'.png'" :style="{
+      <img v-for="cardId in state.cards" :key="cardId" :src="'src/assets/img/cards/'+cardId+'.png'" :style="{
       width: '7%',
       height: '120px',
       marginRight: '-1%',
-      transform: selectedCards.includes(card.Id) ? 'translateY(-20px)' : 'translateX(calc(-1% * (13 - ' + card.Id + ')))',
-      zIndex: selectedCards.includes(card.Id) ? 10 : 1,
+      transform: selectedCards.includes(cardId) ? 'translateY(-20px)' : 'translateX(calc(-1% * (13 - ' + cardId + ')))',
+      zIndex: selectedCards.includes(cardId) ? 10 : 1,
       transition: 'transform 0.3s ease'
-    }" @click="toggleCard(card.Id)">
+    }" @click="toggleCard(cardId)">
     </div>
 
     <!--player1 信息 -->
@@ -231,6 +231,7 @@ import { ref,  reactive,onMounted,onBeforeUnmount  } from 'vue'
 import { audioManager } from '@/utils/audio'
 import { websocket } from '@/utils/websocket'
 const state = reactive({
+  deck:[],
   countdownPlayer:0,
   cards:[],
   player2CardsNum:13,
@@ -245,11 +246,36 @@ const isChupaiBtnPressed = ref(false)  // 添加：跟踪"出牌"按钮按下状
 
 
 onMounted(() => {
+  initDeck()
   audioManager.preload('bgm', 'src/assets/music/game_bg1.mp3')
    audioManager.playBGM('bgm')
    websocket.send({"type":"play","data":"","name":""})
    websocket.on('message', handleMessage)
 })
+
+// 初始化一副牌
+const initDeck= () => {
+  const suits = ["♦", "♣", "♥", "♠"];
+  const values = ["3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2"];
+  let cardId = 0;
+  for (let i = 0; i < values.length; i++) {
+    const valueName = values[i];
+    for (let suit = 0; suit < suits.length; suit++) {
+      const suitName = suits[suit];
+      cardId++;
+      const card = {
+        Value: 3 + i,
+        Suit: suit,
+        Name: suitName + valueName,
+        Id: cardId,
+        Rank: valueName,
+        SuitName: suitName
+      };
+      state.deck.push(card);
+    }
+  }
+  console.log(state.deck);
+}
 
 const handleMessage = (data) => {
   // 处理接收到的消息
@@ -257,7 +283,7 @@ const handleMessage = (data) => {
   if (data.type == "showCard") {
     data = JSON.parse(data.data)
     //玩家牌排序
-    state.cards = data.cards.sort((a, b) => b.Id - a.Id);
+    state.cards = data.cards.sort((a, b) => b - a);
     //重置牌数
     state.player2CardsNum = 13
     state.player3CardsNum = 13
@@ -278,14 +304,14 @@ const handleMessage = (data) => {
           // selectedCards.value = []
           // state.outCards=(data.cards)
           // startCountdown(2)
-          for(let i=0;i<data.cards.length;i++){
-            cardsMsg += data.cards[i].Name + " "
+          for(let i=0;i<data.cardIds.length;i++){
+            cardsMsg += state.deck[data.cardIds[i]].Name + " "
           }
           state.lastmsg = "玩家1出了：" + cardsMsg
 
           // 过滤掉state.cards中存在于data.cards的牌
           state.cards = state.cards.filter(item =>
-               !data.cards.some(card => card.Id === item.Id)  // 取反some的结果，排除包含的牌
+               !data.cardIds.some(cardId => cardId === item)  // 取反some的结果，排除包含的牌
           );
           selectedCards.value = []
         }
@@ -294,8 +320,8 @@ const handleMessage = (data) => {
         state.player2CardsNum = data.cards_num
         // state.outCards=(data.cards)
         // startCountdown(3)
-        for(let i=0;i<data.cards.length;i++){
-          cardsMsg += data.cards[i].Name + " "
+        for(let i=0;i<data.cardIds.length;i++){
+          cardsMsg += state.deck[data.cardIds[i]].Name + " "
         }
         state.lastmsg = "玩家2出了：" + cardsMsg
         break
@@ -303,8 +329,8 @@ const handleMessage = (data) => {
         state.player3CardsNum = data.cards_num
         // state.outCards=(data.cards)
         // startCountdown(4)
-        for(let i=0;i<data.cards.length;i++){
-          cardsMsg += data.cards[i].Name + " "
+        for(let i=0;i<data.cardIds.length;i++){
+          cardsMsg += state.deck[data.cardIds[i]].Name + " "
         }
         state.lastmsg = "玩家3出了：" + cardsMsg
         break
@@ -312,8 +338,8 @@ const handleMessage = (data) => {
         state.player4CardsNum = data.cards_num
         // state.outCards=(data.cards)
         // startCountdown(1)
-        for(let i=0;i<data.cards.length;i++){
-          cardsMsg += data.cards[i].Name + " "
+        for(let i=0;i<data.cardIds.length;i++){
+          cardsMsg += state.deck[data.cardIds[i]].Name + " "
         }
         state.lastmsg = "玩家4出了：" + cardsMsg
         //如果必出是玩家
@@ -322,7 +348,7 @@ const handleMessage = (data) => {
 
     //如果成功再改内容
     if (data.code == 0) {
-      state.outCards = (data.cards)
+      state.outCards = (data.cardIds)
       startCountdown(data.current + 1)
       //如果必出是玩家，记录下必出玩家的pid
       state.mustPid = data.mustPid
@@ -475,8 +501,8 @@ const chupai = () => {
     let cards =[]
     selectedCards.value.forEach(item => {
       state.cards.forEach(card => {
-        if(card.Id == item){
-          cards.push(card)
+        if(card == item){
+          cards.push(card.Id)
         }
       })
     })
@@ -484,7 +510,7 @@ const chupai = () => {
       type: "playCard",
       data: JSON.stringify({
         pid: state.countdownPlayer-1,
-        cards: cards,
+        cardIds: cards,
       }),
     }
     // console.log(data)
@@ -504,6 +530,7 @@ const pass = () => {
   }
   websocket.send(data)
 }
+
 
 </script>
 
