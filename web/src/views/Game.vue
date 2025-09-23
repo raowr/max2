@@ -502,7 +502,7 @@ const chupai = () => {
     selectedCards.value.forEach(item => {
       state.cards.forEach(card => {
         if(card == item){
-          cards.push(card.Id)
+          cards.push(card)
         }
       })
     })
