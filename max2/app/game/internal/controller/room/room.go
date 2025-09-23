@@ -249,19 +249,6 @@ func dealCards(deck []Card, players []*Player) {
 	for i := 0; i < len(deck); i++ {
 		players[i%4].Cards = append(players[i%4].Cards, deck[i])
 	}
-
-	// 对每个玩家的牌进行排序
-	for _, player := range players {
-		sort.Slice(player.Cards, func(i, j int) bool {
-			if player.Cards[i].Value != player.Cards[j].Value {
-				return player.Cards[i].Value < player.Cards[j].Value
-			} else {
-				return player.Cards[i].Suit < player.Cards[j].Suit
-			}
-
-		})
-	}
-
 }
 
 // 显示玩家的牌
@@ -288,6 +275,10 @@ func bidLandlord(room *Room) {
 	}
 	// ♦3先出牌
 	room.Current = currentPlayer
+}
+
+func arrangeAiCards(players []*Player) {
+
 }
 
 // 解析玩家输入的牌索引
@@ -431,8 +422,8 @@ func compareCards(last []Card, current []Card) bool {
 func getMaxValue(cards []Card) int {
 	maxVal := 0
 	for _, card := range cards {
-		if card.Value > maxVal {
-			maxVal = card.Value
+		if card.Id > maxVal {
+			maxVal = card.Id
 		}
 	}
 	//相同点数牌，继续判断花色
@@ -604,6 +595,9 @@ func PlayOneGame(room *Room) {
 
 	// 确定谁先出牌，既方块3在谁那
 	bidLandlord(room)
+
+	//整理机器人的牌
+	arrangeAiCards(room.Players)
 
 	// 显示玩家的牌（除了底牌）
 	for _, player := range room.Players {
