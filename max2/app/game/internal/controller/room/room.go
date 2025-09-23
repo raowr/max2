@@ -47,20 +47,27 @@ const (
 )
 
 const (
-	 =
+	single   = iota + 1 //单牌
+	pair                //对子
+	straight            //顺子
+	suit                //花色
+	three               //3带2
+	four                //4带1
+	flush               //同花顺
 )
 
 // 玩家结构体
 type Player struct {
-	ID         int
-	Cards      []Card
-	Name       string
-	RoomID     string     // 玩家所在房间ID
-	Type       PlayerType // 玩家类型（人类或AI）
-	OutCardIds []int      //玩家单次打出的牌id
-	Must       bool       //是否必须要出牌
-	Win        int64      //奖励,
-	Pass       int        //是否跳过
+	ID          int
+	Cards       []Card
+	Name        string
+	RoomID      string           // 玩家所在房间ID
+	Type        PlayerType       // 玩家类型（人类或AI）
+	OutCardIds  []int            //玩家单次打出的牌id
+	Must        bool             //是否必须要出牌
+	Win         int64            //奖励,
+	Pass        int              //是否跳过
+	handPattern map[int][][]Card //整理的牌型放数组中
 }
 
 // 房间结构体
@@ -290,10 +297,10 @@ func parseCardIndices(player *Player) bool {
 	if len(player.OutCardIds) == 0 {
 		return false // 输入无效
 	}
-	for _,cardId :=range player.OutCardIds{
+	for _, cardId := range player.OutCardIds {
 		isHas := false
-		for _,v :=range player.Cards {
-			if cardId  == v.Id  {
+		for _, v := range player.Cards {
+			if cardId == v.Id {
 				isHas = true
 				break
 			}
@@ -742,7 +749,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 	}
 	code := 0
 	//验证牌是否存在
-	if !parseCardIndices(currentPlayer){
+	if !parseCardIndices(currentPlayer) {
 		fmt.Println("输入的牌不存在")
 		code = 1
 	}
