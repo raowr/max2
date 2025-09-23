@@ -342,20 +342,31 @@ func parseCardIndices(input string, maxIndex int) []int {
 func getSelectedCards(player *Player, indices []int) []Card {
 	var selected []Card
 	for _, idx := range indices {
-		selected = append(selected, player.Cards[idx])
+		for _, card := range player.Cards {
+			if idx == card.Id {
+				selected = append(selected, card)
+			}
+		}
 	}
 	return selected
 }
 
 // 从玩家手中移除牌
 func removeCards(player *Player, indices []int) {
-	// 按降序排序索引，以便从后往前删除
-	sort.Sort(sort.Reverse(sort.IntSlice(indices)))
-
-	for _, idx := range indices {
-		// 移除指定索引的牌
-		player.Cards = append(player.Cards[:idx], player.Cards[idx+1:]...)
+	// 创建 ID 集合用于快速查找
+	idSet := make(map[int]bool)
+	for _, id := range indices {
+		idSet[id] = true
 	}
+
+	newCards := make([]Card, 0, len(player.Cards))
+	for _, card := range player.Cards {
+		if !idSet[card.Id] {
+			newCards = append(newCards, card)
+		}
+	}
+
+	player.Cards = newCards
 }
 
 // 判断牌型是否有效
@@ -546,7 +557,7 @@ func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
 		plays = append(plays, struct {
 			indices []int
 			cards   []Card
-		}{[]int{i}, []Card{card}})
+		}{[]int{card.Id}, []Card{card}})
 	}
 
 	// 对子
@@ -556,7 +567,7 @@ func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
 				plays = append(plays, struct {
 					indices []int
 					cards   []Card
-				}{[]int{i, j}, []Card{cards[i], cards[j]}})
+				}{[]int{cards[i].Id, cards[j].Id}, []Card{cards[i], cards[j]}})
 			}
 		}
 	}
@@ -564,61 +575,10 @@ func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
 	// 这里可以扩展更多牌型的生成逻辑
 
 	//顺子(5张点数连续的牌,花色不同)
-	straights := findAllStraights(cards)
-	if len(straights) > 0 {
-		for _, straight := range straights {
-			indices := make([]int, len(straight))
-			for i := range straight {
-				indices[i] = i
-			}
-			plays = append(plays, struct {
-				indices []int
-				cards   []Card
-			}{indices, straight})
-		}
-	}
-
-	fmt.Printf("找到 %d 个顺子:\n", len(straights))
-	for i, straight := range straights {
-		fmt.Printf("顺子 %d: ", i+1)
-		for j, card := range straight {
-			if j > 0 {
-				fmt.Print(" - ")
-			}
-			fmt.Printf("%s%s", card.Rank, card.Suit)
-		}
-		fmt.Println()
-	}
 
 	//花色(5张相同的花色)
-	flushes := findAllFlushes(cards)
-	if len(flushes) > 0 {
-		for _, flush := range flushes {
-			indices := make([]int, len(flush))
-			for i := range flush {
-				indices[i] = i
-			}
-			plays = append(plays, struct {
-				indices []int
-				cards   []Card
-			}{indices, flush})
-		}
-	}
 
 	//福禄(3带2)
-	flushesEfficient := findAllFlushesEfficient(cards)
-	if len(flushesEfficient) > 0 {
-		for _, flush := range flushesEfficient {
-			indices := make([]int, len(flush))
-			for i := range flush {
-				indices[i] = i
-			}
-			plays = append(plays, struct {
-				indices []int
-				cards   []Card
-			}{indices, flush})
-		}
-	}
 
 	//4条(4带1)
 
@@ -752,17 +712,6 @@ func (room *Room) GameLoop(ctx context.Context) {
 		indices = aiDecideCards(currentPlayer, room.LastCards)
 		selectedCards = getSelectedCards(currentPlayer, indices)
 
-		// 转换为输入格式
-		if len(indices) == 0 {
-			input = "0"
-		} else {
-			parts := make([]string, len(indices))
-			for i, idx := range indices {
-				parts[i] = strconv.Itoa(idx + 1) // 转换为1-based索引
-			}
-			input = strings.Join(parts, ",")
-		}
-		fmt.Println(input)
 	} else {
 		//记录开始出牌时间
 		now := int(time.Now().Unix())
@@ -781,9 +730,9 @@ func (room *Room) GameLoop(ctx context.Context) {
 				selectedCards = currentPlayer.OutCards
 				//获取出牌索引
 				for _, outCard := range currentPlayer.OutCards {
-					for j, card := range currentPlayer.Cards {
+					for _, card := range currentPlayer.Cards {
 						if outCard.Id == card.Id {
-							indices = append(indices, j)
+							indices = append(indices, card.Id)
 							break
 						}
 					}
@@ -797,7 +746,13 @@ func (room *Room) GameLoop(ctx context.Context) {
 			indices = make([]int, 0)
 			selectedCards = make([]Card, 0)                             //超过出牌时间过
 			if len(currentPlayer.OutCards) <= 0 && currentPlayer.Must { //如果是必出牌最小的一张
-				indices = append(indices, 0)
+				minCardId := currentPlayer.Cards[0].Id  //最小牌ID
+				for _, v := range currentPlayer.Cards { //找出最小牌Id
+					if v.Id < minCardId {
+						minCardId = v.Id
+					}
+				}
+				indices = append(indices, minCardId)
 				selectedCards = getSelectedCards(currentPlayer, indices)
 			}
 		}
