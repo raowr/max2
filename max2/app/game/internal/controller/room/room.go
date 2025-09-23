@@ -692,7 +692,6 @@ func (room *Room) GameLoop(ctx context.Context) {
 	fmt.Printf("上一手牌: %s\n", showCards(room.LastCards))
 	fmt.Println("请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
 
-	var input string
 	var indices []int
 	var selectedCards []Card
 	if currentPlayer.Type == AI {
