@@ -437,7 +437,7 @@ func showCards(cards []Card) string {
 // AI出牌决策
 //player Ai玩家
 //Landlord 人类玩家
-func aiDecideCards(player, landlord *Player, lastCards []Card) []int {
+func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) []int {
 
 	//新做法
 	//情况1：如果AI是大就是必出的，选择出最小牌所在的牌组
