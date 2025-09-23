@@ -46,6 +46,10 @@ const (
 	OutCard = 10 //出牌最大时间
 )
 
+const (
+	 =
+)
+
 // 玩家结构体
 type Player struct {
 	ID         int
@@ -281,35 +285,24 @@ func arrangeAiCards(players []*Player) {
 
 }
 
-// 解析玩家输入的牌索引
-func parseCardIndices(input string, maxIndex int) []int {
-	if input == "0" {
-		return []int{} // 不出牌
+// 验证玩家输入的牌
+func parseCardIndices(player *Player) bool {
+	if len(player.OutCardIds) == 0 {
+		return false // 输入无效
 	}
-
-	parts := strings.Split(input, ",")
-	var indices []int
-
-	for _, part := range parts {
-		idx, err := strconv.Atoi(part)
-		if err != nil || idx < 1 || idx > maxIndex {
-			return nil // 无效输入
+	for _,cardId :=range player.OutCardIds{
+		isHas := false
+		for _,v :=range player.Cards {
+			if cardId  == v.Id  {
+				isHas = true
+				break
+			}
 		}
-		indices = append(indices, idx-1) // 转换为0-based索引
+		if !isHas {
+			return false
+		}
 	}
-
-	// 去重并排序
-	uniqueIndices := make(map[int]bool)
-	for _, idx := range indices {
-		uniqueIndices[idx] = true
-	}
-	indices = []int{}
-	for idx := range uniqueIndices {
-		indices = append(indices, idx)
-	}
-	sort.Ints(indices)
-
-	return indices
+	return true
 }
 
 // 从玩家手中获取选中的牌
@@ -705,6 +698,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 			currentPlayer.Pass == 0 { //玩家还没不出
 			return
 		} else {
+			//有出牌
 			if len(currentPlayer.OutCardIds) > 0 {
 				g.Log().Debug(ctx, currentPlayer.OutCardIds)
 				selectedCards = getSelectedCards(currentPlayer, indices)
@@ -747,6 +741,11 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	}
 	code := 0
+	//验证牌是否存在
+	if !parseCardIndices(currentPlayer){
+		fmt.Println("输入的牌不存在")
+		code = 1
+	}
 	// 验证牌型
 	cardType, valid := isValidCardType(selectedCards)
 	if !valid {
