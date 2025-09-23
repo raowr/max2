@@ -288,10 +288,6 @@ func bidLandlord(room *Room) {
 	room.Current = currentPlayer
 }
 
-func arrangeAiCards(players []*Player) {
-
-}
-
 // 验证玩家输入的牌
 func parseCardIndices(player *Player) bool {
 	if len(player.OutCardIds) == 0 {
@@ -439,6 +435,13 @@ func showCards(cards []Card) string {
 
 // AI出牌决策
 func aiDecideCards(player *Player, lastCards []Card) []int {
+
+	//新做法
+	//情况1：如果AI是必出的，选择出最小牌所在的牌组
+	//情况2：优先出比玩家剩余牌数的牌组，当玩家牌数大于5时，和情况1相同做法
+	//情况3：玩家剩余一张牌时，AI也剩余全是单牌，优先重大到小出牌，即顶牌
+	//情况4：AI出牌选择相同牌型最小的牌组出
+
 	// 简单AI策略：尝试找出能压过上一手的最小牌组
 	// 如果上一手没牌，尝试出最小的牌组
 
@@ -578,8 +581,12 @@ func PlayOneGame(room *Room) {
 	// 确定谁先出牌，既方块3在谁那
 	bidLandlord(room)
 
-	//整理机器人的牌
-	arrangeAiCards(room.Players)
+	//发完牌开始整理机器人的牌
+	for _, player := range room.Players {
+		if player.ID == int(AI) {
+			player.Solve()
+		}
+	}
 
 	// 显示玩家的牌（除了底牌）
 	for _, player := range room.Players {
@@ -603,7 +610,6 @@ func PlayOneGame(room *Room) {
 					Data: gconv.String(data),
 				}
 			}()
-
 		}
 		showPlayerCards(player)
 	}
