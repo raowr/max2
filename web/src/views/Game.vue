@@ -282,6 +282,7 @@ const handleMessage = (data) => {
   console.log('Received message:', data)
   if (data.type == "showCard") {
     data = JSON.parse(data.data)
+    console.log(data);
     //玩家牌排序
     state.cards = data.cards.sort((a, b) => b - a);
     //重置牌数
@@ -305,7 +306,11 @@ const handleMessage = (data) => {
           // state.outCards=(data.cards)
           // startCountdown(2)
           for(let i=0;i<data.cardIds.length;i++){
-            cardsMsg += state.deck[data.cardIds[i]].Name + " "
+            for(let j=0;j<state.deck.length;j++){
+              if(state.deck[j].Id == data.cardIds[i]){
+                cardsMsg += state.deck[j].Name + " "
+              }
+            }
           }
           state.lastmsg = "玩家1出了：" + cardsMsg
 
@@ -320,27 +325,39 @@ const handleMessage = (data) => {
         state.player2CardsNum = data.cards_num
         // state.outCards=(data.cards)
         // startCountdown(3)
-        for(let i=0;i<data.cardIds.length;i++){
-          cardsMsg += state.deck[data.cardIds[i]].Name + " "
-        }
+          for(let i=0;i<data.cardIds.length;i++){
+            for(let j=0;j<state.deck.length;j++){
+              if(state.deck[j].Id == data.cardIds[i]){
+                cardsMsg += state.deck[j].Name + " "
+              }
+            }
+          }
         state.lastmsg = "玩家2出了：" + cardsMsg
         break
       case 2:
         state.player3CardsNum = data.cards_num
         // state.outCards=(data.cards)
         // startCountdown(4)
-        for(let i=0;i<data.cardIds.length;i++){
-          cardsMsg += state.deck[data.cardIds[i]].Name + " "
-        }
+          for(let i=0;i<data.cardIds.length;i++){
+            for(let j=0;j<state.deck.length;j++){
+              if(state.deck[j].Id == data.cardIds[i]){
+                cardsMsg += state.deck[j].Name + " "
+              }
+            }
+          }
         state.lastmsg = "玩家3出了：" + cardsMsg
         break
       case 3:
         state.player4CardsNum = data.cards_num
         // state.outCards=(data.cards)
         // startCountdown(1)
-        for(let i=0;i<data.cardIds.length;i++){
-          cardsMsg += state.deck[data.cardIds[i]].Name + " "
-        }
+          for(let i=0;i<data.cardIds.length;i++){
+            for(let j=0;j<state.deck.length;j++){
+              if(state.deck[j].Id == data.cardIds[i]){
+                cardsMsg += state.deck[j].Name + " "
+              }
+            }
+          }
         state.lastmsg = "玩家4出了：" + cardsMsg
         //如果必出是玩家
         break
@@ -405,6 +422,10 @@ let timer3 = null
 let timer4 = null
 
 const startCountdown = (pid) => {
+    clearInterval(timer1)
+    clearInterval(timer2)
+    clearInterval(timer3)
+    clearInterval(timer4)
   state.countdownPlayer = pid
   switch (pid) {
     case 1:

@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/rand"
-	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -68,6 +67,7 @@ type Player struct {
 	Win         int64            //奖励,
 	Pass        int              //是否跳过
 	handPattern map[int][][]Card //整理的牌型放数组中
+	CardNum     int              //牌数
 }
 
 // 房间结构体
@@ -107,9 +107,11 @@ func NewRoomManager() *RoomManager {
 // 创建新玩家
 func (rm *RoomManager) CreatePlayer(name string, playerType PlayerType) *Player {
 	player := &Player{
-		ID:   rm.nextPlayerID,
-		Name: name,
-		Type: playerType,
+		ID:          rm.nextPlayerID,
+		Name:        name,
+		Type:        playerType,
+		handPattern: make(map[int][][]Card),
+		CardNum:     13,
 	}
 	rm.PlayerList[player.ID] = player
 	rm.nextPlayerID++
@@ -252,6 +254,11 @@ func shuffleDeck(deck []Card) {
 func clearPlayerCards(players []*Player) {
 	for _, player := range players {
 		player.Cards = []Card{}
+		player.CardNum = 13
+		player.handPattern = make(map[int][][]Card)
+		player.Must = false
+		player.OutCardIds = []int{}
+
 	}
 }
 
@@ -265,11 +272,20 @@ func dealCards(deck []Card, players []*Player) {
 
 // 显示玩家的牌
 func showPlayerCards(player *Player) {
-	fmt.Printf("%s的牌: ", player.Name)
-	for i, card := range player.Cards {
-		fmt.Printf("%d.%s ", i+1, card.Name)
+	if player.Type == Human {
+		fmt.Printf("%s的牌: ", player.Name)
+		for i, card := range player.Cards {
+			fmt.Printf("%d.%s ", i+1, card.Name)
+		}
+		fmt.Println()
+	} else {
+		fmt.Printf("%s的牌: ", player.Name)
+		for i, v := range player.handPattern {
+			fmt.Printf("牌型：%d,具体的牌：%v ", i, v)
+		}
+		fmt.Println()
 	}
-	fmt.Println()
+
 }
 
 // 确定谁先出牌
@@ -291,6 +307,9 @@ func bidLandlord(room *Room) {
 
 // 验证玩家输入的牌
 func parseCardIndices(player *Player) bool {
+	if player.Type == AI {
+		return true
+	}
 	if len(player.OutCardIds) == 0 {
 		return false // 输入无效
 	}
@@ -323,86 +342,122 @@ func getSelectedCards(player *Player, indices []int) []Card {
 }
 
 // 从玩家手中移除牌
-func removeCards(player *Player, indices []int) {
+func removeCards(player *Player, cardType int, indices []int) {
 	// 创建 ID 集合用于快速查找
 	idSet := make(map[int]bool)
 	for _, id := range indices {
 		idSet[id] = true
 	}
 
-	newCards := make([]Card, 0, len(player.Cards))
-	for _, card := range player.Cards {
-		if !idSet[card.Id] {
-			newCards = append(newCards, card)
+	if player.Type == Human {
+		newCards := make([]Card, 0, len(player.Cards))
+		for _, card := range player.Cards {
+			if !idSet[card.Id] {
+				newCards = append(newCards, card)
+			}
+		}
+		player.Cards = newCards
+	} else {
+		for i, v := range player.handPattern[cardType] {
+			isDel := false
+			for _, card := range v {
+				if idSet[card.Id] {
+					isDel = true
+					break
+				}
+			}
+			if isDel {
+				player.handPattern[cardType] = append(player.handPattern[cardType][:i], player.handPattern[cardType][i+1:]...)
+				break
+			}
+		}
+		if len(player.handPattern[cardType]) <= 0 {
+			delete(player.handPattern, cardType)
 		}
 	}
 
-	player.Cards = newCards
 }
 
 // 判断牌型是否有效
-func isValidCardType(cards []Card) (string, bool) {
+func isValidCardType(cards []Card) (int, bool) {
 	if len(cards) == 0 {
-		return "pass", true // 不出牌
+		return 0, true // 不出牌
 	}
 
 	// 单牌
 	if len(cards) == 1 {
-		return "single", true
+		return SINGLE, true
 	}
 
 	// 对子
 	if len(cards) == 2 {
-		if cards[0].Value == cards[1].Value {
-			return "pair", true
+		if judgeTwoCards(cards) == PAIR {
+			return PAIR, true
 		}
-		return "", false
 	}
 
-	//顺子(5张点数连续的牌,花色不同)
-	if len(cards) == 5 {
-
-		// 检查是否连续
-		values := make([]int, len(cards))
-		for i, card := range cards {
-			values[i] = card.Value
-		}
-		sort.Ints(values)
-
-		for i := 1; i < len(values); i++ {
-			if values[i] != values[i-1]+1 {
-				return "", false
-			}
-		}
-		return "straight", true
-	}
-
+	//5张
 	//花色(5张相同的花色)
-
 	//福禄(3带2)
-
 	//4条(4带1)
-
 	//同花顺(5张点数连续的牌,花色相同)
-
-	// 其他牌型可以在这里继续实现...
-	return "", false
+	if len(cards) == 5 {
+		if pokerHand := judgeFiveCards(cards); pokerHand > 0 {
+			return pokerHand, true
+		}
+	}
+	return 0, false
 }
 
 // 比较牌的大小
-func compareCards(last []Card, current []Card) bool {
-	return getMaxValue(current) > getMaxValue(last)
+func compareCards(lastPH, pokerHand int, last []Card, current []Card) bool {
+	if len(last) == 0 {
+		return true // 上一手没牌，当前任何有效牌型都可以出
+	}
+
+	if len(current) == 0 {
+		return true // 不出牌
+	}
+	//牌型相同比较
+	if lastPH == pokerHand {
+		return getMaxValue(pokerHand, current) > getMaxValue(lastPH, last)
+	} else {
+		//牌型不同，当前牌型必须大于上一手牌型
+		return pokerHand > lastPH
+	}
 }
 
 // 获取牌组中的最大值
-func getMaxValue(cards []Card) int {
-	maxVal := 0
-	for _, card := range cards {
-		if card.Id > maxVal {
-			maxVal = card.Id
+func getMaxValue(pokerHand int, cards []Card) (maxVal int) {
+
+	//分牌型获取最大值
+	if pokerHand == SINGLE || //单牌最大值
+		pokerHand == PAIR || //对子最大值
+		pokerHand == STRAIGHT || //顺子最大值
+		pokerHand == SUIT || //同花最大值
+		pokerHand == FLUSH { //同花顺最大值
+		for _, card := range cards {
+			if card.Id > maxVal {
+				maxVal = card.Id
+			}
 		}
 	}
-	//相同点数牌，继续判断花色
+	if pokerHand == THREE { //三带二最大值
+		rankCount := countRanks(cards)
+		for rank, count := range rankCount {
+			if count == 3 {
+				maxVal = rank
+			}
+		}
+	}
+	if pokerHand == FOUR { //四带一最大值
+		rankCount := countRanks(cards)
+		for rank, count := range rankCount {
+			if count == 4 {
+				maxVal = rank
+			}
+		}
+	}
 	return maxVal
 }
 
@@ -422,7 +477,7 @@ func showCards(cards []Card) string {
 // AI出牌决策
 // player Ai玩家
 // Landlord 人类玩家
-func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) (pokerHandType int, indices []int) {
+func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) (pokerHandType int, playCards []Card) {
 
 	//新做法
 	//情况1：如果AI是大就是必出的，选择出最小牌所在的牌组
@@ -430,26 +485,82 @@ func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) (poke
 	//情况3：玩家剩余一张牌时，优先出牌组，AI也剩余全是单牌，优先重大到小出牌，即顶牌
 	//情况4：AI出牌选择相同牌型最小的牌组出
 
-	playCards := make([]Card, 0)
-	//正常情况,正常出牌，但要比上一家大，而且牌型相同
+	// playCards := make([]Card, 0)
+	//正常情况,正常出牌，但要比上一家大，而且牌型相同的最小牌组出
 	if len(lastCards) > 0 {
-		for pokerHand, v := range player.handPattern {
-			if pokerHand == lastPH && compareCards(lastCards, v[0]) {
-				//存在有上一家出牌的牌型，且当前牌型和上一家牌型相同
-				// 检查当前牌组是否能比上一家大
-				playCards = v[0]
-				pokerHandType = pokerHand
-				break
+		pokerHandCards := make([][]Card, 0)
+		if lastPH == SINGLE || lastPH == PAIR { //单牌和对子这样比比较
+			for pokerHand, v := range player.handPattern {
+				if pokerHand == lastPH {
+					for _, v1 := range v {
+						if compareCards(lastPH, pokerHand, lastCards, v1) {
+							pokerHandCards = append(pokerHandCards, v1)
+						}
+					}
+				}
+			}
+			if len(pokerHandCards) > 0 {
+				playCards = pokerHandCards[0] //最小牌组
+				for _, v := range pokerHandCards {
+					if !compareCards(lastPH, lastPH, playCards, v) {
+						playCards = v
+					}
+				}
+			}
+		} else { //5张的这样比较
+			pokerHandNew := make(map[int][][]Card, 0)
+			for pokerHand, v := range player.handPattern {
+				if pokerHand > lastPH { //牌型比上一手牌大
+					pokerHandNew[pokerHand] = v
+				} else if pokerHand == lastPH { //牌型形同
+					for _, v1 := range v {
+						if compareCards(lastPH, pokerHand, lastCards, v1) {
+							pokerHandCards = append(pokerHandCards, v1)
+						}
+					}
+				}
+			}
+			for pokerHand, v := range pokerHandNew {
+				for _, v1 := range v {
+					if compareCards(lastPH, pokerHand, lastCards, v1) {
+						pokerHandCards = append(pokerHandCards, v1)
+					}
+				}
+			}
+			if len(pokerHandCards) > 0 {
+				playCards = pokerHandCards[0] //最小牌组
+				for _, v := range pokerHandCards {
+					if !compareCards(lastPH, lastPH, playCards, v) {
+						playCards = v
+					}
+				}
 			}
 		}
 
+		//如果时3号玩家，上次出牌是单牌，玩家剩余1张牌，选择比上家大的最大的单牌出
+		if player.ID == 3 && lastPH == SINGLE && len(landlord.Cards) == 1 {
+			if len(pokerHandCards) > 0 {
+				playCards = pokerHandCards[0] //最大牌组
+				for _, v := range pokerHandCards {
+					if compareCards(lastPH, lastPH, playCards, v) {
+						playCards = v
+					}
+				}
+			}
+		}
+		pokerHandType = lastPH
 	}
 	//情况1
 	if player.Must || len(lastCards) <= 0 {
-		minCardId := player.Cards[0].Id //最小牌id
-		for _, card := range player.Cards {
-			if card.Id < minCardId {
-				minCardId = card.Id
+		//先取最小牌在牌组中，
+		minCardId := 52 //最小牌id
+		for _, v := range player.handPattern {
+			for _, v1 := range v {
+				for _, v2 := range v1 {
+					if v2.Id < minCardId {
+						minCardId = v2.Id
+					}
+				}
 			}
 		}
 		findCard := false
@@ -471,63 +582,126 @@ func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) (poke
 				break
 			}
 		}
-
-	}
-	//情况2,玩家牌数等于5张时
-	if len(landlord.Cards) == 5 {
-		pokerHandCards := make([]Card, 0)
-		for pokerHand, v := range player.handPattern {
-			if pokerHand <= PAIR {
-				for _, v1 := range v {
-					pokerHandCards = append(pokerHandCards, v1...)
+		//这里判断玩家牌数量，如果有小于5张的牌组，优先出这些牌组
+		//情况2,玩家牌数等于5张时
+		if len(landlord.Cards) == 5 {
+			pokerHandCards := make([]Card, 0)
+			for pokerHand, v := range player.handPattern {
+				if pokerHand <= PAIR {
+					for _, v1 := range v {
+						pokerHandCards = append(pokerHandCards, v1...)
+					}
 				}
 			}
-		}
-		var minCardId int
-		if len(pokerHandCards) > 0 {
-			minCardId = pokerHandCards[0].Id //最小牌id
-			for _, v := range pokerHandCards {
-				if v.Id < minCardId {
-					minCardId = v.Id
+			var minCardId int
+			if len(pokerHandCards) > 0 {
+				minCardId = pokerHandCards[0].Id //最小牌id
+				for _, v := range pokerHandCards {
+					if v.Id < minCardId {
+						minCardId = v.Id
+					}
 				}
 			}
-		}
-		for pokerHand, v := range player.handPattern {
-			if pokerHand <= PAIR {
-				for _, v1 := range v {
-					for _, v2 := range v1 {
-						if v2.Id == minCardId {
-							playCards = v1
-							pokerHandType = pokerHand
-							break
+			for pokerHand, v := range player.handPattern {
+				if pokerHand <= PAIR {
+					for _, v1 := range v {
+						for _, v2 := range v1 {
+							if v2.Id == minCardId {
+								playCards = v1
+								pokerHandType = pokerHand
+								break
+							}
 						}
 					}
 				}
 			}
 		}
-	}
-	//情况2,玩家牌数小于5张时,优先出比玩家剩余牌数多的牌组,从多的往少的找
-	if len(landlord.Cards) < 5 {
+		//情况2,玩家牌数小于5张时,优先出比玩家剩余牌数多的牌组,从多的往少的找
+		if 1 < len(landlord.Cards) && len(landlord.Cards) < 5 {
+			pokerHandCards := make([]Card, 0)
+			for pokerHand, v := range player.handPattern {
+				if pokerHand > PAIR {
+					for _, v1 := range v {
+						pokerHandCards = append(pokerHandCards, v1...)
+					}
+				}
+			}
+			var minCardId int
+			if len(pokerHandCards) > 0 {
+				minCardId = pokerHandCards[0].Id //最小牌id
+				for _, v := range pokerHandCards {
+					if v.Id < minCardId {
+						minCardId = v.Id
+					}
+				}
+			}
+			for pokerHand, v := range player.handPattern {
+				if pokerHand <= PAIR {
+					for _, v1 := range v {
+						for _, v2 := range v1 {
+							if v2.Id == minCardId {
+								playCards = v1
+								pokerHandType = pokerHand
+								break
+							}
+						}
+					}
+				}
+			}
+		}
+		//如果玩家剩余1张牌
+		if len(landlord.Cards) == 1 {
+			//优先出大于单牌数的,全部Ai从大打到小
+			pokerHandCards := make([]Card, 0)
+			for pokerHand, v := range player.handPattern {
+				if pokerHand > SINGLE {
+					for _, v1 := range v {
+						pokerHandCards = append(pokerHandCards, v1...)
+					}
+				}
+			}
+			var minCardId int
+			if len(pokerHandCards) > 0 {
+				minCardId = pokerHandCards[0].Id //最小牌id
+				for _, v := range pokerHandCards {
+					if v.Id < minCardId {
+						minCardId = v.Id
+					}
+				}
+				for pokerHand, v := range player.handPattern {
+					if pokerHand <= PAIR {
+						for _, v1 := range v {
+							for _, v2 := range v1 {
+								if v2.Id == minCardId {
+									playCards = v1
+									pokerHandType = pokerHand
+									break
+								}
+							}
+						}
+					}
+				}
+			} else {
+				pokerHandCards := make([][]Card, 0)
+				for pokerHand, v := range player.handPattern {
+					if pokerHand == SINGLE {
+						pokerHandCards = v
+					}
+				}
+				if len(pokerHandCards) > 0 {
+					playCards = pokerHandCards[0] //最大牌组
+					for _, v := range pokerHandCards {
+						if compareCards(SINGLE, SINGLE, playCards, v) {
+							playCards = v
+						}
+					}
+				}
+			}
+		}
 
-	}
-
-	for _, v := range playCards {
-		indices = append(indices, v.Id)
 	}
 
 	return
-}
-
-// 判断是否是更好的出牌（用于AI决策）
-func isBetterPlay(currentBest, candidate []Card) bool {
-	// 简单策略：牌数少的更好；牌数相同则最大值小的更好
-	if len(candidate) < len(currentBest) {
-		return true
-	}
-	if len(candidate) > len(currentBest) {
-		return false
-	}
-	return getMaxValue(candidate) < getMaxValue(currentBest)
 }
 
 // 生成所有可能的有效牌组合（简化版）
@@ -590,14 +764,22 @@ func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
 func isGameOver(room *Room) (isOver bool, winer *Player) {
 	var win int64 = 0
 	for _, player := range room.Players {
-		win += int64(len(player.Cards))
-		if len(player.Cards) == 0 {
+		win += int64(player.CardNum)
+		if player.CardNum == 0 {
 			isOver = true
 			winer = player
 		}
 	}
 	if winer != nil {
 		winer.Win = win
+		room.LastPH = 0
+		for _, player := range room.Players {
+			player.Cards = []Card{}
+			player.CardNum = 13
+			player.handPattern = make(map[int][][]Card)
+			player.Must = false
+			player.OutCardIds = []int{}
+		}
 	}
 	return isOver, winer
 }
@@ -623,7 +805,7 @@ func PlayOneGame(room *Room) {
 
 	//发完牌开始整理机器人的牌
 	for _, player := range room.Players {
-		if player.ID == int(AI) {
+		if int(player.Type) == int(AI) {
 			player.Solve()
 		}
 	}
@@ -696,9 +878,9 @@ func (room *Room) GameLoop(ctx context.Context) {
 	}
 
 	currentPlayer := room.Players[room.Current]
-	fmt.Printf("\n%s的回合 (当前手牌数: %d)\n", currentPlayer.Name, len(currentPlayer.Cards))
+	fmt.Printf("\n%s的回合 (当前手牌数: %d)\n", currentPlayer.Name, currentPlayer.CardNum)
 	showPlayerCards(currentPlayer)
-	fmt.Printf("上一手牌: %s\n", showCards(room.LastCards))
+	fmt.Printf("上一手牌，牌型: %v, 牌是：%s\n", room.LastPH, showCards(room.LastCards))
 	fmt.Println("请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
 
 	var indices []int
@@ -717,8 +899,13 @@ func (room *Room) GameLoop(ctx context.Context) {
 			return
 		}
 		room.OutStarTime = 0
-		indices = aiDecideCards(currentPlayer, room.LastCards)
-		selectedCards = getSelectedCards(currentPlayer, indices)
+		room.LastPH, selectedCards = aiDecideCards(currentPlayer, room.Landlord, room.LastPH, room.LastCards)
+		// selectedCards = getSelectedCards(currentPlayer, indices)
+		if len(selectedCards) > 0 {
+			for _, v := range selectedCards {
+				indices = append(indices, v.Id)
+			}
+		}
 
 	} else {
 		//记录开始出牌时间
@@ -734,17 +921,56 @@ func (room *Room) GameLoop(ctx context.Context) {
 			return
 		} else {
 			//有出牌
-			if len(currentPlayer.OutCardIds) > 0 {
+			if len(currentPlayer.OutCardIds) > 0 && now-room.OutStarTime < OutCard {
 				g.Log().Debug(ctx, currentPlayer.OutCardIds)
-				selectedCards = getSelectedCards(currentPlayer, indices)
+				//判断出牌数量是否符合规则
+				if len(currentPlayer.OutCardIds) != 1 &&
+					len(currentPlayer.OutCardIds) != 2 &&
+					len(currentPlayer.OutCardIds) != 5 {
+					return
+				}
+				//验证牌是否存在
+				if !parseCardIndices(currentPlayer) {
+					currentPlayer.OutCardIds = make([]int, 0)
+					fmt.Printf("输入的牌不存在%v \n", currentPlayer.OutCardIds)
+					return
+				}
 				//获取出牌索引
 				indices = currentPlayer.OutCardIds
+				selectedCards = getSelectedCards(currentPlayer, indices)
+				//判断牌型是否正确
+				//判断牌型LastPH
+				LastPH, isHas := isValidCardType(selectedCards)
+				if !isHas {
+					currentPlayer.OutCardIds = make([]int, 0)
+					g.Log().Debug(ctx, "牌型无效,selectedCards:%v", selectedCards)
+					return
+				}
+				//判断和上一手牌型是否相同
+				if room.LastPH > 0 {
+					if room.LastPH == SINGLE || room.LastPH == PAIR {
+						if LastPH != room.LastPH {
+							currentPlayer.OutCardIds = make([]int, 0)
+							g.Log().Debug(ctx, "牌型和上一手牌型不一致1,LastPH:%v,room.LastPH:%v", LastPH, room.LastPH)
+							return
+						}
+					} else {
+						if LastPH < room.LastPH {
+							currentPlayer.OutCardIds = make([]int, 0)
+							g.Log().Debug(ctx, "牌型和上一手牌型不一致2,LastPH:%v,room.LastPH:%v", LastPH, room.LastPH)
+							return
+						}
+					}
+
+				}
+
 			}
 
 			// selectedCards = getSelectedCards(currentPlayer, indices)
 		}
 		//倒计时结束，自动出牌逻辑
 		if now-room.OutStarTime >= OutCard {
+			currentPlayer.OutCardIds = make([]int, 0)
 			indices = make([]int, 0)
 			selectedCards = make([]Card, 0)                               //超过出牌时间过
 			if len(currentPlayer.OutCardIds) <= 0 && currentPlayer.Must { //如果是必出牌最小的一张
@@ -756,6 +982,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 				}
 				indices = append(indices, minCardId)
 				selectedCards = getSelectedCards(currentPlayer, indices)
+				currentPlayer.OutCardIds = indices
 			}
 		}
 		//玩家点不出逻辑
@@ -776,20 +1003,15 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	}
 	code := 0
-	//验证牌是否存在
-	if !parseCardIndices(currentPlayer) {
-		fmt.Println("输入的牌不存在")
-		code = 1
-	}
 	// 验证牌型
 	cardType, valid := isValidCardType(selectedCards)
 	if !valid {
-		fmt.Println("牌型无效，请重新选择")
+		fmt.Printf("牌型无效，请重新选择 %v \n", selectedCards)
 		code = 1
 
 	}
 	// 验证是否能压过上一手牌
-	if !compareCards(room.LastCards, selectedCards) {
+	if !compareCards(room.LastPH, cardType, room.LastCards, selectedCards) {
 		fmt.Println("不能压过上5一手牌,请重新选择")
 		code = 1
 
@@ -821,12 +1043,13 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.passCount++
 		// 如果三家都不出，重置上一手牌
 		if room.passCount >= 3 {
+			room.LastPH = 0
 			room.LastCards = []Card{}
 			room.passCount = 0
 		}
 	} else {
 		// 出牌
-		fmt.Printf("%s出了: %s (%s)\n", currentPlayer.Name, showCards(selectedCards), cardType)
+		fmt.Printf("%s出了: %s (%v)\n", currentPlayer.Name, showCards(selectedCards), cardType)
 		msgType = "outCard"
 		//其他人改为非必出
 		for _, v := range room.Players {
@@ -836,7 +1059,9 @@ func (room *Room) GameLoop(ctx context.Context) {
 				v.Must = false //其他人可以不出牌
 			}
 		}
-		removeCards(currentPlayer, indices)
+		removeCards(currentPlayer, cardType, indices)
+		currentPlayer.CardNum -= len(selectedCards)
+		room.LastPH = cardType
 		room.LastCards = selectedCards
 		room.passCount = 0
 	}
@@ -856,18 +1081,18 @@ func (room *Room) GameLoop(ctx context.Context) {
 	//通知用户,出牌，
 	go func() {
 		data, _ := json.Marshal(struct {
-			Pid      int    `json:"pid"`
-			CardIds  []int  `json:"cardIds"`
-			CardType string `json:"card_type"`
-			CardsNum int    `json:"cards_num"` //剩余牌数
-			Code     int    `json:"code"`      //0成功,非零失败
-			Current  int    `json:"current"`   //当前出牌玩家
-			MustPid  int    `json:"mustPid"`   //必须出牌的玩家ID
+			Pid      int   `json:"pid"`
+			CardIds  []int `json:"cardIds"`
+			CardType int   `json:"card_type"`
+			CardsNum int   `json:"cards_num"` //剩余牌数
+			Code     int   `json:"code"`      //0成功,非零失败
+			Current  int   `json:"current"`   //当前出牌玩家
+			MustPid  int   `json:"mustPid"`   //必须出牌的玩家ID
 		}{
 			Pid:      currentPlayer.ID,
 			CardIds:  indices,
 			CardType: cardType,
-			CardsNum: len(currentPlayer.Cards),
+			CardsNum: currentPlayer.CardNum,
 			Code:     0,
 			Current:  room.Current,
 			MustPid:  mustPid,
