@@ -128,6 +128,7 @@ func (ps *Player) findFours() {
 }
 
 // 查找3带2
+// 查找3带2
 func (ps *Player) findThrees() {
 	rankCount := ps.countRanks()
 
@@ -143,9 +144,11 @@ func (ps *Player) findThrees() {
 				}
 			}
 
-			// 查找对子
+			// 步骤1：优先查找真正的对子（牌面数量为2的牌）
+			foundPair := false
 			for r, c := range rankCount {
-				if c >= 2 && r != rank {
+				// 只匹配数量恰好为2的牌，且不是当前3张牌的牌面
+				if c == 2 && r != rank {
 					pairCards = nil
 					pairCount := 0
 					for _, card := range ps.Cards {
@@ -158,7 +161,32 @@ func (ps *Player) findThrees() {
 						combination := append(threeCards, pairCards...)
 						ps.handPattern[THREE] = append(ps.handPattern[THREE], combination)
 						ps.removeCards(combination)
+						foundPair = true
 						break
+					}
+				}
+			}
+
+			// 步骤2：若没有真正的对子，再从其他3张相同牌面的牌中取2张作为对子
+			if !foundPair {
+				for r, c := range rankCount {
+					// 匹配数量大于等于3的其他牌面（非当前3张牌的牌面）
+					if c >= 3 && r != rank {
+						pairCards = nil
+						pairCount := 0
+						for _, card := range ps.Cards {
+							if card.Rank == r && pairCount < 2 {
+								pairCards = append(pairCards, card)
+								pairCount++
+							}
+						}
+						if len(pairCards) == 2 {
+							combination := append(threeCards, pairCards...)
+							ps.handPattern[THREE] = append(ps.handPattern[THREE], combination)
+							ps.removeCards(combination)
+							foundPair = true
+							break
+						}
 					}
 				}
 			}
