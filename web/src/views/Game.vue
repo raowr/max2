@@ -384,7 +384,9 @@ const handleMessage = (data) => {
     //重置弃牌
     state.outCards = []
     // 重复玩
-     websocket.send({"type":"play","data":"","name":""})
+    setTimeout(() => {
+      websocket.send({"type":"play","data":"","name":""})
+    }, 5000)
 
   }
 }
