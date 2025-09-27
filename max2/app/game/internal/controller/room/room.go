@@ -92,7 +92,7 @@ type Room struct {
 type RoomManager struct {
 	Rooms        map[string]*Room
 	PlayerList   map[int]*Player
-	nextPlayerID int
+	NextPlayerID int
 }
 
 // 创建新的房间管理器
@@ -100,21 +100,21 @@ func NewRoomManager() *RoomManager {
 	return &RoomManager{
 		Rooms:        make(map[string]*Room),
 		PlayerList:   make(map[int]*Player),
-		nextPlayerID: 0,
+		NextPlayerID: 0,
 	}
 }
 
 // 创建新玩家
 func (rm *RoomManager) CreatePlayer(name string, playerType PlayerType) *Player {
 	player := &Player{
-		ID:          rm.nextPlayerID,
+		ID:          rm.NextPlayerID,
 		Name:        name,
 		Type:        playerType,
 		handPattern: make(map[int][][]Card),
 		CardNum:     13,
 	}
 	rm.PlayerList[player.ID] = player
-	rm.nextPlayerID++
+	rm.NextPlayerID++
 	return player
 }
 

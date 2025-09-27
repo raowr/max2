@@ -73,6 +73,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 		case consts.InitRoom:
 			// Checks sending interval limit.
 			// rm := room.NewRoomManager()
+			rm.NextPlayerID = 0
 			playerName := "美女"
 			humanPlayer := rm.CreatePlayer(playerName, room.Human)
 			pid = humanPlayer.ID
