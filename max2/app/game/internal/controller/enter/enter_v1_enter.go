@@ -91,7 +91,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 			case <-time.After(2 * time.Second):
 				fmt.Println("\n时间到，已超时")
 				//3秒后地3个人加入
-				aiName := fmt.Sprintf("机器人%d号", len(roomInfo.Players))
+				aiName := fmt.Sprintf("帅锅%d号", len(roomInfo.Players))
 				aiPlayer := rm.CreatePlayer(aiName, room.AI)
 				rm.JoinRoom(aiPlayer, roomInfo.ID)
 			}
@@ -123,6 +123,12 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 						From: gconv.String(pid),
 					}
 					_ = c.write(ws, msgData)
+					//玩家输完钱,需要离开房间
+					for _, player := range roomInfo.Players {
+						if player.Type == room.Human && player.Point <= 0 {
+							rm.LeaveRoom(player)
+						}
+					}
 				}
 			}()
 			roomInfo.IsPlaying = true

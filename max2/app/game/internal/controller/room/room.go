@@ -64,10 +64,11 @@ type Player struct {
 	Type        PlayerType       // 玩家类型（人类或AI）
 	OutCardIds  []int            //玩家单次打出的牌id
 	Must        bool             //是否必须要出牌
-	Win         int64            //奖励,
+	Win         int64            //奖励,单局奖励
 	Pass        int              //是否跳过
 	handPattern map[int][][]Card //整理的牌型放数组中
 	CardNum     int              //牌数
+	Point       int64            //积分，总积分
 }
 
 // 房间结构体
@@ -112,6 +113,7 @@ func (rm *RoomManager) CreatePlayer(name string, playerType PlayerType) *Player 
 		Type:        playerType,
 		handPattern: make(map[int][][]Card),
 		CardNum:     13,
+		Point:       100, //初始100积分
 	}
 	rm.PlayerList[player.ID] = player
 	rm.NextPlayerID++
@@ -761,7 +763,7 @@ func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
 
 // 检查游戏是否结束,算奖，输家剩几张牌，就输多少积分
 // 赢玩家剩余多少张牌，就赢多少积分
-func isGameOver(room *Room) (isOver bool, winer *Player) {
+func isGameOver(room *Room) (isOver bool, winer *Player, playerPoint, playerWin int64) {
 	var win int64 = 0
 	for _, player := range room.Players {
 		win += int64(player.CardNum)
@@ -779,9 +781,19 @@ func isGameOver(room *Room) (isOver bool, winer *Player) {
 			player.handPattern = make(map[int][][]Card)
 			player.Must = false
 			player.OutCardIds = []int{}
+			if player.Type == Human {
+				if player.ID == winer.ID {
+					player.Point += winer.Win //人类赢
+					playerWin = winer.Win
+				} else {
+					player.Point -= int64(player.CardNum) //人类输
+					playerWin = int64(player.CardNum)
+				}
+				playerPoint = player.Point
+			}
 		}
 	}
-	return isOver, winer
+	return isOver, winer, playerPoint, playerWin
 }
 
 // 玩一局游戏
@@ -821,11 +833,13 @@ func PlayOneGame(room *Room) {
 			}
 			go func() {
 				data, _ := json.Marshal(struct {
-					Cards   []int `json:"cards"`
-					Current int   `json:"current"`
+					Cards       []int `json:"cards"`
+					Current     int   `json:"current"`
+					PlayerPoint int64 `json:"playerPoint"` //玩家总瓜子数
 				}{
-					Cards:   cards,
-					Current: room.Current,
+					Cards:       cards,
+					Current:     room.Current,
+					PlayerPoint: room.Landlord.Point,
 				})
 				room.MsgChan <- RoomMsg{
 					Type: "showCard",
@@ -852,17 +866,23 @@ func PlayOneGame(room *Room) {
 // 房间循环定时器
 func (room *Room) GameLoop(ctx context.Context) {
 	// 检查游戏是否结束
-	over, winner := isGameOver(room)
+	over, winner, playerPoint, playerWin := isGameOver(room)
 	if over {
 		go func() {
 			data, _ := json.Marshal(struct {
-				WinName string `json:"winName"`
-				Winner  int    `json:"winner"`
-				Point   int64  `json:"point"`
+				WinName     string `json:"winName"`
+				Winner      int    `json:"winner"`
+				Point       int64  `json:"point"`
+				Win         int64  `json:"win"`         //当次赢分
+				PlayerPoint int64  `json:"playerPoint"` //玩家总瓜子数
+				PlayerWin   int64  `json:"playerWin"`   //玩家赢分,负数为输
 			}{
-				WinName: winner.Name,
-				Winner:  winner.ID,
-				Point:   winner.Win,
+				WinName:     winner.Name,
+				Winner:      winner.ID,
+				Point:       winner.Point,
+				Win:         winner.Win,
+				PlayerPoint: playerPoint,
+				PlayerWin:   playerWin,
 			})
 			room.MsgChan <- RoomMsg{
 				Type: "over",
@@ -873,8 +893,6 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.IsPlaying = false
 		room.LastCards = make([]Card, 0)
 		fmt.Printf("\n游戏结束！恭喜%s！获胜\n", winner.Name)
-		//游戏结束开始算奖
-
 	}
 
 	currentPlayer := room.Players[room.Current]

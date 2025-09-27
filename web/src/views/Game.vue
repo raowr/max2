@@ -27,19 +27,24 @@
     }" @click="toggleCard(cardId)">
     </div>
 
-    <!--player1 信息 -->
-
-    <div style="position: absolute;bottom:5%;left:3%;">
-      <img src="@/assets/img/ui/chatlog.png" width="110px">
-      <img src="@/assets/img/touxiang/bighead15718.png" width="100px"
-        style="position: absolute;bottom:38.2%;left:3%;border-radius: 25px;">
-      <div style="width:140px;height:40px;text-align:center;">
-        <p style="z-index:1;font-size:16px; color:white;">帅哥1</p>
-      </div>
-
-    </div>
-
-    <!--player1 信息结束 -->
+<!--player1 信息 -->
+<div style="position: absolute;bottom:5%;left:3%;">
+  <img src="@/assets/img/ui/chatlog.png" width="110px">
+  
+  <!-- 总瓜子数信息 (头像上方) -->
+  <div style="position: absolute; top: -15%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; 
+              white-space: nowrap; min-width: 100px;"> <!-- 增大最小宽度至100px -->
+    <img src="@/assets/img/ui/bf_heart.png" width='20px' style='margin-right: 5px;'>
+    <p style="z-index:1;font-size:14px; color:yellow; font-weight: bold;">{{ state.player1Point }}瓜子</p>
+  </div>
+  
+  <img src="@/assets/img/touxiang/bighead15718.png" width="100px"
+    style="position: absolute;bottom:38.2%;left:3%;border-radius: 25px;">
+  <div style="width:140px;height:40px;text-align:center;">
+    <p style="z-index:1;font-size:16px; color:white;">帅哥1</p>
+  </div>
+</div>
+<!--player1 信息结束 -->
 
     <!--player2 信息 -->
     <div style="position: absolute;top:30%;right:5%;">
@@ -221,7 +226,38 @@
     <!-- 后手出牌时的功能 !-->
 
 
-
+ <!-- 游戏结束弹窗 -->
+<div v-if="showGameOverModal" class="game-over-modal">
+  <div class="modal-content">
+    <!-- 胜利/失败标题 (移至背景图外部顶部) -->
+    <h2 class="result-title">{{ isWinner ? '恭喜胜利!' : '游戏失败' }}</h2>
+    
+    <!-- 缩小的背景图容器 -->
+    <div 
+      class="result-bg" 
+      :style="{ 
+        backgroundImage: isWinner ? `url(${winBg})` : `url(${loseBg})`
+      }"
+    >
+      <!-- 移除原内部标题 -->
+    </div>
+    
+    <!-- 积分信息 (背景图下方) -->
+    <p class="score-info" :style="{
+      // 胜利状态样式 (保持不变)
+      fontSize: isWinner ? '24px' : '22px',
+      fontWeight: isWinner ? 'bold' : 'bold',
+      color: isWinner ? '#FF3333' : '#FF4500',
+      textShadow: isWinner ? '0 0 10px rgba(255, 215, 0, 0.8)' : '0 0 8px rgba(255, 69, 0, 0.7)',
+      padding: '10px',
+      borderRadius: '8px',
+      background: isWinner ? 'linear-gradient(45deg, #FFD700, #FFA500)' : 'linear-gradient(45deg, #FF6347, #FFA07A)'
+    }">{{ gameOverMessage }}</p>
+    
+    <!-- 按钮 (积分信息下方) -->
+    <button class="restart-btn" @click="restartGame">再来一局</button>
+  </div>
+</div>
 
   </div>
 </template>
@@ -240,9 +276,19 @@ const state = reactive({
   outCards:[],
   lastmsg:"",
   mustPid:0,
+  player1Point: 0, // 初始瓜子数
 })
 const isPassBtnPressed = ref(false)  // 添加：跟踪按钮按下状态
 const isChupaiBtnPressed = ref(false)  // 添加：跟踪"出牌"按钮按下状态
+
+// 添加游戏结束弹窗相关状态
+const showGameOverModal = ref(false)
+const isWinner = ref(false)
+const gameOverMessage = ref('')
+
+// 导入背景图片（新增代码）
+import winBg from '@/assets/img/ui/win_bg.png'
+import loseBg from '@/assets/img/ui/lose_bg.png'
 
 
 onMounted(() => {
@@ -293,6 +339,8 @@ const handleMessage = (data) => {
     startCountdown(data.current+1)
     //如果必出是玩家，记录下必出玩家的pid
     state.mustPid = data.current
+    //更新玩家总瓜子数
+    state.player1Point = data.playerPoint
   }
   if(data.type == "outCard"){
     data = JSON.parse(data.data)
@@ -379,16 +427,33 @@ const handleMessage = (data) => {
 
   }
   if(data.type == "over"){
+    clearInterval(timer1)
+    clearInterval(timer2)
+    clearInterval(timer3)
+    clearInterval(timer4)
+    state.countdownPlayer = 0
     data = JSON.parse(data.data)
-    state.lastmsg = "游戏结束，玩家: " + data.winName + "胜利,赢得:" + data.point + "积分"
-    //重置弃牌
+    state.lastmsg = "游戏结束，玩家: " + data.winName + "胜利,赢得:" + data.win + "颗瓜子"
+    
+    state.player1Point = data.playerPoint
+    // 显示游戏结束弹窗
+    showGameOverModal.value = true
+    // 判断当前玩家是否胜利（假设当前玩家是"帅哥1"）
+    isWinner.value = data.winner === 0
+    gameOverMessage.value = isWinner.value 
+      ? `恭喜你赢得了${data.playerWin}颗瓜子!` 
+      : `很遗憾这局你输了${data.playerWin}颗瓜子`
+    
+    // 重置弃牌
     state.outCards = []
-    // 重复玩
-    setTimeout(() => {
-      websocket.send({"type":"play","data":"","name":""})
-    }, 5000)
-
+    // 移除自动重新开始的逻辑，由用户点击按钮触发
   }
+}
+
+// 添加重新开始游戏的方法
+const restartGame = () => {
+  showGameOverModal.value = false
+  websocket.send({"type":"play","data":"","name":""})
 }
 
 const selectedCards = ref([])  // 改为数组存储选中状态
@@ -578,5 +643,96 @@ const pass = () => {
     transform: translateY(-20px) translateX(calc(-1% * (13 - var(--n))));
     z-index: 10;
 }
+:global(body) {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.game {
+  background: url('@/assets/img/bg/Table_Dif12324.png') no-repeat;
+  background-size: cover; 
+  background-position: center;
+  position: absolute; 
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
 
+.player1_card img:hover {
+    transform: translateY(-20px) translateX(calc(-1% * (13 - var(--n))));
+    z-index: 10;
+}
+
+
+/* 游戏结束弹窗样式 */
+.game-over-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  /* 移除原背景图设置 */
+  padding: 20px;  /* 减少内边距 */
+  border-radius: 15px;
+  text-align: center;
+  width: 320px;  /* 调整弹窗宽度 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 胜利/失败标题 (背景图外部顶部) */
+.result-title {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  margin: 0 0 15px 0; /* 底部 margin 分隔标题与背景图 */
+  font-size: 26px;
+  text-align: center;
+}
+
+/* 缩小的背景图容器 (移除内部标题相关样式) */
+.result-bg {
+  width: 220px;  
+  height: 160px; 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 20px; /* 背景图与积分信息间距 */
+  border-radius: 10px;
+  /* 移除原 position: relative (不再需要内部定位) */
+}
+
+/* 积分信息 (背景图下方) */
+.score-info {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 25px;
+  text-shadow: none;
+}
+
+/* 按钮 (积分信息下方) */
+.restart-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 180px;
+  margin-top: 10px;
+}
+
+.restart-btn:hover {
+  background-color: #45a049;
+}
 </style>
