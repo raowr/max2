@@ -254,8 +254,13 @@
       background: isWinner ? 'linear-gradient(45deg, #FFD700, #FFA500)' : 'linear-gradient(45deg, #FF6347, #FFA07A)'
     }">{{ gameOverMessage }}</p>
     
-    <!-- 按钮 (积分信息下方) -->
-    <button class="restart-btn" @click="restartGame">再来一局</button>
+      <!-- 修改按钮文本和点击事件 -->
+      <button 
+        class="restart-btn" 
+        @click="state.player1Point === 0 ? goToHome() : restartGame()"
+      >
+        {{ state.player1Point === 0 ? '返回首页' : '再来一局' }}
+      </button>
   </div>
 </div>
 
@@ -441,8 +446,8 @@ const handleMessage = (data) => {
     // 判断当前玩家是否胜利（假设当前玩家是"帅哥1"）
     isWinner.value = data.winner === 0
     gameOverMessage.value = isWinner.value 
-      ? `恭喜你赢得了${data.playerWin}颗瓜子!` 
-      : `很遗憾这局你输了${data.playerWin}颗瓜子`
+      ? `哇！恭喜你赢得了${data.playerWin}颗瓜子!` 
+      : `咦！你很菜这局你输了${data.playerWin}颗瓜子`
     
     // 重置弃牌
     state.outCards = []
@@ -619,6 +624,12 @@ const pass = () => {
   websocket.send(data)
 }
 
+// 添加返回首页的方法
+const goToHome = () => {
+  showGameOverModal.value = false
+  router.push('/')  // 跳转到首页路由
+}
+
 
 </script>
 
@@ -694,7 +705,7 @@ const pass = () => {
 .result-title {
   color: white;
   text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-  margin: 0 0 15px 0; /* 底部 margin 分隔标题与背景图 */
+  margin: 0 0 0 0; /* 底部 margin 分隔标题与背景图 */
   font-size: 26px;
   text-align: center;
 }
@@ -717,7 +728,9 @@ const pass = () => {
   font-size: 18px;
   margin-bottom: 25px;
   text-shadow: none;
+  white-space: nowrap; /* 添加：强制不换行 */
 }
+
 
 /* 按钮 (积分信息下方) */
 .restart-btn {

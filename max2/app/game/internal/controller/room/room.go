@@ -776,11 +776,6 @@ func isGameOver(room *Room) (isOver bool, winer *Player, playerPoint, playerWin 
 		winer.Win = win
 		room.LastPH = 0
 		for _, player := range room.Players {
-			player.Cards = []Card{}
-			player.CardNum = 13
-			player.handPattern = make(map[int][][]Card)
-			player.Must = false
-			player.OutCardIds = []int{}
 			if player.Type == Human {
 				if player.ID == winer.ID {
 					player.Point += winer.Win //人类赢
