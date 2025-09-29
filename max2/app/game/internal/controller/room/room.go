@@ -138,7 +138,7 @@ func (rm *RoomManager) CreateRoom(player *Player, aiCount int) *Room {
 
 	// 添加AI机器人
 	for i := 0; i < aiCount; i++ {
-		aiName := fmt.Sprintf("机器人%d号", i+1)
+		aiName := fmt.Sprintf("帅锅%d号", i+1)
 		aiPlayer := rm.CreatePlayer(aiName, AI)
 		room.Players = append(room.Players, aiPlayer)
 		aiPlayer.RoomID = roomID
