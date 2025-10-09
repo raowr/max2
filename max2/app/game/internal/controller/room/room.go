@@ -363,7 +363,6 @@ func removeCards(player *Player, cardType int, indices []int) {
 	} else {
 		for patternType, patternGroups := range player.handPattern {
 			newPatternGroups := make([][]Card, 0)
-
 			for _, group := range patternGroups {
 				newGroup := make([]Card, 0)
 				for _, card := range group {
@@ -587,14 +586,22 @@ func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) (poke
 					}
 				}
 				if maxCardId > 0 {
+					findCard := false
 					for _, v := range player.handPattern {
 						for _, v1 := range v {
 							for _, v2 := range v1 {
 								if v2.Id == maxCardId {
 									maxCard = append(maxCard, v2)
+									findCard = true
 									break
 								}
 							}
+							if findCard {
+								break
+							}
+						}
+						if findCard {
+							break
 						}
 					}
 					//如果比上手大，就需要重新整理牌
