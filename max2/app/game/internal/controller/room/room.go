@@ -68,6 +68,7 @@ type Player struct {
 	Pass        int              //是否跳过
 	handPattern map[int][][]Card //整理的牌型放数组中
 	CardNum     int              //牌数
+	ReCard      bool             //是否需要重新整理牌
 	Point       int64            //积分，总积分
 }
 
@@ -360,21 +361,41 @@ func removeCards(player *Player, cardType int, indices []int) {
 		}
 		player.Cards = newCards
 	} else {
-		for i, v := range player.handPattern[cardType] {
-			isDel := false
-			for _, card := range v {
-				if idSet[card.Id] {
-					isDel = true
-					break
+		for patternType, patternGroups := range player.handPattern {
+			newPatternGroups := make([][]Card, 0)
+
+			for _, group := range patternGroups {
+				newGroup := make([]Card, 0)
+				for _, card := range group {
+					if !idSet[card.Id] {
+						newGroup = append(newGroup, card)
+					}
+				}
+				// 只保留非空的牌组
+				if len(newGroup) > 0 {
+					newPatternGroups = append(newPatternGroups, newGroup)
 				}
 			}
-			if isDel {
-				player.handPattern[cardType] = append(player.handPattern[cardType][:i], player.handPattern[cardType][i+1:]...)
-				break
-			}
+			player.handPattern[patternType] = newPatternGroups
 		}
-		if len(player.handPattern[cardType]) <= 0 {
-			delete(player.handPattern, cardType)
+		//如果需要重新整理牌
+		if player.ReCard {
+			player.Cards = make([]Card, 0)
+			player.ReCard = false
+			if len(player.handPattern) > 0 {
+				for _, patternGroups := range player.handPattern {
+					for _, group := range patternGroups {
+						for _, card := range group {
+							player.Cards = append(player.Cards, card)
+						}
+					}
+				}
+			}
+			//重新整理牌
+			if len(player.Cards) > 0 {
+				player.handPattern = make(map[int][][]Card)
+				player.Solve()
+			}
 		}
 	}
 
@@ -549,6 +570,41 @@ func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) (poke
 					}
 				}
 			}
+		}
+		//如果时3号玩家，如果打的是单张,玩家3没有单张，需要拆出单张，如果打的是对，需要从3条和4条中拆
+		if player.ID == 3 && lastPH == SINGLE && len(landlord.Cards) == 1 && len(playCards) <= 0 {
+			//选择最大牌所在的牌组
+			maxCardId := 0 //最大牌id
+			maxCard := make([]Card, 0)
+			if player.CardNum > 0 {
+				for _, v := range player.handPattern {
+					for _, v1 := range v {
+						for _, v2 := range v1 {
+							if v2.Id > maxCardId {
+								maxCardId = v2.Id
+							}
+						}
+					}
+				}
+				if maxCardId > 0 {
+					for _, v := range player.handPattern {
+						for _, v1 := range v {
+							for _, v2 := range v1 {
+								if v2.Id == maxCardId {
+									maxCard = append(maxCard, v2)
+									break
+								}
+							}
+						}
+					}
+					//如果比上手大，就需要重新整理牌
+					if compareCards(lastPH, lastPH, lastCards, maxCard) {
+						playCards = maxCard
+						player.ReCard = true
+					}
+				}
+			}
+
 		}
 		pokerHandType = lastPH
 	}
