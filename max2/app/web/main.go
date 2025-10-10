@@ -5,7 +5,7 @@ import (
 
 	"github.com/gogf/gf/v2/os/gctx"
 
-	_ "web/config"
+	_ "web/manifest/config"
 	"web/internal/cmd"
 )
 
