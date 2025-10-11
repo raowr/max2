@@ -113,20 +113,20 @@ const state = reactive({
     {
       id: 1,
       name: '玩家一',
-      avatar: '@/assets/img/touxiang/bighead15339.png',
+      avatar: require('@/assets/img/touxiang/bighead15339.png'),
       stars: 3,
       ready: false,
       isOwner: true,
-      lihui: '@/assets/img/lihui/full15342.png',
+      lihui: require('@/assets/img/lihui/full15342.png'),
     },
     {
       id: 2,
       name: '玩家二',
-      avatar: '@/assets/img/touxiang/bighead15419.png',
+      avatar: require('@/assets/img/touxiang/bighead15419.png'),
       stars: 2,
       ready: false,
       isOwner: false,
-      lihui: '@/assets/img/lihui/full15418.png',
+      lihui: require('@/assets/img/lihui/full15418.png'),
     },
     {
       id: 3,
@@ -231,18 +231,18 @@ const handleMessage = (data) => {
 // 添加工具函数（放在script setup顶部）
 const getAvatarByType = (type) => {
   const avatars = [
-    '@/assets/img/touxiang/bighead15339.png', // 房主头像
-    '@/assets/img/touxiang/bighead15419.png'  // 机器人默认头像
+    require('@/assets/img/touxiang/bighead15339.png'), // 房主头像
+    require('@/assets/img/touxiang/bighead15419.png')  // 机器人默认头像
   ]
-  return avatars[type] || '@/assets/img/touxiang/bighead15729.png'
+  return avatars[type] || require('@/assets/img/touxiang/bighead15729.png')
 }
 
 const getLihuiByType = (type) => {
   const lihuis = [
-    '@/assets/img/lihui/full15342.png', // 房主立绘
-    '@/assets/img/lihui/full15418.png'  // 机器人默认立绘
+    require('@/assets/img/lihui/full15342.png'), // 房主立绘
+    require('@/assets/img/lihui/full15418.png')  // 机器人默认立绘
   ]
-  return lihuis[type] || '@/assets/img/lihui/full15703.png'
+  return lihuis[type] || require('@/assets/img/lihui/full15703.png')
 }
 onBeforeUnmount(() => {
   websocket.off('message', handleMessage)
@@ -265,7 +265,7 @@ const isReady=() => {
   return ready
 }
 
-const audioUrl = ref('@/assets/music/game_bg1.mp3') // 假设音频文件存放路径
+const audioUrl = ref(require('@/assets/music/game_bg1.mp3')) // 假设音频文件存放路径
 const bgm = ref(null)
 
 const toGame = () => {
