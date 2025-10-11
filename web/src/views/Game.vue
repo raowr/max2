@@ -17,7 +17,7 @@
     <!--player1 牌 -->
     <div class="player1_card"
       style="position: absolute; top:78%; left: 2%; right: 2%; display: flex; justify-content: center;">
-      <img v-for="cardId in state.cards" :key="cardId" :src="'@/assets/img/cards/'+cardId+'.png'" :style="{
+      <img v-for="cardId in state.cards" :key="cardId" :src="getCardImage(cardId)" :style="{
       width: '7%',
       height: '120px',
       marginRight: '-1%',
@@ -298,7 +298,8 @@ import loseBg from '@/assets/img/ui/lose_bg.png'
 
 onMounted(() => {
   initDeck()
-  audioManager.preload('bgm', '@/assets/music/game_bg1.mp3')
+  const bgmUrl = new URL('@/assets/music/game_bg1.mp3', import.meta.url).href;
+  audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
    audioManager.playBGM('bgm')
    websocket.send({"type":"play","data":"","name":""})
    websocket.on('message', handleMessage)
@@ -629,6 +630,14 @@ const goToHome = () => {
   showGameOverModal.value = false
   router.push('/')  // 跳转到首页路由
 }
+
+// 定义动态获取卡牌图片路径的方法（解析 @ 别名）
+const getCardImage = (cardId) => {
+  console.log(cardId)
+  // 使用 new URL() 构造路径，Vite 会自动解析 @ 别名并处理资源
+  const cardIdStr = String(cardId);
+  return new URL(`@/assets/img/cards/${cardIdStr}.png`, import.meta.url).href;
+};
 
 
 </script>
