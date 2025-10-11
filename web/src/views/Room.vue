@@ -46,7 +46,7 @@
 
                   <div class="player-stars">
                     <img v-for="n in 3" :key="n"
-                      :src="n <= player.stars ? 'src/assets/img/ui/star.png' : 'src/assets/img/ui/star_dark.png'"
+                      :src="n <= player.stars ? '@/assets/img/ui/star.png' : '@/assets/img/ui/star_dark.png'"
                       alt="星星">
                   </div>
 
@@ -113,20 +113,20 @@ const state = reactive({
     {
       id: 1,
       name: '玩家一',
-      avatar: 'src/assets/img/touxiang/bighead15339.png',
+      avatar: '@/assets/img/touxiang/bighead15339.png',
       stars: 3,
       ready: false,
       isOwner: true,
-      lihui: 'src/assets/img/lihui/full15342.png',
+      lihui: '@/assets/img/lihui/full15342.png',
     },
     {
       id: 2,
       name: '玩家二',
-      avatar: 'src/assets/img/touxiang/bighead15419.png',
+      avatar: '@/assets/img/touxiang/bighead15419.png',
       stars: 2,
       ready: false,
       isOwner: false,
-      lihui: 'src/assets/img/lihui/full15418.png',
+      lihui: '@/assets/img/lihui/full15418.png',
     },
     {
       id: 3,
@@ -174,7 +174,7 @@ onMounted(() => {
   init()
 })
 const init = async () => {
-  audioManager.preload('bgm', 'src/assets/music/game_bg.mp3')
+  audioManager.preload('bgm', '@/assets/music/game_bg.mp3')
    audioManager.playBGM('bgm')
 
   websocket.on('message', handleMessage)
@@ -231,18 +231,18 @@ const handleMessage = (data) => {
 // 添加工具函数（放在script setup顶部）
 const getAvatarByType = (type) => {
   const avatars = [
-    'src/assets/img/touxiang/bighead15339.png', // 房主头像
-    'src/assets/img/touxiang/bighead15419.png'  // 机器人默认头像
+    '@/assets/img/touxiang/bighead15339.png', // 房主头像
+    '@/assets/img/touxiang/bighead15419.png'  // 机器人默认头像
   ]
-  return avatars[type] || 'src/assets/img/touxiang/bighead15729.png'
+  return avatars[type] || '@/assets/img/touxiang/bighead15729.png'
 }
 
 const getLihuiByType = (type) => {
   const lihuis = [
-    'src/assets/img/lihui/full15342.png', // 房主立绘
-    'src/assets/img/lihui/full15418.png'  // 机器人默认立绘
+    '@/assets/img/lihui/full15342.png', // 房主立绘
+    '@/assets/img/lihui/full15418.png'  // 机器人默认立绘
   ]
-  return lihuis[type] || 'src/assets/img/lihui/full15703.png'
+  return lihuis[type] || '@/assets/img/lihui/full15703.png'
 }
 onBeforeUnmount(() => {
   websocket.off('message', handleMessage)
@@ -265,7 +265,7 @@ const isReady=() => {
   return ready
 }
 
-const audioUrl = ref('src/assets/music/game_bg1.mp3') // 假设音频文件存放路径
+const audioUrl = ref('@/assets/music/game_bg1.mp3') // 假设音频文件存放路径
 const bgm = ref(null)
 
 const toGame = () => {

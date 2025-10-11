@@ -9,7 +9,7 @@
     <!-- 通过 left: 50% + transform: translateX(-50%) 实现水平居中 -->
     <div
       style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); display: flex; align-items: center;">
-      <img v-for="cardId in state.outCards" :key="cardId" :src="'src/assets/img/cards/'+cardId+'.png'"
+      <img v-for="cardId in state.outCards" :key="cardId" :src="'@/assets/img/cards/'+cardId+'.png'"
         style="width: 100%; height: 140px; margin-right: -4%; transition: transform 0.3s ease;">
     </div>
     <!--弃牌堆结束 -->
@@ -17,7 +17,7 @@
     <!--player1 牌 -->
     <div class="player1_card"
       style="position: absolute; top:78%; left: 2%; right: 2%; display: flex; justify-content: center;">
-      <img v-for="cardId in state.cards" :key="cardId" :src="'src/assets/img/cards/'+cardId+'.png'" :style="{
+      <img v-for="cardId in state.cards" :key="cardId" :src="'@/assets/img/cards/'+cardId+'.png'" :style="{
       width: '7%',
       height: '120px',
       marginRight: '-1%',
@@ -130,7 +130,7 @@
         </div>
       </div>
       <div width="90px"
-        style="background-image: url('src/assets/img/ui/chatlog.png'); background-size:90px;position: absolute;width: 90px;height: 90px;">
+        style="background-image: url('@/assets/img/ui/chatlog.png'); background-size:90px;position: absolute;width: 90px;height: 90px;">
         <img src="@/assets/img/touxiang/bighead15729.png" width="90px"
           style="bottom:31.2%;left:3.1%;border-radius: 25px;">
       </div>
@@ -298,7 +298,7 @@ import loseBg from '@/assets/img/ui/lose_bg.png'
 
 onMounted(() => {
   initDeck()
-  audioManager.preload('bgm', 'src/assets/music/game_bg1.mp3')
+  audioManager.preload('bgm', '@/assets/music/game_bg1.mp3')
    audioManager.playBGM('bgm')
    websocket.send({"type":"play","data":"","name":""})
    websocket.on('message', handleMessage)
