@@ -9,7 +9,7 @@
     <!-- 通过 left: 50% + transform: translateX(-50%) 实现水平居中 -->
     <div
       style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); display: flex; align-items: center;">
-      <img v-for="cardId in state.outCards" :key="cardId" :src="'@/assets/img/cards/'+cardId+'.png'"
+      <img v-for="cardId in state.outCards" :key="cardId" :src="getCardImage(cardId)"
         style="width: 100%; height: 140px; margin-right: -4%; transition: transform 0.3s ease;">
     </div>
     <!--弃牌堆结束 -->
@@ -27,24 +27,24 @@
     }" @click="toggleCard(cardId)">
     </div>
 
-<!--player1 信息 -->
-<div style="position: absolute;bottom:5%;left:3%;">
-  <img src="@/assets/img/ui/chatlog.png" width="110px">
-  
-  <!-- 总瓜子数信息 (头像上方) -->
-  <div style="position: absolute; top: -15%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; 
+    <!--player1 信息 -->
+    <div style="position: absolute;bottom:5%;left:3%;">
+      <img src="@/assets/img/ui/chatlog.png" width="110px">
+
+      <!-- 总瓜子数信息 (头像上方) -->
+      <div style="position: absolute; top: -15%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; 
               white-space: nowrap; min-width: 100px;"> <!-- 增大最小宽度至100px -->
-    <img src="@/assets/img/ui/bf_heart.png" width='20px' style='margin-right: 5px;'>
-    <p style="z-index:1;font-size:14px; color:yellow; font-weight: bold;">{{ state.player1Point }}瓜子</p>
-  </div>
-  
-  <img src="@/assets/img/touxiang/bighead15718.png" width="100px"
-    style="position: absolute;bottom:38.2%;left:3%;border-radius: 25px;">
-  <div style="width:140px;height:40px;text-align:center;">
-    <p style="z-index:1;font-size:16px; color:white;">帅哥1</p>
-  </div>
-</div>
-<!--player1 信息结束 -->
+        <img src="@/assets/img/ui/bf_heart.png" width='20px' style='margin-right: 5px;'>
+        <p style="z-index:1;font-size:14px; color:yellow; font-weight: bold;">{{ state.player1Point }}瓜子</p>
+      </div>
+
+      <img src="@/assets/img/touxiang/bighead15718.png" width="100px"
+        style="position: absolute;bottom:38.2%;left:3%;border-radius: 25px;">
+      <div style="width:140px;height:40px;text-align:center;">
+        <p style="z-index:1;font-size:16px; color:white;">帅哥1</p>
+      </div>
+    </div>
+    <!--player1 信息结束 -->
 
     <!--player2 信息 -->
     <div style="position: absolute;top:30%;right:5%;">
@@ -129,8 +129,13 @@
           {{ countdownPlayer3 }}
         </div>
       </div>
-      <div width="90px"
-        style="background-image: url('@/assets/img/ui/chatlog.png'); background-size:90px;position: absolute;width: 90px;height: 90px;">
+      <div width="90px" :style="{
+        backgroundImage: `url(${chatlogBgUrl})`,  // 绑定解析后的路径
+        backgroundSize: '90px',
+        position: 'absolute',
+        width: '90px',
+        height: '90px'
+      }">
         <img src="@/assets/img/touxiang/bighead15729.png" width="90px"
           style="bottom:31.2%;left:3.1%;border-radius: 25px;">
       </div>
@@ -166,20 +171,17 @@
       <!-- 尺寸从100调整为80（80%） -->
       <svg :width="80" :height="80">
         <!-- 圆形半径从45调整为36（45*0.8），背景圆改为实心深灰色 -->
-        <circle cx="40" cy="40" r="36" stroke="#eee" stroke-width="8" fill="#555" />  <!-- 实心背景 -->
+        <circle cx="40" cy="40" r="36" stroke="#eee" stroke-width="8" fill="#555" /> <!-- 实心背景 -->
         <!-- 进度圆改为实心，颜色随倒计时变化 -->
-        <circle cx="40" cy="40" r="36" 
-          :stroke="countdownPlayer1 > 10 ? '#4CAF50' : '#ff5722'" 
-          :fill="countdownPlayer1 > 10 ? '#81C784' : '#FF9800'"  
-          stroke-width="8"
-          :style="{
+        <circle cx="40" cy="40" r="36" :stroke="countdownPlayer1 > 10 ? '#4CAF50' : '#ff5722'"
+          :fill="countdownPlayer1 > 10 ? '#81C784' : '#FF9800'" stroke-width="8" :style="{
             strokeDasharray: 226.19,
             strokeDashoffset: 226.19 * (1 - countdownPlayer1/30),
             transition: 'stroke-dashoffset 1s linear'
           }" />
       </svg>
       <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                 font-size: 26px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">  <!-- 字体从19px放大到26px -->
+                 font-size: 26px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)"> <!-- 字体从19px放大到26px -->
         {{ countdownPlayer1 }}
       </div>
     </div>
@@ -189,61 +191,44 @@
     <!-- 后手出牌时的功能 !-->
     <div v-if="state.countdownPlayer == 1">
       <!-- 修改：出牌按钮添加按下缩小效果 -->
-      <img 
-        v-if="checkOut()" 
-        src='@/assets/img/btn_chupai.png' 
-        :style="{
+      <img v-if="checkOut()" src='@/assets/img/btn_chupai.png' :style="{
           position: 'absolute',
           top: '60%',
           left: '54%',
           transform: isChupaiBtnPressed ? 'scale(0.9)' : 'scale(1)',  // 按下缩小至90%
           transition: 'transform 0.1s ease'  // 平滑过渡动画
-        }" 
-        @click='chupai()'
-        @mousedown="isChupaiBtnPressed = true" 
-        @mouseup="isChupaiBtnPressed = false"   
-        @mouseleave="isChupaiBtnPressed = false"  
-      >
+        }" @click='chupai()' @mousedown="isChupaiBtnPressed = true" @mouseup="isChupaiBtnPressed = false"
+        @mouseleave="isChupaiBtnPressed = false">
       <img v-else src='@/assets/img/btn_chupai_hui.png' style='position: absolute;top:60%;left:54%'>
 
-      <img 
-        v-if="state.mustPid != 0"
-        src='@/assets/img/btn_bujiao2.png' 
-        :style="{
+      <img v-if="state.mustPid != 0" src='@/assets/img/btn_bujiao2.png' :style="{
           position: 'absolute',
           top: '60%',
           left: '32%',
           transform: isPassBtnPressed ? 'scale(0.9)' : 'scale(1)',  // 按下时缩小到90%
           transition: 'transform 0.1s ease'  // 平滑过渡动画
-        }" 
-        @click='pass()'
-        @mousedown="isPassBtnPressed = true"
-        @mouseup="isPassBtnPressed = false"
-        @mouseleave="isPassBtnPressed = false"
-      >
+        }" @click='pass()' @mousedown="isPassBtnPressed = true" @mouseup="isPassBtnPressed = false"
+        @mouseleave="isPassBtnPressed = false">
     </div>
 
     <!-- 后手出牌时的功能 !-->
 
 
- <!-- 游戏结束弹窗 -->
-<div v-if="showGameOverModal" class="game-over-modal">
-  <div class="modal-content">
-    <!-- 胜利/失败标题 (移至背景图外部顶部) -->
-    <h2 class="result-title">{{ isWinner ? '恭喜胜利!' : '游戏失败' }}</h2>
-    
-    <!-- 缩小的背景图容器 -->
-    <div 
-      class="result-bg" 
-      :style="{ 
+    <!-- 游戏结束弹窗 -->
+    <div v-if="showGameOverModal" class="game-over-modal">
+      <div class="modal-content">
+        <!-- 胜利/失败标题 (移至背景图外部顶部) -->
+        <h2 class="result-title">{{ isWinner ? '恭喜胜利!' : '游戏失败' }}</h2>
+
+        <!-- 缩小的背景图容器 -->
+        <div class="result-bg" :style="{ 
         backgroundImage: isWinner ? `url(${winBg})` : `url(${loseBg})`
-      }"
-    >
-      <!-- 移除原内部标题 -->
-    </div>
-    
-    <!-- 积分信息 (背景图下方) -->
-    <p class="score-info" :style="{
+      }">
+          <!-- 移除原内部标题 -->
+        </div>
+
+        <!-- 积分信息 (背景图下方) -->
+        <p class="score-info" :style="{
       // 胜利状态样式 (保持不变)
       fontSize: isWinner ? '24px' : '22px',
       fontWeight: isWinner ? 'bold' : 'bold',
@@ -253,22 +238,19 @@
       borderRadius: '8px',
       background: isWinner ? 'linear-gradient(45deg, #FFD700, #FFA500)' : 'linear-gradient(45deg, #FF6347, #FFA07A)'
     }">{{ gameOverMessage }}</p>
-    
-      <!-- 修改按钮文本和点击事件 -->
-      <button 
-        class="restart-btn" 
-        @click="state.player1Point === 0 ? goToHome() : restartGame()"
-      >
-        {{ state.player1Point === 0 ? '返回首页' : '再来一局' }}
-      </button>
-  </div>
-</div>
+
+        <!-- 修改按钮文本和点击事件 -->
+        <button class="restart-btn" @click="state.player1Point === 0 ? goToHome() : restartGame()">
+          {{ state.player1Point === 0 ? '返回首页' : '再来一局' }}
+        </button>
+      </div>
+    </div>
 
   </div>
 </template>
 
 <script setup>
-import { ref,  reactive,onMounted,onBeforeUnmount  } from 'vue'
+import { ref,  reactive,onMounted,onBeforeUnmount,computed   } from 'vue'
 import { audioManager } from '@/utils/audio'
 import { websocket } from '@/utils/websocket'
 const state = reactive({
@@ -631,15 +613,25 @@ const goToHome = () => {
   router.push('/')  // 跳转到首页路由
 }
 
-// 定义动态获取卡牌图片路径的方法（解析 @ 别名）
+// 预加载 cards 目录下所有 .png 图片（Vite 特有的资源导入方式）
+// eager: true 表示立即加载，import: 'default' 获取图片 URL
+const cardImages = import.meta.glob('@/assets/img/cards/*.png', { eager: true, import: 'default' });
+
+// 动态获取卡牌图片路径（利用预加载的图片映射）
 const getCardImage = (cardId) => {
-  console.log(cardId)
-  // 使用 new URL() 构造路径，Vite 会自动解析 @ 别名并处理资源
-  const cardIdStr = String(cardId);
-  return new URL(`@/assets/img/cards/${cardIdStr}.png`, import.meta.url).href;
+  const cardIdStr = String(cardId).trim();
+  // 构造预加载图片的路径 key（与 glob 匹配的路径格式）
+    const imageKey = `/src/assets/img/cards/${cardIdStr}.png`; 
+  // 返回预加载的图片 URL（开发/生产环境路径自动适配）
+  return cardImages[imageKey] || ''; // 若找不到对应图片，返回空（可添加默认图）
 };
 
 
+// 计算属性：解析聊天框背景图路径（处理 @ 别名）
+const chatlogBgUrl = computed(() => {
+  // 使用 new URL() 构造路径，Vite 会自动解析 @ 别名
+  return new URL('@/assets/img/ui/chatlog.png', import.meta.url).href;
+});
 </script>
 
 <style scoped>
