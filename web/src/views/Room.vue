@@ -758,4 +758,64 @@ body {
     height: 16px;
   }
 }
+
+/* 横屏模式专属样式 */
+@media (max-width: 998px) {
+  .back-btn img {
+    height: 30px;
+}
+
+.room-title {
+    position: absolute;
+    left: 42px;
+    top: 0px;
+}
+.player-card {
+    width: 15%;
+    position: relative;
+    margin-bottom: 20px;
+}
+.ready-btn-container {
+    left: 45%;
+    top: 78%;
+
+}
+
+/* 确保 controls-section 的父容器具有相对定位，作为定位参考 */
+.room-container { /* 假设父容器类名为 room-container，根据实际情况调整 */
+  position: relative; /* 添加此属性 */
+  /* ... 父容器原有样式 ... */
+}
+
+.controls-section {
+  /* 移除可能存在的 float 或 margin 等定位样式 */
+  /* float: right; 如需保留可注释或删除 */
+  
+  /* 设置右上角定位 */
+  position: absolute;
+  top: 0; /* 距离顶部 0px */
+  right: 0; /* 距离右侧 0px */
+  width: 300px; /* 根据需要调整宽度 */
+  /* ... 其他原有基础样式（如背景、内边距等）... */
+}
+.controls-section {
+  /* 原有定位与布局样式 */
+  position: absolute;
+  top: 74px; /* 原 top: 0，增加数值向下移动（如 10px） */
+  right: 65px; /* 原 right: 0，减小数值向左移动（如 10px） */
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transform: scale(0.6);
+  transform-origin: top right;
+  /* ... 其他原有样式 ... */
+}
+
+/* 确保子元素占满容器宽度（可选，根据内容需求调整） */
+.game-info, .room-actions {
+  width: 100%; /* 让子元素宽度填满父容器 */
+  /* ... 其他原有样式 ... */
+}
+}
 </style>

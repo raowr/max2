@@ -491,4 +491,124 @@
   font-size: 25px;
   color: white;
 }
+
+
+/* 横屏模式专属样式 */
+@media (max-width: 998px) {
+
+.yourenchang {
+  height: 100%;
+  width: 32%;
+  top: 15%;
+  left: 60%;
+  position: absolute;
+
+  display: none;
+}
+
+.title_bg {
+  height: 10%;
+  width: 100%;
+  margin-top: 22px;
+}
+
+.friendroom {
+  z-index: 1;
+  position: absolute;
+  left: 49%;
+  top: 6%;
+  height: 30px;
+}
+
+.img_return2 {
+  z-index: 1;
+  position: absolute;
+  left: 8%;
+  top: 6%;
+  height: 40px;
+}
+.img_return2 img{
+width: 80%;
+}
+
+
+.btn_create_room {
+  z-index: 1;
+  position: absolute;
+  left: 14%;
+  top: 21%;
+  width: 70%;
+}
+
+.tips {
+  z-index: 1;
+  position: absolute;
+  left: 85%;
+  top: 89%;
+}
+
+.free {
+  z-index: 1;
+  position: absolute;
+  left: 35%;
+  top: 33%;
+  font-size: 20px;
+  color: white;
+}
+
+.free2 {
+  z-index: 1;
+  position: absolute;
+  left: 35%;
+  top: 58%;
+  font-size: 20px;
+  color: white;
+}
+
+.bg_abmatch1 {
+  z-index: 1;
+  position: absolute;
+  left: 0%;
+  top: 17%;
+  width: 100%;
+}
+
+.bg_abmatch {
+  z-index: 1;
+  position: absolute;
+  left: 0%;
+  top: 42%;
+  width: 100%;
+}
+
+.w_joinroom {
+  z-index: 1;
+  position: absolute;
+  left: 6%;
+  top: 42%;
+  width: 90%;
+}
+
+.roominput {
+  display: none;
+  z-index: 1;
+  position: absolute;
+  left: 30%;
+  top: 166%;
+  height: 30px;
+  width: 200px;
+}
+
+.roomsubmit {
+  display: none;
+  z-index: 1;
+  position: absolute;
+  left: 40%;
+  top: 190%;
+  height: 30px;
+  width: 100px;
+  background: red;
+  color: white;
+}
+}
 </style>

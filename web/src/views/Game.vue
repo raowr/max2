@@ -5,30 +5,29 @@
       {{state.lastmsg}}
     </div>
 
-    <!--弃牌堆 -->
-    <!-- 通过 left: 50% + transform: translateX(-50%) 实现水平居中 -->
-    <div
-      style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); display: flex; align-items: center;">
-      <img v-for="cardId in state.outCards" :key="cardId" :src="getCardImage(cardId)"
-        style="width: 100%; height: 140px; margin-right: -4%; transition: transform 0.3s ease;">
-    </div>
-    <!--弃牌堆结束 -->
+<!-- 移除内联样式，仅保留必要的动态属性 -->
+<div class="discard-pile-container">
+  <img v-for="cardId in state.outCards" :key="cardId" :src="getCardImage(cardId)"
+    class="discard-card">
+</div>
+<!--弃牌堆结束 -->
 
-    <!--player1 牌 -->
-    <div class="player1_card"
-      style="position: absolute; top:78%; left: 2%; right: 2%; display: flex; justify-content: center;">
-      <img v-for="cardId in state.cards" :key="cardId" :src="getCardImage(cardId)" :style="{
-      width: '7%',
-      height: '120px',
-      marginRight: '-1%',
+<!--player1 牌 -->
+<!-- 移除容器的内联静态样式，保留类名 -->
+<div class="player1_card">
+  <!-- 为卡牌添加类名.player1-card-item，抽取静态样式 -->
+  <img v-for="cardId in state.cards" :key="cardId" :src="getCardImage(cardId)" 
+    class="player1-card-item" 
+    :style="{
+      // 保留动态样式：选中状态的位移、层级，以及基于cardId的 translateX
       transform: selectedCards.includes(cardId) ? 'translateY(-20px)' : 'translateX(calc(-1% * (13 - ' + cardId + ')))',
-      zIndex: selectedCards.includes(cardId) ? 10 : 1,
-      transition: 'transform 0.3s ease'
+      zIndex: selectedCards.includes(cardId) ? 10 : 1
     }" @click="toggleCard(cardId)">
-    </div>
+</div>
+<!--player1 牌结束 -->
 
     <!--player1 信息 -->
-    <div style="position: absolute;bottom:5%;left:3%;">
+    <div class="player1-container" >
       <img src="@/assets/img/ui/chatlog.png" width="110px">
 
       <!-- 总瓜子数信息 (头像上方) -->
@@ -47,7 +46,7 @@
     <!--player1 信息结束 -->
 
     <!--player2 信息 -->
-    <div style="position: absolute;top:30%;right:5%;">
+    <div class="player2-container"  style="">
       <!-- 修改为圆形倒计时 -->
       <div v-if="state.countdownPlayer == 2"
         style="position: absolute; top: -5%; left: 34%; transform: translateX(-50%); z-index: 999; text-align: center">
@@ -79,7 +78,7 @@
     <!--player2 信息结束 -->
 
     <!--player4 信息 -->
-    <div style="position: absolute;top:30%;left:3%;">
+    <div class="player4-container" style="">
       <!-- 修改为圆形倒计时 -->
       <div v-if="state.countdownPlayer == 4"
         style="position: absolute; top: -4%; left: 40%; transform: translateX(-50%); z-index: 999; text-align: center">
@@ -111,7 +110,7 @@
     <!--player4 信息结束 -->
 
     <!--player3 信息 -->
-    <div style="position: absolute;top:5%;left:40%;width: 90px;">
+    <div class="player3-container" style="">
       <!-- 修改为圆形倒计时 -->
       <div v-if="state.countdownPlayer == 3"
         style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
@@ -165,51 +164,53 @@
     <!--功能区 -->
 
 
-    <!-- 修改为圆形倒计时 -->
-    <div v-if="state.countdownPlayer == 1"
-      style="position: absolute; top: 59%; left: 51%; transform: translateX(-50%); z-index: 999; text-align: center">
-      <!-- 尺寸从100调整为80（80%） -->
-      <svg :width="80" :height="80">
-        <!-- 圆形半径从45调整为36（45*0.8），背景圆改为实心深灰色 -->
-        <circle cx="40" cy="40" r="36" stroke="#eee" stroke-width="8" fill="#555" /> <!-- 实心背景 -->
-        <!-- 进度圆改为实心，颜色随倒计时变化 -->
-        <circle cx="40" cy="40" r="36" :stroke="countdownPlayer1 > 10 ? '#4CAF50' : '#ff5722'"
-          :fill="countdownPlayer1 > 10 ? '#81C784' : '#FF9800'" stroke-width="8" :style="{
-            strokeDasharray: 226.19,
-            strokeDashoffset: 226.19 * (1 - countdownPlayer1/30),
-            transition: 'stroke-dashoffset 1s linear'
-          }" />
-      </svg>
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                 font-size: 26px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)"> <!-- 字体从19px放大到26px -->
-        {{ countdownPlayer1 }}
-      </div>
-    </div>
+<!-- 修改为圆形倒计时 -->
+<!-- 外层容器添加类名：countdown-circle-container -->
+<div v-if="state.countdownPlayer == 1" class="countdown-circle-container">
+  <!-- SVG尺寸保持属性形式（非样式） -->
+  <svg width="80" height="80">
+    <!-- 背景圆添加类名：countdown-bg-circle -->
+    <circle class="countdown-bg-circle" cx="40" cy="40" r="36" />
+    <!-- 进度圆添加类名：countdown-progress-circle -->
+    <circle class="countdown-progress-circle" cx="40" cy="40" r="36" 
+      :stroke="countdownPlayer1 > 10 ? '#4CAF50' : '#ff5722'"
+      :fill="countdownPlayer1 > 10 ? '#81C784' : '#FF9800'" 
+      :style="{
+        strokeDashoffset: 226.19 * (1 - countdownPlayer1/30)  // 保留动态进度偏移
+      }" />
+  </svg>
+  <!-- 文本区域添加类名：countdown-text -->
+  <div class="countdown-text">
+    {{ countdownPlayer1 }}
+  </div>
+</div>
 
 
 
-    <!-- 后手出牌时的功能 !-->
-    <div v-if="state.countdownPlayer == 1">
-      <!-- 修改：出牌按钮添加按下缩小效果 -->
-      <img v-if="checkOut()" src='@/assets/img/btn_chupai.png' :style="{
-          position: 'absolute',
-          top: '60%',
-          left: '54%',
-          transform: isChupaiBtnPressed ? 'scale(0.9)' : 'scale(1)',  // 按下缩小至90%
-          transition: 'transform 0.1s ease'  // 平滑过渡动画
-        }" @click='chupai()' @mousedown="isChupaiBtnPressed = true" @mouseup="isChupaiBtnPressed = false"
-        @mouseleave="isChupaiBtnPressed = false">
-      <img v-else src='@/assets/img/btn_chupai_hui.png' style='position: absolute;top:60%;left:54%'>
+   <!-- 后手出牌时的功能 !-->
+<!-- 容器添加类名：backhand-actions-container -->
+<div v-if="state.countdownPlayer == 1" class="backhand-actions-container">
+  
+  <!-- 出牌按钮添加类名：chupai-btn -->
+  <img v-if="checkOut()" src='@/assets/img/btn_chupai.png' 
+    class="chupai-btn"  
+    :style="{
+      transform: isChupaiBtnPressed ? 'scale(0.9)' : 'scale(1)'  // 保留动态样式
+    }" @click='chupai()' @mousedown="isChupaiBtnPressed = true" @mouseup="isChupaiBtnPressed = false"
+    @mouseleave="isChupaiBtnPressed = false">
+  
+  <!-- 禁用出牌按钮添加类名：chupai-btn-disabled -->
+  <img v-else src='@/assets/img/btn_chupai_hui.png' class="chupai-btn-disabled">
 
-      <img v-if="state.mustPid != 0" src='@/assets/img/btn_bujiao2.png' :style="{
-          position: 'absolute',
-          top: '60%',
-          left: '32%',
-          transform: isPassBtnPressed ? 'scale(0.9)' : 'scale(1)',  // 按下时缩小到90%
-          transition: 'transform 0.1s ease'  // 平滑过渡动画
-        }" @click='pass()' @mousedown="isPassBtnPressed = true" @mouseup="isPassBtnPressed = false"
-        @mouseleave="isPassBtnPressed = false">
-    </div>
+  <!-- 不叫按钮添加类名：bujiao-btn -->
+  <img v-if="state.mustPid != 0" src='@/assets/img/btn_bujiao2.png' 
+    class="bujiao-btn"  
+    :style="{
+      transform: isPassBtnPressed ? 'scale(0.9)' : 'scale(1)'  // 保留动态样式
+    }" @click='pass()' @mousedown="isPassBtnPressed = true" @mouseup="isPassBtnPressed = false"
+    @mouseleave="isPassBtnPressed = false">
+</div>
+<!-- 后手出牌时的功能 !-->
 
     <!-- 后手出牌时的功能 !-->
 
@@ -255,14 +256,14 @@ import { audioManager } from '@/utils/audio'
 import { websocket } from '@/utils/websocket'
 const state = reactive({
   deck:[],
-  countdownPlayer:0,
-  cards:[],
+  countdownPlayer:1,
+  cards:[1,2,3,4,5,6,7,8,9,10,11,12,13],
   player2CardsNum:13,
   player3CardsNum:13,
   player4CardsNum:13,
-  outCards:[],
+  outCards:[1,2,3,4,5],
   lastmsg:"",
-  mustPid:0,
+  mustPid:1,
   player1Point: 0, // 初始瓜子数
 })
 const isPassBtnPressed = ref(false)  // 添加：跟踪按钮按下状态
@@ -748,5 +749,184 @@ const chatlogBgUrl = computed(() => {
 
 .restart-btn:hover {
   background-color: #45a049;
+}
+
+.player1-container {
+    position: absolute;
+    bottom:5%;
+    left:3%;
+  }
+  .player2-container{
+    position: absolute;
+    top:30%;
+    right:5%;
+  }
+  .player4-container{
+    position: absolute;
+    top:30%;
+    left:3%;
+  }
+  .player3-container{
+    position: absolute;
+    top:5%;
+    left:40%;
+    width: 90px;
+  }
+/* 弃牌堆容器样式 */
+.discard-pile-container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 10px 0;
+}
+
+/* 弃牌堆卡牌样式 */
+.discard-card {
+  width: 120px;
+  height: 140px;
+  margin-right: -15px;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* player1牌容器样式 */
+.player1_card {
+  position: absolute;
+  top: 78%;
+  left: 2%;
+  right: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+/* player1卡牌静态样式 */
+.player1-card-item {
+  width: 7%;          /* 原内联width */
+  height: 120px;      /* 原内联height */
+  margin-right: -1%;  /* 原内联marginRight */
+  transition: transform 0.3s ease;  /* 原内联transition */
+}
+
+
+/* 功能区容器静态样式 */
+.backhand-actions-container {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  width: 100%;
+}
+
+/* 出牌按钮静态样式 */
+.chupai-btn {
+  position: absolute;
+  top: 0;
+  left: 54%;
+  transition: transform 0.1s ease;  /* 过渡效果移至CSS */
+}
+
+/* 禁用状态出牌按钮静态样式 */
+.chupai-btn-disabled {
+  position: absolute;
+  top: 0;
+  left: 54%;
+}
+
+/* 不叫按钮静态样式 */
+.bujiao-btn {
+  position: absolute;
+  top: 0;
+  left: 32%;
+  transition: transform 0.1s ease;  /* 过渡效果移至CSS */
+}
+
+/* 倒计时容器样式（抽取定位相关静态样式） */
+.countdown-circle-container {
+  position: absolute;
+  top: 59%;
+  left: 51%;
+  transform: translateX(-50%);
+  z-index: 999;
+  text-align: center;
+}
+
+/* 背景圆样式（抽取静态视觉样式） */
+.countdown-bg-circle {
+  stroke: #eee;
+  stroke-width: 8;
+  fill: #555; /* 实心背景 */
+}
+
+/* 进度圆样式（抽取静态基础样式） */
+.countdown-progress-circle {
+  stroke-width: 8;
+  stroke-dasharray: 226.19; /* 固定圆周长度（2πr = 2*3.14*36 ≈ 226.19） */
+  transition: stroke-dashoffset 1s linear; /* 进度过渡动画 */
+}
+
+/* 倒计时文本样式（抽取静态文本样式） */
+.countdown-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 26px;
+  color: white;
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+/* 横屏模式专属样式 */
+@media (max-width: 998px) {
+   .player1-container {
+    transform: scale(0.8); /* 缩小至80% */
+    bottom: -4%; /* 向下移动（从原来的5%调整为8%） */
+    transform-origin: bottom left; /* 确保缩放从左下角开始，避免水平偏移 */
+  }
+
+    .player2-container {
+    transform: scale(0.8); /* 整体缩小至80% */
+    transform-origin: top right; /* 以右上角为缩放原点，避免位置偏移 */
+  }
+    .player4-container{
+    transform: scale(0.8); /* 整体缩小至80% */
+  }
+  .player3-container{
+    transform: scale(0.8); /* 整体缩小至80% */
+  }
+  .discard-pile-container {
+  
+    transform: translateX(-50%) scale(0.6);
+    transform-origin: top center;
+  }
+
+  .player1_card {
+  position: absolute;
+  top: 70%; /* 原78% → 减少2%实现向上移动 */
+  left: -8%; /* 原2% → 增加1%实现向右移动 */
+  right: -18%; /* 保持右边界不变 */
+  display: flex;
+  justify-content: center;
+  transform: scale(0.8);
+}
+
+  .backhand-actions-container {
+    transform: scale(0.6); /* 整体缩小至60% */
+    transform-origin: top center; /* 以顶部中心为缩放原点，避免位置偏移 */
+  }
+  /* 不叫按钮静态样式 */
+.bujiao-btn {
+  left: 22%;
+}
+/* 禁用状态出牌按钮静态样式 */
+.chupai-btn-disabled {
+  left: 57%;
+}
+    .countdown-circle-container {
+    transform: translateX(-50%) scale(0.6); /* 保持水平居中并缩小至60% */
+    transform-origin: top center; /* 以顶部中心为缩放原点，避免位置偏移 */
+  }
+
 }
 </style>
