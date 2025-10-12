@@ -256,14 +256,14 @@ import { audioManager } from '@/utils/audio'
 import { websocket } from '@/utils/websocket'
 const state = reactive({
   deck:[],
-  countdownPlayer:1,
-  cards:[1,2,3,4,5,6,7,8,9,10,11,12,13],
+  countdownPlayer:0,
+  cards:[],
   player2CardsNum:13,
   player3CardsNum:13,
   player4CardsNum:13,
-  outCards:[1,2,3,4,5],
+  outCards:[],
   lastmsg:"",
-  mustPid:1,
+  mustPid:0,
   player1Point: 0, // 初始瓜子数
 })
 const isPassBtnPressed = ref(false)  // 添加：跟踪按钮按下状态
