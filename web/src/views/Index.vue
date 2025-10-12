@@ -9,7 +9,7 @@
       <img class="title_bg" src="@/assets/img/ui/title_bg.png" alt="标题背景" />
       <img class="friendroom" src="@/assets/img/ui/txt_friendroom.png" />
       <div class="img_return2" @onclick="return2()"><img src="@/assets/img/ui/img_return2.png" alt="标题背景"  /></div>
-      <br /><br /><a href="room.html"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch1" /></a>
+      <br /><br /><a @onclick="inroom()"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch1" /></a>
       <router-link to="/room"><img src="@/assets/img/ui/btn_create_room.png" class="btn_create_room" /></router-link>
       <img class="tips" src="@/assets/img/ui/tips.png" />
       <p class="free">限时免费</p>
