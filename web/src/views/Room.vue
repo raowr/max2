@@ -201,7 +201,7 @@ const handleMessage = (data) => {
  try {
       // 解析JSON字符串
       const serverPlayers = JSON.parse(data.data)
-      
+      state.roomId=serverPlayers[0].RoomID
       // 智能合并数据
       serverPlayers.forEach(serverPlayer => {
         const convertedId = serverPlayer.ID + 1

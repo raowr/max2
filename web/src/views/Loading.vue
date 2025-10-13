@@ -52,7 +52,7 @@ import return1BgImg from '@/assets/img/ui/img_return1_bg.png';
 import return1Img from '@/assets/img/ui/img_return1.png';
 // import friendRoomImg from '@/assets/img/ui/txt_friendroom.png';
 import roomOwnerImg from '@/assets/img/ui/roomowner.png';
-// import frameGoldImg from '@/assets/img/ui/frame_gold.png';
+import frameGoldImg from '@/assets/img/ui/frame_gold.png';
 import characterBgImg from '@/assets/img/ui/character_bg.png';
 import nameBgImg from '@/assets/img/ui/namebg.png';
 import readyImg from '@/assets/img/ui/ready.png';
@@ -173,7 +173,7 @@ export default {
         return1Img,   // 新增：返回1图标
         // friendRoomImg,// 新增：好友房间
         roomOwnerImg, // 新增：房间所有者
-        // frameGoldImg, // 新增：金色框架
+        frameGoldImg, // 新增：金色框架
         characterBgImg,// 新增：角色背景
         nameBgImg,    // 新增：姓名背景
         readyImg,     // 新增：准备图标

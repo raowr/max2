@@ -824,7 +824,7 @@ const chatlogBgUrl = computed(() => {
 .chupai-btn {
   position: absolute;
   top: 0;
-  left: 54%;
+  left: 57%;
   transition: transform 0.1s ease;  /* 过渡效果移至CSS */
 }
 
@@ -903,9 +903,9 @@ const chatlogBgUrl = computed(() => {
 
   .player1_card {
   position: absolute;
-  top: 70%; /* 原78% → 减少2%实现向上移动 */
-  left: -8%; /* 原2% → 增加1%实现向右移动 */
-  right: -18%; /* 保持右边界不变 */
+  top: 72%; /* 原78% → 减少2%实现向上移动 */
+  left: -12%; /* 原2% → 增加1%实现向右移动 */
+  right: -19%; /* 保持右边界不变 */
   display: flex;
   justify-content: center;
   transform: scale(0.8);
