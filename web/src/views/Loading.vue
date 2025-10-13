@@ -249,8 +249,8 @@ export default {
       ],
       // 新增：MP3 文件路径列表
       audioPaths: [
-        gameBgMusic,       // 引入的背景音乐
-        gameBgMusic1,     // 引入的点击音效
+        // gameBgMusic,       // 引入的背景音乐
+        // gameBgMusic1,     // 引入的点击音效
         // ... 补充其他 MP3 路径
       ],
       loadedCount: 0,
