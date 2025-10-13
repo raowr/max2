@@ -72,7 +72,7 @@
     </div>
   </div>
 </template>
-
+<script src="@/assets/js/yinghua.js"></script>
 <script setup>
 
    const right =() =>{
