@@ -1,7 +1,7 @@
 <template>
   <div class="game">
 
-    <div class="msg" style="position: absolute; top: 1%; left: 6%; transform: translateX(-50%);color:gold;">
+    <div class="msg" style="position: absolute; top: 1%; color:gold;">
       {{state.lastmsg}}
     </div>
 
