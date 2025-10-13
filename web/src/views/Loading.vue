@@ -255,7 +255,12 @@ export default {
       ],
       loadedCount: 0,
       totalFiles: 0,       // 新增：总资源数（图片+音频）
-      progressPercentage: 0
+      progressPercentage: 0,
+      progressBarStyle: {
+        // 确保图片完整缓存到浏览器
+        backgroundSize: 'contain', // 保持图片比例完整显示
+        backgroundRepeat: 'no-repeat'
+      }
     };
   },
   mounted() {

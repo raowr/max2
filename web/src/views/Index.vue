@@ -101,31 +101,7 @@
     }
 
 </script>
-<script>
-export default {
-  name: 'Index',
-  mounted() {
-    // 动态加载 yinghua.js（Vue 3 Options API 中直接使用，无需修改）
-    this.loadExternalScript('../assets/js/yinghua.js');
-  },
-  methods: {
-    loadExternalScript(src) {
-      const scriptUrl = new URL(src, import.meta.url).href;
-      if (document.querySelector(`script[src="${scriptUrl}"]`)) return;
 
-      const script = document.createElement('script');
-      script.src = scriptUrl;
-      script.type = 'text/javascript';
-      script.async = false; // 禁用异步，确保依赖顺序（若 SakuraList 在其他脚本中定义，需先加载依赖脚本）
-
-      script.onload = () => console.log('yinghua.js 加载成功');
-      script.onerror = () => console.error('yinghua.js 加载失败');
-
-      document.body.appendChild(script);
-    }
-  }
-};
-</script>
 
 <style scoped>
 .index {
