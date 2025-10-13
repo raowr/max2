@@ -761,6 +761,9 @@ body {
 
 /* 横屏模式专属样式 */
 @media (max-width: 998px) {
+    .players-section {
+        margin-left: 20px;
+  }
   .back-btn img {
     height: 30px;
 }
@@ -771,7 +774,7 @@ body {
     top: 0px;
 }
 .player-card {
-    width: 15%;
+    width: 16%;
     position: relative;
     margin-bottom: 20px;
 }
