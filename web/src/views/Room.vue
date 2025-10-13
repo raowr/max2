@@ -805,7 +805,7 @@ body {
   /* 原有定位与布局样式 */
   position: absolute;
   top: 74px; /* 原 top: 0，增加数值向下移动（如 10px） */
-  right: 65px; /* 原 right: 0，减小数值向左移动（如 10px） */
+  right: 40px; /* 原 right: 0，减小数值向左移动（如 10px） */
   width: 300px;
   display: flex;
   flex-direction: column;
