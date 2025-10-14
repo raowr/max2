@@ -197,7 +197,9 @@
     :style="{
       transform: isChupaiBtnPressed ? 'scale(0.9)' : 'scale(1)'  // 保留动态样式
     }" @click='chupai()' @mousedown="isChupaiBtnPressed = true" @mouseup="isChupaiBtnPressed = false"
-    @mouseleave="isChupaiBtnPressed = false">
+    @mouseleave="isChupaiBtnPressed = false"  
+  @touchstart="isChupaiBtnPressed = true"  
+  @touchend="isChupaiBtnPressed = false" >
   
   <!-- 禁用出牌按钮添加类名：chupai-btn-disabled -->
   <img v-else src='@/assets/img/btn_chupai_hui.png' class="chupai-btn-disabled">
@@ -208,7 +210,8 @@
     :style="{
       transform: isPassBtnPressed ? 'scale(0.9)' : 'scale(1)'  // 保留动态样式
     }" @click='pass()' @mousedown="isPassBtnPressed = true" @mouseup="isPassBtnPressed = false"
-    @mouseleave="isPassBtnPressed = false">
+    @mouseleave="isPassBtnPressed = false"  @touchstart="isPassBtnPressed = true"  
+  @touchend="isPassBtnPressed = false">
 </div>
 <!-- 后手出牌时的功能 !-->
 
