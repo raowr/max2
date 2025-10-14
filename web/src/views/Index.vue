@@ -8,13 +8,13 @@
     <div class="yourenchang" id="charubiaoqian1">
       <img class="title_bg" src="@/assets/img/ui/title_bg.png" alt="标题背景" />
       <img class="friendroom" src="@/assets/img/ui/txt_friendroom.png" />
-      <div class="img_return2" @onclick="return2()"><img src="@/assets/img/ui/img_return2.png" alt="标题背景"  /></div>
-      <br /><br /><a @onclick="inroom()"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch1" /></a>
+      <div class="img_return2" @click="return2()"><img src="@/assets/img/ui/img_return2.png" alt="标题背景"  /></div>
+      <br /><br /><a @click="inroom()"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch1" /></a>
       <router-link to="/room"><img src="@/assets/img/ui/btn_create_room.png" class="btn_create_room" /></router-link>
       <img class="tips" src="@/assets/img/ui/tips.png" />
       <p class="free">限时免费</p>
-      <a href="#"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch" @onclick="inroom()" /></a>
-      <a href="#"><img src="@/assets/img/ui/w_joinroom.png" class="w_joinroom" @onclick="inroom()" /></a>
+      <a href="#"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch" @click="inroom()" /></a>
+      <a href="#"><img src="@/assets/img/ui/w_joinroom.png" class="w_joinroom" @click="inroom()" /></a>
       <form action="api/room/" method="get">
         <input type="text" placeholder="房间号" name="roomid" class="roominput" id="inroom" />
         <input type="submit" value="确定" class="roomsubmit" id="btn_inroom" />

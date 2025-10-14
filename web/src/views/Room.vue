@@ -9,11 +9,13 @@
     <div class="room-container">
       <!-- Header with back button -->
       <div class="header">
-        <div class="back-btn" @click="goHome">
+        <router-link to="/index"> 
+          <div class="back-btn">
           <img src="@/assets/img/ui/img_return1_bg.png" alt="返回按钮背景">
           <img src="@/assets/img/ui/img_return1.png" alt="返回" style="position: absolute; left: 0; top: 0;">
           <img src="@/assets/img/ui/txt_friendroom.png" alt="好友房间" class="room-title">
         </div>
+        </router-link>
       </div>
 
       <!-- Main Content -->
