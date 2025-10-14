@@ -44,7 +44,8 @@ import bar23182Img from '@/assets/img/ui/bar23182.png';
 import starImg from '@/assets/img/ui/star.png';
 import starDarkImg from '@/assets/img/ui/star_dark.png';
 import bighead15339 from '@/assets/img/touxiang/bighead15339.png';
-import full15342 from '@/assets/img/lihui/full15342.png';
+import full15920 from '@/assets/img/lihui/full15920.png';
+import full16020 from '@/assets/img/lihui/full16020.png';
 import bighead15419 from '@/assets/img/touxiang/bighead15419.png';
 import full15418 from '@/assets/img/lihui/full15418.png';
 import indoorBgImg from '@/assets/img/bg/indoor.png';
@@ -165,7 +166,7 @@ export default {
         starImg,      // 新增：星星图标
         starDarkImg,  // 新增：暗星星图标
         bighead15339, // 新增：大头像15339
-        full15342,    // 新增：满15342
+        full16020,    // 新增：满16020
         bighead15419, // 新增：大头像15419
         full15418,    // 新增：满15418
         indoorBgImg,  // 新增：室内背景

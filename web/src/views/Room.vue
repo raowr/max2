@@ -113,7 +113,7 @@ import { audioManager } from '@/utils/audio'
 import starImg from '@/assets/img/ui/star.png';
 import starDarkImg from '@/assets/img/ui/star_dark.png';
 import bighead15339 from '@/assets/img/touxiang/bighead15339.png';
-import full15342 from '@/assets/img/lihui/full15342.png';
+import full16020 from '@/assets/img/lihui/full16020.png';
 import bighead15419 from '@/assets/img/touxiang/bighead15419.png';
 import full15418 from '@/assets/img/lihui/full15418.png';
 const router = useRouter()
@@ -126,7 +126,7 @@ const state = reactive({
       stars: 3,
       ready: false,
       isOwner: true,
-      lihui: full15342,
+      lihui: full16020,
     },
     {
       id: 2,
@@ -253,7 +253,7 @@ const getAvatarByType = (type) => {
 const getLihuiByType = (type) => {
   const lihuis = [
     // 替换 require() 为 new URL() 构造路径
-    new URL('@/assets/img/lihui/full15342.png', import.meta.url).href, // 房主立绘
+    new URL('@/assets/img/lihui/full16020.png', import.meta.url).href, // 房主立绘
     new URL('@/assets/img/lihui/full15418.png', import.meta.url).href  // 机器人默认立绘
   ]
   // 默认立绘（找不到对应type时使用）

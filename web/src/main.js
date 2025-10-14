@@ -11,7 +11,8 @@ const app = createApp(App)
 // 添加全局websocket
 app.config.globalProperties.$websocket = websocket
 // 连接WebSocket（根据你的实际地址修改）
-const wsUrl = process.env.VUE_APP_WS_URL; // Vue CLI 项目使用此语法
+const wsUrl = import.meta.env.VITE_WS_URL;
+console.log(wsUrl);
 websocket.connect(wsUrl)
 // websocket.connect('ws://127.0.0.1:8000/enter')
 

@@ -420,7 +420,7 @@
 }
 
 #lihui {
-  background: url('@/assets/img/lihui/full15342.png');
+  background: url('@/assets/img/lihui/full15920.png');
   background-size: 100% 100%;
   height: 100%;
   width: 40%;
