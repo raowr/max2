@@ -16,11 +16,11 @@
 <!-- 移除容器的内联静态样式，保留类名 -->
 <div class="player1_card">
   <!-- 为卡牌添加类名.player1-card-item，抽取静态样式 -->
-  <img v-for="cardId in state.cards" :key="cardId" :src="getCardImage(cardId)" 
+  <img v-for="(cardId, index) in state.cards" :key="cardId" :src="getCardImage(cardId)" 
     class="player1-card-item" 
     :style="{
       // 保留动态样式：选中状态的位移、层级，以及基于cardId的 translateX
-      transform: selectedCards.includes(cardId) ? 'translateY(-20px)' : 'translateX(calc(-1% * (13 - ' + cardId + ')))',
+      transform: selectedCards.includes(cardId) ? 'translateY(-20px)' : 'translateX(calc(-1% * (13 - ' + index + ')))',
       zIndex: selectedCards.includes(cardId) ? 10 : 1
     }" @click="toggleCard(cardId)">
 </div>
@@ -907,7 +907,7 @@ const chatlogBgUrl = computed(() => {
   .player1_card {
   position: absolute;
   top: 72%; /* 原78% → 减少2%实现向上移动 */
-  left: -12%; /* 原2% → 增加1%实现向右移动 */
+  left: -9%; /* 原2% → 增加1%实现向右移动 */
   right: -19%; /* 保持右边界不变 */
   display: flex;
   justify-content: center;
