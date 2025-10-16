@@ -20,7 +20,7 @@
     class="player1-card-item" 
     :style="{
       // 保留动态样式：选中状态的位移、层级，以及基于cardId的 translateX
-      transform: selectedCards.includes(cardId) ? 'translateY(-20px)' : 'translateX(calc(-1% * (13 - ' + index + ')))',
+      transform: selectedCards.includes(cardId) ? 'translateY(-15px)' : 'translateX(calc(-1% * (13 - ' + index + ')))',
       zIndex: selectedCards.includes(cardId) ? 10 : 1
     }" @click="toggleCard(cardId)">
 </div>
@@ -779,7 +779,7 @@ const chatlogBgUrl = computed(() => {
 .discard-pile-container {
   position: absolute;
   top: 30%;
-  left: 50%;
+  left: 47%;
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
