@@ -261,7 +261,6 @@ func clearPlayerCards(players []*Player) {
 		player.handPattern = make(map[int][][]Card)
 		player.Must = false
 		player.OutCardIds = []int{}
-
 	}
 }
 
@@ -950,6 +949,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.Rgtimer.Stop()
 		room.IsPlaying = false
 		room.LastCards = make([]Card, 0)
+		room.OutStarTime = 0
+		room.passCount = 0
 		fmt.Printf("\n游戏结束！恭喜%s！获胜\n", winner.Name)
 	}
 
