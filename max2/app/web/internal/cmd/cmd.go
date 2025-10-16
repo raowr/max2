@@ -24,7 +24,7 @@ var (
 					index.NewV1(),
 				)
 			})
-			s.SetPort(8001)
+			s.SetPort(80)
 			s.Run()
 			return nil
 		},
