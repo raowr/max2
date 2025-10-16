@@ -233,16 +233,23 @@ func (ps *Player) findSuits() {
 	}
 }
 
-// 查找顺子
+// 查找顺子 - 2不参与任何顺子，顺子最大到A
 func (ps *Player) findStraights() {
 	if len(ps.Cards) < 5 {
 		return
 	}
 
-	// 去重并排序
+	// 去重、排除2并排序
 	uniqueRanks := make(map[int]bool)
 	var sortedRanks []int
+	twoRank := 15 // 2的Rank值
+
 	for _, card := range ps.Cards {
+		// 完全排除2，不参与顺子计算
+		if card.Rank == twoRank {
+			continue
+		}
+
 		if !uniqueRanks[card.Rank] {
 			uniqueRanks[card.Rank] = true
 			sortedRanks = append(sortedRanks, card.Rank)
@@ -250,9 +257,18 @@ func (ps *Player) findStraights() {
 	}
 	sort.Ints(sortedRanks)
 
+	// 最大顺子只能到A(14)
+	maxRank := 14
+
 	// 检查顺子
 	for i := 0; i <= len(sortedRanks)-5; i++ {
+		// 如果顺子中最大的牌超过A，则跳过
+		if sortedRanks[i+4] > maxRank {
+			continue
+		}
+
 		isStraightValid := true
+		// 检查是否连续递增
 		for j := 0; j < 4; j++ {
 			if sortedRanks[i+j+1]-sortedRanks[i+j] != 1 {
 				isStraightValid = false
@@ -262,11 +278,9 @@ func (ps *Player) findStraights() {
 
 		if isStraightValid {
 			var straightCards []Card
-			usedRanks := make(map[int]bool)
 
 			for rank := sortedRanks[i]; rank <= sortedRanks[i+4]; rank++ {
-				usedRanks[rank] = true
-				// 找到第一张该牌面的牌
+				// 找到对应rank的牌
 				for _, card := range ps.Cards {
 					if card.Rank == rank && !containsCard(straightCards, card) {
 						straightCards = append(straightCards, card)
@@ -477,33 +491,48 @@ func isFlush(cards []Card) bool {
 	return false
 }
 
-// 判断是否是顺子
+// 判断是否是顺子 - 2不能参与顺子，顺子最大到A
 func isStraight(cards []Card) bool {
 	if len(cards) < 5 {
 		return false
 	}
 
-	// 获取唯一的牌面值并排序
+	// 2的Rank值（根据原有定义，2的Rank是15）
+	twoRank := 15
+	// A的Rank值（根据原有定义，A的Rank是14）
+	maxValidRank := 14
+
+	// 获取唯一的牌面值并排除2，同时收集有效牌面
 	uniqueRanks := make(map[int]bool)
-	var ranks []int
+	var validRanks []int
 	for _, card := range cards {
+		// 排除2，不参与顺子判断
+		if card.Rank == twoRank {
+			continue
+		}
+		// 只保留不超过A的牌面
+		if card.Rank > maxValidRank {
+			continue
+		}
 		if !uniqueRanks[card.Rank] {
 			uniqueRanks[card.Rank] = true
-			ranks = append(ranks, card.Rank)
+			validRanks = append(validRanks, card.Rank)
 		}
 	}
 
-	if len(ranks) < 5 {
+	// 有效牌面不足5张，无法组成顺子
+	if len(validRanks) < 5 {
 		return false
 	}
 
-	sort.Ints(ranks)
+	// 对有效牌面排序
+	sort.Ints(validRanks)
 
-	// 检查连续5张牌
-	for i := 0; i <= len(ranks)-5; i++ {
+	// 检查是否存在连续的5张牌
+	for i := 0; i <= len(validRanks)-5; i++ {
 		isConsecutive := true
 		for j := 0; j < 4; j++ {
-			if ranks[i+j+1]-ranks[i+j] != 1 {
+			if validRanks[i+j+1]-validRanks[i+j] != 1 {
 				isConsecutive = false
 				break
 			}
