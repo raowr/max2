@@ -71,7 +71,7 @@
         <p style="z-index:1;font-size:16px; color:white;">帅哥2</p>
       </div>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-70%;top:-2%'>
-      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:74%;left:-60%;">剩{{state.player2CardsNum}}张
+      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:66%;left:-60%;">剩{{state.player2CardsNum}}张
       </p>
     </div>
 
