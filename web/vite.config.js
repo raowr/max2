@@ -1,26 +1,33 @@
-import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
-import path from 'path'; // 新增这行导入
+import { resolve } from 'path'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueDevTools(),
-  ],
+  plugins: [vue()],
+  base: './',
+  
+  // 关键：添加路径解析
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src') // 映射 @ 为 src 目录
-    },
+      '@': resolve(__dirname, 'src'),
+      '@/assets': resolve(__dirname, 'src/assets')
+    }
   },
-    build: {
-      outDir: path.resolve(__dirname, '../max2/app/web/resource/dist'),
-      rollupOptions: {
-        input: path.resolve(__dirname, 'index.html') // 明确指定入口文件
+  
+  build: {
+    outDir: 'dist',
+    target: 'es2015',
+    
+    rollupOptions: {
+      output: {
+        format: 'iife',
+        chunkFileNames: '[name]-[hash].js',
+        entryFileNames: '[name]-[hash].js',
+        assetFileNames: 'img/[name]-[hash][extname]'
       }
     },
-  
+    
+    modulePreload: false,
+    minify: 'esbuild'
+  }
 })
