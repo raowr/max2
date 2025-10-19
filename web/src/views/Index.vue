@@ -8,7 +8,7 @@
     <div class="yourenchang" id="charubiaoqian1">
       <img class="title_bg" src="@/assets/img/ui/title_bg.png" alt="标题背景" />
       <img class="friendroom" src="@/assets/img/ui/txt_friendroom.png" />
-      <div class="img_return2" @click="return2()"><img src="@/assets/img/ui/img_return2.png" alt="标题背景"  /></div>
+      <div class="img_return2" @click="return2()"><img src="@/assets/img/ui/img_return2.png" alt="标题背景" /></div>
       <br /><br /><a @click="inroom()"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch1" /></a>
       <router-link to="/room"><img src="@/assets/img/ui/btn_create_room.png" class="btn_create_room" /></router-link>
       <img class="tips" src="@/assets/img/ui/tips.png" />
@@ -74,31 +74,63 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
+import { audioManager } from '@/utils/audio'
+onMounted(() => {
+  init()
+})
+const init = async () => {
+  if (isApp) {
+    try {
+      // 动态解析音频路径（替换字符串路径为 new URL() 构造的 URL）
+      const bgmUrl = new URL('@/assets/music/qinghuaci.mp3', import.meta.url).href;
+      audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
+      audioManager.playBGM('bgm')
 
-   const right =() =>{
-      // 实现right方法逻辑，例如显示/隐藏房间面板
-      const panel = document.getElementById("charubiaoqian1");
-      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    } catch (error) {
+      console.error('初始化背景音乐失败:', error);
+    }
+  }
 
-      const right = document.getElementById("right");
-      right.style.display = "none"
-    }
-      const   return2 =() =>{
-      // 实现right方法逻辑，例如显示/隐藏房间面板
-      const panel = document.getElementById("charubiaoqian1");
-      panel.style.display =  "none";
+}
 
-      const right = document.getElementById("right");
-      right.style.display = "block"
-      
-    }
-   const  inroom =() =>{
-      // 实现加入房间逻辑
-      const input = document.getElementById("inroom");
-      const submitBtn = document.getElementById("btn_inroom");
-      input.style.display = "block";
-      submitBtn.style.display = "block";
-    }
+// 判断是否在原生 App 环境（示例）
+const isApp = () => {
+  // 假设原生 App 注入了名为 "AppBridge" 的全局对象
+  return !!window.AppBridge;
+  // 或根据实际约定判断，如 Android 可能注入 window.android，iOS 注入 window.webkit.messageHandlers
+};
+
+// 判断是否在 Web 浏览器环境
+const isWeb = () => {
+  // 浏览器环境存在 window 和 document 对象，且没有 App 特有标识
+  return typeof window !== 'undefined' && typeof document !== 'undefined' && !isApp();
+};
+
+const right = () => {
+  // 实现right方法逻辑，例如显示/隐藏房间面板
+  const panel = document.getElementById("charubiaoqian1");
+  panel.style.display = panel.style.display === "block" ? "none" : "block";
+
+  const right = document.getElementById("right");
+  right.style.display = "none"
+}
+const return2 = () => {
+  // 实现right方法逻辑，例如显示/隐藏房间面板
+  const panel = document.getElementById("charubiaoqian1");
+  panel.style.display = "none";
+
+  const right = document.getElementById("right");
+  right.style.display = "block"
+
+}
+const inroom = () => {
+  // 实现加入房间逻辑
+  const input = document.getElementById("inroom");
+  const submitBtn = document.getElementById("btn_inroom");
+  input.style.display = "block";
+  submitBtn.style.display = "block";
+}
 
 </script>
 
@@ -448,6 +480,7 @@
   top: 2%;
   left: 50%;
 }
+
 .currency-container .gold-icon {
   background: url('@/assets/img/ui/gold0.png');
   background-size: 100% 100%;
@@ -497,119 +530,120 @@
 /* 横屏模式专属样式 */
 @media (max-width: 998px) {
 
-.yourenchang {
-  height: 100%;
-  width: 32%;
-  top: 15%;
-  left: 60%;
-  position: absolute;
+  .yourenchang {
+    height: 100%;
+    width: 32%;
+    top: 15%;
+    left: 60%;
+    position: absolute;
 
-  display: none;
-}
+    display: none;
+  }
 
-.title_bg {
-  height: 10%;
-  width: 100%;
-  margin-top: 22px;
-}
+  .title_bg {
+    height: 10%;
+    width: 100%;
+    margin-top: 22px;
+  }
 
-.friendroom {
-  z-index: 1;
-  position: absolute;
-  left: 49%;
-  top: 6%;
-  height: 30px;
-}
+  .friendroom {
+    z-index: 1;
+    position: absolute;
+    left: 49%;
+    top: 6%;
+    height: 30px;
+  }
 
-.img_return2 {
-  z-index: 1;
-  position: absolute;
-  left: 8%;
-  top: 6%;
-  height: 40px;
-}
-.img_return2 img{
-width: 80%;
-}
+  .img_return2 {
+    z-index: 1;
+    position: absolute;
+    left: 8%;
+    top: 6%;
+    height: 40px;
+  }
+
+  .img_return2 img {
+    width: 80%;
+  }
 
 
-.btn_create_room {
-  z-index: 1;
-  position: absolute;
-  left: 14%;
-  top: 21%;
-  width: 70%;
-}
+  .btn_create_room {
+    z-index: 1;
+    position: absolute;
+    left: 14%;
+    top: 21%;
+    width: 70%;
+  }
 
-.tips {
-  z-index: 1;
-  position: absolute;
-  left: 85%;
-  top: 89%;
-}
+  .tips {
+    z-index: 1;
+    position: absolute;
+    left: 85%;
+    top: 89%;
+  }
 
-.free {
-  z-index: 1;
-  position: absolute;
-  left: 35%;
-  top: 33%;
-  font-size: 20px;
-  color: white;
-}
+  .free {
+    z-index: 1;
+    position: absolute;
+    left: 35%;
+    top: 33%;
+    font-size: 20px;
+    color: white;
+  }
 
-.free2 {
-  z-index: 1;
-  position: absolute;
-  left: 35%;
-  top: 58%;
-  font-size: 20px;
-  color: white;
-}
+  .free2 {
+    z-index: 1;
+    position: absolute;
+    left: 35%;
+    top: 58%;
+    font-size: 20px;
+    color: white;
+  }
 
-.bg_abmatch1 {
-  z-index: 1;
-  position: absolute;
-  left: 0%;
-  top: 17%;
-  width: 100%;
-}
+  .bg_abmatch1 {
+    z-index: 1;
+    position: absolute;
+    left: 0%;
+    top: 17%;
+    width: 100%;
+  }
 
-.bg_abmatch {
-  z-index: 1;
-  position: absolute;
-  left: 0%;
-  top: 42%;
-  width: 100%;
-}
+  .bg_abmatch {
+    z-index: 1;
+    position: absolute;
+    left: 0%;
+    top: 42%;
+    width: 100%;
+  }
 
-.w_joinroom {
-  z-index: 1;
-  position: absolute;
-  left: 6%;
-  top: 42%;
-  width: 90%;
-}
+  .w_joinroom {
+    z-index: 1;
+    position: absolute;
+    left: 6%;
+    top: 42%;
+    width: 90%;
+  }
 
-.roominput {
-  display: none;
-  z-index: 1;
-  position: absolute;
-  left: 30%;
-  top: 166%;
-  height: 30px;
-  width: 200px;
-}
+  .roominput {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    left: 30%;
+    top: 166%;
+    height: 30px;
+    width: 200px;
+  }
 
-.roomsubmit {
-  display: none;
-  z-index: 1;
-  position: absolute;
-  left: 40%;
-  top: 190%;
-  height: 30px;
-  width: 100px;
-  background: red;
-  color: white;
-}
+  .roomsubmit {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    left: 40%;
+    top: 190%;
+    height: 30px;
+    width: 100px;
+    background: red;
+    color: white;
+  }
 }
 </style>
