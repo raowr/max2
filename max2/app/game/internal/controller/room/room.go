@@ -42,7 +42,7 @@ const (
 )
 
 const (
-	OutCard = 10 //出牌最大时间
+	OutCard = 15 //出牌最大时间
 )
 
 const (

@@ -83,7 +83,7 @@ const init = async () => {
   if (isApp) {
     try {
       // 动态解析音频路径（替换字符串路径为 new URL() 构造的 URL）
-      const bgmUrl = new URL('@/assets/music/qinghuaci.mp3', import.meta.url).href;
+      const bgmUrl = new URL('@/assets/music/yuanshanshaonian.mp3', import.meta.url).href;
       audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
       audioManager.playBGM('bgm')
 
