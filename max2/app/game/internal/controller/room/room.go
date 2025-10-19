@@ -43,6 +43,7 @@ const (
 
 const (
 	OutCard = 15 //出牌最大时间
+	Comm    = 2  //每局抽水2
 )
 
 const (
@@ -846,6 +847,12 @@ func isGameOver(room *Room) (isOver bool, winer *Player, playerPoint, playerWin 
 					player.Point -= int64(player.CardNum) //人类输
 					playerWin = int64(player.CardNum)
 				}
+				//计算抽水
+				if player.Point > Comm {
+					player.Point -= Comm
+				} else {
+					player.Point = 0
+				}
 				playerPoint = player.Point
 			}
 		}
@@ -932,7 +939,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 				Point       int64  `json:"point"`
 				Win         int64  `json:"win"`         //当次赢分
 				PlayerPoint int64  `json:"playerPoint"` //玩家总瓜子数
-				PlayerWin   int64  `json:"playerWin"`   //玩家赢分,负数为输
+				PlayerWin   int64  `json:"playerWin"`   //玩家本局结算分数(排除抽佣)
 			}{
 				WinName:     winner.Name,
 				Winner:      winner.ID,
