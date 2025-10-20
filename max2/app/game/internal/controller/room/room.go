@@ -42,11 +42,6 @@ const (
 )
 
 const (
-	OutCard = 15 //出牌最大时间
-	Comm    = 2  //每局抽水2
-)
-
-const (
 	SINGLE   = iota + 1 // 单牌
 	PAIR                // 对子
 	STRAIGHT            // 顺子
@@ -848,8 +843,9 @@ func isGameOver(room *Room) (isOver bool, winer *Player, playerPoint, playerWin 
 					playerWin = int64(player.CardNum)
 				}
 				//计算抽水
-				if player.Point > Comm {
-					player.Point -= Comm
+				commission := GetGameCommission()
+				if player.Point > commission {
+					player.Point -= commission
 				} else {
 					player.Point = 0
 				}
@@ -997,15 +993,15 @@ func (room *Room) GameLoop(ctx context.Context) {
 		if room.OutStarTime == 0 {
 			room.OutStarTime = now
 		}
-
+		outCardTimeout := GetOutCardTimeout()
 		//玩家不操作逻辑
 		if len(currentPlayer.OutCardIds) <= 0 && //玩家还没出牌
-			now-room.OutStarTime < OutCard && //还在倒计时中
+			now-room.OutStarTime < outCardTimeout && //还在倒计时中
 			currentPlayer.Pass == 0 { //玩家还没不出
 			return
 		} else {
 			//有出牌
-			if len(currentPlayer.OutCardIds) > 0 && now-room.OutStarTime < OutCard {
+			if len(currentPlayer.OutCardIds) > 0 && now-room.OutStarTime < outCardTimeout {
 				g.Log().Debug(ctx, currentPlayer.OutCardIds)
 				//判断出牌数量是否符合规则
 				if len(currentPlayer.OutCardIds) != 1 &&
@@ -1053,7 +1049,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 			// selectedCards = getSelectedCards(currentPlayer, indices)
 		}
 		//倒计时结束，自动出牌逻辑
-		if now-room.OutStarTime >= OutCard {
+		if now-room.OutStarTime >= outCardTimeout {
 			currentPlayer.OutCardIds = make([]int, 0)
 			indices = make([]int, 0)
 			selectedCards = make([]Card, 0)                               //超过出牌时间过
@@ -1073,7 +1069,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		if currentPlayer.Pass == 1 {
 			currentPlayer.Pass = 0
 			if currentPlayer.Must {
-				if now-room.OutStarTime < OutCard {
+				if now-room.OutStarTime < outCardTimeout {
 					//超时出牌
 					return
 				} //未超时不做处理,上面已经处理
