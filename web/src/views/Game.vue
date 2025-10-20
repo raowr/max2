@@ -630,7 +630,7 @@ const pass = () => {
 // 添加返回首页的方法
 const goToHome = () => {
   showGameOverModal.value = false
-  router.push('/')  // 跳转到首页路由
+  router.push('/index')  // 跳转到首页路由
 }
 
 // 预加载 cards 目录下所有 .png 图片（Vite 特有的资源导入方式）
