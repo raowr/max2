@@ -11,6 +11,19 @@
     </div>
     <!--弃牌堆结束 -->
 
+       <!-- 出牌动画过渡容器 -->
+    <div class="card-transition-container">
+      <transition-group name="card-move" tag="div">
+        <img 
+          v-for="(cardId, index) in state.movingCards" 
+          :key="`moving-${cardId}`" 
+          :src="getCardImage(cardId)" 
+          class="moving-card"
+          :style="getMovingCardStyle(index)"
+        >
+      </transition-group>
+    </div>
+
     <!--player1 牌 -->
     <!-- 移除容器的内联静态样式，保留类名 -->
     <div class="player1_card">
@@ -590,6 +603,8 @@ onBeforeUnmount(() => {
   clearInterval(timer)
 })
 
+
+// 修改 chupai 函数，改为先发送数据再移动牌
 const chupai = () => {
   if (selectedCards.value.length === 0) {
     return false
@@ -602,6 +617,8 @@ const chupai = () => {
         }
       })
     })
+    
+    // 1. 先准备数据并发送到服务端
     let data = {
       type: "playCard",
       data: JSON.stringify({
@@ -609,11 +626,49 @@ const chupai = () => {
         cardIds: cards,
       }),
     }
-    // console.log(data)
     websocket.send(data)
-    // selectedCards.value = []
+    
+    // 2. 记录正在移动的牌
+    state.movingCards = [...cards]
+    
+    // 3. 清空选中状态
+    const tempSelectedCards = [...selectedCards.value]
+    selectedCards.value = []
+    
+    // 4. 等待动画完成（500毫秒）后再清空移动中的牌
+    setTimeout(() => {
+      state.movingCards = []
+    }, 800)
   }
 }
+// 修改getMovingCardStyle函数，使移动中的牌排成一行并重叠4px
+const getMovingCardStyle = (index) => {
+  // 获取当前移动中的卡牌总数
+  const totalCards = state.movingCards.length;
+  
+  // 设置卡牌宽度为120px，重叠4px
+  const cardWidth = 120;
+  const overlap = 10;
+  const effectiveWidth = cardWidth - overlap; // 有效宽度为116px，确保重叠4px
+  
+  // 计算整行卡牌的总宽度（包括重叠）
+  const totalWidth = cardWidth + (totalCards - 1) * effectiveWidth;
+  
+  // 计算起始偏移量，使整行卡牌居中显示
+  const startOffset = -totalWidth / 2;
+  
+  // 计算当前卡牌的水平偏移量
+  const horizontalOffset = startOffset + index * effectiveWidth;
+  
+  // 保持卡牌水平，不添加旋转角度
+  const rotation = 0;
+  
+  return {
+    width: `${cardWidth}px`,
+    height: '140px',
+    transform: `translateX(${horizontalOffset}px) rotate(${rotation}deg)`
+  };
+};
 
 //不出牌
 const pass = () => {
@@ -966,6 +1021,49 @@ const goToRoom = () => {
 .room-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 16px rgba(30, 144, 255, 0.6);
+}
+
+
+/* 卡牌过渡动画容器 */
+.card-transition-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* 移动中的卡牌样式 */
+.moving-card {
+  position: absolute;
+  width: 80px;
+  height: 112px;
+  z-index: 100;
+}
+
+/* 卡牌移动动画 */
+.card-move-enter-active {
+  transition: all 800ms  cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card-move-leave-active {
+  display: none;
+}
+
+.card-move-enter-from {
+  /* 开始位置：玩家手牌区域 */
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+}
+
+.card-move-enter-to {
+  /* 结束位置：屏幕中间（弃牌堆位置） */
+  top: 30%;
+  left: 47%;
+  transform: translateX(-50%) scale(1.8); /* 放大到弃牌堆卡牌大小 */
 }
 /* 横屏模式专属样式 */
 @media (max-width: 998px) {
