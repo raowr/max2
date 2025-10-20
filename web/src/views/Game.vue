@@ -277,6 +277,18 @@ const isWinner = ref(false)
 const gameOverMessage = ref('')
 const router = useRouter() // 添加这行获取router实例
 
+const selectedCards = ref([])  // 改为数组存储选中状态
+
+// 新增倒计时逻辑
+const countdownPlayer1 = ref(state.outCardTimeout) // 初始30秒
+const countdownPlayer2 = ref(state.outCardTimeout) // 初始30秒
+const countdownPlayer3 = ref(state.outCardTimeout) // 初始30秒
+const countdownPlayer4 = ref(state.outCardTimeout) // 初始30秒
+let timer1 = null
+let timer2 = null
+let timer3 = null
+let timer4 = null
+
 // 导入背景图片（新增代码）
 import winBg from '@/assets/img/ui/win_bg.png'
 import loseBg from '@/assets/img/ui/lose_bg.png'
@@ -337,6 +349,10 @@ const handleMessage = (data) => {
     state.mustPid = data.current
     //更新玩家总瓜子数
     state.player1Point = data.playerPoint
+    // 重置倒计时
+    countdownPlayer1.value = state.outCardTimeout
+    //清空选中的牌
+    selectedCards.value = []
   }
   if (data.type == "outCard") {
     data = JSON.parse(data.data)
@@ -456,7 +472,7 @@ const restartGame = () => {
   websocket.send({ "type": "play", "data": "", "name": "" })
 }
 
-const selectedCards = ref([])  // 改为数组存储选中状态
+
 
 const toggleCard = (n) => {
   const index = selectedCards.value.indexOf(n)
@@ -478,15 +494,7 @@ const checkOut = () => {
 }
 
 
-// 新增倒计时逻辑
-const countdownPlayer1 = ref(state.outCardTimeout) // 初始30秒
-const countdownPlayer2 = ref(state.outCardTimeout) // 初始30秒
-const countdownPlayer3 = ref(state.outCardTimeout) // 初始30秒
-const countdownPlayer4 = ref(state.outCardTimeout) // 初始30秒
-let timer1 = null
-let timer2 = null
-let timer3 = null
-let timer4 = null
+
 
 const startCountdown = (pid) => {
   clearInterval(timer1)
