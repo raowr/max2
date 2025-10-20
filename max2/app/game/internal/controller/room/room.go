@@ -893,13 +893,15 @@ func PlayOneGame(room *Room) {
 			}
 			go func() {
 				data, _ := json.Marshal(struct {
-					Cards       []int `json:"cards"`
-					Current     int   `json:"current"`
-					PlayerPoint int64 `json:"playerPoint"` //玩家总瓜子数
+					Cards          []int `json:"cards"`
+					Current        int   `json:"current"`
+					PlayerPoint    int64 `json:"playerPoint"`    //玩家总瓜子数
+					OutCardTimeout int   `json:"outCardTimeout"` //出牌最大时间(单位秒) /s
 				}{
-					Cards:       cards,
-					Current:     room.Current,
-					PlayerPoint: room.Landlord.Point,
+					Cards:          cards,
+					Current:        room.Current,
+					PlayerPoint:    room.Landlord.Point,
+					OutCardTimeout: GetOutCardTimeout(), //出牌最大时间(单位秒) /s
 				})
 				room.MsgChan <- RoomMsg{
 					Type: "showCard",
@@ -1161,21 +1163,23 @@ func (room *Room) GameLoop(ctx context.Context) {
 	//通知用户,出牌，
 	go func() {
 		data, _ := json.Marshal(struct {
-			Pid      int   `json:"pid"`
-			CardIds  []int `json:"cardIds"`
-			CardType int   `json:"card_type"`
-			CardsNum int   `json:"cards_num"` //剩余牌数
-			Code     int   `json:"code"`      //0成功,非零失败
-			Current  int   `json:"current"`   //当前出牌玩家
-			MustPid  int   `json:"mustPid"`   //必须出牌的玩家ID
+			Pid            int   `json:"pid"`
+			CardIds        []int `json:"cardIds"`
+			CardType       int   `json:"card_type"`
+			CardsNum       int   `json:"cards_num"`      //剩余牌数
+			Code           int   `json:"code"`           //0成功,非零失败
+			Current        int   `json:"current"`        //当前出牌玩家
+			MustPid        int   `json:"mustPid"`        //必须出牌的玩家ID
+			OutCardTimeout int   `json:"outCardTimeout"` //出牌最大时间(单位秒) /s
 		}{
-			Pid:      currentPlayer.ID,
-			CardIds:  indices,
-			CardType: cardType,
-			CardsNum: currentPlayer.CardNum,
-			Code:     0,
-			Current:  room.Current,
-			MustPid:  mustPid,
+			Pid:            currentPlayer.ID,
+			CardIds:        indices,
+			CardType:       cardType,
+			CardsNum:       currentPlayer.CardNum,
+			Code:           0,
+			Current:        room.Current,
+			MustPid:        mustPid,
+			OutCardTimeout: GetOutCardTimeout(), //出牌最大时间(单位秒) /s
 		})
 		room.MsgChan <- RoomMsg{
 			Type: msgType,

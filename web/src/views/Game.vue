@@ -45,23 +45,23 @@
 
     <!--player2 信息 -->
     <div class="player2-container" style="">
-      <!-- 修改为圆形倒计时 -->
-      <div v-if="state.countdownPlayer == 2"
-        style="position: absolute; top: -5%; left: 34%; transform: translateX(-50%); z-index: 999; text-align: center">
-        <svg :width="100" :height="100">
-          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
-          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer2 > 10 ? '#4CAF50' : '#ff5722'" stroke-width="8"
-            fill="transparent" :style="{
-              strokeDasharray: 283,
-              strokeDashoffset: 283 * (1 - countdownPlayer2 / 30),
-              transition: 'stroke-dashoffset 1s linear'
-            }" />
-        </svg>
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                 font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
-          {{ countdownPlayer2 }}
-        </div>
+    <!-- 修改为圆形倒计时 -->
+    <div v-if="state.countdownPlayer == 2"
+      style="position: absolute; top: -5%; left: 34%; transform: translateX(-50%); z-index: 999; text-align: center">
+      <svg :width="100" :height="100">
+        <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+        <circle cx="50" cy="50" r="45" :stroke="countdownPlayer2 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'" stroke-width="8"
+          fill="transparent" :style="{
+            strokeDasharray: 283,
+            strokeDashoffset: 283 * (1 - countdownPlayer2 / state.outCardTimeout),
+            transition: 'stroke-dashoffset 1s linear'
+          }" />
+      </svg>
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+               font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
+        {{ countdownPlayer2 }}
       </div>
+    </div>
       <img src="@/assets/img/ui/chatlog.png" width="90px">
       <img src="@/assets/img/touxiang/bighead15419.png" width="90px"
         style="position: absolute;bottom:42.2%;left:3.1%;border-radius: 25px;">
@@ -77,23 +77,23 @@
 
     <!--player4 信息 -->
     <div class="player4-container" style="">
-      <!-- 修改为圆形倒计时 -->
-      <div v-if="state.countdownPlayer == 4"
-        style="position: absolute; top: -4%; left: 40%; transform: translateX(-50%); z-index: 999; text-align: center">
-        <svg :width="100" :height="100">
-          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
-          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer4 > 10 ? '#4CAF50' : '#ff5722'" stroke-width="8"
-            fill="transparent" :style="{
-              strokeDasharray: 283,
-              strokeDashoffset: 283 * (1 - countdownPlayer4 / 30),
-              transition: 'stroke-dashoffset 1s linear'
-            }" />
-        </svg>
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                 font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
-          {{ countdownPlayer4 }}
-        </div>
+ <!-- 修改为圆形倒计时 -->
+    <div v-if="state.countdownPlayer == 4"
+      style="position: absolute; top: -4%; left: 40%; transform: translateX(-50%); z-index: 999; text-align: center">
+      <svg :width="100" :height="100">
+        <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+        <circle cx="50" cy="50" r="45" :stroke="countdownPlayer4 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'" stroke-width="8"
+          fill="transparent" :style="{
+            strokeDasharray: 283,
+            strokeDashoffset: 283 * (1 - countdownPlayer4 / state.outCardTimeout),
+            transition: 'stroke-dashoffset 1s linear'
+          }" />
+      </svg>
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+               font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
+        {{ countdownPlayer4 }}
       </div>
+    </div>
       <img src="@/assets/img/ui/chatlog.png" width="90px">
       <img src="@/assets/img/touxiang/bighead15339.png" width="85px"
         style="position: absolute;bottom:42.2%;left:3.1%;border-radius: 25px;">
@@ -109,23 +109,23 @@
 
     <!--player3 信息 -->
     <div class="player3-container" style="">
-      <!-- 修改为圆形倒计时 -->
-      <div v-if="state.countdownPlayer == 3"
-        style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
-        <svg :width="100" :height="100">
-          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
-          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer3 > 10 ? '#4CAF50' : '#ff5722'" stroke-width="8"
-            fill="transparent" :style="{
-              strokeDasharray: 283,
-              strokeDashoffset: 283 * (1 - countdownPlayer3 / 30),
-              transition: 'stroke-dashoffset 1s linear'
-            }" />
-        </svg>
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                 font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
-          {{ countdownPlayer3 }}
-        </div>
+    <!-- 修改为圆形倒计时 -->
+    <div v-if="state.countdownPlayer == 3"
+      style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
+      <svg :width="100" :height="100">
+        <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+        <circle cx="50" cy="50" r="45" :stroke="countdownPlayer3 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'" stroke-width="8"
+          fill="transparent" :style="{
+            strokeDasharray: 283,
+            strokeDashoffset: 283 * (1 - countdownPlayer3 / state.outCardTimeout),
+            transition: 'stroke-dashoffset 1s linear'
+          }" />
+      </svg>
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+               font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
+        {{ countdownPlayer3 }}
       </div>
+    </div>
       <div width="90px" :style="{
         backgroundImage: `url(${chatlogBgUrl})`,  // 绑定解析后的路径
         backgroundSize: '90px',
@@ -162,25 +162,25 @@
     <!--功能区 -->
 
 
-    <!-- 修改为圆形倒计时 -->
-    <!-- 外层容器添加类名：countdown-circle-container -->
-    <div v-if="state.countdownPlayer == 1" class="countdown-circle-container">
-      <!-- SVG尺寸保持属性形式（非样式） -->
-      <svg width="80" height="80">
-        <!-- 背景圆添加类名：countdown-bg-circle -->
-        <circle class="countdown-bg-circle" cx="40" cy="40" r="36" />
-        <!-- 进度圆添加类名：countdown-progress-circle -->
-        <circle class="countdown-progress-circle" cx="40" cy="40" r="36"
-          :stroke="countdownPlayer1 > 10 ? '#4CAF50' : '#ff5722'" :fill="countdownPlayer1 > 10 ? '#81C784' : '#FF9800'"
-          :style="{
-            strokeDashoffset: 226.19 * (1 - countdownPlayer1 / 30)  // 保留动态进度偏移
-          }" />
-      </svg>
-      <!-- 文本区域添加类名：countdown-text -->
-      <div class="countdown-text">
-        {{ countdownPlayer1 }}
-      </div>
+ <!-- 修改为圆形倒计时 -->
+  <!-- 外层容器添加类名：countdown-circle-container -->
+  <div v-if="state.countdownPlayer == 1" class="countdown-circle-container">
+    <!-- SVG尺寸保持属性形式（非样式） -->
+    <svg width="80" height="80">
+      <!-- 背景圆添加类名：countdown-bg-circle -->
+      <circle class="countdown-bg-circle" cx="40" cy="40" r="36" />
+      <!-- 进度圆添加类名：countdown-progress-circle -->
+      <circle class="countdown-progress-circle" cx="40" cy="40" r="36"
+        :stroke="countdownPlayer1 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'" :fill="countdownPlayer1 > (state.outCardTimeout / 3) ? '#81C784' : '#FF9800'"
+        :style="{
+          strokeDashoffset: 226.19 * (1 - countdownPlayer1 / state.outCardTimeout)  // 保留动态进度偏移
+        }" />
+    </svg>
+    <!-- 文本区域添加类名：countdown-text -->
+    <div class="countdown-text">
+      {{ countdownPlayer1 }}
     </div>
+  </div>
 
 
 
@@ -266,6 +266,7 @@ const state = reactive({
   lastmsg: "",
   mustPid: 0,
   player1Point: 0, // 初始瓜子数
+  outCardTimeout: 30, // 出牌最大时间(单位秒) /s
 })
 const isPassBtnPressed = ref(false)  // 添加：跟踪按钮按下状态
 const isChupaiBtnPressed = ref(false)  // 添加：跟踪"出牌"按钮按下状态
@@ -326,6 +327,10 @@ const handleMessage = (data) => {
     state.player2CardsNum = 13
     state.player3CardsNum = 13
     state.player4CardsNum = 13
+        // 更新倒计时时长（如果服务端提供）
+    if (data.outCardTimeout !== undefined) {
+      state.outCardTimeout = data.outCardTimeout
+    }
     //先出牌的开始倒计时
     startCountdown(data.current + 1)
     //如果必出是玩家，记录下必出玩家的pid
@@ -405,6 +410,10 @@ const handleMessage = (data) => {
     //如果成功再改内容
     if (data.code == 0) {
       state.outCards = (data.cardIds)
+      // 更新倒计时时长（如果服务端提供）
+      if (data.outCardTimeout !== undefined) {
+        state.outCardTimeout = data.outCardTimeout
+      }
       startCountdown(data.current + 1)
       //如果必出是玩家，记录下必出玩家的pid
       state.mustPid = data.mustPid
@@ -470,10 +479,10 @@ const checkOut = () => {
 
 
 // 新增倒计时逻辑
-const countdownPlayer1 = ref(30) // 初始30秒
-const countdownPlayer2 = ref(30) // 初始30秒
-const countdownPlayer3 = ref(30) // 初始30秒
-const countdownPlayer4 = ref(30) // 初始30秒
+// const countdownPlayer1 = ref(30) // 初始30秒
+// const countdownPlayer2 = ref(30) // 初始30秒
+// const countdownPlayer3 = ref(30) // 初始30秒
+// const countdownPlayer4 = ref(30) // 初始30秒
 let timer1 = null
 let timer2 = null
 let timer3 = null
@@ -492,7 +501,7 @@ const startCountdown = (pid) => {
       clearInterval(timer3)
       clearInterval(timer4)
       //显示并开始，当前倒计时
-      countdownPlayer1.value = 30
+      countdownPlayer1.value = state.outCardTimeout // 使用从服务端获取的倒计时时长
       timer1 = setInterval(() => {
         if (countdownPlayer1.value > 0) {
           countdownPlayer1.value--
@@ -511,7 +520,7 @@ const startCountdown = (pid) => {
       clearInterval(timer1)
       clearInterval(timer3)
       clearInterval(timer4)
-      countdownPlayer2.value = 30
+      countdownPlayer2.value = state.outCardTimeout // 使用从服务端获取的倒计时时长
       timer2 = setInterval(() => {
         if (countdownPlayer2.value > 0) {
           countdownPlayer2.value--
@@ -529,7 +538,7 @@ const startCountdown = (pid) => {
       clearInterval(timer1)
       clearInterval(timer2)
       clearInterval(timer4)
-      countdownPlayer3.value = 30
+      countdownPlayer3.value = state.outCardTimeout // 使用从服务端获取的倒计时时长
       timer3 = setInterval(() => {
         if (countdownPlayer3.value > 0) {
           countdownPlayer3.value--
@@ -547,7 +556,7 @@ const startCountdown = (pid) => {
       clearInterval(timer1)
       clearInterval(timer2)
       clearInterval(timer3)
-      countdownPlayer4.value = 30
+      countdownPlayer4.value = state.outCardTimeout // 使用从服务端获取的倒计时时长
       timer4 = setInterval(() => {
         if (countdownPlayer4.value > 0) {
           countdownPlayer4.value--
