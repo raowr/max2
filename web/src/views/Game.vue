@@ -1063,7 +1063,7 @@ const goToRoom = () => {
   /* 结束位置：屏幕中间（弃牌堆位置） */
   top: 30%;
   left: 47%;
-  transform: translateX(-50%) scale(1.8); /* 放大到弃牌堆卡牌大小 */
+  transform: translateX(-50%); /* 放大到弃牌堆卡牌大小 */
 }
 /* 横屏模式专属样式 */
 @media (max-width: 998px) {
