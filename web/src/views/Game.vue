@@ -479,10 +479,10 @@ const checkOut = () => {
 
 
 // 新增倒计时逻辑
-// const countdownPlayer1 = ref(30) // 初始30秒
-// const countdownPlayer2 = ref(30) // 初始30秒
-// const countdownPlayer3 = ref(30) // 初始30秒
-// const countdownPlayer4 = ref(30) // 初始30秒
+const countdownPlayer1 = ref(state.outCardTimeout) // 初始30秒
+const countdownPlayer2 = ref(state.outCardTimeout) // 初始30秒
+const countdownPlayer3 = ref(state.outCardTimeout) // 初始30秒
+const countdownPlayer4 = ref(state.outCardTimeout) // 初始30秒
 let timer1 = null
 let timer2 = null
 let timer3 = null
