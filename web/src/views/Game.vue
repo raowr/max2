@@ -490,7 +490,7 @@ const handleMessage = (data) => {
     isWinner.value = data.winner === 0
     gameOverMessage.value = isWinner.value
       ? `哇！恭喜你赢得了${data.playerWin}颗瓜子!`
-      : `咦！你很菜这局你输了${data.playerWin}颗瓜子`
+      : `咦！你很菜,这局输了${data.playerWin}颗瓜子`
 
     // 重置弃牌
     state.outCards = []
