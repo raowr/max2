@@ -268,6 +268,7 @@ import { ref, reactive, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useRouter } from 'vue-router' // 添加这行导入
 import { audioManager } from '@/utils/audio'
 import { websocket } from '@/utils/websocket'
+import { cardUtil, CARD_TYPE } from '@/util/card';
 const state = reactive({
   deck: [],
   countdownPlayer: 0,
@@ -302,6 +303,11 @@ let timer2 = null
 let timer3 = null
 let timer4 = null
 
+// 在原有状态变量中添加
+const isPlayingCard = ref(false) // 标记是否正在出牌过程中
+const pendingCards = ref([]) // 存储等待验证的牌
+const playCardTimer = ref(null) // 出牌超时定时器
+
 // 导入背景图片（新增代码）
 import winBg from '@/assets/img/ui/win_bg.png'
 import loseBg from '@/assets/img/ui/lose_bg.png'
@@ -327,11 +333,11 @@ const initDeck = () => {
       const suitName = suits[suit];
       cardId++;
       const card = {
-        Value: 3 + i,
+        Value: valueName,
         Suit: suit,
         Name: suitName + valueName,
         Id: cardId,
-        Rank: valueName,
+        Rank: 3 + i,
         SuitName: suitName
       };
       state.deck.push(card);
@@ -373,6 +379,12 @@ const handleMessage = (data) => {
     let cardsMsg = ""
     switch (data.pid) {
       case 0:
+        if (isPlayingCard.value){
+          isPlayingCard.value = false
+          // 无论成功失败都清除定时器
+          console.log('清除出牌定时器')
+          clearTimeout(playCardTimer.value)
+        }
         if (data.code == 0) {
           // state.must = data.must
           // selectedCards.value = []
@@ -392,6 +404,13 @@ const handleMessage = (data) => {
             !data.cardIds.some(cardId => cardId === item)  // 取反some的结果，排除包含的牌
           );
           selectedCards.value = []
+          // 出牌成功，清空 pending
+          pendingCards.value = []
+        }else {
+          // 出牌失败，恢复牌
+          console.log('出牌失败，恢复牌')
+          state.cards = [...state.cards, ...pendingCards.value]
+          state.cards.sort((a, b) => b - a) // 保持排序一致
         }
         break
       case 1:
@@ -498,13 +517,31 @@ const toggleCard = (n) => {
   }
 }
 
+// 修改checkOut方法，正确处理currentCards为选中牌的数组
 const checkOut = () => {
   if (selectedCards.value.length === 0) {
-    return false
-  } else {
-    return true
+    return false;
   }
-}
+
+  // 构建currentCards数组（选中的牌对象数组）
+  const currentCards = selectedCards.value.map(cardId => {
+    return state.deck.find(card => card.Id === cardId);
+  }).filter(Boolean); // 过滤无效牌
+
+  // 构建lastHand参数
+  const lastHand = {
+    cards: state.outCards.map(cardId => {
+      return state.deck.find(card => card.Id === cardId);
+    }).filter(Boolean),
+    isSelf: state.mustPid === 0, // 是否是自己出的最后一手牌
+    type: state.outCards.length > 0
+            ? cardUtil.getType(state.outCards.map(id => state.deck.find(c => c.Id === id)).filter(Boolean))
+            : null
+  };
+
+  // 调用牌型校验工具
+  return cardUtil.canPlayCards(currentCards, lastHand);
+};
 
 
 
@@ -604,41 +641,58 @@ onBeforeUnmount(() => {
 })
 
 
-// 修改 chupai 函数，改为先发送数据再移动牌
+// 修改 chupai 函数，添加牌移除和定时器逻辑
 const chupai = () => {
+  if (isPlayingCard.value) {
+    console.log("正在处理出牌，请等待响应")
+    return false
+  }
+
   if (selectedCards.value.length === 0) {
     return false
   } else {
-    let cards = []
-    selectedCards.value.forEach(item => {
-      state.cards.forEach(card => {
-        if (card == item) {
-          cards.push(card)
-        }
-      })
-    })
-    
-    // 1. 先准备数据并发送到服务端
+    // 1. 保存选中的牌用于后续恢复
+    const cardsToPlay = [...selectedCards.value]
+    pendingCards.value = cardsToPlay
+    isPlayingCard.value = true
+
+    // 2. 先从手牌中移除牌
+    const originalCards = [...state.cards]
+    state.cards = state.cards.filter(card => !cardsToPlay.includes(card))
+
+    // 3. 准备并发送数据到服务端
     let data = {
       type: "playCard",
       data: JSON.stringify({
         pid: state.countdownPlayer - 1,
-        cardIds: cards,
+        cardIds: cardsToPlay,
       }),
     }
     websocket.send(data)
-    
-    // 2. 记录正在移动的牌
-    state.movingCards = [...cards]
-    
-    // 3. 清空选中状态
-    const tempSelectedCards = [...selectedCards.value]
+
+    // 4. 记录正在移动的牌
+    state.movingCards = [...cardsToPlay]
+
+    // 5. 清空选中状态
     selectedCards.value = []
-    
-    // 4. 等待动画完成（500毫秒）后再清空移动中的牌
+
+    // 6. 等待动画完成后清空移动中的牌
     setTimeout(() => {
       state.movingCards = []
     }, 800)
+
+    // 7. 设置30秒超时定时器，超时未响应则恢复牌
+    playCardTimer.value = setTimeout(() => {
+      console.log('出牌超时，未收到服务响应，恢复牌')
+      if (isPlayingCard.value) {
+        // 恢复牌
+        state.cards = [...originalCards]
+        state.cards.sort((a, b) => b - a) // 保持排序一致
+        // state.lastmsg = "出牌超时，服务未响应"
+      }
+      isPlayingCard.value = false
+      pendingCards.value = []
+    }, 30000) // 30秒超时
   }
 }
 // 修改getMovingCardStyle函数，使移动中的牌排成一行并重叠4px
@@ -1146,6 +1200,17 @@ const goToRoom = () => {
     min-width: 120px;
     height: 44px;
     line-height: 24px;
+  }
+
+  /* 移动中的卡牌在小屏幕下缩小到0.6倍 */
+  .moving-card {
+    transform: scale(0.6);
+  }
+  /* 调整卡牌移动动画的位置，适配缩小后的尺寸 */
+  .card-move-enter-to {
+    top: 30%;
+    left: 47%;
+    transform: translateX(-50%) scale(0.6);
   }
 
 }

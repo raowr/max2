@@ -25,7 +25,7 @@ type RoomMsg struct {
 
 // 牌的结构体
 type Card struct {
-	Value    int    // 牌值 3-15，分别对应3-A
+	Value    string // 牌值 3-15，分别对应3-A
 	Suit     string // 花色 0-3 方块、梅花、红桃、黑桃
 	Name     string // 牌的名称
 	Id       int    //牌的id
@@ -227,7 +227,7 @@ func initDeck() []Card {
 		for _, suitName := range suits {
 			cardId++
 			card := Card{
-				Value:    3 + i,
+				Value:    valueName,
 				Suit:     suitName,
 				Name:     suitName + valueName,
 				Id:       cardId,
@@ -764,61 +764,6 @@ func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) (poke
 	return
 }
 
-// 生成所有可能的有效牌组合（简化版）
-func generateAllPossiblePlays(isMust bool, cards []Card) []struct {
-	indices []int
-	cards   []Card
-} {
-	var plays []struct {
-		indices []int
-		cards   []Card
-	}
-
-	// 添加不出牌选项,不是必须出牌才添加不出牌选项
-	if !isMust {
-		//随机选择不出
-		if grand.Meet(1, 4) {
-			plays = append(plays, struct {
-				indices []int
-				cards   []Card
-			}{[]int{}, []Card{}})
-		}
-	}
-
-	// 单牌
-	for _, card := range cards {
-		plays = append(plays, struct {
-			indices []int
-			cards   []Card
-		}{[]int{card.Id}, []Card{card}})
-	}
-
-	// 对子
-	for i := 0; i < len(cards); i++ {
-		for j := i + 1; j < len(cards); j++ {
-			if cards[i].Value == cards[j].Value {
-				plays = append(plays, struct {
-					indices []int
-					cards   []Card
-				}{[]int{cards[i].Id, cards[j].Id}, []Card{cards[i], cards[j]}})
-			}
-		}
-	}
-
-	// 这里可以扩展更多牌型的生成逻辑
-
-	//顺子(5张点数连续的牌,花色不同)
-
-	//花色(5张相同的花色)
-
-	//福禄(3带2)
-
-	//4条(4带1)
-
-	//同花顺(5张点数连续的牌,花色相同)
-	return plays
-}
-
 // 检查游戏是否结束,算奖，输家剩几张牌，就输多少积分
 // 赢玩家剩余多少张牌，就赢多少积分
 func isGameOver(room *Room) (isOver bool, winer *Player, playerPoint, playerWin int64) {
@@ -1015,6 +960,24 @@ func (room *Room) GameLoop(ctx context.Context) {
 				if !parseCardIndices(currentPlayer) {
 					currentPlayer.OutCardIds = make([]int, 0)
 					fmt.Printf("输入的牌不存在%v \n", currentPlayer.OutCardIds)
+					msg := fmt.Sprintf("输入的牌不存在:%v", currentPlayer.OutCardIds)
+					//通知出牌失败
+					go func() {
+						data, _ := json.Marshal(struct {
+							Pid  int    `json:"pid"`
+							Code int    `json:"code"` //0成功,非零失败
+							Msg  string `json:"msg"`  //提示消息
+						}{
+							Pid:  currentPlayer.ID,
+							Code: 1,
+							Msg:  msg,
+						})
+						room.MsgChan <- RoomMsg{
+							Type: "outCard",
+							Data: gconv.String(data),
+						}
+					}()
+					currentPlayer.OutCardIds = make([]int, 0)
 					return
 				}
 				//获取出牌索引
@@ -1026,6 +989,23 @@ func (room *Room) GameLoop(ctx context.Context) {
 				if !isHas {
 					currentPlayer.OutCardIds = make([]int, 0)
 					g.Log().Debug(ctx, "牌型无效,selectedCards:%v", selectedCards)
+					msg := fmt.Sprintf("牌型无效,selectedCards:%v", selectedCards)
+					//通知出牌失败
+					go func() {
+						data, _ := json.Marshal(struct {
+							Pid  int    `json:"pid"`
+							Code int    `json:"code"` //0成功,非零失败
+							Msg  string `json:"msg"`  //提示消息
+						}{
+							Pid:  currentPlayer.ID,
+							Code: 1,
+							Msg:  msg,
+						})
+						room.MsgChan <- RoomMsg{
+							Type: "outCard",
+							Data: gconv.String(data),
+						}
+					}()
 					return
 				}
 				//判断和上一手牌型是否相同
@@ -1034,12 +1014,46 @@ func (room *Room) GameLoop(ctx context.Context) {
 						if LastPH != room.LastPH {
 							currentPlayer.OutCardIds = make([]int, 0)
 							g.Log().Debug(ctx, "牌型和上一手牌型不一致1,LastPH:%v,room.LastPH:%v", LastPH, room.LastPH)
+							msg := fmt.Sprintf("牌型和上一手牌型不一致1,LastPH:%v,room.LastPH:%v", LastPH, room.LastPH)
+							//通知出牌失败
+							go func() {
+								data, _ := json.Marshal(struct {
+									Pid  int    `json:"pid"`
+									Code int    `json:"code"` //0成功,非零失败
+									Msg  string `json:"msg"`  //提示消息
+								}{
+									Pid:  currentPlayer.ID,
+									Code: 1,
+									Msg:  msg,
+								})
+								room.MsgChan <- RoomMsg{
+									Type: "outCard",
+									Data: gconv.String(data),
+								}
+							}()
 							return
 						}
 					} else {
 						if LastPH < room.LastPH {
 							currentPlayer.OutCardIds = make([]int, 0)
 							g.Log().Debug(ctx, "牌型和上一手牌型不一致2,LastPH:%v,room.LastPH:%v", LastPH, room.LastPH)
+							msg := fmt.Sprintf("牌型和上一手牌型不一致2,LastPH:%v,room.LastPH:%v", LastPH, room.LastPH)
+							//通知出牌失败
+							go func() {
+								data, _ := json.Marshal(struct {
+									Pid  int    `json:"pid"`
+									Code int    `json:"code"` //0成功,非零失败
+									Msg  string `json:"msg"`  //提示消息
+								}{
+									Pid:  currentPlayer.ID,
+									Code: 1,
+									Msg:  msg,
+								})
+								room.MsgChan <- RoomMsg{
+									Type: "outCard",
+									Data: gconv.String(data),
+								}
+							}()
 							return
 						}
 					}
