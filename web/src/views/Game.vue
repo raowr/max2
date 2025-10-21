@@ -495,6 +495,12 @@ const handleMessage = (data) => {
     // 重置弃牌
     state.outCards = []
     // 移除自动重新开始的逻辑，由用户点击按钮触发
+    if (isPlayingCard.value) {
+      isPlayingCard.value = false
+      pendingCards.value = []
+      // 游戏结束也清除定时器
+      clearTimeout(playCardTimer.value)
+    }
   }
 }
 
