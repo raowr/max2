@@ -264,7 +264,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onBeforeUnmount, computed } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, onBeforeUnmount, computed } from 'vue'
 import { useRouter } from 'vue-router' // 添加这行导入
 import { audioManager } from '@/utils/audio'
 import { websocket } from '@/utils/websocket'
@@ -308,10 +308,21 @@ const isPlayingCard = ref(false) // 标记是否正在出牌过程中
 const pendingCards = ref([]) // 存储等待验证的牌
 const playCardTimer = ref(null) // 出牌超时定时器
 
+// 响应式变量：当前屏幕宽度
+const screenWidth = ref(window.innerWidth);
+// 缩放比例（默认100%，小于998px时为60%）
+const scaleFactor = ref(screenWidth.value < 998 ? 0.6 : 1);
+
 // 导入背景图片（新增代码）
 import winBg from '@/assets/img/ui/win_bg.png'
 import loseBg from '@/assets/img/ui/lose_bg.png'
 
+
+// 监听屏幕尺寸变化
+const handleResize = () => {
+  screenWidth.value = window.innerWidth;
+  scaleFactor.value = screenWidth.value < 998 ? 0.6 : 1; // 更新缩放比例
+};
 
 onMounted(() => {
   initDeck()
@@ -320,7 +331,10 @@ onMounted(() => {
   audioManager.playBGM('bgm')
   websocket.send({ "type": "play", "data": "", "name": "" })
   websocket.on('message', handleMessage)
+  window.addEventListener('resize', handleResize)
 })
+
+onUnmounted(() => window.removeEventListener('resize', handleResize));
 
 // 初始化一副牌
 const initDeck = () => {
@@ -702,13 +716,15 @@ const chupai = () => {
     }, 30000) // 30秒超时
   }
 }
+
 // 修改getMovingCardStyle函数，使移动中的牌排成一行并重叠4px
 const getMovingCardStyle = (index) => {
   // 获取当前移动中的卡牌总数
   const totalCards = state.movingCards.length;
   
   // 设置卡牌宽度为120px，重叠4px
-  const cardWidth = 120;
+  const cardWidth = 120 * scaleFactor.value;
+  const cardHeight = 140* scaleFactor.value;
   const overlap = 10;
   const effectiveWidth = cardWidth - overlap; // 有效宽度为116px，确保重叠4px
   
@@ -726,7 +742,7 @@ const getMovingCardStyle = (index) => {
   
   return {
     width: `${cardWidth}px`,
-    height: '140px',
+    height: `${cardHeight}px`,
     transform: `translateX(${horizontalOffset}px) rotate(${rotation}deg)`
   };
 };
@@ -1209,15 +1225,15 @@ const goToRoom = () => {
     line-height: 24px;
   }
 
-  /* 移动中的卡牌在小屏幕下缩小到0.6倍 */
+  /* 移动中的卡牌在小屏幕下缩小到0.4倍 */
   .moving-card {
-    transform: scale(0.6);
+    transform: scale(0.1);
   }
   /* 调整卡牌移动动画的位置，适配缩小后的尺寸 */
   .card-move-enter-to {
     top: 30%;
     left: 47%;
-    transform: translateX(-50%) scale(0.6);
+    transform: translateX(-50%) scale(0.1);
   }
 
 }
