@@ -110,7 +110,7 @@ func (rm *RoomManager) CreatePlayer(name string, playerType PlayerType) *Player 
 		Type:        playerType,
 		handPattern: make(map[int][][]Card),
 		CardNum:     13,
-		Point:       GetGameInitPoint(), //初始100积分
+		Point:       GetGameInitPoint(), //初始积分
 	}
 	rm.PlayerList[player.ID] = player
 	rm.NextPlayerID++
