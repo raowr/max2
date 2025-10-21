@@ -211,8 +211,8 @@
       <!-- 禁用出牌按钮添加类名：chupai-btn-disabled -->
       <img v-else src='@/assets/img/btn_chupai_hui.png' class="chupai-btn-disabled">
 
-      <!-- 不叫按钮添加类名：bujiao-btn -->
-      <img v-if="state.mustPid != 0" src='@/assets/img/btn_bujiao2.png' class="bujiao-btn" :style="{
+      <!-- 不出按钮添加类名：buchu-btn -->
+      <img v-if="state.mustPid != 0" src='@/assets/img/btn_buchu.png' class="buchu-btn" :style="{
         transform: isPassBtnPressed ? 'scale(0.9)' : 'scale(1)'  // 保留动态样式
       }" @click='pass()' @mousedown="isPassBtnPressed = true" @mouseup="isPassBtnPressed = false"
         @mouseleave="isPassBtnPressed = false" @touchstart="isPassBtnPressed = true"
@@ -976,8 +976,8 @@ const goToRoom = () => {
   left: 54%;
 }
 
-/* 不叫按钮静态样式 */
-.bujiao-btn {
+/* 不出按钮静态样式 */
+.buchu-btn {
   position: absolute;
   top: 0;
   left: 32%;
@@ -1179,8 +1179,8 @@ const goToRoom = () => {
     /* 以顶部中心为缩放原点，避免位置偏移 */
   }
 
-  /* 不叫按钮静态样式 */
-  .bujiao-btn {
+  /* 不出按钮静态样式 */
+  .buchu-btn {
     left: 22%;
   }
 
