@@ -16,3 +16,8 @@ func GetOutCardTimeout() int {
 func GetGameCommission() int64 {
 	return g.Cfg().MustGet(context.Background(), "game.comm").Int64() //每局抽水2
 }
+
+// 初始化玩家积分
+func GetGameInitPoint() int64 {
+	return g.Cfg().MustGet(context.Background(), "game.point").Int64() //初始化积分(玩家初始进来送的积分)
+}
