@@ -69,7 +69,7 @@ import img54 from '@/assets/img/54.png'; // 新增：54 图片
 import bighead15729 from '@/assets/img/touxiang/bighead15729.png'; // 新增：大头像15729
 import btnChupaiImg from '@/assets/img/btn_chupai.png'; // 新增：出牌按钮
 import btnChupaiHuiImg from '@/assets/img/btn_chupai_hui.png'; // 新增：出牌按钮（隐藏）
-import btnBujiao2Img from '@/assets/img/btn_bujiao2.png'; // 新增：放弃按钮2
+import btnBujiao2Img from '@/assets/img/btn_buchu.png'; // 新增：放弃按钮
 // 导入背景图片（新增代码）
 import winBg from '@/assets/img/ui/win_bg.png'
 import loseBg from '@/assets/img/ui/lose_bg.png'

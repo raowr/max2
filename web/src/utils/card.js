@@ -182,14 +182,16 @@ function isStraight(cards) {
 function isFourOfAKind(cards) {
     const counts = countRanks(cards);
     const values = Object.values(counts);
-    return values.includes(4) && values.includes(1);
+    // 确保只有两个不同的牌点，且一个出现4次，另一个出现1次
+    return values.length === 2 && values.includes(4) && values.includes(1);
 }
 
 // 辅助函数：判断是否为葫芦
 function isFullHouse(cards) {
     const counts = countRanks(cards);
     const values = Object.values(counts);
-    return values.includes(3) && values.includes(2);
+     // 确保只有两个不同的牌点，且一个出现3次，另一个出现2次
+    return values.length === 2 && values.includes(3) && values.includes(2);
 }
 
 // 辅助函数：获取最大牌点

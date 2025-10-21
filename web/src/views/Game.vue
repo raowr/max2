@@ -268,7 +268,7 @@ import { ref, reactive, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useRouter } from 'vue-router' // 添加这行导入
 import { audioManager } from '@/utils/audio'
 import { websocket } from '@/utils/websocket'
-import { cardUtil, CARD_TYPE } from '@/util/card';
+import { cardUtil, CARD_TYPE } from '@/utils/card';
 const state = reactive({
   deck: [],
   countdownPlayer: 0,
@@ -333,12 +333,12 @@ const initDeck = () => {
       const suitName = suits[suit];
       cardId++;
       const card = {
-        Value: valueName,
-        Suit: suit,
-        Name: suitName + valueName,
-        Id: cardId,
-        Rank: 3 + i,
-        SuitName: suitName
+        rank: 3 + i,
+        suit: suit,
+        name: suitName + valueName,
+        id: cardId,
+        rankName: valueName,
+        suitName: suitName
       };
       state.deck.push(card);
     }
@@ -392,8 +392,8 @@ const handleMessage = (data) => {
           // startCountdown(2)
           for (let i = 0; i < data.cardIds.length; i++) {
             for (let j = 0; j < state.deck.length; j++) {
-              if (state.deck[j].Id == data.cardIds[i]) {
-                cardsMsg += state.deck[j].Name + " "
+              if (state.deck[j].id == data.cardIds[i]) {
+                cardsMsg += state.deck[j].name + " "
               }
             }
           }
@@ -419,8 +419,8 @@ const handleMessage = (data) => {
         // startCountdown(3)
         for (let i = 0; i < data.cardIds.length; i++) {
           for (let j = 0; j < state.deck.length; j++) {
-            if (state.deck[j].Id == data.cardIds[i]) {
-              cardsMsg += state.deck[j].Name + " "
+            if (state.deck[j].id == data.cardIds[i]) {
+              cardsMsg += state.deck[j].name + " "
             }
           }
         }
@@ -432,8 +432,8 @@ const handleMessage = (data) => {
         // startCountdown(4)
         for (let i = 0; i < data.cardIds.length; i++) {
           for (let j = 0; j < state.deck.length; j++) {
-            if (state.deck[j].Id == data.cardIds[i]) {
-              cardsMsg += state.deck[j].Name + " "
+            if (state.deck[j].id == data.cardIds[i]) {
+              cardsMsg += state.deck[j].name + " "
             }
           }
         }
@@ -445,8 +445,8 @@ const handleMessage = (data) => {
         // startCountdown(1)
         for (let i = 0; i < data.cardIds.length; i++) {
           for (let j = 0; j < state.deck.length; j++) {
-            if (state.deck[j].Id == data.cardIds[i]) {
-              cardsMsg += state.deck[j].Name + " "
+            if (state.deck[j].id == data.cardIds[i]) {
+              cardsMsg += state.deck[j].name + " "
             }
           }
         }
@@ -531,22 +531,23 @@ const checkOut = () => {
 
   // 构建currentCards数组（选中的牌对象数组）
   const currentCards = selectedCards.value.map(cardId => {
-    return state.deck.find(card => card.Id === cardId);
+    return state.deck.find(card => card.id === cardId);
   }).filter(Boolean); // 过滤无效牌
 
   // 构建lastHand参数
   const lastHand = {
     cards: state.outCards.map(cardId => {
-      return state.deck.find(card => card.Id === cardId);
+      return state.deck.find(card => card.id === cardId);
     }).filter(Boolean),
     isSelf: state.mustPid === 0, // 是否是自己出的最后一手牌
     type: state.outCards.length > 0
-            ? cardUtil.getType(state.outCards.map(id => state.deck.find(c => c.Id === id)).filter(Boolean))
+            ? cardUtil.getCardType(state.outCards.map(id => state.deck.find(c => c.id === id)).filter(Boolean))
             : null
   };
-
   // 调用牌型校验工具
-  return cardUtil.canPlayCards(currentCards, lastHand);
+  let res = cardUtil.canPlayCards(currentCards, lastHand);
+  console.log("验证出牌：",currentCards,lastHand,res)
+  return res
 };
 
 
