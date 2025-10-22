@@ -266,7 +266,7 @@ export default {
         backgroundSize: 'contain', // 保持图片比例完整显示
         backgroundRepeat: 'no-repeat'
       },
-      isReady:false,
+      isReady: false,
     };
   },
   mounted() {
@@ -312,23 +312,32 @@ export default {
 
       if (this.loadedCount === this.totalFiles) {
         //如果是网页直接跳，如果不是显示进入游戏按钮
-        if (this.isApp()){
+        if (this.isAndroidPackagedH5()) {
           setTimeout(() => {
             this.$router.push('/index');
           }, 300);
-        }else {
+        } else {
           this.isReady = true
         }
 
       }
     },
     // 判断是否在原生 App 环境（示例）
-    isApp() {
-      // 假设原生 App 注入了名为 "AppBridge" 的全局对象
-      return !!window.AppBridge;
-      // 或根据实际约定判断，如 Android 可能注入 window.android，iOS 注入 window.webkit.messageHandlers
+    // H5 端判断逻辑
+    isAndroidPackagedH5() {
+      // 方式一：检测 AndroidBridge 注入的方法
+      if (window.AndroidBridge && typeof window.AndroidBridge.isAndroidWebView === 'function') {
+        return true; // 安卓打包的 H5 环境
+      }
+
+      // 方式二：检测直接注入的全局变量
+      if (window.isAndroidWebView === true) {
+        return true; // 安卓打包的 H5 环境
+      }
+
+      return false; // 普通浏览器环境
     },
-    toIndex(){
+    toIndex() {
       this.$router.push('/index');
     }
   }
@@ -416,6 +425,7 @@ export default {
   font-weight: bold;
   /* 添加粗体样式 */
 }
+
 .login-btn-container {
   position: absolute;
   bottom: 20px;
@@ -423,6 +433,7 @@ export default {
   transform: translateX(-50%);
   z-index: 10;
 }
+
 .login-btn {
   cursor: pointer;
   transition: transform 0.2s;

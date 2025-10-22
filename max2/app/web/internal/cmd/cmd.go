@@ -17,7 +17,8 @@ var (
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			s := g.Server()
-			s.AddSearchPath("./resource")
+			s.AddSearchPath("./resource/dist")
+			s.AddStaticPath("/public", "./resource/public") // 映射公共目录
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.Bind(

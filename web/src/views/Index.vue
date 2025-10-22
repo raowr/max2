@@ -2,7 +2,7 @@
   <div class="index">
     <div id="right">
       <div class="right1" @click="right()"></div>
-      <router-link to="/download"><div class="right2"></div></router-link><!--暂时跳到下载页面 -->
+      <div class="right2"></div>
       <div class="right3"></div>
     </div>
     <div class="yourenchang" id="charubiaoqian1">
