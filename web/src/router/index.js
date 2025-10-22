@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 import Loading from '../views/Loading.vue'
 import Index from '../views/Index.vue'
 import Room from '../views/Room.vue'
-import Game from '../views/Game.vue'
+import Game from '../views/Download.vue'
+import Download from '../views/Game.vue'
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
     path: '/game',
     name: 'Game',
     component: Game
+  },
+    {
+    path: '/download',
+    name: 'Download',
+    component: Download
   }
   // 其他路由...
 ]

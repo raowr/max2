@@ -1,0 +1,1 @@
+apkVersionHandler("2max-20251022-release.apk")

@@ -5,6 +5,10 @@
         <div class="progress-bar" :style="{ width: progressPercentage + '%' }"></div>
       </div>
       <p class="loading-text">加载中... {{ progressPercentage }}%</p>
+      <!-- login Button -->
+      <div class="login-btn-container" v-if=isReady>
+        <img src="@/assets/img/ui/login.png" class="login-btn" alt="进入主页" @click="toIndex()">
+      </div>
     </div>
   </div>
 </template>
@@ -261,7 +265,8 @@ export default {
         // 确保图片完整缓存到浏览器
         backgroundSize: 'contain', // 保持图片比例完整显示
         backgroundRepeat: 'no-repeat'
-      }
+      },
+      isReady:false,
     };
   },
   mounted() {
@@ -306,10 +311,25 @@ export default {
       this.progressPercentage = Math.round((this.loadedCount / this.totalFiles) * 100);
 
       if (this.loadedCount === this.totalFiles) {
-        setTimeout(() => {
-          this.$router.push('/index');
-        }, 300);
+        //如果是网页直接跳，如果不是显示进入游戏按钮
+        if (this.isApp()){
+          setTimeout(() => {
+            this.$router.push('/index');
+          }, 300);
+        }else {
+          this.isReady = true
+        }
+
       }
+    },
+    // 判断是否在原生 App 环境（示例）
+    isApp() {
+      // 假设原生 App 注入了名为 "AppBridge" 的全局对象
+      return !!window.AppBridge;
+      // 或根据实际约定判断，如 Android 可能注入 window.android，iOS 注入 window.webkit.messageHandlers
+    },
+    toIndex(){
+      this.$router.push('/index');
     }
   }
 };
@@ -395,5 +415,20 @@ export default {
   font-size: 16px;
   font-weight: bold;
   /* 添加粗体样式 */
+}
+.login-btn-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+.login-btn {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.login-btn:hover {
+  transform: scale(1.1);
 }
 </style>
