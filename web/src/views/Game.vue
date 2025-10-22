@@ -398,6 +398,8 @@ const handleMessage = (data) => {
           // 无论成功失败都清除定时器
           console.log('清除出牌定时器')
           clearTimeout(playCardTimer.value)
+          //等待动画完成后清空移动中的牌
+          state.movingCards = []
         }
         if (data.code == 0) {
           // state.must = data.must
@@ -698,9 +700,9 @@ const chupai = () => {
     selectedCards.value = []
 
     // 6. 等待动画完成后清空移动中的牌
-    setTimeout(() => {
-      state.movingCards = []
-    }, 800)
+    // setTimeout(() => {
+    //   state.movingCards = []
+    // }, 800)
 
     // 7. 设置30秒超时定时器，超时未响应则恢复牌
     playCardTimer.value = setTimeout(() => {
@@ -713,6 +715,8 @@ const chupai = () => {
       }
       isPlayingCard.value = false
       pendingCards.value = []
+      //等待动画完成后清空移动中的牌
+      state.movingCards = []
     }, 30000) // 30秒超时
   }
 }
