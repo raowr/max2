@@ -121,7 +121,7 @@ export default {
         //版本文件加载错误，使用默认
         script.onerror = function(){
             ysbtn.style.visibility='visible'
-            ysbtn.href = ysbtn.href + "ig.apk"
+            ysbtn.href = ysbtn.href + "2max.apk"
         }
         this.createQrCode();
     },
