@@ -277,6 +277,7 @@ const state = reactive({
   player3CardsNum: 13,
   player4CardsNum: 13,
   outCards: [],
+  lastOutCards:[],//上一手出牌
   lastmsg: "",
   mustPid: 0,
   player1Point: 0, // 初始瓜子数
@@ -428,6 +429,8 @@ const handleMessage = (data) => {
           console.log('出牌失败，恢复牌')
           state.cards = [...state.cards, ...pendingCards.value]
           state.cards.sort((a, b) => b - a) // 保持排序一致
+          //恢复上一手出牌
+          state.outCards = state.lastOutCards
         }
         break
       case 1:
@@ -475,6 +478,7 @@ const handleMessage = (data) => {
     //如果成功再改内容
     if (data.code == 0) {
       state.outCards = (data.cardIds)
+      state.lastOutCards = (data.cardIds)
       // 更新倒计时时长（如果服务端提供）
       if (data.outCardTimeout !== undefined) {
         state.outCardTimeout = data.outCardTimeout
