@@ -183,16 +183,26 @@ onMounted(() => {
   init()
 })
 const init = async () => {
-    // 动态解析音频路径（替换字符串路径为 new URL() 构造的 URL）
+  // 动态解析音频路径
   const bgmUrl = new URL('@/assets/music/game_bg.mp3', import.meta.url).href;
-  audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
-   audioManager.playBGM('bgm')
+  audioManager.preload('bgm', bgmUrl);
+  audioManager.playBGM('bgm');
 
-  websocket.on('message', handleMessage)
-  websocket.on('connected', () => console.log('Connected'))
-  websocket.on('disconnected', () => console.log('Disconnected'))
-  toggleReady()
+  // 监听 WebSocket 事件
+  websocket.on('message', handleMessage);
+  websocket.on('connected', () => {
+    console.log('Connected');
+    // 连接成功后再执行 toggleReady
+    toggleReady();
+  });
+  websocket.on('disconnected', () => {
+    console.log('Disconnected');
+  });
 
+  // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
+  if (websocket.socket && websocket.socket.readyState === WebSocket.OPEN) {
+    toggleReady();
+  }
 }
 
 
@@ -264,10 +274,14 @@ onBeforeUnmount(() => {
 
 })
 
-// 原有方法保持不变，修改发送消息的方法示例：
 const toggleReady = () => {
-  websocket.send({"type":"initRoom","data":"","name":""})
-  console.log('send ready')
+  // 确保 WebSocket 已连接再发送消息
+  if (websocket.socket && websocket.socket.readyState === WebSocket.OPEN) {
+    websocket.send({"type":"initRoom","data":"","name":""});
+    console.log('send ready');
+  } else {
+    console.log('WebSocket not connected, cannot send ready message');
+  }
 }
 
 const isReady=() => {

@@ -331,7 +331,20 @@ onMounted(() => {
   const bgmUrl = new URL('@/assets/music/game_bg1.mp3', import.meta.url).href;
   audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
   audioManager.playBGM('bgm')
-  websocket.send({ "type": "getInfo", "data": "", "name": "" })
+    websocket.on('connected', () => {
+    console.log('Connected');
+    websocket.send({"type":"initRoom","data":"","name":""});
+    // 连接成功后再执行 toggleReady
+    websocket.send({ "type": "getInfo", "data": "", "name": "" })
+  });
+  websocket.on('disconnected', () => {
+    console.log('Disconnected');
+  });
+
+  // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
+  if (websocket.socket && websocket.socket.readyState === WebSocket.OPEN) {
+    websocket.send({ "type": "play", "data": "", "name": "" })
+  }
   websocket.on('message', handleMessage)
   window.addEventListener('resize', handleResize)
 })
@@ -359,7 +372,7 @@ const initDeck = () => {
       state.deck.push(card);
     }
   }
-  console.log(state.deck);
+  // console.log(state.deck);
 }
 
 const handleMessage = (data) => {

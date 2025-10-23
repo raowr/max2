@@ -187,9 +187,11 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 			// 显示玩家的牌（除了底牌）
 			cards := make([]int, 0)
 			cardsNum := make([]*message.PlayData, 0)
+			playerPoint := int64(0)
 			for _, player := range roomInfo.Players {
 				//只能显示自己的牌
 				if player.ID == pid {
+					playerPoint = player.Point
 					for _, card := range player.Cards {
 						cards = append(cards, card.Id)
 					}
@@ -222,7 +224,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 				}{
 					Cards:                cards,
 					Current:              roomInfo.Current,
-					PlayerPoint:          roomInfo.Landlord.Point,
+					PlayerPoint:          playerPoint,
 					OutCardTimeout:       outCardTimeout,       //出牌最大时间(单位秒) /s
 					RemainOutCardTimeout: remainOutCardTimeout, //剩余出牌时间(单位秒) /s
 					CardsNum:             cardsNum,
