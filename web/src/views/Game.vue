@@ -281,6 +281,7 @@ const state = reactive({
   mustPid: 0,
   player1Point: 0, // 初始瓜子数
   outCardTimeout: 30, // 出牌最大时间(单位秒) /s
+  containerAtEndPosition: false, // 控制容器是否在结束位置
 })
 const isPassBtnPressed = ref(false)  // 添加：跟踪按钮按下状态
 const isChupaiBtnPressed = ref(false)  // 添加：跟踪"出牌"按钮按下状态
@@ -700,9 +701,10 @@ const chupai = () => {
     selectedCards.value = []
 
     // 6. 等待动画完成后清空移动中的牌
-    // setTimeout(() => {
-    //   state.movingCards = []
-    // }, 800)
+    setTimeout(() => {
+      state.movingCards = []
+      state.outCards = [...cardsToPlay]
+    }, 500)
 
     // 7. 设置30秒超时定时器，超时未响应则恢复牌
     playCardTimer.value = setTimeout(() => {
@@ -1116,17 +1118,21 @@ const goToRoom = () => {
   z-index: 99;
 }
 
-/* 移动中的卡牌样式 */
+
+/* 移动中的卡牌样式 - 确保初始位置正确 */
 .moving-card {
   position: absolute;
   width: 80px;
   height: 112px;
   z-index: 100;
+  top: 80%;  /* 新增：默认位置设为玩家手牌区域 */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* 卡牌移动动画 */
 .card-move-enter-active {
-  transition: all 800ms  cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 500ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .card-move-leave-active {
@@ -1134,17 +1140,23 @@ const goToRoom = () => {
 }
 
 .card-move-enter-from {
-  /* 开始位置：玩家手牌区域 */
+  /* 开始位置：玩家手牌区域，添加opacity: 0防止闪烁 */
   top: 80%;
   left: 50%;
   transform: translateX(-50%) scale(1);
+  opacity: 0;  /* 新增：动画开始时透明 */
 }
 
 .card-move-enter-to {
   /* 结束位置：屏幕中间（弃牌堆位置） */
   top: 30%;
   left: 47%;
-  transform: translateX(-50%); /* 放大到弃牌堆卡牌大小 */
+  transform: translateX(-50%);
+  opacity: 1;  /* 新增：动画结束时显示 */
+}
+/* 添加这个新类，处理动画结束后移除元素 */
+.card-move-enter-to.card-move-complete {
+  display: none; /* 动画完成后隐藏元素 */
 }
 /* 横屏模式专属样式 */
 @media (max-width: 998px) {
@@ -1238,6 +1250,7 @@ const goToRoom = () => {
     top: 30%;
     left: 47%;
     transform: translateX(-50%) scale(0.1);
+    opacity: 1;  /* 新增：动画结束时显示 */
   }
 
 }
