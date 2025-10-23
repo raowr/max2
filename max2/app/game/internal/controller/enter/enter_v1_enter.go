@@ -73,6 +73,12 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 		case consts.InitRoom:
 			// Checks sending interval limit.
 			// rm := room.NewRoomManager()
+			//删除所有房间
+			for roomID, room := range rm.Rooms {
+				room.Rgtimer.Close()
+				delete(rm.Rooms, roomID)
+			}
+
 			rm.NextPlayerID = 0
 			playerName := "美女"
 			humanPlayer := rm.CreatePlayer(playerName, room.Human)
@@ -165,6 +171,66 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 				msgData := message.ChatMsg{
 					Type: roomMsg.Type,
 					Data: roomMsg.Data,
+					From: gconv.String(pid),
+				}
+				_ = c.write(ws, msgData)
+			}()
+		case consts.GetInfo: //获取房间信息,用于再game页刷新
+			var roomId string
+			for _, v := range rm.PlayerList {
+				if v.ID == pid {
+					roomId = v.RoomID
+					break
+				}
+			}
+			roomInfo := rm.Rooms[roomId]
+			// 显示玩家的牌（除了底牌）
+			cards := make([]int, 0)
+			cardsNum := make([]*message.PlayData, 0)
+			for _, player := range roomInfo.Players {
+				//只能显示自己的牌
+				if player.ID == pid {
+					for _, card := range player.Cards {
+						cards = append(cards, card.Id)
+					}
+				} else {
+					cardsNum = append(cardsNum, &message.PlayData{
+						Id:      player.ID,
+						CardNum: player.CardNum,
+					})
+				}
+			}
+			//计算剩余出牌时间
+			var remainOutCardTimeout, outCardTimeout int
+			outCardTimeout = room.GetOutCardTimeout()
+			if roomInfo.OutStarTime > 0 {
+				now := int(time.Now().Unix())
+				remainOutCardTimeout = outCardTimeout - (now - roomInfo.OutStarTime)
+			} else {
+				remainOutCardTimeout = outCardTimeout
+			}
+
+			go func() {
+				data, _ := json.Marshal(struct {
+					Cards                []int               `json:"cards"`
+					Current              int                 `json:"current"`
+					PlayerPoint          int64               `json:"playerPoint"`          //玩家总瓜子数
+					OutCardTimeout       int                 `json:"outCardTimeout"`       //出牌最大时间(单位秒) /s
+					RemainOutCardTimeout int                 `json:"remainOutCardTimeout"` //剩余出牌时间(单位秒) /s
+					CardsNum             []*message.PlayData `json:"cardsNum"`             //机器人剩余牌数
+					IsPlaying            bool                `json:"isPlaying"`            //是否进行中游戏
+				}{
+					Cards:                cards,
+					Current:              roomInfo.Current,
+					PlayerPoint:          roomInfo.Landlord.Point,
+					OutCardTimeout:       outCardTimeout,       //出牌最大时间(单位秒) /s
+					RemainOutCardTimeout: remainOutCardTimeout, //剩余出牌时间(单位秒) /s
+					CardsNum:             cardsNum,
+					IsPlaying:            roomInfo.IsPlaying,
+				})
+				msgData := message.ChatMsg{
+					Type: consts.GetInfo,
+					Data: gconv.String(data),
 					From: gconv.String(pid),
 				}
 				_ = c.write(ws, msgData)

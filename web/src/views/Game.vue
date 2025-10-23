@@ -331,7 +331,7 @@ onMounted(() => {
   const bgmUrl = new URL('@/assets/music/game_bg1.mp3', import.meta.url).href;
   audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
   audioManager.playBGM('bgm')
-  websocket.send({ "type": "play", "data": "", "name": "" })
+  websocket.send({ "type": "getInfo", "data": "", "name": "" })
   websocket.on('message', handleMessage)
   window.addEventListener('resize', handleResize)
 })
@@ -365,6 +365,39 @@ const initDeck = () => {
 const handleMessage = (data) => {
   // 处理接收到的消息
   console.log('Received message:', data)
+  if (data.type == "getInfo") {
+    data = JSON.parse(data.data)
+    console.log("getInfo",data);
+    if (data.isPlaying) {//是否游戏中
+      //玩家牌排序
+      state.cards = data.cards.sort((a, b) => b - a);
+      //设置牌数
+      for (let i = 0; i < data.cardsNum.length; i++) {
+        switch (data.cardsNum[i].id+1) {
+        case 2:
+          state.player2CardsNum = data.cardsNum[i].cardNum
+        case 3:
+            state.player3CardsNum = data.cardsNum[i].cardNum
+        case 4:
+            state.player4CardsNum = data.cardsNum[i].cardNum
+        }
+      }
+      // 更新倒计时时长（如果服务端提供）
+      if (data.outCardTimeout !== undefined) {
+        state.outCardTimeout = data.outCardTimeout
+      }
+      //先出牌的开始倒计时
+      startCountdown(data.current + 1,data.remainOutCardTimeout)
+      //如果必出是玩家，记录下必出玩家的pid
+      state.mustPid = data.current
+      //更新玩家总瓜子数
+      state.player1Point = data.playerPoint
+
+
+    }else {
+      websocket.send({ "type": "play", "data": "", "name": "" })
+    }
+  }
   if (data.type == "showCard") {
     data = JSON.parse(data.data)
     console.log(data);
@@ -379,7 +412,7 @@ const handleMessage = (data) => {
       state.outCardTimeout = data.outCardTimeout
     }
     //先出牌的开始倒计时
-    startCountdown(data.current + 1)
+    startCountdown(data.current + 1,state.outCardTimeout)
     //如果必出是玩家，记录下必出玩家的pid
     state.mustPid = data.current
     //更新玩家总瓜子数
@@ -483,7 +516,7 @@ const handleMessage = (data) => {
       if (data.outCardTimeout !== undefined) {
         state.outCardTimeout = data.outCardTimeout
       }
-      startCountdown(data.current + 1)
+      startCountdown(data.current + 1,state.outCardTimeout)
       //如果必出是玩家，记录下必出玩家的pid
       state.mustPid = data.mustPid
     }
@@ -492,7 +525,7 @@ const handleMessage = (data) => {
   if (data.type == "pass") {
     data = JSON.parse(data.data)
     state.mustPid = data.mustPid
-    startCountdown(data.current + 1)
+    startCountdown(data.current + 1,state.outCardTimeout)
 
   }
   if (data.type == "over") {
@@ -574,7 +607,7 @@ const checkOut = () => {
 
 
 
-const startCountdown = (pid) => {
+const startCountdown = (pid,remainOutCardTimeout) => {
   clearInterval(timer1)
   clearInterval(timer2)
   clearInterval(timer3)
@@ -587,7 +620,7 @@ const startCountdown = (pid) => {
       clearInterval(timer3)
       clearInterval(timer4)
       //显示并开始，当前倒计时
-      countdownPlayer1.value = state.outCardTimeout // 使用从服务端获取的倒计时时长
+      countdownPlayer1.value = remainOutCardTimeout // 使用从服务端获取的倒计时时长
       timer1 = setInterval(() => {
         if (countdownPlayer1.value > 0) {
           countdownPlayer1.value--
@@ -606,7 +639,7 @@ const startCountdown = (pid) => {
       clearInterval(timer1)
       clearInterval(timer3)
       clearInterval(timer4)
-      countdownPlayer2.value = state.outCardTimeout // 使用从服务端获取的倒计时时长
+      countdownPlayer2.value = remainOutCardTimeout // 使用从服务端获取的倒计时时长
       timer2 = setInterval(() => {
         if (countdownPlayer2.value > 0) {
           countdownPlayer2.value--
@@ -624,7 +657,7 @@ const startCountdown = (pid) => {
       clearInterval(timer1)
       clearInterval(timer2)
       clearInterval(timer4)
-      countdownPlayer3.value = state.outCardTimeout // 使用从服务端获取的倒计时时长
+      countdownPlayer3.value = remainOutCardTimeout // 使用从服务端获取的倒计时时长
       timer3 = setInterval(() => {
         if (countdownPlayer3.value > 0) {
           countdownPlayer3.value--
@@ -642,7 +675,7 @@ const startCountdown = (pid) => {
       clearInterval(timer1)
       clearInterval(timer2)
       clearInterval(timer3)
-      countdownPlayer4.value = state.outCardTimeout // 使用从服务端获取的倒计时时长
+      countdownPlayer4.value = remainOutCardTimeout // 使用从服务端获取的倒计时时长
       timer4 = setInterval(() => {
         if (countdownPlayer4.value > 0) {
           countdownPlayer4.value--

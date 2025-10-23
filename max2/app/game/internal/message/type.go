@@ -7,5 +7,6 @@ type ChatMsg struct {
 }
 
 type PlayData struct {
-	Id int `json:"id"` //用户id
+	Id      int `json:"id"`      //用户id
+	CardNum int `json:"cardNum"` //剩余牌数
 }

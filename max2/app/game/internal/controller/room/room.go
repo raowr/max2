@@ -184,6 +184,8 @@ func (rm *RoomManager) LeaveRoom(player *Player) {
 	if !exists {
 		return
 	}
+	//停止房间定时器
+	room.Rgtimer.Close()
 
 	// 从房间中移除玩家
 	for i, p := range room.Players {

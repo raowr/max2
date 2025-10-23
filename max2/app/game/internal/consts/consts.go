@@ -6,6 +6,7 @@ const (
 	InitRoom             = "initRoom"
 	Play                 = "play"
 	PlayCard             = "playCard"
+	GetInfo              = "getInfo"
 	ChatSessionName      = "ChatName"
 	ChatSessionNameTemp  = "ChatNameTemp"
 	ChatSessionNameError = "ChatNameError"
