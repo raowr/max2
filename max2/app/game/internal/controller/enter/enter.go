@@ -3,3 +3,37 @@
 // =================================================================================
 
 package enter
+
+import (
+	"game/internal/controller/room"
+	"github.com/gorilla/websocket"
+	"sync"
+	"time"
+)
+
+// 客户端连接结构体
+type Client struct {
+	conn      *websocket.Conn // WebSocket 连接
+	userID    string          // 用户标识（用于重连）
+	heartbeat time.Time       // 最后心跳时间
+	sendChan  chan []byte     // 消息发送通道，增大缓冲避免阻塞
+	pid       int             // 玩家id
+}
+
+// 全局房间管理器及并发安全锁（核心优化：解决全局资源竞争）
+var (
+	clients       = make(map[string]*Client)
+	clientsMu     sync.RWMutex // 保护clients的读写锁
+	rm            *room.RoomManager
+	rmMu          sync.RWMutex              // 保护roomManager的读写锁
+	allowedOrigin = room.GetAllowedOrigin() // 生产环境需替换为实际域名
+)
+
+func init() {
+	// 初始化全局房间管理器（带锁保护）
+	rmMu.Lock()
+	if rm == nil {
+		rm = room.NewRoomManager()
+	}
+	rmMu.Unlock()
+}
