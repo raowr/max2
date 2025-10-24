@@ -31,14 +31,12 @@ type Client struct {
 
 // 全局房间管理器及并发安全锁（核心优化：解决全局资源竞争）
 var (
-	clients   = make(map[string]*Client)
-	clientsMu sync.RWMutex // 保护clients的读写锁
-	rm        *room.RoomManager
-	rmMu      sync.RWMutex // 保护roomManager的读写锁
+	clients       = make(map[string]*Client)
+	clientsMu     sync.RWMutex // 保护clients的读写锁
+	rm            *room.RoomManager
+	rmMu          sync.RWMutex              // 保护roomManager的读写锁
+	allowedOrigin = room.GetAllowedOrigin() // 生产环境需替换为实际域名
 )
-
-// 生产环境需替换为实际域名
-const allowedOrigin = "http://8.155.147.137"
 
 func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.EnterRes, err error) {
 	var (

@@ -21,3 +21,8 @@ func GetGameCommission() int64 {
 func GetGameInitPoint() int64 {
 	return g.Cfg().MustGet(context.Background(), "game.point").Int64() //初始化积分(玩家初始进来送的积分)
 }
+
+// 初始化玩家积分
+func GetAllowedOrigin() string {
+	return g.Cfg().MustGet(context.Background(), "game.allowedOrigin").String() //初始化积分(玩家初始进来送的积分)
+}
