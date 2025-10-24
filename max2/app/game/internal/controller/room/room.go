@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/gogf/gf/v2/os/gtime"
 	"math/rand"
-	"strconv"
 	"strings"
 	"time"
 
@@ -1233,7 +1232,7 @@ func showRooms(rm *RoomManager) {
 }
 
 // 开始游戏主程序
-func startGame() {
+/*func startGame() {
 	fmt.Println("欢迎来到斗地主游戏！")
 	rm := NewRoomManager()
 
@@ -1344,4 +1343,4 @@ func startGame() {
 			fmt.Println("无效的操作，请重新选择")
 		}
 	}
-}
+}*/
