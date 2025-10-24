@@ -579,6 +579,10 @@ const handleMessage = (data) => {
       // 游戏结束也清除定时器
       clearTimeout(playCardTimer.value)
     }
+    //玩家输完，跳到首页
+    if (state.player1Point <= 0){
+      router.push({path:'/index'})
+    }
   }
 }
 
