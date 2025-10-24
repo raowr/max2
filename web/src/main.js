@@ -4,6 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router' // 引入路由配置
 import { websocket } from './utils/websocket'
+import { storage } from './utils/storage' // 导入封装的存储工具
 
 const app = createApp(App)
 
@@ -25,7 +26,15 @@ function initApp() {
   // 延迟连接 WebSocket，确保应用先加载
   setTimeout(() => {
     if (wsUrl) {
-      websocket.connect(wsUrl)
+// 初始化 WebSocket 配置（全局一次）
+      websocket.init({
+        url: wsUrl+"?user_id="+storage.local.get("user_id"), // 后端地址
+        reconnectInterval: 5000, // 5秒重连一次
+        heartbeatInterval: 20000 // 20秒一次心跳
+      });
+
+// 启动连接（可在登录后再调用，这里直接启动作为示例）
+      websocket.connect();
     } else {
       console.warn('VITE_WS_URL is not defined, using default WebSocket URL')
       // 可以在这里设置一个默认的 WebSocket URL

@@ -7,6 +7,7 @@ const (
 	Play                 = "play"
 	PlayCard             = "playCard"
 	GetInfo              = "getInfo"
+	Heartbeat            = "heartbeat"
 	ChatSessionName      = "ChatName"
 	ChatSessionNameTemp  = "ChatNameTemp"
 	ChatSessionNameError = "ChatNameError"

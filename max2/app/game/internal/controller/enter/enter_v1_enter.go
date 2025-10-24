@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"sync"
 	"time"
 
 	v1 "game/api/enter/v1"
@@ -13,242 +14,501 @@ import (
 	"game/internal/message"
 
 	"github.com/gogf/gf/v2/encoding/gjson"
-	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/frame/g" // 修正：GFv2 正确导入路径
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/gorilla/websocket"
 )
 
+// 客户端连接结构体
+type Client struct {
+	conn      *websocket.Conn // WebSocket 连接
+	userID    string          // 用户标识（用于重连）
+	heartbeat time.Time       // 最后心跳时间
+	sendChan  chan []byte     // 消息发送通道，增大缓冲避免阻塞
+	pid       int             // 玩家id
+}
+
+// 全局房间管理器及并发安全锁（核心优化：解决全局资源竞争）
+var (
+	clients   = make(map[string]*Client)
+	clientsMu sync.RWMutex // 保护clients的读写锁
+	rm        *room.RoomManager
+	rmMu      sync.RWMutex // 保护roomManager的读写锁
+)
+
+// 生产环境需替换为实际域名
+const allowedOrigin = "http://8.155.147.137"
+
 func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.EnterRes, err error) {
 	var (
 		r          = g.RequestFromCtx(ctx)
 		ws         *websocket.Conn
-		msg        message.ChatMsg
-		name       string
-		msgByte    []byte
-		rm         *room.RoomManager
-		pid        int
 		wsUpGrader = websocket.Upgrader{
-			// CheckOrigin allows any origin in development
-			// In production, implement proper origin checking for security
 			CheckOrigin: func(r *http.Request) bool {
-				return true
+				// 从配置读取 debug 模式（推荐：配置文件中配置 app.debug = true/false）
+				// MustGet: 键不存在时 panic；若想避免 panic，用 Get().Bool() 并处理默认值
+				isDebug := g.Cfg().MustGet(ctx, "app.debug").Bool()
+				if isDebug {
+					return true // 调试模式允许所有跨域
+				}
+				// 生产模式严格校验 Origin
+				return r.Header.Get("Origin") == allowedOrigin
 			},
-			// Error handler for upgrade failures
 			Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
-				// Implement error handling logic here
+				g.Log().Errorf(ctx, "WebSocket升级失败: %v", reason)
+				w.WriteHeader(status)
+				w.Write([]byte(reason.Error()))
 			},
 		}
 	)
+
+	// 升级HTTP连接为WebSocket
 	ws, err = wsUpGrader.Upgrade(r.Response.Writer, r.Request, nil)
 	if err != nil {
-		r.Response.Write(err.Error())
+		g.Log().Errorf(ctx, "WebSocket升级失败: %v", err)
+		r.Response.WriteHeader(http.StatusInternalServerError)
+		r.Response.Write([]byte("连接建立失败"))
 		return
 	}
-	for {
-		// Blocking reading message from current websocket.
-		_, msgByte, err = ws.ReadMessage()
-		if err != nil {
-			return nil, nil
-		}
-		// Message decoding.
-		if err = gjson.DecodeTo(msgByte, &msg); err != nil {
-			msgData := message.ChatMsg{
-				Type: consts.ChatTypeError,
-				Data: fmt.Sprintf(`invalid message: %s`, err.Error()),
-				From: "",
-			}
-			_ = c.write(ws, msgData)
-			continue
-		}
-		msg.From = name
 
-		g.Log().Print(ctx, msg)
+	// 初始化全局房间管理器（带锁保护）
+	rmMu.Lock()
+	if rm == nil {
+		rm = room.NewRoomManager()
+	}
+	rmMu.Unlock()
 
-		if rm == nil {
-			rm = room.NewRoomManager()
-		}
-
-		switch msg.Type {
-		case consts.InitRoom:
-			// Checks sending interval limit.
-			// rm := room.NewRoomManager()
-			//删除所有房间
-			for roomID, room := range rm.Rooms {
-				room.Rgtimer.Close()
-				delete(rm.Rooms, roomID)
-			}
-
-			rm.NextPlayerID = 0
-			playerName := "美女"
-			humanPlayer := rm.CreatePlayer(playerName, room.Human)
-			pid = humanPlayer.ID
-			aiCount := 2
-			roomInfo := rm.CreateRoom(humanPlayer, aiCount)
-			players, _ := json.Marshal(roomInfo.Players)
-
-			msgData := message.ChatMsg{
-				Type: consts.InitRoom,
-				Data: gconv.String(players),
-				From: gconv.String(humanPlayer.ID),
-			}
-			_ = c.write(ws, msgData)
-			select {
-			case <-time.After(2 * time.Second):
-				fmt.Println("\n时间到，已超时")
-				//3秒后地3个人加入
-				aiName := fmt.Sprintf("帅锅%d号", len(roomInfo.Players))
-				aiPlayer := rm.CreatePlayer(aiName, room.AI)
-				rm.JoinRoom(aiPlayer, roomInfo.ID)
-			}
-			// room.PlayOneGame(roomInfo)
-			//返回玩家列表
-			players, _ = json.Marshal(roomInfo.Players)
-			msgData = message.ChatMsg{
-				Type: consts.InitRoom,
-				Data: gconv.String(players),
-				From: gconv.String(humanPlayer.ID),
-			}
-			_ = c.write(ws, msgData)
-			// room.PlayOneGame(roomInfo)
-		case consts.Play:
-			var roomId string
-			for _, v := range rm.PlayerList {
-				if v.ID == pid {
-					roomId = v.RoomID
-					break
-				}
-			}
-			roomInfo := rm.Rooms[roomId]
-			go func() {
-				for {
-					roomMsg := <-roomInfo.MsgChan
-					msgData := message.ChatMsg{
-						Type: roomMsg.Type,
-						Data: roomMsg.Data,
-						From: gconv.String(pid),
-					}
-					_ = c.write(ws, msgData)
-					//玩家输完钱,需要离开房间
-					for _, player := range roomInfo.Players {
-						if player.Type == room.Human && player.Point <= 0 {
-							rm.LeaveRoom(player)
-						}
-					}
-				}
-			}()
-			roomInfo.IsPlaying = true
-			room.PlayOneGame(roomInfo)
-		case consts.PlayCard:
-			var roomId string
-			player := &room.Player{}
-			for _, v := range rm.PlayerList {
-				if v.ID == pid {
-					player = v
-					roomId = v.RoomID
-					break
-				}
-			}
-			data := struct {
-				Pid     int   `json:"pid"`
-				CardIds []int `json:"cardIds"`
-				Pass    int   `json:"pass"`
-			}{}
-			err := json.Unmarshal([]byte(msg.Data), &data)
-			if err != nil {
-				g.Log().Error(ctx, err)
-				return nil, err
-			}
-			if data.Pid != pid {
-				g.Log().Error(ctx, fmt.Errorf("pid not equal"))
-				return nil, fmt.Errorf("pid not equal")
-			}
-			player.OutCardIds = data.CardIds
-			player.Pass = data.Pass
-			roomInfo := rm.Rooms[roomId]
-			go func() {
-				roomMsg := <-roomInfo.MsgChan
-				msgData := message.ChatMsg{
-					Type: roomMsg.Type,
-					Data: roomMsg.Data,
-					From: gconv.String(pid),
-				}
-				_ = c.write(ws, msgData)
-			}()
-		case consts.GetInfo: //获取房间信息,用于再game页刷新
-			var roomId string
-			for _, v := range rm.PlayerList {
-				if v.ID == pid {
-					roomId = v.RoomID
-					break
-				}
-			}
-			roomInfo := rm.Rooms[roomId]
-			// 显示玩家的牌（除了底牌）
-			cards := make([]int, 0)
-			cardsNum := make([]*message.PlayData, 0)
-			playerPoint := int64(0)
-			for _, player := range roomInfo.Players {
-				//只能显示自己的牌
-				if player.ID == pid {
-					playerPoint = player.Point
-					for _, card := range player.Cards {
-						cards = append(cards, card.Id)
-					}
-				} else {
-					cardsNum = append(cardsNum, &message.PlayData{
-						Id:      player.ID,
-						CardNum: player.CardNum,
-					})
-				}
-			}
-			//计算剩余出牌时间
-			var remainOutCardTimeout, outCardTimeout int
-			outCardTimeout = room.GetOutCardTimeout()
-			if roomInfo.OutStarTime > 0 {
-				now := int(time.Now().Unix())
-				remainOutCardTimeout = outCardTimeout - (now - roomInfo.OutStarTime)
-			} else {
-				remainOutCardTimeout = outCardTimeout
-			}
-
-			go func() {
-				data, _ := json.Marshal(struct {
-					Cards                []int               `json:"cards"`
-					Current              int                 `json:"current"`
-					PlayerPoint          int64               `json:"playerPoint"`          //玩家总瓜子数
-					OutCardTimeout       int                 `json:"outCardTimeout"`       //出牌最大时间(单位秒) /s
-					RemainOutCardTimeout int                 `json:"remainOutCardTimeout"` //剩余出牌时间(单位秒) /s
-					CardsNum             []*message.PlayData `json:"cardsNum"`             //机器人剩余牌数
-					IsPlaying            bool                `json:"isPlaying"`            //是否进行中游戏
-				}{
-					Cards:                cards,
-					Current:              roomInfo.Current,
-					PlayerPoint:          playerPoint,
-					OutCardTimeout:       outCardTimeout,       //出牌最大时间(单位秒) /s
-					RemainOutCardTimeout: remainOutCardTimeout, //剩余出牌时间(单位秒) /s
-					CardsNum:             cardsNum,
-					IsPlaying:            roomInfo.IsPlaying,
-				})
-				msgData := message.ChatMsg{
-					Type: consts.GetInfo,
-					Data: gconv.String(data),
-					From: gconv.String(pid),
-				}
-				_ = c.write(ws, msgData)
-			}()
-		}
+	// 获取或生成用户ID
+	userID := r.GetQuery("user_id").String()
+	if userID == "" {
+		userID = room.GenerateUserID()
+		g.Log().Infof(ctx, "用户生成新ID: %s", userID)
 	}
 
+	// 创建客户端实例（增大消息缓冲）
+	client := &Client{
+		conn:      ws,
+		userID:    userID,
+		heartbeat: time.Now(),
+		sendChan:  make(chan []byte, 1000), // 缓冲增大至1000，减少阻塞
+	}
+
+	// 加锁更新客户端连接（重连逻辑）
+	clientsMu.Lock()
+	if oldClient, ok := clients[userID]; ok {
+		oldClient.conn.Close() // 关闭旧连接
+		g.Log().Infof(ctx, "用户 %s 重连，关闭旧连接", userID)
+	}
+	clients[userID] = client
+	clientsMu.Unlock()
+
+	g.Log().Infof(ctx, "用户 %s 连接成功", userID)
+
+	// 启动协程（增加退出日志）
+	go client.readLoop(ctx)
+	go client.readServe(ctx)
+	go client.writeLoop(ctx)
+	go client.heartbeatCheck(ctx)
+	return
 }
 
-// write sends message to current client.
-func (c *ControllerV1) write(ws *websocket.Conn, msg message.ChatMsg) error {
+// 读消息循环：处理客户端消息
+func (c *Client) readLoop(ctx context.Context) {
+	defer func() {
+		// 清理资源（带锁）
+		clientsMu.Lock()
+		delete(clients, c.userID)
+		clientsMu.Unlock()
+
+		c.conn.Close()
+		g.Log().Infof(ctx, "用户 %s 断开连接（readLoop退出）", c.userID)
+	}()
+
+	for {
+		// 读取客户端消息
+		mt, data, err := c.conn.ReadMessage()
+		if err != nil {
+			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseNormalClosure) {
+				g.Log().Errorf(ctx, "用户 %s 消息读取错误: %v", c.userID, err)
+			}
+			break // 连接断开，退出循环
+		}
+
+		// 解析消息（严格错误处理）
+		var msg message.ChatMsg
+		if err := gconv.Struct(data, &msg); err != nil {
+			errMsg := message.ChatMsg{
+				Type: consts.ChatTypeError,
+				Data: fmt.Sprintf("无效消息格式: %v", err),
+				From: "",
+			}
+			c.sendChan <- c.encodeMessage(ctx, errMsg)
+			continue
+		}
+
+		// 根据消息类型处理业务（所有操作加锁保护全局rm）
+		switch msg.Type {
+		case consts.InitRoom:
+			c.handleInitRoom(ctx)
+		case consts.Play:
+			c.handlePlay(ctx)
+		case consts.PlayCard:
+			c.handlePlayCard(ctx, msg.Data)
+		case consts.GetInfo:
+			c.handleGetInfo(ctx)
+		case consts.Heartbeat:
+			c.handleHeartbeat(ctx, msg.Data)
+		default:
+			errMsg := message.ChatMsg{
+				Type: consts.ChatTypeError,
+				Data: "未知消息类型",
+				From: "",
+			}
+			c.sendChan <- c.encodeMessage(ctx, errMsg)
+		}
+
+		g.Log().Infof(ctx, "用户 %s 接收消息: %s（类型: %d）", c.userID, data, mt)
+	}
+}
+
+// 处理房间初始化
+func (c *Client) handleInitRoom(ctx context.Context) {
+	rmMu.Lock()
+	defer rmMu.Unlock()
+
+	// 清理当前用户关联的旧房间（优化：定向清理，避免全量遍历）
+	var oldRoomID string
+	for _, player := range rm.PlayerList {
+		if player.UserId == c.userID {
+			oldRoomID = player.RoomID
+			break
+		}
+	}
+	if oldRoomID != "" {
+		if roomInfo, ok := rm.Rooms[oldRoomID]; ok {
+			if roomInfo.Rgtimer != nil {
+				roomInfo.Rgtimer.Close() // 停止定时器（确保资源释放）
+			}
+			delete(rm.Rooms, oldRoomID)
+			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userID, oldRoomID)
+		}
+		// 从玩家列表移除旧玩家
+		delete(rm.PlayerList, c.userID)
+	}
+
+	// 创建新房间和玩家
+	roomInfo := rm.CreateRoom()
+	playerName := "美女"
+	humanPlayer := roomInfo.CreatePlayer(playerName, room.Human)
+	humanPlayer.UserId = c.userID
+	c.pid = humanPlayer.ID
+	rm.PlayerList[humanPlayer.UserId] = humanPlayer // 关联用户与玩家
+
+	// 创建AI玩家
+	aiCount := 2
+	for i := 0; i < aiCount; i++ {
+		aiName := fmt.Sprintf("帅锅%d号", i+1)
+		roomInfo.CreatePlayer(aiName, room.AI)
+	}
+
+	// 推送玩家列表（处理JSON错误）
+	players, err := json.Marshal(roomInfo.Players)
+	if err != nil {
+		g.Log().Errorf(ctx, "用户 %s 序列化玩家列表失败: %v", c.userID, err)
+		return
+	}
+	msgData := message.ChatMsg{
+		Type: consts.InitRoom,
+		Data: gconv.String(players),
+		From: gconv.String(humanPlayer.ID),
+	}
+	c.sendChan <- c.encodeMessage(ctx, msgData)
+
+	// 延迟添加额外AI（带上下文超时，避免协程泄漏）
+	go func(ctx context.Context, roomID string) {
+		select {
+		case <-ctx.Done():
+			return
+		case <-time.After(2 * time.Second):
+			rmMu.Lock()
+			defer rmMu.Unlock()
+
+			roomInfo, ok := rm.Rooms[roomID]
+			if !ok {
+				g.Log().Warningf(ctx, "房间 %s 已不存在，停止添加AI", roomID)
+				return
+			}
+			aiName := fmt.Sprintf("帅锅%d号", len(roomInfo.Players))
+			roomInfo.CreatePlayer(aiName, room.AI)
+
+			// 再次推送更新后的玩家列表
+			players, err := json.Marshal(roomInfo.Players)
+			if err != nil {
+				g.Log().Errorf(ctx, "用户 %s 序列化玩家列表失败: %v", c.userID, err)
+				return
+			}
+			msgData := message.ChatMsg{
+				Type: consts.InitRoom,
+				Data: gconv.String(players),
+				From: gconv.String(c.pid),
+			}
+			c.sendChan <- c.encodeMessage(ctx, msgData)
+		}
+	}(ctx, roomInfo.ID)
+}
+
+// 处理开始游戏
+func (c *Client) handlePlay(ctx context.Context) {
+	rmMu.RLock()
+	player, ok := rm.PlayerList[c.userID]
+	if !ok {
+		rmMu.RUnlock()
+		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userID)
+		return
+	}
+	roomInfo, ok := rm.Rooms[player.RoomID]
+	rmMu.RUnlock()
+
+	if !ok {
+		g.Log().Errorf(ctx, "用户 %s 房间不存在", c.userID)
+		return
+	}
+
+	rmMu.Lock()
+	roomInfo.IsPlaying = true
+	rmMu.Unlock()
+
+	// 启动游戏逻辑（传入上下文，支持取消）
+	go room.PlayOneGame(roomInfo)
+}
+
+// 处理出牌
+func (c *Client) handlePlayCard(ctx context.Context, data string) {
+	rmMu.RLock()
+	player, ok := rm.PlayerList[c.userID]
+	rmMu.RUnlock()
+	if !ok {
+		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userID)
+		return
+	}
+
+	// 解析出牌数据（严格错误处理）
+	var reqData struct {
+		Pid     int   `json:"pid"`
+		CardIds []int `json:"cardIds"`
+		Pass    int   `json:"pass"`
+	}
+	if err := json.Unmarshal([]byte(data), &reqData); err != nil {
+		g.Log().Errorf(ctx, "用户 %s 解析出牌数据失败: %v", c.userID, err)
+		return
+	}
+	if reqData.Pid != c.pid {
+		g.Log().Errorf(ctx, "用户 %s PID不匹配（%d vs %d）", c.userID, reqData.Pid, c.pid)
+		return
+	}
+
+	// 更新玩家出牌信息
+	rmMu.Lock()
+	player.OutCardIds = reqData.CardIds
+	player.Pass = reqData.Pass
+	rmMu.Unlock()
+}
+
+// 处理获取房间信息
+func (c *Client) handleGetInfo(ctx context.Context) {
+	rmMu.RLock()
+	player, ok := rm.PlayerList[c.userID]
+	if !ok {
+		rmMu.RUnlock()
+		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userID)
+		return
+	}
+	roomInfo, ok := rm.Rooms[player.RoomID]
+	rmMu.RUnlock()
+	if !ok {
+		g.Log().Errorf(ctx, "用户 %s 房间不存在", c.userID)
+		return
+	}
+
+	// 整理房间信息（仅暴露当前玩家可见数据）
+	cards := make([]int, 0)
+	cardsNum := make([]*message.PlayData, 0)
+	playerPoint := int64(0)
+	rmMu.RLock()
+	for _, p := range roomInfo.Players {
+		if p.ID == c.pid {
+			playerPoint = p.Point
+			for _, card := range p.Cards {
+				cards = append(cards, card.Id)
+			}
+		} else {
+			cardsNum = append(cardsNum, &message.PlayData{
+				Id:      p.ID,
+				CardNum: p.CardNum,
+			})
+		}
+	}
+	current := roomInfo.Current
+	isPlaying := roomInfo.IsPlaying
+	outStarTime := roomInfo.OutStarTime
+	rmMu.RUnlock()
+
+	// 计算剩余出牌时间
+	outCardTimeout := room.GetOutCardTimeout()
+	remainOutCardTimeout := outCardTimeout
+	if outStarTime > 0 {
+		now := int(time.Now().Unix())
+		remainOutCardTimeout = outCardTimeout - (now - outStarTime)
+		if remainOutCardTimeout < 0 {
+			remainOutCardTimeout = 0
+		}
+	}
+
+	// 序列化并推送（处理JSON错误）
+	resData, err := json.Marshal(struct {
+		Cards                []int               `json:"cards"`
+		Current              int                 `json:"current"`
+		PlayerPoint          int64               `json:"playerPoint"`
+		OutCardTimeout       int                 `json:"outCardTimeout"`
+		RemainOutCardTimeout int                 `json:"remainOutCardTimeout"`
+		CardsNum             []*message.PlayData `json:"cardsNum"`
+		IsPlaying            bool                `json:"isPlaying"`
+	}{
+		Cards:                cards,
+		Current:              current,
+		PlayerPoint:          playerPoint,
+		OutCardTimeout:       outCardTimeout,
+		RemainOutCardTimeout: remainOutCardTimeout,
+		CardsNum:             cardsNum,
+		IsPlaying:            isPlaying,
+	})
+	if err != nil {
+		g.Log().Errorf(ctx, "用户 %s 序列化房间信息失败: %v", c.userID, err)
+		return
+	}
+
+	msgData := message.ChatMsg{
+		Type: consts.GetInfo,
+		Data: gconv.String(resData),
+		From: gconv.String(c.pid),
+	}
+	c.sendChan <- c.encodeMessage(ctx, msgData)
+}
+
+// 处理心跳
+func (c *Client) handleHeartbeat(ctx context.Context, data string) {
+	if data == "ping" {
+		c.heartbeat = time.Now()
+		// 非阻塞发送pong，避免通道满导致阻塞
+		select {
+		case c.sendChan <- []byte(`{"type":"heartbeat","data":"pong"}`):
+		default:
+			g.Log().Warningf(ctx, "用户 %s 心跳响应发送阻塞（通道满）", c.userID)
+		}
+	}
+}
+
+// 读取服务端消息并推送给客户端（修复空指针和资源泄漏）
+func (c *Client) readServe(ctx context.Context) {
+	// 等待玩家初始化（最多等5秒）
+	var roomID string
+	rmMu.RLock()
+	player, ok := rm.PlayerList[c.userID]
+	if ok && player.RoomID != "" {
+		roomID = player.RoomID
+	}
+	rmMu.RUnlock()
+
+	// 循环读取房间消息（带退出机制）
+	for {
+		rmMu.RLock()
+		roomInfo, ok := rm.Rooms[roomID]
+		rmMu.RUnlock()
+		if !ok {
+			g.Log().Errorf(ctx, "用户 %s 房间 %s 已不存在，退出readServe", c.userID, roomID)
+			return
+		}
+
+		select {
+		case <-ctx.Done():
+			g.Log().Infof(ctx, "用户 %s readServe退出（上下文关闭）", c.userID)
+			return
+		case roomMsg, ok := <-roomInfo.MsgChan:
+			if !ok {
+				g.Log().Infof(ctx, "用户 %s 房间消息通道已关闭", c.userID)
+				return
+			}
+			// 推送消息给客户端
+			msgData := message.ChatMsg{
+				Type: roomMsg.Type,
+				Data: roomMsg.Data,
+				From: gconv.String(c.pid),
+			}
+			select {
+			case c.sendChan <- c.encodeMessage(ctx, msgData):
+			default:
+				g.Log().Warningf(ctx, "用户 %s 消息发送阻塞（通道满）", c.userID)
+			}
+
+			// 处理玩家余额不足（带锁）
+			rmMu.Lock()
+			for _, p := range roomInfo.Players {
+				if p.Type == room.Human && p.Point <= 0 {
+					rm.LeaveRoom(p)
+					g.Log().Infof(ctx, "玩家 %d 余额不足，已离开房间", p.ID)
+				}
+			}
+			rmMu.Unlock()
+		}
+	}
+}
+
+// 写消息循环：发送消息到客户端
+func (c *Client) writeLoop(ctx context.Context) {
+	defer g.Log().Infof(ctx, "用户 %s writeLoop退出", c.userID)
+
+	for {
+		select {
+		case data := <-c.sendChan:
+			if err := c.conn.WriteMessage(ghttp.WsMsgText, data); err != nil {
+				g.Log().Errorf(ctx, "用户 %s 消息发送失败: %v", c.userID, err)
+				return
+			}
+		case <-ctx.Done():
+			return
+		}
+	}
+}
+
+// 心跳检测：超时断开连接
+func (c *Client) heartbeatCheck(ctx context.Context) {
+	ticker := time.NewTicker(5 * time.Second)
+	defer ticker.Stop()
+	defer g.Log().Infof(ctx, "用户 %s 心跳检测退出", c.userID)
+
+	for {
+		select {
+		case <-ticker.C:
+			if time.Since(c.heartbeat) > 60*time.Second {
+				g.Log().Infof(ctx, "用户 %s 心跳超时（60秒），断开连接", c.userID)
+				c.conn.Close()
+				return
+			}
+		case <-ctx.Done():
+			return
+		}
+	}
+}
+
+// 消息编码（处理错误）
+func (c *Client) encodeMessage(ctx context.Context, msg message.ChatMsg) []byte {
 	msgBytes, err := gjson.Encode(msg)
 	if err != nil {
-		return err
+		g.Log().Errorf(ctx, "用户 %s 消息编码失败: %v", c.userID, err)
+		return []byte(`{"type":"error","data":"消息编码失败"}`)
 	}
-	return ws.WriteMessage(ghttp.WsMsgText, msgBytes)
+	return msgBytes
 }
 
 /*

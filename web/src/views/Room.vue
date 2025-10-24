@@ -116,6 +116,7 @@ import bighead15339 from '@/assets/img/touxiang/bighead15339.png';
 import full16020 from '@/assets/img/lihui/full16020.png';
 import bighead15419 from '@/assets/img/touxiang/bighead15419.png';
 import full15418 from '@/assets/img/lihui/full15418.png';
+import { storage } from '@/utils/storage'
 const router = useRouter()
 const state = reactive({
   players: [
@@ -179,6 +180,7 @@ const state = reactive({
     }
   })
 })
+const userId = ref('')
 onMounted(() => {
   init()
 })
@@ -190,20 +192,31 @@ const init = async () => {
 
   // 监听 WebSocket 事件
   websocket.on('message', handleMessage);
-  websocket.on('connected', () => {
-    console.log('Connected');
+  websocket.on('open', () => {
+    console.log('on open');
     // 连接成功后再执行 toggleReady
     toggleReady();
   });
-  websocket.on('disconnected', () => {
-    console.log('Disconnected');
+  websocket.on('error', () => {
+    console.log('on error');
+  });
+  websocket.on('close', () => {
+    console.log('on close');
   });
 
   // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
-  if (websocket.socket && websocket.socket.readyState === WebSocket.OPEN) {
+  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
     toggleReady();
   }
 }
+
+// 组件卸载时移除回调（关键：防止内存泄漏）
+onUnmounted(() => {
+  websocket.off('open', ()=>{console.log('off open');});
+  websocket.off('message', ()=>{console.log('off message');});
+  websocket.off('error', ()=>{console.log('off error');});
+  websocket.off('error', ()=>{console.log('off error');});
+});
 
 
 const handleMessage = (data) => {
@@ -213,9 +226,14 @@ const handleMessage = (data) => {
  try {
       // 解析JSON字符串
       const serverPlayers = JSON.parse(data.data)
+
       state.roomId=serverPlayers[0].RoomID
       // 智能合并数据
       serverPlayers.forEach(serverPlayer => {
+        if (serverPlayer.ID == 0) {//是人类玩家
+          //保存用户userId
+          storage.local.set('user_id', serverPlayer.UserId)
+        }
         const convertedId = serverPlayer.ID + 1
         // 查找已有玩家
         const existing = state.players.find(p => p.id === convertedId)

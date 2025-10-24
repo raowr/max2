@@ -331,23 +331,34 @@ onMounted(() => {
   const bgmUrl = new URL('@/assets/music/game_bg1.mp3', import.meta.url).href;
   audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
   audioManager.playBGM('bgm')
-    websocket.on('connected', () => {
-    console.log('Connected');
+  websocket.on('open', () => {
+    console.log('on open');
     websocket.send({"type":"initRoom","data":"","name":""});
     // 连接成功后再执行 toggleReady
     websocket.send({ "type": "getInfo", "data": "", "name": "" })
   });
-  websocket.on('disconnected', () => {
-    console.log('Disconnected');
+  websocket.on('error', () => {
+    console.log('on error');
+  });
+  websocket.on('close', () => {
+    console.log('on close');
   });
 
   // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
-  if (websocket.socket && websocket.socket.readyState === WebSocket.OPEN) {
+  if (websocket.socket && websocket.ws.readyState === WebSocket.OPEN) {
     websocket.send({ "type": "play", "data": "", "name": "" })
   }
   websocket.on('message', handleMessage)
   window.addEventListener('resize', handleResize)
 })
+
+// 组件卸载时移除回调（关键：防止内存泄漏）
+onUnmounted(() => {
+  websocket.off('open', ()=>{console.log('off open');});
+  websocket.off('message', ()=>{console.log('off message');});
+  websocket.off('error', ()=>{console.log('off error');});
+  websocket.off('error', ()=>{console.log('off error');});
+});
 
 onUnmounted(() => window.removeEventListener('resize', handleResize));
 

@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/gogf/gf/v2/os/gtime"
 	"math/rand"
 	"strconv"
 	"strings"
@@ -66,66 +67,68 @@ type Player struct {
 	CardNum     int              //牌数
 	ReCard      bool             //是否需要重新整理牌
 	Point       int64            //积分，总积分
+	UserId      string           //用户id
 }
 
 // 房间结构体
 type Room struct {
-	ID          string
-	Players     []*Player
-	Deck        []Card
-	Landlord    *Player
-	Farmers     []*Player
-	Current     int    // 当前出牌玩家索引
-	LastCards   []Card // 上一手牌
-	LastPH      int    //上一手牌型
-	Turn        int    // 轮次
-	IsPlaying   bool   // 房间是否正在游戏中
-	MsgChan     chan RoomMsg
-	Rgtimer     *gtimer.Timer
-	OutStarTime int //出牌开始时间
-	passCount   int //不出次数
+	ID           string
+	Players      []*Player
+	Deck         []Card
+	Landlord     *Player
+	Farmers      []*Player
+	Current      int    // 当前出牌玩家索引
+	LastCards    []Card // 上一手牌
+	LastPH       int    //上一手牌型
+	Turn         int    // 轮次
+	IsPlaying    bool   // 房间是否正在游戏中
+	MsgChan      chan RoomMsg
+	Rgtimer      *gtimer.Timer
+	OutStarTime  int //出牌开始时间
+	passCount    int //不出次数
+	NextPlayerID int
 }
 
 // 房间管理器
 type RoomManager struct {
-	Rooms        map[string]*Room
-	PlayerList   map[int]*Player
-	NextPlayerID int
+	Rooms      map[string]*Room
+	PlayerList map[string]*Player
 }
 
 // 创建新的房间管理器
 func NewRoomManager() *RoomManager {
 	return &RoomManager{
-		Rooms:        make(map[string]*Room),
-		PlayerList:   make(map[int]*Player),
-		NextPlayerID: 0,
+		Rooms:      make(map[string]*Room),
+		PlayerList: make(map[string]*Player),
 	}
 }
 
 // 创建新玩家
-func (rm *RoomManager) CreatePlayer(name string, playerType PlayerType) *Player {
+func (room *Room) CreatePlayer(name string, playerType PlayerType) *Player {
 	player := &Player{
-		ID:          rm.NextPlayerID,
+		ID:          room.NextPlayerID,
 		Name:        name,
 		Type:        playerType,
 		handPattern: make(map[int][][]Card),
 		CardNum:     13,
 		Point:       GetGameInitPoint(), //初始积分
+		RoomID:      room.ID,
+		//UserId: 	 generateUserID(),//初始化用户ID
 	}
-	rm.PlayerList[player.ID] = player
-	rm.NextPlayerID++
+	room.Players = append(room.Players, player) //加入房间
+	room.NextPlayerID++
 	return player
 }
 
 // 创建新房间（支持添加AI）
-func (rm *RoomManager) CreateRoom(player *Player, aiCount int) *Room {
+func (rm *RoomManager) CreateRoom() *Room {
 	// 生成唯一房间ID
 	roomID := generateRoomID()
 
 	// 创建新房间
 	room := &Room{
 		ID:        roomID,
-		Players:   []*Player{player},
+		Players:   []*Player{},
 		IsPlaying: false,
 		MsgChan:   make(chan RoomMsg),
 		Rgtimer:   gtimer.New(),
@@ -134,15 +137,15 @@ func (rm *RoomManager) CreateRoom(player *Player, aiCount int) *Room {
 	room.Rgtimer.Stop() //先停止
 
 	// 添加AI机器人
-	for i := 0; i < aiCount; i++ {
-		aiName := fmt.Sprintf("帅锅%d号", i+1)
-		aiPlayer := rm.CreatePlayer(aiName, AI)
-		room.Players = append(room.Players, aiPlayer)
-		aiPlayer.RoomID = roomID
-	}
+	//for i := 0; i < aiCount; i++ {
+	//	aiName := fmt.Sprintf("帅锅%d号", i+1)
+	//	aiPlayer := rm.CreatePlayer(aiName, AI)
+	//	room.Players = append(room.Players, aiPlayer)
+	//	aiPlayer.RoomID = roomID
+	//}
 
 	// 将玩家加入房间
-	player.RoomID = roomID
+	//player.RoomID = roomID
 
 	// 保存房间
 	rm.Rooms[roomID] = room
@@ -212,11 +215,17 @@ func (rm *RoomManager) LeaveRoom(player *Player) {
 func generateRoomID() string {
 	rand.Seed(time.Now().UnixNano())
 	const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	result := make([]byte, 6)
+	result := make([]byte, 10)
 	for i := range result {
 		result[i] = chars[rand.Intn(len(chars))]
 	}
 	return string(result)
+}
+
+// 生成唯一玩家ID
+func GenerateUserID() string {
+	result := generateRoomID() + gconv.String(gtime.Now().TimestampMilli())
+	return result
 }
 
 // 初始化一副牌
@@ -300,6 +309,7 @@ func bidLandlord(room *Room) {
 				v.Must = true
 			}
 		}
+		v.CardNum = len(v.Cards)
 	}
 	// ♦3先出牌
 	room.Current = currentPlayer
