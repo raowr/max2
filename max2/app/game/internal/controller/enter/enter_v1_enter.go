@@ -46,12 +46,18 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 			CheckOrigin: func(r *http.Request) bool {
 				// 从配置读取 debug 模式（推荐：配置文件中配置 app.debug = true/false）
 				// MustGet: 键不存在时 panic；若想避免 panic，用 Get().Bool() 并处理默认值
-				isDebug := g.Cfg().MustGet(ctx, "app.debug").Bool()
-				if isDebug {
-					return true // 调试模式允许所有跨域
-				}
-				// 生产模式严格校验 Origin
-				return r.Header.Get("Origin") == allowedOrigin
+				//isDebug := g.Cfg().MustGet(ctx, "app.debug").Bool()
+				//if isDebug {
+				//	return true // 调试模式允许所有跨域
+				//}
+				//// 2. Android 原生客户端（Origin 为空字符串）
+				//origin := r.Header.Get("Origin")
+				//allowedOrigins := map[string]bool{
+				//	allowedOrigin: true, // 浏览器前端域名
+				//	"": true,            // 允许空 Origin（Android 原生）
+				//}
+				//return allowedOrigins[origin]
+				return true
 			},
 			Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
 				g.Log().Errorf(ctx, "WebSocket升级失败: %v", reason)
