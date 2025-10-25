@@ -311,6 +311,9 @@ const screenWidth = ref(window.innerWidth);
 // 缩放比例（默认100%，小于998px时为60%）
 const scaleFactor = ref(screenWidth.value < 998 ? 0.6 : 1);
 
+// 添加这行来定义bgmInitialized变量
+const bgmInitialized = ref(false) // 跟踪BGM是否已经初始化
+
 // 导入背景图片（新增代码）
 import winBg from '@/assets/img/ui/win_bg.png'
 import loseBg from '@/assets/img/ui/lose_bg.png'
@@ -326,7 +329,25 @@ onMounted(() => {
   initDeck()
   const bgmUrl = new URL('@/assets/music/game_bg1.mp3', import.meta.url).href;
   audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
-  audioManager.playBGM('bgm')
+  try {
+    audioManager.playBGM('bgm')
+  } catch (error) {
+    console.error('BGM播放失败:', error)
+  }
+  // 添加用户交互事件监听器来初始化BGM
+  const initBGMOnInteraction = () => {
+    if (!bgmInitialized.value) {
+      audioManager.playBGM('bgm')
+      bgmInitialized.value = true
+      // 移除监听器，避免重复触发
+      document.removeEventListener('click', initBGMOnInteraction)
+      document.removeEventListener('touchstart', initBGMOnInteraction)
+    }
+  }
+  
+  // 添加多种交互方式的支持
+  document.addEventListener('click', initBGMOnInteraction)
+  document.addEventListener('touchstart', initBGMOnInteraction)
   websocket.on('open', () => {
     console.log('game on open');
     //websocket.send({"type":"initRoom","data":"","name":""});
@@ -355,6 +376,11 @@ onUnmounted(() => {
   websocket.off('message', () => { console.log('off message'); });
   websocket.off('error', () => { console.log('off error'); });
   websocket.off('error', () => { console.log('off error'); });
+
+    // 移除BGM初始化相关的事件监听器
+  document.removeEventListener('click', () => {});
+  document.removeEventListener('touchstart', () => {});
+  window.removeEventListener('resize', handleResize);
 });
 
 onUnmounted(() => window.removeEventListener('resize', handleResize));
