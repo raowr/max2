@@ -94,13 +94,11 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	go client.readServe(ctx)
 	go client.writeLoop(ctx)
 	go client.heartbeatCheck(ctx)
-	for {
-		select {
-		case <-ctx.Done():
-			g.Log().Infof(ctx, "用户 退出（上下文关闭）")
-			return
-		}
-	}
+
+	// 优化后
+	<-ctx.Done()
+	g.Log().Infof(ctx, "用户 退出（上下文关闭）")
+	return
 }
 
 // 读消息循环：处理客户端消息
@@ -229,32 +227,31 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		localCtx := context.Background()
 		// 添加日志记录协程启动
 		g.Log().Infof(localCtx, "用户 %s 开始延迟添加AI到房间 %s", userID, roomID)
-		select {
-		case <-time.After(2 * time.Second):
-			rmMu.Lock()
-			defer rmMu.Unlock()
 
-			roomInfo, ok := rm.Rooms[roomID]
-			if !ok {
-				g.Log().Warningf(ctx, "房间 %s 已不存在，停止添加AI", roomID)
-				return
-			}
-			aiName := fmt.Sprintf("帅锅%d号", len(roomInfo.Players))
-			roomInfo.CreatePlayer(aiName, room.AI)
+		<-time.After(2 * time.Second)
+		rmMu.Lock()
+		defer rmMu.Unlock()
 
-			// 再次推送更新后的玩家列表
-			players, err := json.Marshal(roomInfo.Players)
-			if err != nil {
-				g.Log().Errorf(ctx, "用户 %s 序列化玩家列表失败: %v", c.userID, err)
-				return
-			}
-			msgData := message.ChatMsg{
-				Type: consts.InitRoom,
-				Data: gconv.String(players),
-				From: gconv.String(clientPid),
-			}
-			c.sendChan <- c.encodeMessage(localCtx, msgData)
+		roomInfo, ok := rm.Rooms[roomID]
+		if !ok {
+			g.Log().Warningf(ctx, "房间 %s 已不存在，停止添加AI", roomID)
+			return
 		}
+		aiName := fmt.Sprintf("帅锅%d号", len(roomInfo.Players))
+		roomInfo.CreatePlayer(aiName, room.AI)
+
+		// 再次推送更新后的玩家列表
+		players, err := json.Marshal(roomInfo.Players)
+		if err != nil {
+			g.Log().Errorf(ctx, "用户 %s 序列化玩家列表失败: %v", c.userID, err)
+			return
+		}
+		msgData := message.ChatMsg{
+			Type: consts.InitRoom,
+			Data: gconv.String(players),
+			From: gconv.String(clientPid),
+		}
+		c.sendChan <- c.encodeMessage(localCtx, msgData)
 	}(roomInfo.ID, c.userID, c.pid)
 
 }
@@ -437,28 +434,13 @@ func (c *Client) handleHeartbeat(ctx context.Context, data string) {
 
 // 读取服务端消息并推送给客户端（修复空指针和资源泄漏）
 func (c *Client) readServe(ctx context.Context) {
-	// 等待玩家初始化（最多等5秒）
+
 	var roomID string
+	roomInfo := &room.Room{}
 	// 循环读取房间消息（带退出机制）
 	for {
 		if c.closed {
 			g.Log().Warningf(ctx, "用户 %s 房间1 已不存在，退出readServe", c.userID)
-			return
-		}
-		if roomID == "" {
-			select {
-			case roomID = <-c.roomIdChan:
-			case <-ctx.Done():
-				g.Log().Infof(ctx, "用户 %s readServe退出（上下文关闭）", c.userID)
-				return
-			}
-		}
-
-		rmMu.RLock()
-		roomInfo, ok := rm.Rooms[roomID]
-		rmMu.RUnlock()
-		if !ok {
-			g.Log().Errorf(ctx, "用户 %s 房间 %s 已不存在，退出readServe", c.userID, roomID)
 			return
 		}
 
@@ -466,6 +448,10 @@ func (c *Client) readServe(ctx context.Context) {
 		case <-ctx.Done():
 			g.Log().Infof(ctx, "用户 %s readServe退出（上下文关闭）", c.userID)
 			return
+		case roomID = <-c.roomIdChan: //监听房间Id变化
+			rmMu.RLock()
+			roomInfo = rm.Rooms[roomID]
+			rmMu.RUnlock()
 		case roomMsg, ok := <-roomInfo.MsgChan:
 			if !ok {
 				g.Log().Infof(ctx, "用户 %s 房间消息通道已关闭", c.userID)
