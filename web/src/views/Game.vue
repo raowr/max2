@@ -78,7 +78,7 @@
       </div>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-70%;top:-2%'>
       <p style="z-index:1;font-size:16px; color:white;position: absolute;top:66%;left:-60%;">剩{{ state.player2CardsNum
-        }}张
+      }}张
       </p>
     </div>
 
@@ -344,7 +344,7 @@ onMounted(() => {
       document.removeEventListener('touchstart', initBGMOnInteraction)
     }
   }
-  
+
   // 添加多种交互方式的支持
   document.addEventListener('click', initBGMOnInteraction)
   document.addEventListener('touchstart', initBGMOnInteraction)
@@ -376,9 +376,9 @@ onUnmounted(() => {
   websocket.off('error', () => { console.log('off error'); });
   websocket.off('error', () => { console.log('off error'); });
 
-    // 移除BGM初始化相关的事件监听器
-  document.removeEventListener('click', () => {});
-  document.removeEventListener('touchstart', () => {});
+  // 移除BGM初始化相关的事件监听器
+  document.removeEventListener('click', () => { });
+  document.removeEventListener('touchstart', () => { });
   window.removeEventListener('resize', handleResize);
 });
 
@@ -415,7 +415,8 @@ const handleMessage = (data) => {
   if (parsedData.type == "getInfo") {
     data = JSON.parse(parsedData.data)
     console.log("getInfo", data);
-    if (data.isPlaying) {//是否游戏中
+    //是否游戏中
+    if (data.isPlaying) {
       state.outCards = (data.outCards)
       state.lastOutCards = (data.outCards)
       //如果必出是玩家，记录下必出玩家的pid
@@ -452,7 +453,7 @@ const handleMessage = (data) => {
       }
       switch (data.lastPid) {
         case 0:
-           state.lastmsg = "玩家1出了：" + cardsMsg
+          state.lastmsg = "玩家1出了：" + cardsMsg
           break;
         case 1:
           state.lastmsg = "玩家2出了：" + cardsMsg
