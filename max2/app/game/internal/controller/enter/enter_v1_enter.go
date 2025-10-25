@@ -128,6 +128,9 @@ func (c *Client) readLoop(ctx context.Context) {
 			return // 连接断开，退出循环
 		}
 
+		// 只要成功接收到消息，无论后续处理是否成功，都更新心跳
+		c.heartbeat = time.Now()
+
 		// 解析消息（严格错误处理）
 		var msg message.ChatMsg
 		if err := gconv.Struct(data, &msg); err != nil {
@@ -139,7 +142,6 @@ func (c *Client) readLoop(ctx context.Context) {
 			c.sendChan <- c.encodeMessage(ctx, errMsg)
 			continue
 		}
-
 		// 根据消息类型处理业务（所有操作加锁保护全局rm）
 		switch msg.Type {
 		case consts.InitRoom:
@@ -543,6 +545,7 @@ func (c *Client) heartbeatCheck(ctx context.Context) {
 		}
 		select {
 		case <-ticker.C:
+			g.Log().Infof(ctx, "heartbeatCheck: %v", time.Since(c.heartbeat))
 			if time.Since(c.heartbeat) > 60*time.Second {
 				g.Log().Infof(ctx, "用户 %s 心跳超时（60秒），断开连接", c.userID)
 				c.conn.Close()
