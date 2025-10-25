@@ -195,7 +195,7 @@ const init = async () => {
   websocket.on('open', () => {
     console.log('room on open');
     // 连接成功后再执行 toggleReady
-    toggleReady();
+    websocket.send({"type":"getInfo","data":"","name":""});
   });
   websocket.on('error', () => {
     console.log('on error');
@@ -267,6 +267,11 @@ const handleMessage = (data) => {
       console.error('解析玩家数据失败:', e)
     }
   }
+  if(parsedData.type === "getInfo"){
+          // 解析JSON字符串
+      const serverPlayers = JSON.parse(parsedData.data)
+      state.roomId=serverPlayers.roomId
+  }
 }
 // 添加工具函数（放在script setup顶部）
 const getAvatarByType = (type) => {
@@ -294,13 +299,7 @@ onBeforeUnmount(() => {
 })
 
 const toggleReady = () => {
-  // 确保 WebSocket 已连接再发送消息
-  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
-    websocket.send({"type":"initRoom","data":"","name":""});
-    console.log('send ready');
-  } else {
-    console.log('WebSocket not connected, cannot send ready message');
-  }
+  websocket.send({"type":"initRoom","data":"","name":""});
 }
 
 const isReady=() => {

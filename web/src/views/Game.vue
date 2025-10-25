@@ -350,7 +350,6 @@ onMounted(() => {
   document.addEventListener('touchstart', initBGMOnInteraction)
   websocket.on('open', () => {
     console.log('game on open');
-    //websocket.send({"type":"initRoom","data":"","name":""});
     // 连接成功后再执行 toggleReady
     websocket.send({ "type": "getInfo", "data": "", "name": "" })
   });
@@ -469,7 +468,7 @@ const handleMessage = (data) => {
 
 
     } else {
-      websocket.send({ "type": "play", "data": "", "name": "" })
+      router.push('/index')  // 跳转到首页路由
     }
   }
   if (parsedData.type == "showCard") {

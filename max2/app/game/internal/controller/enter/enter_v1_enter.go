@@ -381,6 +381,8 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 
 	// 序列化并推送（处理JSON错误）
 	resData, err := json.Marshal(struct {
+		RoomId               string              `json:"roomId"`
+		Players              []*room.Player      `json:"players"`
 		Cards                []int               `json:"cards"`
 		Current              int                 `json:"current"`
 		PlayerPoint          int64               `json:"playerPoint"`
@@ -392,6 +394,8 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		MustPid              int                 `json:"mustPid"`
 		LastPid              int                 `json:"lastPid"`
 	}{
+		RoomId:               roomInfo.ID,
+		Players:              roomInfo.Players,
 		Cards:                cards,
 		Current:              current,
 		PlayerPoint:          playerPoint,
