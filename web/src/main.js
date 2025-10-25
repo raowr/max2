@@ -26,11 +26,12 @@ function initApp() {
   // 延迟连接 WebSocket，确保应用先加载
   setTimeout(() => {
     if (wsUrl) {
+      console.log('user_id:', storage.local.get("user_id"))
 // 初始化 WebSocket 配置（全局一次）
       websocket.init({
         url: wsUrl+"?user_id="+storage.local.get("user_id"), // 后端地址
         reconnectInterval: 5000, // 5秒重连一次
-        heartbeatInterval: 20000 // 20秒一次心跳
+        heartbeatInterval: 10000 // 20秒一次心跳
       });
 
 // 启动连接（可在登录后再调用，这里直接启动作为示例）

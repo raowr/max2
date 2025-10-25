@@ -5,19 +5,31 @@
 package enter
 
 import (
+	"context"
 	"game/internal/controller/room"
-	"github.com/gorilla/websocket"
 	"sync"
 	"time"
+
+	"github.com/gogf/gf/v2/os/gcache"
+	"github.com/gorilla/websocket"
+)
+
+var (
+	clientCache *gcache.Cache
+	cacheCtx    = context.Background()
+	// 缓存键常量
+	cacheKeyPrefix = "ws:client:"
 )
 
 // 客户端连接结构体
 type Client struct {
-	conn      *websocket.Conn // WebSocket 连接
-	userID    string          // 用户标识（用于重连）
-	heartbeat time.Time       // 最后心跳时间
-	sendChan  chan []byte     // 消息发送通道，增大缓冲避免阻塞
-	pid       int             // 玩家id
+	conn       *websocket.Conn // WebSocket 连接
+	userID     string          // 用户标识（用于重连）
+	heartbeat  time.Time       // 最后心跳时间
+	sendChan   chan []byte     // 消息发送通道，增大缓冲避免阻塞
+	pid        int             // 玩家id
+	closed     bool            // 连接是否已关闭
+	roomIdChan chan string     // 房间id通道
 }
 
 // 全局房间管理器及并发安全锁（核心优化：解决全局资源竞争）
@@ -36,4 +48,58 @@ func init() {
 		rm = room.NewRoomManager()
 	}
 	rmMu.Unlock()
+
+	clientCache = gcache.New()
+
+}
+
+// 生成缓存键
+func getClientCacheKey(userID string) string {
+	return cacheKeyPrefix + userID
+}
+
+// 添加客户端到缓存
+func addClient(client *Client) error {
+	cacheKey := getClientCacheKey(client.userID)
+	return clientCache.Set(cacheCtx, cacheKey, client, 0)
+}
+
+// 根据userID获取客户端
+func getClient(userID string) (*Client, error) {
+	cacheKey := getClientCacheKey(userID)
+
+	value, err := clientCache.Get(cacheCtx, cacheKey)
+	if err != nil {
+		return nil, err
+	}
+
+	if value == nil || value.IsNil() {
+		return nil, nil // 客户端不存在
+	}
+
+	client, ok := value.Val().(*Client)
+	if !ok {
+		// 类型断言失败，删除无效缓存
+		clientCache.Remove(cacheCtx, cacheKey)
+		return nil, nil
+	}
+
+	return client, nil
+}
+
+// 删除客户端
+func removeClient(userID string) error {
+	cacheKey := getClientCacheKey(userID)
+	_, err := clientCache.Remove(cacheCtx, cacheKey)
+	return err
+}
+
+// 批量删除（用于清理操作）
+func removeClients(userIDs []string) error {
+	for _, userID := range userIDs {
+		if err := removeClient(userID); err != nil {
+			return err
+		}
+	}
+	return nil
 }

@@ -141,4 +141,4 @@ class WebSocketService {
 }
 
 // 导出单例实例
-export default new WebSocketService();
+export const websocket = new WebSocketService();

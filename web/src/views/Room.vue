@@ -105,7 +105,7 @@
 
 </template>
 <script setup>
-import { ref,reactive, onMounted, computed, onBeforeUnmount } from 'vue'
+import { ref,reactive, onMounted, computed, onBeforeUnmount,onUnmounted } from 'vue'
 import { websocket } from '@/utils/websocket'
 import { useRouter } from 'vue-router'
 import { audioManager } from '@/utils/audio'
@@ -169,11 +169,11 @@ const state = reactive({
   maxReconnectAttempts: 5,
 
   connectionStatusClass: computed(() => ({
-    connected: websocket.socket?.readyState === WebSocket.OPEN,
-    disconnected: websocket.socket?.readyState === WebSocket.CLOSED
+    connected: websocket.ws?.readyState === WebSocket.OPEN,
+    disconnected: websocket.ws?.readyState === WebSocket.CLOSED
   })),
   connectionStatusText: computed(() => {
-    switch (websocket.socket?.readyState) {
+    switch (websocket.ws?.readyState) {
       case WebSocket.OPEN: return '已连接'
       case WebSocket.CONNECTING: return '连接中...'
       default: return '已断开'
@@ -193,7 +193,7 @@ const init = async () => {
   // 监听 WebSocket 事件
   websocket.on('message', handleMessage);
   websocket.on('open', () => {
-    console.log('on open');
+    console.log('room on open');
     // 连接成功后再执行 toggleReady
     toggleReady();
   });
@@ -222,10 +222,11 @@ onUnmounted(() => {
 const handleMessage = (data) => {
   // 处理接收到的消息
   console.log('Received message:', data)
-    if (data.type === "initRoom") {
+  const parsedData = JSON.parse(data)
+    if (parsedData.type === "initRoom") {
  try {
       // 解析JSON字符串
-      const serverPlayers = JSON.parse(data.data)
+      const serverPlayers = JSON.parse(parsedData.data)
 
       state.roomId=serverPlayers[0].RoomID
       // 智能合并数据
@@ -294,7 +295,7 @@ onBeforeUnmount(() => {
 
 const toggleReady = () => {
   // 确保 WebSocket 已连接再发送消息
-  if (websocket.socket && websocket.socket.readyState === WebSocket.OPEN) {
+  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
     websocket.send({"type":"initRoom","data":"","name":""});
     console.log('send ready');
   } else {

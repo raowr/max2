@@ -11,16 +11,11 @@
     </div>
     <!--弃牌堆结束 -->
 
-       <!-- 出牌动画过渡容器 -->
+    <!-- 出牌动画过渡容器 -->
     <div class="card-transition-container">
       <transition-group name="card-move" tag="div">
-        <img 
-          v-for="(cardId, index) in state.movingCards" 
-          :key="`moving-${cardId}`" 
-          :src="getCardImage(cardId)" 
-          class="moving-card"
-          :style="getMovingCardStyle(index)"
-        >
+        <img v-for="(cardId, index) in state.movingCards" :key="`moving-${cardId}`" :src="getCardImage(cardId)"
+          class="moving-card" :style="getMovingCardStyle(index)">
       </transition-group>
     </div>
 
@@ -58,23 +53,23 @@
 
     <!--player2 信息 -->
     <div class="player2-container" style="">
-    <!-- 修改为圆形倒计时 -->
-    <div v-if="state.countdownPlayer == 2"
-      style="position: absolute; top: -5%; left: 34%; transform: translateX(-50%); z-index: 999; text-align: center">
-      <svg :width="100" :height="100">
-        <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
-        <circle cx="50" cy="50" r="45" :stroke="countdownPlayer2 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'" stroke-width="8"
-          fill="transparent" :style="{
-            strokeDasharray: 283,
-            strokeDashoffset: 283 * (1 - countdownPlayer2 / state.outCardTimeout),
-            transition: 'stroke-dashoffset 1s linear'
-          }" />
-      </svg>
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+      <!-- 修改为圆形倒计时 -->
+      <div v-if="state.countdownPlayer == 2"
+        style="position: absolute; top: -5%; left: 34%; transform: translateX(-50%); z-index: 999; text-align: center">
+        <svg :width="100" :height="100">
+          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer2 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'"
+            stroke-width="8" fill="transparent" :style="{
+              strokeDasharray: 283,
+              strokeDashoffset: 283 * (1 - countdownPlayer2 / state.outCardTimeout),
+              transition: 'stroke-dashoffset 1s linear'
+            }" />
+        </svg>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
                font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
-        {{ countdownPlayer2 }}
+          {{ countdownPlayer2 }}
+        </div>
       </div>
-    </div>
       <img src="@/assets/img/ui/chatlog.png" width="90px">
       <img src="@/assets/img/touxiang/bighead15419.png" width="90px"
         style="position: absolute;bottom:42.2%;left:3.1%;border-radius: 25px;">
@@ -82,7 +77,8 @@
         <p style="z-index:1;font-size:16px; color:white;">帅哥2</p>
       </div>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-70%;top:-2%'>
-      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:66%;left:-60%;">剩{{ state.player2CardsNum }}张
+      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:66%;left:-60%;">剩{{ state.player2CardsNum
+        }}张
       </p>
     </div>
 
@@ -90,23 +86,23 @@
 
     <!--player4 信息 -->
     <div class="player4-container" style="">
- <!-- 修改为圆形倒计时 -->
-    <div v-if="state.countdownPlayer == 4"
-      style="position: absolute; top: -4%; left: 40%; transform: translateX(-50%); z-index: 999; text-align: center">
-      <svg :width="100" :height="100">
-        <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
-        <circle cx="50" cy="50" r="45" :stroke="countdownPlayer4 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'" stroke-width="8"
-          fill="transparent" :style="{
-            strokeDasharray: 283,
-            strokeDashoffset: 283 * (1 - countdownPlayer4 / state.outCardTimeout),
-            transition: 'stroke-dashoffset 1s linear'
-          }" />
-      </svg>
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+      <!-- 修改为圆形倒计时 -->
+      <div v-if="state.countdownPlayer == 4"
+        style="position: absolute; top: -4%; left: 40%; transform: translateX(-50%); z-index: 999; text-align: center">
+        <svg :width="100" :height="100">
+          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer4 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'"
+            stroke-width="8" fill="transparent" :style="{
+              strokeDasharray: 283,
+              strokeDashoffset: 283 * (1 - countdownPlayer4 / state.outCardTimeout),
+              transition: 'stroke-dashoffset 1s linear'
+            }" />
+        </svg>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
                font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
-        {{ countdownPlayer4 }}
+          {{ countdownPlayer4 }}
+        </div>
       </div>
-    </div>
       <img src="@/assets/img/ui/chatlog.png" width="90px">
       <img src="@/assets/img/touxiang/bighead15339.png" width="85px"
         style="position: absolute;bottom:42.2%;left:3.1%;border-radius: 25px;">
@@ -122,23 +118,23 @@
 
     <!--player3 信息 -->
     <div class="player3-container" style="">
-    <!-- 修改为圆形倒计时 -->
-    <div v-if="state.countdownPlayer == 3"
-      style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
-      <svg :width="100" :height="100">
-        <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
-        <circle cx="50" cy="50" r="45" :stroke="countdownPlayer3 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'" stroke-width="8"
-          fill="transparent" :style="{
-            strokeDasharray: 283,
-            strokeDashoffset: 283 * (1 - countdownPlayer3 / state.outCardTimeout),
-            transition: 'stroke-dashoffset 1s linear'
-          }" />
-      </svg>
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+      <!-- 修改为圆形倒计时 -->
+      <div v-if="state.countdownPlayer == 3"
+        style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
+        <svg :width="100" :height="100">
+          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer3 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'"
+            stroke-width="8" fill="transparent" :style="{
+              strokeDasharray: 283,
+              strokeDashoffset: 283 * (1 - countdownPlayer3 / state.outCardTimeout),
+              transition: 'stroke-dashoffset 1s linear'
+            }" />
+        </svg>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
                font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
-        {{ countdownPlayer3 }}
+          {{ countdownPlayer3 }}
+        </div>
       </div>
-    </div>
       <div width="90px" :style="{
         backgroundImage: `url(${chatlogBgUrl})`,  // 绑定解析后的路径
         backgroundSize: '90px',
@@ -175,25 +171,25 @@
     <!--功能区 -->
 
 
- <!-- 修改为圆形倒计时 -->
-  <!-- 外层容器添加类名：countdown-circle-container -->
-  <div v-if="state.countdownPlayer == 1" class="countdown-circle-container">
-    <!-- SVG尺寸保持属性形式（非样式） -->
-    <svg width="80" height="80">
-      <!-- 背景圆添加类名：countdown-bg-circle -->
-      <circle class="countdown-bg-circle" cx="40" cy="40" r="36" />
-      <!-- 进度圆添加类名：countdown-progress-circle -->
-      <circle class="countdown-progress-circle" cx="40" cy="40" r="36"
-        :stroke="countdownPlayer1 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'" :fill="countdownPlayer1 > (state.outCardTimeout / 3) ? '#81C784' : '#FF9800'"
-        :style="{
-          strokeDashoffset: 226.19 * (1 - countdownPlayer1 / state.outCardTimeout)  // 保留动态进度偏移
-        }" />
-    </svg>
-    <!-- 文本区域添加类名：countdown-text -->
-    <div class="countdown-text">
-      {{ countdownPlayer1 }}
+    <!-- 修改为圆形倒计时 -->
+    <!-- 外层容器添加类名：countdown-circle-container -->
+    <div v-if="state.countdownPlayer == 1" class="countdown-circle-container">
+      <!-- SVG尺寸保持属性形式（非样式） -->
+      <svg width="80" height="80">
+        <!-- 背景圆添加类名：countdown-bg-circle -->
+        <circle class="countdown-bg-circle" cx="40" cy="40" r="36" />
+        <!-- 进度圆添加类名：countdown-progress-circle -->
+        <circle class="countdown-progress-circle" cx="40" cy="40" r="36"
+          :stroke="countdownPlayer1 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'"
+          :fill="countdownPlayer1 > (state.outCardTimeout / 3) ? '#81C784' : '#FF9800'" :style="{
+            strokeDashoffset: 226.19 * (1 - countdownPlayer1 / state.outCardTimeout)  // 保留动态进度偏移
+          }" />
+      </svg>
+      <!-- 文本区域添加类名：countdown-text -->
+      <div class="countdown-text">
+        {{ countdownPlayer1 }}
+      </div>
     </div>
-  </div>
 
 
 
@@ -277,7 +273,7 @@ const state = reactive({
   player3CardsNum: 13,
   player4CardsNum: 13,
   outCards: [],
-  lastOutCards:[],//上一手出牌
+  lastOutCards: [],//上一手出牌
   lastmsg: "",
   mustPid: 0,
   player1Point: 0, // 初始瓜子数
@@ -332,8 +328,8 @@ onMounted(() => {
   audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
   audioManager.playBGM('bgm')
   websocket.on('open', () => {
-    console.log('on open');
-    websocket.send({"type":"initRoom","data":"","name":""});
+    console.log('game on open');
+    //websocket.send({"type":"initRoom","data":"","name":""});
     // 连接成功后再执行 toggleReady
     websocket.send({ "type": "getInfo", "data": "", "name": "" })
   });
@@ -345,7 +341,8 @@ onMounted(() => {
   });
 
   // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
-  if (websocket.socket && websocket.ws.readyState === WebSocket.OPEN) {
+  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
+    console.log('game play on open');
     websocket.send({ "type": "play", "data": "", "name": "" })
   }
   websocket.on('message', handleMessage)
@@ -354,10 +351,10 @@ onMounted(() => {
 
 // 组件卸载时移除回调（关键：防止内存泄漏）
 onUnmounted(() => {
-  websocket.off('open', ()=>{console.log('off open');});
-  websocket.off('message', ()=>{console.log('off message');});
-  websocket.off('error', ()=>{console.log('off error');});
-  websocket.off('error', ()=>{console.log('off error');});
+  websocket.off('open', () => { console.log('off open'); });
+  websocket.off('message', () => { console.log('off message'); });
+  websocket.off('error', () => { console.log('off error'); });
+  websocket.off('error', () => { console.log('off error'); });
 });
 
 onUnmounted(() => window.removeEventListener('resize', handleResize));
@@ -389,20 +386,25 @@ const initDeck = () => {
 const handleMessage = (data) => {
   // 处理接收到的消息
   console.log('Received message:', data)
-  if (data.type == "getInfo") {
-    data = JSON.parse(data.data)
-    console.log("getInfo",data);
+  const parsedData = JSON.parse(data)
+  if (parsedData.type == "getInfo") {
+    data = JSON.parse(parsedData.data)
+    console.log("getInfo", data);
     if (data.isPlaying) {//是否游戏中
+      state.outCards = (data.outCards)
+      state.lastOutCards = (data.outCards)
+      //如果必出是玩家，记录下必出玩家的pid
+      state.mustPid = data.mustPid
       //玩家牌排序
       state.cards = data.cards.sort((a, b) => b - a);
       //设置牌数
       for (let i = 0; i < data.cardsNum.length; i++) {
-        switch (data.cardsNum[i].id+1) {
-        case 2:
-          state.player2CardsNum = data.cardsNum[i].cardNum
-        case 3:
+        switch (data.cardsNum[i].id + 1) {
+          case 2:
+            state.player2CardsNum = data.cardsNum[i].cardNum
+          case 3:
             state.player3CardsNum = data.cardsNum[i].cardNum
-        case 4:
+          case 4:
             state.player4CardsNum = data.cardsNum[i].cardNum
         }
       }
@@ -411,19 +413,41 @@ const handleMessage = (data) => {
         state.outCardTimeout = data.outCardTimeout
       }
       //先出牌的开始倒计时
-      startCountdown(data.current + 1,data.remainOutCardTimeout)
+      startCountdown(data.current + 1, data.remainOutCardTimeout)
       //如果必出是玩家，记录下必出玩家的pid
-      state.mustPid = data.current
       //更新玩家总瓜子数
       state.player1Point = data.playerPoint
+      let cardsMsg = ""
+      for (let i = 0; i < data.outCards.length; i++) {
+        for (let j = 0; j < state.deck.length; j++) {
+          if (state.deck[j].id == data.outCards[i]) {
+            cardsMsg += state.deck[j].name + " "
+          }
+        }
+      }
+      switch (data.lastPid) {
+        case 0:
+           state.lastmsg = "玩家1出了：" + cardsMsg
+          break;
+        case 1:
+          state.lastmsg = "玩家2出了：" + cardsMsg
+          break;
+        case 2:
+          state.lastmsg = "玩家3出了：" + cardsMsg
+          break;
+        case 3:
+          state.lastmsg = "玩家4出了：" + cardsMsg
+          break;
+      }
 
 
-    }else {
+
+    } else {
       websocket.send({ "type": "play", "data": "", "name": "" })
     }
   }
-  if (data.type == "showCard") {
-    data = JSON.parse(data.data)
+  if (parsedData.type == "showCard") {
+    data = JSON.parse(parsedData.data)
     console.log(data);
     //玩家牌排序
     state.cards = data.cards.sort((a, b) => b - a);
@@ -431,12 +455,12 @@ const handleMessage = (data) => {
     state.player2CardsNum = 13
     state.player3CardsNum = 13
     state.player4CardsNum = 13
-        // 更新倒计时时长（如果服务端提供）
+    // 更新倒计时时长（如果服务端提供）
     if (data.outCardTimeout !== undefined) {
       state.outCardTimeout = data.outCardTimeout
     }
     //先出牌的开始倒计时
-    startCountdown(data.current + 1,state.outCardTimeout)
+    startCountdown(data.current + 1, state.outCardTimeout)
     //如果必出是玩家，记录下必出玩家的pid
     state.mustPid = data.current
     //更新玩家总瓜子数
@@ -446,13 +470,13 @@ const handleMessage = (data) => {
     //清空选中的牌
     selectedCards.value = []
   }
-  if (data.type == "outCard") {
-    data = JSON.parse(data.data)
+  if (parsedData.type == "outCard") {
+    data = JSON.parse(parsedData.data)
     // 刷新玩家牌数
     let cardsMsg = ""
     switch (data.pid) {
       case 0:
-        if (isPlayingCard.value){
+        if (isPlayingCard.value) {
           isPlayingCard.value = false
           // 无论成功失败都清除定时器
           console.log('清除出牌定时器')
@@ -481,7 +505,7 @@ const handleMessage = (data) => {
           selectedCards.value = []
           // 出牌成功，清空 pending
           pendingCards.value = []
-        }else {
+        } else {
           // 出牌失败，恢复牌
           console.log('出牌失败，恢复牌')
           state.cards = [...state.cards, ...pendingCards.value]
@@ -540,25 +564,25 @@ const handleMessage = (data) => {
       if (data.outCardTimeout !== undefined) {
         state.outCardTimeout = data.outCardTimeout
       }
-      startCountdown(data.current + 1,state.outCardTimeout)
+      startCountdown(data.current + 1, state.outCardTimeout)
       //如果必出是玩家，记录下必出玩家的pid
       state.mustPid = data.mustPid
     }
 
   }
-  if (data.type == "pass") {
-    data = JSON.parse(data.data)
+  if (parsedData.type == "pass") {
+    data = JSON.parse(parsedData.data)
     state.mustPid = data.mustPid
-    startCountdown(data.current + 1,state.outCardTimeout)
+    startCountdown(data.current + 1, state.outCardTimeout)
 
   }
-  if (data.type == "over") {
+  if (parsedData.type == "over") {
     clearInterval(timer1)
     clearInterval(timer2)
     clearInterval(timer3)
     clearInterval(timer4)
     state.countdownPlayer = 0
-    data = JSON.parse(data.data)
+    data = JSON.parse(parsedData.data)
     state.lastmsg = "游戏结束，玩家: " + data.winName + "胜利,赢得:" + data.win + "颗瓜子"
 
     state.player1Point = data.playerPoint
@@ -580,8 +604,8 @@ const handleMessage = (data) => {
       clearTimeout(playCardTimer.value)
     }
     //玩家输完，跳到首页
-    if (state.player1Point <= 0){
-      router.push({path:'/index'})
+    if (state.player1Point <= 0) {
+      router.push({ path: '/index' })
     }
   }
 }
@@ -623,19 +647,19 @@ const checkOut = () => {
     }).filter(Boolean),
     isSelf: state.mustPid === 0, // 是否是自己出的最后一手牌
     type: state.outCards.length > 0
-            ? cardUtil.getCardType(state.outCards.map(id => state.deck.find(c => c.id === id)).filter(Boolean))
-            : null
+      ? cardUtil.getCardType(state.outCards.map(id => state.deck.find(c => c.id === id)).filter(Boolean))
+      : null
   };
   // 调用牌型校验工具
   let res = cardUtil.canPlayCards(currentCards, lastHand);
-  console.log("验证出牌：",currentCards,lastHand,res)
+  console.log("验证出牌：", currentCards, lastHand, res)
   return res
 };
 
 
 
 
-const startCountdown = (pid,remainOutCardTimeout) => {
+const startCountdown = (pid, remainOutCardTimeout) => {
   clearInterval(timer1)
   clearInterval(timer2)
   clearInterval(timer3)
@@ -792,25 +816,25 @@ const chupai = () => {
 const getMovingCardStyle = (index) => {
   // 获取当前移动中的卡牌总数
   const totalCards = state.movingCards.length;
-  
+
   // 设置卡牌宽度为120px，重叠4px
   const cardWidth = 120 * scaleFactor.value;
-  const cardHeight = 140* scaleFactor.value;
+  const cardHeight = 140 * scaleFactor.value;
   const overlap = 10;
   const effectiveWidth = cardWidth - overlap; // 有效宽度为116px，确保重叠4px
-  
+
   // 计算整行卡牌的总宽度（包括重叠）
   const totalWidth = cardWidth + (totalCards - 1) * effectiveWidth;
-  
+
   // 计算起始偏移量，使整行卡牌居中显示
   const startOffset = -totalWidth / 2;
-  
+
   // 计算当前卡牌的水平偏移量
   const horizontalOffset = startOffset + index * effectiveWidth;
-  
+
   // 保持卡牌水平，不添加旋转角度
   const rotation = 0;
-  
+
   return {
     width: `${cardWidth}px`,
     height: `${cardHeight}px`,
@@ -1110,13 +1134,15 @@ const goToRoom = () => {
   color: white;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
+
 /* 按钮容器样式 - 确保在所有屏幕尺寸下都不换行 */
 .buttons-container {
   display: flex;
   gap: 15px;
   justify-content: center;
   margin-top: 20px;
-  flex-wrap: nowrap; /* 强制不换行 */
+  flex-wrap: nowrap;
+  /* 强制不换行 */
   align-items: center;
 }
 
@@ -1190,7 +1216,8 @@ const goToRoom = () => {
   width: 80px;
   height: 112px;
   z-index: 100;
-  top: 80%;  /* 新增：默认位置设为玩家手牌区域 */
+  top: 80%;
+  /* 新增：默认位置设为玩家手牌区域 */
   left: 50%;
   transform: translateX(-50%);
 }
@@ -1209,7 +1236,8 @@ const goToRoom = () => {
   top: 80%;
   left: 50%;
   transform: translateX(-50%) scale(1);
-  opacity: 0;  /* 新增：动画开始时透明 */
+  opacity: 0;
+  /* 新增：动画开始时透明 */
 }
 
 .card-move-enter-to {
@@ -1217,12 +1245,16 @@ const goToRoom = () => {
   top: 30%;
   left: 47%;
   transform: translateX(-50%);
-  opacity: 1;  /* 新增：动画结束时显示 */
+  opacity: 1;
+  /* 新增：动画结束时显示 */
 }
+
 /* 添加这个新类，处理动画结束后移除元素 */
 .card-move-enter-to.card-move-complete {
-  display: none; /* 动画完成后隐藏元素 */
+  display: none;
+  /* 动画完成后隐藏元素 */
 }
+
 /* 横屏模式专属样式 */
 @media (max-width: 998px) {
   .player1-container {
@@ -1294,11 +1326,12 @@ const goToRoom = () => {
     /* 以顶部中心为缩放原点，避免位置偏移 */
   }
 
-   .buttons-container {
+  .buttons-container {
     gap: 12px;
   }
-  
-  .restart-btn, .room-btn {
+
+  .restart-btn,
+  .room-btn {
     padding: 10px 20px;
     font-size: 16px;
     min-width: 120px;
@@ -1310,12 +1343,14 @@ const goToRoom = () => {
   .moving-card {
     transform: scale(0.1);
   }
+
   /* 调整卡牌移动动画的位置，适配缩小后的尺寸 */
   .card-move-enter-to {
     top: 30%;
     left: 47%;
     transform: translateX(-50%) scale(0.1);
-    opacity: 1;  /* 新增：动画结束时显示 */
+    opacity: 1;
+    /* 新增：动画结束时显示 */
   }
 
 }

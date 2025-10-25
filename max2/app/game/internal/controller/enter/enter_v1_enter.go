@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"sync"
 	"time"
 
 	v1 "game/api/enter/v1"
@@ -67,19 +66,25 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 
 	// 创建客户端实例（增大消息缓冲）
 	client := &Client{
-		conn:      ws,
-		userID:    userID,
-		heartbeat: time.Now(),
-		sendChan:  make(chan []byte, 1000), // 缓冲增大至1000，减少阻塞
+		conn:       ws,
+		userID:     userID,
+		heartbeat:  time.Now(),
+		sendChan:   make(chan []byte, 10000), // 缓冲增大至10000，减少阻塞
+		roomIdChan: make(chan string, 1),     // 房间ID通道（缓冲1条）
 	}
 
 	// 加锁更新客户端连接（重连逻辑）
 	clientsMu.Lock()
-	if oldClient, ok := clients[userID]; ok {
+	if oldClient, err := getClient(userID); err == nil && oldClient != nil {
 		oldClient.conn.Close() // 关闭旧连接
+		oldClient.closed = true
 		g.Log().Infof(ctx, "用户 %s 重连，关闭旧连接", userID)
 	}
-	clients[userID] = client
+	if err = addClient(client); err != nil {
+		g.Log().Errorf(ctx, "添加客户端到缓存失败: %v", err)
+		ws.Close()
+		return
+	}
 	clientsMu.Unlock()
 
 	g.Log().Infof(ctx, "用户 %s 连接成功", userID)
@@ -89,7 +94,13 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	go client.readServe(ctx)
 	go client.writeLoop(ctx)
 	go client.heartbeatCheck(ctx)
-	return
+	for {
+		select {
+		case <-ctx.Done():
+			g.Log().Infof(ctx, "用户 退出（上下文关闭）")
+			return
+		}
+	}
 }
 
 // 读消息循环：处理客户端消息
@@ -105,13 +116,16 @@ func (c *Client) readLoop(ctx context.Context) {
 	}()
 
 	for {
+		if c.closed {
+			return
+		}
 		// 读取客户端消息
 		mt, data, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseNormalClosure) {
 				g.Log().Errorf(ctx, "用户 %s 消息读取错误: %v", c.userID, err)
 			}
-			break // 连接断开，退出循环
+			return // 连接断开，退出循环
 		}
 
 		// 解析消息（严格错误处理）
@@ -167,6 +181,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 	if oldRoomID != "" {
 		if roomInfo, ok := rm.Rooms[oldRoomID]; ok {
 			if roomInfo.Rgtimer != nil {
+				roomInfo.Rgtimer.Stop()
 				roomInfo.Rgtimer.Close() // 停止定时器（确保资源释放）
 			}
 			delete(rm.Rooms, oldRoomID)
@@ -183,6 +198,8 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 	humanPlayer.UserId = c.userID
 	c.pid = humanPlayer.ID
 	rm.PlayerList[humanPlayer.UserId] = humanPlayer // 关联用户与玩家
+	// 发送房间ID到客户端
+	c.roomIdChan <- roomInfo.ID
 
 	// 创建AI玩家
 	aiCount := 2
@@ -205,10 +222,12 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 	c.sendChan <- c.encodeMessage(ctx, msgData)
 
 	// 延迟添加额外AI（带上下文超时，避免协程泄漏）
-	go func(ctx context.Context, roomID string) {
+	go func(roomID string, userID string, clientPid int) {
+		// 使用Background上下文确保协程能执行完
+		localCtx := context.Background()
+		// 添加日志记录协程启动
+		g.Log().Infof(localCtx, "用户 %s 开始延迟添加AI到房间 %s", userID, roomID)
 		select {
-		case <-ctx.Done():
-			return
 		case <-time.After(2 * time.Second):
 			rmMu.Lock()
 			defer rmMu.Unlock()
@@ -230,11 +249,12 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 			msgData := message.ChatMsg{
 				Type: consts.InitRoom,
 				Data: gconv.String(players),
-				From: gconv.String(c.pid),
+				From: gconv.String(clientPid),
 			}
-			c.sendChan <- c.encodeMessage(ctx, msgData)
+			c.sendChan <- c.encodeMessage(localCtx, msgData)
 		}
-	}(ctx, roomInfo.ID)
+	}(roomInfo.ID, c.userID, c.pid)
+
 }
 
 // 处理开始游戏
@@ -259,7 +279,7 @@ func (c *Client) handlePlay(ctx context.Context) {
 	rmMu.Unlock()
 
 	// 启动游戏逻辑（传入上下文，支持取消）
-	go room.PlayOneGame(roomInfo)
+	room.PlayOneGame(roomInfo)
 }
 
 // 处理出牌
@@ -309,7 +329,8 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		g.Log().Errorf(ctx, "用户 %s 房间不存在", c.userID)
 		return
 	}
-
+	// 发送房间ID到客户端
+	c.roomIdChan <- roomInfo.ID
 	// 整理房间信息（仅暴露当前玩家可见数据）
 	cards := make([]int, 0)
 	cardsNum := make([]*message.PlayData, 0)
@@ -344,6 +365,20 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		}
 	}
 
+	//上一次出牌
+	outCards := make([]int, 0)
+	for _, card := range roomInfo.LastCards {
+		outCards = append(outCards, card.Id)
+	}
+	var mustPid int
+	for _, v := range roomInfo.Players {
+		if v.Must {
+			mustPid = v.ID //必须出牌的玩家
+		}
+	}
+	//上一位出牌玩家
+	lastPid := (roomInfo.Current - 1 + 4) % 4
+
 	// 序列化并推送（处理JSON错误）
 	resData, err := json.Marshal(struct {
 		Cards                []int               `json:"cards"`
@@ -353,6 +388,9 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		RemainOutCardTimeout int                 `json:"remainOutCardTimeout"`
 		CardsNum             []*message.PlayData `json:"cardsNum"`
 		IsPlaying            bool                `json:"isPlaying"`
+		OutCards             []int               `json:"outCards"`
+		MustPid              int                 `json:"mustPid"`
+		LastPid              int                 `json:"lastPid"`
 	}{
 		Cards:                cards,
 		Current:              current,
@@ -361,6 +399,9 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		RemainOutCardTimeout: remainOutCardTimeout,
 		CardsNum:             cardsNum,
 		IsPlaying:            isPlaying,
+		OutCards:             outCards,
+		MustPid:              mustPid,
+		LastPid:              lastPid,
 	})
 	if err != nil {
 		g.Log().Errorf(ctx, "用户 %s 序列化房间信息失败: %v", c.userID, err)
@@ -392,15 +433,21 @@ func (c *Client) handleHeartbeat(ctx context.Context, data string) {
 func (c *Client) readServe(ctx context.Context) {
 	// 等待玩家初始化（最多等5秒）
 	var roomID string
-	rmMu.RLock()
-	player, ok := rm.PlayerList[c.userID]
-	if ok && player.RoomID != "" {
-		roomID = player.RoomID
-	}
-	rmMu.RUnlock()
-
 	// 循环读取房间消息（带退出机制）
 	for {
+		if c.closed {
+			g.Log().Warningf(ctx, "用户 %s 房间1 已不存在，退出readServe", c.userID)
+			return
+		}
+		if roomID == "" {
+			select {
+			case roomID = <-c.roomIdChan:
+			case <-ctx.Done():
+				g.Log().Infof(ctx, "用户 %s readServe退出（上下文关闭）", c.userID)
+				return
+			}
+		}
+
 		rmMu.RLock()
 		roomInfo, ok := rm.Rooms[roomID]
 		rmMu.RUnlock()
@@ -424,6 +471,7 @@ func (c *Client) readServe(ctx context.Context) {
 				Data: roomMsg.Data,
 				From: gconv.String(c.pid),
 			}
+			g.Log().Infof(ctx, "房间 %s 向用户 %s 发送消息: %s", roomID, c.userID, msgData)
 			select {
 			case c.sendChan <- c.encodeMessage(ctx, msgData):
 			default:
@@ -446,15 +494,34 @@ func (c *Client) readServe(ctx context.Context) {
 // 写消息循环：发送消息到客户端
 func (c *Client) writeLoop(ctx context.Context) {
 	defer g.Log().Infof(ctx, "用户 %s writeLoop退出", c.userID)
-
+	g.Log().Infof(ctx, "用户 %s 收到用户消息: ", c.userID)
 	for {
+		var roomID string
+		player, ok := rm.PlayerList[c.userID]
+		if ok && player.RoomID != "" {
+			roomID = player.RoomID
+		}
+		if c.closed {
+			g.Log().Infof(ctx, "用户 %s writeLoop退出1", c.userID)
+			return
+		}
+		//先执行到这里等待sendChan有数据
 		select {
-		case data := <-c.sendChan:
+		// 使用多返回值语法检测通道关闭
+		case data, ok := <-c.sendChan:
+			// 如果通道已关闭，退出循环
+			if !ok {
+				g.Log().Infof(ctx, "用户 %s sendChan已关闭，writeLoop退出", c.userID)
+				return
+			}
+
+			g.Log().Infof(ctx, " writeLoop 房间 %s 向用户 %s 发送消息: %s", roomID, c.userID, string(data))
 			if err := c.conn.WriteMessage(ghttp.WsMsgText, data); err != nil {
-				g.Log().Errorf(ctx, "用户 %s 消息发送失败: %v", c.userID, err)
+				g.Log().Errorf(ctx, " writeLoop 房间 %s 用户 %s 消息发送失败: %v,消息内容: %s", roomID, c.userID, err, string(data))
 				return
 			}
 		case <-ctx.Done():
+			g.Log().Infof(ctx, "用户 %s writeLoop退出2 房间 %s", c.userID, roomID)
 			return
 		}
 	}
@@ -465,8 +532,11 @@ func (c *Client) heartbeatCheck(ctx context.Context) {
 	ticker := time.NewTicker(5 * time.Second)
 	defer ticker.Stop()
 	defer g.Log().Infof(ctx, "用户 %s 心跳检测退出", c.userID)
-
+	fmt.Println("heartbeatCheck:", c.heartbeat)
 	for {
+		if c.closed {
+			return
+		}
 		select {
 		case <-ticker.C:
 			if time.Since(c.heartbeat) > 60*time.Second {
@@ -475,6 +545,7 @@ func (c *Client) heartbeatCheck(ctx context.Context) {
 				return
 			}
 		case <-ctx.Done():
+			g.Log().Infof(ctx, "用户 %s 心跳检测被取消: %v", c.userID, ctx.Err())
 			return
 		}
 	}

@@ -12,7 +12,7 @@ export const storage = {
         get(key) {
             const prefixedKey = `${PREFIX}${key}`
             const data = localStorage.getItem(prefixedKey)
-            return data ? JSON.parse(data) : null
+            return data ? JSON.parse(data) : ""
         },
         remove(key) {
             const prefixedKey = `${PREFIX}${key}`
@@ -36,7 +36,7 @@ export const storage = {
         get(key) {
             const prefixedKey = `${PREFIX}${key}`
             const data = sessionStorage.getItem(prefixedKey)
-            return data ? JSON.parse(data) : null
+            return data ? JSON.parse(data) : ""
         },
         remove(key) {
             const prefixedKey = `${PREFIX}${key}`
