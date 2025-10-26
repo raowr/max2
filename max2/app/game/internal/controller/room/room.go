@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/gogf/gf/v2/os/gtime"
@@ -887,7 +888,10 @@ func (room *Room) GameLoop(ctx context.Context) {
 	// 检查游戏是否结束
 	over, winner, playerPoint, playerWin := isGameOver(room)
 	if over {
+		var wg sync.WaitGroup
+		wg.Add(1)
 		go func() {
+			defer wg.Done() // 使用defer确保即使发生panic也会调用Done()
 			data, _ := json.Marshal(struct {
 				WinName     string `json:"winName"`
 				Winner      int    `json:"winner"`
@@ -903,9 +907,15 @@ func (room *Room) GameLoop(ctx context.Context) {
 				PlayerPoint: playerPoint,
 				PlayerWin:   playerWin,
 			})
-			room.MsgChan <- RoomMsg{
+			// 使用select和超时避免永久阻塞
+			select {
+			case room.MsgChan <- RoomMsg{
 				Type: "over",
 				Data: gconv.String(data),
+			}:
+			// 消息发送成功
+			case <-time.After(2 * time.Second): // 设置合理的超时时间
+				g.Log().Error(ctx, "发送游戏结束消息超时")
 			}
 		}()
 		room.Rgtimer.Stop()
@@ -914,6 +924,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.OutStarTime = 0
 		room.passCount = 0
 		g.Log().Infof(ctx, "\n游戏结束！恭喜%s！获胜\n", winner.Name)
+		wg.Wait()
+		return
 	}
 
 	currentPlayer := room.Players[room.Current]
