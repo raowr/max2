@@ -17,6 +17,8 @@ import (
 	"github.com/gogf/gf/v2/util/gconv"
 )
 
+var ctx = context.Background()
+
 type MsgChan chan RoomMsg
 
 type RoomMsg struct {
@@ -207,7 +209,7 @@ func (rm *RoomManager) LeaveRoom(player *Player) {
 	} else if room.IsPlaying {
 		// 如果游戏正在进行中且玩家离开，结束当前游戏
 		room.IsPlaying = false
-		fmt.Printf("玩家 %s 已离开房间，游戏结束\n", player.Name)
+		g.Log().Infof(ctx, "玩家 %s 已离开房间，游戏结束\n", player.Name)
 	}
 }
 
@@ -282,24 +284,22 @@ func dealCards(deck []Card, players []*Player) {
 // 显示玩家的牌
 func showPlayerCards(player *Player) {
 	if player.Type == Human {
-		fmt.Printf("%s的牌: ", player.Name)
+		g.Log().Infof(ctx, "%s的牌: ", player.Name)
 		for i, card := range player.Cards {
-			fmt.Printf("%d.%s ", i+1, card.Name)
+			g.Log().Infof(ctx, "%d.%s ", i+1, card.Name)
 		}
-		fmt.Println()
 	} else {
-		fmt.Printf("%s的牌: ", player.Name)
+		g.Log().Infof(ctx, "%s的牌: ", player.Name)
 		for i, v := range player.handPattern {
-			fmt.Printf("牌型：%d,具体的牌：%v ", i, v)
+			g.Log().Infof(ctx, "牌型：%d,具体的牌：%v ", i, v)
 		}
-		fmt.Println()
 	}
 
 }
 
 // 确定谁先出牌
 func bidLandlord(room *Room) {
-	fmt.Println("\n确定谁先出牌...")
+	g.Log().Infof(ctx, "\n确定谁先出牌...")
 	currentPlayer := 0
 	for _, v := range room.Players {
 		for _, card := range v.Cards {
@@ -815,7 +815,7 @@ func isGameOver(room *Room) (isOver bool, winer *Player, playerPoint, playerWin 
 
 // 玩一局游戏
 func PlayOneGame(room *Room) {
-	fmt.Printf("\n===== 房间 %s 游戏开始 =====", room.ID)
+	g.Log().Infof(ctx, "\n===== 房间 %s 游戏开始 =====", room.ID)
 
 	// 初始化游戏
 	room.Deck = initDeck()
@@ -869,9 +869,9 @@ func PlayOneGame(room *Room) {
 		showPlayerCards(player)
 	}
 
-	// fmt.Println("\n底牌是:", showCards(room.Deck))
-	// fmt.Println("地主是:", room.Landlord.Name)
-	// fmt.Println("游戏开始!")
+	// g.Log().Infof(ctx,"\n底牌是:", showCards(room.Deck))
+	// g.Log().Infof(ctx,"地主是:", room.Landlord.Name)
+	// g.Log().Infof(ctx,"游戏开始!")
 
 	// 显示地主的牌
 	// showPlayerCards(room.Landlord)
@@ -913,14 +913,14 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.LastCards = make([]Card, 0)
 		room.OutStarTime = 0
 		room.passCount = 0
-		fmt.Printf("\n游戏结束！恭喜%s！获胜\n", winner.Name)
+		g.Log().Infof(ctx, "\n游戏结束！恭喜%s！获胜\n", winner.Name)
 	}
 
 	currentPlayer := room.Players[room.Current]
-	fmt.Printf("\n%s的回合 (当前手牌数: %d)\n", currentPlayer.Name, currentPlayer.CardNum)
+	g.Log().Infof(ctx, "\n%s的回合 (当前手牌数: %d)\n", currentPlayer.Name, currentPlayer.CardNum)
 	showPlayerCards(currentPlayer)
-	fmt.Printf("上一手牌，牌型: %v, 牌是：%s\n", room.LastPH, showCards(room.LastCards))
-	fmt.Println("请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
+	g.Log().Infof(ctx, "上一手牌，牌型: %v, 牌是：%s\n", room.LastPH, showCards(room.LastCards))
+	g.Log().Infof(ctx, "请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
 
 	var indices []int
 	var selectedCards []Card
@@ -971,7 +971,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 				//验证牌是否存在
 				if !parseCardIndices(currentPlayer) {
 					currentPlayer.OutCardIds = make([]int, 0)
-					fmt.Printf("输入的牌不存在%v \n", currentPlayer.OutCardIds)
+					g.Log().Infof(ctx, "输入的牌不存在%v \n", currentPlayer.OutCardIds)
 					msg := fmt.Sprintf("输入的牌不存在:%v", currentPlayer.OutCardIds)
 					//通知出牌失败
 					go func() {
@@ -1114,13 +1114,13 @@ func (room *Room) GameLoop(ctx context.Context) {
 	// 验证牌型
 	cardType, valid := isValidCardType(selectedCards)
 	if !valid {
-		fmt.Printf("牌型无效，请重新选择 %v \n", selectedCards)
+		g.Log().Infof(ctx, "牌型无效，请重新选择 %v \n", selectedCards)
 		code = 1
 
 	}
 	// 验证是否能压过上一手牌
 	if !compareCards(room.LastPH, cardType, room.LastCards, selectedCards) {
-		fmt.Println("不能压过上5一手牌,请重新选择")
+		g.Log().Infof(ctx, "不能压过上5一手牌,请重新选择")
 		code = 1
 
 	}
@@ -1145,7 +1145,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 	var msgType = ""
 	// 如果是不出牌
 	if len(selectedCards) == 0 {
-		fmt.Printf("%s不出\n", currentPlayer.Name)
+		g.Log().Infof(ctx, "%s不出\n", currentPlayer.Name)
 		//通知用户,某位机器人不出牌，
 		msgType = "pass"
 		room.passCount++
@@ -1157,7 +1157,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		}
 	} else {
 		// 出牌
-		fmt.Printf("%s出了: %s (%v)\n", currentPlayer.Name, showCards(selectedCards), cardType)
+		g.Log().Infof(ctx, "%s出了: %s (%v)\n", currentPlayer.Name, showCards(selectedCards), cardType)
 		msgType = "outCard"
 		//其他人改为非必出
 		for _, v := range room.Players {
@@ -1217,9 +1217,9 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 // 显示房间列表
 func showRooms(rm *RoomManager) {
-	fmt.Println("\n===== 房间列表 =====")
+	g.Log().Infof(ctx, "\n===== 房间列表 =====")
 	if len(rm.Rooms) == 0 {
-		fmt.Println("暂无可用房间")
+		g.Log().Infof(ctx, "暂无可用房间")
 		return
 	}
 
@@ -1228,38 +1228,38 @@ func showRooms(rm *RoomManager) {
 		if room.IsPlaying {
 			status = "游戏中"
 		}
-		fmt.Printf("房间ID: %s, 玩家数: %d/3, 状态: %s\n", id, len(room.Players), status)
+		g.Log().Infof(ctx, "房间ID: %s, 玩家数: %d/3, 状态: %s\n", id, len(room.Players), status)
 	}
 }
 
 // 开始游戏主程序
 /*func startGame() {
-	fmt.Println("欢迎来到斗地主游戏！")
+	g.Log().Infof(ctx,"欢迎来到斗地主游戏！")
 	rm := NewRoomManager()
 
 	// 创建第一个玩家（人类）
-	fmt.Print("请输入你的名字: ")
+	g.Log().Infof(ctx,"请输入你的名字: ")
 	var playerName string
 	fmt.Scanln(&playerName)
 	humanPlayer := rm.CreatePlayer(playerName, Human)
 
 	for {
-		fmt.Println("\n===== 主菜单 =====")
-		fmt.Println("1. 创建房间（与机器人对战）")
-		fmt.Println("2. 加入房间（与其他玩家对战）")
-		fmt.Println("3. 查看房间列表")
-		fmt.Println("4. 退出游戏")
+		g.Log().Infof(ctx,"\n===== 主菜单 =====")
+		g.Log().Infof(ctx,"1. 创建房间（与机器人对战）")
+		g.Log().Infof(ctx,"2. 加入房间（与其他玩家对战）")
+		g.Log().Infof(ctx,"3. 查看房间列表")
+		g.Log().Infof(ctx,"4. 退出游戏")
 
 		if humanPlayer.RoomID != "" {
 			room := rm.Rooms[humanPlayer.RoomID]
-			fmt.Printf("\n你当前在房间 %s 中，已有 %d/3 名玩家\n", room.ID, len(room.Players))
-			fmt.Println("5. 离开房间")
+			g.Log().Infof(ctx,"\n你当前在房间 %s 中，已有 %d/3 名玩家\n", room.ID, len(room.Players))
+			g.Log().Infof(ctx,"5. 离开房间")
 			if len(room.Players) == 3 && !room.IsPlaying {
-				fmt.Println("6. 开始游戏")
+				g.Log().Infof(ctx,"6. 开始游戏")
 			}
 		}
 
-		fmt.Print("请选择操作: ")
+		g.Log().Infof(ctx,"请选择操作: ")
 		var input string
 		fmt.Scanln(&input)
 		input = strings.TrimSpace(input)
@@ -1267,41 +1267,41 @@ func showRooms(rm *RoomManager) {
 		switch input {
 		case "1":
 			if humanPlayer.RoomID != "" {
-				fmt.Println("你已经在一个房间中，请先离开当前房间")
+				g.Log().Infof(ctx,"你已经在一个房间中，请先离开当前房间")
 				break
 			}
 
 			// 选择机器人数量
-			fmt.Print("请选择机器人数量 (1-2): ")
+			g.Log().Infof(ctx,"请选择机器人数量 (1-2): ")
 			var aiCountStr string
 			fmt.Scanln(&aiCountStr)
 			aiCount, err := strconv.Atoi(aiCountStr)
 			if err != nil || aiCount < 1 || aiCount > 2 {
-				fmt.Println("无效的数量，默认创建2个机器人")
+				g.Log().Infof(ctx,"无效的数量，默认创建2个机器人")
 				aiCount = 2
 			}
 
 			room := rm.CreateRoom(humanPlayer, aiCount)
-			fmt.Printf("房间创建成功！房间ID: %s\n", room.ID)
-			fmt.Printf("房间内有 %d 个机器人，共 %d 名玩家\n", aiCount, len(room.Players))
+			g.Log().Infof(ctx,"房间创建成功！房间ID: %s\n", room.ID)
+			g.Log().Infof(ctx,"房间内有 %d 个机器人，共 %d 名玩家\n", aiCount, len(room.Players))
 			if len(room.Players) == 3 {
-				fmt.Println("可以选择开始游戏了")
+				g.Log().Infof(ctx,"可以选择开始游戏了")
 			}
 
 		case "2":
 			if humanPlayer.RoomID != "" {
-				fmt.Println("你已经在一个房间中，请先离开当前房间")
+				g.Log().Infof(ctx,"你已经在一个房间中，请先离开当前房间")
 				break
 			}
-			fmt.Print("请输入房间ID: ")
+			g.Log().Infof(ctx,"请输入房间ID: ")
 			var roomID string
 			fmt.Scanln(&roomID)
 			success := rm.JoinRoom(humanPlayer, roomID)
 			if success {
 				room := rm.Rooms[roomID]
-				fmt.Printf("成功加入房间 %s！当前房间有 %d/3 名玩家\n", roomID, len(room.Players))
+				g.Log().Infof(ctx,"成功加入房间 %s！当前房间有 %d/3 名玩家\n", roomID, len(room.Players))
 			} else {
-				fmt.Println("加入房间失败，房间不存在或已满或正在游戏中")
+				g.Log().Infof(ctx,"加入房间失败，房间不存在或已满或正在游戏中")
 			}
 
 		case "3":
@@ -1312,36 +1312,36 @@ func showRooms(rm *RoomManager) {
 			if humanPlayer.RoomID != "" {
 				rm.LeaveRoom(humanPlayer)
 			}
-			fmt.Println("谢谢游玩，再见！")
+			g.Log().Infof(ctx,"谢谢游玩，再见！")
 			return
 
 		case "5":
 			if humanPlayer.RoomID == "" {
-				fmt.Println("你不在任何房间中")
+				g.Log().Infof(ctx,"你不在任何房间中")
 				break
 			}
 			rm.LeaveRoom(humanPlayer)
-			fmt.Println("已离开房间")
+			g.Log().Infof(ctx,"已离开房间")
 
 		case "6":
 			if humanPlayer.RoomID == "" {
-				fmt.Println("你不在任何房间中")
+				g.Log().Infof(ctx,"你不在任何房间中")
 				break
 			}
 			room := rm.Rooms[humanPlayer.RoomID]
 			if len(room.Players) != 3 {
-				fmt.Println("玩家不足3人，无法开始游戏")
+				g.Log().Infof(ctx,"玩家不足3人，无法开始游戏")
 				break
 			}
 			if room.IsPlaying {
-				fmt.Println("游戏已经开始")
+				g.Log().Infof(ctx,"游戏已经开始")
 				break
 			}
 			room.IsPlaying = true
 			PlayOneGame(room)
 
 		default:
-			fmt.Println("无效的操作，请重新选择")
+			g.Log().Infof(ctx,"无效的操作，请重新选择")
 		}
 	}
 }*/
