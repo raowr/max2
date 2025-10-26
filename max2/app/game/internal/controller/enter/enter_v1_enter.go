@@ -524,7 +524,7 @@ func (c *Client) heartbeatCheck(ctx context.Context) {
 	ticker := time.NewTicker(5 * time.Second)
 	defer ticker.Stop()
 	defer g.Log().Infof(ctx, "用户 %s 心跳检测退出", c.userID)
-	fmt.Println("heartbeatCheck:", c.heartbeat)
+	g.Log().Infof(ctx, "heartbeatCheck: %v", time.Since(c.heartbeat))
 	for {
 		if c.closed {
 			return
