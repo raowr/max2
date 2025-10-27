@@ -321,44 +321,9 @@ func (ps *Player) findPairs() {
 
 // 处理单牌（考虑2的数量）
 func (ps *Player) findSingles() {
-	// 统计2的数量
-	twoCount := 0
+	//所有剩余牌都是单牌
 	for _, card := range ps.Cards {
-		if card.Rank == 15 { // 2的Rank为15
-			twoCount++
-		}
-	}
-
-	// 如果2的数量大于单牌数量，则2不参与单牌
-	if twoCount > 0 {
-		var singles []Card
-		var twos []Card
-
-		// 分离2和其他单牌
-		for _, card := range ps.Cards {
-			if card.Rank == 15 {
-				twos = append(twos, card)
-			} else {
-				singles = append(singles, card)
-			}
-		}
-
-		// 添加单牌
-		for _, card := range singles {
-			ps.handPattern[SINGLE] = append(ps.handPattern[SINGLE], []Card{card})
-		}
-
-		// 只有当2的数量小于等于单牌数量时，2才作为单牌
-		if len(twos) <= len(singles) {
-			for _, card := range twos {
-				ps.handPattern[SINGLE] = append(ps.handPattern[SINGLE], []Card{card})
-			}
-		}
-	} else {
-		// 没有2，所有剩余牌都是单牌
-		for _, card := range ps.Cards {
-			ps.handPattern[SINGLE] = append(ps.handPattern[SINGLE], []Card{card})
-		}
+		ps.handPattern[SINGLE] = append(ps.handPattern[SINGLE], []Card{card})
 	}
 }
 
