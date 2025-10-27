@@ -2,6 +2,7 @@ package room
 
 import (
 	"sort"
+	"strings"
 )
 
 // 按牌面排序
@@ -31,8 +32,8 @@ func (ps *Player) countRanks() map[int]int {
 }
 
 // 统计花色数量
-func (ps *Player) countSuits() map[string]int {
-	count := make(map[string]int)
+func (ps *Player) countSuits() map[int]int {
+	count := make(map[int]int)
 	for _, card := range ps.Cards {
 		count[card.Suit]++
 	}
@@ -60,7 +61,7 @@ func (ps *Player) findFlushes() {
 	}
 }
 
-func (ps *Player) findStraightInSuit(cards []Card, cardSuit string) {
+func (ps *Player) findStraightInSuit(cards []Card, cardSuit int) {
 	if len(cards) < 5 {
 		return
 	}
@@ -461,8 +462,8 @@ func countRanks(cards []Card) map[int]int {
 }
 
 // 统计花色数量
-func countSuits(cards []Card) map[string]int {
-	count := make(map[string]int)
+func countSuits(cards []Card) map[int]int {
+	count := make(map[int]int)
 	for _, card := range cards {
 		count[card.Suit]++
 	}
@@ -585,4 +586,193 @@ func isFullHouse(cards []Card) bool {
 	}
 
 	return hasThree && hasTwo
+}
+
+// 比较牌的大小
+func compareCards(lastPH, pokerHand int, last []Card, current []Card) bool {
+	if len(last) == 0 {
+		return true // 上一手没牌，当前任何有效牌型都可以出
+	}
+
+	if len(current) == 0 {
+		return true // 不出牌
+	}
+	//牌型相同比较
+	if lastPH == pokerHand {
+		return getMaxValue(pokerHand, current) > getMaxValue(lastPH, last)
+	} else {
+		//牌型不同，当前牌型必须大于上一手牌型
+		return pokerHand > lastPH
+	}
+}
+
+// 获取牌组中的最大值
+func getMaxValue(pokerHand int, cards []Card) (maxVal int) {
+
+	//分牌型获取最大值
+	if pokerHand == SINGLE || //单牌最大值
+		pokerHand == PAIR || //对子最大值
+		pokerHand == STRAIGHT || //顺子最大值
+		pokerHand == SUIT || //同花最大值
+		pokerHand == FLUSH { //同花顺最大值
+		for _, card := range cards {
+			if card.Id > maxVal {
+				maxVal = card.Id
+			}
+		}
+	}
+	if pokerHand == THREE { //三带二最大值
+		rankCount := countRanks(cards)
+		for rank, count := range rankCount {
+			if count == 3 {
+				maxVal = rank
+			}
+		}
+	}
+	if pokerHand == FOUR { //四带一最大值
+		rankCount := countRanks(cards)
+		for rank, count := range rankCount {
+			if count == 4 {
+				maxVal = rank
+			}
+		}
+	}
+	return maxVal
+}
+
+// 显示牌组
+func showCards(cards []Card) string {
+	if len(cards) == 0 {
+		return "不出"
+	}
+
+	var names []string
+	for _, card := range cards {
+		names = append(names, card.Name)
+	}
+	return strings.Join(names, " ")
+}
+
+// 找到所有可能出现对子中最小的对子
+func FindSmallestPossiblePair(lastPH int, lastCards, cards []Card, pairType PairType) []Card {
+	if len(cards) < 2 {
+		return nil
+	}
+
+	// 按牌的点数分组
+	rankGroups := make(map[int][]Card)
+	for _, card := range cards {
+		rankGroups[card.Rank] = append(rankGroups[card.Rank], card)
+	}
+
+	// 收集所有可能的对子
+	var allPairs [][]Card
+	var gtlastCards [][]Card //大于上一手牌的对子
+
+	for _, group := range rankGroups {
+		if len(group) >= 2 {
+			// 对每组牌按花色从大到小排序（黑桃3>红桃2>梅花1>方块0）
+			sortCardsBySuitDesc(group)
+
+			// 生成所有可能的对子组合
+			for i := 0; i < len(group); i++ {
+				for j := i + 1; j < len(group); j++ {
+					pair := []Card{group[i], group[j]}
+					allPairs = append(allPairs, pair)
+				}
+			}
+		}
+	}
+
+	if len(allPairs) == 0 {
+		return nil
+	}
+
+	for _, pair := range allPairs {
+		if compareCards(lastPH, lastPH, lastCards, pair) {
+			gtlastCards = append(gtlastCards, pair)
+		}
+	}
+	if len(gtlastCards) == 0 {
+		return nil
+	}
+
+	// 根据类型返回最大或最小的对子
+	switch pairType {
+	case SmallestPair:
+		return findSmallestPair(allPairs)
+	case LargestPair:
+		return findLargestPair(allPairs)
+	default:
+		return nil
+	}
+}
+
+// 按花色从大到小排序：黑桃(3) > 红桃(2) > 梅花(1) > 方块(0)
+func sortCardsBySuitDesc(cards []Card) {
+	sort.Slice(cards, func(i, j int) bool {
+		return cards[i].Suit > cards[j].Suit
+	})
+}
+
+// 比较两个对子的大小（用于找最小对子）
+func comparePairsForSmallest(pair1, pair2 []Card) bool {
+	// 先比较点数
+	if pair1[0].Rank != pair2[0].Rank {
+		return pair1[0].Rank < pair2[0].Rank
+	}
+
+	// 点数相同，比较第一张牌的花色
+	if pair1[0].Suit != pair2[0].Suit {
+		return pair1[0].Suit < pair2[0].Suit
+	}
+
+	// 第一张牌花色相同，比较第二张牌的花色
+	return pair1[1].Suit < pair2[1].Suit
+}
+
+// 比较两个对子的大小（用于找最大对子）
+func comparePairsForLargest(pair1, pair2 []Card) bool {
+	// 先比较点数
+	if pair1[0].Rank != pair2[0].Rank {
+		return pair1[0].Rank > pair2[0].Rank
+	}
+
+	// 点数相同，比较第一张牌的花色
+	if pair1[0].Suit != pair2[0].Suit {
+		return pair1[0].Suit > pair2[0].Suit
+	}
+
+	// 第一张牌花色相同，比较第二张牌的花色
+	return pair1[1].Suit > pair2[1].Suit
+}
+
+// 找到所有对子中最小的对子
+func findSmallestPair(pairs [][]Card) []Card {
+	if len(pairs) == 0 {
+		return nil
+	}
+
+	smallest := pairs[0]
+	for i := 1; i < len(pairs); i++ {
+		if comparePairsForSmallest(pairs[i], smallest) {
+			smallest = pairs[i]
+		}
+	}
+	return smallest
+}
+
+// 找到所有对子中最大的对子
+func findLargestPair(pairs [][]Card) []Card {
+	if len(pairs) == 0 {
+		return nil
+	}
+
+	largest := pairs[0]
+	for i := 1; i < len(pairs); i++ {
+		if comparePairsForLargest(pairs[i], largest) {
+			largest = pairs[i]
+		}
+	}
+	return largest
 }
