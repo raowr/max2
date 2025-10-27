@@ -164,7 +164,7 @@ func DecideCards(player, landlord *Player, lastPH int, lastCards []Card) (pokerH
 			}
 		}
 		//如果是3号玩家，人类玩家剩余5张牌，50%概率拆并且牌组上没有并且上一手是人类打的，必须拆牌
-		if player.ID == 3 && len(landlord.Cards) == 5 && (lastPH == SINGLE || lastPH == PAIR) && landlord.Must && Probability(50) && len(playCards) <= 0 {
+		if player.ID == 3 && len(landlord.Cards) == 5 && (lastPH == SINGLE || lastPH == PAIR) && landlord.Must && Probability(40) && len(playCards) <= 0 {
 			//如果是单牌
 			if lastPH == SINGLE {
 				gtLandlordCardIds := make([]Card, 0) //所有比人类玩家大的牌的Id
