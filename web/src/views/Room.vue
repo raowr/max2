@@ -117,6 +117,7 @@ import full16020 from '@/assets/img/lihui/full16020.png';
 import bighead15419 from '@/assets/img/touxiang/bighead15419.png';
 import full15418 from '@/assets/img/lihui/full15418.png';
 import { storage } from '@/utils/storage'
+import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
 const router = useRouter()
 const state = reactive({
   players: [
@@ -319,6 +320,11 @@ const toGame = () => {
     //路由跳到游戏页面
     router.push({path:'/game'})
   }
+
+  //确定player头像，存于storage
+  storage.local.set('player2avatar', getTouxiang())
+  storage.local.set('player3avatar', getTouxiang())
+  storage.local.set('player4avatar', getTouxiang())
 }
 
 

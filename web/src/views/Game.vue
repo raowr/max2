@@ -43,8 +43,8 @@
         <p style="z-index:1;font-size:14px; color:yellow; font-weight: bold;">{{ state.player1Point }}瓜子</p>
       </div>
 
-      <img src="@/assets/img/touxiang/bighead15718.png" width="100px"
-        style="position: absolute;bottom:38.2%;left:3%;border-radius: 25px;">
+      <img src="@/assets/img/touxiang/smallhead.png" width="100px"
+        style="position: absolute;bottom:34.2%;left:3%;border-radius: 25px;">
       <div style="width:140px;height:40px;text-align:center;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥1</p>
       </div>
@@ -71,13 +71,12 @@
         </div>
       </div>
       <img src="@/assets/img/ui/chatlog.png" width="90px">
-      <img src="@/assets/img/touxiang/bighead15419.png" width="90px"
-        style="position: absolute;bottom:42.2%;left:3.1%;border-radius: 25px;">
+      <img :src="player2touxiang" width="90px" style="position: absolute;bottom:35.2%;left:-0.9%;border-radius: 25px;">
       <div style="width:140px;height:40px;text-align:center;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥2</p>
       </div>
-      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-70%;top:-2%'>
-      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:66%;left:-60%;">剩{{ state.player2CardsNum
+      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-60%;top:-2%'>
+      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:66%;left:-45%;">剩{{ state.player2CardsNum
       }}张
       </p>
     </div>
@@ -104,13 +103,12 @@
         </div>
       </div>
       <img src="@/assets/img/ui/chatlog.png" width="90px">
-      <img src="@/assets/img/touxiang/bighead15339.png" width="85px"
-        style="position: absolute;bottom:42.2%;left:3.1%;border-radius: 25px;">
+      <img :src="player4touxiang" width="85px" style="position: absolute;bottom:36.2%;left:3.1%;border-radius: 25px;">
       <div style="width:100px;height:40px;text-align:center;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥4</p>
       </div>
-      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:110%;top:0%'>
-      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:67%;left:130%;width: 60px;">
+      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:94%;top:0%'>
+      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:67%;left:112%;width: 60px;">
         剩{{ state.player4CardsNum }}张</p>
     </div>
 
@@ -142,11 +140,10 @@
         width: '90px',
         height: '90px'
       }">
-        <img src="@/assets/img/touxiang/bighead15729.png" width="90px"
-          style="bottom:31.2%;left:3.1%;border-radius: 25px;">
+        <img :src="player3touxiang" width="90px" style="bottom:31.2%;left:3.1%;border-radius: 25px;">
       </div>
-      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:120px;'>
-      <p style="position: absolute;font-size:16px; color:white;top:90px;left:135px;width: 60px;">
+      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:100px;'>
+      <p style="position: absolute;font-size:16px; color:white;top:90px;left:118px;width: 60px;">
         剩{{ state.player3CardsNum }}张</p>
       <div style="position: absolute;width:105px;height:40px;text-align:center;top:90px;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥3</p>
@@ -265,6 +262,8 @@ import { useRouter } from 'vue-router' // 添加这行导入
 import { audioManager } from '@/utils/audio'
 import { websocket } from '@/utils/websocket'
 import { cardUtil, CARD_TYPE } from '@/utils/card';
+import { storage } from '@/utils/storage'
+import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
 const state = reactive({
   deck: [],
   countdownPlayer: 0,
@@ -313,6 +312,10 @@ const scaleFactor = ref(screenWidth.value < 998 ? 0.6 : 1);
 
 // 添加这行来定义bgmInitialized变量
 const bgmInitialized = ref(false) // 跟踪BGM是否已经初始化
+
+const player2touxiang = ref("")
+const player3touxiang = ref("")
+const player4touxiang = ref("")
 
 // 导入背景图片（新增代码）
 import winBg from '@/assets/img/ui/win_bg.png'
@@ -368,6 +371,11 @@ onMounted(() => {
   }
   websocket.on('message', handleMessage)
   window.addEventListener('resize', handleResize)
+
+  // 从storage中获取player2avatar
+  player2touxiang.value = storage.local.get('player2avatar')
+  player3touxiang.value = storage.local.get('player3avatar')
+  player4touxiang.value = storage.local.get('player4avatar')
 })
 
 // 组件卸载时移除回调（关键：防止内存泄漏）
@@ -474,6 +482,9 @@ const handleMessage = (data) => {
     }
   }
   if (parsedData.type == "showCard") {
+
+    resetAvatar()
+
     data = JSON.parse(parsedData.data)
     console.log(data);
     //玩家牌排序
@@ -911,6 +922,27 @@ const chatlogBgUrl = computed(() => {
 const goToRoom = () => {
   showGameOverModal.value = false
   router.push('/room')  // 跳转到房间路由
+}
+
+//重新设置头像
+const resetAvatar = () => {
+  //头像处理
+  if (Math.random() > 0.5) {
+    let player2avatar = getTouxiang()
+    player2touxiang.value = player2avatar
+    storage.local.set('player2avatar', player2avatar)
+  }
+  if (Math.random() > 0.5) {
+    let player3avatar = getTouxiang()
+    player3touxiang.value = player3avatar
+    storage.local.set('player3avatar', player3avatar)
+  }
+
+  if (Math.random() > 0.5) {
+    let player4avatar = getTouxiang()
+    player4touxiang.value = player4avatar
+    storage.local.set('player4avatar', player4avatar)
+  }
 }
 </script>
 

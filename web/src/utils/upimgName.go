@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func main() {
+func main1() {
 	// 指定要处理的目录路径
 	root := "../assets" // 请替换为你的实际路径
 
