@@ -1,5 +1,5 @@
 <template>
-  <div class="loading-page">
+  <div class="loading-page":style="backgroundStyle">
     <div class="loading-content">
       <div class="progress-container">
         <div class="progress-bar" :style="{ width: progressPercentage + '%' }"></div>
@@ -141,7 +141,7 @@ export default {
     return {
       // 所有需要预加载的图片路径（根据实际项目补充）
       imagePaths: [
-        cg4Img,       // 直接使用 import 后的变量
+        // cg4Img,       // 直接使用 import 后的变量
         titleBgImg,   // 新增：标题背景
         friendRoomImg, // 新增：好友房间
         return2Img,   // 新增：返回2图标
@@ -269,14 +269,43 @@ export default {
       isReady: false,
     };
   },
+  computed: {
+    // 新增：动态计算背景样式
+    backgroundStyle() {
+      return {
+        backgroundImage: this.backgroundLoaded ? `url(${cg4Img})` : 'none',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
+  },
   mounted() {
-    // 2. 计算总资源数（图片数 + 音频数）
-    this.totalFiles = this.imagePaths.length + this.audioPaths.length;
-
-    // 3. 预加载所有资源（图片 + 音频）
-    this.preloadAllResources();
+// 优先预加载背景图
+    this.preloadBackgroundImage().then(() => {
+      // 背景加载完成后，开始加载其他资源
+      this.totalFiles = this.imagePaths.length + this.audioPaths.length;
+      this.preloadAllResources();
+    });
   },
   methods: {
+    // 优先预加载背景图片
+    preloadBackgroundImage() {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          console.log('背景图片优先加载完成');
+          this.backgroundLoaded = true; // 更新加载状态
+          resolve();
+        };
+        img.onerror = () => {
+          console.error('背景图片加载失败');
+          this.backgroundLoaded = false;
+          resolve(); // 即使失败也继续
+        };
+        img.src = cg4Img; // 直接使用导入的变量，不需要 require
+      });
+    },
     // 新增：统一预加载图片和音频
     preloadAllResources() {
       // 预加载图片（复用原有逻辑）
@@ -352,7 +381,7 @@ export default {
   width: 100vw;
   height: 100vh;
   /* 1. 添加背景图（路径根据实际位置调整，此处假设图片在 src/assets/ 下） */
-  background-image: url('@/assets/img/cg/cg4.png');
+  /*background-image: url('@/assets/img/cg/cg4.png');*/
   background-size: cover;
   /* 覆盖全屏 */
   background-position: center;
@@ -365,6 +394,9 @@ export default {
   /* 垂直方向底部对齐 */
   padding-bottom: 80px;
   /* 距离底部 80px（可调整数值控制"上一点"的距离） */
+  /* 添加一个默认背景色，在图片加载前显示 */
+  background-color: #000000;
+  transition: background-image 0.3s ease;
 }
 
 .loading-content {
