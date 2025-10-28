@@ -450,6 +450,7 @@ func (c *Client) readServe(ctx context.Context) {
 
 	var roomID string
 	roomInfo := &room.Room{}
+	roomInfo.MsgChan = make(chan room.RoomMsg)
 	// 循环读取房间消息（带退出机制）
 	for {
 		if c.closed {

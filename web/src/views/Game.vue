@@ -1319,17 +1319,15 @@ const resetAvatar = () => {
   .player1-container {
     transform: scale(0.8);
     /* 缩小至80% */
-    bottom: -4%;
+    bottom: 6%;
     /* 向下移动（从原来的5%调整为8%） */
     transform-origin: bottom left;
-    /* 确保缩放从左下角开始，避免水平偏移 */
   }
 
   .player2-container {
     transform: scale(0.8);
     /* 整体缩小至80% */
     transform-origin: top right;
-    /* 以右上角为缩放原点，避免位置偏移 */
   }
 
   .player4-container {
