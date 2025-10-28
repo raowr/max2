@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/gogf/gf/v2/util/grand"
 	"net/http"
 	"time"
 
@@ -201,8 +202,8 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 	// 发送房间ID到客户端
 	c.roomIdChan <- roomInfo.ID
 
-	// 创建AI玩家
-	aiCount := 2
+	// 创建AI玩家，随机ai人数
+	aiCount := grand.N(0, 3)
 	for i := 0; i < aiCount; i++ {
 		aiName := fmt.Sprintf("帅锅%d号", i+1)
 		roomInfo.CreatePlayer(aiName, room.AI)
@@ -219,8 +220,16 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		Data: gconv.String(players),
 		From: gconv.String(humanPlayer.ID),
 	}
-	c.sendChan <- c.encodeMessage(ctx, msgData)
-
+	// 非阻塞发送，如果通道满则记录警告但继续执行
+	select {
+	case c.sendChan <- c.encodeMessage(ctx, msgData):
+		// 发送成功
+	default:
+		g.Log().Warningf(ctx, "用户 %s 消息发送阻塞（通道满），丢弃初始化消息", c.userID)
+	}
+	if aiCount >= 3 {
+		return
+	}
 	// 延迟添加额外AI（带上下文超时，避免协程泄漏）
 	go func(roomID string, userID string, clientPid int) {
 		// 使用Background上下文确保协程能执行完
@@ -237,8 +246,11 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 			g.Log().Warningf(ctx, "房间 %s 已不存在，停止添加AI", roomID)
 			return
 		}
-		aiName := fmt.Sprintf("帅锅%d号", len(roomInfo.Players))
-		roomInfo.CreatePlayer(aiName, room.AI)
+		aiNum := len(roomInfo.Players)
+		for i := 0; i < 3-aiNum; i++ {
+			aiName := fmt.Sprintf("帅锅%d号", aiNum+i+1)
+			roomInfo.CreatePlayer(aiName, room.AI)
+		}
 
 		// 再次推送更新后的玩家列表
 		players, err := json.Marshal(roomInfo.Players)
