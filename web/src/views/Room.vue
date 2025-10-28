@@ -196,7 +196,7 @@ const init = async () => {
   websocket.on('open', () => {
     console.log('room on open');
     // 连接成功后再执行 toggleReady
-    websocket.send({"type":"getInfo","data":"","name":""});
+    websocket.send({"type":"initRoom","data":"","name":""});
   });
   websocket.on('error', () => {
     console.log('on error');
