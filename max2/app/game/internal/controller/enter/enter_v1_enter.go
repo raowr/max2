@@ -4,9 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/gogf/gf/v2/util/grand"
 	"net/http"
 	"time"
+
+	"github.com/gogf/gf/v2/util/grand"
 
 	v1 "game/api/enter/v1"
 	"game/internal/consts"
@@ -247,7 +248,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 			return
 		}
 		aiNum := len(roomInfo.Players)
-		for i := 0; i < 3-aiNum; i++ {
+		for i := 0; i < 4-aiNum; i++ {
 			aiName := fmt.Sprintf("帅锅%d号", aiNum+i+1)
 			roomInfo.CreatePlayer(aiName, room.AI)
 		}

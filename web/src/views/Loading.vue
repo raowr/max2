@@ -1,5 +1,5 @@
 <template>
-  <div class="loading-page":style="backgroundStyle">
+  <div class="loading-page" :style="backgroundStyle">
     <div class="loading-content">
       <div class="progress-container">
         <div class="progress-bar" :style="{ width: progressPercentage + '%' }"></div>
@@ -267,6 +267,7 @@ export default {
         backgroundRepeat: 'no-repeat'
       },
       isReady: false,
+      backgroundLoaded:false,
     };
   },
   computed: {
@@ -381,7 +382,7 @@ export default {
   width: 100vw;
   height: 100vh;
   /* 1. 添加背景图（路径根据实际位置调整，此处假设图片在 src/assets/ 下） */
-  /*background-image: url('@/assets/img/cg/cg4.png');*/
+  /* background-image: url('@/assets/img/cg/cg4.png'); */
   background-size: cover;
   /* 覆盖全屏 */
   background-position: center;
@@ -394,8 +395,6 @@ export default {
   /* 垂直方向底部对齐 */
   padding-bottom: 80px;
   /* 距离底部 80px（可调整数值控制"上一点"的距离） */
-  /* 添加一个默认背景色，在图片加载前显示 */
-  background-color: #000000;
   transition: background-image 0.3s ease;
 }
 

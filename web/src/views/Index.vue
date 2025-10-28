@@ -1,5 +1,8 @@
 <template>
   <div class="index">
+     <div v-show="userIdShow" class="msg" style="position: absolute; top: 0%;left: 11%; color:gold;">
+      {{ storage.local.get('user_id') }}
+    </div>
     <div id="right">
       <div class="right1" @click="right()"></div>
       <div class="right2"></div>
@@ -37,13 +40,13 @@
     </div>
     <!--  右边设置栏 -->
     <div class="right-settings">
-      <div class="setting-btn btn-set"></div>
+      <div class="setting-btn btn-set" ></div>
       <div class="setting-btn btn-guide"></div>
       <div class="setting-btn btn-trophy"></div>
     </div>
 
     <!--  人物信息 -->
-    <div class="character-info">
+    <div class="character-info"  @click="info()">
       <div class="character-bg"></div>
       <div class="avatar"></div>
       <div class="title"></div>
@@ -74,8 +77,11 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { ref,onMounted } from 'vue'
 import { audioManager } from '@/utils/audio'
+import { storage } from '@/utils/storage'
+
+const userIdShow = ref(false)  // 玩家di显示与隐藏
 onMounted(() => {
   init()
 })
@@ -93,6 +99,8 @@ const init = async () => {
   }
 
 }
+
+
 
 // 判断是否在原生 App 环境（示例）
 const isApp = () => {
@@ -131,7 +139,9 @@ const inroom = () => {
   input.style.display = "block";
   submitBtn.style.display = "block";
 }
-
+const info = () => {
+  userIdShow.value = !userIdShow.value
+}
 </script>
 
 
@@ -148,11 +158,11 @@ const inroom = () => {
 }
 
 .right1 {
-  background: url("@/assets/img/ui/btn_yibanchang.png");
+  background: url("@/assets/img/ui/btn_yourenchang.png");
   background-size: 100% 100%;
   height: 20%;
   width: 23%;
-  top: 15%;
+  top: 20%;
   position: absolute;
   right: 13%;
   float: right;
@@ -163,18 +173,18 @@ const inroom = () => {
   background-size: 100% 100%;
   height: 20%;
   width: 25%;
-  top: 35%;
+  top: 41%;
   position: absolute;
   right: 11%;
   float: right;
 }
 
 .right3 {
-  background: url("@/assets/img/ui/btn_yourenchang.png");
+  background: url("@/assets/img/ui/btn_yibanchang.png");
   background-size: 100% 100%;
   height: 20%;
   width: 25%;
-  top: 55%;
+  top: 61%;
   position: absolute;
   right: 11%;
   float: right;

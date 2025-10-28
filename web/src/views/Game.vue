@@ -44,8 +44,8 @@
       </div>
 
       <img src="@/assets/img/touxiang/smallhead.png" width="100px"
-        style="position: absolute;bottom:34.2%;left:3%;border-radius: 25px;">
-      <div style="width:140px;height:40px;text-align:center;">
+        style="position: absolute;bottom:10.2%;left:4%;border-radius: 25px;">
+      <div style="width:110px;height:40px;text-align:center;position: absolute;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥1</p>
       </div>
     </div>
@@ -55,7 +55,7 @@
     <div class="player2-container" style="">
       <!-- 修改为圆形倒计时 -->
       <div v-if="state.countdownPlayer == 2"
-        style="position: absolute; top: -5%; left: 34%; transform: translateX(-50%); z-index: 999; text-align: center">
+        style="position: absolute; top: -5%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
         <svg :width="100" :height="100">
           <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
           <circle cx="50" cy="50" r="45" :stroke="countdownPlayer2 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'"
@@ -71,12 +71,12 @@
         </div>
       </div>
       <img src="@/assets/img/ui/chatlog.png" width="90px">
-      <img :src="player2touxiang" width="90px" style="position: absolute;bottom:35.2%;left:-0.9%;border-radius: 25px;">
-      <div style="width:140px;height:40px;text-align:center;">
+      <img :src="player2touxiang" width="90px" style="position: absolute;bottom:10.2%;left:1.1%;border-radius: 25px;">
+      <div style="width:89px;height:40px;text-align:center;position: absolute;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥2</p>
       </div>
-      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-60%;top:-2%'>
-      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:66%;left:-45%;">剩{{ state.player2CardsNum
+      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-95%;top:-2%'>
+      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:96%;left:-75%;">剩{{ state.player2CardsNum
       }}张
       </p>
     </div>
@@ -87,7 +87,7 @@
     <div class="player4-container" style="">
       <!-- 修改为圆形倒计时 -->
       <div v-if="state.countdownPlayer == 4"
-        style="position: absolute; top: -4%; left: 40%; transform: translateX(-50%); z-index: 999; text-align: center">
+        style="position: absolute; top: -4%; left: 46%; transform: translateX(-50%); z-index: 999; text-align: center">
         <svg :width="100" :height="100">
           <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
           <circle cx="50" cy="50" r="45" :stroke="countdownPlayer4 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'"
@@ -118,7 +118,7 @@
     <div class="player3-container" style="">
       <!-- 修改为圆形倒计时 -->
       <div v-if="state.countdownPlayer == 3"
-        style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
+        style="position: absolute; top: 0%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
         <svg :width="100" :height="100">
           <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
           <circle cx="50" cy="50" r="45" :stroke="countdownPlayer3 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'"
@@ -1069,7 +1069,7 @@ const resetAvatar = () => {
 .player4-container {
   position: absolute;
   top: 30%;
-  left: 3%;
+  left: 5%;
 }
 
 .player3-container {
