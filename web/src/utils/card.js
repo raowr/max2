@@ -104,19 +104,11 @@ function compareByRankRule(type, current, last) {
         case CARD_TYPE.PAIR:
             return current[0].rank > last[0].rank ? 1 : (current[0].rank < last[0].rank ? -1 : 0);
         case CARD_TYPE.STRAIGHT_FLUSH:
+        case CARD_TYPE.SUIT:
         case CARD_TYPE.STRAIGHT: {
             const currentMax = getMaxRank(current);
             const lastMax = getMaxRank(last);
             return currentMax > lastMax ? 1 : (currentMax < lastMax ? -1 : 0);
-        }
-        case CARD_TYPE.SUIT: {
-            const currentRanks = getSortedRanks(current, true);
-            const lastRanks = getSortedRanks(last, true);
-            for (let i = 0; i < 5; i++) {
-                if (currentRanks[i] > lastRanks[i]) return 1;
-                if (currentRanks[i] < lastRanks[i]) return -1;
-            }
-            return 0;
         }
         case CARD_TYPE.FULL_HOUSE: {
             const currentThree = getRankByCount(countRanks(current), 3);
