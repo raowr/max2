@@ -79,6 +79,14 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	clientsMu.Lock()
 	if oldClient, err := getClient(userID); err == nil && oldClient != nil {
 		oldClient.conn.Close() // 关闭旧连接
+		// 关闭通道（安全检查，避免对 nil 通道调用 close）
+		if oldClient.sendChan != nil {
+			close(oldClient.sendChan)
+		}
+		if oldClient.roomChan != nil {
+			close(oldClient.roomChan)
+		}
+
 		g.Log().Infof(ctx, "用户 %s 重连，关闭旧连接", userID)
 	}
 	if err = addClient(client); err != nil {
@@ -287,6 +295,7 @@ func (c *Client) handlePlay(ctx context.Context) {
 
 	rmMu.Lock()
 	roomInfo.IsPlaying = true
+	roomInfo.Status = 1 //游戏中
 	rmMu.Unlock()
 
 	// 启动游戏逻辑（传入上下文，支持取消）
@@ -406,6 +415,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		OutCards             []int               `json:"outCards"`
 		MustPid              int                 `json:"mustPid"`
 		LastPid              int                 `json:"lastPid"`
+		Status               int                 `json:"status"`
 	}{
 		RoomId:               roomInfo.ID,
 		Players:              roomInfo.Players,
@@ -419,6 +429,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		OutCards:             outCards,
 		MustPid:              mustPid,
 		LastPid:              lastPid,
+		Status:               roomInfo.Status,
 	})
 	if err != nil {
 		g.Log().Errorf(ctx, "用户 %s 序列化房间信息失败: %v", c.userID, err)
@@ -458,11 +469,11 @@ func (c *Client) readServe(ctx context.Context) {
 
 		case newRoom := <-c.roomChan:
 			// 切换到新房间
-			if roomInfo != nil {
-				g.Log().Infof(ctx, "用户 %s 从房间 %s 切换到房间 %s", c.userID, roomInfo.ID, newRoom.ID)
-			} else {
-				g.Log().Infof(ctx, "用户 %s 加入房间 %s", c.userID, newRoom.ID)
-			}
+			// if roomInfo != nil {
+			// 	g.Log().Infof(ctx, "用户 %s 从房间 切换到房间", c.userID)
+			// } else {
+			// 	g.Log().Infof(ctx, "用户 %s 加入房间", c.userID)
+			// }
 			roomInfo = newRoom
 
 		default:

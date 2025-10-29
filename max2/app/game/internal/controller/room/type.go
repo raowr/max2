@@ -2,6 +2,7 @@ package room
 
 import (
 	"context"
+
 	"github.com/gogf/gf/v2/os/gtimer"
 )
 
@@ -76,7 +77,8 @@ type Room struct {
 	Rgtimer      *gtimer.Timer
 	OutStarTime  int //出牌开始时间
 	passCount    int //不出次数
-	NextPlayerID int
+	NextPlayerID int //下一位出牌玩家
+	Status       int //房间状态 0 未开始 1 游戏中 2 结算中
 }
 
 // 房间管理器

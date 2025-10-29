@@ -81,6 +81,7 @@ import { ref,onMounted } from 'vue'
 import { audioManager } from '@/utils/audio'
 import { storage } from '@/utils/storage'
 import {useRoute,useRouter} from 'vue-router'
+import { websocket } from '@/utils/websocket'
 
 const router = useRouter()
 const route = useRoute()

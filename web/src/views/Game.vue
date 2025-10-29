@@ -367,7 +367,7 @@ onMounted(() => {
   // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
   if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
     console.log('game play on open');
-    websocket.send({ "type": "play", "data": "", "name": "" })
+     websocket.send({ "type": "getInfo", "data": "", "name": "" })
   }
   websocket.on('message', handleMessage)
   window.addEventListener('resize', handleResize)
@@ -376,6 +376,8 @@ onMounted(() => {
   player2touxiang.value = storage.local.get('player2avatar')
   player3touxiang.value = storage.local.get('player3avatar')
   player4touxiang.value = storage.local.get('player4avatar')
+
+  websocket.send({ "type": "getInfo", "data": "", "name": "" })
 })
 
 // 组件卸载时移除回调（关键：防止内存泄漏）
@@ -474,11 +476,16 @@ const handleMessage = (data) => {
           state.lastmsg = "玩家4出了：" + cardsMsg
           break;
       }
-
-
-
     } else {
-      router.push('/index')  // 跳转到首页路由
+      switch (data.status) {
+        case 0://未开始
+          websocket.send({ "type": "play", "data": "", "name": "" })
+          break;
+        case 2://结算中
+          router.push('/index')  // 跳转到首页路由
+          break;
+      }
+      
     }
   }
   if (parsedData.type == "showCard") {

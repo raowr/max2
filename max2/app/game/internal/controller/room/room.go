@@ -54,6 +54,7 @@ func (rm *RoomManager) CreateRoom() *Room {
 		IsPlaying: false,
 		MsgChan:   make(chan RoomMsg),
 		Rgtimer:   gtimer.New(),
+		Status:    0, //未开始
 	}
 	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
 	room.Rgtimer.Stop() //先停止
@@ -129,6 +130,7 @@ func (rm *RoomManager) LeaveRoom(player *Player) {
 	} else if room.IsPlaying {
 		// 如果游戏正在进行中且玩家离开，结束当前游戏
 		room.IsPlaying = false
+		room.Status = 0 //结算中
 		g.Log().Infof(ctx, "玩家 %s 已离开房间，游戏结束\n", player.Name)
 	}
 }
@@ -518,6 +520,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		}()
 		room.Rgtimer.Stop()
 		room.IsPlaying = false
+		room.Status = 2 //结算中
 		room.LastCards = make([]Card, 0)
 		room.OutStarTime = 0
 		room.passCount = 0
