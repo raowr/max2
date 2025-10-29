@@ -23,13 +23,12 @@ var (
 
 // 客户端连接结构体
 type Client struct {
-	conn            *websocket.Conn // WebSocket 连接
-	userID          string          // 用户标识（用于重连）
-	heartbeat       time.Time       // 最后心跳时间
-	sendChan        chan []byte     // 消息发送通道，增大缓冲避免阻塞
-	pid             int             // 玩家id
-	closed          bool            // 连接是否已关闭
-	readServeClosed chan bool       // 读取服务端消息通道，用于通知退出
+	conn      *websocket.Conn // WebSocket 连接
+	userID    string          // 用户标识（用于重连）
+	heartbeat time.Time       // 最后心跳时间
+	sendChan  chan []byte     // 消息发送通道，增大缓冲避免阻塞
+	pid       int             // 玩家id
+	roomChan  chan *room.Room //房间通道
 }
 
 // 全局房间管理器及并发安全锁（核心优化：解决全局资源竞争）

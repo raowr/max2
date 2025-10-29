@@ -80,6 +80,10 @@
 import { ref,onMounted } from 'vue'
 import { audioManager } from '@/utils/audio'
 import { storage } from '@/utils/storage'
+import {useRoute,useRouter} from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
 
 const userIdShow = ref(false)  // 玩家di显示与隐藏
 onMounted(() => {
@@ -97,7 +101,18 @@ const init = async () => {
       console.error('初始化背景音乐失败:', error);
     }
   }
-
+  //当前重连
+  websocket.on('open', () => {
+    console.log('index on open');
+    // 连接成功后再执行 toggleReady
+    websocket.send({ "type": "getInfo", "data": "", "name": "" })
+  });
+  // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
+  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
+    console.log('index play on open');
+    websocket.send({ "type": "getInfo", "data": "", "name": "" })
+  }
+  websocket.on('message', handleMessage)
 }
 
 
@@ -141,6 +156,19 @@ const inroom = () => {
 }
 const info = () => {
   userIdShow.value = !userIdShow.value
+}
+
+const handleMessage = (data) => {
+  // 处理接收到的消息
+  console.log('index Received message:', data)
+  const parsedData = JSON.parse(data)
+  if (parsedData.type == "getInfo") {
+    data = JSON.parse(parsedData.data)
+    //如果游戏中跳到游戏界面
+    if (data.isPlaying && route.name !== "Game") {
+      router.push('/game')  // 跳转到游戏页面
+    }
+  }
 }
 </script>
 

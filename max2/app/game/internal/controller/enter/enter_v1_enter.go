@@ -68,18 +68,17 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 
 	// 创建客户端实例（增大消息缓冲）
 	client := &Client{
-		conn:            ws,
-		userID:          userID,
-		heartbeat:       time.Now(),
-		sendChan:        make(chan []byte, 10000), // 缓冲增大至10000，减少阻塞
-		readServeClosed: make(chan bool, 1),       // 初始化通道
+		conn:      ws,
+		userID:    userID,
+		heartbeat: time.Now(),
+		sendChan:  make(chan []byte, 10000), // 缓冲增大至10000，减少阻塞
+		roomChan:  make(chan *room.Room, 1), //新建房间通道
 	}
 
 	// 加锁更新客户端连接（重连逻辑）
 	clientsMu.Lock()
 	if oldClient, err := getClient(userID); err == nil && oldClient != nil {
 		oldClient.conn.Close() // 关闭旧连接
-		oldClient.closed = true
 		g.Log().Infof(ctx, "用户 %s 重连，关闭旧连接", userID)
 	}
 	if err = addClient(client); err != nil {
@@ -93,7 +92,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 
 	// 启动协程（增加退出日志）
 	go client.readLoop(ctx)
-	go client.readServe(ctx, nil)
+	go client.readServe(ctx)
 	go client.writeLoop(ctx)
 	go client.heartbeatCheck(ctx)
 
@@ -116,9 +115,6 @@ func (c *Client) readLoop(ctx context.Context) {
 	}()
 
 	for {
-		if c.closed {
-			return
-		}
 		// 读取客户端消息
 		mt, data, err := c.conn.ReadMessage()
 		if err != nil {
@@ -186,7 +182,6 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 				roomInfo.Rgtimer.Stop()
 				roomInfo.Rgtimer.Close() // 停止定时器（确保资源释放）
 			}
-			c.readServeClosed <- true // 通知readServe退出
 			delete(rm.Rooms, oldRoomID)
 			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userID, oldRoomID)
 		}
@@ -196,7 +191,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 
 	// 创建新房间和玩家
 	roomInfo := rm.CreateRoom()
-	go c.readServe(ctx, roomInfo)
+	c.roomChan <- roomInfo
 	playerName := "美女"
 	humanPlayer := roomInfo.CreatePlayer(playerName, room.Human)
 	humanPlayer.UserId = c.userID
@@ -341,7 +336,10 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		g.Log().Errorf(ctx, "用户 %s 房间不存在", c.userID)
 		return
 	}
-
+	//如果进行中的才监听房间消息
+	if roomInfo.IsPlaying {
+		c.roomChan <- roomInfo
+	}
 	// 整理房间信息（仅暴露当前玩家可见数据）
 	cards := make([]int, 0)
 	cardsNum := make([]*message.PlayData, 0)
@@ -445,66 +443,68 @@ func (c *Client) handleHeartbeat(ctx context.Context, data string) {
 }
 
 // 读取服务端消息并推送给客户端（修复空指针和资源泄漏）
-// 房间关闭，退出当前监听，新建监听房间
-func (c *Client) readServe(ctx context.Context, roomInfo *room.Room) {
-	var roomID string
-	if roomInfo == nil {
-		for _, player := range rm.PlayerList {
-			if player.UserId == c.userID {
-				roomID = player.RoomID
-				break
-			}
-
-		}
-		ok1 := false
-		roomInfo, ok1 = rm.Rooms[roomID]
-		if !ok1 {
-			g.Log().Errorf(ctx, "用户 %s 没有房间，暂时不监听房间信息", c.userID)
-			return
-		}
-	}
-
+func (c *Client) readServe(ctx context.Context) {
 	// 循环读取房间消息（带退出机制）
+	var roomInfo *room.Room
 	for {
-		if c.closed {
-			g.Log().Warningf(ctx, "用户 %s 房间1 已不存在，退出readServe", c.userID)
-			return
-		}
-
 		select {
-		case <-c.readServeClosed:
-			g.Log().Infof(ctx, "用户 %s 创建新房间退出监听房间%v返回信息", c.userID, roomInfo.ID)
-			return
 		case <-ctx.Done():
 			g.Log().Infof(ctx, "用户 %s readServe退出（上下文关闭）房间 %s", c.userID, roomInfo.ID)
 			return
-		case roomMsg, ok := <-roomInfo.MsgChan:
-			if !ok {
-				g.Log().Infof(ctx, "用户 %s 房间消息通道已关闭 房间 %s", c.userID, roomInfo.ID)
-				return
-			}
-			// 推送消息给客户端
-			msgData := message.ChatMsg{
-				Type: roomMsg.Type,
-				Data: roomMsg.Data,
-				From: gconv.String(c.pid),
-			}
-			g.Log().Infof(ctx, "房间 %s 向用户 %s 发送消息: %s", roomInfo.ID, c.userID, msgData)
-			select {
-			case c.sendChan <- c.encodeMessage(ctx, msgData):
-			default:
-				g.Log().Warningf(ctx, "用户 %s 消息发送阻塞（通道满）", c.userID)
-			}
 
-			// 处理玩家余额不足（带锁）
-			rmMu.Lock()
-			for _, p := range roomInfo.Players {
-				if p.Type == room.Human && p.Point <= 0 {
-					rm.LeaveRoom(p)
-					g.Log().Infof(ctx, "玩家 %d 余额不足，已离开房间", p.ID)
-				}
+		case newRoom := <-c.roomChan:
+			// 切换到新房间
+			if roomInfo != nil {
+				g.Log().Infof(ctx, "用户 %s 从房间 %s 切换到房间 %s", c.userID, roomInfo.ID, newRoom.ID)
+			} else {
+				g.Log().Infof(ctx, "用户 %s 加入房间 %s", c.userID, newRoom.ID)
 			}
-			rmMu.Unlock()
+			roomInfo = newRoom
+
+		default:
+			// 只有当有房间信息时才监听消息通道
+			if roomInfo != nil {
+				select {
+				case roomMsg, ok := <-roomInfo.MsgChan:
+					if !ok {
+						// 房间消息通道关闭，重置房间信息等待新房间分配
+						// g.Log().Infof(ctx, "用户 %s 房间消息通道已关闭 房间 %s", c.userID, roomInfo.ID)
+						roomInfo = nil
+						continue
+					}
+
+					// 推送消息给客户端
+					msgData := message.ChatMsg{
+						Type: roomMsg.Type,
+						Data: roomMsg.Data,
+						From: gconv.String(c.pid),
+					}
+					g.Log().Infof(ctx, "房间 %s 向用户 %s 发送消息: %s", roomInfo.ID, c.userID, msgData)
+
+					select {
+					case c.sendChan <- c.encodeMessage(ctx, msgData):
+					default:
+						g.Log().Warningf(ctx, "用户 %s 消息发送阻塞（通道满）", c.userID)
+					}
+
+					// 处理玩家余额不足（带锁）
+					rmMu.Lock()
+					for _, p := range roomInfo.Players {
+						if p.Type == room.Human && p.Point <= 0 {
+							rm.LeaveRoom(p)
+							g.Log().Infof(ctx, "玩家 %d 余额不足，已离开房间", p.ID)
+						}
+					}
+					rmMu.Unlock()
+
+				default:
+					// 没有消息时，短暂休眠避免忙等待
+					time.Sleep(10 * time.Millisecond)
+				}
+			} else {
+				// 没有房间时，短暂休眠避免忙等待
+				time.Sleep(100 * time.Millisecond)
+			}
 		}
 	}
 }
@@ -518,10 +518,6 @@ func (c *Client) writeLoop(ctx context.Context) {
 		player, ok := rm.PlayerList[c.userID]
 		if ok && player.RoomID != "" {
 			roomID = player.RoomID
-		}
-		if c.closed {
-			g.Log().Infof(ctx, "用户 %s writeLoop退出1", c.userID)
-			return
 		}
 		//先执行到这里等待sendChan有数据
 		select {
@@ -552,9 +548,6 @@ func (c *Client) heartbeatCheck(ctx context.Context) {
 	defer g.Log().Infof(ctx, "用户 %s 心跳检测退出", c.userID)
 	g.Log().Infof(ctx, "heartbeatCheck: %v", time.Since(c.heartbeat))
 	for {
-		if c.closed {
-			return
-		}
 		select {
 		case <-ticker.C:
 			g.Log().Infof(ctx, "heartbeatCheck: %v", time.Since(c.heartbeat))
