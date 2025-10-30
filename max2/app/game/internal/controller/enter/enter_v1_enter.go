@@ -146,6 +146,7 @@ func (c *Client) readLoop(ctx context.Context) {
 			c.sendChan <- c.encodeMessage(ctx, errMsg)
 			continue
 		}
+		g.Log().Infof(ctx, "用户 %s 接收消息: %s（类型: %d）", c.userID, data, mt)
 		// 根据消息类型处理业务（所有操作加锁保护全局rm）
 		switch msg.Type {
 		case consts.InitRoom:
@@ -166,8 +167,6 @@ func (c *Client) readLoop(ctx context.Context) {
 			}
 			c.sendChan <- c.encodeMessage(ctx, errMsg)
 		}
-
-		g.Log().Infof(ctx, "用户 %s 接收消息: %s（类型: %d）", c.userID, data, mt)
 	}
 }
 
@@ -297,6 +296,12 @@ func (c *Client) handlePlay(ctx context.Context) {
 
 	if !ok {
 		g.Log().Errorf(ctx, "用户 %s 房间不存在", c.userID)
+		return
+	}
+
+	//判断游戏进行中不能再次play,避免同一房间多次play
+	if roomInfo.IsPlaying || roomInfo.Status == 1 {
+		g.Log().Errorf(ctx, "用户 %s 房间 %s 进行中不能再次开始比赛", c.userID, roomInfo.ID)
 		return
 	}
 
