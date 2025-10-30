@@ -126,6 +126,10 @@ func (rm *RoomManager) LeaveRoom(player *Player) {
 
 	// 如果房间为空，删除房间
 	if len(room.Players) == 0 {
+		// 先关闭通道
+		if room.MsgChan != nil {
+			close(room.MsgChan)
+		}
 		delete(rm.Rooms, room.ID)
 	} else if room.IsPlaying {
 		// 如果游戏正在进行中且玩家离开，结束当前游戏
