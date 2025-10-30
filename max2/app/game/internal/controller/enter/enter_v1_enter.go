@@ -306,6 +306,11 @@ func (c *Client) handlePlay(ctx context.Context) {
 	rmMu.Unlock()
 
 	// 启动游戏逻辑（传入上下文，支持取消）
+	//判断人数是否足够
+	if len(roomInfo.Players) < 4 {
+		g.Log().Errorf(ctx, "用户 %s 房间人数不足", c.userID)
+		return
+	}
 	room.PlayOneGame(roomInfo)
 }
 
