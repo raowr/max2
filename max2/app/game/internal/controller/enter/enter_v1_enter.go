@@ -66,6 +66,9 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 		g.Log().Infof(ctx, "用户生成新ID: %s", userID)
 	}
 
+	// 创建连接专用上下文
+	connCtx, cancel := context.WithCancel(context.Background())
+
 	// 创建客户端实例（增大消息缓冲）
 	client := &Client{
 		conn:      ws,
@@ -73,11 +76,15 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 		heartbeat: time.Now(),
 		sendChan:  make(chan []byte, 10000), // 缓冲增大至10000，减少阻塞
 		roomChan:  make(chan *room.Room, 1), //新建房间通道
+		cancel:    cancel,
 	}
 
 	// 加锁更新客户端连接（重连逻辑）
 	clientsMu.Lock()
 	if oldClient, err := getClient(userID); err == nil && oldClient != nil {
+		if oldClient.cancel != nil {
+			oldClient.cancel() // 触发旧连接的 <-ctx.Done()
+		}
 		oldClient.conn.Close() // 关闭旧连接
 		// 关闭通道（安全检查，避免对 nil 通道调用 close）
 		if oldClient.sendChan != nil {
@@ -99,10 +106,10 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	g.Log().Infof(ctx, "用户 %s 连接成功", userID)
 
 	// 启动协程（增加退出日志）
-	go client.readLoop(ctx)
-	go client.readServe(ctx)
-	go client.writeLoop(ctx)
-	go client.heartbeatCheck(ctx)
+	go client.readLoop(connCtx)
+	go client.readServe(connCtx)
+	go client.writeLoop(connCtx)
+	go client.heartbeatCheck(connCtx)
 
 	// 优化后
 	<-ctx.Done()
