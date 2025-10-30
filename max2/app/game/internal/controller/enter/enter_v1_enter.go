@@ -487,7 +487,7 @@ func (c *Client) readServe(ctx context.Context) {
 	for {
 		select {
 		case <-ctx.Done():
-			g.Log().Infof(ctx, "用户 %s readServe退出（上下文关闭）房间 %s", c.userID, roomInfo.ID)
+			g.Log().Infof(ctx, "用户 %s readServe退出（上下文关闭）房间", c.userID)
 			return
 
 		case newRoom := <-c.roomChan:
