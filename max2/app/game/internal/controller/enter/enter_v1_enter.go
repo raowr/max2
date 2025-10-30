@@ -106,7 +106,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 
 	// 优化后
 	<-ctx.Done()
-	g.Log().Infof(ctx, "用户 退出（上下文关闭）")
+	g.Log().Infof(ctx, "用户 %s 退出（上下文关闭）", userID)
 	return
 }
 
@@ -271,7 +271,14 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 			Data: gconv.String(players),
 			From: gconv.String(clientPid),
 		}
-		c.sendChan <- c.encodeMessage(localCtx, msgData)
+		// 使用非阻塞select避免向已关闭通道发送消息
+		select {
+		case c.sendChan <- c.encodeMessage(localCtx, msgData):
+			g.Log().Infof(localCtx, "房间 %s 用户 %s 延迟添加AI成功，已发送给客户端", roomID, userID)
+		default:
+			// 通道可能已关闭或已满，记录警告但不中断程序
+			g.Log().Warningf(localCtx, "用户 %s 延迟添加AI后消息发送失败（通道可能已关闭或已满）", userID)
+		}
 	}(roomInfo.ID, c.userID, c.pid)
 
 }
@@ -441,7 +448,14 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		Data: gconv.String(resData),
 		From: gconv.String(c.pid),
 	}
-	c.sendChan <- c.encodeMessage(ctx, msgData)
+	// 使用非阻塞select避免向已关闭通道发送消息
+	select {
+	case c.sendChan <- c.encodeMessage(ctx, msgData):
+		g.Log().Infof(ctx, "用户 %s 获取房间信息成功，已发送更新", c.userID)
+	default:
+		// 通道可能已关闭或已满，记录警告但不中断程序
+		g.Log().Warningf(ctx, "用户 %s 获取房间信息后消息发送失败（通道可能已关闭或已满）", c.userID)
+	}
 }
 
 // 处理心跳

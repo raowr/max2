@@ -107,7 +107,6 @@
 <script setup>
 import { ref,reactive, onMounted, computed, onBeforeUnmount,onUnmounted } from 'vue'
 import { websocket } from '@/utils/websocket'
-import { useRouter } from 'vue-router'
 import { audioManager } from '@/utils/audio'
 // 导入星星图片资源（使用 @ 别名，Vite 会自动解析路径）
 import starImg from '@/assets/img/ui/star.png';
@@ -118,7 +117,11 @@ import bighead15419 from '@/assets/img/touxiang/bighead15419.png';
 import full15418 from '@/assets/img/lihui/full15418.png';
 import { storage } from '@/utils/storage'
 import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
+import {useRoute,useRouter} from 'vue-router'
+
+const route = useRoute()
 const router = useRouter()
+
 const state = reactive({
   players: [
     {
@@ -196,7 +199,7 @@ const init = async () => {
   websocket.on('open', () => {
     console.log('room on open');
     // 连接成功后再执行 toggleReady
-    websocket.send({"type":"initRoom","data":"","name":""});
+    websocket.send({ "type": "getInfo", "data": "", "name": "" })
   });
   websocket.on('error', () => {
     console.log('on error');
@@ -207,6 +210,8 @@ const init = async () => {
 
   // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
   if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
+    console.log('getInfo room on open');
+    // websocket.send({ "type": "getInfo", "data": "", "name": "" })
     toggleReady();
   }
 }
@@ -272,6 +277,11 @@ const handleMessage = (data) => {
           // 解析JSON字符串
       const serverPlayers = JSON.parse(parsedData.data)
       state.roomId=serverPlayers.roomId
+     if (serverPlayers.isPlaying && route.name !== "Game") {
+      router.push('/game')  // 跳转到游戏页面
+    }else {
+      toggleReady();
+    }
   }
 }
 // 添加工具函数（放在script setup顶部）

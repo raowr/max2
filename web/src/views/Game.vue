@@ -377,7 +377,6 @@ onMounted(() => {
   player3touxiang.value = storage.local.get('player3avatar')
   player4touxiang.value = storage.local.get('player4avatar')
 
-  websocket.send({ "type": "getInfo", "data": "", "name": "" })
 })
 
 // 组件卸载时移除回调（关键：防止内存泄漏）
