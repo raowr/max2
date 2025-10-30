@@ -190,8 +190,10 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 			}
 			// 先关闭通道
 			if roomInfo.MsgChan != nil {
+				ch := roomInfo.MsgChan
 				roomInfo.MsgChan = nil
-				close(roomInfo.MsgChan)
+				close(ch)
+				g.Log().Infof(context.Background(), "用户 %s MsgChan 已关闭", c.userID)
 			}
 			delete(rm.Rooms, oldRoomID)
 			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userID, oldRoomID)
@@ -615,6 +617,8 @@ func (c *Client) encodeMessage(ctx context.Context, msg message.ChatMsg) []byte 
 
 // 关闭客户端连接
 func (c *Client) closeConnection(reason string) {
+	rmMu.Lock()
+	defer rmMu.Unlock()
 	logCtx := context.Background()
 	g.Log().Infof(logCtx, "用户 %s 关闭连接，原因: %s", c.userID, reason)
 
@@ -630,15 +634,20 @@ func (c *Client) closeConnection(reason string) {
 		c.conn = nil // 关键：设置为 nil，防止重复关闭
 	}
 
-	// 关闭通道（防止重复关闭）
+	// 关闭 sendChan
 	if c.sendChan != nil {
+		ch := c.sendChan
 		c.sendChan = nil
-		close(c.sendChan)
+		close(ch)
+		g.Log().Infof(context.Background(), "用户 %s sendChan 已关闭", c.userID)
 	}
 
+	// 关闭 roomChan
 	if c.roomChan != nil {
+		ch := c.roomChan
 		c.roomChan = nil
-		close(c.roomChan)
+		close(ch)
+		g.Log().Infof(context.Background(), "用户 %s roomChan 已关闭", c.userID)
 	}
 
 	// 最后清理资源
