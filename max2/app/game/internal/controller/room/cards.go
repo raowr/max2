@@ -94,6 +94,11 @@ func (ps *Player) findStraightInSuit(cards []Card, cardSuit int) {
 
 		if isStraightValid && len(straightCards) == 5 {
 			ps.handPattern[FLUSH] = append(ps.handPattern[FLUSH], straightCards)
+			// 移除已使用的牌：将用过的点数设为false
+			for i := 0; i < 5; i++ {
+				rank := start + i
+				uniqueRanks[rank] = false
+			}
 			// 移除已使用的牌
 			ps.removeCards(straightCards)
 		}
