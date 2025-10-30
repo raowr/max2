@@ -131,6 +131,7 @@ func (rm *RoomManager) LeaveRoom(player *Player) {
 			ch := room.MsgChan
 			room.MsgChan = nil
 			close(ch)
+			g.Log().Infof(ctx, "玩家 %s 已离开房间:%s \n", room.ID)
 		}
 		delete(rm.Rooms, room.ID)
 	} else if room.IsPlaying {
