@@ -129,6 +129,7 @@ func (rm *RoomManager) LeaveRoom(player *Player) {
 		// 先关闭通道
 		if room.MsgChan != nil {
 			close(room.MsgChan)
+			room.MsgChan = nil
 		}
 		delete(rm.Rooms, room.ID)
 	} else if room.IsPlaying {
@@ -465,9 +466,11 @@ func PlayOneGame(room *Room) {
 					PlayerPoint:    room.Landlord.Point,
 					OutCardTimeout: GetOutCardTimeout(), //出牌最大时间(单位秒) /s
 				})
-				room.MsgChan <- RoomMsg{
-					Type: "showCard",
-					Data: gconv.String(data),
+				if room.MsgChan != nil {
+					room.MsgChan <- RoomMsg{
+						Type: "showCard",
+						Data: gconv.String(data),
+					}
 				}
 			}()
 		}
@@ -512,14 +515,16 @@ func (room *Room) GameLoop(ctx context.Context) {
 				PlayerWin:   playerWin,
 			})
 			// 使用select和超时避免永久阻塞
-			select {
-			case room.MsgChan <- RoomMsg{
-				Type: "over",
-				Data: gconv.String(data),
-			}:
-			// 消息发送成功
-			case <-time.After(2 * time.Second): // 设置合理的超时时间
-				g.Log().Error(ctx, "发送游戏结束消息超时")
+			if room.MsgChan != nil {
+				select {
+				case room.MsgChan <- RoomMsg{
+					Type: "over",
+					Data: gconv.String(data),
+				}:
+				// 消息发送成功
+				case <-time.After(2 * time.Second): // 设置合理的超时时间
+					g.Log().Error(ctx, "发送游戏结束消息超时")
+				}
 			}
 		}()
 		room.Rgtimer.Stop()
@@ -601,9 +606,11 @@ func (room *Room) GameLoop(ctx context.Context) {
 							Code: 1,
 							Msg:  msg,
 						})
-						room.MsgChan <- RoomMsg{
-							Type: "outCard",
-							Data: gconv.String(data),
+						if room.MsgChan != nil {
+							room.MsgChan <- RoomMsg{
+								Type: "outCard",
+								Data: gconv.String(data),
+							}
 						}
 					}()
 					currentPlayer.OutCardIds = make([]int, 0)
@@ -630,9 +637,11 @@ func (room *Room) GameLoop(ctx context.Context) {
 							Code: 1,
 							Msg:  msg,
 						})
-						room.MsgChan <- RoomMsg{
-							Type: "outCard",
-							Data: gconv.String(data),
+						if room.MsgChan != nil {
+							room.MsgChan <- RoomMsg{
+								Type: "outCard",
+								Data: gconv.String(data),
+							}
 						}
 					}()
 					return
@@ -655,9 +664,11 @@ func (room *Room) GameLoop(ctx context.Context) {
 									Code: 1,
 									Msg:  msg,
 								})
-								room.MsgChan <- RoomMsg{
-									Type: "outCard",
-									Data: gconv.String(data),
+								if room.MsgChan != nil {
+									room.MsgChan <- RoomMsg{
+										Type: "outCard",
+										Data: gconv.String(data),
+									}
 								}
 							}()
 							return
@@ -678,9 +689,11 @@ func (room *Room) GameLoop(ctx context.Context) {
 									Code: 1,
 									Msg:  msg,
 								})
-								room.MsgChan <- RoomMsg{
-									Type: "outCard",
-									Data: gconv.String(data),
+								if room.MsgChan != nil {
+									room.MsgChan <- RoomMsg{
+										Type: "outCard",
+										Data: gconv.String(data),
+									}
 								}
 							}()
 							return
@@ -751,9 +764,11 @@ func (room *Room) GameLoop(ctx context.Context) {
 				Pid:  currentPlayer.ID,
 				Code: code,
 			})
-			room.MsgChan <- RoomMsg{
-				Type: "outCard",
-				Data: gconv.String(data),
+			if room.MsgChan != nil {
+				room.MsgChan <- RoomMsg{
+					Type: "outCard",
+					Data: gconv.String(data),
+				}
 			}
 		}()
 		currentPlayer.OutCardIds = make([]int, 0)
@@ -824,9 +839,11 @@ func (room *Room) GameLoop(ctx context.Context) {
 			MustPid:        mustPid,
 			OutCardTimeout: GetOutCardTimeout(), //出牌最大时间(单位秒) /s
 		})
-		room.MsgChan <- RoomMsg{
-			Type: msgType,
-			Data: gconv.String(data),
+		if room.MsgChan != nil {
+			room.MsgChan <- RoomMsg{
+				Type: msgType,
+				Data: gconv.String(data),
+			}
 		}
 	}()
 

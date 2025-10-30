@@ -191,6 +191,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 			// 先关闭通道
 			if roomInfo.MsgChan != nil {
 				close(roomInfo.MsgChan)
+				roomInfo.MsgChan = nil
 			}
 			delete(rm.Rooms, oldRoomID)
 			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userID, oldRoomID)
