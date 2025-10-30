@@ -632,13 +632,13 @@ func (c *Client) closeConnection(reason string) {
 
 	// 关闭通道（防止重复关闭）
 	if c.sendChan != nil {
-		close(c.sendChan)
 		c.sendChan = nil
+		close(c.sendChan)
 	}
 
 	if c.roomChan != nil {
-		close(c.roomChan)
 		c.roomChan = nil
+		close(c.roomChan)
 	}
 
 	// 最后清理资源
