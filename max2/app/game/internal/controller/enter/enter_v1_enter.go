@@ -111,23 +111,13 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	go client.writeLoop(connCtx)
 	go client.heartbeatCheck(connCtx)
 
-	// 优化后
-	<-ctx.Done()
-	g.Log().Infof(ctx, "用户 %s 退出（上下文关闭）", userID)
-	return
+	// 返回空响应
+	return &v1.EnterRes{}, nil
 }
 
 // 读消息循环：处理客户端消息
 func (c *Client) readLoop(ctx context.Context) {
-	defer func() {
-		// 清理资源（带锁）
-		clientsMu.Lock()
-		delete(clients, c.userID)
-		clientsMu.Unlock()
-
-		c.conn.Close()
-		g.Log().Infof(ctx, "用户 %s 断开连接（readLoop退出）", c.userID)
-	}()
+	defer c.closeConnection("读循环退出")
 
 	for {
 		// 读取客户端消息
@@ -600,6 +590,7 @@ func (c *Client) heartbeatCheck(ctx context.Context) {
 			if time.Since(c.heartbeat) > 60*time.Second {
 				g.Log().Infof(ctx, "用户 %s 心跳超时（60秒），断开连接", c.userID)
 				c.conn.Close()
+				c.closeConnection("心跳超时")
 				return
 			}
 		case <-ctx.Done():
@@ -617,6 +608,43 @@ func (c *Client) encodeMessage(ctx context.Context, msg message.ChatMsg) []byte 
 		return []byte(`{"type":"error","data":"消息编码失败"}`)
 	}
 	return msgBytes
+}
+
+// 关闭客户端连接
+func (c *Client) closeConnection(reason string) {
+	logCtx := context.Background()
+	g.Log().Infof(logCtx, "用户 %s 关闭连接，原因: %s", c.userID, reason)
+
+	// 先取消上下文
+	if c.cancel != nil {
+		c.cancel()
+		c.cancel = nil // 设置为 nil，避免重复调用
+	}
+
+	// 然后关闭连接（防止重复关闭）
+	if c.conn != nil {
+		c.conn.Close()
+		c.conn = nil // 关键：设置为 nil，防止重复关闭
+	}
+
+	// 关闭通道（防止重复关闭）
+	if c.sendChan != nil {
+		close(c.sendChan)
+		c.sendChan = nil
+	}
+
+	if c.roomChan != nil {
+		close(c.roomChan)
+		c.roomChan = nil
+	}
+
+	// 最后清理资源
+	clientsMu.Lock()
+	err := removeClient(c.userID)
+	if err != nil {
+		g.Log().Infof(logCtx, "用户 %s 删除客户端失败", c.userID)
+	}
+	clientsMu.Unlock()
 }
 
 /*
