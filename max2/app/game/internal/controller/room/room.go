@@ -128,8 +128,8 @@ func (rm *RoomManager) LeaveRoom(player *Player) {
 	if len(room.Players) == 0 {
 		// 先关闭通道
 		if room.MsgChan != nil {
-			close(room.MsgChan)
 			room.MsgChan = nil
+			close(room.MsgChan)
 		}
 		delete(rm.Rooms, room.ID)
 	} else if room.IsPlaying {
