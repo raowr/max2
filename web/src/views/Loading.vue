@@ -342,30 +342,8 @@ export default {
 
       if (this.loadedCount === this.totalFiles) {
         //如果是网页直接跳，如果不是显示进入游戏按钮
-        if (this.isAndroidPackagedH5()) {
-          setTimeout(() => {
-            this.$router.push('/index');
-          }, 300);
-        } else {
-          this.isReady = true
-        }
-
+        this.isReady = true
       }
-    },
-    // 判断是否在原生 App 环境（示例）
-    // H5 端判断逻辑
-    isAndroidPackagedH5() {
-      // 方式一：检测 AndroidBridge 注入的方法
-      if (window.AndroidBridge && typeof window.AndroidBridge.isAndroidWebView === 'function') {
-        return true; // 安卓打包的 H5 环境
-      }
-
-      // 方式二：检测直接注入的全局变量
-      if (window.isAndroidWebView === true) {
-        return true; // 安卓打包的 H5 环境
-      }
-
-      return false; // 普通浏览器环境
     },
     toIndex() {
       this.$router.push('/index');

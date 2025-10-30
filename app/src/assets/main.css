@@ -1,0 +1,17 @@
+@import './base.css';
+/* 全局样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 确保元素宽高包含边框和内边距 */
+}
+
+/* 根容器 #app 样式 */
+#app {
+  min-height: 100vh; /* 确保容器占满视口高度 */
+  width: 100%; /* 宽度占满屏幕 */
+  margin: 0 auto; /* 水平居中（若需固定宽度可添加 max-width） */
+  background-color: #fff; /* 基础背景色（根据项目调整） */
+  overflow-x: hidden; /* 防止横向滚动条 */
+  font-family: "Helvetica Neue", Arial, sans-serif; /* 全局字体 */
+}

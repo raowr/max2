@@ -188,13 +188,6 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 				roomInfo.Rgtimer.Stop()
 				roomInfo.Rgtimer.Close() // 停止定时器（确保资源释放）
 			}
-			// 先关闭通道
-			if roomInfo.MsgChan != nil {
-				ch := roomInfo.MsgChan
-				roomInfo.MsgChan = nil
-				close(ch)
-				g.Log().Infof(context.Background(), "用户 %s MsgChan 已关闭", c.userID)
-			}
 			delete(rm.Rooms, oldRoomID)
 			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userID, oldRoomID)
 		}

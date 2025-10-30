@@ -332,12 +332,6 @@ onMounted(() => {
   initDeck()
   const bgmUrl = new URL('@/assets/music/game_bg1.mp3', import.meta.url).href;
   audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
-  //app端直接播放,web端点击后播放
-  try {
-    audioManager.playBGM('bgm')
-  } catch (error) {
-    console.error('BGM播放失败:', error)
-  }
   // 添加用户交互事件监听器来初始化BGM
   const initBGMOnInteraction = () => {
     if (!bgmInitialized.value) {

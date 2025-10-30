@@ -124,22 +124,8 @@ func (rm *RoomManager) LeaveRoom(player *Player) {
 	// 清空玩家的房间ID
 	player.RoomID = ""
 
-	// 如果房间为空，删除房间
-	if len(room.Players) == 0 {
-		// 先关闭通道
-		if room.MsgChan != nil {
-			ch := room.MsgChan
-			room.MsgChan = nil
-			close(ch)
-			g.Log().Infof(ctx, "玩家 %s 已离开房间:%s \n", room.ID)
-		}
-		delete(rm.Rooms, room.ID)
-	} else if room.IsPlaying {
-		// 如果游戏正在进行中且玩家离开，结束当前游戏
-		room.IsPlaying = false
-		room.Status = 0 //结算中
-		g.Log().Infof(ctx, "玩家 %s 已离开房间，游戏结束\n", player.Name)
-	}
+	delete(rm.Rooms, room.ID)
+	room = nil
 }
 
 // 生成唯一房间ID
