@@ -89,9 +89,11 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 		// 关闭通道（安全检查，避免对 nil 通道调用 close）
 		if oldClient.sendChan != nil {
 			close(oldClient.sendChan)
+			oldClient.sendChan = nil
 		}
 		if oldClient.roomChan != nil {
 			close(oldClient.roomChan)
+			oldClient.roomChan = nil
 		}
 
 		g.Log().Infof(ctx, "用户 %s 重连，关闭旧连接", userID)
