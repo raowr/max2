@@ -212,7 +212,7 @@ const init = async () => {
   if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
     console.log('getInfo room on open');
     // websocket.send({ "type": "getInfo", "data": "", "name": "" })
-    toggleReady();
+    // toggleReady();
   }
 }
 

@@ -212,7 +212,7 @@ const init = async () => {
   if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
     console.log('getInfo room on open');
     // websocket.send({ "type": "getInfo", "data": "", "name": "" })
-    toggleReady();
+    // toggleReady();
   }
 }
 
@@ -280,8 +280,8 @@ const handleMessage = (data) => {
      if (serverPlayers.isPlaying && route.name !== "Game") {
       router.push('/game')  // 跳转到游戏页面
     }else {
-      toggleReady();
-    }
+       toggleReady();
+     }
   }
 }
 // 添加工具函数（放在script setup顶部）

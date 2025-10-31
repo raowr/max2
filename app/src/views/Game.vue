@@ -243,7 +243,7 @@
 
         <!-- 修改按钮区域，交换按钮顺序 -->
         <div class="buttons-container">
-          <button class="room-btn" @click="goToRoom()">
+          <button class="room-btn" @click="toRoom()">
             返回房间
           </button>
           <button class="restart-btn" @click="state.player1Point === 0 ? goToHome() : restartGame()">
@@ -903,9 +903,10 @@ const chatlogBgUrl = computed(() => {
 });
 
 // 添加返回房间的方法
-const goToRoom = () => {
+const toRoom = () => {
   showGameOverModal.value = false
-  router.push('/room')  // 跳转到房间路由
+  websocket.send({"type":"initRoom","data":"","name":""});
+  router.push({path:'/room'})
 }
 
 //重新设置头像
