@@ -470,14 +470,14 @@ const handleMessage = (data) => {
           break;
       }
     } else {
-      switch (data.status) {
-        case 0://未开始
-          websocket.send({ "type": "play", "data": "", "name": "" })
-          break;
-        case 2://结算中
-          router.push('/index')  // 跳转到首页路由
-          break;
-      }
+      // switch (data.status) {
+      //   case 0://未开始
+      //     websocket.send({ "type": "play", "data": "", "name": "" })
+      //     break;
+      //   case 2://结算中
+      //     router.push('/index')  // 跳转到首页路由
+      //     break;
+      // }
       
     }
   }

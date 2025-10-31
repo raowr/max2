@@ -327,6 +327,7 @@ const isReady=() => {
 const toGame = () => {
   if (isReady()) {
     // websocket.send({"type":"toGame","data":"","name":""})
+    websocket.send({ "type": "play", "data": "", "name": "" })
     //路由跳到游戏页面
     router.push({path:'/game'})
   }
