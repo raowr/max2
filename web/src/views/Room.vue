@@ -202,7 +202,9 @@ const init = async () => {
     websocket.send({ "type": "getInfo", "data": "", "name": "" })
   });
   websocket.on('error', () => {
-    state.players[0].ready = false
+    state.players.forEach(player => {
+      player.ready = false
+    })
     console.log('on error');
   });
   websocket.on('close', () => {
@@ -237,36 +239,8 @@ const handleMessage = (data) => {
 
       state.roomId=serverPlayers[0].RoomID
       // 智能合并数据
-      serverPlayers.forEach(serverPlayer => {
-        if (serverPlayer.ID == 0) {//是人类玩家
-          //保存用户userId
-          storage.local.set('user_id', serverPlayer.UserId)
-        }
-        const convertedId = serverPlayer.ID + 1
-        // 查找已有玩家
-        const existing = state.players.find(p => p.id === convertedId)
-        
-        if (existing) {
-          // 更新已有玩家属性
-          existing.name = serverPlayer.Name
-          existing.isOwner = serverPlayer.Type === 0
-          existing.avatar = getAvatarByType(serverPlayer.Type)
-          existing.lihui = getLihuiByType(serverPlayer.Type)
-          existing.ready=true
-        } else {
-          // 添加新玩家（如果需要）
-          state.players.push({
-            id: convertedId,
-            name: serverPlayer.Name,
-            avatar: getAvatarByType(serverPlayer.Type),
-            stars: 3,
-            ready: false,
-            isOwner: serverPlayer.Type === 0,
-            lihui: getLihuiByType(serverPlayer.Type)
-          })
-        }
-      })
-      
+      initPlayers(serverPlayers)
+
       // 保留不在服务端返回中的原有玩家（如等待中的空位）
       // 自动截断超过4个的玩家
       state.players.splice(4)
@@ -276,14 +250,46 @@ const handleMessage = (data) => {
   }
   if(parsedData.type === "getInfo"){
           // 解析JSON字符串
-      const serverPlayers = JSON.parse(parsedData.data)
-      state.roomId=serverPlayers.roomId
-     if (serverPlayers.isPlaying && route.name !== "Game") {
-      router.push('/game')  // 跳转到游戏页面
-    }else {
-       toggleReady();
+      const data = JSON.parse(parsedData.data)
+      state.roomId=data.roomId
+     if (data.isPlaying && route.name !== "Game") {
+        router.push('/game')  // 跳转到游戏页面
+     }else {
+         initPlayers(data.players)
      }
   }
+}
+const initPlayers = (serverPlayers) => {
+  // 智能合并数据
+  serverPlayers.forEach(serverPlayer => {
+    if (serverPlayer.ID == 0) {//是人类玩家
+      //保存用户userId
+      storage.local.set('user_id', serverPlayer.UserId)
+    }
+    const convertedId = serverPlayer.ID + 1
+    // 查找已有玩家
+    const existing = state.players.find(p => p.id === convertedId)
+
+    if (existing) {
+      // 更新已有玩家属性
+      existing.name = serverPlayer.Name
+      existing.isOwner = serverPlayer.Type === 0
+      existing.avatar = getAvatarByType(serverPlayer.Type)
+      existing.lihui = getLihuiByType(serverPlayer.Type)
+      existing.ready=true
+    } else {
+      // 添加新玩家（如果需要）
+      state.players.push({
+        id: convertedId,
+        name: serverPlayer.Name,
+        avatar: getAvatarByType(serverPlayer.Type),
+        stars: 3,
+        ready: false,
+        isOwner: serverPlayer.Type === 0,
+        lihui: getLihuiByType(serverPlayer.Type)
+      })
+    }
+  })
 }
 // 添加工具函数（放在script setup顶部）
 const getAvatarByType = (type) => {
