@@ -202,6 +202,7 @@ const init = async () => {
     websocket.send({ "type": "getInfo", "data": "", "name": "" })
   });
   websocket.on('error', () => {
+    state.players[0].ready = false
     console.log('on error');
   });
   websocket.on('close', () => {
