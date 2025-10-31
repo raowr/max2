@@ -475,6 +475,7 @@ const handleMessage = (data) => {
       //     websocket.send({ "type": "play", "data": "", "name": "" })
       //     break;
         case 2://结算中
+          console.log("结算中");
           router.push('/index')  // 跳转到首页路由
           break;
       }
