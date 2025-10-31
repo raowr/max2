@@ -30,6 +30,7 @@ type Client struct {
 	pid       int                // 玩家id
 	roomChan  chan *room.Room    //房间通道
 	cancel    context.CancelFunc // 添加取消函数
+	mutex     sync.RWMutex       // 新增：保护 conn 等字段的并发访问
 }
 
 // 全局房间管理器及并发安全锁（核心优化：解决全局资源竞争）
