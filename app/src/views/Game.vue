@@ -1068,7 +1068,7 @@ const resetAvatar = () => {
 .discard-pile-container {
   position: absolute;
   top: 30%;
-  left: 47%;
+  left: 50%;
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
@@ -1287,7 +1287,7 @@ const resetAvatar = () => {
 .card-move-enter-to {
   /* 结束位置：屏幕中间（弃牌堆位置） */
   top: 32%;
-  left: 48%;
+  left: 50%;
   transform: translateX(-50%);
   opacity: 1;
   /* 新增：动画结束时显示 */
@@ -1389,7 +1389,7 @@ const resetAvatar = () => {
   /* 调整卡牌移动动画的位置，适配缩小后的尺寸 */
   .card-move-enter-to {
     top: 32%;
-    left: 48%;
+    left: 50%;
     transform: translateX(-50%) scale(0.1);
     opacity: 1;
     /* 新增：动画结束时显示 */
