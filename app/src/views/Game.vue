@@ -1184,7 +1184,7 @@ const resetAvatar = () => {
   display: flex;
   gap: 15px;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 0px;
   flex-wrap: nowrap;
   /* 强制不换行 */
   align-items: center;
