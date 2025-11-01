@@ -830,15 +830,24 @@ func (room *Room) safeSendRoomMessage(msgType string, data any) {
 	room.mutex.RUnlock()
 
 	if roomMsgChan != nil {
-		select {
-		case roomMsgChan <- RoomMsg{
-			Type: msgType,
-			Data: gconv.String(data),
-		}:
-			// 发送成功
-		default:
-			g.Log().Warningf(ctx, "房间 %s 消息发送阻塞（通道满）", room.ID)
-		}
+		// 使用函数包装发送操作并添加 recover
+		func() {
+			defer func() {
+				if r := recover(); r != nil {
+					g.Log().Errorf(ctx, "发送房间消息发生panic: %v", r)
+				}
+			}()
+
+			select {
+			case roomMsgChan <- RoomMsg{
+				Type: msgType,
+				Data: gconv.String(data),
+			}:
+				// 发送成功
+			default:
+				g.Log().Warningf(ctx, "房间 %s 消息发送阻塞（通道满）", room.ID)
+			}
+		}()
 	}
 }
 

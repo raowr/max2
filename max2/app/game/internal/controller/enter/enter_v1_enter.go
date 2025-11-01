@@ -623,12 +623,21 @@ func (c *Client) safeSendMessage(ctx context.Context, msg message.ChatMsg) {
 	c.mutex.RUnlock()
 
 	if sendChan != nil {
-		select {
-		case sendChan <- c.encodeMessage(ctx, msg):
-			// 发送成功
-		default:
-			g.Log().Warningf(ctx, "用户 %s 消息发送阻塞（通道满）", c.userID)
-		}
+		// 使用匿名函数包装发送操作并添加 recover 机制
+		func() {
+			defer func() {
+				if r := recover(); r != nil {
+					g.Log().Errorf(ctx, "用户 %s 消息发送发生panic: %v", c.userID, r)
+				}
+			}()
+
+			select {
+			case sendChan <- c.encodeMessage(ctx, msg):
+				// 发送成功
+			default:
+				g.Log().Warningf(ctx, "用户 %s 消息发送阻塞（通道满）", c.userID)
+			}
+		}()
 	}
 }
 
@@ -645,18 +654,30 @@ func (c *Client) safeSendToRoomChan(ctx context.Context, roomInfo *room.Room) bo
 		return false
 	}
 
-	// 非阻塞发送或阻塞发送取决于业务需求
-	// 以下是非阻塞发送的实现
-	select {
-	case roomChan <- roomInfo:
-		return true
-	case <-ctx.Done():
-		g.Log().Warningf(ctx, "用户 %s 向 roomChan 发送消息超时", c.userID)
-		return false
-	default:
-		g.Log().Warningf(ctx, "用户 %s 向 roomChan 发送消息阻塞", c.userID)
-		return false
-	}
+	// 使用匿名函数包装发送操作并添加 recover 机制
+	result := false
+	func() {
+		defer func() {
+			if r := recover(); r != nil {
+				g.Log().Errorf(ctx, "用户 %s 向 roomChan 发送消息发生panic: %v", c.userID, r)
+				result = false
+			}
+		}()
+
+		// 非阻塞发送或阻塞发送取决于业务需求
+		select {
+		case roomChan <- roomInfo:
+			result = true
+		case <-ctx.Done():
+			g.Log().Warningf(ctx, "用户 %s 向 roomChan 发送消息超时", c.userID)
+			result = false
+		default:
+			g.Log().Warningf(ctx, "用户 %s 向 roomChan 发送消息阻塞", c.userID)
+			result = false
+		}
+	}()
+
+	return result
 }
 
 // 消息编码（处理错误）
