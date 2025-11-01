@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/rand"
+	"strings"
 	"sync"
 	"time"
 
@@ -52,7 +53,7 @@ func (rm *RoomManager) CreateRoom() *Room {
 		ID:        roomID,
 		Players:   []*Player{},
 		IsPlaying: false,
-		MsgChan:   make(chan RoomMsg),
+		MsgChan:   make(chan RoomMsg, 100),
 		Rgtimer:   gtimer.New(),
 		Status:    0, //未开始
 	}
@@ -200,9 +201,15 @@ func dealCards(deck []Card, players []*Player) {
 func showPlayerCards(player *Player) {
 	if player.Type == Human {
 		g.Log().Infof(ctx, "%s的牌: ", player.Name)
+		// 创建牌名切片
+		cardNames := make([]string, len(player.Cards))
 		for i, card := range player.Cards {
-			g.Log().Infof(ctx, "%d.%s ", i+1, card.Name)
+			cardNames[i] = card.Name
 		}
+
+		// 使用 strings.Join 连接，自动处理分隔符
+		cardsList := strings.Join(cardNames, ",")
+		g.Log().Infof(ctx, "%s", cardsList)
 	} else {
 		g.Log().Infof(ctx, "%s的牌: ", player.Name)
 		for i, v := range player.handPattern {
