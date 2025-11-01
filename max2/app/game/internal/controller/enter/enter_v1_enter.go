@@ -86,15 +86,19 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 			oldClient.cancel() // 触发旧连接的 <-ctx.Done()
 		}
 		oldClient.conn.Close() // 关闭旧连接
-		// 关闭通道（安全检查，避免对 nil 通道调用 close）
+
+		oldClient.mutex.Lock()
+		// 关闭sendChan
 		if oldClient.sendChan != nil {
 			close(oldClient.sendChan)
 			oldClient.sendChan = nil
 		}
+		// 关闭roomChan
 		if oldClient.roomChan != nil {
 			close(oldClient.roomChan)
 			oldClient.roomChan = nil
 		}
+		oldClient.mutex.Unlock()
 
 		g.Log().Infof(ctx, "用户 %s 重连，关闭旧连接", userID)
 	}
@@ -187,6 +191,15 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 			if roomInfo.Rgtimer != nil {
 				roomInfo.Rgtimer.Stop()
 				roomInfo.Rgtimer.Close() // 停止定时器（确保资源释放）
+			}
+			// 关闭 MsgChan
+			if roomInfo.MsgChan != nil {
+				c.mutex.Lock()
+				roomMsgChan := roomInfo.MsgChan
+				roomInfo.MsgChan = nil
+				c.mutex.Unlock()
+				close(roomMsgChan)
+				g.Log().Infof(context.Background(), "用户 %s 已关闭房间 %s 消息通道", c.userID, oldRoomID)
 			}
 			delete(rm.Rooms, oldRoomID)
 			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userID, oldRoomID)
@@ -448,9 +461,9 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 func (c *Client) handleHeartbeat(ctx context.Context, data string) {
 	if data == "ping" {
 		// 加读锁保护对sendChan的访问
-		c.mutex.Lock()
+		c.mutex.RLock()
 		sendChan := c.sendChan
-		c.mutex.Unlock()
+		c.mutex.RUnlock()
 		c.heartbeat = time.Now()
 		// 非阻塞发送pong，避免通道满导致阻塞
 		if sendChan != nil {
@@ -545,9 +558,9 @@ func (c *Client) writeLoop(ctx context.Context) {
 		}
 
 		// 在 writeLoop 函数中修改为
-		c.mutex.Lock()
+		c.mutex.RLock()
 		sendChan := c.sendChan
-		c.mutex.Unlock()
+		c.mutex.RUnlock()
 		if sendChan != nil {
 			select {
 			case data, ok := <-sendChan:
@@ -605,9 +618,9 @@ func (c *Client) heartbeatCheck(ctx context.Context) {
 
 // 安全发送消息的函数
 func (c *Client) safeSendMessage(ctx context.Context, msg message.ChatMsg) {
-	c.mutex.Lock()
+	c.mutex.RLock()
 	sendChan := c.sendChan
-	c.mutex.Unlock()
+	c.mutex.RUnlock()
 
 	if sendChan != nil {
 		select {
