@@ -1120,7 +1120,7 @@ const resetAvatar = () => {
 .chupai-btn {
   position: absolute;
   top: 0;
-  left: 57%;
+  left: 54%;
   transition: transform 0.1s ease;
   /* 过渡效果移至CSS */
 }
@@ -1354,6 +1354,10 @@ const resetAvatar = () => {
   /* 不出按钮静态样式 */
   .buchu-btn {
     left: 22%;
+  }
+  /* 出牌按钮静态样式 */
+  .chupai-btn {
+    left: 57%;
   }
 
   /* 禁用状态出牌按钮静态样式 */

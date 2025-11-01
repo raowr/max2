@@ -40,9 +40,15 @@
     </div>
     <!--  右边设置栏 -->
     <div class="right-settings">
-      <div class="setting-btn btn-set" ></div>
+      <div class="setting-btn btn-set" @click="toggleSettingImage()"></div>
       <div class="setting-btn btn-guide"></div>
       <div class="setting-btn btn-trophy"></div>
+              <!-- 弹出图片容器 -->
+  <div v-if="showSettingImage" class="setting-image-container">
+    <img src="@/assets/img/creator.jpg" alt="设置图片" class="setting-image">
+    <!-- 可选：点击图片外部关闭 -->
+    <div class="setting-image-overlay" @click="toggleSettingImage()"></div>
+  </div>
     </div>
 
     <!--  人物信息 -->
@@ -85,6 +91,10 @@ import { websocket } from '@/utils/websocket'
 
 const router = useRouter()
 const route = useRoute()
+const showSettingImage = ref(false)  // 弹出图片容器显示与隐藏
+const toggleSettingImage = () => {
+  showSettingImage.value = !showSettingImage.value
+}
 
 const userIdShow = ref(false)  // 玩家di显示与隐藏
 onMounted(() => {
@@ -553,6 +563,33 @@ const toRoom = ()=>{
   color: white;
 }
 
+/* 设置图片容器样式 */
+.setting-image-container {
+  position: absolute;
+  right: 7%; /* 定位在设置按钮左侧 */
+  top: 2%; /* 与设置按钮顶部对齐 */
+  z-index: 1000; /* 确保显示在最上层 */
+  margin-right: 10px; /* 与设置按钮保持一定距离 */
+}
+
+/* 设置图片样式 */
+.setting-image {
+  max-width: 200px; /* 设置图片最大宽度 */
+  max-height: 200px; /* 设置图片最大高度 */
+  border-radius: 8px; /* 可选：添加圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 可选：添加阴影效果 */
+}
+
+/* 可选：点击外部关闭的遮罩层 */
+.setting-image-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 999;
+}
 
 /* 横屏模式专属样式 */
 @media (max-width: 998px) {
@@ -671,6 +708,10 @@ const toRoom = ()=>{
     width: 100px;
     background: red;
     color: white;
+  }
+  .setting-image {
+    max-width: 200px; /* 横屏模式下缩小图片 */
+    max-height: 200px;
   }
 }
 </style>
