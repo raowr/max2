@@ -10,6 +10,19 @@ class AudioManager {
     this.audioElements.set(key, audio)
   }
 
+    // 添加播放一次的方法
+  playOnce(key) {
+    const audio = this.audioElements.get(key)
+    if (audio) {
+      // 克隆音频元素，避免影响原始音频
+      const clone = audio.cloneNode(true)
+      // 确保设置为非循环播放
+      clone.loop = false
+      // 播放音频并处理可能的错误
+      clone.play().catch(error => console.error('单次播放失败:', error))
+    }
+  }
+
   playBGM(key) {
     if (this.currentBGM) {
       this.currentBGM.pause()

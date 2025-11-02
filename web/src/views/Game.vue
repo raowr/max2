@@ -606,6 +606,51 @@ const handleMessage = (data) => {
       startCountdown(data.current + 1, state.outCardTimeout)
       //如果必出是玩家，记录下必出玩家的pid
       state.mustPid = data.mustPid
+
+      //播放出牌声音
+      const cardType = cardUtil.getCardType(state.outCards.map(id => state.deck.find(c => c.id === id)).filter(Boolean))
+      const playedCards = state.outCards.map(id => state.deck.find(c => c.id === id)).filter(Boolean)
+      console.log(state.outCards)
+      console.log(cardType)
+      console.log(playedCards)
+      let musicPath = ""
+      switch (cardType) {
+        case CARD_TYPE.SINGLE:
+          musicPath = "single/" + playedCards[0].id
+          playSound(musicPath)
+          break
+        case CARD_TYPE.PAIR:
+          musicPath = "pair/" + playedCards[0].rank
+          playSound(musicPath)
+          break
+        case CARD_TYPE.STRAIGHT:
+          musicPath = "straight/straight"
+          playSound(musicPath)
+          break
+        case CARD_TYPE.SUIT:
+          musicPath = "suit/suit"
+          playSound(musicPath)
+          break
+        case CARD_TYPE.FULL_HOUSE:
+          let countFull = cardUtil.countRanks(playedCards)
+          let rankFull = cardUtil.getRankByCount(countFull, 3)
+          musicPath = "full_house/" + rankFull
+          playSound(musicPath)
+          break
+        case CARD_TYPE.FOUR_OF_A_KIND:
+          let countFour = cardUtil.countRanks(playedCards)
+          let rankFour= cardUtil.getRankByCount(countFour, 4)
+          musicPath = "full_house/" + rankFour
+          playSound(musicPath)
+          break
+        case CARD_TYPE.STRAIGHT_FLUSH:
+          musicPath = "straight_flush/straight_flush"
+          playSound(musicPath)
+          break
+        default:
+          playSound('default')
+          break
+      }
     }
 
   }
@@ -613,6 +658,9 @@ const handleMessage = (data) => {
     data = JSON.parse(parsedData.data)
     state.mustPid = data.mustPid
     startCountdown(data.current + 1, state.outCardTimeout)
+
+    const musicPath = "guo"
+    playSound(musicPath)
 
   }
   if (parsedData.type == "over") {
@@ -648,6 +696,71 @@ const handleMessage = (data) => {
     }
   }
 }
+
+// 在文件顶部添加音频预加载代码
+// 预加载 music 目录下所有 .mp3 音频文件（Vite 特有的资源导入方式）
+// eager: true 表示立即加载，import: 'default' 获取音频 URL
+const audioFiles = import.meta.glob('@/assets/music/**/*.mp3', { eager: true, import: 'default' });
+
+
+// 动态获取音频文件路径（利用预加载的音频映射）
+const getAudioUrl = (musicPath) => {
+  try {
+    // 构造预加载音频的路径 key（与 glob 匹配的路径格式）
+    // musicPath 格式为 "category/filename"，如 "single/1"、"pair/3"等
+    const audioKey = `/src/assets/music/${musicPath}.mp3`;
+    // 返回预加载的音频 URL（开发/生产环境路径自动适配）
+    return audioFiles[audioKey] || ''; // 若找不到对应音频，返回空
+  } catch (error) {
+    console.error('获取音频URL失败:', error);
+    return '';
+  }
+};
+
+// 修改playSound函数，使用新的音频获取机制
+const playSound = (musicPath) => {
+  try {
+    // 尝试使用预加载的音频变量（保持原有的兼容逻辑）
+    const preloadAudio = window[`preload_${musicPath}`];
+    if (preloadAudio) {
+      audioManager.play(preloadAudio);
+      return;
+    }
+
+    // 使用新的Vite资源获取方式（主要解决打包后文件名加后缀问题）
+    const audioUrl = getAudioUrl(musicPath);
+    if (audioUrl) {
+      // 优先使用audioManager播放
+      if (audioManager && audioManager.play) {
+        audioManager.play(audioUrl);
+      } else {
+        // 备选：直接创建Audio对象播放
+        const audio = new Audio(audioUrl);
+        audio.play().catch(err => {
+          console.warn('播放音频失败:', err);
+        });
+      }
+      return;
+    }
+
+    // 最后的备选方案：使用URL构造函数和import.meta.url解析路径
+    try {
+      // 获取基础URL路径
+      const baseUrl = new URL('.', import.meta.url).href;
+      const cardMusicUrl = baseUrl + '/assets/music/' + musicPath + '.mp3';
+      
+      // 创建新的Audio对象并播放
+      const audio = new Audio(cardMusicUrl);
+      audio.play().catch(err => {
+        console.warn('播放音频失败:', err);
+      });
+    } catch (error) {
+      console.error('音频播放错误:', error);
+    }
+  } catch (error) {
+    console.error('播放声音时发生错误:', error);
+  }
+};
 
 // 添加重新开始游戏的方法
 const restartGame = () => {
@@ -712,9 +825,16 @@ const startCountdown = (pid, remainOutCardTimeout) => {
       clearInterval(timer4)
       //显示并开始，当前倒计时
       countdownPlayer1.value = remainOutCardTimeout // 使用从服务端获取的倒计时时长
+      let isPlayKuaidian = false
       timer1 = setInterval(() => {
         if (countdownPlayer1.value > 0) {
           countdownPlayer1.value--
+          if (countdownPlayer1.value < remainOutCardTimeout/2) {
+            if (!isPlayKuaidian) {
+              isPlayKuaidian = true
+              playSound('kuaidian')
+            }
+          }
         } else {
           clearInterval(timer1)
           // 触发超时逻辑

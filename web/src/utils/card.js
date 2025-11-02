@@ -143,7 +143,7 @@ function judgeFiveCards(cards) {
 }
 
 // 辅助函数：统计牌面数量
-function countRanks(cards) {
+export function countRanks(cards) {
     return cards.reduce((count, card) => {
         count[card.rank] = (count[card.rank] || 0) + 1;
         return count;
@@ -192,7 +192,7 @@ function getMaxRank(cards) {
 }
 
 // 辅助函数：根据数量获取牌点
-function getRankByCount(countMap, targetCount) {
+export function getRankByCount(countMap, targetCount) {
     for (const [rank, count] of Object.entries(countMap)) {
         if (count === targetCount) return parseInt(rank, 10);
     }
@@ -210,7 +210,9 @@ export const cardUtil = {
     canPlayCards,
     getCardType,
     CARD_TYPE,
-    getKeyIdByType // 暴露按牌型获取关键ID的函数
+    getKeyIdByType, // 暴露按牌型获取关键ID的函数
+    countRanks,
+    getRankByCount,
 };
 
 export default cardUtil;
