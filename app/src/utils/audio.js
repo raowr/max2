@@ -28,6 +28,18 @@ class AudioManager {
       clone.play()
     }
   }
+
+    // 添加暂停背景音乐的方法
+  pauseBGM() {
+    if (this.currentBGM) {
+      this.currentBGM.pause()
+    }
+  }
+  
+  // 添加获取当前BGM状态的方法
+  isBGMPlaying() {
+    return this.currentBGM && !this.currentBGM.paused
+  }
 }
 
 export const audioManager = new AudioManager()

@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-     <div v-show="userIdShow" class="msg" style="position: absolute; top: 0%;left: 11%; color:gold;">
+    <div v-show="userIdShow" class="msg" style="position: absolute; top: 0%;left: 11%; color:gold;">
       {{ storage.local.get('user_id') }}
     </div>
     <div id="right">
@@ -13,7 +13,7 @@
       <img class="friendroom" src="@/assets/img/ui/txt_friendroom.png" />
       <div class="img_return2" @click="return2()"><img src="@/assets/img/ui/img_return2.png" alt="标题背景" /></div>
       <br /><br /><a @click="inroom()"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch1" /></a>
-      <img src="@/assets/img/ui/btn_create_room.png" class="btn_create_room" @click="toRoom()"/>
+      <img src="@/assets/img/ui/btn_create_room.png" class="btn_create_room" @click="toRoom()" />
       <img class="tips" src="@/assets/img/ui/tips.png" />
       <p class="free">限时免费</p>
       <a href="#"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch" @click="inroom()" /></a>
@@ -41,18 +41,36 @@
     <!--  右边设置栏 -->
     <div class="right-settings">
       <div class="setting-btn btn-set" @click="toggleSettingImage()"></div>
-      <div class="setting-btn btn-guide"></div>
+      <div class="setting-btn btn-guide"  @click="toggleGuideModal()"></div>
       <div class="setting-btn btn-trophy"></div>
-              <!-- 弹出图片容器 -->
-  <div v-if="showSettingImage" class="setting-image-container">
-    <img src="@/assets/img/creator.jpg" alt="设置图片" class="setting-image">
-    <!-- 可选：点击图片外部关闭 -->
-    <div class="setting-image-overlay" @click="toggleSettingImage()"></div>
-  </div>
+      <!-- 弹出图片容器 -->
+      <div v-if="showSettingImage" class="setting-image-container">
+        <img src="@/assets/img/creator.jpg" alt="设置图片" class="setting-image">
+        <!-- 可选：点击图片外部关闭 -->
+        <div class="setting-image-overlay" @click="toggleSettingImage()"></div>
+      </div>
+            <!-- 规则说明弹窗 -->
+      <div v-if="showGuideModal" class="guide-modal-container">
+        <img src="@/assets/img/ui/act_bg.png" alt="规则说明背景" class="guide-modal-bg">
+        <div class="guide-modal-content">
+          <h2>游戏规则说明</h2>
+          <div class="guide-content">
+            <p>1. 游戏基本玩法介绍: 核心规则是 4 人对战，，先出完所有牌者获胜。</p>
+            <p>2. 卡牌规则说明: 使用一副 52 张扑克牌,每个玩家开始游戏时，会随机分配13张牌，<br/>基本牌型：单张、对子、顺子、5张同花、三带二、四带一、5张同花顺.<br/>大小规则：单张牌，点数从大到小为 2、A、K、Q、J、10…3，对子类似，5张牌:同花顺 > 四带一 > 三带二 > 同花 > 顺子 。其中牌数相同才能打
+              <br/>出牌顺序：拥有最小牌方块3先出牌，之后按逆时针顺序，下家需出比上家大的牌型，或选择不出
+            </p>
+            <p>3. 胜利条件:任意一名玩家先出完所有牌则该获胜</p>
+            <p>4. 获胜奖励：游戏结束时，结算所有玩家剩余牌总数就是获胜瓜子数</p>
+            <!-- 可以根据实际游戏规则添加更多内容 -->
+          </div>
+          <button class="guide-close-btn" @click="toggleGuideModal()">关闭</button>
+        </div>
+        <div class="guide-modal-overlay" @click="toggleGuideModal()"></div>
+      </div>
     </div>
 
     <!--  人物信息 -->
-    <div class="character-info"  @click="info()">
+    <div class="character-info" @click="info()">
       <div class="character-bg"></div>
       <div class="avatar"></div>
       <div class="title"></div>
@@ -83,33 +101,57 @@
 </template>
 
 <script setup>
-import { ref,onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { audioManager } from '@/utils/audio'
 import { storage } from '@/utils/storage'
-import {useRoute,useRouter} from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { websocket } from '@/utils/websocket'
 
 const router = useRouter()
 const route = useRoute()
 const showSettingImage = ref(false)  // 弹出图片容器显示与隐藏
+const showGuideModal = ref(false)   // 规则说明弹窗显示与隐藏
+// 页面可见性变化处理函数
+const handleVisibilityChange = () => {
+  if (document.hidden) {
+    // 页面不可见时暂停音乐
+    audioManager.pauseBGM()
+    console.log('页面不可见，暂停音乐')
+  } else {
+    // 页面重新可见时恢复音乐
+    if (!audioManager.isBGMPlaying()) {
+      audioManager.playBGM('bgm')
+      console.log('页面可见，恢复音乐')
+    }
+  }
+}
 const toggleSettingImage = () => {
   showSettingImage.value = !showSettingImage.value
+}
+const toggleGuideModal = () => {
+  showGuideModal.value = !showGuideModal.value
 }
 
 const userIdShow = ref(false)  // 玩家di显示与隐藏
 onMounted(() => {
   init()
+  // 添加页面可见性变化监听
+  document.addEventListener('visibilitychange', handleVisibilityChange)
+})
+// 组件卸载时移除监听
+onUnmounted(() => {
+  document.removeEventListener('visibilitychange', handleVisibilityChange)
 })
 const init = async () => {
-    try {
-      // 动态解析音频路径（替换字符串路径为 new URL() 构造的 URL）
-      const bgmUrl = new URL('@/assets/music/yuanshanshaonian.mp3', import.meta.url).href;
-      audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
-      audioManager.playBGM('bgm')
+  try {
+    // 动态解析音频路径（替换字符串路径为 new URL() 构造的 URL）
+    const bgmUrl = new URL('@/assets/music/yuanshanshaonian.mp3', import.meta.url).href;
+    audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
+    audioManager.playBGM('bgm')
 
-    } catch (error) {
-      console.error('初始化背景音乐失败:', error);
-    }
+  } catch (error) {
+    console.error('初始化背景音乐失败:', error);
+  }
   //当前重连
   websocket.on('open', () => {
     console.log('index on open');
@@ -165,9 +207,9 @@ const handleMessage = (data) => {
     }
   }
 }
-const toRoom = ()=>{
-  websocket.send({"type":"initRoom","data":"","name":""});
-  router.push({path:'/room'})
+const toRoom = () => {
+  websocket.send({ "type": "initRoom", "data": "", "name": "" });
+  router.push({ path: '/room' })
 }
 </script>
 
@@ -566,18 +608,26 @@ const toRoom = ()=>{
 /* 设置图片容器样式 */
 .setting-image-container {
   position: absolute;
-  right: 7%; /* 定位在设置按钮左侧 */
-  top: 2%; /* 与设置按钮顶部对齐 */
-  z-index: 1000; /* 确保显示在最上层 */
-  margin-right: 10px; /* 与设置按钮保持一定距离 */
+  right: 7%;
+  /* 定位在设置按钮左侧 */
+  top: 2%;
+  /* 与设置按钮顶部对齐 */
+  z-index: 1000;
+  /* 确保显示在最上层 */
+  margin-right: 10px;
+  /* 与设置按钮保持一定距离 */
 }
 
 /* 设置图片样式 */
 .setting-image {
-  max-width: 200px; /* 设置图片最大宽度 */
-  max-height: 200px; /* 设置图片最大高度 */
-  border-radius: 8px; /* 可选：添加圆角 */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 可选：添加阴影效果 */
+  max-width: 200px;
+  /* 设置图片最大宽度 */
+  max-height: 200px;
+  /* 设置图片最大高度 */
+  border-radius: 8px;
+  /* 可选：添加圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  /* 可选：添加阴影效果 */
 }
 
 /* 可选：点击外部关闭的遮罩层 */
@@ -590,6 +640,119 @@ const toRoom = ()=>{
   background-color: transparent;
   z-index: 999;
 }
+
+/* 规则说明弹窗样式 */
+.guide-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.guide-modal-bg {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  /* object-fit: cover; */
+  opacity: 0.9;
+}
+
+.guide-modal-content {
+  position: relative;
+  /* background: rgba(0, 0, 0, 0.4); */
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 60vw; /* 修改为屏幕宽度的60% */
+  max-height: 60vh;
+  overflow-y: auto;
+  z-index: 10;
+  color: white;
+}
+
+/* 自定义滚动条样式 */
+.guide-modal-content::-webkit-scrollbar {
+  width: 12px;
+  /* 滚动条宽度 */
+}
+.guide-modal-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  /* 滚动条背景 */
+  border-radius: 6px;
+  /* 滚动条背景圆角 */
+}
+
+.guide-modal-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #999, #666);
+  /* 滚动条滑块灰色渐变 */
+  border-radius: 6px;
+  /* 滚动条滑块圆角 */
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  /* 滚动条滑块边框 */
+}
+
+.guide-modal-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #aaa, #777);
+  /* 滚动条滑块悬停状态灰色渐变 */
+}
+
+/* Firefox 滚动条样式 */
+.guide-modal-content {
+  scrollbar-width: thin;
+  /* 滚动条宽度 */
+  scrollbar-color: #888 rgba(0, 0, 0, 0.3);
+  /* 滚动条颜色（滑块颜色 背景颜色） */
+}
+
+.guide-modal-content h2 {
+  text-align: center;
+  color: gold;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.guide-content {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.guide-content p {
+  margin-bottom: 15px;
+}
+
+.guide-close-btn {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 30px;
+  background: gold;
+  color: #333;
+  border: none;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.guide-close-btn:hover {
+  background: #ffcc00;
+  transform: scale(1.05);
+}
+
+.guide-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 9;
+}
+
 
 /* 横屏模式专属样式 */
 @media (max-width: 998px) {
@@ -709,9 +872,27 @@ const toRoom = ()=>{
     background: red;
     color: white;
   }
+
   .setting-image {
-    max-width: 200px; /* 横屏模式下缩小图片 */
+    max-width: 200px;
+    /* 横屏模式下缩小图片 */
     max-height: 200px;
+  }
+
+  .guide-modal-content {
+    max-width: 60vw; /* 修改为屏幕宽度的60% */
+    max-height: 60vh;
+    margin: 20px;
+    padding: 20px;
+    margin-top: 50px; /* 添加顶部外边距使其向下移动 */
+  }
+  
+  .guide-modal-content h2 {
+    font-size: 24px;
+  }
+  
+  .guide-content {
+    font-size: 16px;
   }
 }
 </style>

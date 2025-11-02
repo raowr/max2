@@ -42,6 +42,8 @@ import trophyBtnImg from '@/assets/img/ui/btn_trophy.png';
 import bg2Img from '@/assets/img/ui/bg_2.png';
 import bigheadImg from '@/assets/img/touxiang/bighead.png';
 import zuichuqueshengImg from '@/assets/img/ui/zuichuquesheng.png';
+import creatorImg from '@/assets/img/creator.jpg'
+import actBgImg from '@/assets/img/ui/act_bg.png'
 
 //room.vue 预加载资源
 import bar23182Img from '@/assets/img/ui/bar23182.png';
@@ -166,6 +168,8 @@ export default {
         bg2Img,
         bigheadImg,
         zuichuqueshengImg, // 新增：最上游程
+        creatorImg,   // 新增：创建者头像
+        actBgImg,     // 新增：规则背景
         bar23182Img,  // 新增：进度条图片
         starImg,      // 新增：星星图标
         starDarkImg,  // 新增：暗星星图标
