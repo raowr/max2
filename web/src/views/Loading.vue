@@ -15,6 +15,8 @@
 
 <script>
 
+import { audioManager } from '@/utils/audio'
+
 // 1. 显式引入所有需要预加载的图片（确保 Vite 打包时包含这些资源）
 import cg4Img from '@/assets/img/cg/cg4.png';
 //index.vue 预加载资源
@@ -361,26 +363,117 @@ export default {
           // gameBgMusic,       // 引入的背景音乐
           // gameBgMusic1,      // 引入的点击音效
           // 出牌音频
-          single1, single2, single3, single4, single5, single6, single7, single8, single9, single10,
-          single11, single12, single13, single14, single15, single16, single17, single18, single19, single20,
-          single21, single22, single23, single24, single25, single26, single27, single28, single29, single30,
-          single31, single32, single33, single34, single35, single36, single37, single38, single39, single40,
-          single41, single42, single43, single44, single45, single46, single47, single48, single49, single50,
-          single51, single52,
-          // 对子音频
-          pair3, pair4, pair5, pair6, pair7, pair8, pair9, pair10,
-          pair11, pair12, pair13, pair14, pair15,
-          // 葫芦音频
-          fullHouse3, fullHouse4, fullHouse5, fullHouse6, fullHouse7, fullHouse8, fullHouse9, fullHouse10,
-          fullHouse11, fullHouse12, fullHouse13, fullHouse14, fullHouse15,
-          // 四条音频
-          four3, four4, four5, four6, four7, four8, four9, four10,
-          four11, four12, four13, four14, four15,
-          // 其他牌型音频
-          straight, suit, straightFlush,
-          // 功能音频
-          guo, kuaidian
         ],
+        // 先定义 audioResources
+          audioResources: {
+        // 单张牌音效
+        'single/1': single1,
+        'single/2': single2,
+        'single/3': single3,
+        'single/4': single4,
+        'single/5': true,
+        'single/6': true,
+        'single/7': true,
+        'single/8': true,
+        'single/9': true,
+        'single/10': true,
+        'single/11': true,
+        'single/12': true,
+        'single/13': true,
+        'single/14': true,
+        'single/15': true,
+        'single/16': true,
+        'single/17': true,
+        'single/18': true,
+        'single/19': true,
+        'single/20': true,
+        'single/21': true,
+        'single/22': true,
+        'single/23': true,
+        'single/24': true,
+        'single/25': true,
+        'single/26': true,
+        'single/27': true,
+        'single/28': true,
+        'single/29': true,
+        'single/30': true,
+        'single/31': true,
+        'single/32': true,
+        'single/33': true,
+        'single/34': true,
+        'single/35': true,
+        'single/36': true,
+        'single/37': true,
+        'single/38': true,
+        'single/39': true,
+        'single/40': true,
+        'single/41': true,
+        'single/42': true,
+        'single/43': true,
+        'single/44': true,
+        'single/45': true,
+        'single/46': true,
+        'single/47': true,
+        'single/48': true,
+        'single/49': true,
+        'single/50': true,
+        'single/51': true,
+        'single/52': true,
+        
+        // 对子音效
+        'pair/3': true,
+        'pair/4': true,
+        'pair/5': true,
+        'pair/6': true,
+        'pair/7': true,
+        'pair/8': true,
+        'pair/9': true,
+        'pair/10': true,
+        'pair/11': true,
+        'pair/12': true,
+        'pair/13': true,
+        'pair/14': true,
+        'pair/15': true,
+        
+        // 葫芦音效
+        'full_house/3': true,
+        'full_house/4': true,
+        'full_house/5': true,
+        'full_house/6': true,
+        'full_house/7': true,
+        'full_house/8': true,
+        'full_house/9': true,
+        'full_house/10': true,
+        'full_house/11': true,
+        'full_house/12': true,
+        'full_house/13': true,
+        'full_house/14': true,
+        'full_house/15': true,
+        
+        // 四条音效
+        'four/3': true,
+        'four/4': true,
+        'four/5': true,
+        'four/6': true,
+        'four/7': true,
+        'four/8': true,
+        'four/9': true,
+        'four/10': true,
+        'four/11': true,
+        'four/12': true,
+        'four/13': true,
+        'four/14': true,
+        'four/15': true,
+        
+        // 其他牌型音效
+        'straight/straight': true,
+        'suit/suit': true,
+        'straight_flush/straight_flush': true,
+        
+        // 功能音效
+        'guo': true,
+        'kuaidian': true
+      },
       loadedCount: 0,
       totalFiles: 0,       // 新增：总资源数（图片+音频）
       progressPercentage: 0,
@@ -392,6 +485,13 @@ export default {
       isReady: false,
       backgroundLoaded:false,
       isCapacitor: window.Capacitor && window.Capacitor.isPluginAvailable('CapacitorHttp'),
+      // 修复：使用计算属性或者延迟初始化
+      preloadStatus: { 
+        loaded: 0, 
+        total: 0, // 先设为0，在mounted中设置
+        isComplete: false 
+      },
+      preloadedAudioUrls:{},
     };
   },
   computed: {
@@ -412,6 +512,11 @@ export default {
       this.totalFiles = this.imagePaths.length + this.audioPaths.length;
       this.preloadAllResources();
     });
+
+     // 启动音频预加载（可以考虑在用户首次交互后调用，以符合浏览器的自动播放政策）
+  setTimeout(() => {
+    this.preloadAllAudios();
+  }, 1000); // 延迟1秒开始预加载，给其他初始化代码一些时间
   },
   methods: {
     // 优先预加载背景图片
@@ -470,7 +575,70 @@ export default {
     },
     toIndex() {
       this.$router.push('/index');
-    }
+    },
+       
+// 修改后的批量预加载函数
+async preloadAllAudios() {
+  console.log('开始预加载音频资源...');
+  const keys = Object.keys(this.audioResources);
+  let loadedCount = 0;
+  
+  // 分批加载，避免一次性请求过多资源
+  const batchSize = 5;
+  for (let i = 0; i < keys.length; i += batchSize) {
+    const batch = keys.slice(i, i + batchSize);
+    const promises = batch.map(musicPath => {
+      return new Promise((resolve) => {
+        const key = 'preload_' + musicPath;
+        try {
+          // 使用与playSound相同的路径构建方式
+          const baseUrl = new URL('../', import.meta.url).href;
+          const cardMusicUrl = baseUrl + '/assets/music/' + musicPath + '.mp3';
+          
+          // 存储预加载的URL，用于后续检查
+          this.preloadedAudioUrls[key] = cardMusicUrl;
+          
+          // 创建一个临时的Audio对象进行预加载
+          const tempAudio = new Audio();
+          
+          // 设置加载完成事件
+          tempAudio.oncanplaythrough = () => {
+            loadedCount++;
+            this.preloadStatus.loaded = loadedCount;
+            console.log(`预加载完成: ${musicPath}, 进度: ${loadedCount}/${keys.length}`);
+            // 预加载完成后，使用audioManager正式加载
+            audioManager.preload(key, cardMusicUrl);
+            resolve();
+          };
+          
+          // 加载失败处理
+          tempAudio.onerror = () => {
+            console.error(`预加载失败: ${musicPath}`);
+            // 失败也继续，避免阻塞其他资源加载
+            loadedCount++;
+            this.preloadStatus.loaded = loadedCount;
+            resolve();
+          };
+          
+          // 设置音频源并开始加载
+          tempAudio.src = cardMusicUrl;
+          tempAudio.load();
+        } catch (error) {
+          console.error(`预加载出错: ${musicPath}`, error);
+          loadedCount++;
+          this.preloadStatus.loaded = loadedCount;
+          resolve();
+        }
+      });
+    });
+    
+    // 等待当前批次加载完成
+    await Promise.all(promises);
+  }
+  
+  this.preloadStatus.isComplete = true;
+  console.log('所有音频资源预加载完成');
+},
   }
 };
 </script>

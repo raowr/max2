@@ -134,104 +134,6 @@ import card49Img from '@/assets/img/cards/49.png'
 import card50Img from '@/assets/img/cards/50.png'
 import card51Img from '@/assets/img/cards/51.png'
 import card52Img from '@/assets/img/cards/52.png'
-//出牌音频
-import single1 from '@/assets/music/single/1.mp3';
-import single2 from '@/assets/music/single/2.mp3';
-import single3 from '@/assets/music/single/3.mp3';
-import single4 from '@/assets/music/single/4.mp3';
-import single5 from '@/assets/music/single/5.mp3';
-import single6 from '@/assets/music/single/6.mp3';
-import single7 from '@/assets/music/single/7.mp3';
-import single8 from '@/assets/music/single/8.mp3';
-import single9 from '@/assets/music/single/9.mp3';
-import single10 from '@/assets/music/single/10.mp3';
-import single11 from '@/assets/music/single/11.mp3';
-import single12 from '@/assets/music/single/12.mp3';
-import single13 from '@/assets/music/single/13.mp3';
-import single14 from '@/assets/music/single/14.mp3';
-import single15 from '@/assets/music/single/15.mp3';
-import single16 from '@/assets/music/single/16.mp3';
-import single17 from '@/assets/music/single/17.mp3';
-import single18 from '@/assets/music/single/18.mp3';
-import single19 from '@/assets/music/single/19.mp3';
-import single20 from '@/assets/music/single/20.mp3';
-import single21 from '@/assets/music/single/21.mp3';
-import single22 from '@/assets/music/single/22.mp3';
-import single23 from '@/assets/music/single/23.mp3';
-import single24 from '@/assets/music/single/24.mp3';
-import single25 from '@/assets/music/single/25.mp3';
-import single26 from '@/assets/music/single/26.mp3';
-import single27 from '@/assets/music/single/27.mp3';
-import single28 from '@/assets/music/single/28.mp3';
-import single29 from '@/assets/music/single/29.mp3';
-import single30 from '@/assets/music/single/30.mp3';
-import single31 from '@/assets/music/single/31.mp3';
-import single32 from '@/assets/music/single/32.mp3';
-import single33 from '@/assets/music/single/33.mp3';
-import single34 from '@/assets/music/single/34.mp3';
-import single35 from '@/assets/music/single/35.mp3';
-import single36 from '@/assets/music/single/36.mp3';
-import single37 from '@/assets/music/single/37.mp3';
-import single38 from '@/assets/music/single/38.mp3';
-import single39 from '@/assets/music/single/39.mp3';
-import single40 from '@/assets/music/single/40.mp3';
-import single41 from '@/assets/music/single/41.mp3';
-import single42 from '@/assets/music/single/42.mp3';
-import single43 from '@/assets/music/single/43.mp3';
-import single44 from '@/assets/music/single/44.mp3';
-import single45 from '@/assets/music/single/45.mp3';
-import single46 from '@/assets/music/single/46.mp3';
-import single47 from '@/assets/music/single/47.mp3';
-import single48 from '@/assets/music/single/48.mp3';
-import single49 from '@/assets/music/single/49.mp3';
-import single50 from '@/assets/music/single/50.mp3';
-import single51 from '@/assets/music/single/51.mp3';
-import single52 from '@/assets/music/single/52.mp3';
-import pair3 from '@/assets/music/pair/3.mp3';
-import pair4 from '@/assets/music/pair/4.mp3';
-import pair5 from '@/assets/music/pair/5.mp3';
-import pair6 from '@/assets/music/pair/6.mp3';
-import pair7 from '@/assets/music/pair/7.mp3';
-import pair8 from '@/assets/music/pair/8.mp3';
-import pair9 from '@/assets/music/pair/9.mp3';
-import pair10 from '@/assets/music/pair/10.mp3';
-import pair11 from '@/assets/music/pair/11.mp3';
-import pair12 from '@/assets/music/pair/12.mp3';
-import pair13 from '@/assets/music/pair/13.mp3';
-import pair14 from '@/assets/music/pair/14.mp3';
-import pair15 from '@/assets/music/pair/15.mp3';
-import fullHouse3 from "@/assets/music/full_house/3.mp3";
-import fullHouse4 from "@/assets/music/full_house/4.mp3";
-import fullHouse5 from "@/assets/music/full_house/5.mp3";
-import fullHouse6 from "@/assets/music/full_house/6.mp3";
-import fullHouse7 from "@/assets/music/full_house/7.mp3";
-import fullHouse8 from "@/assets/music/full_house/8.mp3";
-import fullHouse9 from "@/assets/music/full_house/9.mp3";
-import fullHouse10 from "@/assets/music/full_house/10.mp3";
-import fullHouse11 from "@/assets/music/full_house/11.mp3";
-import fullHouse12 from "@/assets/music/full_house/12.mp3";
-import fullHouse13 from "@/assets/music/full_house/13.mp3";
-import fullHouse14 from "@/assets/music/full_house/14.mp3";
-import fullHouse15 from "@/assets/music/full_house/15.mp3";
-import four3 from "@/assets/music/four/3.mp3";
-import four4 from "@/assets/music/four/4.mp3";
-import four5 from "@/assets/music/four/5.mp3";
-import four6 from "@/assets/music/four/6.mp3";
-import four7 from "@/assets/music/four/7.mp3";
-import four8 from "@/assets/music/four/8.mp3";
-import four9 from "@/assets/music/four/9.mp3";
-import four10 from "@/assets/music/four/10.mp3";
-import four11 from "@/assets/music/four/11.mp3";
-import four12 from "@/assets/music/four/12.mp3";
-import four13 from "@/assets/music/four/13.mp3";
-import four14 from "@/assets/music/four/14.mp3";
-import four15 from "@/assets/music/four/15.mp3";
-import straight from "@/assets/music/straight/straight.mp3";
-import suit from "@/assets/music/suit/suit.mp3";
-import straightFlush from "@/assets/music/straight_flush/straight_flush.mp3";
-import guo from "@/assets/music/guo.mp3";
-import kuaidian from "@/assets/music/kuaidian.mp3";
-
 
 
 
@@ -361,25 +263,6 @@ export default {
           // gameBgMusic,       // 引入的背景音乐
           // gameBgMusic1,      // 引入的点击音效
           // 出牌音频
-          single1, single2, single3, single4, single5, single6, single7, single8, single9, single10,
-          single11, single12, single13, single14, single15, single16, single17, single18, single19, single20,
-          single21, single22, single23, single24, single25, single26, single27, single28, single29, single30,
-          single31, single32, single33, single34, single35, single36, single37, single38, single39, single40,
-          single41, single42, single43, single44, single45, single46, single47, single48, single49, single50,
-          single51, single52,
-          // 对子音频
-          pair3, pair4, pair5, pair6, pair7, pair8, pair9, pair10,
-          pair11, pair12, pair13, pair14, pair15,
-          // 葫芦音频
-          fullHouse3, fullHouse4, fullHouse5, fullHouse6, fullHouse7, fullHouse8, fullHouse9, fullHouse10,
-          fullHouse11, fullHouse12, fullHouse13, fullHouse14, fullHouse15,
-          // 四条音频
-          four3, four4, four5, four6, four7, four8, four9, four10,
-          four11, four12, four13, four14, four15,
-          // 其他牌型音频
-          straight, suit, straightFlush,
-          // 功能音频
-          guo, kuaidian
         ],
       loadedCount: 0,
       totalFiles: 0,       // 新增：总资源数（图片+音频）
@@ -470,7 +353,7 @@ export default {
     },
     toIndex() {
       this.$router.push('/index');
-    }
+    },
   }
 };
 </script>

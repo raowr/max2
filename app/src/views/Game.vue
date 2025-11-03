@@ -692,7 +692,7 @@ const getAudioUrl = (musicPath) => {
     // musicPath 格式为 "category/filename"，如 "single/1"、"pair/3"等
     const audioKey = `/src/assets/music/${musicPath}.mp3`;
     // 返回预加载的音频 URL（开发/生产环境路径自动适配）
-    return audioFiles[audioKey] || ''; // 若找不到对应音频，返回空
+    return audioFiles[audioKey] || ''; // 重要：添加 return 语句
   } catch (error) {
     console.error('获取音频URL失败:', error);
     return '';
@@ -701,27 +701,20 @@ const getAudioUrl = (musicPath) => {
 
 const playSound = (musicPath) => {
   try {
-    // 使用Vite资源获取方式
-    const audioUrl = getAudioUrl(musicPath);
-    console.log(audioUrl)
-    if (audioUrl) {
-      // 检查audioManager和playOnce方法是否存在
-      if (audioManager && audioManager.playOnce) {
-        // 先检查audioElements中是否已存在该音频
-        if (!audioManager.audioElements.has(musicPath)) {
-          // 如果不存在，则预加载该音频
-          audioManager.preload(musicPath, audioUrl);
-        }
-        // 使用playOnce播放
-        audioManager.playOnce(musicPath);
-      } else {
-        // 备选：直接创建Audio对象播放
+    // 直接使用 AudioManager 的 playOnce 方法播放音频
+    audioManager.playOnce(musicPath);
+    
+    // 备选方案：如果 AudioManager 中没有预加载该音频，则尝试直接加载播放
+    if (!audioManager.audioElements.has(musicPath)) {
+      // 获取音频 URL
+      const audioUrl = getAudioUrl(musicPath);
+      if (audioUrl) {
+        // 创建新的 Audio 对象并播放
         const audio = new Audio(audioUrl);
         audio.play().catch(err => {
           console.warn('播放音频失败:', err);
         });
       }
-      return;
     }
   } catch (error) {
     console.error('播放声音时发生错误:', error);

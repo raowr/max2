@@ -23,7 +23,15 @@ export default defineConfig({
         format: 'iife',
         chunkFileNames: '[name]-[hash].js',
         entryFileNames: '[name]-[hash].js',
-        assetFileNames: 'img/[name]-[hash][extname]'
+        // 修改这里：使用函数来区分不同类型的资源
+        assetFileNames: (assetInfo) => {
+          // 对于音频文件，输出到 music 目录
+          if (assetInfo.name && /\.(mp3|wav|ogg)$/.test(assetInfo.name)) {
+            return 'music/[name]-[hash][extname]'
+          }
+          // 其他资源仍然输出到 img 目录
+          return 'img/[name]-[hash][extname]'
+        }
       }
     },
     
