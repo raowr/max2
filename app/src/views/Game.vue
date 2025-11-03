@@ -623,7 +623,7 @@ const handleMessage = (data) => {
         case CARD_TYPE.FOUR_OF_A_KIND:
           let countFour = cardUtil.countRanks(playedCards)
           let rankFour= cardUtil.getRankByCount(countFour, 4)
-          musicPath = "full_house/" + rankFour
+          musicPath = "four/" + rankFour
           playSound(musicPath)
           break
         case CARD_TYPE.STRAIGHT_FLUSH:
@@ -683,7 +683,7 @@ const handleMessage = (data) => {
 // 预加载 music 目录下所有 .mp3 音频文件（Vite 特有的资源导入方式）
 // eager: true 表示立即加载，import: 'default' 获取音频 URL
 const audioFiles = import.meta.glob('@/assets/music/**/*.mp3', { eager: true, import: 'default' });
-
+console.log(audioFiles)
 
 // 动态获取音频文件路径（利用预加载的音频映射）
 const getAudioUrl = (musicPath) => {
@@ -699,22 +699,21 @@ const getAudioUrl = (musicPath) => {
   }
 };
 
-// 修改playSound函数，使用新的音频获取机制
 const playSound = (musicPath) => {
   try {
-    // 尝试使用预加载的音频变量（保持原有的兼容逻辑）
-    const preloadAudio = window[`preload_${musicPath}`];
-    if (preloadAudio) {
-      audioManager.play(preloadAudio);
-      return;
-    }
-
-    // 使用新的Vite资源获取方式（主要解决打包后文件名加后缀问题）
+    // 使用Vite资源获取方式
     const audioUrl = getAudioUrl(musicPath);
+    console.log(audioUrl)
     if (audioUrl) {
-      // 优先使用audioManager播放
-      if (audioManager && audioManager.play) {
-        audioManager.play(audioUrl);
+      // 检查audioManager和playOnce方法是否存在
+      if (audioManager && audioManager.playOnce) {
+        // 先检查audioElements中是否已存在该音频
+        if (!audioManager.audioElements.has(musicPath)) {
+          // 如果不存在，则预加载该音频
+          audioManager.preload(musicPath, audioUrl);
+        }
+        // 使用playOnce播放
+        audioManager.playOnce(musicPath);
       } else {
         // 备选：直接创建Audio对象播放
         const audio = new Audio(audioUrl);
@@ -723,21 +722,6 @@ const playSound = (musicPath) => {
         });
       }
       return;
-    }
-
-    // 最后的备选方案：使用URL构造函数和import.meta.url解析路径
-    try {
-      // 获取基础URL路径
-      const baseUrl = new URL('.', import.meta.url).href;
-      const cardMusicUrl = baseUrl + '/assets/music/' + musicPath + '.mp3';
-      
-      // 创建新的Audio对象并播放
-      const audio = new Audio(cardMusicUrl);
-      audio.play().catch(err => {
-        console.warn('播放音频失败:', err);
-      });
-    } catch (error) {
-      console.error('音频播放错误:', error);
     }
   } catch (error) {
     console.error('播放声音时发生错误:', error);
