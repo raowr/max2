@@ -238,6 +238,23 @@ import kuaidian from "@/assets/music/kuaidian.mp3";
 
 
 
+// 使用 import.meta.glob 批量导入所有音频文件
+const audioModules = import.meta.glob('@/assets/music/**/*.mp3', { eager: true, import: 'default' });
+console.log(audioModules);
+// 将导入的音频模块转换为资源映射
+const createAudioResources = () => {
+  const resources = {};
+  
+  // 遍历所有导入的音频模块
+  Object.keys(audioModules).forEach(modulePath => {
+    // 提取相对路径（去掉 @/assets/music/ 和文件扩展名）
+    const relativePath = modulePath.replace('@/assets/music/', '').replace('.mp3', '');
+    // 将导入的音频 URL 存储到资源映射中
+    resources[relativePath] = audioModules[modulePath];
+  });
+  
+  return resources;
+};
 
 
 export default {
@@ -366,114 +383,114 @@ export default {
         ],
         // 先定义 audioResources
           audioResources: {
-        // 单张牌音效
-        'single/1': single1,
-        'single/2': single2,
-        'single/3': single3,
-        'single/4': single4,
-        'single/5': true,
-        'single/6': true,
-        'single/7': true,
-        'single/8': true,
-        'single/9': true,
-        'single/10': true,
-        'single/11': true,
-        'single/12': true,
-        'single/13': true,
-        'single/14': true,
-        'single/15': true,
-        'single/16': true,
-        'single/17': true,
-        'single/18': true,
-        'single/19': true,
-        'single/20': true,
-        'single/21': true,
-        'single/22': true,
-        'single/23': true,
-        'single/24': true,
-        'single/25': true,
-        'single/26': true,
-        'single/27': true,
-        'single/28': true,
-        'single/29': true,
-        'single/30': true,
-        'single/31': true,
-        'single/32': true,
-        'single/33': true,
-        'single/34': true,
-        'single/35': true,
-        'single/36': true,
-        'single/37': true,
-        'single/38': true,
-        'single/39': true,
-        'single/40': true,
-        'single/41': true,
-        'single/42': true,
-        'single/43': true,
-        'single/44': true,
-        'single/45': true,
-        'single/46': true,
-        'single/47': true,
-        'single/48': true,
-        'single/49': true,
-        'single/50': true,
-        'single/51': true,
-        'single/52': true,
-        
-        // 对子音效
-        'pair/3': true,
-        'pair/4': true,
-        'pair/5': true,
-        'pair/6': true,
-        'pair/7': true,
-        'pair/8': true,
-        'pair/9': true,
-        'pair/10': true,
-        'pair/11': true,
-        'pair/12': true,
-        'pair/13': true,
-        'pair/14': true,
-        'pair/15': true,
-        
-        // 葫芦音效
-        'full_house/3': true,
-        'full_house/4': true,
-        'full_house/5': true,
-        'full_house/6': true,
-        'full_house/7': true,
-        'full_house/8': true,
-        'full_house/9': true,
-        'full_house/10': true,
-        'full_house/11': true,
-        'full_house/12': true,
-        'full_house/13': true,
-        'full_house/14': true,
-        'full_house/15': true,
-        
-        // 四条音效
-        'four/3': true,
-        'four/4': true,
-        'four/5': true,
-        'four/6': true,
-        'four/7': true,
-        'four/8': true,
-        'four/9': true,
-        'four/10': true,
-        'four/11': true,
-        'four/12': true,
-        'four/13': true,
-        'four/14': true,
-        'four/15': true,
-        
-        // 其他牌型音效
-        'straight/straight': true,
-        'suit/suit': true,
-        'straight_flush/straight_flush': true,
-        
-        // 功能音效
-        'guo': true,
-        'kuaidian': true
-      },
+            // 单张牌音效
+            'single/1': single1,
+            'single/2': single2,
+            'single/3': single3,
+            'single/4': single4,
+            'single/5': single5,
+            'single/6': single6,
+            'single/7': single7,
+            'single/8': single8,
+            'single/9': single9,
+            'single/10': single10,
+            'single/11': single11,
+            'single/12': single12,
+            'single/13': single13,
+            'single/14': single14,
+            'single/15': single15,
+            'single/16': single16,
+            'single/17': single17,
+            'single/18': single18,
+            'single/19': single19,
+            'single/20': single20,
+            'single/21': single21,
+            'single/22': single22,
+            'single/23': single23,
+            'single/24': single24,
+            'single/25': single25,
+            'single/26': single26,
+            'single/27': single27,
+            'single/28': single28,
+            'single/29': single29,
+            'single/30': single30,
+            'single/31': single31,
+            'single/32': single32,
+            'single/33': single33,
+            'single/34': single34,
+            'single/35': single35,
+            'single/36': single36,
+            'single/37': single37,
+            'single/38': single38,
+            'single/39': single39,
+            'single/40': single40,
+            'single/41': single41,
+            'single/42': single42,
+            'single/43': single43,
+            'single/44': single44,
+            'single/45': single45,
+            'single/46': single46,
+            'single/47': single47,
+            'single/48': single48,
+            'single/49': single49,
+            'single/50': single50,
+            'single/51': single51,
+            'single/52': single52,
+            
+            // 对子音效
+            'pair/3': pair3,
+            'pair/4': pair4,
+            'pair/5': pair5,
+            'pair/6': pair6,
+            'pair/7': pair7,
+            'pair/8': pair8,
+            'pair/9': pair9,
+            'pair/10': pair10,
+            'pair/11': pair11,
+            'pair/12': pair12,
+            'pair/13': pair13,
+            'pair/14': pair14,
+            'pair/15': pair15,
+            
+            // 葫芦音效
+            'full_house/3': fullHouse3,
+            'full_house/4': fullHouse4,
+            'full_house/5': fullHouse5,
+            'full_house/6': fullHouse6,
+            'full_house/7': fullHouse7,
+            'full_house/8': fullHouse8,
+            'full_house/9': fullHouse9,
+            'full_house/10': fullHouse10,
+            'full_house/11': fullHouse11,
+            'full_house/12': fullHouse12,
+            'full_house/13': fullHouse13,
+            'full_house/14': fullHouse14,
+            'full_house/15': fullHouse15,
+            
+            // 四条音效
+            'four/3': four3,
+            'four/4': four4,
+            'four/5': four5,
+            'four/6': four6,
+            'four/7': four7,
+            'four/8': four8,
+            'four/9': four9,
+            'four/10': four10,
+            'four/11': four11,
+            'four/12': four12,
+            'four/13': four13,
+            'four/14': four14,
+            'four/15': four15,
+            
+            // 其他牌型音效
+            'straight/straight': straight,
+            'suit/suit': suit,
+            'straight_flush/straight_flush': straightFlush,
+            
+            // 功能音效
+            'guo': guo,
+            'kuaidian': kuaidian
+          },
       loadedCount: 0,
       totalFiles: 0,       // 新增：总资源数（图片+音频）
       progressPercentage: 0,
@@ -492,6 +509,7 @@ export default {
         isComplete: false 
       },
       preloadedAudioUrls:{},
+      audioResources: createAudioResources(),
     };
   },
   computed: {
@@ -551,6 +569,7 @@ export default {
 
       // 新增：预加载音频
       this.audioPaths.forEach(path => {
+        console.log('预加载音频资源...',path);
         const audio = new Audio();
         audio.src = path;
         // 音频加载完成事件（可使用 canplaythrough 确保可播放）
@@ -577,68 +596,79 @@ export default {
       this.$router.push('/index');
     },
        
-// 修改后的批量预加载函数
-async preloadAllAudios() {
-  console.log('开始预加载音频资源...');
-  const keys = Object.keys(this.audioResources);
-  let loadedCount = 0;
-  
-  // 分批加载，避免一次性请求过多资源
-  const batchSize = 5;
-  for (let i = 0; i < keys.length; i += batchSize) {
-    const batch = keys.slice(i, i + batchSize);
-    const promises = batch.map(musicPath => {
-      return new Promise((resolve) => {
-        const key = 'preload_' + musicPath;
-        try {
-          // 使用与playSound相同的路径构建方式
-          const baseUrl = new URL('../', import.meta.url).href;
-          const cardMusicUrl = baseUrl + '/assets/music/' + musicPath + '.mp3';
-          
-          // 存储预加载的URL，用于后续检查
-          this.preloadedAudioUrls[key] = cardMusicUrl;
-          
-          // 创建一个临时的Audio对象进行预加载
-          const tempAudio = new Audio();
-          
-          // 设置加载完成事件
-          tempAudio.oncanplaythrough = () => {
-            loadedCount++;
-            this.preloadStatus.loaded = loadedCount;
-            console.log(`预加载完成: ${musicPath}, 进度: ${loadedCount}/${keys.length}`);
-            // 预加载完成后，使用audioManager正式加载
-            audioManager.preload(key, cardMusicUrl);
-            resolve();
-          };
-          
-          // 加载失败处理
-          tempAudio.onerror = () => {
-            console.error(`预加载失败: ${musicPath}`);
-            // 失败也继续，避免阻塞其他资源加载
-            loadedCount++;
-            this.preloadStatus.loaded = loadedCount;
-            resolve();
-          };
-          
-          // 设置音频源并开始加载
-          tempAudio.src = cardMusicUrl;
-          tempAudio.load();
-        } catch (error) {
-          console.error(`预加载出错: ${musicPath}`, error);
-          loadedCount++;
-          this.preloadStatus.loaded = loadedCount;
-          resolve();
-        }
-      });
-    });
-    
-    // 等待当前批次加载完成
-    await Promise.all(promises);
-  }
-  
-  this.preloadStatus.isComplete = true;
-  console.log('所有音频资源预加载完成');
-},
+// ... existing code ...
+    async preloadAllAudios() {
+      console.log('开始预加载音频资源...');
+      const keys = Object.keys(this.audioResources);
+      let loadedCount = 0;
+      
+      // 分批加载，避免一次性请求过多资源
+      const batchSize = 5;
+      for (let i = 0; i < keys.length; i += batchSize) {
+        const batch = keys.slice(i, i + batchSize);
+        const promises = batch.map(musicPath => {
+          return new Promise((resolve) => {
+            const key = 'preload_' + musicPath;
+            try {
+              // 修改为：直接使用 audioResources 中导入的音频变量
+              // 这些导入的变量会自动解析为编译后的带 hash 的路径
+              let cardMusicUrl = this.audioResources[musicPath];
+              
+              // 如果是 true，表示需要处理（应该避免这种情况）
+              if (cardMusicUrl === true) {
+                console.warn(`音频路径未正确配置: ${musicPath}，请添加正确的导入语句`);
+                resolve();
+                return;
+              }
+              
+              // 调试信息，查看实际使用的音频路径
+              console.log(`预加载音频: ${musicPath}，URL: ${cardMusicUrl}`);
+              
+              // 存储预加载的 URL，用于后续检查
+              this.preloadedAudioUrls[key] = cardMusicUrl;
+              
+              // 创建一个临时的 Audio 对象进行预加载
+              const tempAudio = new Audio();
+              
+              // 设置加载完成事件
+              tempAudio.oncanplaythrough = () => {
+                loadedCount++;
+                this.preloadStatus.loaded = loadedCount;
+                console.log(`预加载完成: ${musicPath}, 进度: ${loadedCount}/${keys.length}`);
+                // 预加载完成后，使用 audioManager 正式加载
+                audioManager.preload(key, cardMusicUrl);
+                resolve();
+              };
+              
+              // 加载失败处理
+              tempAudio.onerror = () => {
+                console.error(`预加载失败: ${musicPath}，URL: ${cardMusicUrl}`);
+                // 失败也继续，避免阻塞其他资源加载
+                loadedCount++;
+                this.preloadStatus.loaded = loadedCount;
+                resolve();
+              };
+              
+              // 设置音频源并开始加载
+              tempAudio.src = cardMusicUrl;
+              tempAudio.load();
+            } catch (error) {
+              console.error(`预加载出错: ${musicPath}`);
+              loadedCount++;
+              this.preloadStatus.loaded = loadedCount;
+              resolve();
+            }
+          });
+        });
+        
+        // 等待当前批次加载完成
+        await Promise.all(promises);
+      }
+      
+      this.preloadStatus.isComplete = true;
+      console.log('所有音频资源预加载完成');
+    },
+// ... existing code ...
   }
 };
 </script>
