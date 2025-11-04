@@ -22,6 +22,13 @@
     <!--player1 牌 -->
     <!-- 移除容器的内联静态样式，保留类名 -->
     <div class="player1_card">
+       <span  v-show="player1pass"  style="
+        position: absolute;
+        left: 50%;
+        color: #FF6600;
+        font-size: 28px;
+        top: -50px;
+        ">过</span>
       <!-- 为卡牌添加类名.player1-card-item，抽取静态样式 -->
       <img v-for="(cardId, index) in state.cards" :key="cardId" :src="getCardImage(cardId)" class="player1-card-item"
         :style="{
@@ -75,6 +82,13 @@
       <div style="width:89px;height:40px;text-align:center;position: absolute;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥2</p>
       </div>
+            <span v-show="player2pass" style="
+                  position: absolute;
+                  right: 135%;
+                  color: #FF6600;
+                  font-size: 28px;
+                  top: -40%;
+              ">过</span>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-95%;top:-2%'>
       <p style="z-index:1;font-size:16px; color:white;position: absolute;top:96%;left:-75%;">剩{{ state.player2CardsNum
       }}张
@@ -107,6 +121,13 @@
       <div style="width:100px;height:40px;text-align:center;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥4</p>
       </div>
+            <span v-show="player4pass"  style="
+                  position: absolute;
+                  left: 120%;
+                  color: #FF6600;
+                  font-size: 28px;
+                  top: -28%;
+              ">过</span>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:94%;top:0%'>
       <p style="z-index:1;font-size:16px; color:white;position: absolute;top:67%;left:112%;width: 60px;">
         剩{{ state.player4CardsNum }}张</p>
@@ -142,6 +163,13 @@
       }">
         <img :src="player3touxiang" width="90px" style="bottom:31.2%;left:3.1%;border-radius: 25px;">
       </div>
+              <span  v-show="player3pass"  style="
+        position: absolute;
+        left: 200%;
+        color: #FF6600;
+        font-size: 28px;
+        top: 24px;
+        ">过</span>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:100px;'>
       <p style="position: absolute;font-size:16px; color:white;top:90px;left:118px;width: 60px;">
         剩{{ state.player3CardsNum }}张</p>
@@ -316,6 +344,11 @@ const bgmInitialized = ref(false) // 跟踪BGM是否已经初始化
 const player2touxiang = ref("")
 const player3touxiang = ref("")
 const player4touxiang = ref("")
+
+const player1pass = ref(false)
+const player2pass = ref(false)
+const player3pass = ref(false)
+const player4pass = ref(false)
 
 // 导入背景图片（新增代码）
 import winBg from '@/assets/img/ui/win_bg.png'
@@ -527,6 +560,8 @@ const handleMessage = (data) => {
           selectedCards.value = []
           // 出牌成功，清空 pending
           pendingCards.value = []
+          //隐藏过
+           player1pass.value = false
         } else {
           // 出牌失败，恢复牌
           console.log('出牌失败，恢复牌')
@@ -548,6 +583,8 @@ const handleMessage = (data) => {
           }
         }
         state.lastmsg = "玩家2出了：" + cardsMsg
+        //隐藏过
+        player2pass.value = false
         break
       case 2:
         state.player3CardsNum = data.cards_num
@@ -561,6 +598,8 @@ const handleMessage = (data) => {
           }
         }
         state.lastmsg = "玩家3出了：" + cardsMsg
+        //隐藏过
+        player3pass.value = false
         break
       case 3:
         state.player4CardsNum = data.cards_num
@@ -574,7 +613,8 @@ const handleMessage = (data) => {
           }
         }
         state.lastmsg = "玩家4出了：" + cardsMsg
-        //如果必出是玩家
+        //隐藏过
+        player4pass.value = false
         break
     }
 
@@ -634,6 +674,16 @@ const handleMessage = (data) => {
           playSound('default')
           break
       }
+      //先隐藏过
+      if (data.current == 0) {
+        player1pass.value = false
+      } else if (data.current == 1) {
+        player2pass.value = false
+      } else if (data.current == 2) {
+        player3pass.value = false
+      } else if (data.current == 3) {
+        player4pass.value = false
+      }
     }
 
   }
@@ -643,6 +693,28 @@ const handleMessage = (data) => {
     startCountdown(data.current + 1, state.outCardTimeout)
     const musicPath = "guo"
     playSound(musicPath)
+
+    //判断谁过
+      if (data.pid == 0) {
+      player1pass.value = true
+    } else if (data.pid == 1) {
+      player2pass.value = true
+    } else if (data.pid == 2) {
+      player3pass.value = true
+    } else if (data.pid == 3) {
+      player4pass.value = true
+    }
+
+    //先隐藏过
+    if (data.current == 0) {
+      player1pass.value = false
+    } else if (data.current == 1) {
+      player2pass.value = false
+    } else if (data.current == 2) {
+      player3pass.value = false
+    } else if (data.current == 3) {
+      player4pass.value = false
+    }
 
   }
   if (parsedData.type == "over") {
