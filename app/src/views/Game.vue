@@ -524,6 +524,11 @@ const handleMessage = (data) => {
     countdownPlayer1.value = state.outCardTimeout
     //清空选中的牌
     selectedCards.value = []
+
+    player1pass.value = false
+    player2pass.value = false
+    player3pass.value = false
+    player4pass.value = false
   }
   if (parsedData.type == "outCard") {
     data = JSON.parse(parsedData.data)
@@ -744,10 +749,17 @@ const handleMessage = (data) => {
       // 游戏结束也清除定时器
       clearTimeout(playCardTimer.value)
     }
+
+    player1pass.value = false
+    player2pass.value = false
+    player3pass.value = false
+    player4pass.value = false
     //玩家输完，跳到首页
     if (state.player1Point <= 0) {
       router.push({ path: '/index' })
     }
+
+
   }
 }
 
