@@ -324,7 +324,10 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userID)
 		return
 	}
-
+	rmMu.RLock()
+	roomInfo := rm.Rooms[player.RoomID]
+	currentPlayer := roomInfo.Players[roomInfo.Current]
+	rmMu.RUnlock()
 	// 解析出牌数据（严格错误处理）
 	var reqData struct {
 		Pid     int   `json:"pid"`
@@ -337,6 +340,12 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 	}
 	if reqData.Pid != c.pid {
 		g.Log().Errorf(ctx, "用户 %s PID不匹配（%d vs %d）", c.userID, reqData.Pid, c.pid)
+		return
+	}
+
+	//如果不是人类出牌时间，返回
+	if currentPlayer.Type != room.Human {
+		g.Log().Errorf(ctx, "用户 %s 不是该玩家出牌阶段", c.userID)
 		return
 	}
 
