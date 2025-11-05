@@ -1062,6 +1062,7 @@ const getMovingCardStyle = (index) => {
 
 //不出牌
 const pass = () => {
+  state.countdownPlayer = 0
   let data = {
     type: "playCard",
     data: JSON.stringify({
