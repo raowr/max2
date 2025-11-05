@@ -326,7 +326,6 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 	}
 	rmMu.RLock()
 	roomInfo := rm.Rooms[player.RoomID]
-	currentPlayer := roomInfo.Players[roomInfo.Current]
 	rmMu.RUnlock()
 	// 解析出牌数据（严格错误处理）
 	var reqData struct {
@@ -344,7 +343,7 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 	}
 
 	//如果不是人类出牌时间，返回
-	if currentPlayer.Type != room.Human {
+	if player.ID != roomInfo.Current {
 		g.Log().Errorf(ctx, "用户 %s 不是该玩家出牌阶段", c.userID)
 		return
 	}
