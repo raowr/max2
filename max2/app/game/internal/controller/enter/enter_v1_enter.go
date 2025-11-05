@@ -74,8 +74,8 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 		conn:      ws,
 		userID:    userID,
 		heartbeat: time.Now(),
-		sendChan:  make(chan []byte, 10000), // 缓冲增大至10000，减少阻塞
-		roomChan:  make(chan *room.Room, 1), //新建房间通道
+		sendChan:  make(chan []byte, 10000),   // 缓冲增大至10000，减少阻塞
+		roomChan:  make(chan *room.Room, 100), //新建房间通道
 		cancel:    cancel,
 	}
 
