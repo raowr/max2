@@ -1046,7 +1046,6 @@ const getMovingCardStyle = (index) => {
 
 //不出牌
 const pass = () => {
-  state.countdownPlayer = 0
   let data = {
     type: "playCard",
     data: JSON.stringify({
@@ -1055,6 +1054,7 @@ const pass = () => {
     }),
   }
   websocket.send(data)
+  state.countdownPlayer = 0
 }
 
 // 添加返回首页的方法
