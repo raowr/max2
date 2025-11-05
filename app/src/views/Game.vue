@@ -696,10 +696,10 @@ const handleMessage = (data) => {
     data = JSON.parse(parsedData.data)
     state.mustPid = data.mustPid
     startCountdown(data.current + 1, state.outCardTimeout)
-    if (data.pid != 0) {
-      const musicPath = "guo"
-      playSound(musicPath)
-    }
+
+    const musicPath = "guo"
+    playSound(musicPath)
+
     //判断谁过
       if (data.pid == 0) {
       player1pass.value = true
@@ -1055,13 +1055,6 @@ const pass = () => {
     }),
   }
   websocket.send(data)
-  //隐藏不出按钮
-  state.countdownPlayer = 0
-  //显示"过"
-  player1pass.value = true
-  //播过声音
-  const musicPath = "guo"
-  playSound(musicPath)
 }
 
 // 添加返回首页的方法
