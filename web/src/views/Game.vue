@@ -712,10 +712,13 @@ const handleMessage = (data) => {
   if (parsedData.type == "pass") {
     data = JSON.parse(parsedData.data)
     state.mustPid = data.mustPid
-    startCountdown(data.current + 1, state.outCardTimeout)
 
-    const musicPath = "guo"
-    playSound(musicPath)
+    if (data.pid != 0) {
+      const musicPath = "guo"
+      playSound(musicPath)
+      startCountdown(data.current + 1, state.outCardTimeout)
+    }
+
 
     //判断谁过
      if (data.pid == 0) {
@@ -1070,6 +1073,17 @@ const pass = () => {
     }),
   }
   websocket.send(data)
+
+  //隐藏不出按钮
+  state.countdownPlayer = 0
+  //显示"过"
+  player1pass.value = true
+  //播过声音
+  const musicPath = "guo"
+  playSound(musicPath)
+
+  //玩家出牌后下一位开始倒计时
+  startCountdown(2, state.outCardTimeout)
 }
 
 // 添加返回首页的方法
