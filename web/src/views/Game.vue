@@ -1084,6 +1084,8 @@ const pass = () => {
 
   //玩家出牌后下一位开始倒计时
   startCountdown(2, state.outCardTimeout)
+  //隐藏2号的"过"
+  player2pass.value = false
 }
 
 // 添加返回首页的方法
