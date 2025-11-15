@@ -38,13 +38,16 @@ func (room *Room) CreatePlayer(name string, playerType PlayerType) *Player {
 		RoomID:      room.ID,
 		//UserId: 	 generateUserID(),//初始化用户ID
 	}
+	if player.Type == Human {
+		player.MsgChan = make(chan RoomMsg, 100) // 初始化玩家消息通道
+	}
 	room.Players = append(room.Players, player) //加入房间
 	room.NextPlayerID++
 	return player
 }
 
 // 创建新房间（支持添加AI）
-func (rm *RoomManager) CreateRoom() *Room {
+func (rm *RoomManager) CreateRoom(roomType int) *Room {
 	// 生成唯一房间ID
 	roomID := generateRoomID()
 
@@ -53,12 +56,18 @@ func (rm *RoomManager) CreateRoom() *Room {
 		ID:        roomID,
 		Players:   []*Player{},
 		IsPlaying: false,
-		MsgChan:   make(chan RoomMsg, 100),
 		Rgtimer:   gtimer.New(),
 		Status:    0, //未开始
 	}
-	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
-	room.Rgtimer.Stop() //先停止
+	if roomType == 1 {
+		room.Type = 1 //比赛房
+		room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
+		room.Rgtimer.Stop() //先停止
+	} else {
+		room.Type = 2 //好友房
+		room.Rgtimer.Add(context.Background(), 1*time.Second, room.FriendGameLoop)
+		room.Rgtimer.Stop() //先停止
+	}
 
 	// 添加AI机器人
 	//for i := 0; i < aiCount; i++ {
@@ -133,7 +142,7 @@ func (rm *RoomManager) LeaveRoom(player *Player) {
 func generateRoomID() string {
 	rand.Seed(time.Now().UnixNano())
 	const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	result := make([]byte, 10)
+	result := make([]byte, 6)
 	for i := range result {
 		result[i] = chars[rand.Intn(len(chars))]
 	}
@@ -440,6 +449,7 @@ func PlayOneGame(room *Room) {
 		}
 	}
 
+	// ... existing code ...
 	// 显示玩家的牌（除了底牌）
 	for _, player := range room.Players {
 		//只能显示自己的牌
@@ -449,7 +459,7 @@ func PlayOneGame(room *Room) {
 			for _, card := range room.Landlord.Cards {
 				cards = append(cards, card.Id)
 			}
-			go func() {
+			go func(humanPlayer *Player) {
 				data, _ := json.Marshal(struct {
 					Cards          []int `json:"cards"`
 					Current        int   `json:"current"`
@@ -461,14 +471,31 @@ func PlayOneGame(room *Room) {
 					PlayerPoint:    room.Landlord.Point,
 					OutCardTimeout: GetOutCardTimeout(), //出牌最大时间(单位秒) /s
 				})
-				if room.MsgChan != nil {
-					msgType := "showCard"
-					room.safeSendRoomMessage(msgType, data)
+				msgType := "showCard"
+
+				// 先加锁保护MsgChan的访问
+				room.mutex.RLock()
+				msgChan := humanPlayer.MsgChan
+				room.mutex.RUnlock()
+
+				// 直接向人类玩家的消息通道发送消息，而不是发送给所有玩家
+				if msgChan != nil {
+					select {
+					case msgChan <- RoomMsg{
+						Type: msgType,
+						Data: gconv.String(data),
+					}:
+						// 发送成功
+					default:
+						g.Log().Warningf(ctx, "发送给玩家 %s 的手牌消息阻塞（通道满）", humanPlayer.Name)
+					}
 				}
-			}()
+			}(player) // 传入当前玩家
 		}
 		showPlayerCards(player)
 	}
+	// ... existing code ...
+	// ... existing code ...
 
 	// g.Log().Infof(ctx,"\n底牌是:", showCards(room.Deck))
 	// g.Log().Infof(ctx,"地主是:", room.Landlord.Name)
@@ -508,11 +535,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 				PlayerWin:   playerWin,
 			})
 			// 使用select和超时避免永久阻塞
-			if room.MsgChan != nil {
-				msgType := "over"
-				room.safeSendRoomMessage(msgType, data)
-
-			}
+			msgType := "over"
+			room.safeSendRoomMessage(msgType, data)
 		}()
 		room.Rgtimer.Stop()
 		room.IsPlaying = false
@@ -593,10 +617,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 							Code: 1,
 							Msg:  msg,
 						})
-						if room.MsgChan != nil {
-							msgType := "outCard"
-							room.safeSendRoomMessage(msgType, data)
-						}
+						msgType := "outCard"
+						room.safeSendRoomMessage(msgType, data)
 					}()
 					currentPlayer.OutCardIds = make([]int, 0)
 					return
@@ -622,10 +644,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 							Code: 1,
 							Msg:  msg,
 						})
-						if room.MsgChan != nil {
-							msgType := "outCard"
-							room.safeSendRoomMessage(msgType, data)
-						}
+						msgType := "outCard"
+						room.safeSendRoomMessage(msgType, data)
 					}()
 					return
 				}
@@ -647,10 +667,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 									Code: 1,
 									Msg:  msg,
 								})
-								if room.MsgChan != nil {
-									msgType := "outCard"
-									room.safeSendRoomMessage(msgType, data)
-								}
+								msgType := "outCard"
+								room.safeSendRoomMessage(msgType, data)
 							}()
 							return
 						}
@@ -670,10 +688,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 									Code: 1,
 									Msg:  msg,
 								})
-								if room.MsgChan != nil {
-									msgType := "outCard"
-									room.safeSendRoomMessage(msgType, data)
-								}
+								msgType := "outCard"
+								room.safeSendRoomMessage(msgType, data)
 							}()
 							return
 						}
@@ -743,10 +759,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 				Pid:  currentPlayer.ID,
 				Code: code,
 			})
-			if room.MsgChan != nil {
-				msgType := "outCard"
-				room.safeSendRoomMessage(msgType, data)
-			}
+			msgType := "outCard"
+			room.safeSendRoomMessage(msgType, data)
 		}()
 		currentPlayer.OutCardIds = make([]int, 0)
 		return
@@ -816,38 +830,52 @@ func (room *Room) GameLoop(ctx context.Context) {
 			MustPid:        mustPid,
 			OutCardTimeout: GetOutCardTimeout(), //出牌最大时间(单位秒) /s
 		})
-		if room.MsgChan != nil {
-			room.safeSendRoomMessage(msgType, data)
-		}
+		room.safeSendRoomMessage(msgType, data)
 	}()
 
 }
 
 // 安全发送消息的函数
 func (room *Room) safeSendRoomMessage(msgType string, data any) {
+	// 先加锁保护Players切片的访问
 	room.mutex.RLock()
-	roomMsgChan := room.MsgChan
+	players := room.Players
 	room.mutex.RUnlock()
 
-	if roomMsgChan != nil {
-		// 使用函数包装发送操作并添加 recover
-		func() {
-			defer func() {
-				if r := recover(); r != nil {
-					g.Log().Errorf(ctx, "发送房间消息发生panic: %v", r)
-				}
-			}()
+	// 转换数据为字符串形式
+	dataStr := gconv.String(data)
 
-			select {
-			case roomMsgChan <- RoomMsg{
-				Type: msgType,
-				Data: gconv.String(data),
-			}:
-				// 发送成功
-			default:
-				g.Log().Warningf(ctx, "房间 %s 消息发送阻塞（通道满）", room.ID)
+	// 遍历每个玩家，分别发送消息
+	for _, player := range players {
+		// 为每个玩家单独创建一个goroutine发送消息
+		go func(p *Player) {
+			// 在访问MsgChan之前获取读锁
+			room.mutex.RLock()
+			msgChan := p.MsgChan // 保存MsgChan的引用
+			room.mutex.RUnlock() // 立即释放锁，避免长时间持有
+
+			// 检查玩家消息通道是否存在
+			if msgChan != nil {
+				// 使用函数包装发送操作并添加recover
+				func() {
+					defer func() {
+						if r := recover(); r != nil {
+							g.Log().Errorf(ctx, "发送给玩家 %s 的消息发生panic: %v", p.Name, r)
+						}
+					}()
+
+					select {
+					case msgChan <- RoomMsg{
+						Type: msgType,
+						Data: dataStr,
+					}:
+						// 发送成功
+					default:
+						g.Log().Warningf(ctx, "玩家 %s 的消息发送阻塞（通道满）", p.Name)
+					}
+				}()
 			}
-		}()
+		}(player) // 注意这里使用闭包捕获player变量
 	}
 }
 

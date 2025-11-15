@@ -4,6 +4,8 @@ import "time"
 
 const (
 	InitRoom             = "initRoom"
+	CreateRoom           = "createRoom"
+	JoinRoom             = "joinRoom"
 	Play                 = "play"
 	PlayCard             = "playCard"
 	GetInfo              = "getInfo"

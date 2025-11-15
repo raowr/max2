@@ -60,6 +60,7 @@ type Player struct {
 	ReCard      bool             //是否需要重新整理牌
 	Point       int64            //积分，总积分
 	UserId      string           //用户id
+	MsgChan     chan RoomMsg     // 玩家消息通道
 }
 
 // 房间结构体
@@ -74,13 +75,13 @@ type Room struct {
 	LastPH       int    //上一手牌型
 	Turn         int    // 轮次
 	IsPlaying    bool   // 房间是否正在游戏中
-	MsgChan      chan RoomMsg
 	Rgtimer      *gtimer.Timer
 	OutStarTime  int          //出牌开始时间
 	passCount    int          //不出次数
 	NextPlayerID int          //下一位出牌玩家
 	Status       int          //房间状态 0 未开始 1 游戏中 2 结算中
 	mutex        sync.RWMutex // 新增：保护 conn 等字段的并发访问
+	Type         int          //房间类型 1比赛房，2好友房
 }
 
 // 房间管理器
