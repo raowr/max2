@@ -879,6 +879,11 @@ func (room *Room) safeSendRoomMessage(msgType string, data any) {
 	}
 }
 
+//提供给外部使用
+func (room *Room) SendRoomMessage(msgType string, data any) {
+	room.safeSendRoomMessage(msgType, data)
+}
+
 // 显示房间列表
 func showRooms(rm *RoomManager) {
 	g.Log().Infof(ctx, "\n===== 房间列表 =====")

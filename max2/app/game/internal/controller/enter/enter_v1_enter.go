@@ -442,6 +442,8 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 	rm.PlayerList[humanPlayer.UserId] = humanPlayer // 关联用户与玩家
 	rm.JoinRoom(humanPlayer, roomID)
 
+	c.safeSendToRoomChan(ctx, roomInfo)
+
 	// 推送玩家列表（处理JSON错误）
 	// 创建一个临时结构体，只包含可序列化的字段
 	type PlayerDTO struct {
@@ -469,17 +471,19 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 		}
 	}
 
-	players, err := json.Marshal(playerDTOs)
-	if err != nil {
-		g.Log().Errorf(ctx, "用户 %s 序列化玩家列表失败: %v", c.userID, err)
-		return
-	}
-	msgData := message.ChatMsg{
-		Type: consts.InitRoom,
-		Data: gconv.String(players),
-		From: gconv.String(humanPlayer.ID),
-	}
-	c.safeSendMessage(ctx, msgData)
+	//players, err := json.Marshal(playerDTOs)
+	//if err != nil {
+	//	g.Log().Errorf(ctx, "用户 %s 序列化玩家列表失败: %v", c.userID, err)
+	//	return
+	//}
+	//msgData := message.ChatMsg{
+	//	Type: consts.JoinRoom,
+	//	Data: gconv.String(players),
+	//	From: gconv.String(humanPlayer.ID),
+	//}
+	//应该通知到房间内每个人
+	roomInfo.SendRoomMessage(consts.JoinRoom, playerDTOs)
+	//c.safeSendMessage(ctx, msgData)
 
 }
 

@@ -91,7 +91,7 @@
       </div>
 
       <!-- Ready Button -->
-      <div class="ready-btn-container">
+      <div class="ready-btn-container" v-if="player.isOwner">
         <img v-if=!isReady() src="@/assets/img/ui/btn_start_no.png" class="ready-btn" alt="准备中" >
         <img v-else src="@/assets/img/ui/btn_start.png" class="ready-btn" alt="已准备" @click="toGame">
       </div>
@@ -185,6 +185,7 @@ const state = reactive({
   })
 })
 const userId = ref('')
+const playerId  = ref(0)
 onMounted(() => {
   init()
 })
@@ -262,7 +263,7 @@ const handleMessage = (data) => {
 const initPlayers = (serverPlayers) => {
   // 智能合并数据
   serverPlayers.forEach(serverPlayer => {
-    if (serverPlayer.ID == 0) {//是人类玩家
+    if (serverPlayer.Type == 0) {//是人类玩家
       //保存用户userId
       storage.local.set('user_id', serverPlayer.UserId)
     }
@@ -273,7 +274,7 @@ const initPlayers = (serverPlayers) => {
     if (existing) {
       // 更新已有玩家属性
       existing.name = serverPlayer.Name
-      existing.isOwner = serverPlayer.Type === 0
+      existing.isOwner = serverPlayer.ID == 0
       existing.avatar = getAvatarByType(serverPlayer.Type)
       existing.lihui = getLihuiByType(serverPlayer.Type)
       existing.ready=true
@@ -285,7 +286,7 @@ const initPlayers = (serverPlayers) => {
         avatar: getAvatarByType(serverPlayer.Type),
         stars: 3,
         ready: false,
-        isOwner: serverPlayer.Type === 0,
+        isOwner: serverPlayer.ID == 0,
         lihui: getLihuiByType(serverPlayer.Type)
       })
     }
