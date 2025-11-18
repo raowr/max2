@@ -3,7 +3,7 @@ package message
 type ChatMsg struct {
 	Type string `json:"type" v:"required"`
 	Data string `json:"data" v:"required"`
-	From string `json:"name" v:""`
+	From string `json:"from" v:""`
 }
 
 type PlayData struct {

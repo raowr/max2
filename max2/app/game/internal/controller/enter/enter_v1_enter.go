@@ -144,7 +144,7 @@ func (c *Client) readLoop(ctx context.Context) {
 			errMsg := message.ChatMsg{
 				Type: consts.ChatTypeError,
 				Data: fmt.Sprintf("无效消息格式: %v", err),
-				From: "",
+				From: c.userID,
 			}
 			c.safeSendMessage(ctx, errMsg)
 			continue
@@ -170,7 +170,7 @@ func (c *Client) readLoop(ctx context.Context) {
 			errMsg := message.ChatMsg{
 				Type: consts.ChatTypeError,
 				Data: "未知消息类型",
-				From: "",
+				From: c.userID,
 			}
 			c.safeSendMessage(ctx, errMsg)
 		}
@@ -254,7 +254,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 	msgData := message.ChatMsg{
 		Type: consts.InitRoom,
 		Data: gconv.String(players),
-		From: gconv.String(humanPlayer.ID),
+		From: c.userID,
 	}
 	c.safeSendMessage(ctx, msgData)
 	if aiCount >= 3 {
@@ -316,7 +316,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		msgData := message.ChatMsg{
 			Type: consts.InitRoom,
 			Data: gconv.String(players),
-			From: gconv.String(clientPid),
+			From: c.userID,
 		}
 		c.safeSendMessage(ctx, msgData)
 	}(roomInfo.ID, c.userID, c.pid)
@@ -392,7 +392,7 @@ func (c *Client) handleCreateRoom(ctx context.Context) {
 	msgData := message.ChatMsg{
 		Type: consts.InitRoom,
 		Data: gconv.String(players),
-		From: gconv.String(humanPlayer.ID),
+		From: c.userID,
 	}
 	c.safeSendMessage(ctx, msgData)
 
@@ -670,7 +670,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 	msgData := message.ChatMsg{
 		Type: consts.GetInfo,
 		Data: gconv.String(resData),
-		From: gconv.String(c.pid),
+		From: c.userID,
 	}
 	c.safeSendMessage(ctx, msgData)
 }
@@ -744,7 +744,7 @@ func (c *Client) readServe(ctx context.Context) {
 							msgData := message.ChatMsg{
 								Type: playerMsg.Type,
 								Data: playerMsg.Data,
-								From: gconv.String(c.pid),
+								From: c.userID,
 							}
 							g.Log().Infof(ctx, "玩家 %d 向用户 %s 发送消息: %+v", player.ID, c.userID, msgData)
 

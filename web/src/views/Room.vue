@@ -91,7 +91,7 @@
       </div>
 
       <!-- Ready Button -->
-      <div class="ready-btn-container" v-if="player.isOwner">
+      <div class="ready-btn-container" v-if="playerId == 0">
         <img v-if=!isReady() src="@/assets/img/ui/btn_start_no.png" class="ready-btn" alt="准备中" >
         <img v-else src="@/assets/img/ui/btn_start.png" class="ready-btn" alt="已准备" @click="toGame">
       </div>
@@ -135,12 +135,12 @@ const state = reactive({
     },
     {
       id: 2,
-      name: '玩家二',
-      avatar: bighead15419,
+      name: '等待中...',
+      avatar: "",
       stars: 2,
       ready: false,
       isOwner: false,
-      lihui: full15418,
+      lihui: '',
     },
     {
       id: 3,
@@ -233,21 +233,29 @@ const handleMessage = (data) => {
   // 处理接收到的消息
   console.log('Received message:', data)
   const parsedData = JSON.parse(data)
-    if (parsedData.type === "initRoom") {
- try {
-      // 解析JSON字符串
-      const serverPlayers = JSON.parse(parsedData.data)
+  if (parsedData.from != undefined) {
+    //保存玩家id
+    storage.local.set('user_id', parsedData.from)
+    //用户ID
+    userId.value = parsedData.from
+  }
 
-      state.roomId=serverPlayers[0].RoomID
-      // 智能合并数据
-      initPlayers(serverPlayers)
 
-      // 保留不在服务端返回中的原有玩家（如等待中的空位）
-      // 自动截断超过4个的玩家
-      state.players.splice(4)
-    } catch (e) {
-      console.error('解析玩家数据失败:', e)
-    }
+  if (parsedData.type === "initRoom") {
+    try {
+        // 解析JSON字符串
+        const serverPlayers = JSON.parse(parsedData.data)
+
+        state.roomId=serverPlayers[0].RoomID
+        // 智能合并数据
+        initPlayers(serverPlayers)
+
+        // 保留不在服务端返回中的原有玩家（如等待中的空位）
+        // 自动截断超过4个的玩家
+        state.players.splice(4)
+      } catch (e) {
+        console.error('解析玩家数据失败:', e)
+      }
   }
   if(parsedData.type === "getInfo"){
           // 解析JSON字符串
@@ -259,13 +267,32 @@ const handleMessage = (data) => {
          initPlayers(data.players)
      }
   }
+
+    if (parsedData.type === "joinRoom") {
+    try {
+        // 解析JSON字符串
+        const serverPlayers = JSON.parse(parsedData.data)
+
+        state.roomId=serverPlayers[0].RoomID
+        // 智能合并数据
+        initPlayers(serverPlayers)
+
+        // 保留不在服务端返回中的原有玩家（如等待中的空位）
+        // 自动截断超过4个的玩家
+        state.players.splice(4)
+      } catch (e) {
+        console.error('解析玩家数据失败:', e)
+      }
+  }
+
 }
 const initPlayers = (serverPlayers) => {
   // 智能合并数据
   serverPlayers.forEach(serverPlayer => {
-    if (serverPlayer.Type == 0) {//是人类玩家
+    if (serverPlayer.UserId == userId.value) {//是人类玩家
       //保存用户userId
-      storage.local.set('user_id', serverPlayer.UserId)
+      // storage.local.set('user_id', serverPlayer.UserId)
+      playerId.value = serverPlayer.ID
     }
     const convertedId = serverPlayer.ID + 1
     // 查找已有玩家
@@ -275,19 +302,19 @@ const initPlayers = (serverPlayers) => {
       // 更新已有玩家属性
       existing.name = serverPlayer.Name
       existing.isOwner = serverPlayer.ID == 0
-      existing.avatar = getAvatarByType(serverPlayer.Type)
-      existing.lihui = getLihuiByType(serverPlayer.Type)
+      existing.avatar = getAvatarByType(existing.isOwner ? serverPlayer.Type:1)
+      existing.lihui = getLihuiByType(existing.isOwner ? serverPlayer.Type:1)
       existing.ready=true
     } else {
       // 添加新玩家（如果需要）
       state.players.push({
         id: convertedId,
         name: serverPlayer.Name,
-        avatar: getAvatarByType(serverPlayer.Type),
+        avatar: getAvatarByType(existing.isOwner ? serverPlayer.Type:1),
         stars: 3,
         ready: false,
         isOwner: serverPlayer.ID == 0,
-        lihui: getLihuiByType(serverPlayer.Type)
+        lihui: getLihuiByType(existing.isOwner ? serverPlayer.Type:1)
       })
     }
   })
