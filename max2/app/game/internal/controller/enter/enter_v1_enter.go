@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"sync/atomic"
 	"time"
 
 	"github.com/gogf/gf/v2/util/grand"
@@ -82,24 +83,8 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	// 加锁更新客户端连接（重连逻辑）
 	clientsMu.Lock()
 	if oldClient, err := getClient(userID); err == nil && oldClient != nil {
-		if oldClient.cancel != nil {
-			oldClient.cancel() // 触发旧连接的 <-ctx.Done()
-		}
-		oldClient.conn.Close() // 关闭旧连接
-
-		oldClient.mutex.Lock()
-		// 关闭sendChan
-		if oldClient.sendChan != nil {
-			close(oldClient.sendChan)
-			oldClient.sendChan = nil
-		}
-		// 关闭roomChan
-		if oldClient.roomChan != nil {
-			close(oldClient.roomChan)
-			oldClient.roomChan = nil
-		}
-		oldClient.mutex.Unlock()
-
+		// 统一使用 closeConnection 方法，避免重复关闭
+		oldClient.closeConnection("用户重连")
 		g.Log().Infof(ctx, "用户 %s 重连，关闭旧连接", userID)
 	}
 	if err = addClient(client); err != nil {
@@ -434,6 +419,13 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 	if roomInfo.Status == 1 {
 		g.Log().Errorf(ctx, "用户 %s 房间 %s 已开始游戏", c.userID, roomID)
 		return
+	}
+	//判断玩家已在房间
+	for _, player := range roomInfo.Players {
+		if player.UserId == c.userID {
+			g.Log().Errorf(ctx, "用户 %s 已在房间 %s", c.userID, roomID)
+			return
+		}
 	}
 	playerName := "好友"
 	humanPlayer := roomInfo.CreatePlayer(playerName, room.Human)
@@ -909,6 +901,12 @@ func (c *Client) encodeMessage(ctx context.Context, msg message.ChatMsg) []byte 
 
 // 关闭客户端连接
 func (c *Client) closeConnection(reason string) {
+
+	// 原子操作检查是否已关闭
+	if !atomic.CompareAndSwapInt32(&c.closed, 0, 1) {
+		g.Log().Infof(context.Background(), "用户 %s 连接已关闭，跳过重复关闭", c.userID)
+		return
+	}
 	rmMu.Lock()
 	defer rmMu.Unlock()
 	logCtx := context.Background()
