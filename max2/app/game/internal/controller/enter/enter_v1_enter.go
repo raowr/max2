@@ -111,6 +111,11 @@ func (c *Client) readLoop(ctx context.Context) {
 	defer c.closeConnection("读循环退出")
 
 	for {
+		// 检查连接是否已关闭
+		if atomic.LoadInt32(&c.closed) == 1 {
+			g.Log().Infof(ctx, "用户 %s 连接已关闭，读循环退出", c.userID)
+			return
+		}
 		// 读取客户端消息
 		mt, data, err := c.conn.ReadMessage()
 		if err != nil {
@@ -760,6 +765,11 @@ func (c *Client) writeLoop(ctx context.Context) {
 	defer g.Log().Infof(ctx, "用户 %s writeLoop退出", c.userID)
 	g.Log().Infof(ctx, "用户 %s 收到用户消息: ", c.userID)
 	for {
+		// 检查连接是否已关闭
+		if atomic.LoadInt32(&c.closed) == 1 {
+			g.Log().Infof(ctx, "用户 %s 连接已关闭，写循环退出", c.userID)
+			return
+		}
 		var roomID string
 		player, ok := rm.PlayerList[c.userID]
 		if ok && player.RoomID != "" {
@@ -814,7 +824,7 @@ func (c *Client) heartbeatCheck(ctx context.Context) {
 			g.Log().Infof(ctx, "heartbeatCheck: %v", time.Since(c.heartbeat))
 			if time.Since(c.heartbeat) > 60*time.Second {
 				g.Log().Infof(ctx, "用户 %s 心跳超时（60秒），断开连接", c.userID)
-				c.conn.Close()
+				//c.conn.Close()
 				c.closeConnection("心跳超时")
 				return
 			}
