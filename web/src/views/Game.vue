@@ -292,6 +292,10 @@ import { websocket } from '@/utils/websocket'
 import { cardUtil, CARD_TYPE } from '@/utils/card';
 import { storage } from '@/utils/storage'
 import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
+// 导入背景图片（新增代码）
+import winBg from '@/assets/img/ui/win_bg.png'
+import loseBg from '@/assets/img/ui/lose_bg.png'
+
 const state = reactive({
   deck: [],
   countdownPlayer: 0,
@@ -350,9 +354,8 @@ const player2pass = ref(false)
 const player3pass = ref(false)
 const player4pass = ref(false)
 
-// 导入背景图片（新增代码）
-import winBg from '@/assets/img/ui/win_bg.png'
-import loseBg from '@/assets/img/ui/lose_bg.png'
+const currentPlayerUid = ref(storage.local.get('user_id'))
+const currentPlayerId = ref(0)
 
 
 // 监听屏幕尺寸变化
@@ -452,6 +455,15 @@ const handleMessage = (data) => {
   if (parsedData.type == "getInfo") {
     data = JSON.parse(parsedData.data)
     console.log("getInfo", data);
+    //确定玩家pid
+    for (let i = 0; i < data.players.length; i++) {
+      if (data.players[i].UserId == currentPlayerUid.value){
+        currentPlayerId.value = data.players[i].ID
+      }
+    }
+    //对应位置
+    //先确定差值1-0
+    // 假如：玩家id：1，玩家就是确定在底部0位置，2号玩家：4-|(2-1)|,读作：4减去2-1的绝对值
     //是否游戏中
     if (data.isPlaying) {
       state.outCards = (data.outCards)
