@@ -464,9 +464,12 @@ const handleMessage = (data) => {
     //对应位置
     //先确定差值1-0
     // 假如：玩家id：1，玩家就是确定在底部0位置，2号玩家：4-|(2-1)|,读作：4减去2-1的绝对值
+<<<<<<< HEAD
     //当减去差值大于等于0，直接用，当减去差值小于0需要用4减去差值的绝对值
 
 
+=======
+>>>>>>> 8e3d9ca0e59dd79c164ebefcabed442530ab0870
     //是否游戏中
     if (data.isPlaying) {
       state.outCards = (data.outCards)

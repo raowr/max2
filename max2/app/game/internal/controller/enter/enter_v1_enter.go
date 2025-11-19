@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"sync/atomic"
 	"time"
 
 	"github.com/gogf/gf/v2/util/grand"
@@ -81,18 +80,30 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	}
 
 	// 加锁更新客户端连接（重连逻辑）
-	clientsMu.Lock()
 	if oldClient, err := getClient(userID); err == nil && oldClient != nil {
-		// 统一使用 closeConnection 方法，避免重复关闭
-		oldClient.closeConnection("用户重连")
+		if oldClient.cancel != nil {
+			oldClient.cancel() // 触发旧连接的 <-ctx.Done()
+		}
+		if oldClient.conn != nil {
+			oldClient.conn.Close() // 关闭旧连接
+		}
+		// oldClient.conn.Close() // 关闭旧连接
+
+		oldClient.mutex.Lock()
+		// 关闭sendChan
+		if oldClient.sendChan != nil {
+			close(oldClient.sendChan)
+			oldClient.sendChan = nil
+		}
+		// 关闭roomChan
+		if oldClient.roomChan != nil {
+			close(oldClient.roomChan)
+			oldClient.roomChan = nil
+		}
+		oldClient.mutex.Unlock()
+
 		g.Log().Infof(ctx, "用户 %s 重连，关闭旧连接", userID)
 	}
-	if err = addClient(client); err != nil {
-		g.Log().Errorf(ctx, "添加客户端到缓存失败: %v", err)
-		ws.Close()
-		return
-	}
-	clientsMu.Unlock()
 
 	g.Log().Infof(ctx, "用户 %s 连接成功", userID)
 
@@ -111,11 +122,6 @@ func (c *Client) readLoop(ctx context.Context) {
 	defer c.closeConnection("读循环退出")
 
 	for {
-		// 检查连接是否已关闭
-		if atomic.LoadInt32(&c.closed) == 1 {
-			g.Log().Infof(ctx, "用户 %s 连接已关闭，读循环退出", c.userID)
-			return
-		}
 		// 读取客户端消息
 		mt, data, err := c.conn.ReadMessage()
 		if err != nil {
@@ -765,11 +771,6 @@ func (c *Client) writeLoop(ctx context.Context) {
 	defer g.Log().Infof(ctx, "用户 %s writeLoop退出", c.userID)
 	g.Log().Infof(ctx, "用户 %s 收到用户消息: ", c.userID)
 	for {
-		// 检查连接是否已关闭
-		if atomic.LoadInt32(&c.closed) == 1 {
-			g.Log().Infof(ctx, "用户 %s 连接已关闭，写循环退出", c.userID)
-			return
-		}
 		var roomID string
 		player, ok := rm.PlayerList[c.userID]
 		if ok && player.RoomID != "" {
@@ -912,11 +913,6 @@ func (c *Client) encodeMessage(ctx context.Context, msg message.ChatMsg) []byte 
 // 关闭客户端连接
 func (c *Client) closeConnection(reason string) {
 
-	// 原子操作检查是否已关闭
-	if !atomic.CompareAndSwapInt32(&c.closed, 0, 1) {
-		g.Log().Infof(context.Background(), "用户 %s 连接已关闭，跳过重复关闭", c.userID)
-		return
-	}
 	rmMu.Lock()
 	defer rmMu.Unlock()
 	logCtx := context.Background()
