@@ -233,7 +233,7 @@
       <img v-else src='@/assets/img/btn_chupai_hui.png' class="chupai-btn-disabled">
 
       <!-- 不出按钮添加类名：buchu-btn -->
-      <img v-if="state.mustPid != 0" src='@/assets/img/btn_buchu.png' class="buchu-btn" :style="{
+      <img v-if="state.mustPid != currentPlayerId" src='@/assets/img/btn_buchu.png' class="buchu-btn" :style="{
         transform: isPassBtnPressed ? 'scale(0.9)' : 'scale(1)'  // 保留动态样式
       }" @click='pass()' @mousedown="isPassBtnPressed = true" @mouseup="isPassBtnPressed = false"
         @mouseleave="isPassBtnPressed = false" @touchstart="isPassBtnPressed = true"
@@ -292,6 +292,10 @@ import { websocket } from '@/utils/websocket'
 import { cardUtil, CARD_TYPE } from '@/utils/card';
 import { storage } from '@/utils/storage'
 import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
+// 导入背景图片（新增代码）
+import winBg from '@/assets/img/ui/win_bg.png'
+import loseBg from '@/assets/img/ui/lose_bg.png'
+
 const state = reactive({
   deck: [],
   countdownPlayer: 0,
@@ -350,9 +354,8 @@ const player2pass = ref(false)
 const player3pass = ref(false)
 const player4pass = ref(false)
 
-// 导入背景图片（新增代码）
-import winBg from '@/assets/img/ui/win_bg.png'
-import loseBg from '@/assets/img/ui/lose_bg.png'
+const currentPlayerUid = ref(storage.local.get('user_id'))
+const currentPlayerId = ref(0)
 
 
 // 监听屏幕尺寸变化
@@ -452,6 +455,18 @@ const handleMessage = (data) => {
   if (parsedData.type == "getInfo") {
     data = JSON.parse(parsedData.data)
     console.log("getInfo", data);
+    //确定玩家pid
+    for (let i = 0; i < data.players.length; i++) {
+      if (data.players[i].UserId == currentPlayerUid.value){
+        currentPlayerId.value = data.players[i].ID
+      }
+    }
+    //对应位置
+    //先确定差值1-0
+    // 假如：玩家id：1，玩家就是确定在底部0位置，2号玩家：4-|(2-1)|,读作：4减去2-1的绝对值
+    //当减去差值大于等于0，直接用，当减去差值小于0需要用4减去差值的绝对值
+
+
     //是否游戏中
     if (data.isPlaying) {
       state.outCards = (data.outCards)
@@ -462,7 +477,7 @@ const handleMessage = (data) => {
       state.cards = data.cards.sort((a, b) => b - a);
       //设置牌数
       for (let i = 0; i < data.cardsNum.length; i++) {
-        switch (data.cardsNum[i].id + 1) {
+        switch (getPlayerPosition(data.cardsNum[i].ID) + 1) {
           case 2:
             state.player2CardsNum = data.cardsNum[i].cardNum
           case 3:
@@ -488,7 +503,7 @@ const handleMessage = (data) => {
           }
         }
       }
-      switch (data.lastPid) {
+      switch (getPlayerPosition(data.lastPid)) {
         case 0:
           state.lastmsg = "玩家1出了：" + cardsMsg
           break;
@@ -532,7 +547,7 @@ const handleMessage = (data) => {
       state.outCardTimeout = data.outCardTimeout
     }
     //先出牌的开始倒计时
-    startCountdown(data.current + 1, state.outCardTimeout)
+    startCountdown(getPlayerPosition(data.current) + 1, state.outCardTimeout)
     //如果必出是玩家，记录下必出玩家的pid
     state.mustPid = data.current
     //更新玩家总瓜子数
@@ -551,7 +566,7 @@ const handleMessage = (data) => {
     data = JSON.parse(parsedData.data)
     // 刷新玩家牌数
     let cardsMsg = ""
-    switch (data.pid) {
+    switch (getPlayerPosition(data.pid)) {
       case 0:
         if (isPlayingCard.value) {
           isPlayingCard.value = false
@@ -648,7 +663,7 @@ const handleMessage = (data) => {
       if (data.outCardTimeout !== undefined) {
         state.outCardTimeout = data.outCardTimeout
       }
-      startCountdown(data.current + 1, state.outCardTimeout)
+      startCountdown(getPlayerPosition(data.current) + 1, state.outCardTimeout)
       //如果必出是玩家，记录下必出玩家的pid
       state.mustPid = data.mustPid
 
@@ -697,13 +712,13 @@ const handleMessage = (data) => {
           break
       }
           //先隐藏过
-     if (data.current == 0) {
+     if (getPlayerPosition(data.current) == 0) {
         player1pass.value = false
-      } else if (data.current == 1) {
+      } else if (getPlayerPosition(data.current) == 1) {
         player2pass.value = false
-      } else if (data.current == 2) {
+      } else if (getPlayerPosition(data.current) == 2) {
         player3pass.value = false
-      } else if (data.current == 3) {
+      } else if (getPlayerPosition(data.current) == 3) {
         player4pass.value = false
       }
     }
@@ -716,29 +731,29 @@ const handleMessage = (data) => {
     if (data.pid != 0) {
       const musicPath = "guo"
       playSound(musicPath)
-      startCountdown(data.current + 1, state.outCardTimeout)
+      startCountdown(getPlayerPosition(data.current) + 1, state.outCardTimeout)
     }
 
 
     //判断谁过
-     if (data.pid == 0) {
+     if (getPlayerPosition(data.pid) == 0) {
       player1pass.value = true
-    } else if (data.pid == 1) {
+    } else if (getPlayerPosition(data.pid) == 1) {
       player2pass.value = true
-    } else if (data.pid == 2) {
+    } else if (getPlayerPosition(data.pid) == 2) {
       player3pass.value = true
-    } else if (data.pid == 3) {
+    } else if (getPlayerPosition(data.pid) == 3) {
       player4pass.value = true
     }
 
               //先隐藏过
-    if (data.current == 0) {
+    if (getPlayerPosition(data.current) == 0) {
       player1pass.value = false
-    } else if (data.current == 1) {
+    } else if (getPlayerPosition(data.current) == 1) {
       player2pass.value = false
-    } else if (data.current == 2) {
+    } else if (getPlayerPosition(data.current) == 2) {
       player3pass.value = false
-    } else if (data.current == 3) {
+    } else if (getPlayerPosition(data.current) == 3) {
       player4pass.value = false
     }
 
@@ -859,7 +874,7 @@ const checkOut = () => {
     cards: state.outCards.map(cardId => {
       return state.deck.find(card => card.id === cardId);
     }).filter(Boolean),
-    isSelf: state.mustPid === 0, // 是否是自己出的最后一手牌
+    isSelf: state.mustPid === currentPlayerId.value, // 是否是自己出的最后一手牌
     type: state.outCards.length > 0
       ? cardUtil.getCardType(state.outCards.map(id => state.deck.find(c => c.id === id)).filter(Boolean))
       : null
@@ -1140,6 +1155,14 @@ const resetAvatar = () => {
     player4touxiang.value = player4avatar
     storage.local.set('player4avatar', player4avatar)
   }
+}
+
+const getPlayerPosition = (playerId) => {
+  // 计算差值
+  const diff =playerId- currentPlayerId.value
+  // 当差值大于等于0，直接用，当差值小于0需要用4减去差值的绝对值
+  const position = diff >= 0 ? diff : 4 - Math.abs(diff)
+  return position
 }
 </script>
 
