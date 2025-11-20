@@ -58,16 +58,10 @@ func (rm *RoomManager) CreateRoom(roomType int) *Room {
 		IsPlaying: false,
 		Rgtimer:   gtimer.New(),
 		Status:    0, //未开始
+		Type:      roomType,
 	}
-	if roomType == 1 {
-		room.Type = 1 //比赛房
-		room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
-		room.Rgtimer.Stop() //先停止
-	} else {
-		room.Type = 2 //好友房
-		room.Rgtimer.Add(context.Background(), 1*time.Second, room.FriendGameLoop)
-		room.Rgtimer.Stop() //先停止
-	}
+	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
+	room.Rgtimer.Stop() //先停止
 
 	// 添加AI机器人
 	//for i := 0; i < aiCount; i++ {

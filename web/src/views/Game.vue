@@ -269,8 +269,8 @@
           background: isWinner ? 'linear-gradient(45deg, #FFD700, #FFA500)' : 'linear-gradient(45deg, #FF6347, #FFA07A)'
         }">{{ gameOverMessage }}</p>
 
-        <!-- 修改按钮区域，交换按钮顺序 -->
-        <div class="buttons-container">
+        <!-- 修改按钮区域，交换按钮顺序 只有房主才能操作-->
+        <div class="buttons-container" v-if="currentPlayerId === 0">
           <button class="room-btn" @click="toRoom()">
             返回房间
           </button>
