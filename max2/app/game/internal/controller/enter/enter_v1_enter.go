@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/gogf/gf/v2/util/grand"
@@ -77,6 +79,8 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 		sendChan:  make(chan []byte, 10000),   // 缓冲增大至10000，减少阻塞
 		roomChan:  make(chan *room.Room, 100), //新建房间通道
 		cancel:    cancel,
+		mutex:     sync.RWMutex{}, // 显式初始化互斥锁
+		closed:    0,              // 初始化关闭标记为0（未关闭）
 	}
 
 	// 加锁更新客户端连接（重连逻辑）
@@ -105,6 +109,12 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 		g.Log().Infof(ctx, "用户 %s 重连，关闭旧连接", userID)
 	}
 
+	if err = addClient(client); err != nil {
+		g.Log().Errorf(ctx, "添加客户端到缓存失败: %v", err)
+		ws.Close()
+		return
+	}
+
 	g.Log().Infof(ctx, "用户 %s 连接成功", userID)
 
 	// 启动协程（增加退出日志）
@@ -122,6 +132,11 @@ func (c *Client) readLoop(ctx context.Context) {
 	defer c.closeConnection("读循环退出")
 
 	for {
+		// 检查连接是否已关闭
+		if atomic.LoadInt32(&c.closed) == 1 {
+			g.Log().Infof(ctx, "用户 %s 连接已关闭，读循环退出", c.userID)
+			return
+		}
 		// 读取客户端消息
 		mt, data, err := c.conn.ReadMessage()
 		if err != nil {
@@ -570,28 +585,41 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 
 // 处理获取房间信息
 func (c *Client) handleGetInfo(ctx context.Context) {
-	rmMu.RLock()
+	// 1. 先获取基本信息，使用读锁保护
+	var roomID string
+	var roomInfo *room.Room
+	var isPlaying bool
+
 	player, ok := rm.PlayerList[c.userID]
-	if !ok {
-		rmMu.RUnlock()
-		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userID)
+	if ok {
+		roomID = player.RoomID
+		roomInfo, ok = rm.Rooms[roomID]
+		if ok {
+			isPlaying = roomInfo.IsPlaying
+		}
+	}
+
+	// 检查基本条件
+	if !ok || roomInfo == nil {
+		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息或房间不存在", c.userID)
 		return
 	}
-	roomInfo, ok := rm.Rooms[player.RoomID]
-	rmMu.RUnlock()
-	if !ok {
-		g.Log().Errorf(ctx, "用户 %s 房间不存在", c.userID)
-		return
-	}
-	//如果进行中的才监听房间消息
-	if roomInfo.IsPlaying {
+
+	// 2. 在锁外调用safeSendToRoomChan，避免锁嵌套
+	if isPlaying {
 		c.safeSendToRoomChan(ctx, roomInfo)
 	}
-	// 整理房间信息（仅暴露当前玩家可见数据）
+
+	// 3. 获取详细房间信息，再次使用读锁
 	cards := make([]int, 0)
 	cardsNum := make([]*message.PlayData, 0)
-	playerPoint := int64(0)
-	rmMu.RLock()
+	var playerPoint int64
+	var current int
+	var outStarTime int
+	var lastCards []room.Card // 假设Card是room包中定义的类型
+	var mustPid int
+	var status int
+
 	for _, p := range roomInfo.Players {
 		if p.ID == c.pid {
 			playerPoint = p.Point
@@ -604,12 +632,16 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 				CardNum: p.CardNum,
 			})
 		}
+		if p.Must {
+			mustPid = p.ID //必须出牌的玩家
+		}
 	}
-	current := roomInfo.Current
-	isPlaying := roomInfo.IsPlaying
-	outStarTime := roomInfo.OutStarTime
-	rmMu.RUnlock()
+	current = roomInfo.Current
+	outStarTime = roomInfo.OutStarTime
+	lastCards = roomInfo.LastCards // 缓存lastCards引用
+	status = roomInfo.Status
 
+	// 4. 计算剩余信息，在锁外进行
 	// 计算剩余出牌时间
 	outCardTimeout := room.GetOutCardTimeout()
 	remainOutCardTimeout := outCardTimeout
@@ -623,22 +655,43 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 
 	//上一次出牌
 	outCards := make([]int, 0)
-	for _, card := range roomInfo.LastCards {
+	for _, card := range lastCards {
 		outCards = append(outCards, card.Id)
 	}
-	var mustPid int
-	for _, v := range roomInfo.Players {
-		if v.Must {
-			mustPid = v.ID //必须出牌的玩家
+
+	//上一位出牌玩家
+	lastPid := (current - 1 + 4) % 4
+
+	// 创建一个临时结构体，只包含可序列化的字段
+	type PlayerDTO struct {
+		ID      int    `json:"ID"`
+		Name    string `json:"Name"`
+		RoomID  string `json:"RoomID"`
+		Type    int    `json:"Type"`
+		CardNum int    `json:"CardNum"`
+		Point   int64  `json:"Point"`
+		UserId  string `json:"UserId"`
+		// 只包含需要序列化的字段，排除MsgChan等不可序列化字段
+	}
+
+	// 转换玩家列表为可序列化的DTO列表
+	playerDTOs := make([]PlayerDTO, len(roomInfo.Players))
+	for i, p := range roomInfo.Players {
+		playerDTOs[i] = PlayerDTO{
+			ID:      p.ID,
+			Name:    p.Name,
+			RoomID:  p.RoomID,
+			Type:    int(p.Type),
+			CardNum: p.CardNum,
+			Point:   p.Point,
+			UserId:  p.UserId,
 		}
 	}
-	//上一位出牌玩家
-	lastPid := (roomInfo.Current - 1 + 4) % 4
 
-	// 序列化并推送（处理JSON错误）
+	// 5. 序列化并推送（处理JSON错误）
 	resData, err := json.Marshal(struct {
 		RoomId               string              `json:"roomId"`
-		Players              []*room.Player      `json:"players"`
+		Players              []PlayerDTO         `json:"players"`
 		Cards                []int               `json:"cards"`
 		Current              int                 `json:"current"`
 		PlayerPoint          int64               `json:"playerPoint"`
@@ -651,8 +704,8 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		LastPid              int                 `json:"lastPid"`
 		Status               int                 `json:"status"`
 	}{
-		RoomId:               roomInfo.ID,
-		Players:              roomInfo.Players,
+		RoomId:               roomID,
+		Players:              playerDTOs,
 		Cards:                cards,
 		Current:              current,
 		PlayerPoint:          playerPoint,
@@ -663,13 +716,14 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		OutCards:             outCards,
 		MustPid:              mustPid,
 		LastPid:              lastPid,
-		Status:               roomInfo.Status,
+		Status:               status,
 	})
 	if err != nil {
 		g.Log().Errorf(ctx, "用户 %s 序列化房间信息失败: %v", c.userID, err)
 		return
 	}
 
+	// 6. 最后在锁外发送消息
 	msgData := message.ChatMsg{
 		Type: consts.GetInfo,
 		Data: gconv.String(resData),
@@ -771,6 +825,11 @@ func (c *Client) writeLoop(ctx context.Context) {
 	defer g.Log().Infof(ctx, "用户 %s writeLoop退出", c.userID)
 	g.Log().Infof(ctx, "用户 %s 收到用户消息: ", c.userID)
 	for {
+		// 检查连接是否已关闭
+		if atomic.LoadInt32(&c.closed) == 1 {
+			g.Log().Infof(ctx, "用户 %s 连接已关闭，写循环退出", c.userID)
+			return
+		}
 		var roomID string
 		player, ok := rm.PlayerList[c.userID]
 		if ok && player.RoomID != "" {
@@ -912,6 +971,12 @@ func (c *Client) encodeMessage(ctx context.Context, msg message.ChatMsg) []byte 
 
 // 关闭客户端连接
 func (c *Client) closeConnection(reason string) {
+
+	// 原子操作检查是否已关闭
+	if !atomic.CompareAndSwapInt32(&c.closed, 0, 1) {
+		g.Log().Infof(context.Background(), "用户 %s 连接已关闭，跳过重复关闭", c.userID)
+		return
+	}
 
 	rmMu.Lock()
 	defer rmMu.Unlock()
