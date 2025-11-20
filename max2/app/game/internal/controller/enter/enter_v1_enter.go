@@ -84,6 +84,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	}
 
 	// 加锁更新客户端连接（重连逻辑）
+	clientsMu.Lock()
 	if oldClient, err := getClient(userID); err == nil && oldClient != nil {
 		if oldClient.cancel != nil {
 			oldClient.cancel() // 触发旧连接的 <-ctx.Done()
@@ -110,10 +111,12 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	}
 
 	if err = addClient(client); err != nil {
+		clientsMu.Unlock()
 		g.Log().Errorf(ctx, "添加客户端到缓存失败: %v", err)
 		ws.Close()
 		return
 	}
+	clientsMu.Unlock()
 
 	g.Log().Infof(ctx, "用户 %s 连接成功", userID)
 
@@ -192,28 +195,7 @@ func (c *Client) readLoop(ctx context.Context) {
 func (c *Client) handleInitRoom(ctx context.Context) {
 	rmMu.Lock()
 	defer rmMu.Unlock()
-
-	// 清理当前用户关联的旧房间（优化：定向清理，避免全量遍历）
-	var oldRoomID string
-	for _, player := range rm.PlayerList {
-		if player.UserId == c.userID {
-			oldRoomID = player.RoomID
-			break
-		}
-	}
-	if oldRoomID != "" {
-		if roomInfo, ok := rm.Rooms[oldRoomID]; ok {
-			if roomInfo.Rgtimer != nil {
-				roomInfo.Rgtimer.Stop()
-				roomInfo.Rgtimer.Close() // 停止定时器（确保资源释放）
-			}
-			delete(rm.Rooms, oldRoomID)
-			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userID, oldRoomID)
-		}
-		// 从玩家列表移除旧玩家
-		delete(rm.PlayerList, c.userID)
-	}
-
+	c.clearRoom(ctx)
 	// 创建新房间和玩家
 	roomInfo := rm.CreateRoom(1) //创建比赛房
 	c.safeSendToRoomChan(ctx, roomInfo)
@@ -339,25 +321,7 @@ func (c *Client) handleCreateRoom(ctx context.Context) {
 	rmMu.Lock()
 	defer rmMu.Unlock()
 	// 清理当前用户关联的旧房间（优化：定向清理，避免全量遍历）
-	var oldRoomID string
-	for _, player := range rm.PlayerList {
-		if player.UserId == c.userID {
-			oldRoomID = player.RoomID
-			break
-		}
-	}
-	if oldRoomID != "" {
-		if roomInfo, ok := rm.Rooms[oldRoomID]; ok {
-			if roomInfo.Rgtimer != nil {
-				roomInfo.Rgtimer.Stop()
-				roomInfo.Rgtimer.Close() // 停止定时器（确保资源释放）
-			}
-			delete(rm.Rooms, oldRoomID)
-			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userID, oldRoomID)
-		}
-		// 从玩家列表移除旧玩家
-		delete(rm.PlayerList, c.userID)
-	}
+	c.clearRoom(ctx)
 
 	roomInfo := rm.CreateRoom(2) //创建比赛房
 	c.safeSendToRoomChan(ctx, roomInfo)
@@ -447,18 +411,23 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 		return
 	}
 	//判断玩家已在房间
+	inRoom := false
 	for _, player := range roomInfo.Players {
 		if player.UserId == c.userID {
 			g.Log().Errorf(ctx, "用户 %s 已在房间 %s", c.userID, roomID)
-			return
+			inRoom = true
+			break
 		}
 	}
-	playerName := "好友"
-	humanPlayer := roomInfo.CreatePlayer(playerName, room.Human)
-	humanPlayer.UserId = c.userID
-	c.pid = humanPlayer.ID
-	rm.PlayerList[humanPlayer.UserId] = humanPlayer // 关联用户与玩家
-	rm.JoinRoom(humanPlayer, roomID)
+	//不在房间再加入房间，在房间直接返回房间数据
+	if !inRoom {
+		playerName := "好友"
+		humanPlayer := roomInfo.CreatePlayer(playerName, room.Human)
+		humanPlayer.UserId = c.userID
+		c.pid = humanPlayer.ID
+		rm.PlayerList[humanPlayer.UserId] = humanPlayer // 关联用户与玩家
+		// rm.JoinRoom(humanPlayer, roomID)
+	}
 
 	c.safeSendToRoomChan(ctx, roomInfo)
 
@@ -539,8 +508,12 @@ func (c *Client) handlePlay(ctx context.Context) {
 	roomInfo.IsPlaying = true
 	roomInfo.Status = 1 //游戏中
 	rmMu.Unlock()
-
+	//如果时好友房,通知房间内每个人开始游戏
+	if roomInfo.Type == 2 {
+		roomInfo.SendRoomMessage(consts.Play, "")
+	}
 	room.PlayOneGame(roomInfo)
+
 }
 
 // 处理出牌
@@ -585,6 +558,8 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 
 // 处理获取房间信息
 func (c *Client) handleGetInfo(ctx context.Context) {
+	rmMu.Lock()
+	defer rmMu.Unlock()
 	// 1. 基础数据访问（假设是安全的）
 	player, ok := rm.PlayerList[c.userID]
 	if !ok {
@@ -604,14 +579,10 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 	var status int
 
 	// 快速获取易变数据
-	func() {
-		rmMu.RLock()
-		defer rmMu.RUnlock()
-		current = roomInfo.Current
-		outStarTime = roomInfo.OutStarTime
-		isPlaying = roomInfo.IsPlaying
-		status = roomInfo.Status
-	}()
+	current = roomInfo.Current
+	outStarTime = roomInfo.OutStarTime
+	isPlaying = roomInfo.IsPlaying
+	status = roomInfo.Status
 
 	// 3. 在锁外进行其他操作
 	if isPlaying {
@@ -1013,22 +984,6 @@ func (c *Client) closeConnection(reason string) {
 		close(ch)
 		g.Log().Infof(context.Background(), "用户 %s roomChan 已关闭", c.userID)
 	}
-	//关闭用户消息通道
-	rmMu.RLock()
-	player, ok := rm.PlayerList[c.userID]
-	rmMu.RUnlock()
-	if !ok {
-		g.Log().Errorf(logCtx, "用户 %s 未找到玩家信息", c.userID)
-		return
-	}
-	if player.MsgChan != nil {
-		c.mutex.Lock()
-		ch := player.MsgChan
-		player.MsgChan = nil
-		c.mutex.Unlock()
-		close(ch)
-		g.Log().Infof(context.Background(), "用户 %s MsgChan 已关闭", c.userID)
-	}
 
 	// 最后清理资源
 	clientsMu.Lock()
@@ -1037,6 +992,44 @@ func (c *Client) closeConnection(reason string) {
 		g.Log().Infof(logCtx, "用户 %s 删除客户端失败", c.userID)
 	}
 	clientsMu.Unlock()
+}
+
+// 清理旧房间
+func (c *Client) clearRoom(ctx context.Context) {
+	// 清理当前用户关联的旧房间（优化：定向清理，避免全量遍历）
+	var oldRoomID string
+	for _, player := range rm.PlayerList {
+		if player.UserId == c.userID {
+			oldRoomID = player.RoomID
+			break
+		}
+	}
+	if oldRoomID != "" {
+		if roomInfo, ok := rm.Rooms[oldRoomID]; ok {
+			if roomInfo.Rgtimer != nil {
+				roomInfo.Rgtimer.Stop()
+				roomInfo.Rgtimer.Close() // 停止定时器（确保资源释放）
+			}
+			delete(rm.Rooms, oldRoomID)
+			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userID, oldRoomID)
+		}
+		//关闭用户消息通道
+		player, ok := rm.PlayerList[c.userID]
+		if !ok {
+			g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userID)
+			return
+		}
+		if player.MsgChan != nil {
+			c.mutex.Lock()
+			ch := player.MsgChan
+			player.MsgChan = nil
+			c.mutex.Unlock()
+			close(ch)
+			g.Log().Infof(context.Background(), "用户 %s MsgChan 已关闭", c.userID)
+		}
+		// 从玩家列表移除旧玩家
+		delete(rm.PlayerList, c.userID)
+	}
 }
 
 /*

@@ -356,6 +356,7 @@ const player4pass = ref(false)
 
 const currentPlayerUid = ref(storage.local.get('user_id'))
 const currentPlayerId = ref(0)
+const proactivePass = ref(false) // 主动过牌标记
 
 
 // 监听屏幕尺寸变化
@@ -727,10 +728,14 @@ const handleMessage = (data) => {
     data = JSON.parse(parsedData.data)
     state.mustPid = data.mustPid
 
-    if (data.pid != 0) {
+    if (data.pid != currentPlayerId.value && !proactivePass.value) {
       const musicPath = "guo"
       playSound(musicPath)
       startCountdown(getPlayerPosition(data.current) + 1, state.outCardTimeout)
+    }
+    
+    if (data.pid == currentPlayerId.value ){
+      proactivePass.value = false
     }
 
 
@@ -1100,6 +1105,9 @@ const pass = () => {
   startCountdown(2, state.outCardTimeout)
   //隐藏2号的"过"
   player2pass.value = false
+
+  //主动过牌
+  proactivePass.value = true
 }
 
 // 添加返回首页的方法

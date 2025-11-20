@@ -203,7 +203,7 @@ const joinroom = () => {
   const roomid = input.value
   const data = JSON.stringify({roomID:roomid})
   websocket.send({ "type": "joinRoom", "data": data, "name": "" });
-  // router.push({ path: '/room' })
+  router.push({ path: '/room' })
 }
 const info = () => {
   userIdShow.value = !userIdShow.value
@@ -817,11 +817,18 @@ const toRoom = () => {
   }
 
   .tips {
-    z-index: 1;
+    z-index: 2;
     position: absolute;
     left: 85%;
-    top: 89%;
+    top: 16%;
   }
+
+  .tips2 {
+  z-index: 1;
+  position: absolute;
+  left: 85%;
+  top: 41%;
+}
 
   .free {
     z-index: 1;
@@ -869,8 +876,8 @@ const toRoom = () => {
     display: none;
     z-index: 1;
     position: absolute;
-    left: 30%;
-    top: 166%;
+    left: 16%;
+    top: 41%;
     height: 30px;
     width: 200px;
   }
@@ -879,8 +886,8 @@ const toRoom = () => {
     display: none;
     z-index: 1;
     position: absolute;
-    left: 40%;
-    top: 190%;
+    left: 32%;
+    top: 51%;
     height: 30px;
     width: 100px;
     background: red;

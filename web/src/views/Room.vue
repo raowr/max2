@@ -284,6 +284,12 @@ const handleMessage = (data) => {
         console.error('解析玩家数据失败:', e)
       }
   }
+  if (parsedData.type === "play") {
+    if (playerId.value !== 0) {
+      // 非房主操作跳到游戏页
+      router.push({path:'/game'})
+    }
+  }
 
 }
 const initPlayers = (serverPlayers) => {
