@@ -585,40 +585,44 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 
 // 处理获取房间信息
 func (c *Client) handleGetInfo(ctx context.Context) {
-	// 1. 先获取基本信息，使用读锁保护
-	var roomID string
-	var roomInfo *room.Room
-	var isPlaying bool
-
+	// 1. 基础数据访问（假设是安全的）
 	player, ok := rm.PlayerList[c.userID]
-	if ok {
-		roomID = player.RoomID
-		roomInfo, ok = rm.Rooms[roomID]
-		if ok {
-			isPlaying = roomInfo.IsPlaying
-		}
-	}
-
-	// 检查基本条件
-	if !ok || roomInfo == nil {
-		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息或房间不存在", c.userID)
+	if !ok {
+		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userID)
 		return
 	}
 
-	// 2. 在锁外调用safeSendToRoomChan，避免锁嵌套
+	roomInfo, ok := rm.Rooms[player.RoomID]
+	if !ok {
+		g.Log().Errorf(ctx, "用户 %s 房间不存在", c.userID)
+		return
+	}
+
+	// 2. 如果涉及到可能被其他goroutine修改的数据，才加锁
+	var current, outStarTime int
+	var isPlaying bool
+	var status int
+
+	// 快速获取易变数据
+	func() {
+		rmMu.RLock()
+		defer rmMu.RUnlock()
+		current = roomInfo.Current
+		outStarTime = roomInfo.OutStarTime
+		isPlaying = roomInfo.IsPlaying
+		status = roomInfo.Status
+	}()
+
+	// 3. 在锁外进行其他操作
 	if isPlaying {
 		c.safeSendToRoomChan(ctx, roomInfo)
 	}
 
-	// 3. 获取详细房间信息，再次使用读锁
+	// 4. 玩家卡片数据（通常比较稳定，可以不加锁）
 	cards := make([]int, 0)
 	cardsNum := make([]*message.PlayData, 0)
 	var playerPoint int64
-	var current int
-	var outStarTime int
-	var lastCards []room.Card // 假设Card是room包中定义的类型
 	var mustPid int
-	var status int
 
 	for _, p := range roomInfo.Players {
 		if p.ID == c.pid {
@@ -633,16 +637,11 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 			})
 		}
 		if p.Must {
-			mustPid = p.ID //必须出牌的玩家
+			mustPid = p.ID
 		}
 	}
-	current = roomInfo.Current
-	outStarTime = roomInfo.OutStarTime
-	lastCards = roomInfo.LastCards // 缓存lastCards引用
-	status = roomInfo.Status
 
-	// 4. 计算剩余信息，在锁外进行
-	// 计算剩余出牌时间
+	// 5. 计算剩余信息，在锁外进行
 	outCardTimeout := room.GetOutCardTimeout()
 	remainOutCardTimeout := outCardTimeout
 	if outStarTime > 0 {
@@ -653,13 +652,13 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		}
 	}
 
-	//上一次出牌
+	// 上一次出牌
 	outCards := make([]int, 0)
-	for _, card := range lastCards {
+	for _, card := range roomInfo.LastCards {
 		outCards = append(outCards, card.Id)
 	}
 
-	//上一位出牌玩家
+	// 上一位出牌玩家
 	lastPid := (current - 1 + 4) % 4
 
 	// 创建一个临时结构体，只包含可序列化的字段
@@ -671,7 +670,6 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		CardNum int    `json:"CardNum"`
 		Point   int64  `json:"Point"`
 		UserId  string `json:"UserId"`
-		// 只包含需要序列化的字段，排除MsgChan等不可序列化字段
 	}
 
 	// 转换玩家列表为可序列化的DTO列表
@@ -688,7 +686,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		}
 	}
 
-	// 5. 序列化并推送（处理JSON错误）
+	// 6. 序列化并推送（处理JSON错误）
 	resData, err := json.Marshal(struct {
 		RoomId               string              `json:"roomId"`
 		Players              []PlayerDTO         `json:"players"`
@@ -704,7 +702,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		LastPid              int                 `json:"lastPid"`
 		Status               int                 `json:"status"`
 	}{
-		RoomId:               roomID,
+		RoomId:               roomInfo.ID,
 		Players:              playerDTOs,
 		Cards:                cards,
 		Current:              current,
@@ -723,7 +721,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		return
 	}
 
-	// 6. 最后在锁外发送消息
+	// 7. 最后在锁外发送消息
 	msgData := message.ChatMsg{
 		Type: consts.GetInfo,
 		Data: gconv.String(resData),
