@@ -514,14 +514,14 @@ func (c *Client) handleLeaveRoom(ctx context.Context, data string) {
 		}
 	} else {
 		if len(roomInfo.Players) > 0 {
+			roomInfo.NextPlayerID = 1
 			for _, player := range roomInfo.Players {
 				if player.ID == 0 {
 					continue
 				} else {
-					roomInfo.NextPlayerID++
 					player.ID = roomInfo.NextPlayerID
+					roomInfo.NextPlayerID++
 				}
-
 			}
 		}
 	}
