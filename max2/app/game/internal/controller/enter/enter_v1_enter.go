@@ -484,12 +484,15 @@ func (c *Client) handleLeaveRoom(ctx context.Context, data string) {
 	//移除房间内该玩家
 	player, ok := rm.PlayerList[c.userID]
 	if !ok {
-		rmMu.RUnlock()
 		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userID)
 		return
 	}
 	isHomeowner := false
 	roomInfo, ok := rm.Rooms[player.RoomID]
+	if !ok {
+		g.Log().Errorf(ctx, "用户 %s 未找到房间 %s 信息", c.userID, player.RoomID)
+		return
+	}
 	players := make([]*room.Player, 0) //临时玩家数组
 	for _, player := range roomInfo.Players {
 		if player.UserId != c.userID {
