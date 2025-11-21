@@ -283,9 +283,10 @@ const handleMessage = (data) => {
       }
   }
   if (parsedData.type === "play") {
-    if (playerId.value !== 0) {
-      // 非房主操作跳到游戏页
-      router.push({path:'/game'})
+    // 非房主&不在游戏页 操作跳到游戏页
+    if (playerId.value !== 0 && route.name !== "Game") {
+      router.push('/game')  // 跳转到游戏页面
+      // router.push({path:'/game'})
     }
   }
 

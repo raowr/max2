@@ -270,11 +270,11 @@
         }">{{ gameOverMessage }}</p>
 
         <!-- 修改按钮区域，交换按钮顺序 只有房主才能操作-->
-        <div class="buttons-container" v-if="currentPlayerId === 0">
+        <div class="buttons-container">
           <button class="room-btn" @click="toRoom()">
             返回房间
           </button>
-          <button class="restart-btn" @click="state.player1Point === 0 ? goToHome() : restartGame()">
+          <button class="restart-btn" v-if="currentPlayerId === 0" @click="state.player1Point === 0 ? goToHome() : restartGame()">
             {{ state.player1Point === 0 ? '返回首页' : '再来一局' }}
           </button>
         </div>
@@ -818,11 +818,14 @@ const handleMessage = (data) => {
     }
 
     //好友房，五秒后跳到房间页面
-    if (roomType.value == 2) {
-      setTimeout(()=>{
-        router.push({path:'/room'})
-      },5000)
-    }
+    // if (roomType.value == 2) {
+    //   setTimeout(()=>{
+    //     router.push({path:'/room'})
+    //   },5000)
+    // }
+  }
+  if (parsedData.type === "play") {
+    showGameOverModal.value = false
   }
 }
 
@@ -1163,7 +1166,10 @@ const chatlogBgUrl = computed(() => {
 // 添加返回房间的方法
 const toRoom = () => {
   showGameOverModal.value = false
-  websocket.send({"type":"initRoom","data":"","name":""});
+  //如果是好友房直接返回
+  if (roomType.value !== 2){
+    websocket.send({"type":"initRoom","data":"","name":""});
+  }
   router.push({path:'/room'})
 }
 
