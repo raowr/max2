@@ -82,13 +82,13 @@
       <div style="width:89px;height:40px;text-align:center;position: absolute;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥2</p>
       </div>
-            <span v-show="player2pass" style="
-                  position: absolute;
-                  right: 135%;
-                  color: #FF6600;
-                  font-size: 28px;
-                  top: -40%;
-              ">过</span>
+      <span v-show="player2pass" style="
+            position: absolute;
+            right: 135%;
+            color: #FF6600;
+            font-size: 28px;
+            top: -40%;
+        ">过</span>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-95%;top:-2%'>
       <p style="z-index:1;font-size:16px; color:white;position: absolute;top:96%;left:-75%;">剩{{ state.player2CardsNum
       }}张
@@ -121,13 +121,13 @@
       <div style="width:100px;height:40px;text-align:center;">
         <p style="z-index:1;font-size:16px; color:white;">帅哥4</p>
       </div>
-            <span v-show="player4pass"  style="
-                  position: absolute;
-                  left: 120%;
-                  color: #FF6600;
-                  font-size: 28px;
-                  top: -28%;
-              ">过</span>
+      <span v-show="player4pass"  style="
+            position: absolute;
+            left: 120%;
+            color: #FF6600;
+            font-size: 28px;
+            top: -28%;
+        ">过</span>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:94%;top:0%'>
       <p style="z-index:1;font-size:16px; color:white;position: absolute;top:67%;left:112%;width: 60px;">
         剩{{ state.player4CardsNum }}张</p>
@@ -163,7 +163,7 @@
       }">
         <img :src="player3touxiang" width="90px" style="bottom:31.2%;left:3.1%;border-radius: 25px;">
       </div>
-              <span  v-show="player3pass"  style="
+        <span  v-show="player3pass"  style="
         position: absolute;
         left: 200%;
         color: #FF6600;
@@ -233,7 +233,7 @@
       <img v-else src='@/assets/img/btn_chupai_hui.png' class="chupai-btn-disabled">
 
       <!-- 不出按钮添加类名：buchu-btn -->
-      <img v-if="state.mustPid != 0" src='@/assets/img/btn_buchu.png' class="buchu-btn" :style="{
+      <img v-if="state.mustPid != currentPlayerId" src='@/assets/img/btn_buchu.png' class="buchu-btn" :style="{
         transform: isPassBtnPressed ? 'scale(0.9)' : 'scale(1)'  // 保留动态样式
       }" @click='pass()' @mousedown="isPassBtnPressed = true" @mouseup="isPassBtnPressed = false"
         @mouseleave="isPassBtnPressed = false" @touchstart="isPassBtnPressed = true"
@@ -269,12 +269,12 @@
           background: isWinner ? 'linear-gradient(45deg, #FFD700, #FFA500)' : 'linear-gradient(45deg, #FF6347, #FFA07A)'
         }">{{ gameOverMessage }}</p>
 
-        <!-- 修改按钮区域，交换按钮顺序 -->
+        <!-- 修改按钮区域，交换按钮顺序 只有房主才能操作-->
         <div class="buttons-container">
           <button class="room-btn" @click="toRoom()">
             返回房间
           </button>
-          <button class="restart-btn" @click="state.player1Point === 0 ? goToHome() : restartGame()">
+          <button class="restart-btn" v-if="currentPlayerId === 0" @click="state.player1Point === 0 ? goToHome() : restartGame()">
             {{ state.player1Point === 0 ? '返回首页' : '再来一局' }}
           </button>
         </div>
@@ -292,6 +292,10 @@ import { websocket } from '@/utils/websocket'
 import { cardUtil, CARD_TYPE } from '@/utils/card';
 import { storage } from '@/utils/storage'
 import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
+// 导入背景图片（新增代码）
+import winBg from '@/assets/img/ui/win_bg.png'
+import loseBg from '@/assets/img/ui/lose_bg.png'
+
 const state = reactive({
   deck: [],
   countdownPlayer: 0,
@@ -350,9 +354,11 @@ const player2pass = ref(false)
 const player3pass = ref(false)
 const player4pass = ref(false)
 
-// 导入背景图片（新增代码）
-import winBg from '@/assets/img/ui/win_bg.png'
-import loseBg from '@/assets/img/ui/lose_bg.png'
+const currentPlayerUid = ref(storage.local.get('user_id'))
+const currentPlayerId = ref(0)
+const proactivePass = ref(false) // 主动过牌标记
+
+const roomType = ref(0)
 
 
 // 监听屏幕尺寸变化
@@ -446,6 +452,19 @@ const handleMessage = (data) => {
   if (parsedData.type == "getInfo") {
     data = JSON.parse(parsedData.data)
     console.log("getInfo", data);
+    //房间类型
+    roomType.value = data.type
+    //确定玩家pid
+    for (let i = 0; i < data.players.length; i++) {
+      if (data.players[i].UserId == currentPlayerUid.value){
+        currentPlayerId.value = data.players[i].ID
+      }
+    }
+    //对应位置
+    //先确定差值1-0
+    // 假如：玩家id：1，玩家就是确定在底部0位置，2号玩家：4-|(2-1)|,读作：4减去2-1的绝对值
+    //当减去差值大于等于0，直接用，当减去差值小于0需要用4减去差值的绝对值
+    
     //是否游戏中
     if (data.isPlaying) {
       state.outCards = (data.outCards)
@@ -456,7 +475,7 @@ const handleMessage = (data) => {
       state.cards = data.cards.sort((a, b) => b - a);
       //设置牌数
       for (let i = 0; i < data.cardsNum.length; i++) {
-        switch (data.cardsNum[i].id + 1) {
+        switch (getPlayerPosition(data.cardsNum[i].ID) + 1) {
           case 2:
             state.player2CardsNum = data.cardsNum[i].cardNum
           case 3:
@@ -470,7 +489,7 @@ const handleMessage = (data) => {
         state.outCardTimeout = data.outCardTimeout
       }
       //先出牌的开始倒计时
-      startCountdown(data.current + 1, data.remainOutCardTimeout)
+      startCountdown(getPlayerPosition(data.current) + 1, data.remainOutCardTimeout)
       //如果必出是玩家，记录下必出玩家的pid
       //更新玩家总瓜子数
       state.player1Point = data.playerPoint
@@ -482,7 +501,7 @@ const handleMessage = (data) => {
           }
         }
       }
-      switch (data.lastPid) {
+      switch (getPlayerPosition(data.lastPid)) {
         case 0:
           state.lastmsg = "玩家1出了：" + cardsMsg
           break;
@@ -496,7 +515,18 @@ const handleMessage = (data) => {
           state.lastmsg = "玩家4出了：" + cardsMsg
           break;
       }
-    } 
+    } else {
+      switch (data.status) {
+      //   case 0://未开始
+      //     websocket.send({ "type": "play", "data": "", "name": "" })
+      //     break;
+        case 2://结算中
+          console.log("结算中");
+          router.push('/index')  // 跳转到首页路由
+          break;
+      }
+      
+    }
   }
   if (parsedData.type == "showCard") {
 
@@ -515,7 +545,7 @@ const handleMessage = (data) => {
       state.outCardTimeout = data.outCardTimeout
     }
     //先出牌的开始倒计时
-    startCountdown(data.current + 1, state.outCardTimeout)
+    startCountdown(getPlayerPosition(data.current) + 1, state.outCardTimeout)
     //如果必出是玩家，记录下必出玩家的pid
     state.mustPid = data.current
     //更新玩家总瓜子数
@@ -534,7 +564,7 @@ const handleMessage = (data) => {
     data = JSON.parse(parsedData.data)
     // 刷新玩家牌数
     let cardsMsg = ""
-    switch (data.pid) {
+    switch (getPlayerPosition(data.pid)) {
       case 0:
         if (isPlayingCard.value) {
           isPlayingCard.value = false
@@ -565,8 +595,8 @@ const handleMessage = (data) => {
           selectedCards.value = []
           // 出牌成功，清空 pending
           pendingCards.value = []
-          //隐藏过
-           player1pass.value = false
+        //隐藏过
+        player1pass.value = false
         } else {
           // 出牌失败，恢复牌
           console.log('出牌失败，恢复牌')
@@ -588,7 +618,7 @@ const handleMessage = (data) => {
           }
         }
         state.lastmsg = "玩家2出了：" + cardsMsg
-        //隐藏过
+                //隐藏过
         player2pass.value = false
         break
       case 2:
@@ -631,7 +661,7 @@ const handleMessage = (data) => {
       if (data.outCardTimeout !== undefined) {
         state.outCardTimeout = data.outCardTimeout
       }
-      startCountdown(data.current + 1, state.outCardTimeout)
+      startCountdown(getPlayerPosition(data.current) + 1, state.outCardTimeout)
       //如果必出是玩家，记录下必出玩家的pid
       state.mustPid = data.mustPid
 
@@ -679,14 +709,14 @@ const handleMessage = (data) => {
           playSound('default')
           break
       }
-      //先隐藏过
-      if (data.current == 0) {
+          //先隐藏过
+     if (getPlayerPosition(data.current) == 0) {
         player1pass.value = false
-      } else if (data.current == 1) {
+      } else if (getPlayerPosition(data.current) == 1) {
         player2pass.value = false
-      } else if (data.current == 2) {
+      } else if (getPlayerPosition(data.current) == 2) {
         player3pass.value = false
-      } else if (data.current == 3) {
+      } else if (getPlayerPosition(data.current) == 3) {
         player4pass.value = false
       }
     }
@@ -695,33 +725,37 @@ const handleMessage = (data) => {
   if (parsedData.type == "pass") {
     data = JSON.parse(parsedData.data)
     state.mustPid = data.mustPid
-    startCountdown(data.current + 1, state.outCardTimeout)
 
-    if (data.pid != 0) {
+    if (!proactivePass.value) {
       const musicPath = "guo"
       playSound(musicPath)
-      startCountdown(data.current + 1, state.outCardTimeout)
+      startCountdown(getPlayerPosition(data.current) + 1, state.outCardTimeout)
+    }
+    
+    if (data.pid == currentPlayerId.value ){
+      proactivePass.value = false
     }
 
+
     //判断谁过
-      if (data.pid == 0) {
+     if (getPlayerPosition(data.pid) == 0) {
       player1pass.value = true
-    } else if (data.pid == 1) {
+    } else if (getPlayerPosition(data.pid) == 1) {
       player2pass.value = true
-    } else if (data.pid == 2) {
+    } else if (getPlayerPosition(data.pid) == 2) {
       player3pass.value = true
-    } else if (data.pid == 3) {
+    } else if (getPlayerPosition(data.pid) == 3) {
       player4pass.value = true
     }
 
-    //先隐藏过
-    if (data.current == 0) {
+              //先隐藏过
+    if (getPlayerPosition(data.current) == 0) {
       player1pass.value = false
-    } else if (data.current == 1) {
+    } else if (getPlayerPosition(data.current) == 1) {
       player2pass.value = false
-    } else if (data.current == 2) {
+    } else if (getPlayerPosition(data.current) == 2) {
       player3pass.value = false
-    } else if (data.current == 3) {
+    } else if (getPlayerPosition(data.current) == 3) {
       player4pass.value = false
     }
 
@@ -733,16 +767,29 @@ const handleMessage = (data) => {
     clearInterval(timer4)
     state.countdownPlayer = 0
     data = JSON.parse(parsedData.data)
-    state.lastmsg = "游戏结束，玩家: " + data.winName + "胜利,赢得:" + data.win + "颗瓜子"
+    data.forEach(winer=>{
+        if (winer.win > 0 ){
+          state.lastmsg = "游戏结束，玩家: " + winer.winName + "胜利,赢得:" + winer.win + "颗瓜子"
+        }
+      if (winer.winner == currentPlayerId.value ){
+        var win = Math.abs(winer.win)
+        isWinner.value = winer.win > 0
+        gameOverMessage.value = isWinner.value
+                ? `哇！恭喜你赢得了${win}颗瓜子!`
+                : `咦！你很菜,这局输了${win}颗瓜子`
 
-    state.player1Point = data.playerPoint
+        //更新总瓜子数
+        state.player1Point = winer.point
+      }
+    })
+
     // 显示游戏结束弹窗
     showGameOverModal.value = true
     // 判断当前玩家是否胜利（假设当前玩家是"帅哥1"）
-    isWinner.value = data.winner === 0
-    gameOverMessage.value = isWinner.value
-      ? `哇！恭喜你赢得了${data.playerWin}颗瓜子!`
-      : `咦！你很菜,这局输了${data.playerWin}颗瓜子`
+    // isWinner.value = data.winner === 0
+    // gameOverMessage.value = isWinner.value
+    //   ? `哇！恭喜你赢得了${data.playerWin}颗瓜子!`
+    //   : `咦！你很菜,这局输了${data.playerWin}颗瓜子`
 
     // 重置弃牌
     state.outCards = []
@@ -753,17 +800,26 @@ const handleMessage = (data) => {
       // 游戏结束也清除定时器
       clearTimeout(playCardTimer.value)
     }
-
+    
     player1pass.value = false
     player2pass.value = false
     player3pass.value = false
     player4pass.value = false
+    
     //玩家输完，跳到首页
     if (state.player1Point <= 0) {
       router.push({ path: '/index' })
     }
 
-
+    //好友房，五秒后跳到房间页面
+    // if (roomType.value == 2) {
+    //   setTimeout(()=>{
+    //     router.push({path:'/room'})
+    //   },5000)
+    // }
+  }
+  if (parsedData.type === "play") {
+    showGameOverModal.value = false
   }
 }
 
@@ -777,10 +833,9 @@ console.log(audioFiles)
 const getAudioUrl = (musicPath) => {
   try {
     // 构造预加载音频的路径 key（与 glob 匹配的路径格式）
-    // musicPath 格式为 "category/filename"，如 "single/1"、"pair/3"等
     const audioKey = `/src/assets/music/${musicPath}.mp3`;
     // 返回预加载的音频 URL（开发/生产环境路径自动适配）
-    return audioFiles[audioKey] || ''; // 重要：添加 return 语句
+    return audioFiles[audioKey] || ''; // 若找不到对应音频，返回空
   } catch (error) {
     console.error('获取音频URL失败:', error);
     return '';
@@ -844,7 +899,7 @@ const checkOut = () => {
     cards: state.outCards.map(cardId => {
       return state.deck.find(card => card.id === cardId);
     }).filter(Boolean),
-    isSelf: state.mustPid === 0, // 是否是自己出的最后一手牌
+    isSelf: state.mustPid === currentPlayerId.value, // 是否是自己出的最后一手牌
     type: state.outCards.length > 0
       ? cardUtil.getCardType(state.outCards.map(id => state.deck.find(c => c.id === id)).filter(Boolean))
       : null
@@ -1071,6 +1126,9 @@ const pass = () => {
   startCountdown(2, state.outCardTimeout)
   //隐藏2号的"过"
   player2pass.value = false
+
+  //主动过牌
+  proactivePass.value = true
 }
 
 // 添加返回首页的方法
@@ -1102,7 +1160,10 @@ const chatlogBgUrl = computed(() => {
 // 添加返回房间的方法
 const toRoom = () => {
   showGameOverModal.value = false
-  websocket.send({"type":"initRoom","data":"","name":""});
+  //如果是好友房直接返回
+  if (roomType.value !== 2){
+    websocket.send({"type":"initRoom","data":"","name":""});
+  }
   router.push({path:'/room'})
 }
 
@@ -1125,6 +1186,14 @@ const resetAvatar = () => {
     player4touxiang.value = player4avatar
     storage.local.set('player4avatar', player4avatar)
   }
+}
+
+const getPlayerPosition = (playerId) => {
+  // 计算差值
+  const diff =playerId- currentPlayerId.value
+  // 当差值大于等于0，直接用，当差值小于0需要用4减去差值的绝对值
+  const position = diff >= 0 ? diff : 4 - Math.abs(diff)
+  return position
 }
 </script>
 
@@ -1552,7 +1621,8 @@ const resetAvatar = () => {
   .buchu-btn {
     left: 22%;
   }
-  /* 出牌按钮静态样式 */
+
+    /* 出牌按钮静态样式 */
   .chupai-btn {
     left: 57%;
   }

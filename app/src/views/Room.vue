@@ -9,13 +9,11 @@
     <div class="room-container">
       <!-- Header with back button -->
       <div class="header">
-        <router-link to="/index"> 
-          <div class="back-btn">
+        <div class="back-btn" @click="leaveRoom">
           <img src="@/assets/img/ui/img_return1_bg.png" alt="返回按钮背景">
           <img src="@/assets/img/ui/img_return1.png" alt="返回" style="position: absolute; left: 0; top: 0;">
           <img src="@/assets/img/ui/txt_friendroom.png" alt="好友房间" class="room-title">
         </div>
-        </router-link>
       </div>
 
       <!-- Main Content -->
@@ -91,7 +89,7 @@
       </div>
 
       <!-- Ready Button -->
-      <div class="ready-btn-container">
+      <div class="ready-btn-container" v-if="playerId == 0">
         <img v-if=!isReady() src="@/assets/img/ui/btn_start_no.png" class="ready-btn" alt="准备中" >
         <img v-else src="@/assets/img/ui/btn_start.png" class="ready-btn" alt="已准备" @click="toGame">
       </div>
@@ -121,46 +119,46 @@ import {useRoute,useRouter} from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
-
+const getInitialPlayers = () => [
+  {
+    id: 1,
+    name: '玩家一',
+    avatar: bighead15339,
+    stars: 3,
+    ready: false,
+    isOwner: true,
+    lihui: full16020,
+  },
+  {
+    id: 2,
+    name: '等待中...',
+    avatar: "",
+    stars: 2,
+    ready: false,
+    isOwner: false,
+    lihui: '',
+  },
+  {
+    id: 3,
+    name: '等待中...',
+    avatar: '',
+    stars: 0,
+    ready: false,
+    isOwner: false,
+    lihui: '',
+  },
+  {
+    id: 4,
+    name: '等待中...',
+    avatar: '',
+    stars: 0,
+    ready: false,
+    isOwner: false,
+    lihui: '',
+  }
+]
 const state = reactive({
-  players: [
-    {
-      id: 1,
-      name: '玩家一',
-      avatar: bighead15339,
-      stars: 3,
-      ready: false,
-      isOwner: true,
-      lihui: full16020,
-    },
-    {
-      id: 2,
-      name: '玩家二',
-      avatar: bighead15419,
-      stars: 2,
-      ready: false,
-      isOwner: false,
-      lihui: full15418,
-    },
-    {
-      id: 3,
-      name: '等待中...',
-      avatar: '',
-      stars: 0,
-      ready: false,
-      isOwner: false,
-      lihui: '',
-    },
-    {
-      id: 4,
-      name: '等待中...',
-      avatar: '',
-      stars: 0,
-      ready: false,
-      isOwner: false,
-      lihui: '',
-    }
-  ],
+  players: getInitialPlayers(),
   gameType: '经典模式',
   gameReward: '100金币',
   roomId: '123456',
@@ -185,6 +183,7 @@ const state = reactive({
   })
 })
 const userId = ref('')
+const playerId  = ref(0)
 onMounted(() => {
   init()
 })
@@ -217,6 +216,13 @@ const init = async () => {
     // websocket.send({ "type": "getInfo", "data": "", "name": "" })
     // toggleReady();
   }
+
+    //确定player头像，存于storage
+  storage.local.set('player2avatar', getTouxiang())
+  storage.local.set('player3avatar', getTouxiang())
+  storage.local.set('player4avatar', getTouxiang())
+
+  
 }
 
 // 组件卸载时移除回调（关键：防止内存泄漏）
@@ -232,64 +238,86 @@ const handleMessage = (data) => {
   // 处理接收到的消息
   console.log('Received message:', data)
   const parsedData = JSON.parse(data)
-    if (parsedData.type === "initRoom") {
- try {
-      // 解析JSON字符串
-      const serverPlayers = JSON.parse(parsedData.data)
+  if (parsedData.from != undefined) {
+    //保存玩家id
+    storage.local.set('user_id', parsedData.from)
+    //用户ID
+    userId.value = parsedData.from
+  }
 
-      state.roomId=serverPlayers[0].RoomID
-      // 智能合并数据
-   // 智能合并数据
-    initPlayers(serverPlayers)
-      
-      // 保留不在服务端返回中的原有玩家（如等待中的空位）
-      // 自动截断超过4个的玩家
-      state.players.splice(4)
-    } catch (e) {
-      console.error('解析玩家数据失败:', e)
-    }
+
+  if (parsedData.type === "initRoom") {
+    try {
+        // 解析JSON字符串
+        const serverPlayers = JSON.parse(parsedData.data)
+
+        state.roomId=serverPlayers[0].RoomID
+        // 智能合并数据
+        initPlayers(serverPlayers)
+
+        // 保留不在服务端返回中的原有玩家（如等待中的空位）
+        // 自动截断超过4个的玩家
+        state.players.splice(4)
+      } catch (e) {
+        console.error('解析玩家数据失败:', e)
+      }
   }
   if(parsedData.type === "getInfo"){
-    // 解析JSON字符串
-    const data = JSON.parse(parsedData.data)
-    state.roomId=data.roomId
-    if (data.isPlaying && route.name !== "Game") {
+          // 解析JSON字符串
+      const data = JSON.parse(parsedData.data)
+      state.roomId=data.roomId
+     if (data.isPlaying && route.name !== "Game") {
+        router.push('/game')  // 跳转到游戏页面
+     }else {
+         initPlayers(data.players)
+     }
+  }
+
+    if (parsedData.type === "joinRoom") {
+    try {
+        // 解析JSON字符串
+        const serverPlayers = JSON.parse(parsedData.data)
+
+        state.roomId=serverPlayers[0].RoomID
+        // 智能合并数据
+        initPlayers(serverPlayers)
+
+        // 保留不在服务端返回中的原有玩家（如等待中的空位）
+        // 自动截断超过4个的玩家
+        state.players.splice(4)
+      } catch (e) {
+        console.error('解析玩家数据失败:', e)
+      }
+  }
+  if (parsedData.type === "play") {
+    // 非房主&不在游戏页 操作跳到游戏页
+    if (playerId.value !== 0 && route.name !== "Game") {
       router.push('/game')  // 跳转到游戏页面
-    }else {
-      initPlayers(data.players)
+      // router.push({path:'/game'})
     }
   }
-}
 
+}
 const initPlayers = (serverPlayers) => {
-  // 智能合并数据
+  // 先重置为初始状态
+  state.players = getInitialPlayers()
+
+  // 然后根据服务端数据填充
   serverPlayers.forEach(serverPlayer => {
-    if (serverPlayer.ID == 0) {//是人类玩家
-      //保存用户userId
-      storage.local.set('user_id', serverPlayer.UserId)
+    if (serverPlayer.UserId == userId.value) {
+      playerId.value = serverPlayer.ID
+      state.gameReward=serverPlayer.Point+'金币'
     }
     const convertedId = serverPlayer.ID + 1
-    // 查找已有玩家
-    const existing = state.players.find(p => p.id === convertedId)
 
-    if (existing) {
-      // 更新已有玩家属性
-      existing.name = serverPlayer.Name
-      existing.isOwner = serverPlayer.Type === 0
-      existing.avatar = getAvatarByType(serverPlayer.Type)
-      existing.lihui = getLihuiByType(serverPlayer.Type)
-      existing.ready=true
-    } else {
-      // 添加新玩家（如果需要）
-      state.players.push({
-        id: convertedId,
-        name: serverPlayer.Name,
-        avatar: getAvatarByType(serverPlayer.Type),
-        stars: 3,
-        ready: false,
-        isOwner: serverPlayer.Type === 0,
-        lihui: getLihuiByType(serverPlayer.Type)
-      })
+    if (convertedId <= state.players.length) {
+      const player = state.players[convertedId - 1]
+      player.name = serverPlayer.Name
+      player.isOwner = serverPlayer.ID == 0
+      player.avatar = getAvatarByType(player.isOwner ? serverPlayer.Type : 1)
+      player.lihui = getLihuiByType(player.isOwner ? serverPlayer.Type : 1)
+      player.ready = true
+      player.stars = 5 // 或者根据服务端数据设置
     }
   })
 }
@@ -335,15 +363,18 @@ const isReady=() => {
 
 const toGame = () => {
   if (isReady()) {
+    // websocket.send({"type":"toGame","data":"","name":""})
     websocket.send({ "type": "play", "data": "", "name": "" })
     //路由跳到游戏页面
     router.push({path:'/game'})
   }
 
-  //确定player头像，存于storage
-  storage.local.set('player2avatar', getTouxiang())
-  storage.local.set('player3avatar', getTouxiang())
-  storage.local.set('player4avatar', getTouxiang())
+}
+
+const leaveRoom=()=>{
+  websocket.send({ "type": "leaveRoom", "data": "", "name": "" })
+  //路由跳到游戏页面
+  router.push({path:'/index'})
 }
 
 

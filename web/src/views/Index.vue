@@ -4,8 +4,8 @@
       {{ storage.local.get('user_id') }}
     </div>
     <div id="right">
-      <div class="right1" @click="right()"></div>
-      <div class="right2"  @click="toRoom()" ></div>
+      <div class="right1" @click="toRoom()"></div>
+      <div class="right2"  @click="right()" ></div>
       <div class="right3"></div>
     </div>
     <div class="yourenchang" id="charubiaoqian1">
@@ -241,29 +241,29 @@ const toRoom = () => {
 }
 
 .right1 {
-  background: url("@/assets/img/ui/btn_yourenchang.png");
+  background: url("@/assets/img/ui/btn_yibanchang.png");
   background-size: 100% 100%;
   height: 20%;
-  width: 23%;
+  width: 25%;
   top: 20%;
   position: absolute;
-  right: 13%;
+  right: 11%;
   float: right;
 }
 
 .right2 {
-  background: url("@/assets/img/ui/btn_dajiangsai.png");
+  background: url("@/assets/img/ui/btn_yourenchang.png");
   background-size: 100% 100%;
   height: 20%;
   width: 25%;
-  top: 41%;
+  top: 42%;
   position: absolute;
   right: 11%;
   float: right;
 }
 
 .right3 {
-  background: url("@/assets/img/ui/btn_yibanchang.png");
+  background: url("@/assets/img/ui/btn_dajiangsai.png");
   background-size: 100% 100%;
   height: 20%;
   width: 25%;

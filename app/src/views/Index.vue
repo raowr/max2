@@ -4,8 +4,8 @@
       {{ storage.local.get('user_id') }}
     </div>
     <div id="right">
-      <div class="right1" @click="right()"></div>
-      <div class="right2"></div>
+      <div class="right1" @click="toRoom()"></div>
+      <div class="right2"  @click="right()" ></div>
       <div class="right3"></div>
     </div>
     <div class="yourenchang" id="charubiaoqian1">
@@ -13,15 +13,15 @@
       <img class="friendroom" src="@/assets/img/ui/txt_friendroom.png" />
       <div class="img_return2" @click="return2()"><img src="@/assets/img/ui/img_return2.png" alt="标题背景" /></div>
       <br /><br /><a @click="inroom()"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch1" /></a>
-      <img src="@/assets/img/ui/btn_create_room.png" class="btn_create_room" @click="toRoom()" />
+      <img src="@/assets/img/ui/btn_create_room.png" class="btn_create_room"  @click="createRoom()"/>
       <img class="tips" src="@/assets/img/ui/tips.png" />
       <p class="free">限时免费</p>
-      <a href="#"><img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch" @click="inroom()" /></a>
-      <a href="#"><img src="@/assets/img/ui/w_joinroom.png" class="w_joinroom" @click="inroom()" /></a>
-      <form action="api/room/" method="get">
+      <img src="@/assets/img/ui/bg_abmatch.png" class="bg_abmatch" @click="inroom()" />
+      <img src="@/assets/img/ui/w_joinroom.png" class="w_joinroom" @click="inroom()" />
+      <div>
         <input type="text" placeholder="房间号" name="roomid" class="roominput" id="inroom" />
-        <input type="submit" value="确定" class="roomsubmit" id="btn_inroom" />
-      </form>
+        <input type="submit" value="确定" class="roomsubmit" id="btn_inroom" @click="joinroom()"/>
+      </div>
       <img src="@/assets/img/ui/tips.png" class="tips2" />
       <p class="free2">限时免费</p>
       <!-- </right> -->
@@ -191,6 +191,20 @@ const inroom = () => {
   input.style.display = "block";
   submitBtn.style.display = "block";
 }
+
+const createRoom = () => {
+  // 实现创建房间逻辑
+  websocket.send({ "type": "createRoom", "data": "", "name": "" });
+  router.push({ path: '/room' })
+}
+const joinroom = () => {
+  // 实现加入房间逻辑
+  const input = document.getElementById("inroom");
+  const roomid = input.value
+  const data = JSON.stringify({roomID:roomid})
+  websocket.send({ "type": "joinRoom", "data": data, "name": "" });
+  router.push({ path: '/room' })
+}
 const info = () => {
   userIdShow.value = !userIdShow.value
 }
@@ -227,29 +241,29 @@ const toRoom = () => {
 }
 
 .right1 {
-  background: url("@/assets/img/ui/btn_yourenchang.png");
+  background: url("@/assets/img/ui/btn_yibanchang.png");
   background-size: 100% 100%;
   height: 20%;
-  width: 23%;
+  width: 25%;
   top: 20%;
   position: absolute;
-  right: 13%;
+  right: 11%;
   float: right;
 }
 
 .right2 {
-  background: url("@/assets/img/ui/btn_dajiangsai.png");
+  background: url("@/assets/img/ui/btn_yourenchang.png");
   background-size: 100% 100%;
   height: 20%;
   width: 25%;
-  top: 41%;
+  top: 42%;
   position: absolute;
   right: 11%;
   float: right;
 }
 
 .right3 {
-  background: url("@/assets/img/ui/btn_yibanchang.png");
+  background: url("@/assets/img/ui/btn_dajiangsai.png");
   background-size: 100% 100%;
   height: 20%;
   width: 25%;
@@ -803,11 +817,18 @@ const toRoom = () => {
   }
 
   .tips {
-    z-index: 1;
+    z-index: 2;
     position: absolute;
     left: 85%;
-    top: 89%;
+    top: 16%;
   }
+
+  .tips2 {
+  z-index: 1;
+  position: absolute;
+  left: 85%;
+  top: 41%;
+}
 
   .free {
     z-index: 1;
@@ -855,8 +876,8 @@ const toRoom = () => {
     display: none;
     z-index: 1;
     position: absolute;
-    left: 30%;
-    top: 166%;
+    left: 16%;
+    top: 41%;
     height: 30px;
     width: 200px;
   }
@@ -865,8 +886,8 @@ const toRoom = () => {
     display: none;
     z-index: 1;
     position: absolute;
-    left: 40%;
-    top: 190%;
+    left: 32%;
+    top: 51%;
     height: 30px;
     width: 100px;
     background: red;
