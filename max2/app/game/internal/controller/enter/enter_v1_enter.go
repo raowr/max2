@@ -172,6 +172,8 @@ func (c *Client) readLoop(ctx context.Context) {
 			c.handleCreateRoom(ctx)
 		case consts.JoinRoom:
 			c.handleJoinRoom(ctx, msg.Data)
+		case consts.LeaveRoom:
+			c.handleLeaveRoom(ctx, msg.Data)
 		case consts.Play:
 			c.handlePlay(ctx)
 		case consts.PlayCard:
@@ -425,6 +427,7 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 		humanPlayer := roomInfo.CreatePlayer(playerName, room.Human)
 		humanPlayer.UserId = c.userID
 		c.pid = humanPlayer.ID
+		humanPlayer.Name = playerName + gconv.String(humanPlayer.ID)
 		rm.PlayerList[humanPlayer.UserId] = humanPlayer // 关联用户与玩家
 		// rm.JoinRoom(humanPlayer, roomID)
 	}
@@ -471,6 +474,88 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 	//应该通知到房间内每个人
 	roomInfo.SendRoomMessage(consts.JoinRoom, playerDTOs)
 	//c.safeSendMessage(ctx, msgData)
+
+}
+
+//离开房间
+func (c *Client) handleLeaveRoom(ctx context.Context, data string) {
+	rmMu.Lock()
+	defer rmMu.Unlock()
+	//移除房间内该玩家
+	player, ok := rm.PlayerList[c.userID]
+	if !ok {
+		rmMu.RUnlock()
+		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userID)
+		return
+	}
+	isHomeowner := false
+	roomInfo, ok := rm.Rooms[player.RoomID]
+	players := make([]*room.Player, 0) //临时玩家数组
+	for _, player := range roomInfo.Players {
+		if player.UserId != c.userID {
+			players = append(players, player)
+		}
+		//如果是房主离开,重新牌ID
+		if player.UserId == c.userID {
+			if player.ID == 0 {
+				isHomeowner = true
+			}
+		}
+
+	}
+	roomInfo.Players = players
+	roomInfo.NextPlayerID = 0
+	if isHomeowner {
+		if len(roomInfo.Players) > 0 {
+			for _, player := range roomInfo.Players {
+				player.ID = roomInfo.NextPlayerID
+				roomInfo.NextPlayerID++
+			}
+		}
+	} else {
+		if len(roomInfo.Players) > 0 {
+			for _, player := range roomInfo.Players {
+				if player.ID == 0 {
+					continue
+				} else {
+					roomInfo.NextPlayerID++
+					player.ID = roomInfo.NextPlayerID
+				}
+
+			}
+		}
+	}
+	//移除rm中用户列表
+	delete(rm.PlayerList, c.userID)
+
+	// 创建一个临时结构体，只包含可序列化的字段
+	type PlayerDTO struct {
+		ID      int    `json:"ID"`
+		Name    string `json:"Name"`
+		RoomID  string `json:"RoomID"`
+		Type    int    `json:"Type"`
+		CardNum int    `json:"CardNum"`
+		Point   int64  `json:"Point"`
+		UserId  string `json:"UserId"`
+		// 只包含需要序列化的字段，排除MsgChan等不可序列化字段
+	}
+
+	// 转换玩家列表为可序列化的DTO列表
+	playerDTOs := make([]PlayerDTO, len(roomInfo.Players))
+	for i, p := range roomInfo.Players {
+		playerDTOs[i] = PlayerDTO{
+			ID:      p.ID,
+			Name:    p.Name,
+			RoomID:  p.RoomID,
+			Type:    int(p.Type),
+			CardNum: p.CardNum,
+			Point:   p.Point,
+			UserId:  p.UserId,
+		}
+	}
+
+	//应该通知到房间内每个人
+	roomInfo.SendRoomMessage(consts.JoinRoom, playerDTOs)
 
 }
 
@@ -577,12 +662,14 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 	var current, outStarTime int
 	var isPlaying bool
 	var status int
+	var roomType int
 
 	// 快速获取易变数据
 	current = roomInfo.Current
 	outStarTime = roomInfo.OutStarTime
 	isPlaying = roomInfo.IsPlaying
 	status = roomInfo.Status
+	roomType = roomInfo.Type
 
 	// 3. 在锁外进行其他操作
 	if isPlaying {
@@ -672,6 +759,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		MustPid              int                 `json:"mustPid"`
 		LastPid              int                 `json:"lastPid"`
 		Status               int                 `json:"status"`
+		Type                 int                 `json:"type"` //房间类型 1比赛房，2好友房
 	}{
 		RoomId:               roomInfo.ID,
 		Players:              playerDTOs,
@@ -686,6 +774,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 		MustPid:              mustPid,
 		LastPid:              lastPid,
 		Status:               status,
+		Type:                 roomType,
 	})
 	if err != nil {
 		g.Log().Errorf(ctx, "用户 %s 序列化房间信息失败: %v", c.userID, err)

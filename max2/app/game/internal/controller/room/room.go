@@ -382,8 +382,9 @@ func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) (poke
 
 // 检查游戏是否结束,算奖，输家剩几张牌，就输多少积分
 // 赢玩家剩余多少张牌，就赢多少积分
-func isGameOver(room *Room) (isOver bool, winer *Player, playerPoint, playerWin int64) {
+func isGameOver(room *Room) (isOver bool, overMsgData []*overMsg) {
 	var win int64 = 0
+	var winer *Player
 	for _, player := range room.Players {
 		win += int64(player.CardNum)
 		if player.CardNum == 0 {
@@ -396,12 +397,13 @@ func isGameOver(room *Room) (isOver bool, winer *Player, playerPoint, playerWin 
 		room.LastPH = 0
 		for _, player := range room.Players {
 			if player.Type == Human {
+				var playerWin int64
 				if player.ID == winer.ID {
-					player.Point += winer.Win //人类赢
-					playerWin = winer.Win
+					player.Point += winer.Win //赢的玩家
+					playerWin = winer.Win     //输的是正数
 				} else {
-					player.Point -= int64(player.CardNum) //人类输
-					playerWin = int64(player.CardNum)
+					player.Point -= int64(player.CardNum) //输的玩家
+					playerWin = -int64(player.CardNum)    //输的是负数
 				}
 				//计算抽水
 				commission := GetGameCommission()
@@ -410,11 +412,16 @@ func isGameOver(room *Room) (isOver bool, winer *Player, playerPoint, playerWin 
 				} else {
 					player.Point = 0
 				}
-				playerPoint = player.Point
+				overMsgData = append(overMsgData, &overMsg{
+					WinName: player.Name,
+					Winner:  player.ID,
+					Win:     playerWin,
+					Point:   player.Point,
+				})
 			}
 		}
 	}
-	return isOver, winer, playerPoint, playerWin
+	return isOver, overMsgData
 }
 
 // 玩一局游戏
@@ -507,27 +514,13 @@ func PlayOneGame(room *Room) {
 // 房间循环定时器
 func (room *Room) GameLoop(ctx context.Context) {
 	// 检查游戏是否结束
-	over, winner, playerPoint, playerWin := isGameOver(room)
+	over, overMsgData := isGameOver(room)
 	if over {
 		var wg sync.WaitGroup
 		wg.Add(1)
 		go func() {
 			defer wg.Done() // 使用defer确保即使发生panic也会调用Done()
-			data, _ := json.Marshal(struct {
-				WinName     string `json:"winName"`
-				Winner      int    `json:"winner"`
-				Point       int64  `json:"point"`
-				Win         int64  `json:"win"`         //当次赢分
-				PlayerPoint int64  `json:"playerPoint"` //玩家总瓜子数
-				PlayerWin   int64  `json:"playerWin"`   //玩家本局结算分数(排除抽佣)
-			}{
-				WinName:     winner.Name,
-				Winner:      winner.ID,
-				Point:       winner.Point,
-				Win:         winner.Win,
-				PlayerPoint: playerPoint,
-				PlayerWin:   playerWin,
-			})
+			data, _ := json.Marshal(overMsgData)
 			// 使用select和超时避免永久阻塞
 			msgType := "over"
 			room.safeSendRoomMessage(msgType, data)

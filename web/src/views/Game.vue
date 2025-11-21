@@ -358,6 +358,8 @@ const currentPlayerUid = ref(storage.local.get('user_id'))
 const currentPlayerId = ref(0)
 const proactivePass = ref(false) // 主动过牌标记
 
+const roomType = ref(0)
+
 
 // 监听屏幕尺寸变化
 const handleResize = () => {
@@ -456,6 +458,8 @@ const handleMessage = (data) => {
   if (parsedData.type == "getInfo") {
     data = JSON.parse(parsedData.data)
     console.log("getInfo", data);
+    //房间类型
+    roomType.value = data.type
     //确定玩家pid
     for (let i = 0; i < data.players.length; i++) {
       if (data.players[i].UserId == currentPlayerUid.value){
@@ -769,16 +773,29 @@ const handleMessage = (data) => {
     clearInterval(timer4)
     state.countdownPlayer = 0
     data = JSON.parse(parsedData.data)
-    state.lastmsg = "游戏结束，玩家: " + data.winName + "胜利,赢得:" + data.win + "颗瓜子"
+    data.forEach(winer=>{
+        if (winer.win > 0 ){
+          state.lastmsg = "游戏结束，玩家: " + winer.winName + "胜利,赢得:" + winer.win + "颗瓜子"
+        }
+      if (winer.winner == currentPlayerId ){
+        var win = Math.abs(winer.win)
+        isWinner.value = winer.win > 0
+        gameOverMessage.value = isWinner.value
+                ? `哇！恭喜你赢得了${win}颗瓜子!`
+                : `咦！你很菜,这局输了${win}颗瓜子`
 
-    state.player1Point = data.playerPoint
+        //更新总瓜子数
+        state.player1Point = winer.point
+      }
+    })
+
     // 显示游戏结束弹窗
     showGameOverModal.value = true
     // 判断当前玩家是否胜利（假设当前玩家是"帅哥1"）
-    isWinner.value = data.winner === 0
-    gameOverMessage.value = isWinner.value
-      ? `哇！恭喜你赢得了${data.playerWin}颗瓜子!`
-      : `咦！你很菜,这局输了${data.playerWin}颗瓜子`
+    // isWinner.value = data.winner === 0
+    // gameOverMessage.value = isWinner.value
+    //   ? `哇！恭喜你赢得了${data.playerWin}颗瓜子!`
+    //   : `咦！你很菜,这局输了${data.playerWin}颗瓜子`
 
     // 重置弃牌
     state.outCards = []
@@ -798,6 +815,13 @@ const handleMessage = (data) => {
     //玩家输完，跳到首页
     if (state.player1Point <= 0) {
       router.push({ path: '/index' })
+    }
+
+    //好友房，五秒后跳到房间页面
+    if (roomType.value == 2) {
+      setTimeout(()=>{
+        router.push({path:'/room'})
+      },5000)
     }
   }
 }

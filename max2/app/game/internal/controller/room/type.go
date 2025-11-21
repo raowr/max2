@@ -97,3 +97,10 @@ const (
 	SmallestPair PairType = iota // 最小的对子
 	LargestPair                  // 最大的对子
 )
+
+type overMsg struct {
+	WinName string `json:"winName"` //玩家名称
+	Winner  int    `json:"winner"`  //玩家ID
+	Point   int64  `json:"point"`   //玩家总瓜子数
+	Win     int64  `json:"win"`     //当次赢分,正数为赢，负数为输
+}

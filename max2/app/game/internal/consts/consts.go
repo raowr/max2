@@ -6,6 +6,7 @@ const (
 	InitRoom             = "initRoom"
 	CreateRoom           = "createRoom"
 	JoinRoom             = "joinRoom"
+	LeaveRoom            = "leaveRoom"
 	Play                 = "play"
 	PlayCard             = "playCard"
 	GetInfo              = "getInfo"
