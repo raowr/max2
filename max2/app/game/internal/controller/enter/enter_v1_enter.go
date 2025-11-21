@@ -477,7 +477,7 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 
 }
 
-//离开房间
+// 离开房间
 func (c *Client) handleLeaveRoom(ctx context.Context, data string) {
 	rmMu.Lock()
 	defer rmMu.Unlock()
@@ -693,7 +693,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 	var mustPid int
 
 	for _, p := range roomInfo.Players {
-		if p.ID == c.pid {
+		if p.ID == player.ID {
 			playerPoint = p.Point
 			for _, card := range p.Cards {
 				cards = append(cards, card.Id)

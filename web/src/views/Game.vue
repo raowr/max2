@@ -495,7 +495,7 @@ const handleMessage = (data) => {
         state.outCardTimeout = data.outCardTimeout
       }
       //先出牌的开始倒计时
-      startCountdown(data.current + 1, data.remainOutCardTimeout)
+      startCountdown(getPlayerPosition(data.current) + 1, data.remainOutCardTimeout)
       //如果必出是玩家，记录下必出玩家的pid
       //更新玩家总瓜子数
       state.player1Point = data.playerPoint
@@ -732,7 +732,7 @@ const handleMessage = (data) => {
     data = JSON.parse(parsedData.data)
     state.mustPid = data.mustPid
 
-    if (data.pid != currentPlayerId.value && !proactivePass.value) {
+    if (!proactivePass.value) {
       const musicPath = "guo"
       playSound(musicPath)
       startCountdown(getPlayerPosition(data.current) + 1, state.outCardTimeout)
@@ -777,7 +777,7 @@ const handleMessage = (data) => {
         if (winer.win > 0 ){
           state.lastmsg = "游戏结束，玩家: " + winer.winName + "胜利,赢得:" + winer.win + "颗瓜子"
         }
-      if (winer.winner == currentPlayerId ){
+      if (winer.winner == currentPlayerId.value ){
         var win = Math.abs(winer.win)
         isWinner.value = winer.win > 0
         gameOverMessage.value = isWinner.value

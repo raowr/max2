@@ -216,6 +216,13 @@ const init = async () => {
     // websocket.send({ "type": "getInfo", "data": "", "name": "" })
     // toggleReady();
   }
+
+    //确定player头像，存于storage
+  storage.local.set('player2avatar', getTouxiang())
+  storage.local.set('player3avatar', getTouxiang())
+  storage.local.set('player4avatar', getTouxiang())
+
+  
 }
 
 // 组件卸载时移除回调（关键：防止内存泄漏）
@@ -362,10 +369,6 @@ const toGame = () => {
     router.push({path:'/game'})
   }
 
-  //确定player头像，存于storage
-  storage.local.set('player2avatar', getTouxiang())
-  storage.local.set('player3avatar', getTouxiang())
-  storage.local.set('player4avatar', getTouxiang())
 }
 
 const leaveRoom=()=>{

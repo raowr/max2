@@ -382,7 +382,7 @@ func aiDecideCards(player, landlord *Player, lastPH int, lastCards []Card) (poke
 
 // 检查游戏是否结束,算奖，输家剩几张牌，就输多少积分
 // 赢玩家剩余多少张牌，就赢多少积分
-func isGameOver(room *Room) (isOver bool, overMsgData []*overMsg) {
+func isGameOver(room *Room) (isOver bool, overMsgData []*overMsg, winName string) {
 	var win int64 = 0
 	var winer *Player
 	for _, player := range room.Players {
@@ -390,6 +390,7 @@ func isGameOver(room *Room) (isOver bool, overMsgData []*overMsg) {
 		if player.CardNum == 0 {
 			isOver = true
 			winer = player
+			winName = player.Name
 		}
 	}
 	if winer != nil {
@@ -421,7 +422,7 @@ func isGameOver(room *Room) (isOver bool, overMsgData []*overMsg) {
 			}
 		}
 	}
-	return isOver, overMsgData
+	return isOver, overMsgData, winName
 }
 
 // 玩一局游戏
@@ -454,7 +455,7 @@ func PlayOneGame(room *Room) {
 	// 显示玩家的牌（除了底牌）
 	for _, player := range room.Players {
 		//只能显示自己的牌
-		if player.ID == int(Human) {
+		if player.Type == Human {
 			room.Landlord = player
 			cards := make([]int, 0)
 			for _, card := range room.Landlord.Cards {
@@ -514,7 +515,7 @@ func PlayOneGame(room *Room) {
 // 房间循环定时器
 func (room *Room) GameLoop(ctx context.Context) {
 	// 检查游戏是否结束
-	over, overMsgData := isGameOver(room)
+	over, overMsgData, winName := isGameOver(room)
 	if over {
 		var wg sync.WaitGroup
 		wg.Add(1)
@@ -531,7 +532,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.LastCards = make([]Card, 0)
 		room.OutStarTime = 0
 		room.passCount = 0
-		g.Log().Infof(ctx, "\n游戏结束！恭喜%s！获胜\n", winner.Name)
+		g.Log().Infof(ctx, "\n游戏结束！恭喜%s！获胜\n", winName)
 		wg.Wait()
 		return
 	}
@@ -866,7 +867,7 @@ func (room *Room) safeSendRoomMessage(msgType string, data any) {
 	}
 }
 
-//提供给外部使用
+// 提供给外部使用
 func (room *Room) SendRoomMessage(msgType string, data any) {
 	room.safeSendRoomMessage(msgType, data)
 }
