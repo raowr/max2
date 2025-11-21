@@ -525,6 +525,16 @@ func (c *Client) handleLeaveRoom(ctx context.Context, data string) {
 			}
 		}
 	}
+
+	if player.MsgChan != nil {
+		c.mutex.Lock()
+		ch := player.MsgChan
+		player.MsgChan = nil
+		c.mutex.Unlock()
+		close(ch)
+		g.Log().Infof(context.Background(), "用户 %s 离开房间 %s 后 MsgChan 关闭", c.userID, roomInfo.ID)
+	}
+
 	//移除rm中用户列表
 	delete(rm.PlayerList, c.userID)
 
