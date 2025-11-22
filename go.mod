@@ -1,6 +1,6 @@
 module game1
 
-go 1.18
+go 1.23.0
 
 require (
 	github.com/gogf/gf/v2 v2.9.3
