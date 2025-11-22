@@ -214,32 +214,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		roomInfo.CreatePlayer(aiName, room.AI)
 	}
 
-	// 推送玩家列表（处理JSON错误）
-	// 创建一个临时结构体，只包含可序列化的字段
-	type PlayerDTO struct {
-		ID      int    `json:"ID"`
-		Name    string `json:"Name"`
-		RoomID  string `json:"RoomID"`
-		Type    int    `json:"Type"`
-		CardNum int    `json:"CardNum"`
-		Point   int64  `json:"Point"`
-		UserId  string `json:"UserId"`
-		// 只包含需要序列化的字段，排除MsgChan等不可序列化字段
-	}
-
-	// 转换玩家列表为可序列化的DTO列表
-	playerDTOs := make([]PlayerDTO, len(roomInfo.Players))
-	for i, p := range roomInfo.Players {
-		playerDTOs[i] = PlayerDTO{
-			ID:      p.ID,
-			Name:    p.Name,
-			RoomID:  p.RoomID,
-			Type:    int(p.Type),
-			CardNum: p.CardNum,
-			Point:   p.Point,
-			UserId:  p.UserId,
-		}
-	}
+	playerDTOs := getPlayers(roomInfo)
 
 	players, err := json.Marshal(playerDTOs)
 	if err != nil {
@@ -278,30 +253,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		}
 
 		// 创建一个临时结构体，只包含可序列化的字段
-		type PlayerDTO struct {
-			ID      int    `json:"ID"`
-			Name    string `json:"Name"`
-			RoomID  string `json:"RoomID"`
-			Type    int    `json:"Type"`
-			CardNum int    `json:"CardNum"`
-			Point   int64  `json:"Point"`
-			UserId  string `json:"UserId"`
-			// 只包含需要序列化的字段，排除MsgChan等不可序列化字段
-		}
-
-		// 转换玩家列表为可序列化的DTO列表
-		playerDTOs := make([]PlayerDTO, len(roomInfo.Players))
-		for i, p := range roomInfo.Players {
-			playerDTOs[i] = PlayerDTO{
-				ID:      p.ID,
-				Name:    p.Name,
-				RoomID:  p.RoomID,
-				Type:    int(p.Type),
-				CardNum: p.CardNum,
-				Point:   p.Point,
-				UserId:  p.UserId,
-			}
-		}
+		playerDTOs := getPlayers(roomInfo)
 
 		players, err := json.Marshal(playerDTOs)
 		if err != nil {
@@ -335,31 +287,7 @@ func (c *Client) handleCreateRoom(ctx context.Context) {
 	rm.PlayerList[humanPlayer.UserId] = humanPlayer // 关联用户与玩家
 
 	// 推送玩家列表（处理JSON错误）
-	// 创建一个临时结构体，只包含可序列化的字段
-	type PlayerDTO struct {
-		ID      int    `json:"ID"`
-		Name    string `json:"Name"`
-		RoomID  string `json:"RoomID"`
-		Type    int    `json:"Type"`
-		CardNum int    `json:"CardNum"`
-		Point   int64  `json:"Point"`
-		UserId  string `json:"UserId"`
-		// 只包含需要序列化的字段，排除MsgChan等不可序列化字段
-	}
-
-	// 转换玩家列表为可序列化的DTO列表
-	playerDTOs := make([]PlayerDTO, len(roomInfo.Players))
-	for i, p := range roomInfo.Players {
-		playerDTOs[i] = PlayerDTO{
-			ID:      p.ID,
-			Name:    p.Name,
-			RoomID:  p.RoomID,
-			Type:    int(p.Type),
-			CardNum: p.CardNum,
-			Point:   p.Point,
-			UserId:  p.UserId,
-		}
-	}
+	playerDTOs := getPlayers(roomInfo)
 
 	players, err := json.Marshal(playerDTOs)
 	if err != nil {
@@ -436,30 +364,7 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 
 	// 推送玩家列表（处理JSON错误）
 	// 创建一个临时结构体，只包含可序列化的字段
-	type PlayerDTO struct {
-		ID      int    `json:"ID"`
-		Name    string `json:"Name"`
-		RoomID  string `json:"RoomID"`
-		Type    int    `json:"Type"`
-		CardNum int    `json:"CardNum"`
-		Point   int64  `json:"Point"`
-		UserId  string `json:"UserId"`
-		// 只包含需要序列化的字段，排除MsgChan等不可序列化字段
-	}
-
-	// 转换玩家列表为可序列化的DTO列表
-	playerDTOs := make([]PlayerDTO, len(roomInfo.Players))
-	for i, p := range roomInfo.Players {
-		playerDTOs[i] = PlayerDTO{
-			ID:      p.ID,
-			Name:    p.Name,
-			RoomID:  p.RoomID,
-			Type:    int(p.Type),
-			CardNum: p.CardNum,
-			Point:   p.Point,
-			UserId:  p.UserId,
-		}
-	}
+	playerDTOs := getPlayers(roomInfo)
 
 	//players, err := json.Marshal(playerDTOs)
 	//if err != nil {
@@ -542,30 +447,7 @@ func (c *Client) handleLeaveRoom(ctx context.Context, data string) {
 	delete(rm.PlayerList, c.userID)
 
 	// 创建一个临时结构体，只包含可序列化的字段
-	type PlayerDTO struct {
-		ID      int    `json:"ID"`
-		Name    string `json:"Name"`
-		RoomID  string `json:"RoomID"`
-		Type    int    `json:"Type"`
-		CardNum int    `json:"CardNum"`
-		Point   int64  `json:"Point"`
-		UserId  string `json:"UserId"`
-		// 只包含需要序列化的字段，排除MsgChan等不可序列化字段
-	}
-
-	// 转换玩家列表为可序列化的DTO列表
-	playerDTOs := make([]PlayerDTO, len(roomInfo.Players))
-	for i, p := range roomInfo.Players {
-		playerDTOs[i] = PlayerDTO{
-			ID:      p.ID,
-			Name:    p.Name,
-			RoomID:  p.RoomID,
-			Type:    int(p.Type),
-			CardNum: p.CardNum,
-			Point:   p.Point,
-			UserId:  p.UserId,
-		}
-	}
+	playerDTOs := getPlayers(roomInfo)
 
 	//应该通知到房间内每个人
 	roomInfo.SendRoomMessage(consts.JoinRoom, playerDTOs)
@@ -733,34 +615,12 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 	lastPid := (current - 1 + 4) % 4
 
 	// 创建一个临时结构体，只包含可序列化的字段
-	type PlayerDTO struct {
-		ID      int    `json:"ID"`
-		Name    string `json:"Name"`
-		RoomID  string `json:"RoomID"`
-		Type    int    `json:"Type"`
-		CardNum int    `json:"CardNum"`
-		Point   int64  `json:"Point"`
-		UserId  string `json:"UserId"`
-	}
-
-	// 转换玩家列表为可序列化的DTO列表
-	playerDTOs := make([]PlayerDTO, len(roomInfo.Players))
-	for i, p := range roomInfo.Players {
-		playerDTOs[i] = PlayerDTO{
-			ID:      p.ID,
-			Name:    p.Name,
-			RoomID:  p.RoomID,
-			Type:    int(p.Type),
-			CardNum: p.CardNum,
-			Point:   p.Point,
-			UserId:  p.UserId,
-		}
-	}
+	playerDTOs := getPlayers(roomInfo)
 
 	// 6. 序列化并推送（处理JSON错误）
 	resData, err := json.Marshal(struct {
 		RoomId               string              `json:"roomId"`
-		Players              []PlayerDTO         `json:"players"`
+		Players              []*PlayerDTO        `json:"players"`
 		Cards                []int               `json:"cards"`
 		Current              int                 `json:"current"`
 		PlayerPoint          int64               `json:"playerPoint"`

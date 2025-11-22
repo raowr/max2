@@ -12,7 +12,7 @@
         <div class="back-btn" @click="leaveRoom">
           <img src="@/assets/img/ui/img_return1_bg.png" alt="返回按钮背景">
           <img src="@/assets/img/ui/img_return1.png" alt="返回" style="position: absolute; left: 0; top: 0;">
-          <img src="@/assets/img/ui/txt_friendroom.png" alt="好友房间" class="room-title">
+          <img :src="getRoomTitleImage()" alt="房间标题" class="room-title">
         </div>
       </div>
 
@@ -184,6 +184,7 @@ const state = reactive({
 })
 const userId = ref('')
 const playerId  = ref(0)
+const roomType = ref(0)
 onMounted(() => {
   init()
 })
@@ -252,6 +253,9 @@ const handleMessage = (data) => {
         const serverPlayers = JSON.parse(parsedData.data)
 
         state.roomId=serverPlayers[0].RoomID
+        //房间类型
+        roomType.value = serverPlayers[0].RoomType
+
         // 智能合并数据
         initPlayers(serverPlayers)
 
@@ -266,6 +270,8 @@ const handleMessage = (data) => {
           // 解析JSON字符串
       const data = JSON.parse(parsedData.data)
       state.roomId=data.roomId
+      //房间类型
+      roomType.value = data.type
      if (data.isPlaying && route.name !== "Game") {
         router.push('/game')  // 跳转到游戏页面
      }else {
@@ -279,6 +285,8 @@ const handleMessage = (data) => {
         const serverPlayers = JSON.parse(parsedData.data)
 
         state.roomId=serverPlayers[0].RoomID
+        //房间类型
+        roomType.value = serverPlayers[0].RoomType
         // 智能合并数据
         initPlayers(serverPlayers)
 
@@ -377,7 +385,19 @@ const leaveRoom=()=>{
   router.push({path:'/index'})
 }
 
-
+const getRoomTitleImage = () => {
+  // 根据房间类型返回不同的图片路径
+  switch (roomType.value) {
+    case 1:
+      return new URL('@/assets/img/ui/duanweifang.png', import.meta.url).href; // 好友房
+    case 2:
+      // 如果有其他类型的房间标题图片，可以在这里添加
+      return new URL('@/assets/img/ui/txt_friendroom.png', import.meta.url).href;
+    default:
+      // 默认使用当前的房间标题图片
+      return new URL('@/assets/img/ui/duanweifang.png', import.meta.url).href;
+  }
+}
 
 </script>
 <style scoped>
@@ -479,8 +499,8 @@ body {
 
 .room-title {
   position: absolute;
-  left: 110px;
-  top: 15px;
+  left: 100px;
+  top: 0px;
 }
 
 .main-content {
@@ -860,7 +880,7 @@ body {
 
 .room-title {
     position: absolute;
-    left: 42px;
+    left: 40px;
     top: 0px;
 }
 .player-card {

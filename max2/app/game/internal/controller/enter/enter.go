@@ -43,6 +43,20 @@ var (
 	allowedOrigin = room.GetAllowedOrigin() // 生产环境需替换为实际域名
 )
 
+// 推送玩家列表（处理JSON错误）
+// 创建一个临时结构体，只包含可序列化的字段
+type PlayerDTO struct {
+	ID       int    `json:"ID"`
+	Name     string `json:"Name"`
+	RoomID   string `json:"RoomID"`
+	Type     int    `json:"Type"`
+	CardNum  int    `json:"CardNum"`
+	Point    int64  `json:"Point"`
+	UserId   string `json:"UserId"`
+	RoomType int    `json:"RoomType"`
+	// 只包含需要序列化的字段，排除MsgChan等不可序列化字段
+}
+
 func init() {
 	// 初始化全局房间管理器（带锁保护）
 	rmMu.Lock()
@@ -104,4 +118,22 @@ func removeClients(userIDs []string) error {
 		}
 	}
 	return nil
+}
+
+func getPlayers(roomInfo *room.Room) []*PlayerDTO {
+	// 转换玩家列表为可序列化的DTO列表
+	playerDTOs := make([]*PlayerDTO, len(roomInfo.Players))
+	for i, p := range roomInfo.Players {
+		playerDTOs[i] = &PlayerDTO{
+			ID:       p.ID,
+			Name:     p.Name,
+			RoomID:   p.RoomID,
+			Type:     int(p.Type),
+			CardNum:  p.CardNum,
+			Point:    p.Point,
+			UserId:   p.UserId,
+			RoomType: roomInfo.Type,
+		}
+	}
+	return playerDTOs
 }
