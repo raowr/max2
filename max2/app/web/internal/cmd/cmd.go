@@ -18,6 +18,7 @@ var (
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			s := g.Server()
 			s.AddSearchPath("./resource/dist")
+			s.AddSearchPath("./resource/public")
 			s.AddStaticPath("/public", "./resource/public") // 映射公共目录
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
