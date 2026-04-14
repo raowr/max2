@@ -13,6 +13,7 @@ import (
 
 	v1 "game/api/enter/v1"
 	"game/internal/consts"
+	"game/internal/controller/log"
 	"game/internal/controller/room"
 	"game/internal/message"
 
@@ -207,6 +208,19 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 	c.pid = humanPlayer.ID
 	rm.PlayerList[humanPlayer.UserId] = humanPlayer // 关联用户与玩家
 
+	//发送日志 创建房间
+	log.SendLog(log.LogInfo{
+		RoomID:     roomInfo.ID,
+		Type:       roomInfo.Type,
+		Status:     roomInfo.Status,
+		UserID:     humanPlayer.UserId,
+		Point:      humanPlayer.Point, //积分
+		Action:     consts.InitRoom,   //行为
+		Remain:     make([]string, 0), //剩余牌
+		OutCardIds: make([]int, 0),    //玩家单次打出的牌id
+		Text:       "",                //完整信息
+	})
+
 	// 创建AI玩家，随机ai人数
 	aiCount := grand.N(0, 3)
 	for i := 0; i < aiCount; i++ {
@@ -301,6 +315,19 @@ func (c *Client) handleCreateRoom(ctx context.Context) {
 	}
 	c.safeSendMessage(ctx, msgData)
 
+	//发送日志 创建房间
+	log.SendLog(log.LogInfo{
+		RoomID:     roomInfo.ID,
+		Type:       roomInfo.Type,
+		Status:     roomInfo.Status,
+		UserID:     humanPlayer.UserId,
+		Point:      humanPlayer.Point, //积分
+		Action:     consts.InitRoom,   //行为
+		Remain:     make([]string, 0), //剩余牌
+		OutCardIds: make([]int, 0),    //玩家单次打出的牌id
+		Text:       "",                //完整信息
+	})
+
 }
 
 // 处理加入房间
@@ -350,9 +377,10 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 		}
 	}
 	//不在房间再加入房间，在房间直接返回房间数据
+	var humanPlayer *room.Player
 	if !inRoom {
 		playerName := "好友"
-		humanPlayer := roomInfo.CreatePlayer(playerName, room.Human)
+		humanPlayer = roomInfo.CreatePlayer(playerName, room.Human)
 		humanPlayer.UserId = c.userID
 		c.pid = humanPlayer.ID
 		humanPlayer.Name = playerName + gconv.String(humanPlayer.ID)
@@ -380,6 +408,18 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 	roomInfo.SendRoomMessage(consts.JoinRoom, playerDTOs)
 	//c.safeSendMessage(ctx, msgData)
 
+	//发送日志 加入房间
+	log.SendLog(log.LogInfo{
+		RoomID:     roomInfo.ID,
+		Type:       roomInfo.Type,
+		Status:     roomInfo.Status,
+		UserID:     c.userID,
+		Point:      humanPlayer.Point, //积分
+		Action:     consts.JoinRoom,   //行为
+		Remain:     make([]string, 0), //剩余牌
+		OutCardIds: make([]int, 0),    //玩家单次打出的牌id
+		Text:       "",                //完整信息
+	})
 }
 
 // 离开房间
@@ -452,6 +492,19 @@ func (c *Client) handleLeaveRoom(ctx context.Context, data string) {
 	//应该通知到房间内每个人
 	roomInfo.SendRoomMessage(consts.JoinRoom, playerDTOs)
 
+	//发送日志 离开房间
+	log.SendLog(log.LogInfo{
+		RoomID:     roomInfo.ID,
+		Type:       roomInfo.Type,
+		Status:     roomInfo.Status,
+		UserID:     c.userID,
+		Point:      player.Point,      //积分
+		Action:     consts.LeaveRoom,  //行为
+		Remain:     make([]string, 0), //剩余牌
+		OutCardIds: make([]int, 0),    //玩家单次打出的牌id
+		Text:       "",                //完整信息
+	})
+
 }
 
 // 处理开始游戏
@@ -494,6 +547,18 @@ func (c *Client) handlePlay(ctx context.Context) {
 	}
 	room.PlayOneGame(roomInfo)
 
+	//发送日志 开始游戏
+	log.SendLog(log.LogInfo{
+		RoomID:     roomInfo.ID,
+		Type:       roomInfo.Type,
+		Status:     roomInfo.Status,
+		UserID:     c.userID,
+		Point:      player.Point,      //积分
+		Action:     consts.Play,       //行为
+		Remain:     make([]string, 0), //剩余牌
+		OutCardIds: make([]int, 0),    //玩家单次打出的牌id
+		Text:       "",                //完整信息
+	})
 }
 
 // 处理出牌

@@ -495,6 +495,8 @@ func PlayOneGame(room *Room) {
 			}(player) // 传入当前玩家
 		}
 		showPlayerCards(player)
+
+		//发送日志 发牌 显示玩家的牌
 	}
 	// ... existing code ...
 	// ... existing code ...
@@ -525,6 +527,11 @@ func (room *Room) GameLoop(ctx context.Context) {
 			// 使用select和超时避免永久阻塞
 			msgType := "over"
 			room.safeSendRoomMessage(msgType, data)
+			//发送日志 结算游戏
+			for _, v := range overMsgData {
+				g.Log().Infof(ctx, "游戏每个用户结算信息：%v, %v, %v, %v\n", v.Winner, v.Win, v.Point, v.WinName)
+
+			}
 		}()
 		room.Rgtimer.Stop()
 		room.IsPlaying = false
@@ -766,6 +773,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 			room.LastCards = []Card{}
 			room.passCount = 0
 		}
+		//发送日志 玩家不出牌
 	} else {
 		// 出牌
 		g.Log().Infof(ctx, "%s出了: %s (%v)\n", currentPlayer.Name, showCards(selectedCards), cardType)
@@ -783,6 +791,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.LastPH = cardType
 		room.LastCards = selectedCards
 		room.passCount = 0
+		//发送日志 玩家出牌
 	}
 	room.OutStarTime = 0 //人类出牌时间恢复为0
 	currentPlayer.OutCardIds = make([]int, 0)
