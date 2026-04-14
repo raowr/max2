@@ -27,6 +27,7 @@ var (
 			})
 			s.SetPort(8000)
 			s.Run()
+			log.ShutdownLog() // 服务器停止后关闭日志系统
 			return nil
 		},
 	}
