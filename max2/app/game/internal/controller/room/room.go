@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"game/internal/controller/log"
 	"math/rand"
 	"strings"
 	"sync"
@@ -201,7 +202,8 @@ func dealCards(deck []Card, players []*Player) {
 }
 
 // 显示玩家的牌
-func showPlayerCards(player *Player) {
+func (room *Room) showPlayerCards(player *Player) {
+	var logCardsStr string
 	if player.Type == Human {
 		g.Log().Infof(ctx, "%s的牌: ", player.Name)
 		// 创建牌名切片
@@ -213,13 +215,38 @@ func showPlayerCards(player *Player) {
 		// 使用 strings.Join 连接，自动处理分隔符
 		cardsList := strings.Join(cardNames, ",")
 		g.Log().Infof(ctx, "%s", cardsList)
+		logCardsStr = cardsList
 	} else {
 		g.Log().Infof(ctx, "%s的牌: ", player.Name)
+		logCardsSlice := []string{}
 		for i, v := range player.handPattern {
 			g.Log().Infof(ctx, "牌型：%d,具体的牌：%v ", i, v)
+			var cardNameGroupSlice []string
+			for _, group := range v {
+				var cardNameSlice []string
+				var cardNameStr string
+				for _, card := range group {
+					cardNameSlice = append(cardNameSlice, card.Name)
+				}
+				cardNameStr = "[" + strings.Join(cardNameSlice, ",") + "]"
+				cardNameGroupSlice = append(cardNameGroupSlice, cardNameStr)
+			}
+			logCardsSlice = append(logCardsSlice, fmt.Sprintf("牌型：%d,具体的牌：%v", i, cardNameGroupSlice))
 		}
+		logCardsStr = strings.Join(logCardsSlice, ";")
 	}
-
+	//发送日志 发牌 显示玩家的牌
+	log.SendLog(log.LogInfo{
+		RoomID:     room.ID,
+		Type:       room.Type,
+		Status:     room.Status,
+		UserID:     player.UserId,
+		Point:      player.Point, //积分
+		Action:     "showCard",   //行为
+		Remain:     logCardsStr,  //剩余牌
+		OutCardIds: "",           //玩家单次打出的牌id
+		Text:       "",           //完整信息
+	})
 }
 
 // 确定谁先出牌
@@ -494,9 +521,7 @@ func PlayOneGame(room *Room) {
 				}
 			}(player) // 传入当前玩家
 		}
-		showPlayerCards(player)
-
-		//发送日志 发牌 显示玩家的牌
+		room.showPlayerCards(player)
 	}
 	// ... existing code ...
 	// ... existing code ...
@@ -530,7 +555,19 @@ func (room *Room) GameLoop(ctx context.Context) {
 			//发送日志 结算游戏
 			for _, v := range overMsgData {
 				g.Log().Infof(ctx, "游戏每个用户结算信息：%v, %v, %v, %v\n", v.Winner, v.Win, v.Point, v.WinName)
-
+				for _, player := range room.Players {
+					if player.ID == v.Winner {
+						log.SendLog(log.LogInfo{
+							RoomID: room.ID,
+							Type:   room.Type,
+							Status: room.Status,
+							UserID: player.UserId,
+							Point:  player.Point,             //积分
+							Action: "over",                   //行为
+							Remain: getPlayerCardStr(player), //剩余牌
+						})
+					}
+				}
 			}
 		}()
 		room.Rgtimer.Stop()
@@ -546,7 +583,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	currentPlayer := room.Players[room.Current]
 	g.Log().Infof(ctx, "\n%s的回合 (当前手牌数: %d)\n", currentPlayer.Name, currentPlayer.CardNum)
-	showPlayerCards(currentPlayer)
+	// room.showPlayerCards(currentPlayer)
 	g.Log().Infof(ctx, "上一手牌，牌型: %v, 牌是：%s\n", room.LastPH, showCards(room.LastCards))
 	g.Log().Infof(ctx, "请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): ")
 
@@ -774,6 +811,15 @@ func (room *Room) GameLoop(ctx context.Context) {
 			room.passCount = 0
 		}
 		//发送日志 玩家不出牌
+		log.SendLog(log.LogInfo{
+			RoomID: room.ID,
+			Type:   room.Type,
+			Status: room.Status,
+			UserID: currentPlayer.UserId,
+			Point:  currentPlayer.Point,             //积分
+			Action: "pass",                          //行为
+			Remain: getPlayerCardStr(currentPlayer), //剩余牌
+		})
 	} else {
 		// 出牌
 		g.Log().Infof(ctx, "%s出了: %s (%v)\n", currentPlayer.Name, showCards(selectedCards), cardType)
@@ -792,6 +838,16 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.LastCards = selectedCards
 		room.passCount = 0
 		//发送日志 玩家出牌
+		log.SendLog(log.LogInfo{
+			RoomID:     room.ID,
+			Type:       room.Type,
+			Status:     room.Status,
+			UserID:     currentPlayer.UserId,
+			Point:      currentPlayer.Point,             //积分
+			Action:     "outCard",                       //行为
+			Remain:     getPlayerCardStr(currentPlayer), //剩余牌
+			OutCardIds: showCards(selectedCards),
+		})
 	}
 	room.OutStarTime = 0 //人类出牌时间恢复为0
 	currentPlayer.OutCardIds = make([]int, 0)

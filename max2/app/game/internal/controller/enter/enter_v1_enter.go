@@ -216,8 +216,8 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		UserID:     humanPlayer.UserId,
 		Point:      humanPlayer.Point, //积分
 		Action:     consts.InitRoom,   //行为
-		Remain:     make([]string, 0), //剩余牌
-		OutCardIds: make([]int, 0),    //玩家单次打出的牌id
+		Remain:     "",                //剩余牌
+		OutCardIds: "",                //玩家单次打出的牌id
 		Text:       "",                //完整信息
 	})
 
@@ -323,8 +323,8 @@ func (c *Client) handleCreateRoom(ctx context.Context) {
 		UserID:     humanPlayer.UserId,
 		Point:      humanPlayer.Point, //积分
 		Action:     consts.InitRoom,   //行为
-		Remain:     make([]string, 0), //剩余牌
-		OutCardIds: make([]int, 0),    //玩家单次打出的牌id
+		Remain:     "",                //剩余牌
+		OutCardIds: "",                //玩家单次打出的牌id
 		Text:       "",                //完整信息
 	})
 
@@ -416,8 +416,8 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 		UserID:     c.userID,
 		Point:      humanPlayer.Point, //积分
 		Action:     consts.JoinRoom,   //行为
-		Remain:     make([]string, 0), //剩余牌
-		OutCardIds: make([]int, 0),    //玩家单次打出的牌id
+		Remain:     "",                //剩余牌
+		OutCardIds: "",                //玩家单次打出的牌id
 		Text:       "",                //完整信息
 	})
 }
@@ -498,11 +498,11 @@ func (c *Client) handleLeaveRoom(ctx context.Context, data string) {
 		Type:       roomInfo.Type,
 		Status:     roomInfo.Status,
 		UserID:     c.userID,
-		Point:      player.Point,      //积分
-		Action:     consts.LeaveRoom,  //行为
-		Remain:     make([]string, 0), //剩余牌
-		OutCardIds: make([]int, 0),    //玩家单次打出的牌id
-		Text:       "",                //完整信息
+		Point:      player.Point,     //积分
+		Action:     consts.LeaveRoom, //行为
+		Remain:     "",               //剩余牌
+		OutCardIds: "",               //玩家单次打出的牌id
+		Text:       "",               //完整信息
 	})
 
 }
@@ -553,11 +553,11 @@ func (c *Client) handlePlay(ctx context.Context) {
 		Type:       roomInfo.Type,
 		Status:     roomInfo.Status,
 		UserID:     c.userID,
-		Point:      player.Point,      //积分
-		Action:     consts.Play,       //行为
-		Remain:     make([]string, 0), //剩余牌
-		OutCardIds: make([]int, 0),    //玩家单次打出的牌id
-		Text:       "",                //完整信息
+		Point:      player.Point, //积分
+		Action:     consts.Play,  //行为
+		Remain:     "",           //剩余牌
+		OutCardIds: "",           //玩家单次打出的牌id
+		Text:       "",           //完整信息
 	})
 }
 
@@ -861,18 +861,6 @@ func (c *Client) writeLoop(ctx context.Context) {
 					return
 				}
 			case <-ctx.Done():
-				roomInfo := rm.Rooms[roomID]
-				log.SendLog(log.LogInfo{
-					RoomID:     roomID,
-					Type:       roomInfo.Type,
-					Status:     roomInfo.Status,
-					UserID:     c.userID,
-					Point:      player.Point,      //积分
-					Action:     consts.LeaveRoom,  //行为
-					Remain:     make([]string, 0), //剩余牌
-					OutCardIds: make([]int, 0),    //玩家单次打出的牌id
-					Text:       "",                //完整信息
-				})
 				g.Log().Infof(ctx, "用户 %s writeLoop退出2 房间 %s", c.userID, roomID)
 				return
 			}

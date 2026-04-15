@@ -1,8 +1,11 @@
 package room
 
 import (
+	"fmt"
 	"sort"
 	"strings"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 // 按牌面排序
@@ -620,7 +623,7 @@ func showCards(cards []Card) string {
 	for _, card := range cards {
 		names = append(names, card.Name)
 	}
-	return strings.Join(names, " ")
+	return strings.Join(names, ",")
 }
 
 // 找到所有可能出现对子中最小的对子
@@ -745,4 +748,38 @@ func findLargestPair(pairs [][]Card) []Card {
 		}
 	}
 	return largest
+}
+
+// 获取玩家牌字符串
+func getPlayerCardStr(player *Player) string {
+	var logCardsStr string
+	if player.Type == Human {
+		// 创建牌名切片
+		cardNames := make([]string, len(player.Cards))
+		for i, card := range player.Cards {
+			cardNames[i] = card.Name
+		}
+
+		// 使用 strings.Join 连接，自动处理分隔符
+		cardsList := strings.Join(cardNames, ",")
+		g.Log().Infof(ctx, "%s", cardsList)
+		logCardsStr = cardsList
+	} else {
+		logCardsSlice := []string{}
+		for i, v := range player.handPattern {
+			var cardNameGroupSlice []string
+			for _, group := range v {
+				var cardNameSlice []string
+				var cardNameStr string
+				for _, card := range group {
+					cardNameSlice = append(cardNameSlice, card.Name)
+				}
+				cardNameStr = "[" + strings.Join(cardNameSlice, ",") + "]"
+				cardNameGroupSlice = append(cardNameGroupSlice, cardNameStr)
+			}
+			logCardsSlice = append(logCardsSlice, fmt.Sprintf("牌型：%d,具体的牌：%v", i, cardNameGroupSlice))
+		}
+		logCardsStr = strings.Join(logCardsSlice, ";")
+	}
+	return logCardsStr
 }
