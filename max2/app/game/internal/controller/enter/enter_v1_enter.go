@@ -861,18 +861,6 @@ func (c *Client) writeLoop(ctx context.Context) {
 					return
 				}
 			case <-ctx.Done():
-				roomInfo := rm.Rooms[roomID]
-				log.SendLog(log.LogInfo{
-					RoomID:     roomID,
-					Type:       roomInfo.Type,
-					Status:     roomInfo.Status,
-					UserID:     c.userID,
-					Point:      player.Point,      //积分
-					Action:     consts.LeaveRoom,  //行为
-					Remain:     make([]string, 0), //剩余牌
-					OutCardIds: make([]int, 0),    //玩家单次打出的牌id
-					Text:       "",                //完整信息
-				})
 				g.Log().Infof(ctx, "用户 %s writeLoop退出2 房间 %s", c.userID, roomID)
 				return
 			}
