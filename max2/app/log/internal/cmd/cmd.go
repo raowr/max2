@@ -10,6 +10,7 @@ import (
 	"log/internal/controller/hello"
 )
 
+// 此处修改为grpc方式
 var (
 	Main = gcmd.Command{
 		Name:  "main",
