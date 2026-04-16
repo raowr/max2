@@ -1,0 +1,24 @@
+// protoc --go_out=plugins=grpc:. *.proto
+
+syntax = "proto3";
+
+package log_game.v1;
+
+option go_package = "api/log_game/v1;v1";
+
+service LogGame{
+    rpc SendLog(SendLogReq) returns (SendLogRes) {}
+}
+
+message SendLogReq {
+    string RoomID = 1; // v: required
+    int32 Type = 2; 
+    int32 Status = 3; 
+    string UserID =4;
+    int64 Point=5;
+    string Action=6;
+    string Remain=7;
+    string OutCardIds=8;
+    string Text=9;
+}
+message SendLogRes {}
