@@ -8,6 +8,8 @@ require (
 	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
 	github.com/emirpasic/gods/v2 v2.0.0-alpha // indirect
+	github.com/go-sql-driver/mysql v1.7.1 // indirect
+	github.com/gogf/gf/contrib/drivers/mysql/v2 v2.10.0 // indirect
 	github.com/gogf/gf/contrib/registry/file/v2 v2.10.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
