@@ -1,0 +1,17 @@
+// protoc --go_out=plugins=grpc:. *.proto
+
+syntax = "proto3";
+
+package set_game.v1;
+
+option go_package = "api/set_game/v1;v1";
+
+service SetGame{
+    rpc SendSet(SendSetReq) returns (SendSetRes) {}
+}
+
+message SendSetReq {
+    string Key = 1; // v: required
+    string value = 2; // v: required
+}
+message SendSetRes {}

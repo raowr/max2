@@ -10,5 +10,6 @@ package boot
 import (
 	_ "gfast/internal/app/common/logic"
 	_ "gfast/internal/app/log/logic"
+	_ "gfast/internal/app/set/logic"
 	_ "gfast/internal/app/system/logic"
 )
