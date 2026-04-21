@@ -10,12 +10,26 @@ import (
 
 	"gfast/internal/app/set/model/do"
 
+	"github.com/gogf/gf/contrib/registry/etcd/v2"
 	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/net/gclient"
+	"github.com/gogf/gf/v2/net/gsel"
+	"github.com/gogf/gf/v2/net/gsvc"
+)
+
+var (
+	client *gclient.Client
 )
 
 func init() {
 	service.RegisterSetGame(New())
+
+	gsvc.SetRegistry(etcd.New(`127.0.0.1:2379`))
+	gsel.SetBuilder(gsel.NewBuilderRoundRobin())
+	client = g.Client()
+	client.SetDiscovery(gsvc.GetRegistry())
+
 }
 
 func New() *sSetGame {
@@ -57,18 +71,15 @@ func (s *sSetGame) Update(ctx context.Context, req *set.SetGameUpdateReq) (err e
 				Value: req.Value,
 			}
 			_, e := dao.SetGame.Ctx(ctx).TX(tx).WherePri(req.Id).Update(data)
-			go func() {
-				r, _ := g.Client().Post(
-					ctx,
-					"http://127.0.0.1:8002/set",
-					g.Map{
+			if e == nil {
+				go func() {
+					res := client.PostContent(ctx, `http://api-service.svc/set`, g.Map{
 						"key":   req.Key,
 						"value": req.Value,
-					},
-				)
-				r.Close()
-			}()
-
+					})
+					g.Log().Info(ctx, res)
+				}()
+			}
 			if err != nil {
 				panic(err)
 			}
