@@ -1,0 +1,15 @@
+2026-04-22T23:11:04.072+08:00 [INFO] {7ca2ce6774b6a818f9767b2b5bae6ccc} D:/gowork/max2/gfast/internal/cmd/cmd.go:25: 
+   ____________           __ 
+  / ____/ ____/___ ______/ /_
+ / / __/ /_  / __ `/ ___/ __/
+/ /_/ / __/ / /_/ (__  ) /_  
+\____/_/    \__,_/____/\__/   Version: 3.3.9
+2026-04-22T23:11:04.353+08:00 [DEBU] D:/gowork/max2/gfast/internal/cmd/cmd.go:33: etcd put success with key "/service/default/default/default/latest/172.20.10.3:8808", value "{"insecure":true,"protocol":"http"}", lease "7587894349409097041"
+2026-04-22T23:31:09.043+08:00 [INFO] {789eacf58cb7a818c90e873d7d45fe69} D:/gowork/max2/gfast/internal/cmd/cmd.go:25: 
+   ____________           __ 
+  / ____/ ____/___ ______/ /_
+ / / __/ /_  / __ `/ ___/ __/
+/ /_/ / __/ / /_/ (__  ) /_  
+\____/_/    \__,_/____/\__/   Version: 3.3.9
+2026-04-22T23:31:09.247+08:00 [DEBU] D:/gowork/max2/gfast/internal/cmd/cmd.go:33: etcd put success with key "/service/default/default/default/latest/172.20.10.3:8808", value "{"insecure":true,"protocol":"http"}", lease "7587894349409097045"
+2026-04-22T23:32:36.921+08:00 [INFO] {e426a16ba1b7a818cb0e873d67d58759} D:/gowork/pkg/mod/github.com/tiger1103/gfast-token@v1.0.10/gftoken/gftoken.go:108: token is invalid

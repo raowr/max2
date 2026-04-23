@@ -1,0 +1,96 @@
+2026-04-23T00:23:36.909+08:00 {b405df8b69baa81876b8e5325cbe6d23} 200 "POST http localhost:8808 /api/v1/system/login HTTP/1.1" 1430611.000, ::1, "http://172.20.10.3:8888/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0", 1003, "open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.", ""
+Stack:
+1. open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.
+   1).  gfast/library/liberr.NewCode
+        D:/gowork/max2/gfast/library/liberr/err.go:38
+   2).  gfast/library/liberr.ErrIsNil
+        D:/gowork/max2/gfast/library/liberr/err.go:26
+   3).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules.func1
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:148
+   4).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:133
+   5).  gfast/internal/app/system/controller.(*loginController).Login
+        D:/gowork/max2/gfast/internal/app/system/controller/sys_login.go:89
+   6).  gfast/internal/app/common/logic/middleware.(*sMiddleware).MiddlewareCORS
+        D:/gowork/max2/gfast/internal/app/common/logic/middleware/middleware.go:31
+
+2026-04-23T00:23:45.869+08:00 {a48581e56bbaa81879b8e5321c12b7ac} 200 "POST http localhost:8808 /api/v1/system/login HTTP/1.1" 296954.300, ::1, "http://172.20.10.3:8888/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0", 1003, "open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.", ""
+Stack:
+1. open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.
+   1).  gfast/library/liberr.NewCode
+        D:/gowork/max2/gfast/library/liberr/err.go:38
+   2).  gfast/library/liberr.ErrIsNil
+        D:/gowork/max2/gfast/library/liberr/err.go:26
+   3).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules.func1
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:148
+   4).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:133
+   5).  gfast/internal/app/system/controller.(*loginController).Login
+        D:/gowork/max2/gfast/internal/app/system/controller/sys_login.go:89
+   6).  gfast/internal/app/common/logic/middleware.(*sMiddleware).MiddlewareCORS
+        D:/gowork/max2/gfast/internal/app/common/logic/middleware/middleware.go:31
+
+2026-04-23T00:23:47.549+08:00 {0cec1e4c6cbaa8187cb8e5320958a731} 200 "POST http localhost:8808 /api/v1/system/login HTTP/1.1" 254798.500, ::1, "http://172.20.10.3:8888/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0", 1003, "open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.", ""
+Stack:
+1. open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.
+   1).  gfast/library/liberr.NewCode
+        D:/gowork/max2/gfast/library/liberr/err.go:38
+   2).  gfast/library/liberr.ErrIsNil
+        D:/gowork/max2/gfast/library/liberr/err.go:26
+   3).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules.func1
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:148
+   4).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:133
+   5).  gfast/internal/app/system/controller.(*loginController).Login
+        D:/gowork/max2/gfast/internal/app/system/controller/sys_login.go:89
+   6).  gfast/internal/app/common/logic/middleware.(*sMiddleware).MiddlewareCORS
+        D:/gowork/max2/gfast/internal/app/common/logic/middleware/middleware.go:31
+
+2026-04-23T00:23:48.748+08:00 {eca3b18f6cbaa8187fb8e5327b52aa9c} 200 "POST http localhost:8808 /api/v1/system/login HTTP/1.1" 320481.700, ::1, "http://172.20.10.3:8888/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0", 1003, "open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.", ""
+Stack:
+1. open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.
+   1).  gfast/library/liberr.NewCode
+        D:/gowork/max2/gfast/library/liberr/err.go:38
+   2).  gfast/library/liberr.ErrIsNil
+        D:/gowork/max2/gfast/library/liberr/err.go:26
+   3).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules.func1
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:148
+   4).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:133
+   5).  gfast/internal/app/system/controller.(*loginController).Login
+        D:/gowork/max2/gfast/internal/app/system/controller/sys_login.go:89
+   6).  gfast/internal/app/common/logic/middleware.(*sMiddleware).MiddlewareCORS
+        D:/gowork/max2/gfast/internal/app/common/logic/middleware/middleware.go:31
+
+2026-04-23T00:23:49.467+08:00 {fc29c8ba6cbaa81882b8e5322d648f0c} 200 "POST http localhost:8808 /api/v1/system/login HTTP/1.1" 316583.600, ::1, "http://172.20.10.3:8888/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0", 1003, "open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.", ""
+Stack:
+1. open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.
+   1).  gfast/library/liberr.NewCode
+        D:/gowork/max2/gfast/library/liberr/err.go:38
+   2).  gfast/library/liberr.ErrIsNil
+        D:/gowork/max2/gfast/library/liberr/err.go:26
+   3).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules.func1
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:148
+   4).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:133
+   5).  gfast/internal/app/system/controller.(*loginController).Login
+        D:/gowork/max2/gfast/internal/app/system/controller/sys_login.go:89
+   6).  gfast/internal/app/common/logic/middleware.(*sMiddleware).MiddlewareCORS
+        D:/gowork/max2/gfast/internal/app/common/logic/middleware/middleware.go:31
+
+2026-04-23T00:23:49.968+08:00 {9c7b9fd86cbaa81885b8e532eb4bc1c9} 200 "POST http localhost:8808 /api/v1/system/login HTTP/1.1" 316164.000, ::1, "http://172.20.10.3:8888/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0", 1003, "open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.", ""
+Stack:
+1. open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.
+   1).  gfast/library/liberr.NewCode
+        D:/gowork/max2/gfast/library/liberr/err.go:38
+   2).  gfast/library/liberr.ErrIsNil
+        D:/gowork/max2/gfast/library/liberr/err.go:26
+   3).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules.func1
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:148
+   4).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:133
+   5).  gfast/internal/app/system/controller.(*loginController).Login
+        D:/gowork/max2/gfast/internal/app/system/controller/sys_login.go:89
+   6).  gfast/internal/app/common/logic/middleware.(*sMiddleware).MiddlewareCORS
+        D:/gowork/max2/gfast/internal/app/common/logic/middleware/middleware.go:31
+

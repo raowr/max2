@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="992b7c79-c234-43e9-8f21-aadab89c7b3a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/max2/app/user/api/register/v1/register.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/boot/boot.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/common/consts/err_code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/libResponse/response.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/libRouter/router.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/libUtils/slice_tree.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/libUtils/utils.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/liberr/err.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/liberr/err_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/logic/cache/cache.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/logic/logic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/service/cache.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/max2/app/user/manifest/config/config.yaml.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/max2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/max2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/max2/app/api-service/__debug_bin.exe1885939646" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/max2/app/user/api/hello/hello.go" beforeDir="false" afterPath="$PROJECT_DIR$/max2/app/user/api/hello/hello.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/max2/app/user/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/max2/app/user/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/max2/app/user/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/max2/app/user/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/max2/app/user/hack/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/max2/app/user/hack/config.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../goRoot" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="3CiQmItyvX2FDCXlFfzBo0hFKWi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "configurable..is.expanded": "false",
+    "configurable.GoLibrariesConfigurable.is.expanded": "true",
+    "go.import.settings.migrated": "true",
+    "last_opened_file_path": "D:/gowork/max2/max2/app/user/internal/common/consts",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors",
+    "ts.external.directory.path": "D:\\gowork\\max2\\gfast-ui\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\gowork\max2\max2\app\user\internal\common\consts" />
+      <recent name="D:\gowork\max2\max2\app\user\internal" />
+      <recent name="D:\gowork\max2\max2\app\user\manifest" />
+      <recent name="D:\gowork\max2\max2\app\user" />
+      <recent name="D:\gowork\max2\max2\app\user\internal\logic" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Build.gfast">
+    <configuration name="api-service" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="max2" />
+      <working_directory value="$PROJECT_DIR$/max2/app/api-service" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$/max2/app/api-service" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="gfast" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="max2" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="DIRECTORY" />
+      <package value="$PROJECT_DIR$/gfast" />
+      <directory value="$PROJECT_DIR$/gfast" />
+      <filePath value="$PROJECT_DIR$/../max2|$PROJECT_DIR$/gfast" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Go Build.gfast" />
+      <item itemvalue="Go Build.api-service" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>

@@ -1,0 +1,7 @@
+2026-04-23T00:21:15.724+08:00 [INFO] {0813d30149baa81873b8e53232c1b87d} D:/gowork/max2/gfast/internal/cmd/cmd.go:25: 
+   ____________           __ 
+  / ____/ ____/___ ______/ /_
+ / / __/ /_  / __ `/ ___/ __/
+/ /_/ / __/ / /_/ (__  ) /_  
+\____/_/    \__,_/____/\__/   Version: 3.3.9
+2026-04-23T00:21:15.947+08:00 [DEBU] D:/gowork/max2/gfast/internal/cmd/cmd.go:33: etcd put success with key "/service/default/default/default/latest/172.20.10.3:8808", value "{"insecure":true,"protocol":"http"}", lease "7587894349409097050"

@@ -1,0 +1,32 @@
+2026-04-22T23:32:52.300+08:00 {d8097554a4b7a818cf0e873dd465f3cd} 200 "POST http localhost:8808 /api/v1/system/login HTTP/1.1" 2883251.700, ::1, "http://172.20.10.3:8888/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0", 1003, "open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.", ""
+Stack:
+1. open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.
+   1).  gfast/library/liberr.NewCode
+        D:/gowork/max2/gfast/library/liberr/err.go:38
+   2).  gfast/library/liberr.ErrIsNil
+        D:/gowork/max2/gfast/library/liberr/err.go:26
+   3).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules.func1
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:148
+   4).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:133
+   5).  gfast/internal/app/system/controller.(*loginController).Login
+        D:/gowork/max2/gfast/internal/app/system/controller/sys_login.go:89
+   6).  gfast/internal/app/common/logic/middleware.(*sMiddleware).MiddlewareCORS
+        D:/gowork/max2/gfast/internal/app/common/logic/middleware/middleware.go:31
+
+2026-04-22T23:34:11.339+08:00 {c0d9cfdeb6b7a818d30e873d77a5293e} 200 "POST http localhost:8808 /api/v1/system/login HTTP/1.1" 2292067.100, ::1, "http://172.20.10.3:8888/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0", 1003, "open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.", ""
+Stack:
+1. open ./resource/casbin/rbac_model.conf: The system cannot find the path specified.
+   1).  gfast/library/liberr.NewCode
+        D:/gowork/max2/gfast/library/liberr/err.go:38
+   2).  gfast/library/liberr.ErrIsNil
+        D:/gowork/max2/gfast/library/liberr/err.go:26
+   3).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules.func1
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:148
+   4).  gfast/internal/app/system/logic/sysUser.(*sSysUser).GetAdminRules
+        D:/gowork/max2/gfast/internal/app/system/logic/sysUser/sys_user.go:133
+   5).  gfast/internal/app/system/controller.(*loginController).Login
+        D:/gowork/max2/gfast/internal/app/system/controller/sys_login.go:89
+   6).  gfast/internal/app/common/logic/middleware.(*sMiddleware).MiddlewareCORS
+        D:/gowork/max2/gfast/internal/app/common/logic/middleware/middleware.go:31
+

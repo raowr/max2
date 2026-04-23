@@ -1,0 +1,4 @@
+2026-04-23T00:21:15.773+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8808/swagger/
+2026-04-23T00:21:15.773+08:00 [INFO] pid[10128]: http server started listening on [:8808]
+2026-04-23T00:21:15.775+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8808/api.json
+2026-04-23T00:21:15.922+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:default Version: Endpoints:172.20.10.3:8808 Metadata:map[insecure:true protocol:http]}
