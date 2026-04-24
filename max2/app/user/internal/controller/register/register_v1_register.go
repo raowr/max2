@@ -2,14 +2,15 @@ package register
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/crypto/gmd5"
-	"github.com/gogf/gf/v2/database/gdb"
-	"github.com/gogf/gf/v2/frame/g"
 	"user/internal/dao"
 	"user/internal/library/liberr"
 	"user/internal/model/do"
 
-	"user/api/register/v1"
+	"github.com/gogf/gf/v2/crypto/gmd5"
+	"github.com/gogf/gf/v2/database/gdb"
+	"github.com/gogf/gf/v2/frame/g"
+
+	v1 "user/api/register/v1"
 	"user/internal/service"
 )
 
@@ -51,15 +52,19 @@ func (c *ControllerV1) Register(ctx context.Context, req *v1.RegisterReq) (res *
 	err = g.DB().Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		err = g.Try(ctx, func(ctx context.Context) {
 			//注册用户
-			_, e := dao.Users.Ctx(ctx).TX(tx).Insert(do.Users{
+			password, err := gmd5.Encrypt(req.Password)
+			if err != nil {
+				panic(err)
+			}
+			_, err = dao.Users.Ctx(ctx).TX(tx).Insert(do.Users{
 				Name:     req.Username,
-				Password: gmd5.Encrypt(req.Password),
+				Password: password,
 			})
-			if e != nil {
-				panic(e)
+			if err != nil {
+				panic(err)
 			}
 			//缓存用户名
-			service.Cache().Set(ctx, req.Username, req.Username, 60*5)
+			service.Cache().Set(ctx, req.Username, password, 60*5)
 		})
 		return err
 	})

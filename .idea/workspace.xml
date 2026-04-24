@@ -4,29 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="992b7c79-c234-43e9-8f21-aadab89c7b3a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/max2/app/user/api/register/v1/register.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/boot/boot.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/common/consts/err_code.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/libResponse/response.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/libRouter/router.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/libUtils/slice_tree.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/libUtils/utils.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/liberr/err.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/library/liberr/err_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/logic/cache/cache.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/logic/logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/internal/service/cache.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/max2/app/user/manifest/config/config.yaml.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/max2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/max2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/max2/app/api-service/__debug_bin.exe1885939646" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/max2/app/user/api/hello/hello.go" beforeDir="false" afterPath="$PROJECT_DIR$/max2/app/user/api/hello/hello.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/max2/app/user/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/max2/app/user/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/max2/app/user/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/max2/app/user/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/max2/app/user/hack/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/max2/app/user/hack/config.yaml" afterDir="false" />
+    <list default="true" id="992b7c79-c234-43e9-8f21-aadab89c7b3a" name="Changes" comment="增加用户注册">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +100,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="增加用户注册" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加用户注册" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
