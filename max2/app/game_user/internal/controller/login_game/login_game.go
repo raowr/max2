@@ -2,11 +2,11 @@ package login_game
 
 import (
 	"context"
+	"encoding/json"
 	v1 "game_user/api/login_game/v1"
+	"game_user/internal/service"
 
 	"github.com/gogf/gf/contrib/rpc/grpcx/v2"
-	"github.com/gogf/gf/v2/errors/gcode"
-	"github.com/gogf/gf/v2/errors/gerror"
 )
 
 type Controller struct {
@@ -18,5 +18,10 @@ func Register(s *grpcx.GrpcServer) {
 }
 
 func (*Controller) SendLogin(ctx context.Context, req *v1.SendLoginReq) (res *v1.SendLoginRes, err error) {
-	return nil, gerror.NewCode(gcode.CodeNotImplemented)
+	reqJson, err := json.Marshal(req)
+	if err != nil {
+		return nil, err
+	}
+	service.Cache().Set(ctx, req.Token, reqJson, 7*24*60*60)
+	return nil, nil
 }

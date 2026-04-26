@@ -26,7 +26,7 @@ import (
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/text/gstr"
 
-	"user/internal/common/consts"
+	"user/internal/consts"
 )
 
 // EncryptPassword 密码加密

@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "game_user/internal/boot"
 	_ "game_user/internal/packed"
 
 	"github.com/gogf/gf/v2/os/gctx"

@@ -6,8 +6,8 @@
 package cache
 
 import (
-	"user/internal/consts"
-	"user/internal/service"
+	"game_user/internal/consts"
+	"game_user/internal/service"
 
 	"github.com/tiger1103/gfast-cache/cache"
 

@@ -16,11 +16,8 @@ import (
 
 	loginGameGrpc "user/api/login_game/v1"
 
-	"github.com/gogf/gf/contrib/registry/etcd/v2"
 	"github.com/gogf/gf/v2/crypto/gmd5"
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/net/gsel"
-	"github.com/gogf/gf/v2/net/gsvc"
 	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -74,11 +71,6 @@ func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.Log
 			liberr.ErrIsNil(ctx, err, "用户名或密码错误")
 		}
 		//选择游戏服务器
-		gsvc.SetRegistry(etcd.New(`127.0.0.1:2379`))
-
-		gsel.SetBuilder(gsel.NewBuilderRoundRobin())
-		selected, _, _ := gsel.GetBuilder().Build().Pick(ctx)
-		targetNode := selected.Address()
 		res.Node = targetNode
 
 		// 生成token

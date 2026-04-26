@@ -11,19 +11,49 @@ import (
 
 	"github.com/gogf/gf/contrib/registry/etcd/v2"
 	"github.com/gogf/gf/contrib/rpc/grpcx/v2"
+	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/peer"
 )
 
 var (
-	ctx    context.Context
-	conn   *grpc.ClientConn
-	client loginGameGrpc.LoginGameClient
+	ctx        context.Context
+	conn       *grpc.ClientConn
+	client     loginGameGrpc.LoginGameClient
+	targetNode string
 )
 
 func init() {
 	grpcx.Resolver.Register(etcd.New("127.0.0.1:2379"))
 	ctx = gctx.New()
-	conn = grpcx.Client.MustNewGrpcClientConn("game")
+	conn = grpcx.Client.MustNewGrpcClientConn("game_user",
+		grpcx.Balancer.WithRandom(),
+		grpc.WithUnaryInterceptor(unaryPickNodeInterceptor()))
 	client = loginGameGrpc.NewLoginGameClient(conn)
+}
+
+// 客户端拦截器：获取当前 gRPC 访问的节点地址
+func unaryPickNodeInterceptor() grpc.UnaryClientInterceptor {
+	return func(
+		ctx context.Context,
+		method string,
+		req, reply interface{},
+		cc *grpc.ClientConn,
+		invoker grpc.UnaryInvoker,
+		opts ...grpc.CallOption,
+	) error {
+		// 执行 gRPC 调用
+		err := invoker(ctx, method, req, reply, cc, opts...)
+		if err != nil {
+			return err
+		}
+
+		// ✅ 这里直接拿到真实节点！
+		if p, ok := peer.FromContext(ctx); ok {
+			targetNode = p.Addr.String()
+			g.Log().Info(ctx, "✅ 当前选中节点：", p.Addr.String())
+		}
+		return nil
+	}
 }
