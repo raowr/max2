@@ -10,4 +10,5 @@ type Users struct {
 	Name     string `json:"name"     orm:"name"     description:"用户名称"`
 	Password string `json:"password" orm:"password" description:"用户密码"`
 	Point    int64  `json:"point"    orm:"point"    description:"用户分数"`
+	Token    string `json:"token"    orm:"token"    description:"登录token"`
 }

@@ -59,6 +59,8 @@ func (c *ControllerV1) Register(ctx context.Context, req *v1.RegisterReq) (res *
 			_, err = dao.Users.Ctx(ctx).TX(tx).Insert(do.Users{
 				Name:     req.Username,
 				Password: password,
+				Point:    100,
+				Token:    "",
 			})
 			if err != nil {
 				panic(err)

@@ -15,4 +15,5 @@ type Users struct {
 	Name     any // 用户名称
 	Password any // 用户密码
 	Point    any // 用户分数
+	Token    any // 登录token
 }

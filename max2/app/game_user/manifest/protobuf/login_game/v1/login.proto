@@ -1,0 +1,19 @@
+// protoc --go_out=plugins=grpc:. *.proto
+
+syntax = "proto3";
+
+package login_game.v1;
+
+option go_package = "api/login_game/v1;v1";
+
+service LoginGame{
+    rpc SendLogin(SendLoginReq) returns (SendLoginRes) {}
+}
+
+message SendLoginReq {
+    string UserId = 1; // v: required
+    string UserName = 2;// v: required
+    string Token = 3; // v: required
+    string Point = 4; // v: required
+}
+message SendLoginRes {}

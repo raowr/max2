@@ -3,3 +3,27 @@
 // =================================================================================
 
 package login
+
+import (
+	"context"
+
+	loginGameGrpc "user/api/login_game/v1"
+
+	"github.com/gogf/gf/contrib/registry/etcd/v2"
+	"github.com/gogf/gf/contrib/rpc/grpcx/v2"
+	"github.com/gogf/gf/v2/os/gctx"
+	"google.golang.org/grpc"
+)
+
+var (
+	ctx    context.Context
+	conn   *grpc.ClientConn
+	client loginGameGrpc.LoginGameClient
+)
+
+func init() {
+	grpcx.Resolver.Register(etcd.New("127.0.0.1:2379"))
+	ctx = gctx.New()
+	conn = grpcx.Client.MustNewGrpcClientConn("game")
+	client = loginGameGrpc.NewLoginGameClient(conn)
+}
