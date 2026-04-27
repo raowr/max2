@@ -13,7 +13,6 @@ import (
 
 	"game_user/internal/controller/enter"
 	"game_user/internal/controller/log"
-	"game_user/internal/controller/login_game"
 	"game_user/internal/controller/set_game"
 )
 
@@ -61,7 +60,6 @@ var (
 				)
 				gs := grpcx.Server.New(c)
 				set_game.Register(gs)
-				login_game.Register(gs)
 				gs.Run()
 			}()
 

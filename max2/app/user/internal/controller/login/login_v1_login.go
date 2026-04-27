@@ -3,6 +3,7 @@ package login
 import (
 	"context"
 	"encoding/json"
+	"math/rand"
 	"time"
 
 	v1 "user/api/login/v1"
@@ -14,11 +15,8 @@ import (
 
 	"user/internal/consts"
 
-	loginGameGrpc "user/api/login_game/v1"
-
 	"github.com/gogf/gf/v2/crypto/gmd5"
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/golang-jwt/jwt/v5"
 )
 
@@ -70,8 +68,17 @@ func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.Log
 		if password != reqPassword {
 			liberr.ErrIsNil(ctx, err, "用户名或密码错误")
 		}
+		res.Username = req.Username
+		res.Point = entUser.Point
 		//选择游戏服务器
-		res.Node = targetNode
+		// 2. 获取全部节点
+		endpoints := serviceGsvc.GetEndpoints()
+
+		// 3. 随机选一个
+		randomNode := endpoints[rand.Intn(len(endpoints))]
+
+		// 4. 拿到地址（IP:端口）
+		res.Node = randomNode.String()
 
 		// 生成token
 		uc := &jwtClaims{
@@ -89,20 +96,13 @@ func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.Log
 		if err != nil {
 			liberr.ErrIsNil(ctx, err, "登录失败")
 		}
-		service.Cache().Set(ctx, "user:"+req.Username, jsonStr, 60*60)
+		service.Cache().Set(ctx, "user:"+req.Username, jsonStr, 7*24*time.Hour)
 		//修改数据库
 		_, err = dao.Users.Ctx(ctx).Where("id", entUser.Id).Update("token", res.Token)
 		if err != nil {
 			liberr.ErrIsNil(ctx, err, "登录失败")
 		}
 
-		//发送token到游戏服务器
-		_, err = client.SendLogin(ctx, &loginGameGrpc.SendLoginReq{
-			UserId:   gconv.String(entUser.Id),
-			UserName: entUser.Name,
-			Token:    res.Token,
-			Point:    gconv.String(entUser.Point),
-		})
 		if err != nil {
 			liberr.ErrIsNil(ctx, err, "登录失败")
 		}

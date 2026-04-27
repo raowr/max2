@@ -2,9 +2,12 @@ package register
 
 import (
 	"context"
+	"encoding/json"
+	"time"
 	"user/internal/dao"
 	"user/internal/library/liberr"
 	"user/internal/model/do"
+	"user/internal/model/entity"
 
 	"github.com/gogf/gf/v2/crypto/gmd5"
 	"github.com/gogf/gf/v2/database/gdb"
@@ -56,7 +59,7 @@ func (c *ControllerV1) Register(ctx context.Context, req *v1.RegisterReq) (res *
 			if err != nil {
 				panic(err)
 			}
-			_, err = dao.Users.Ctx(ctx).TX(tx).Insert(do.Users{
+			result, err := dao.Users.Ctx(ctx).TX(tx).Insert(do.Users{
 				Name:     req.Username,
 				Password: password,
 				Point:    100,
@@ -65,8 +68,23 @@ func (c *ControllerV1) Register(ctx context.Context, req *v1.RegisterReq) (res *
 			if err != nil {
 				panic(err)
 			}
+			userId, err := result.LastInsertId()
+			if err != nil {
+				panic(err)
+			}
+			entUser := entity.Users{
+				Id:       uint(userId),
+				Name:     req.Username,
+				Password: password,
+				Token:    "",
+				Point:    100,
+			}
+			jsonStr, err := json.Marshal(entUser)
+			if err != nil {
+				liberr.ErrIsNil(ctx, err, "登录失败")
+			}
 			//缓存用户名
-			service.Cache().Set(ctx, req.Username, password, 60*5)
+			service.Cache().Set(ctx, "user:"+req.Username, jsonStr, 7*24*time.Hour)
 		})
 		return err
 	})

@@ -8,7 +8,18 @@ type LoginReq struct {
 	Password string `json:"password"`
 }
 type LoginRes struct {
+	g.Meta   `mime:"application/json"`
+	Username string `json:"username"`
+	Token    string `json:"token"`
+	Node     string `json:"node"`
+	Point    int64  `json:"point"`
+}
+
+type LogoutReq struct {
+	g.Meta   `path:"/logout" tags:"Logout" method:"post" summary:"Logout"`
+	Username string `json:"username" v:"required"`
+	Token    string `json:"token"`
+}
+type LogoutRes struct {
 	g.Meta `mime:"application/json"`
-	Token  string `json:"token"`
-	Node   string `json:"node"`
 }
