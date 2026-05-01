@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"game_user/internal/consts"
 	"game_user/internal/controller/log"
+	"game_user/internal/message"
 	"math/rand"
 	"strings"
 	"sync"
 	"time"
 
+	"github.com/gogf/gf/v2/encoding/gjson"
 	"github.com/gogf/gf/v2/os/gtime"
 
 	"github.com/gogf/gf/v2/util/grand"
@@ -618,6 +620,27 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	} else {
 		msg, _ := room.subClient.Receive(ctx)
+		msgJson, err := gjson.DecodeToJson(msg.String())
+		if err != nil {
+			g.Log().Errorf(ctx, "用户 %s 消息解码失败: %v", currentPlayer.Name, err)
+			return
+		}
+		// 7. 最后在锁外发送消息
+		msgData := message.ChatMsg{}
+		msgJson.Scan(&msgData)
+		var reqData struct {
+			Pid     int   `json:"pid"`
+			CardIds []int `json:"cardIds"`
+			Pass    int   `json:"pass"`
+		}
+		err = gconv.Struct(msgData.Data, &reqData)
+		if err != nil {
+			// 处理错误
+			g.Log().Errorf(ctx, "用户 %s 消息解码失败: %v", currentPlayer.Name, err)
+		}
+		currentPlayer.OutCardIds = reqData.CardIds
+		currentPlayer.Pass = reqData.Pass
+
 		//记录开始出牌时间
 		now := int(time.Now().Unix())
 		if room.OutStarTime == 0 {

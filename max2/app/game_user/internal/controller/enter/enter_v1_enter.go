@@ -713,10 +713,10 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 	}
 
 	// 更新玩家出牌信息
-	rmMu.Lock()
-	player.OutCardIds = reqData.CardIds
-	player.Pass = reqData.Pass
-	rmMu.Unlock()
+	// rmMu.Lock()
+	// player.OutCardIds = reqData.CardIds
+	// player.Pass = reqData.Pass
+	// rmMu.Unlock()
 
 	//发布出牌
 	msgData := message.ChatMsg{
