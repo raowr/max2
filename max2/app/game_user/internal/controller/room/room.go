@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"game_user/internal/consts"
 	"game_user/internal/controller/log"
 	"math/rand"
 	"strings"
@@ -39,9 +40,6 @@ func (room *Room) CreatePlayer(name string, playerType PlayerType) *Player {
 		RoomID:      room.ID,
 		//UserId: 	 generateUserID(),//初始化用户ID
 	}
-	if player.Type == Human {
-		player.MsgChan = make(chan RoomMsg, 100) // 初始化玩家消息通道
-	}
 	room.Players = append(room.Players, player) //加入房间
 	room.NextPlayerID++
 	return player
@@ -61,8 +59,6 @@ func (rm *RoomManager) CreateRoom(roomType int) *Room {
 		Status:    0, //未开始
 		Type:      roomType,
 	}
-	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
-	room.Rgtimer.Stop() //先停止
 
 	// 添加AI机器人
 	//for i := 0; i < aiCount; i++ {
@@ -535,7 +531,16 @@ func PlayOneGame(room *Room) {
 
 	// 游戏主循环
 	// passCount := 0
-	room.Rgtimer.Start()
+	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
+	// room.Rgtimer.Stop() //先停止
+	// room.Rgtimer.Start()
+	sub, _, err := g.Redis().Subscribe(ctx, consts.PlayerMsgPrefix+room.Players[room.Current].Name)
+	if err != nil {
+		g.Log().Error(ctx, "writeLoop 订阅失败:", err)
+		return
+	}
+	room.subClient = sub
+	room.pubClient = g.Redis()
 
 }
 
@@ -612,6 +617,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		}
 
 	} else {
+		msg, _ := room.subClient.Receive(ctx)
 		//记录开始出牌时间
 		now := int(time.Now().Unix())
 		if room.OutStarTime == 0 {

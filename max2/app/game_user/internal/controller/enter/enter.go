@@ -10,8 +10,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/gogf/gf/v2/database/gredis"
 	"github.com/gogf/gf/v2/os/gcache"
 	"github.com/gorilla/websocket"
+	"github.com/manveru/faker"
 )
 
 var (
@@ -19,19 +21,23 @@ var (
 	cacheCtx    = context.Background()
 	// 缓存键常量
 	cacheKeyPrefix = "ws:client:"
+
+	fake *faker.Faker
+
+	err error
 )
 
 // 客户端连接结构体
 type Client struct {
 	conn      *websocket.Conn    // WebSocket 连接
-	userID    string             // 用户标识（用于重连）
+	userName  string             // 用户标识（用于重连）
 	heartbeat time.Time          // 最后心跳时间
-	sendChan  chan []byte        // 消息发送通道，增大缓冲避免阻塞
 	pid       int                // 玩家id
-	roomChan  chan *room.Room    //房间通道
 	cancel    context.CancelFunc // 添加取消函数
 	mutex     sync.RWMutex       // 新增：保护 conn 等字段的并发访问
 	closed    int32              // 添加原子关闭标记
+	subClient *gredis.Redis      // 订阅客户端
+	pubClient *gredis.Redis      // 发布客户端
 }
 
 // 全局房间管理器及并发安全锁（核心优化：解决全局资源竞争）
@@ -66,6 +72,11 @@ func init() {
 	rmMu.Unlock()
 
 	clientCache = gcache.New()
+
+	fake, err = faker.New("zh")
+	if err != nil {
+		panic(err)
+	}
 
 }
 
@@ -131,7 +142,7 @@ func getPlayers(roomInfo *room.Room) []*PlayerDTO {
 			Type:     int(p.Type),
 			CardNum:  p.CardNum,
 			Point:    p.Point,
-			UserId:   p.UserId,
+			UserId:   p.UserName,
 			RoomType: roomInfo.Type,
 		}
 	}

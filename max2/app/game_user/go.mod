@@ -7,7 +7,9 @@ require (
 	github.com/gogf/gf/contrib/registry/etcd/v2 v2.8.3
 	github.com/gogf/gf/contrib/rpc/grpcx/v2 v2.10.0
 	github.com/gogf/gf/v2 v2.10.0
+	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/gorilla/websocket v1.5.3
+	github.com/manveru/faker v0.0.0-20171103152722-9fbc68a78c4d
 	github.com/tiger1103/gfast-cache v1.0.12
 	google.golang.org/grpc v1.68.1
 	google.golang.org/protobuf v1.34.2
@@ -39,6 +41,7 @@ require (
 	github.com/grokify/html-strip-tags-go v0.1.0 // indirect
 	github.com/klauspost/compress v1.12.3 // indirect
 	github.com/magiconair/properties v1.8.10 // indirect
+	github.com/manveru/gobdd v0.0.0-20131210092515-f1a17fdd710b // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
