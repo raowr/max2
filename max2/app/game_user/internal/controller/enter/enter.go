@@ -87,7 +87,7 @@ func getClientCacheKey(userID string) string {
 
 // 添加客户端到缓存
 func addClient(client *Client) error {
-	cacheKey := getClientCacheKey(client.userID)
+	cacheKey := getClientCacheKey(client.userName)
 	return clientCache.Set(cacheCtx, cacheKey, client, time.Hour)
 }
 

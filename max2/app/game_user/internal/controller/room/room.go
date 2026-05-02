@@ -238,7 +238,7 @@ func (room *Room) showPlayerCards(player *Player) {
 		RoomID:     room.ID,
 		Type:       room.Type,
 		Status:     room.Status,
-		UserID:     player.UserId,
+		UserID:     player.UserName,
 		Point:      player.Point, //积分
 		Action:     "showCard",   //行为
 		Remain:     logCardsStr,  //剩余牌
@@ -475,6 +475,14 @@ func PlayOneGame(room *Room) {
 			player.Solve()
 		}
 	}
+	//开始监听玩家出牌
+	sub, _, err := g.Redis().Subscribe(ctx, consts.PlayerMsgPrefix+room.Players[room.Current].Name)
+	if err != nil {
+		g.Log().Error(ctx, "writeLoop 订阅失败:", err)
+		return
+	}
+	room.subClient = sub
+	room.pubClient = g.Redis()
 
 	// ... existing code ...
 	// 显示玩家的牌（除了底牌）
@@ -500,22 +508,36 @@ func PlayOneGame(room *Room) {
 				})
 				msgType := "showCard"
 
-				// 先加锁保护MsgChan的访问
-				room.mutex.RLock()
-				msgChan := humanPlayer.MsgChan
-				room.mutex.RUnlock()
+				// // 先加锁保护MsgChan的访问
+				// room.mutex.RLock()
+				// msgChan := humanPlayer.MsgChan
+				// room.mutex.RUnlock()
 
-				// 直接向人类玩家的消息通道发送消息，而不是发送给所有玩家
-				if msgChan != nil {
-					select {
-					case msgChan <- RoomMsg{
-						Type: msgType,
-						Data: gconv.String(data),
-					}:
-						// 发送成功
-					default:
-						g.Log().Warningf(ctx, "发送给玩家 %s 的手牌消息阻塞（通道满）", humanPlayer.Name)
-					}
+				// // 直接向人类玩家的消息通道发送消息，而不是发送给所有玩家
+				// if msgChan != nil {
+				// 	select {
+				// 	case msgChan <- RoomMsg{
+				// 		Type: msgType,
+				// 		Data: gconv.String(data),
+				// 	}:
+				// 		// 发送成功
+				// 	default:
+				// 		g.Log().Warningf(ctx, "发送给玩家 %s 的手牌消息阻塞（通道满）", humanPlayer.Name)
+				// 	}
+				// }
+
+				//发送玩家牌信息
+				msg := RoomMsg{
+					Type: msgType,
+					Data: gconv.String(data),
+				}
+				msgBytes, err := gjson.Encode(msg)
+				if err != nil {
+					g.Log().Errorf(ctx, "用户 %s 消息编码失败: %v", player.UserName, err)
+				}
+				_, err = room.pubClient.Publish(ctx, consts.PlayerMsgPrefix+player.UserName, msgBytes)
+				if err != nil {
+					g.Log().Errorf(ctx, "用户 %s 发送消息失败: %v", player.UserName, err)
 				}
 			}(player) // 传入当前玩家
 		}
@@ -536,13 +558,6 @@ func PlayOneGame(room *Room) {
 	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
 	// room.Rgtimer.Stop() //先停止
 	// room.Rgtimer.Start()
-	sub, _, err := g.Redis().Subscribe(ctx, consts.PlayerMsgPrefix+room.Players[room.Current].Name)
-	if err != nil {
-		g.Log().Error(ctx, "writeLoop 订阅失败:", err)
-		return
-	}
-	room.subClient = sub
-	room.pubClient = g.Redis()
 
 }
 
@@ -568,7 +583,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 							RoomID: room.ID,
 							Type:   room.Type,
 							Status: room.Status,
-							UserID: player.UserId,
+							UserID: player.UserName,
 							Point:  player.Point,             //积分
 							Action: "over",                   //行为
 							Remain: getPlayerCardStr(player), //剩余牌
@@ -844,7 +859,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 			RoomID: room.ID,
 			Type:   room.Type,
 			Status: room.Status,
-			UserID: currentPlayer.UserId,
+			UserID: currentPlayer.UserName,
 			Point:  currentPlayer.Point,             //积分
 			Action: "pass",                          //行为
 			Remain: getPlayerCardStr(currentPlayer), //剩余牌
@@ -871,7 +886,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 			RoomID:     room.ID,
 			Type:       room.Type,
 			Status:     room.Status,
-			UserID:     currentPlayer.UserId,
+			UserID:     currentPlayer.UserName,
 			Point:      currentPlayer.Point,             //积分
 			Action:     "outCard",                       //行为
 			Remain:     getPlayerCardStr(currentPlayer), //剩余牌
@@ -920,43 +935,58 @@ func (room *Room) GameLoop(ctx context.Context) {
 // 安全发送消息的函数
 func (room *Room) safeSendRoomMessage(msgType string, data any) {
 	// 先加锁保护Players切片的访问
-	room.mutex.RLock()
+	// room.mutex.RLock()
 	players := room.Players
-	room.mutex.RUnlock()
+	// room.mutex.RUnlock()
 
 	// 转换数据为字符串形式
-	dataStr := gconv.String(data)
+	// dataStr := gconv.String(data)
 
 	// 遍历每个玩家，分别发送消息
 	for _, player := range players {
 		// 为每个玩家单独创建一个goroutine发送消息
 		go func(p *Player) {
-			// 在访问MsgChan之前获取读锁
-			room.mutex.RLock()
-			msgChan := p.MsgChan // 保存MsgChan的引用
-			room.mutex.RUnlock() // 立即释放锁，避免长时间持有
 
-			// 检查玩家消息通道是否存在
-			if msgChan != nil {
-				// 使用函数包装发送操作并添加recover
-				func() {
-					defer func() {
-						if r := recover(); r != nil {
-							g.Log().Errorf(ctx, "发送给玩家 %s 的消息发生panic: %v", p.Name, r)
-						}
-					}()
-
-					select {
-					case msgChan <- RoomMsg{
-						Type: msgType,
-						Data: dataStr,
-					}:
-						// 发送成功
-					default:
-						g.Log().Warningf(ctx, "玩家 %s 的消息发送阻塞（通道满）", p.Name)
-					}
-				}()
+			//发送玩家牌信息
+			msg := RoomMsg{
+				Type: msgType,
+				Data: gconv.String(data),
 			}
+			msgBytes, err := gjson.Encode(msg)
+			if err != nil {
+				g.Log().Errorf(ctx, "用户 %s 消息编码失败: %v", player.UserName, err)
+			}
+			_, err = room.pubClient.Publish(ctx, consts.PlayerMsgPrefix+player.UserName, msgBytes)
+			if err != nil {
+				g.Log().Errorf(ctx, "用户 %s 发送消息失败: %v", player.UserName, err)
+			}
+
+			// // 在访问MsgChan之前获取读锁
+			// room.mutex.RLock()
+			// msgChan := p.MsgChan // 保存MsgChan的引用
+			// room.mutex.RUnlock() // 立即释放锁，避免长时间持有
+
+			// // 检查玩家消息通道是否存在
+			// if msgChan != nil {
+			// 	// 使用函数包装发送操作并添加recover
+			// 	func() {
+			// 		defer func() {
+			// 			if r := recover(); r != nil {
+			// 				g.Log().Errorf(ctx, "发送给玩家 %s 的消息发生panic: %v", p.Name, r)
+			// 			}
+			// 		}()
+
+			// 		select {
+			// 		case msgChan <- RoomMsg{
+			// 			Type: msgType,
+			// 			Data: dataStr,
+			// 		}:
+			// 			// 发送成功
+			// 		default:
+			// 			g.Log().Warningf(ctx, "玩家 %s 的消息发送阻塞（通道满）", p.Name)
+			// 		}
+			// 	}()
+			// }
 		}(player) // 注意这里使用闭包捕获player变量
 	}
 }
