@@ -4,9 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	log_gamev1 "game_user/api/log_game/v1"
+	v1 "game_user/api/settle/v1"
 	"game_user/internal/consts"
-	"game_user/internal/controller/log"
+	"game_user/internal/controller/log_game"
+	"game_user/internal/controller/settle"
 	"game_user/internal/message"
+	"game_user/internal/service"
 	"math/rand"
 	"strings"
 	"sync"
@@ -38,10 +42,29 @@ func (room *Room) CreatePlayer(name string, playerType PlayerType) *Player {
 		Type:        playerType,
 		handPattern: make(map[int][][]Card),
 		CardNum:     13,
-		Point:       GetGameInitPoint(), //初始积分
+		Point:       0, //GetGameInitPoint(), //初始积分
 		RoomID:      room.ID,
 		//UserId: 	 generateUserID(),//初始化用户ID
 	}
+	//如果是好友房初始化默认积分，如果是段位房使用玩家积累的积分
+	if room.Type == 1 {
+		userInfo := service.Cache().Get(ctx, "user:"+name)
+		entUser := Users{}
+		if userInfo == nil {
+			g.Log().Errorf(ctx, "用户不存在")
+
+		}
+		//缓存有，验证密码正确
+		if err := json.Unmarshal(userInfo.Bytes(), &entUser); err != nil {
+			g.Log().Errorf(ctx, "用户名或密码错误")
+
+		}
+		player.Point = entUser.Point
+	}
+	if room.Type == 2 {
+		player.Point = GetGameInitPoint()
+	}
+
 	room.Players = append(room.Players, player) //加入房间
 	room.NextPlayerID++
 	return player
@@ -234,10 +257,10 @@ func (room *Room) showPlayerCards(player *Player) {
 		logCardsStr = strings.Join(logCardsSlice, ";")
 	}
 	//发送日志 发牌 显示玩家的牌
-	log.SendLog(log.LogInfo{
+	log_game.SendLog(&log_gamev1.SendLogReq{
 		RoomID:     room.ID,
-		Type:       room.Type,
-		Status:     room.Status,
+		Type:       int32(room.Type),
+		Status:     int32(room.Status),
 		UserID:     player.UserName,
 		Point:      player.Point, //积分
 		Action:     "showCard",   //行为
@@ -579,16 +602,42 @@ func (room *Room) GameLoop(ctx context.Context) {
 				g.Log().Infof(ctx, "游戏每个用户结算信息：%v, %v, %v, %v\n", v.Winner, v.Win, v.Point, v.WinName)
 				for _, player := range room.Players {
 					if player.ID == v.Winner {
-						log.SendLog(log.LogInfo{
+						log_game.SendLog(&log_gamev1.SendLogReq{
 							RoomID: room.ID,
-							Type:   room.Type,
-							Status: room.Status,
+							Type:   int32(room.Type),
+							Status: int32(room.Status),
 							UserID: player.UserName,
 							Point:  player.Point,             //积分
 							Action: "over",                   //行为
 							Remain: getPlayerCardStr(player), //剩余牌
 						})
 					}
+				}
+			}
+			//更新玩家积分
+			if room.Type == 1 {
+				for _, v := range overMsgData {
+					userInfo := service.Cache().Get(ctx, "user:"+v.WinName)
+					entUser := Users{}
+					if userInfo == nil {
+						g.Log().Errorf(ctx, "用户不存在")
+
+					}
+					//缓存有，验证密码正确
+					if err := json.Unmarshal(userInfo.Bytes(), &entUser); err != nil {
+						g.Log().Errorf(ctx, "用户名或密码错误")
+
+					}
+					entUser.Point = v.Point
+					service.Cache().Set(ctx, "user:"+v.WinName, entUser, 7*24*time.Hour)
+
+					//发送到user服保存数据库
+					//发送日志 发牌 显示玩家的牌
+					settle.SendSettle(&v1.SendSettleReq{
+						Id:       int64(entUser.Id),
+						UserName: v.WinName,
+						Point:    v.Point,
+					})
 				}
 			}
 		}()
@@ -855,10 +904,10 @@ func (room *Room) GameLoop(ctx context.Context) {
 			room.passCount = 0
 		}
 		//发送日志 玩家不出牌
-		log.SendLog(log.LogInfo{
+		log_game.SendLog(&log_gamev1.SendLogReq{
 			RoomID: room.ID,
-			Type:   room.Type,
-			Status: room.Status,
+			Type:   int32(room.Type),
+			Status: int32(room.Status),
 			UserID: currentPlayer.UserName,
 			Point:  currentPlayer.Point,             //积分
 			Action: "pass",                          //行为
@@ -882,10 +931,10 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.LastCards = selectedCards
 		room.passCount = 0
 		//发送日志 玩家出牌
-		log.SendLog(log.LogInfo{
+		log_game.SendLog(&log_gamev1.SendLogReq{
 			RoomID:     room.ID,
-			Type:       room.Type,
-			Status:     room.Status,
+			Type:       int32(room.Type),
+			Status:     int32(room.Status),
 			UserID:     currentPlayer.UserName,
 			Point:      currentPlayer.Point,             //积分
 			Action:     "outCard",                       //行为
@@ -944,6 +993,9 @@ func (room *Room) safeSendRoomMessage(msgType string, data any) {
 
 	// 遍历每个玩家，分别发送消息
 	for _, player := range players {
+		if player.Type == AI {
+			continue
+		}
 		// 为每个玩家单独创建一个goroutine发送消息
 		go func(p *Player) {
 

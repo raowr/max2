@@ -1,0 +1,18 @@
+// protoc --go_out=plugins=grpc:. *.proto
+
+syntax = "proto3";
+
+package settle.v1;
+
+option go_package = "api/settle/v1;v1";
+
+service Settle{
+    rpc SendSettle(SendSettleReq) returns (SendSettleRes) {}
+}
+
+message SendSettleReq {
+    int64 Id = 1;
+    string UserName = 2;
+    int64 Point=3;
+}
+message SendSettleRes {}

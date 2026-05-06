@@ -12,8 +12,9 @@ import (
 	"github.com/gogf/gf/v2/util/grand"
 
 	v1 "game_user/api/enter/v1"
+	log_gamev1 "game_user/api/log_game/v1"
 	"game_user/internal/consts"
-	"game_user/internal/controller/log"
+	"game_user/internal/controller/log_game"
 	"game_user/internal/controller/room"
 	"game_user/internal/message"
 	"game_user/internal/service"
@@ -69,8 +70,19 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	token := r.GetQuery("token").String()
 
 	//通过username从缓存获取token
-	userToken := service.Cache().Get(ctx, userName).String()
-	if userToken != token {
+	// userToken := service.Cache().Get(ctx, userName).String()
+	userInfo := service.Cache().Get(ctx, "user:"+userName)
+	entUser := room.Users{}
+	if userInfo == nil {
+		g.Log().Errorf(ctx, "用户不存在")
+		return
+	}
+	//缓存有，验证密码正确
+	if err = json.Unmarshal(userInfo.Bytes(), &entUser); err != nil {
+		g.Log().Errorf(ctx, "用户名或密码错误")
+		return
+	}
+	if entUser.Token != token {
 		g.Log().Errorf(ctx, "token不存在")
 		ws.Close()
 		return
@@ -208,10 +220,10 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 	rm.PlayerList[humanPlayer.UserName] = humanPlayer // 关联用户与玩家
 
 	//发送日志 创建房间
-	log.SendLog(log.LogInfo{
+	log_game.SendLog(&log_gamev1.SendLogReq{
 		RoomID:     roomInfo.ID,
-		Type:       roomInfo.Type,
-		Status:     roomInfo.Status,
+		Type:       int32(roomInfo.Type),
+		Status:     int32(roomInfo.Status),
 		UserID:     humanPlayer.UserName,
 		Point:      humanPlayer.Point, //积分
 		Action:     consts.InitRoom,   //行为
@@ -319,10 +331,10 @@ func (c *Client) handleCreateRoom(ctx context.Context) {
 	//监听房间好友信息
 
 	//发送日志 创建房间
-	log.SendLog(log.LogInfo{
+	log_game.SendLog(&log_gamev1.SendLogReq{
 		RoomID:     roomInfo.ID,
-		Type:       roomInfo.Type,
-		Status:     roomInfo.Status,
+		Type:       int32(roomInfo.Type),
+		Status:     int32(roomInfo.Status),
 		UserID:     humanPlayer.UserName,
 		Point:      humanPlayer.Point, //积分
 		Action:     consts.InitRoom,   //行为
@@ -602,10 +614,10 @@ func (c *Client) validLeaveRoom(ctx context.Context, data string) {
 	}
 
 	//发送日志 离开房间
-	log.SendLog(log.LogInfo{
+	log_game.SendLog(&log_gamev1.SendLogReq{
 		RoomID:     roomInfo.ID,
-		Type:       roomInfo.Type,
-		Status:     roomInfo.Status,
+		Type:       int32(roomInfo.Type),
+		Status:     int32(roomInfo.Status),
 		UserID:     reqData.UserName,
 		Point:      player.Point,     //积分
 		Action:     consts.LeaveRoom, //行为
@@ -668,10 +680,10 @@ func (c *Client) handlePlay(ctx context.Context) {
 	room.PlayOneGame(roomInfo)
 
 	//发送日志 开始游戏
-	log.SendLog(log.LogInfo{
+	log_game.SendLog(&log_gamev1.SendLogReq{
 		RoomID:     roomInfo.ID,
-		Type:       roomInfo.Type,
-		Status:     roomInfo.Status,
+		Type:       int32(roomInfo.Type),
+		Status:     int32(roomInfo.Status),
 		UserID:     c.userName,
 		Point:      player.Point, //积分
 		Action:     consts.Play,  //行为

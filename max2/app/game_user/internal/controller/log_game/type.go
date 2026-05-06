@@ -1,6 +1,9 @@
-package log
+package log_game
 
-import "context"
+import (
+	"context"
+	v1 "game_user/api/log_game/v1"
+)
 
 // 行为：创建，加入，开始，发牌，出牌，不出，结算，离开
 // 房间号，	房间类型，房间状态，用户ID，积分，	行为，	剩余牌, 完整信息
@@ -19,7 +22,7 @@ type LogInfo struct {
 
 // LogChan 日志通道，用于异步处理日志
 var (
-	LogChan chan LogInfo
+	LogChan chan *v1.SendLogReq
 	ctx     context.Context
 	cancel  context.CancelFunc
 )

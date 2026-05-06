@@ -1,8 +1,8 @@
-package log_game
+package settle
 
 import (
 	"context"
-	v1 "game_user/api/log_game/v1"
+	v1 "game_user/api/settle/v1"
 
 	"github.com/gogf/gf/contrib/registry/etcd/v2"
 	"github.com/gogf/gf/contrib/rpc/grpcx/v2"
@@ -13,23 +13,23 @@ import (
 )
 
 type Controller struct {
-	v1.UnimplementedLogGameServer
+	v1.UnimplementedSettleServer
 }
 
 func Register(s *grpcx.GrpcServer) {
-	v1.RegisterLogGameServer(s.Server, &Controller{})
+	v1.RegisterSettleServer(s.Server, &Controller{})
 }
 
-func (*Controller) SendLog(ctx context.Context, req *v1.SendLogReq) (res *v1.SendLogRes, err error) {
+func (*Controller) SendSettle(ctx context.Context, req *v1.SendSettleReq) (res *v1.SendSettleRes, err error) {
 	return nil, gerror.NewCode(gcode.CodeNotImplemented)
 }
 
-func SendLog(logInfo *v1.SendLogReq) {
-	LogChan <- logInfo
+func SendSettle(settleInfo *v1.SendSettleReq) {
+	SettleChan <- settleInfo
 }
-func GetLogChan() {
+func GetSettleChan() {
 	ctx, cancel = context.WithCancel(context.Background())
-	LogChan = make(chan *v1.SendLogReq, 100)
+	SettleChan = make(chan *v1.SendSettleReq, 100)
 	grpcx.Resolver.Register(etcd.New("127.0.0.1:2379"))
 	// 启动异步任务
 	go func() {
@@ -40,27 +40,27 @@ func GetLogChan() {
 				return
 			default:
 				// 执行异步操作
-				logInfo := <-LogChan
-				g.Log().Infof(ctx, "执行日志异步任务: %v", logInfo)
-				sendLogToService(logInfo)
+				settleInfo := <-SettleChan
+				g.Log().Infof(ctx, "执行结算异步任务: %v", settleInfo)
+				sendService(settleInfo)
 			}
 		}
 	}()
 }
 
-// ShutdownLog 关闭日志系统
-func ShutdownLog() {
+// ShutdownLogtle 关闭结算信息系统
+func ShutdownSettle() {
 	if cancel != nil {
 		cancel()
 	}
 }
 
-// sendLogToService 发送日志到 log-service
-func sendLogToService(logInfo *v1.SendLogReq) {
+// sendLogtleToService 发送结算信息到 settle-service
+func sendService(settleInfo *v1.SendSettleReq) {
 	ctx := gctx.New()
-	conn := grpcx.Client.MustNewGrpcClientConn("log-service")
-	client := v1.NewLogGameClient(conn)
-	_, err := client.SendLog(ctx, logInfo)
+	conn := grpcx.Client.MustNewGrpcClientConn("user")
+	client := v1.NewSettleClient(conn)
+	_, err := client.SendSettle(ctx, settleInfo)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return

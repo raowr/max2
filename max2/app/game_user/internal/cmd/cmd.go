@@ -12,8 +12,9 @@ import (
 	"google.golang.org/grpc"
 
 	"game_user/internal/controller/enter"
-	"game_user/internal/controller/log"
+	"game_user/internal/controller/log_game"
 	"game_user/internal/controller/set_game"
+	"game_user/internal/controller/settle"
 )
 
 var (
@@ -22,7 +23,8 @@ var (
 		Usage: "main",
 		Brief: "start http and grpc servers",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
-			log.GetLogChan() //启动日志异步任务通道
+			log_game.GetLogChan()  //启动日志异步任务通道
+			settle.GetSettleChan() //启动结算异步任务通道
 
 			var wg sync.WaitGroup
 
@@ -66,7 +68,8 @@ var (
 			// 等待所有服务器完成（通常是无限期等待，直到收到中断信号）
 			wg.Wait()
 
-			log.ShutdownLog() // 服务器停止后关闭日志系统
+			log_game.ShutdownLog()  // 服务器停止后关闭日志系统
+			settle.ShutdownSettle() // 服务器停止后关闭结算系统
 
 			return nil
 		},
