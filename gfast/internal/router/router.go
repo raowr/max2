@@ -14,6 +14,7 @@ import (
 	logRouter "gfast/internal/app/log/router"
 	setRouter "gfast/internal/app/set/router"
 	systemRouter "gfast/internal/app/system/router"
+	userRouter "gfast/internal/app/user/router"
 	"gfast/library/libRouter"
 
 	"github.com/gogf/gf/v2/net/ghttp"
@@ -36,6 +37,8 @@ func (router *Router) BindController(ctx context.Context, group *ghttp.RouterGro
 		logRouter.R.BindController(ctx, group)
 		// 绑定设置路由
 		setRouter.R.BindController(ctx, group)
+		// 绑定用户路由
+		userRouter.R.BindController(ctx, group)
 		//自动绑定定义的模块
 		if err := libRouter.RouterAutoBind(ctx, router, group); err != nil {
 			panic(err)

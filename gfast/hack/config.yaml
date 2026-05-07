@@ -3,8 +3,8 @@ gfcli:
   gen:
     dao:
       - link:            "mysql:root:Rwr!124124@tcp(8.155.147.137:3306)/max2"
-        tables:          "set_game"
+        tables:          "users"
         removePrefix:    "m2_"
         descriptionTag:  true
         noModelComment:  true
-        path: "./internal/app/set"
+        path: "./internal/app/user"

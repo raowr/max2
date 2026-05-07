@@ -40,10 +40,6 @@ func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.Log
 			if err != nil {
 				liberr.ErrIsNil(ctx, err, "用户名或密码错误")
 			}
-			//如果数据库也没有，返回错误
-			if len(user) == 0 {
-				liberr.ErrIsNil(ctx, err, "用户不存在")
-			}
 			//如果用户存在，验证密码
 			password = user["password"].String()
 
