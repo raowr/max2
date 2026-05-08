@@ -73,9 +73,15 @@ func init() {
 
 	clientCache = gcache.New()
 
-	fake, err = faker.New("zh")
+	// 先尝试简体中文
+	fake, err = faker.New("zh_CN")
 	if err != nil {
-		panic(err)
+		// 如果失败，尝试 zh
+		fake, err = faker.New("zh")
+		if err != nil {
+			// 使用默认语言（英文）
+			fake, _ = faker.New("en")
+		}
 	}
 
 }

@@ -4,6 +4,7 @@ go 1.23.0
 
 require (
 	github.com/gogf/gf/contrib/drivers/mysql/v2 v2.10.0
+	github.com/gogf/gf/contrib/nosql/redis/v2 v2.9.1
 	github.com/gogf/gf/contrib/registry/etcd/v2 v2.8.3
 	github.com/gogf/gf/contrib/rpc/grpcx/v2 v2.10.0
 	github.com/gogf/gf/v2 v2.10.0
@@ -23,6 +24,7 @@ require (
 	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
 	github.com/dgraph-io/badger/v4 v4.2.0 // indirect
 	github.com/dgraph-io/ristretto v0.1.1 // indirect
+	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/emirpasic/gods/v2 v2.0.0-alpha // indirect
 	github.com/fatih/color v1.18.0 // indirect
@@ -49,6 +51,7 @@ require (
 	github.com/olekukonko/ll v0.0.9 // indirect
 	github.com/olekukonko/tablewriter v1.1.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
+	github.com/redis/go-redis/v9 v9.12.1 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.17 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.17 // indirect

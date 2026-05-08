@@ -1,0 +1,15 @@
+2026-05-09T00:24:34.501+08:00 [ERRO] {248cbd4ec0a3ad18032a7f19b6b6c2ca} 用户名或密码错误 
+Stack:
+1.  game_user/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:82
+
+2026-05-09T00:40:34.493+08:00 [ERRO] {b43c56e09fa4ad18042a7f19be859053} 用户名或密码错误 
+Stack:
+1.  game_user/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:82
+
+2026-05-09T00:47:29.788+08:00 [ERRO] {1c16bf8e00a5ad18052a7f1943bc2983} 用户名或密码错误 
+Stack:
+1.  game_user/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:82
+

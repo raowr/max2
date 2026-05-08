@@ -1,0 +1,52 @@
+2026-05-09T00:40:20.340+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013059"
+2026-05-09T00:40:50.631+08:00 [ERRO] {28cabfa3a3a4ad18ba3efd7574305d8b} unexpected end of JSON input 
+Stack:
+1.  user/internal/library/liberr.ErrIsNil
+    D:/gowork/max2/max2/app/user/internal/library/liberr/err.go:23
+2.  user/internal/controller/login.(*ControllerV1).Login.func1
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:56
+3.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:33
+4.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T00:42:48.794+08:00 [WARN] keepalive exit, lease id: 7587894528270013059, retry register
+2026-05-09T00:42:48.817+08:00 [ERRO] {c8d4c95fbaa4ad18bb3efd758f7b5e3f} unexpected end of JSON input 
+Stack:
+1.  user/internal/library/liberr.ErrIsNil
+    D:/gowork/max2/max2/app/user/internal/library/liberr/err.go:23
+2.  user/internal/controller/login.(*ControllerV1).Login.func1
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:56
+3.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:33
+4.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T00:42:49.035+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013063"
+2026-05-09T00:44:37.111+08:00 [WARN] keepalive exit, lease id: 7587894528270013063, retry register
+2026-05-09T00:44:37.114+08:00 [ERRO] {d4c5820ac8a4ad18bc3efd75541e6353} unexpected end of JSON input 
+Stack:
+1.  user/internal/library/liberr.ErrIsNil
+    D:/gowork/max2/max2/app/user/internal/library/liberr/err.go:23
+2.  user/internal/controller/login.(*ControllerV1).Login.func1
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:56
+3.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:33
+4.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T00:44:37.132+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013067"
+2026-05-09T00:47:20.087+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013071"
+2026-05-09T00:48:14.766+08:00 [WARN] keepalive exit, lease id: 7587894528270013071, retry register
+2026-05-09T00:48:14.781+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013075"
+2026-05-09T00:48:27.665+08:00 [WARN] keepalive exit, lease id: 7587894528270013075, retry register
+2026-05-09T00:48:27.675+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013079"
+2026-05-09T00:50:58.960+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013085"
+2026-05-09T00:51:16.049+08:00 [WARN] keepalive exit, lease id: 7587894528270013085, retry register
+2026-05-09T00:51:18.233+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013088"
+2026-05-09T00:51:26.122+08:00 [WARN] keepalive exit, lease id: 7587894528270013088, retry register
+2026-05-09T00:51:29.157+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013093"
+2026-05-09T00:52:31.603+08:00 [WARN] keepalive exit, lease id: 7587894528270013093, retry register
+2026-05-09T00:52:36.545+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013097"
+2026-05-09T00:53:12.576+08:00 [WARN] keepalive exit, lease id: 7587894528270013097, retry register
+2026-05-09T00:53:12.582+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013101"

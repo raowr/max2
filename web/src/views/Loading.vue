@@ -1,19 +1,71 @@
 <template>
   <div class="loading-page" :style="backgroundStyle">
     <div class="loading-content">
+      <p class="loading-text">加载中... {{ progressPercentage }}%</p>
       <div class="progress-container">
         <div class="progress-bar" :style="{ width: progressPercentage + '%' }"></div>
       </div>
-      <p class="loading-text">加载中... {{ progressPercentage }}%</p>
       <!-- login Button -->
-      <div class="login-btn-container" v-if=isReady>
-        <img src="@/assets/img/ui/login.png" class="login-btn" alt="进入主页" @click="toIndex()">
+      <div class="login-btn-container" v-if="isReady">
+          <div class="login-group">
+              <img src="@/assets/img/ui/guest_login.png" class="login-btn" alt="游客进入" @click="toIndex()">
+          </div>
+          <div class="login-group">
+              <img src="@/assets/img/ui/user_login.png" class="login-btn" alt="登录游戏" @click="showLoginModal = true">
+              <span class="register-text" @click="toRegister()">注册账号</span>
+          </div>
+      </div>
+    </div>
+     <!-- 登录弹窗 -->
+    <div class="modal-overlay" v-if="showLoginModal" @click="closeLoginModal">
+      <div class="modal-content" @click.stop>
+        <h3 class="modal-title">登录游戏</h3>
+        <form class="login-form" @submit.prevent="handleLogin">
+          <div class="form-group">
+            <label for="username">账号名</label>
+            <input type="text" id="username" v-model="loginForm.username" placeholder="请输入账号名" required>
+          </div>
+          <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" id="password" v-model="loginForm.password" placeholder="请输入密码" required>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" @click="closeLoginModal">取消</button>
+            <button type="submit" class="btn-confirm">确定</button>
+          </div>
+        </form>
+      </div>
+    </div>
+        <!-- 注册弹窗 -->
+    <div class="modal-overlay" v-if="showRegisterModal" @click="closeRegisterModal">
+      <div class="modal-content" @click.stop>
+        <h3 class="modal-title">注册账号</h3>
+        <form class="login-form" @submit.prevent="handleRegister">
+          <div class="form-group">
+            <label for="register-username">账号名</label>
+            <input type="text" id="register-username" v-model="registerForm.username" placeholder="请输入账号名" required>
+          </div>
+          <div class="form-group">
+            <label for="register-password">密码</label>
+            <input type="password" id="register-password" v-model="registerForm.password" placeholder="请输入密码" required>
+          </div>
+          <div class="form-group">
+            <label for="register-confirm-password">确认密码</label>
+            <input type="password" id="register-confirm-password" v-model="registerForm.confirmPassword" placeholder="请再次输入密码" required>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" @click="closeRegisterModal">取消</button>
+            <button type="submit" class="btn-confirm">确定</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { login, register } from '@/api/user'
+
 
 import { audioManager } from '@/utils/audio'
 
@@ -261,6 +313,19 @@ export default {
   name: 'LoadingPage',
   data() {
     return {
+      // 登录弹窗状态
+      showLoginModal: false,
+      loginForm: {
+        username: '',
+        password: ''
+      },
+      // 注册弹窗状态
+      showRegisterModal: false,
+      registerForm: {
+        username: '',
+        password: '',
+        confirmPassword: ''
+      },
       // 所有需要预加载的图片路径（根据实际项目补充）
       imagePaths: [
         // cg4Img,       // 直接使用 import 后的变量
@@ -595,6 +660,75 @@ export default {
     toIndex() {
       this.$router.push('/index');
     },
+    // 显示登录弹窗
+    openLoginModal() {
+      this.showLoginModal = true;
+    },
+    // 关闭登录弹窗
+    closeLoginModal() {
+      this.showLoginModal = false;
+      this.loginForm.username = '';
+      this.loginForm.password = '';
+    },
+    // 处理登录
+    handleLogin() {
+      console.log('登录信息:', this.loginForm);
+      // 这里可以添加登录逻辑
+      // 登录成功后关闭弹窗并跳转到游戏页面
+      // alert('登录成功！');
+      login(this.loginForm).then((res)=>{
+        console.log(res.data)
+        if(res.data.code === 200){
+          alert('登录成功！');
+        }else{
+          alert(res.data.msg);
+        }
+      })
+      this.closeLoginModal();
+      // this.$router.push('/index');
+    },
+        // 关闭注册弹窗
+    closeRegisterModal() {
+      this.showRegisterModal = false;
+      this.registerForm.username = '';
+      this.registerForm.password = '';
+      this.registerForm.confirmPassword = '';
+    },
+    // 跳转到注册（显示注册弹窗）
+    toRegister() {
+      this.showRegisterModal = true;
+    },
+    // 处理注册
+    handleRegister() {
+      // 验证密码是否一致
+      if (this.registerForm.password !== this.registerForm.confirmPassword) {
+        alert('两次输入的密码不一致！');
+        return;
+      }
+      console.log('注册信息:', this.registerForm);
+      // 这里可以添加注册逻辑
+      // alert('注册成功！');
+      registerData = {
+        username: this.registerForm.username,
+        password: this.registerForm.password,
+        password2: this.registerForm.confirmPassword,
+      }
+      register(registerData).then((res)=>{
+        console.log(res.data)
+        if(res.data.code === 200){
+          alert('注册成功！');
+        }else{
+          alert(res.data.msg);
+        }
+      })
+      this.closeRegisterModal();
+      // 注册成功后可以跳转到登录页面或直接登录
+    },
+    toLogin() {
+    // 添加登录逻辑或跳转到登录页面
+    // this.$router.push('/login');
+    console.log('登录游戏');
+    },
        
 // ... existing code ...
     async preloadAllAudios() {
@@ -692,7 +826,7 @@ export default {
   /* 2. 将加载内容定位到底部（默认居中，改为底部对齐） */
   align-items: flex-end;
   /* 垂直方向底部对齐 */
-  padding-bottom: 80px;
+  padding-bottom: 150px;
   /* 距离底部 80px（可调整数值控制"上一点"的距离） */
   transition: background-image 0.3s ease;
 }
@@ -758,10 +892,12 @@ export default {
 
 .login-btn-container {
   position: absolute;
-  bottom: 20px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+  display: flex;
+  gap: 20px; /* 按钮之间的间隔 */
 }
 
 .login-btn {
@@ -771,5 +907,130 @@ export default {
 
 .login-btn:hover {
   transform: scale(1.1);
+}
+.login-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.register-text {
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.register-text:hover {
+    color: #ffff00;
+}
+ 
+/* 弹窗遮罩层 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+ 
+/* 弹窗内容 */
+.modal-content {
+  background-color: #333;
+  border-radius: 12px;
+  padding: 30px;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+ 
+/* 弹窗标题 */
+.modal-title {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+ 
+/* 登录表单 */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+ 
+/* 表单组 */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+ 
+.form-group label {
+  color: #ffffff;
+  font-size: 14px;
+}
+ 
+.form-group input {
+  padding: 12px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background-color: #222;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+ 
+.form-group input:focus {
+  border-color: #4a90d9;
+}
+ 
+.form-group input::placeholder {
+  color: #666;
+}
+ 
+/* 表单按钮组 */
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+ 
+/* 按钮样式 */
+.btn-cancel,
+.btn-confirm {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+ 
+.btn-cancel {
+  background-color: #555;
+  color: #ffffff;
+}
+ 
+.btn-cancel:hover {
+  background-color: #666;
+}
+ 
+.btn-confirm {
+  background-color: #4a90d9;
+  color: #ffffff;
+}
+ 
+.btn-confirm:hover {
+  background-color: #3a80c9;
 }
 </style>

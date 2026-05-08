@@ -6,4 +6,5 @@ package logic
 
 import (
 	_ "user/internal/logic/cache"
+	_ "user/internal/logic/middleware"
 )

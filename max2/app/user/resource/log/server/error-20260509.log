@@ -1,0 +1,3 @@
+2026-05-09T00:24:45.329+08:00 {e07b1ce2c2a3ad186956f33ef8591ce0} 200 "OPTIONS http 127.0.0.1:8020 /login HTTP/1.1" 62644.300, 127.0.0.1, "http://localhost:5173/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0", 51, "Validation Failed", ""
+Stack:
+The username field is required

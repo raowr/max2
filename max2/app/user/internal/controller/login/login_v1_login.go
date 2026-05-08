@@ -34,9 +34,12 @@ func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.Log
 		//登录用户
 		//验证缓存中是否存在
 		userInfo := service.Cache().Get(ctx, "user:"+req.Username)
-		if userInfo == nil {
+		if userInfo.IsEmpty() {
 			//缓存没有，查数据库
 			user, err := dao.Users.Ctx(ctx).Where("name", req.Username).One()
+			if len(user) == 0 {
+				liberr.ErrIsNil(ctx, err, "用户不存在")
+			}
 			if err != nil {
 				liberr.ErrIsNil(ctx, err, "用户名或密码错误")
 			}

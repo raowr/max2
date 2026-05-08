@@ -1,0 +1,8 @@
+2026-05-09T00:48:15.211+08:00 [DEBU] {d4f7583904a5ad18ce2eb843021eef04} [434 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
+2026-05-09T00:48:15.316+08:00 [DEBU] {d4f7583904a5ad18ce2eb843021eef04} [104 ms] [default] [max2] [rows:0  ] SELECT * FROM `users` WHERE `name`='11111' LIMIT 1
+2026-05-09T00:51:18.551+08:00 [DEBU] {70aa07ef32a5ad181154b16a6328a359} [309 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
+2026-05-09T00:51:18.694+08:00 [DEBU] {70aa07ef32a5ad181154b16a6328a359} [141 ms] [default] [max2] [rows:0  ] SELECT * FROM `users` WHERE `name`='1·1111' LIMIT 1
+2026-05-09T00:52:20.479+08:00 [DEBU] {b8c48e3242a5ad181254b16a56fb6318} [622 ms] [default] [max2] [rows:0  ] SELECT * FROM `users` WHERE `name`='1' LIMIT 1
+2026-05-09T00:52:54.597+08:00 [DEBU] {48626e124ba5ad181354b16a3b86b099} [443 ms] [default] [max2] [rows:0  ] SELECT * FROM `users` WHERE `name`='1' LIMIT 1
+2026-05-09T00:53:27.806+08:00 [DEBU] {58ed801153a5ad181454b16aaa26f64b} [373 ms] [default] [max2] [rows:0  ] SELECT * FROM `users` WHERE `name`='1' LIMIT 1
+2026-05-09T00:54:28.475+08:00 [DEBU] {3ccda91161a5ad181554b16a67870133} [721 ms] [default] [max2] [rows:0  ] SELECT * FROM `users` WHERE `name`='1' LIMIT 1

@@ -12,7 +12,10 @@ import (
 	"google.golang.org/grpc"
 
 	"user/internal/controller/hello"
+	"user/internal/controller/login"
+	"user/internal/controller/register"
 	"user/internal/controller/settle"
+	"user/internal/service"
 )
 
 var (
@@ -27,9 +30,13 @@ var (
 				defer wg.Done()
 				s := g.Server()
 				s.Group("/", func(group *ghttp.RouterGroup) {
+					//跨域处理，安全起见正式环境请注释该行
+					group.Middleware(service.Middleware().MiddlewareCORS)
 					group.Middleware(ghttp.MiddlewareHandlerResponse)
 					group.Bind(
 						hello.NewV1(),
+						login.NewV1(),
+						register.NewV1(),
 					)
 				})
 				s.Run()
@@ -42,7 +49,7 @@ var (
 				// 使用配置文件中的设置或默认值
 				c := grpcx.Server.NewConfig()
 				if c.Address == "" {
-					c.Address = ":9000" // 默认 gRPC 端口
+					c.Address = ":9020" // 默认 gRPC 端口
 				}
 
 				grpcx.Resolver.Register(etcd.New("127.0.0.1:2379"))

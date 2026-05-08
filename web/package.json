@@ -13,6 +13,8 @@
     "build:prod": "vite build --mode prod"
   },
   "dependencies": {
+    "axios": "^1.16.0",
+    "element-plus": "^2.14.0",
     "qrcode": "^1.5.4",
     "qrcodejs2": "^0.0.2",
     "vue": "^3.5.18",

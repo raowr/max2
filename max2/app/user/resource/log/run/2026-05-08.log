@@ -1,0 +1,4 @@
+2026-05-08T23:27:04.564+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894528270013032"
+2026-05-08T23:30:35.215+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013037"
+2026-05-08T23:31:02.333+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013040"
+2026-05-08T23:32:58.602+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013045"
