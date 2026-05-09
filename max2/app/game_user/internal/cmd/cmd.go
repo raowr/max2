@@ -8,6 +8,7 @@ import (
 	"github.com/gogf/gf/contrib/rpc/grpcx/v2"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
+	"github.com/gogf/gf/v2/net/gsvc"
 	"github.com/gogf/gf/v2/os/gcmd"
 	"google.golang.org/grpc"
 
@@ -32,7 +33,9 @@ var (
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				s := g.Server()
+				gsvc.SetRegistry(etcd.New(`127.0.0.1:2379`))
+				s := g.Server(`game_user.svc`)
+				// s := g.Server()
 				s.Group("/", func(group *ghttp.RouterGroup) {
 					group.Middleware(ghttp.MiddlewareHandlerResponse)
 					group.Bind(

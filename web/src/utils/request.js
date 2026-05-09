@@ -50,7 +50,8 @@ service.interceptors.response.use(
     } else if (code !== 0 && code !== 200) {
       // 业务错误
       ElMessage.error(res.message || '请求失败');
-      return Promise.reject(new Error(res.message || '请求失败'));
+      return res;
+      // return Promise.reject(new Error(res.message || '请求失败'));
     } else {
       return res;
     }

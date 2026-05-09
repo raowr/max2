@@ -11,7 +11,7 @@
               <img src="@/assets/img/ui/guest_login.png" class="login-btn" alt="游客进入" @click="toIndex()">
           </div>
           <div class="login-group">
-              <img src="@/assets/img/ui/user_login.png" class="login-btn" alt="登录游戏" @click="showLoginModal = true">
+              <img src="@/assets/img/ui/user_login.png" class="login-btn" alt="登录游戏" @click="handleLoginButtonClick()">
               <span class="register-text" @click="toRegister()">注册账号</span>
           </div>
       </div>
@@ -65,6 +65,9 @@
 
 <script>
 import { login, register } from '@/api/user'
+import { ElMessage, ElMessageBox } from 'element-plus';
+import { storage } from '@/utils/storage'
+import { websocket } from '@/utils/websocket'
 
 
 import { audioManager } from '@/utils/audio'
@@ -658,11 +661,118 @@ export default {
       }
     },
     toIndex() {
+        // 延迟连接 WebSocket，确保应用先加载
+        let wsUrl = import.meta.env.VITE_WS_URL;
+      setTimeout(() => {
+        if (wsUrl) {
+          console.log('user_id:', storage.local.get("user_id"))
+    // 初始化 WebSocket 配置（全局一次）
+          websocket.init({
+            url: wsUrl+"?user_id="+storage.local.get("user_id"), // 后端地址
+            reconnectInterval: 5000, // 5秒重连一次
+            heartbeatInterval: 10000 // 20秒一次心跳
+          });
+
+    // 启动连接（可在登录后再调用，这里直接启动作为示例）
+          websocket.connect();
+        } else {
+          console.warn('VITE_WS_URL is not defined, using default WebSocket URL')
+          // 可以在这里设置一个默认的 WebSocket URL
+          websocket.connect('ws://127.0.0.1:8000/enter')
+        }
+      }, 100)
       this.$router.push('/index');
     },
-    // 显示登录弹窗
-    openLoginModal() {
-      this.showLoginModal = true;
+    // 登录按钮点击处理
+    handleLoginButtonClick() {
+      const userData = storage.local.get('user');
+      
+      if (!userData) {
+        // 如果没有用户信息，弹出登录框
+        this.showLoginModal = true;
+        return;
+      }
+      // 如果有用户信息，尝试连接 websocket
+      const node = userData.node || userData.Node;
+      if (!node) {
+        ElMessage.error('用户信息不完整，请重新登录');
+        this.showLoginModal = true;
+        return;
+      }
+      // 尝试连接 websocket
+      this.tryConnectWebSocket(userData);
+    },
+       // 尝试连接 WebSocket
+    // 尝试连接 WebSocket（使用全局 websocket 实例）
+    tryConnectWebSocket(userData) {
+        // 从用户数据中提取参数
+        const node = userData.node || userData.Node;
+        const username = userData.username || userData.Username;
+        const token = userData.token || userData.Token;
+        
+        // 构建 WebSocket URL
+        const wsUrl = `ws://${node}/enter?user_name=${encodeURIComponent(username)}&token=${encodeURIComponent(token)}`;
+        
+        console.log('尝试连接 WebSocket:', wsUrl);
+
+        // 使用全局 websocket 实例
+        const ws = this.$websocket;
+
+        // 保存回调引用，用于后续移除
+        const openCallback = () => {
+            console.log('WebSocket 连接成功');
+            // 移除回调避免重复触发
+            ws.off('open', openCallback);
+            ws.off('error', errorCallback);
+            ws.off('close', closeCallback);
+            // 连接成功，跳转首页
+            this.$router.push('/index');
+        };
+
+        const errorCallback = (error) => {
+            console.error('WebSocket 连接错误:', error);
+            // 移除回调
+            ws.off('open', openCallback);
+            ws.off('error', errorCallback);
+            ws.off('close', closeCallback);
+            ElMessage.error('服务器连接失败，请重新登录');
+            this.showLoginModal = true;
+        };
+
+        const closeCallback = (event) => {
+            console.log('WebSocket 连接关闭:', event.code, event.reason);
+            // 移除回调
+            ws.off('open', openCallback);
+            ws.off('error', errorCallback);
+            ws.off('close', closeCallback);
+            // 如果不是正常关闭且还在 loading 页面
+            if (event.code !== 1000 && this.$route.path === '/loading') {
+                ElMessage.error('服务器连接异常，请重新登录');
+                this.showLoginModal = true;
+            }
+        };
+
+        // 注册回调
+        ws.on('open', openCallback);
+        ws.on('error', errorCallback);
+        ws.on('close', closeCallback);
+
+        // 初始化并连接
+        ws.init({
+            url: wsUrl,
+            reconnectInterval: 5000,
+            heartbeatInterval: 10000
+        }).connect();
+
+        // 超时处理
+        setTimeout(() => {
+            // 检查是否还在连接中
+            if (ws.isConnecting && this.$route.path === '/loading') {
+                ws.close();
+                ElMessage.error('连接超时，请重新登录');
+                this.showLoginModal = true;
+            }
+        }, 10000);
     },
     // 关闭登录弹窗
     closeLoginModal() {
@@ -678,10 +788,20 @@ export default {
       // alert('登录成功！');
       login(this.loginForm).then((res)=>{
         console.log(res.data)
-        if(res.data.code === 200){
-          alert('登录成功！');
+        if(res.code === 0){
+          ElMessage.success('登录成功！');
+          //保存用户信息
+          storage.local.set('user', res.data);
+                    // 尝试连接 WebSocket
+          const userData = res.data;
+          if (userData) {
+            this.closeLoginModal();
+            this.tryConnectWebSocket(userData);
+          } else {
+            ElMessage.error('服务器信息获取失败');
+          }
         }else{
-          alert(res.data.msg);
+          ElMessage.error(res.message);
         }
       })
       this.closeLoginModal();
@@ -702,23 +822,23 @@ export default {
     handleRegister() {
       // 验证密码是否一致
       if (this.registerForm.password !== this.registerForm.confirmPassword) {
-        alert('两次输入的密码不一致！');
+        ElMessage.error('两次输入的密码不一致！');
         return;
       }
       console.log('注册信息:', this.registerForm);
       // 这里可以添加注册逻辑
       // alert('注册成功！');
-      registerData = {
+      let registerData = {
         username: this.registerForm.username,
         password: this.registerForm.password,
         password2: this.registerForm.confirmPassword,
       }
       register(registerData).then((res)=>{
         console.log(res.data)
-        if(res.data.code === 200){
-          alert('注册成功！');
+        if(res.code === 0){
+          ElMessage.success('注册成功！');
         }else{
-          alert(res.data.msg);
+          ElMessage.error(res.message);
         }
       })
       this.closeRegisterModal();

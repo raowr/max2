@@ -50,3 +50,1941 @@ Stack:
 2026-05-09T00:52:36.545+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013097"
 2026-05-09T00:53:12.576+08:00 [WARN] keepalive exit, lease id: 7587894528270013097, retry register
 2026-05-09T00:53:12.582+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013101"
+2026-05-09T21:19:38.725+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013106"
+2026-05-09T21:20:55.794+08:00 [WARN] keepalive exit, lease id: 7587894528270013106, retry register
+2026-05-09T21:20:59.375+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013110"
+2026-05-09T21:24:23.100+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013114"
+2026-05-09T21:26:32.992+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013118"
+2026-05-09T21:32:14.458+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013124"
+2026-05-09T21:32:45.329+08:00 [WARN] keepalive exit, lease id: 7587894528270013124, retry register
+2026-05-09T21:32:45.349+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013128"
+2026-05-09T22:02:05.099+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013137"
+2026-05-09T22:03:55.701+08:00 [WARN] keepalive exit, lease id: 7587894528270013137, retry register
+2026-05-09T22:03:55.711+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013141"
+2026-05-09T22:04:59.722+08:00 [WARN] keepalive exit, lease id: 7587894528270013141, retry register
+2026-05-09T22:04:59.738+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013145"
+2026-05-09T22:06:52.337+08:00 [WARN] keepalive exit, lease id: 7587894528270013145, retry register
+2026-05-09T22:06:52.345+08:00 [ERRO] {806fd439b5eaad180678ca4ada5f489b} Redis Client Do failed with arguments "[Set gFastV3Cache:user:c罗 [123 34 105 100 34 58 49 44 34 110 97 109 101 34 58 34 99 231 189 151 34 44 34 112 97 115 115 119 111 114 100 34 58 34 99 52 99 97 52 50 51 56 97 48 98 57 50 51 56 50 48 100 99 99 53 48 57 97 54 102 55 53 56 52 57 98 34 44 34 112 111 105 110 116 34 58 49 48 48 44 34 116 111 107 101 110 34 58 34 101 121 74 104 98 71 99 105 79 105 74 73 85 122 73 49 78 105 73 115 73 110 82 53 99 67 73 54 73 107 112 88 86 67 74 57 46 101 121 74 74 90 67 73 54 77 67 119 105 86 88 78 108 99 109 53 104 98 87 85 105 79 105 74 106 53 55 50 88 73 105 119 105 90 88 104 119 73 106 111 120 78 122 99 52 79 84 81 119 78 68 69 121 102 81 46 100 67 105 84 80 86 101 97 120 112 48 72 75 113 66 122 56 103 73 83 108 111 107 89 45 78 67 106 70 99 71 107 101 80 110 82 78 105 102 86 68 75 89 34 125] PX 604800000]": context canceled 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:109
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:06:52.345+08:00 [ERRO] {cc650b70abeaad180478ca4a4e8f9fb3} Redis Client Do failed with arguments "[Set gFastV3Cache:user:c罗 [123 34 105 100 34 58 49 44 34 110 97 109 101 34 58 34 99 231 189 151 34 44 34 112 97 115 115 119 111 114 100 34 58 34 99 52 99 97 52 50 51 56 97 48 98 57 50 51 56 50 48 100 99 99 53 48 57 97 54 102 55 53 56 52 57 98 34 44 34 112 111 105 110 116 34 58 49 48 48 44 34 116 111 107 101 110 34 58 34 101 121 74 104 98 71 99 105 79 105 74 73 85 122 73 49 78 105 73 115 73 110 82 53 99 67 73 54 73 107 112 88 86 67 74 57 46 101 121 74 74 90 67 73 54 77 67 119 105 86 88 78 108 99 109 53 104 98 87 85 105 79 105 74 106 53 55 50 88 73 105 119 105 90 88 104 119 73 106 111 120 78 122 99 52 79 84 81 119 78 68 69 121 102 81 46 100 67 105 84 80 86 101 97 120 112 48 72 75 113 66 122 56 103 73 83 108 111 107 89 45 78 67 106 70 99 71 107 101 80 110 82 78 105 102 86 68 75 89 34 125] PX 604800000]": context canceled 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:109
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:06:52.345+08:00 [ERRO] {e01b09a892eaad18fe77ca4a840e0238} Redis Client Do failed with arguments "[Set gFastV3Cache:user:c罗 [123 34 105 100 34 58 49 44 34 110 97 109 101 34 58 34 99 231 189 151 34 44 34 112 97 115 115 119 111 114 100 34 58 34 99 52 99 97 52 50 51 56 97 48 98 57 50 51 56 50 48 100 99 99 53 48 57 97 54 102 55 53 56 52 57 98 34 44 34 112 111 105 110 116 34 58 49 48 48 44 34 116 111 107 101 110 34 58 34 101 121 74 104 98 71 99 105 79 105 74 73 85 122 73 49 78 105 73 115 73 110 82 53 99 67 73 54 73 107 112 88 86 67 74 57 46 101 121 74 74 90 67 73 54 77 67 119 105 86 88 78 108 99 109 53 104 98 87 85 105 79 105 74 106 53 55 50 88 73 105 119 105 90 88 104 119 73 106 111 120 78 122 99 52 79 84 81 119 78 68 69 121 102 81 46 100 67 105 84 80 86 101 97 120 112 48 72 75 113 66 122 56 103 73 83 108 111 107 89 45 78 67 106 70 99 71 107 101 80 110 82 78 105 102 86 68 75 89 34 125] PX 604800000]": context canceled 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:109
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:06:52.347+08:00 [ERRO] {c4a9b69da5eaad180278ca4a63592055} Redis Client Do failed with arguments "[Set gFastV3Cache:user:c罗 [123 34 105 100 34 58 49 44 34 110 97 109 101 34 58 34 99 231 189 151 34 44 34 112 97 115 115 119 111 114 100 34 58 34 99 52 99 97 52 50 51 56 97 48 98 57 50 51 56 50 48 100 99 99 53 48 57 97 54 102 55 53 56 52 57 98 34 44 34 112 111 105 110 116 34 58 49 48 48 44 34 116 111 107 101 110 34 58 34 101 121 74 104 98 71 99 105 79 105 74 73 85 122 73 49 78 105 73 115 73 110 82 53 99 67 73 54 73 107 112 88 86 67 74 57 46 101 121 74 74 90 67 73 54 77 67 119 105 86 88 78 108 99 109 53 104 98 87 85 105 79 105 74 106 53 55 50 88 73 105 119 105 90 88 104 119 73 106 111 120 78 122 99 52 79 84 81 119 78 68 69 121 102 81 46 100 67 105 84 80 86 101 97 120 112 48 72 75 113 66 122 56 103 73 83 108 111 107 89 45 78 67 106 70 99 71 107 101 80 110 82 78 105 102 86 68 75 89 34 125] PX 604800000]": context canceled 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:109
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:06:52.346+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013158"
+2026-05-09T22:06:52.345+08:00 [ERRO] {bc584a8a9ceaad180078ca4af1572491} Redis Client Do failed with arguments "[Set gFastV3Cache:user:c罗 [123 34 105 100 34 58 49 44 34 110 97 109 101 34 58 34 99 231 189 151 34 44 34 112 97 115 115 119 111 114 100 34 58 34 99 52 99 97 52 50 51 56 97 48 98 57 50 51 56 50 48 100 99 99 53 48 57 97 54 102 55 53 56 52 57 98 34 44 34 112 111 105 110 116 34 58 49 48 48 44 34 116 111 107 101 110 34 58 34 101 121 74 104 98 71 99 105 79 105 74 73 85 122 73 49 78 105 73 115 73 110 82 53 99 67 73 54 73 107 112 88 86 67 74 57 46 101 121 74 74 90 67 73 54 77 67 119 105 86 88 78 108 99 109 53 104 98 87 85 105 79 105 74 106 53 55 50 88 73 105 119 105 90 88 104 119 73 106 111 120 78 122 99 52 79 84 81 119 78 68 69 121 102 81 46 100 67 105 84 80 86 101 97 120 112 48 72 75 113 66 122 56 103 73 83 108 111 107 89 45 78 67 106 70 99 71 107 101 80 110 82 78 105 102 86 68 75 89 34 125] PX 604800000]": context canceled 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:109
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:10:15.026+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013162"
+2026-05-09T22:10:55.118+08:00 [ERRO] {10c636cb02ebad186450845ed1dabd97} Redis Client Do failed with arguments "[Get gFastV3Cache:user:c罗]": i/o timeout 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Get
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:168
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:36
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:11:32.737+08:00 [ERRO] {10c636cb02ebad186450845ed1dabd97} Redis Client Do failed with arguments "[Set gFastV3Cache:user:c罗 [123 34 105 100 34 58 49 44 34 110 97 109 101 34 58 34 99 231 189 151 34 44 34 112 97 115 115 119 111 114 100 34 58 34 99 52 99 97 52 50 51 56 97 48 98 57 50 51 56 50 48 100 99 99 53 48 57 97 54 102 55 53 56 52 57 98 34 44 34 112 111 105 110 116 34 58 49 48 48 44 34 116 111 107 101 110 34 58 34 101 121 74 104 98 71 99 105 79 105 74 73 85 122 73 49 78 105 73 115 73 110 82 53 99 67 73 54 73 107 112 88 86 67 74 57 46 101 121 74 74 90 67 73 54 77 67 119 105 86 88 78 108 99 109 53 104 98 87 85 105 79 105 74 106 53 55 50 88 73 105 119 105 90 88 104 119 73 106 111 120 78 122 99 52 79 84 81 119 78 106 89 121 102 81 46 45 51 97 89 111 104 79 51 115 119 97 107 51 112 115 105 101 57 53 109 116 120 88 57 84 48 52 77 101 99 119 52 86 89 72 80 104 75 53 102 87 97 107 34 125] PX 604800000]": i/o timeout 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:109
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:12:11.843+08:00 [ERRO] {54aa42a814ebad186650845e6aa1a46f} Redis Client Do failed with arguments "[Get gFastV3Cache:user:c罗]": i/o timeout 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Get
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:168
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:36
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:13:02.257+08:00 [ERRO] {3062316520ebad186750845e6a6851e8} Redis Client Do failed with arguments "[Get gFastV3Cache:user:c罗]": i/o timeout 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Get
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:168
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:36
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:13:33.109+08:00 [ERRO] {3062316520ebad186750845e6a6851e8} Redis Client Do failed with arguments "[Set gFastV3Cache:user:c罗 [123 34 105 100 34 58 49 44 34 110 97 109 101 34 58 34 99 231 189 151 34 44 34 112 97 115 115 119 111 114 100 34 58 34 99 52 99 97 52 50 51 56 97 48 98 57 50 51 56 50 48 100 99 99 53 48 57 97 54 102 55 53 56 52 57 98 34 44 34 112 111 105 110 116 34 58 49 48 48 44 34 116 111 107 101 110 34 58 34 101 121 74 104 98 71 99 105 79 105 74 73 85 122 73 49 78 105 73 115 73 110 82 53 99 67 73 54 73 107 112 88 86 67 74 57 46 101 121 74 74 90 67 73 54 77 67 119 105 86 88 78 108 99 109 53 104 98 87 85 105 79 105 74 106 53 55 50 88 73 105 119 105 90 88 104 119 73 106 111 120 78 122 99 52 79 84 81 119 78 122 103 122 102 81 46 112 48 75 70 72 57 80 57 89 48 95 118 69 57 79 56 117 87 115 82 101 79 53 106 76 116 115 45 49 103 51 88 65 79 100 100 80 113 87 113 67 101 107 34 125] PX 604800000]": i/o timeout 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:109
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:16:08.947+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013167"
+2026-05-09T22:19:10.187+08:00 [ERRO] {542e230f76ebad18ffd0f811ea862387} Redis Client Do failed with arguments "[Get gFastV3Cache:user:c罗]": i/o timeout 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Get
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:168
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:37
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:19:40.804+08:00 [ERRO] {542e230f76ebad18ffd0f811ea862387} Redis Client Do failed with arguments "[Set gFastV3Cache:user:c罗 [123 34 105 100 34 58 49 44 34 110 97 109 101 34 58 34 99 231 189 151 34 44 34 112 97 115 115 119 111 114 100 34 58 34 99 52 99 97 52 50 51 56 97 48 98 57 50 51 56 50 48 100 99 99 53 48 57 97 54 102 55 53 56 52 57 98 34 44 34 112 111 105 110 116 34 58 49 48 48 44 34 116 111 107 101 110 34 58 34 101 121 74 104 98 71 99 105 79 105 74 73 85 122 73 49 78 105 73 115 73 110 82 53 99 67 73 54 73 107 112 88 86 67 74 57 46 101 121 74 74 90 67 73 54 77 67 119 105 86 88 78 108 99 109 53 104 98 87 85 105 79 105 74 106 53 55 50 88 73 105 119 105 90 88 104 119 73 106 111 120 78 122 99 52 79 84 81 120 77 84 85 119 102 81 46 72 65 106 99 66 108 112 57 109 117 51 97 119 52 51 116 75 88 84 104 117 107 115 120 116 69 70 70 112 76 86 109 117 81 99 120 119 49 98 111 97 113 115 34 125] PX 604800000]": i/o timeout 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:114
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:19:41.049+08:00 [ERRO] {542e230f76ebad18ffd0f811ea862387} UPDATE `users` SET token WHERE (`id`=1) AND (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiJj572XIiwiZXhwIjoxNzc4OTQxMTUwfQ.HAjcBlp9mu3aw43tKXThuksxtEFFpLVmuQcxw1boaqs): context canceled 
+Stack:
+1.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:118
+2.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:20:57.029+08:00 [ERRO] {5c1c88b795ebad1801d1f811d9bc9fac} UPDATE `users` SET token WHERE (`id`=1) AND (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiJj572XIiwiZXhwIjoxNzc4OTQxMjU2fQ.0T2YXwoZ6AQWn0unQptrrpAt15bra0FrZn8GK2cJnlk): Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE (`id`=?) AND (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWU' at line 1 
+Stack:
+1.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:118
+2.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:22:16.630+08:00 [ERRO] {547cb35da8ebad1802d1f8118a0ca6b4} UPDATE `users` SET token WHERE (`id`=1) AND (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiJj572XIiwiZXhwIjoxNzc4OTQxMzM2fQ.hMg4B0_FI2T03pn8oNmucEugKlPZg9PFBWIkLf819Xg): Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE (`id`=?) AND (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWU' at line 1 
+Stack:
+1.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:118
+2.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:22:42.684+08:00 [ERRO] {645ac67eaeebad1803d1f81178152a46} UPDATE `users` SET token WHERE (`id`=1) AND (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiJj572XIiwiZXhwIjoxNzc4OTQxMzYyfQ.83VHfJ5iyqTnaGHrFE8nhIiigvd8qbt12TrZDL73bhw): Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE (`id`=?) AND (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWU' at line 1 
+Stack:
+1.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:118
+2.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:26:38.984+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013172"
+2026-05-09T22:35:17.719+08:00 [ERRO] {fc319f555cecad1874397921821ebf79} SELECT `id` FROM `users` WHERE username = '1' LIMIT 1: Error 1054 (42S22): Unknown column 'username' in 'where clause' 
+Stack:
+1.  user/internal/library/liberr.ErrIsNil
+    D:/gowork/max2/max2/app/user/internal/library/liberr/err.go:23
+2.  user/internal/controller/register.(*ControllerV1).Register
+    D:/gowork/max2/max2/app/user/internal/controller/register/register_v1_register.go:49
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:37:03.677+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013178"
+2026-05-09T22:37:21.731+08:00 [WARN] keepalive exit, lease id: 7587894528270013178, retry register
+2026-05-09T22:37:21.739+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013182"
+2026-05-09T22:37:22.303+08:00 [ERRO] {547ac26a79ecad18adda930b1fce9deb} SELECT `id` FROM `users` WHERE username = '1' LIMIT 1: Error 1054 (42S22): Unknown column 'username' in 'where clause' 
+Stack:
+1.  user/internal/controller/register.(*ControllerV1).Register
+    D:/gowork/max2/max2/app/user/internal/controller/register/register_v1_register.go:49
+2.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:37:22.304+08:00 [ERRO] {547ac26a79ecad18adda930b1fce9deb} SELECT `id` FROM `users` WHERE username = '1' LIMIT 1: Error 1054 (42S22): Unknown column 'username' in 'where clause' 
+Stack:
+1.  user/internal/library/liberr.ErrIsNil
+    D:/gowork/max2/max2/app/user/internal/library/liberr/err.go:23
+2.  user/internal/controller/register.(*ControllerV1).Register
+    D:/gowork/max2/max2/app/user/internal/controller/register/register_v1_register.go:50
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-09T22:38:05.798+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013186"
+2026-05-09T23:08:19.970+08:00 [WARN] keepalive exit, lease id: 7587894528270013186, retry register
+2026-05-09T23:08:21.523+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013209"
+2026-05-09T23:08:28.035+08:00 [WARN] keepalive exit, lease id: 7587894528270013209, retry register
+2026-05-09T23:08:28.123+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013217"
+2026-05-09T23:08:35.074+08:00 [WARN] keepalive exit, lease id: 7587894528270013217, retry register
+2026-05-09T23:08:35.080+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013228"
+2026-05-09T23:08:41.094+08:00 [WARN] keepalive exit, lease id: 7587894528270013228, retry register
+2026-05-09T23:08:41.108+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013237"
+2026-05-09T23:08:47.127+08:00 [WARN] keepalive exit, lease id: 7587894528270013237, retry register
+2026-05-09T23:08:47.454+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013251"
+2026-05-09T23:08:54.132+08:00 [WARN] keepalive exit, lease id: 7587894528270013251, retry register
+2026-05-09T23:08:54.143+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013264"
+2026-05-09T23:09:01.137+08:00 [WARN] keepalive exit, lease id: 7587894528270013264, retry register
+2026-05-09T23:09:01.148+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013276"
+2026-05-09T23:09:08.140+08:00 [WARN] keepalive exit, lease id: 7587894528270013276, retry register
+2026-05-09T23:09:08.145+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013288"
+2026-05-09T23:09:15.143+08:00 [WARN] keepalive exit, lease id: 7587894528270013288, retry register
+2026-05-09T23:09:15.149+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013300"
+2026-05-09T23:09:22.151+08:00 [WARN] keepalive exit, lease id: 7587894528270013300, retry register
+2026-05-09T23:09:22.245+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013312"
+2026-05-09T23:09:29.155+08:00 [WARN] keepalive exit, lease id: 7587894528270013312, retry register
+2026-05-09T23:09:29.163+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013324"
+2026-05-09T23:09:36.158+08:00 [WARN] keepalive exit, lease id: 7587894528270013324, retry register
+2026-05-09T23:09:36.164+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013336"
+2026-05-09T23:09:43.161+08:00 [WARN] keepalive exit, lease id: 7587894528270013336, retry register
+2026-05-09T23:09:43.177+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270013348"
+2026-05-09T23:09:50.166+08:00 [WARN] keepalive exit, lease id: 7587894528270013348, retry register
+2026-05-09T23:09:55.180+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:10:03.190+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:10:11.202+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:10:17.209+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:10:25.212+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:10:32.215+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:10:38.222+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:10:44.231+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:10:50.245+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:10:56.251+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:11:03.259+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:11:10.266+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:11:18.275+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:11:25.278+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:11:32.288+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:11:38.296+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:11:44.301+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:11:50.304+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:11:58.317+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:12:05.463+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:12:11.472+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:12:19.480+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:12:25.489+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:12:33.573+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:12:41.669+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:12:49.676+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:12:57.683+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:13:05.726+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:13:11.733+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:13:17.737+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:13:25.810+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:13:33.826+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:13:40.836+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:13:46.847+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:13:52.853+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:13:58.856+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:14:06.866+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:14:13.878+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:14:19.986+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:14:26.993+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:14:33.131+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:14:39.150+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:14:45.160+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:14:53.181+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:14:59.284+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:15:05.295+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:15:11.313+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:15:19.319+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:15:25.443+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:15:33.460+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:15:41.469+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:15:48.472+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:15:54.475+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:16:02.479+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:16:10.496+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:16:17.912+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:16:23.914+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:16:29.919+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:16:35.928+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:16:43.933+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:16:50.939+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:16:56.947+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:17:03.955+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:17:10.959+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:17:18.966+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:17:24.973+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:17:31.980+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:17:38.988+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:17:44.996+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:17:52.002+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:17:58.010+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:18:05.018+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:18:12.023+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:18:19.030+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:18:27.046+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:18:34.054+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:18:42.058+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:18:49.065+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:18:57.070+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:19:03.078+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:19:09.084+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:19:15.089+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:19:21.091+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:19:29.096+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:19:37.099+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:19:44.103+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:19:52.108+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:19:59.114+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:20:05.119+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:20:13.125+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:20:20.132+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:20:26.139+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:20:32.145+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:20:40.154+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:20:47.162+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:20:53.170+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:21:00.182+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:21:08.187+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:21:14.218+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:21:20.227+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:21:27.235+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:21:33.241+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:21:41.248+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:21:47.254+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:21:54.263+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:22:01.270+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:22:09.277+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:22:17.283+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:22:24.290+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:22:30.297+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:22:36.306+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:22:43.314+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:22:49.321+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:22:57.328+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:23:04.333+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:23:11.340+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:23:19.347+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:23:27.354+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:23:35.359+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:23:41.366+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:23:47.373+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:23:54.380+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:24:00.388+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:24:06.395+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:24:13.401+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:24:20.408+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:24:28.415+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:24:34.422+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:24:40.430+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:24:46.438+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:24:54.444+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:25:02.451+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:25:10.457+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:25:18.464+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:25:25.471+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:25:33.475+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:25:41.480+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:25:49.488+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:25:57.494+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:26:03.499+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:26:11.505+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:26:19.513+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:26:25.523+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:26:31.528+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:26:39.539+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:26:47.548+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:26:54.558+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:27:02.566+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:27:09.574+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:27:17.582+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:27:25.589+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:27:31.595+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:27:38.601+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:27:44.610+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:27:52.617+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:27:58.625+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:28:05.631+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:28:12.639+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:28:20.679+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:28:26.681+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:28:33.690+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:28:41.696+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:28:47.703+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:28:53.711+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:29:01.717+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:29:09.724+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:29:16.730+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:29:23.739+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:29:31.747+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:29:37.753+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:29:45.759+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:29:51.768+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:29:58.775+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:30:04.782+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:30:11.789+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:30:18.792+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:30:24.798+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:30:32.806+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:30:40.813+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:30:46.821+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:30:53.827+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:31:01.874+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:31:08.879+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:31:15.910+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:31:21.917+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:31:29.923+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:31:37.927+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:31:45.934+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:31:52.943+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:32:00.948+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:32:07.954+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:32:14.963+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:32:22.973+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:32:30.978+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:32:37.984+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:32:43.992+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:32:50.995+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:32:59.002+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:33:06.005+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:33:13.012+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:33:19.019+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:33:27.022+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:33:33.030+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:33:39.036+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:33:45.042+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:33:51.050+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:33:57.055+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:34:04.062+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:34:11.068+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:34:17.074+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:34:23.077+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:34:30.084+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:34:37.091+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:34:44.100+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:34:51.107+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:34:59.114+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:35:07.118+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:35:13.125+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:35:21.131+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:35:27.138+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:35:35.142+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:35:42.145+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:35:49.149+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:35:55.156+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:36:01.165+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:36:07.168+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:36:14.175+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:36:20.182+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:36:26.187+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:36:34.193+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:36:42.200+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:36:48.211+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:36:54.218+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:37:00.226+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:37:07.232+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:37:13.239+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:37:19.247+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:37:27.256+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:37:35.263+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:37:43.271+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:37:50.280+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:37:57.289+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:38:03.295+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:38:10.302+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:38:18.309+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:38:26.319+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:38:34.322+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:38:40.326+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:38:47.333+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:38:53.341+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:39:01.349+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:39:08.357+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:39:14.365+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:39:22.368+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:39:29.376+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:39:35.381+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:39:43.387+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:39:50.392+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:39:57.397+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:40:03.404+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:40:10.407+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:40:16.409+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:40:22.415+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:40:30.422+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:40:36.429+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:40:43.435+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:40:49.440+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:40:55.444+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:41:01.448+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:41:08.455+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:41:14.463+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:41:20.470+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:41:27.477+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:41:35.485+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:41:43.492+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:41:49.500+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:41:55.503+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:42:03.508+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:42:10.516+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:42:16.524+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:42:22.531+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:42:28.539+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:42:36.546+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:42:42.551+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:42:49.557+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:42:56.564+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:43:03.570+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:43:11.576+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:43:19.582+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:43:26.590+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:43:33.596+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:43:39.604+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:43:46.611+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:43:53.618+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:44:01.626+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:44:08.631+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:44:14.639+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:44:20.644+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:44:27.650+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:44:33.661+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:44:39.676+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:44:46.683+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:44:53.690+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:45:00.697+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:45:07.739+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:45:13.747+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:45:19.753+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:45:25.762+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:45:33.770+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:45:39.779+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:45:45.784+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:45:52.795+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:45:59.802+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:46:07.811+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:46:14.818+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:46:22.826+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:46:29.833+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:46:35.838+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:46:41.844+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:46:47.851+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:46:54.858+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:47:01.864+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:47:08.867+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:47:16.873+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:47:24.880+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:47:31.887+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:47:39.895+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:47:46.902+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:47:52.906+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:47:58.912+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:48:06.918+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:48:13.929+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:48:19.938+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:48:26.942+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:48:33.947+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:48:41.953+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:48:49.960+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:48:56.967+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:49:02.977+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:49:10.984+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:49:17.991+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:49:23.996+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:49:32.004+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:49:39.014+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:49:45.019+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:49:51.025+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:49:59.034+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:50:05.043+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:50:13.051+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:50:20.057+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:50:27.069+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:50:33.077+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:50:41.084+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:50:49.091+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:50:57.098+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:51:05.105+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:51:11.111+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:51:18.117+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:51:25.124+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:51:33.131+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:51:40.138+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:51:47.144+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:51:53.152+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:52:01.159+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:52:08.163+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:52:16.171+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:52:23.178+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:52:31.186+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:52:38.194+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:52:44.206+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:52:51.211+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:52:59.216+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:53:06.224+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:53:13.230+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:53:21.238+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:53:27.245+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:53:35.252+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:53:41.258+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:53:48.266+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:53:55.271+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:54:01.279+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:54:08.285+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:54:14.293+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:54:21.296+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:54:27.302+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:54:35.308+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:54:41.312+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:54:49.318+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:54:55.324+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:55:02.330+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:55:10.336+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:55:18.372+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:55:24.397+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:55:30.404+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:55:36.411+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:55:43.419+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:55:49.427+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:55:55.457+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:56:02.460+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:56:09.464+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:56:16.471+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:56:22.475+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:56:29.482+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:56:36.514+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:56:43.517+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:56:51.521+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:56:57.524+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:57:05.583+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:57:13.596+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:57:20.627+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:57:26.632+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:57:32.638+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:57:40.645+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:57:46.651+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:57:53.658+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:58:00.664+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:58:08.670+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:58:15.679+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:58:23.687+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:58:29.691+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:58:37.694+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:58:43.699+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:58:51.704+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:58:59.708+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:59:07.711+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:59:15.779+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:59:23.800+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:59:29.848+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:59:35.856+08:00 [ERRO] keepalive retry register failed, will retry in 2s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:59:42.864+08:00 [ERRO] keepalive retry register failed, will retry in 3s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:59:50.868+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-09T23:59:56.873+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+

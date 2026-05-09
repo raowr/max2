@@ -1,0 +1,11 @@
+2026-05-10T00:42:53.904+08:00 [DEBU] {7859bfd54df3ad18472e1b6f0e1381ca} [332 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
+2026-05-10T00:42:54.021+08:00 [DEBU] {7859bfd54df3ad18472e1b6f0e1381ca} [115 ms] [default] [max2] [rows:1  ] SELECT * FROM `users` WHERE `name`='1' LIMIT 1
+2026-05-10T00:43:24.044+08:00 [ERRO] {7859bfd54df3ad18472e1b6f0e1381ca} [  0 ms] [default] [max2] [rows:0  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc4OTQ5Nzc0fQ.Ji2qK7Gnw2qZibBLXzd593lpXsnXeQ1cN0CdEyCTEcU' WHERE `id`=3
+Error: context canceled 
+Stack:
+1.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:120
+2.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-10T00:43:45.896+08:00 [DEBU] {744b23625bf3ad18492e1b6f5a0e72c6} [321 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc4OTQ5ODI1fQ.fQG1VoOITFKoNHs8_UC0EVn1sj4cP_pmpotufmPGh_E' WHERE `id`=3

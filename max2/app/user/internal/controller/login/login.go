@@ -5,15 +5,29 @@
 package login
 
 import (
+	"github.com/gogf/gf/contrib/registry/etcd/v2"
 	"github.com/gogf/gf/v2/net/gsvc"
 	"github.com/gogf/gf/v2/os/gctx"
 )
 
 var (
-	serviceGsvc gsvc.Service
+	serviceGsvc        gsvc.Service
+	resolverRegistered bool
 )
 
-func init() {
-	// 1. 获取服务
-	serviceGsvc, _ = gsvc.Get(gctx.New(), "game_user")
+// GetGameUserService 获取 game_user 服务
+func GetGameUserService() gsvc.Service {
+	if serviceGsvc == nil {
+		// 设置全局注册中心（关键修复）
+		if !resolverRegistered {
+			gsvc.SetRegistry(etcd.New("127.0.0.1:2379"))
+			resolverRegistered = true
+		}
+		var err error
+		serviceGsvc, err = gsvc.Get(gctx.New(), "game_user.svc")
+		if err != nil {
+			return nil
+		}
+	}
+	return serviceGsvc
 }

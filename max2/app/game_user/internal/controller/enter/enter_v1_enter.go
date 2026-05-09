@@ -911,7 +911,7 @@ func (c *Client) validGetInfo(ctx context.Context, data string) {
 func (c *Client) handleHeartbeat(ctx context.Context, data string) {
 	if data == "ping" {
 		msgData := message.ChatMsg{
-			Type: consts.GetInfo,
+			Type: consts.Heartbeat,
 			Data: "pong",
 			From: c.userName,
 		}
@@ -1016,6 +1016,15 @@ func (c *Client) writeLoop(ctx context.Context) {
 				return
 			}
 
+		}
+
+		// 检查连接是否已关闭
+		c.mutex.RLock()
+		conn := c.conn
+		c.mutex.RUnlock()
+		if conn == nil {
+			g.Log().Infof(ctx, "用户 %s 连接已关闭，跳过消息发送", c.userName)
+			return
 		}
 
 		if err := c.conn.WriteMessage(ghttp.WsMsgText, []byte(msg.String())); err != nil {

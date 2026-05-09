@@ -43,9 +43,10 @@ func (c *ControllerV1) Register(ctx context.Context, req *v1.RegisterReq) (res *
 		liberr.ErrIsNil(ctx, err, "确认密码不能为空")
 	}
 	//判断mysql中是否有这个用户名
-	model := dao.Users.Ctx(ctx).Where("username = ?", req.Username)
+	model := dao.Users.Ctx(ctx).Where("name = ?", req.Username)
 	record, err := model.Fields("id").One()
 	if err != nil {
+		g.Log().Error(ctx, err)
 		liberr.ErrIsNil(ctx, err, "用户名已存在")
 	}
 	if len(record) > 0 {

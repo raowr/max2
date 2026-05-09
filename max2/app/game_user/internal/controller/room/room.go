@@ -454,12 +454,14 @@ func isGameOver(room *Room) (isOver bool, overMsgData []*overMsg, winName string
 					player.Point -= int64(player.CardNum) //输的玩家
 					playerWin = -int64(player.CardNum)    //输的是负数
 				}
-				//计算抽水
-				commission := GetGameCommission()
-				if player.Point > commission {
-					player.Point -= commission
-				} else {
-					player.Point = 0
+				//计算抽水,段位房才抽水
+				if room.Type == 1 {
+					commission := GetGameCommission()
+					if player.Point > commission {
+						player.Point -= commission
+					} else {
+						player.Point = 0
+					}
 				}
 				overMsgData = append(overMsgData, &overMsg{
 					WinName: player.Name,

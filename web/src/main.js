@@ -1,12 +1,17 @@
 import './assets/main.css'
+import 'element-plus/dist/index.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router' // 引入路由配置
+import ElementPlus from 'element-plus'
 import { websocket } from './utils/websocket'
 import { storage } from './utils/storage' // 导入封装的存储工具
 
 const app = createApp(App)
+
+// 注册 Element Plus
+app.use(ElementPlus)
 
 // 添加全局websocket
 app.config.globalProperties.$websocket = websocket
@@ -24,24 +29,24 @@ function initApp() {
   console.log('WebSocket URL:', wsUrl);
   
   // 延迟连接 WebSocket，确保应用先加载
-  setTimeout(() => {
-    if (wsUrl) {
-      console.log('user_id:', storage.local.get("user_id"))
-// 初始化 WebSocket 配置（全局一次）
-      websocket.init({
-        url: wsUrl+"?user_id="+storage.local.get("user_id"), // 后端地址
-        reconnectInterval: 5000, // 5秒重连一次
-        heartbeatInterval: 10000 // 20秒一次心跳
-      });
+//   setTimeout(() => {
+//     if (wsUrl) {
+//       console.log('user_id:', storage.local.get("user_id"))
+// // 初始化 WebSocket 配置（全局一次）
+//       websocket.init({
+//         url: wsUrl+"?user_id="+storage.local.get("user_id"), // 后端地址
+//         reconnectInterval: 5000, // 5秒重连一次
+//         heartbeatInterval: 10000 // 20秒一次心跳
+//       });
 
-// 启动连接（可在登录后再调用，这里直接启动作为示例）
-      websocket.connect();
-    } else {
-      console.warn('VITE_WS_URL is not defined, using default WebSocket URL')
-      // 可以在这里设置一个默认的 WebSocket URL
-      websocket.connect('ws://127.0.0.1:8000/enter')
-    }
-  }, 100)
+// // 启动连接（可在登录后再调用，这里直接启动作为示例）
+//       websocket.connect();
+//     } else {
+//       console.warn('VITE_WS_URL is not defined, using default WebSocket URL')
+//       // 可以在这里设置一个默认的 WebSocket URL
+//       websocket.connect('ws://127.0.0.1:8000/enter')
+//     }
+//   }, 100)
 }
 
 // 根据环境选择初始化方式
