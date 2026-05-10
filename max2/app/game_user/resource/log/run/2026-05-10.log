@@ -102956,3 +102956,7 @@ Stack:
 2026-05-10T14:16:05.227+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc000b7df50\u003e"},"BalancerAttributes":null,"Metadata":null}]
 2026-05-10T14:16:05.229+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc000b935f0\u003e"},"BalancerAttributes":null,"Metadata":null}]
 2026-05-10T14:16:05.602+08:00 [DEBU] {cc80de06b51fae185ce2bf1753bd53d2} Log sent successfully
+2026-05-10T14:26:32.222+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894528270025918"
+2026-05-10T14:26:32.257+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894528270025921"
+2026-05-10T14:35:18.371+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894528270025926"
+2026-05-10T14:35:18.392+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894528270025929"

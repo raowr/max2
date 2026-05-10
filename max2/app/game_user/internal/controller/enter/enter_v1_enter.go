@@ -610,6 +610,11 @@ func (c *Client) validLeaveRoom(ctx context.Context, data string) {
 		}
 	}
 
+	if len(roomInfo.Players) == 0 {
+		//房间没人清理房间
+		c.clearRoom(ctx)
+	}
+
 	//发送日志 离开房间
 	log_game.SendLog(&log_gamev1.SendLogReq{
 		RoomID:     roomInfo.ID,
