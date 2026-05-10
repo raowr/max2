@@ -19,6 +19,9 @@ var (
 	ctx    context.Context
 	conn   *grpc.ClientConn
 	client setGrpc.SetGameClient
+
+	userConn   *grpc.ClientConn      // game_user 的连接
+	userClient setGrpc.SetGameClient // game_user 的客户端
 )
 
 func init() {
@@ -26,4 +29,8 @@ func init() {
 	ctx = gctx.New()
 	conn = grpcx.Client.MustNewGrpcClientConn("game")
 	client = setGrpc.NewSetGameClient(conn)
+
+	// GameUser 服务
+	userConn = grpcx.Client.MustNewGrpcClientConn("game_user")
+	userClient = setGrpc.NewSetGameClient(userConn)
 }

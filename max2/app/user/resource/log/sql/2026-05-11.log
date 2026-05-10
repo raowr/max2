@@ -1,0 +1,1 @@
+2026-05-11T00:21:26.356+08:00 [DEBU] {1cc8d797bd40ae185ebb5957bf239797} [439 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1002 WHERE `id`=3

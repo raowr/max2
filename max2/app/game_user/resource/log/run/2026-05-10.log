@@ -102960,3 +102960,3204 @@ Stack:
 2026-05-10T14:26:32.257+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894528270025921"
 2026-05-10T14:35:18.371+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894528270025926"
 2026-05-10T14:35:18.392+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894528270025929"
+2026-05-10T14:36:28.671+08:00 [INFO] {f8af2be1d120ae1883ba5957ae3b713e} 用户 1 连接成功
+2026-05-10T14:36:28.697+08:00 [INFO] heartbeatCheck: 0s
+2026-05-10T14:36:28.697+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-10T14:36:30.386+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-10T14:36:30.483+08:00 [ERRO] 用户名或密码错误 
+Stack:
+1.  game_user/internal/controller/room.(*Room).CreatePlayer
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:60
+2.  game_user/internal/controller/enter.(*Client).handleInitRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:239
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:184
+
+2026-05-10T14:36:30.490+08:00 [INFO] 用户 1 开始延迟添加AI到房间 YV0Q1V
+2026-05-10T14:36:30.499+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"YV0Q1V\",\"Type\":0,\"CardNum\":13,\"Point\":1000,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"Gardner Harvey\",\"RoomID\":\"YV0Q1V\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-10T14:36:30.510+08:00 [INFO] 执行日志异步任务: RoomID:"YV0Q1V" Type:1 UserID:"1" Point:1000 Action:"initRoom"
+2026-05-10T14:36:30.526+08:00 [DEBU] Watch key "/service/default/default/log-service/latest/"
+2026-05-10T14:36:32.504+08:00 [ERRO] 用户名或密码错误 
+Stack:
+1.  game_user/internal/controller/room.(*Room).CreatePlayer
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:60
+2.  game_user/internal/controller/enter.(*Client).handleInitRoom.func1
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:277
+
+2026-05-10T14:36:32.508+08:00 [ERRO] 用户名或密码错误 
+Stack:
+1.  game_user/internal/controller/room.(*Room).CreatePlayer
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:60
+2.  game_user/internal/controller/enter.(*Client).handleInitRoom.func1
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:277
+
+2026-05-10T14:36:32.512+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"YV0Q1V\",\"Type\":0,\"CardNum\":13,\"Point\":1000,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"Gardner Harvey\",\"RoomID\":\"YV0Q1V\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"Scarlett Roob\",\"RoomID\":\"YV0Q1V\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"Mrs. Edwin Langosh\",\"RoomID\":\"YV0Q1V\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-10T14:36:33.696+08:00 [INFO] heartbeatCheck: 3.3101284s
+2026-05-10T14:36:34.273+08:00 [INFO] 用户 1 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-10T14:36:34.286+08:00 [INFO] 
+===== 房间 YV0Q1V 游戏开始 =====
+2026-05-10T14:36:34.299+08:00 [INFO] 
+确定谁先出牌...
+2026-05-10T14:36:34.343+08:00 [INFO] 房间 YV0Q1V 启动消息接收 goroutine
+2026-05-10T14:36:34.344+08:00 [INFO] 1的牌: 
+2026-05-10T14:36:34.346+08:00 [INFO] ♦Q,♣Q,♦4,♦9,♥A,♣A,♦8,♠7,♦A,♠4,♥J,♥9,♦3
+2026-05-10T14:36:34.358+08:00 [INFO] Gardner Harvey的牌: 
+2026-05-10T14:36:34.359+08:00 [INFO] 牌型：5,具体的牌：[[{2 0 ♦2 49 15 ♦} {2 2 ♥2 51 15 ♥} {2 3 ♠2 52 15 ♠} {10 0 ♦10 29 10 ♦} {10 2 ♥10 31 10 ♥}]] 
+2026-05-10T14:36:34.362+08:00 [INFO] 牌型：2,具体的牌：[[{5 2 ♥5 11 5 ♥} {5 3 ♠5 12 5 ♠}]] 
+2026-05-10T14:36:34.374+08:00 [INFO] 牌型：1,具体的牌：[[{J 1 ♣J 34 11 ♣}] [{3 2 ♥3 3 3 ♥}] [{6 2 ♥6 15 6 ♥}] [{K 2 ♥K 43 13 ♥}] [{8 3 ♠8 24 8 ♠}] [{9 3 ♠9 28 9 ♠}]] 
+2026-05-10T14:36:34.376+08:00 [INFO] Scarlett Roob的牌: 
+2026-05-10T14:36:34.364+08:00 [INFO] 用户 1 发送消息: {"type":"showCard","data":"{\"cards\":[37,38,5,25,47,46,21,20,45,8,35,27,1],\"current\":0,\"playerPoint\":1000,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:36:34.398+08:00 [INFO] 牌型：2,具体的牌：[[{K 0 ♦K 41 13 ♦} {K 3 ♠K 44 13 ♠}]] 
+2026-05-10T14:36:34.514+08:00 [INFO] 牌型：1,具体的牌：[[{9 1 ♣9 26 9 ♣}] [{7 2 ♥7 19 7 ♥}] [{Q 2 ♥Q 39 12 ♥}] [{6 3 ♠6 16 6 ♠}] [{J 3 ♠J 36 11 ♠}] [{A 3 ♠A 48 14 ♠}]] 
+2026-05-10T14:36:34.515+08:00 [INFO] 牌型：3,具体的牌：[[{4 1 ♣4 6 4 ♣} {5 0 ♦5 9 5 ♦} {6 0 ♦6 13 6 ♦} {7 1 ♣7 18 7 ♣} {8 1 ♣8 22 8 ♣}]] 
+2026-05-10T14:36:34.516+08:00 [INFO] Mrs. Edwin Langosh的牌: 
+2026-05-10T14:36:34.516+08:00 [INFO] 牌型：2,具体的牌：[[{3 1 ♣3 2 3 ♣} {3 3 ♠3 4 3 ♠}]] 
+2026-05-10T14:36:34.517+08:00 [INFO] 牌型：1,具体的牌：[[{7 0 ♦7 17 7 ♦}] [{J 0 ♦J 33 11 ♦}] [{4 2 ♥4 7 4 ♥}] [{8 2 ♥8 23 8 ♥}] [{10 3 ♠10 32 10 ♠}] [{Q 3 ♠Q 40 12 ♠}]] 
+2026-05-10T14:36:34.528+08:00 [INFO] 牌型：4,具体的牌：[[{2 1 ♣2 50 15 ♣} {K 1 ♣K 42 13 ♣} {10 1 ♣10 30 10 ♣} {6 1 ♣6 14 6 ♣} {5 1 ♣5 10 5 ♣}]] 
+2026-05-10T14:36:34.529+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-10T14:36:35.584+08:00 [INFO] 
+1的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:35.586+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:36:35.596+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:35.598+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:36:35.600+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:36:36.501+08:00 [INFO] 
+1的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:36.501+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:36:36.502+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:36.502+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:36:36.503+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:36:37.501+08:00 [INFO] 
+1的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:37.504+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:36:37.506+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:37.508+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:36:37.509+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:36:38.503+08:00 [INFO] 
+1的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:38.505+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:36:38.506+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:38.507+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:36:38.507+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:36:38.697+08:00 [INFO] heartbeatCheck: 4.1681285s
+2026-05-10T14:36:39.501+08:00 [INFO] 
+1的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:39.502+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:36:39.506+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:39.507+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:36:39.507+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:36:40.501+08:00 [INFO] 
+1的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:40.501+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:36:40.501+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:40.502+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:36:40.503+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:36:40.821+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[1,5,21,25,37]}"}（类型: 1）
+2026-05-10T14:36:40.823+08:00 [INFO] 用户 1 发送出牌消息: {"pid":0,"cardIds":[1,5,21,25,37],"pass":0}
+2026-05-10T14:36:41.501+08:00 [INFO] 
+1的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:41.502+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:36:41.502+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:41.502+08:00 [INFO] 从队列收到消息: playCard
+2026-05-10T14:36:41.504+08:00 [INFO] 用户 1 接收出牌消息1: &{playCard {"pid":0,"cardIds":[1,5,21,25,37],"pass":0} 1}
+2026-05-10T14:36:41.506+08:00 [INFO] 用户 1 接收出牌消息2: {0 [1 5 21 25 37] 0}
+2026-05-10T14:36:41.507+08:00 [DEBU] [1,5,21,25,37]
+2026-05-10T14:36:41.507+08:00 [INFO] 1出了: ♦3,♦4,♦8,♦9,♦Q (4)
+
+2026-05-10T14:36:41.508+08:00 [INFO] ♣Q,♥A,♣A,♠7,♦A,♠4,♥J,♥9
+2026-05-10T14:36:41.509+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:36:41.514+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63153->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:41.514+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:41.515+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:41.517+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:41.517+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:36:41.520+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[1,5,21,25,37],\"card_type\":4,\"cards_num\":8,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:36:42.500+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:42.500+08:00 [INFO] 上一手牌，牌型: 4, 牌是：♦3,♦4,♦8,♦9,♦Q
+
+2026-05-10T14:36:42.502+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:43.501+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:43.502+08:00 [INFO] 上一手牌，牌型: 4, 牌是：♦3,♦4,♦8,♦9,♦Q
+
+2026-05-10T14:36:43.504+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:43.505+08:00 [INFO] Gardner Harvey出了: ♦2,♥2,♠2,♦10,♥10 (5)
+
+2026-05-10T14:36:43.506+08:00 [INFO] 正在订阅 Channel: player_play_card_Scarlett Roob，当前玩家: Scarlett Roob
+2026-05-10T14:36:43.506+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63159->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:43.507+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:43.509+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:43.510+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:43.511+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:43.511+08:00 [INFO] 成功订阅 Channel: player_play_card_Scarlett Roob
+2026-05-10T14:36:43.513+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[49,51,52,29,31],\"card_type\":5,\"cards_num\":8,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:36:43.697+08:00 [INFO] heartbeatCheck: 2.8750403s
+2026-05-10T14:36:44.501+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:44.501+08:00 [INFO] 上一手牌，牌型: 5, 牌是：♦2,♥2,♠2,♦10,♥10
+
+2026-05-10T14:36:44.502+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:45.500+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:45.501+08:00 [INFO] 上一手牌，牌型: 5, 牌是：♦2,♥2,♠2,♦10,♥10
+
+2026-05-10T14:36:45.502+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:45.502+08:00 [INFO] Scarlett Roob不出
+
+2026-05-10T14:36:45.503+08:00 [INFO] 正在订阅 Channel: player_play_card_Mrs. Edwin Langosh，当前玩家: Mrs. Edwin Langosh
+2026-05-10T14:36:45.503+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63160->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:45.504+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:45.505+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:45.510+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:45.512+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:45.512+08:00 [INFO] 成功订阅 Channel: player_play_card_Mrs. Edwin Langosh
+2026-05-10T14:36:45.514+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:36:46.501+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:46.502+08:00 [INFO] 上一手牌，牌型: 5, 牌是：♦2,♥2,♠2,♦10,♥10
+
+2026-05-10T14:36:46.503+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:47.501+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:47.501+08:00 [INFO] 上一手牌，牌型: 5, 牌是：♦2,♥2,♠2,♦10,♥10
+
+2026-05-10T14:36:47.502+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:47.503+08:00 [INFO] Mrs. Edwin Langosh不出
+
+2026-05-10T14:36:47.504+08:00 [INFO] 正在订阅 Channel: player_play_card_1，当前玩家: 1
+2026-05-10T14:36:47.504+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63162->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:47.505+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:47.506+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:47.507+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:47.508+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:47.509+08:00 [INFO] 成功订阅 Channel: player_play_card_1
+2026-05-10T14:36:47.509+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:47.511+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:36:48.501+08:00 [INFO] 
+1的回合 (当前手牌数: 8)
+
+2026-05-10T14:36:48.504+08:00 [INFO] 上一手牌，牌型: 5, 牌是：♦2,♥2,♠2,♦10,♥10
+
+2026-05-10T14:36:48.504+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:48.505+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:36:48.506+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:36:48.641+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-10T14:36:48.642+08:00 [INFO] 用户 1 发送出牌消息: {"pid":0,"cardIds":null,"pass":1}
+2026-05-10T14:36:48.696+08:00 [INFO] heartbeatCheck: 56.6219ms
+2026-05-10T14:36:49.501+08:00 [INFO] 
+1的回合 (当前手牌数: 8)
+
+2026-05-10T14:36:49.501+08:00 [INFO] 上一手牌，牌型: 5, 牌是：♦2,♥2,♠2,♦10,♥10
+
+2026-05-10T14:36:49.502+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:49.507+08:00 [INFO] 从队列收到消息: playCard
+2026-05-10T14:36:49.508+08:00 [INFO] 用户 1 接收出牌消息1: &{playCard {"pid":0,"cardIds":null,"pass":1} 1}
+2026-05-10T14:36:49.509+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 1}
+2026-05-10T14:36:49.509+08:00 [INFO] 1不出
+
+2026-05-10T14:36:49.510+08:00 [INFO] ♣Q,♥A,♣A,♠7,♦A,♠4,♥J,♥9
+2026-05-10T14:36:49.511+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:36:49.511+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63163->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:49.512+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:49.514+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:49.515+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:49.515+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:36:49.518+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":8,\"code\":0,\"current\":1,\"mustPid\":1,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:36:50.502+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 8)
+
+2026-05-10T14:36:50.503+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:36:50.505+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:51.727+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 8)
+
+2026-05-10T14:36:51.731+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:36:51.731+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:51.741+08:00 [INFO] Gardner Harvey出了: ♥3 (1)
+
+2026-05-10T14:36:51.786+08:00 [INFO] 正在订阅 Channel: player_play_card_Scarlett Roob，当前玩家: Scarlett Roob
+2026-05-10T14:36:51.788+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63165->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.789+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.790+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.791+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.792+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.792+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.793+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.794+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.803+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.805+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.806+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.807+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.809+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.810+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.817+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.818+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.819+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.820+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.821+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.821+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.822+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.822+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.823+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.824+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.824+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.825+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.826+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.827+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.828+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.835+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.837+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.838+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.839+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.839+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.840+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.841+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.844+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.851+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.853+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.854+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.855+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.855+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.856+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.858+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.859+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.861+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.861+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.871+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.873+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.875+08:00 [INFO] 成功订阅 Channel: player_play_card_Scarlett Roob
+2026-05-10T14:36:51.886+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:51.890+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[3],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:36:52.801+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:52.801+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥3
+
+2026-05-10T14:36:52.801+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:53.696+08:00 [INFO] heartbeatCheck: 5.0564419s
+2026-05-10T14:36:53.801+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:53.801+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥3
+
+2026-05-10T14:36:53.802+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:54.801+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:54.802+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥3
+
+2026-05-10T14:36:54.803+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:54.805+08:00 [INFO] Scarlett Roob出了: ♠6 (1)
+
+2026-05-10T14:36:54.810+08:00 [INFO] 正在订阅 Channel: player_play_card_Mrs. Edwin Langosh，当前玩家: Mrs. Edwin Langosh
+2026-05-10T14:36:54.813+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63167->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.814+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.816+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.817+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.820+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.835+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.838+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.847+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.851+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.851+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.853+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.853+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.855+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.865+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.867+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.868+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.869+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.871+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.871+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.878+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.879+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.880+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.881+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.884+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.884+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.885+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.886+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.888+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.893+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.895+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.899+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.902+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.903+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.905+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.911+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.913+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.914+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.917+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.920+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.927+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.929+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.930+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:54.935+08:00 [INFO] 成功订阅 Channel: player_play_card_Mrs. Edwin Langosh
+2026-05-10T14:36:54.952+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[16],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:36:55.802+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:55.802+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠6
+
+2026-05-10T14:36:55.804+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:56.801+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 13)
+
+2026-05-10T14:36:56.802+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠6
+
+2026-05-10T14:36:56.802+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:56.803+08:00 [INFO] Mrs. Edwin Langosh出了: ♦7 (1)
+
+2026-05-10T14:36:56.805+08:00 [INFO] 正在订阅 Channel: player_play_card_1，当前玩家: 1
+2026-05-10T14:36:56.805+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63169->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:56.806+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:56.808+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:56.808+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:56.810+08:00 [INFO] 成功订阅 Channel: player_play_card_1
+2026-05-10T14:36:56.810+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:56.811+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[17],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:36:57.803+08:00 [INFO] 
+1的回合 (当前手牌数: 8)
+
+2026-05-10T14:36:57.805+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♦7
+
+2026-05-10T14:36:57.806+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:57.806+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:36:57.807+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:36:58.238+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[20]}"}（类型: 1）
+2026-05-10T14:36:58.239+08:00 [INFO] 用户 1 发送出牌消息: {"pid":0,"cardIds":[20],"pass":0}
+2026-05-10T14:36:58.697+08:00 [INFO] heartbeatCheck: 458.6192ms
+2026-05-10T14:36:58.801+08:00 [INFO] 
+1的回合 (当前手牌数: 8)
+
+2026-05-10T14:36:58.802+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♦7
+
+2026-05-10T14:36:58.802+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:36:58.808+08:00 [INFO] 从队列收到消息: playCard
+2026-05-10T14:36:58.809+08:00 [INFO] 用户 1 接收出牌消息1: &{playCard {"pid":0,"cardIds":[20],"pass":0} 1}
+2026-05-10T14:36:58.810+08:00 [INFO] 用户 1 接收出牌消息2: {0 [20] 0}
+2026-05-10T14:36:58.810+08:00 [DEBU] [20]
+2026-05-10T14:36:58.811+08:00 [INFO] 1出了: ♠7 (1)
+
+2026-05-10T14:36:58.812+08:00 [INFO] ♣Q,♥A,♣A,♦A,♠4,♥J,♥9
+2026-05-10T14:36:58.813+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:36:58.813+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63173->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:58.815+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:58.816+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:58.817+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:36:58.818+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:36:58.824+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[20],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:36:59.801+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 7)
+
+2026-05-10T14:36:59.802+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠7
+
+2026-05-10T14:36:59.802+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:00.801+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 7)
+
+2026-05-10T14:37:00.801+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠7
+
+2026-05-10T14:37:00.802+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:01.801+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 7)
+
+2026-05-10T14:37:01.801+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠7
+
+2026-05-10T14:37:01.802+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:01.803+08:00 [INFO] Gardner Harvey出了: ♠8 (1)
+
+2026-05-10T14:37:01.804+08:00 [INFO] 正在订阅 Channel: player_play_card_Scarlett Roob，当前玩家: Scarlett Roob
+2026-05-10T14:37:01.805+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63180->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.807+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.807+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.808+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.809+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.810+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.812+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.812+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.813+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.816+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.817+08:00 [INFO] 成功订阅 Channel: player_play_card_Scarlett Roob
+2026-05-10T14:37:01.817+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:01.819+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[24],\"card_type\":1,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:02.800+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 12)
+
+2026-05-10T14:37:02.801+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠8
+
+2026-05-10T14:37:02.802+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:03.696+08:00 [INFO] heartbeatCheck: 5.4577907s
+2026-05-10T14:37:03.801+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 12)
+
+2026-05-10T14:37:03.802+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠8
+
+2026-05-10T14:37:03.804+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:04.802+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 12)
+
+2026-05-10T14:37:04.804+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠8
+
+2026-05-10T14:37:04.806+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:04.813+08:00 [INFO] Scarlett Roob出了: ♣9 (1)
+
+2026-05-10T14:37:04.815+08:00 [INFO] 正在订阅 Channel: player_play_card_Mrs. Edwin Langosh，当前玩家: Mrs. Edwin Langosh
+2026-05-10T14:37:04.816+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63184->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:04.818+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:04.821+08:00 [INFO] 成功订阅 Channel: player_play_card_Mrs. Edwin Langosh
+2026-05-10T14:37:04.830+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[26],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:05.801+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 12)
+
+2026-05-10T14:37:05.801+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♣9
+
+2026-05-10T14:37:05.802+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:06.802+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 12)
+
+2026-05-10T14:37:06.804+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♣9
+
+2026-05-10T14:37:06.804+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:07.801+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 12)
+
+2026-05-10T14:37:07.805+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♣9
+
+2026-05-10T14:37:07.806+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:07.807+08:00 [INFO] Mrs. Edwin Langosh出了: ♠10 (1)
+
+2026-05-10T14:37:07.808+08:00 [INFO] 正在订阅 Channel: player_play_card_1，当前玩家: 1
+2026-05-10T14:37:07.808+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63187->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:07.809+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:07.809+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:07.810+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:07.811+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:07.811+08:00 [INFO] 成功订阅 Channel: player_play_card_1
+2026-05-10T14:37:07.813+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[32],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:08.697+08:00 [INFO] heartbeatCheck: 10.4586228s
+2026-05-10T14:37:08.800+08:00 [INFO] 
+1的回合 (当前手牌数: 7)
+
+2026-05-10T14:37:08.801+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠10
+
+2026-05-10T14:37:08.801+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:08.802+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:08.803+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:09.428+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[35]}"}（类型: 1）
+2026-05-10T14:37:09.429+08:00 [INFO] 用户 1 发送出牌消息: {"pid":0,"cardIds":[35],"pass":0}
+2026-05-10T14:37:09.801+08:00 [INFO] 
+1的回合 (当前手牌数: 7)
+
+2026-05-10T14:37:09.801+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠10
+
+2026-05-10T14:37:09.802+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:09.802+08:00 [INFO] 从队列收到消息: playCard
+2026-05-10T14:37:09.803+08:00 [INFO] 用户 1 接收出牌消息1: &{playCard {"pid":0,"cardIds":[35],"pass":0} 1}
+2026-05-10T14:37:09.804+08:00 [INFO] 用户 1 接收出牌消息2: {0 [35] 0}
+2026-05-10T14:37:09.804+08:00 [DEBU] [35]
+2026-05-10T14:37:09.804+08:00 [INFO] 1出了: ♥J (1)
+
+2026-05-10T14:37:09.805+08:00 [INFO] ♣Q,♥A,♣A,♦A,♠4,♥9
+2026-05-10T14:37:09.805+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:37:09.805+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63190->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:09.807+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:09.807+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:09.812+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:09.815+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:09.815+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:09.815+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:37:09.817+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[35],\"card_type\":1,\"cards_num\":6,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:10.901+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:10.901+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥J
+
+2026-05-10T14:37:10.903+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:11.901+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:11.902+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥J
+
+2026-05-10T14:37:11.903+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:11.904+08:00 [INFO] Gardner Harvey出了: ♥K (1)
+
+2026-05-10T14:37:11.905+08:00 [INFO] 正在订阅 Channel: player_play_card_Scarlett Roob，当前玩家: Scarlett Roob
+2026-05-10T14:37:11.906+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63196->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:11.907+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:11.908+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:11.910+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:11.911+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:11.918+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:11.919+08:00 [INFO] 成功订阅 Channel: player_play_card_Scarlett Roob
+2026-05-10T14:37:11.921+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[43],\"card_type\":1,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:12.901+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 11)
+
+2026-05-10T14:37:12.902+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥K
+
+2026-05-10T14:37:12.905+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:13.696+08:00 [INFO] heartbeatCheck: 4.2684873s
+2026-05-10T14:37:13.901+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 11)
+
+2026-05-10T14:37:13.903+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥K
+
+2026-05-10T14:37:13.904+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:13.906+08:00 [INFO] Scarlett Roob出了: ♠A (1)
+
+2026-05-10T14:37:13.907+08:00 [INFO] 正在订阅 Channel: player_play_card_Mrs. Edwin Langosh，当前玩家: Mrs. Edwin Langosh
+2026-05-10T14:37:13.909+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63198->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:13.912+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:13.915+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:13.917+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:13.921+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:13.922+08:00 [INFO] 成功订阅 Channel: player_play_card_Mrs. Edwin Langosh
+2026-05-10T14:37:13.924+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[48],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:14.900+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 11)
+
+2026-05-10T14:37:14.902+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:14.906+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:15.901+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 11)
+
+2026-05-10T14:37:15.901+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:15.901+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:16.901+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 11)
+
+2026-05-10T14:37:16.901+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:16.902+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:16.903+08:00 [INFO] Mrs. Edwin Langosh不出
+
+2026-05-10T14:37:16.904+08:00 [INFO] 正在订阅 Channel: player_play_card_1，当前玩家: 1
+2026-05-10T14:37:16.905+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63199->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:16.906+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:16.907+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:16.907+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:16.908+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:16.910+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:16.910+08:00 [INFO] 成功订阅 Channel: player_play_card_1
+2026-05-10T14:37:16.911+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:17.900+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:17.900+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:17.901+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:17.903+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:17.904+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:18.697+08:00 [INFO] heartbeatCheck: 9.2697755s
+2026-05-10T14:37:18.900+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:18.900+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:18.902+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:18.902+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:18.903+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:19.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:19.901+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:19.902+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:19.902+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:19.903+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:20.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:20.901+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:20.902+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:20.902+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:20.903+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:21.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:21.903+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:21.904+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:21.907+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:21.909+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:22.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:22.901+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:22.902+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:22.904+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:22.904+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:23.696+08:00 [INFO] heartbeatCheck: 14.2687552s
+2026-05-10T14:37:23.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:23.902+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:23.904+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:23.907+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:23.909+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:24.910+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:24.920+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:24.921+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:24.923+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:24.924+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:25.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:25.903+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:25.903+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:25.904+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:25.905+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:26.910+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:26.912+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:26.914+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:26.915+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:26.915+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:26.928+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-10T14:37:26.930+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-10T14:37:27.914+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:27.919+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:27.925+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:27.930+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:27.933+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:28.696+08:00 [INFO] heartbeatCheck: 1.7681169s
+2026-05-10T14:37:28.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:28.902+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:28.904+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:28.905+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:28.907+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:29.900+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:29.902+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:29.904+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:29.905+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:29.906+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:30.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:30.902+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:30.903+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:30.905+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:30.907+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:31.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:31.901+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:31.902+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:31.903+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:31.905+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:32.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:32.902+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:32.906+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:32.907+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:32.909+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:33.696+08:00 [INFO] heartbeatCheck: 6.7679379s
+2026-05-10T14:37:33.901+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:33.904+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:33.905+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:33.907+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:33.909+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:35.001+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:35.002+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:35.006+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:35.007+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:35.008+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:36.009+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:36.011+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:36.013+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:36.014+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:36.015+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:36.947+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-10T14:37:36.949+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-10T14:37:37.180+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:37.181+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:37.181+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:37.181+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:37.182+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:38.101+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:38.104+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:38.105+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:38.111+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:38.150+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:38.697+08:00 [INFO] heartbeatCheck: 1.7509601s
+2026-05-10T14:37:39.100+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:39.101+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:39.102+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:39.103+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:39.103+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:40.101+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:40.102+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:40.102+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:40.103+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:40.103+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:41.107+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:41.122+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:41.123+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:41.124+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:41.125+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:42.101+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:42.102+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:42.103+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:42.104+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:42.105+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:43.101+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:43.101+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:43.102+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:43.102+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:43.102+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:43.697+08:00 [INFO] heartbeatCheck: 6.7504046s
+2026-05-10T14:37:44.100+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:44.101+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:44.103+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:44.103+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:44.104+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:45.100+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:45.101+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:45.102+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:45.102+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:45.104+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:46.101+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:46.102+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:46.105+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:46.105+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:46.106+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:46.961+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-10T14:37:46.962+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-10T14:37:47.100+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:47.100+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:47.100+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:47.101+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:47.101+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:47.102+08:00 [INFO] 1不出
+
+2026-05-10T14:37:47.103+08:00 [INFO] ♣Q,♥A,♣A,♦A,♠4,♥9
+2026-05-10T14:37:47.104+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:37:47.104+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63202->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:47.106+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:47.107+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:47.109+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:47.110+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:47.111+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:47.112+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:37:47.113+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":1,\"mustPid\":2,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:48.101+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 5)
+
+2026-05-10T14:37:48.101+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:48.101+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:48.699+08:00 [INFO] heartbeatCheck: 1.7387478s
+2026-05-10T14:37:49.101+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 5)
+
+2026-05-10T14:37:49.101+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:49.102+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:50.101+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 5)
+
+2026-05-10T14:37:50.101+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠A
+
+2026-05-10T14:37:50.104+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:50.105+08:00 [INFO] Gardner Harvey不出
+
+2026-05-10T14:37:50.108+08:00 [INFO] 正在订阅 Channel: player_play_card_Scarlett Roob，当前玩家: Scarlett Roob
+2026-05-10T14:37:50.109+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63221->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:50.110+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:50.110+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:50.111+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:50.111+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:50.112+08:00 [INFO] 成功订阅 Channel: player_play_card_Scarlett Roob
+2026-05-10T14:37:50.112+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":2,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:51.106+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 10)
+
+2026-05-10T14:37:51.107+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:37:51.107+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:52.201+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 10)
+
+2026-05-10T14:37:52.201+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:37:52.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:53.202+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 10)
+
+2026-05-10T14:37:53.202+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:37:53.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:53.204+08:00 [INFO] Scarlett Roob出了: ♣4,♦5,♦6,♣7,♣8 (3)
+
+2026-05-10T14:37:53.205+08:00 [INFO] 正在订阅 Channel: player_play_card_Mrs. Edwin Langosh，当前玩家: Mrs. Edwin Langosh
+2026-05-10T14:37:53.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63228->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.207+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.208+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.209+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.214+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.215+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.216+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.217+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.218+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.219+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.219+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.221+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.222+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.223+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.223+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.224+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.225+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.226+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.232+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.232+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.233+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.234+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.235+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.235+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.236+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.237+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.238+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.239+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.240+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.240+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.241+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:53.242+08:00 [INFO] 成功订阅 Channel: player_play_card_Mrs. Edwin Langosh
+2026-05-10T14:37:53.248+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[6,9,13,18,22],\"card_type\":3,\"cards_num\":5,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:53.699+08:00 [INFO] heartbeatCheck: 6.7388977s
+2026-05-10T14:37:54.204+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 11)
+
+2026-05-10T14:37:54.206+08:00 [INFO] 上一手牌，牌型: 3, 牌是：♣4,♦5,♦6,♣7,♣8
+
+2026-05-10T14:37:54.207+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:55.207+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 11)
+
+2026-05-10T14:37:55.211+08:00 [INFO] 上一手牌，牌型: 3, 牌是：♣4,♦5,♦6,♣7,♣8
+
+2026-05-10T14:37:55.214+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:56.201+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 11)
+
+2026-05-10T14:37:56.201+08:00 [INFO] 上一手牌，牌型: 3, 牌是：♣4,♦5,♦6,♣7,♣8
+
+2026-05-10T14:37:56.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:56.202+08:00 [INFO] Mrs. Edwin Langosh出了: ♣2,♣K,♣10,♣6,♣5 (4)
+
+2026-05-10T14:37:56.203+08:00 [INFO] 正在订阅 Channel: player_play_card_1，当前玩家: 1
+2026-05-10T14:37:56.209+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63231->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.212+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.213+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.214+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.215+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.216+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.216+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.218+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.218+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.219+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.220+08:00 [INFO] 成功订阅 Channel: player_play_card_1
+2026-05-10T14:37:56.220+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:56.228+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[50,42,30,14,10],\"card_type\":4,\"cards_num\":6,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:57.201+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:57.201+08:00 [INFO] 上一手牌，牌型: 4, 牌是：♣2,♣K,♣10,♣6,♣5
+
+2026-05-10T14:37:57.201+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:57.202+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:37:57.203+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:37:57.764+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-10T14:37:57.766+08:00 [INFO] 用户 1 发送出牌消息: {"pid":0,"cardIds":null,"pass":1}
+2026-05-10T14:37:58.201+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:37:58.201+08:00 [INFO] 上一手牌，牌型: 4, 牌是：♣2,♣K,♣10,♣6,♣5
+
+2026-05-10T14:37:58.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:37:58.202+08:00 [INFO] 从队列收到消息: playCard
+2026-05-10T14:37:58.204+08:00 [INFO] 用户 1 接收出牌消息1: &{playCard {"pid":0,"cardIds":null,"pass":1} 1}
+2026-05-10T14:37:58.204+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 1}
+2026-05-10T14:37:58.205+08:00 [INFO] 1不出
+
+2026-05-10T14:37:58.206+08:00 [INFO] ♣Q,♥A,♣A,♦A,♠4,♥9
+2026-05-10T14:37:58.208+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:37:58.208+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63240->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:58.209+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:58.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:58.215+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:58.218+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:58.218+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:37:58.219+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:37:58.220+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:37:58.696+08:00 [INFO] heartbeatCheck: 931.6673ms
+2026-05-10T14:37:59.236+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 5)
+
+2026-05-10T14:37:59.238+08:00 [INFO] 上一手牌，牌型: 4, 牌是：♣2,♣K,♣10,♣6,♣5
+
+2026-05-10T14:37:59.239+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:00.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:00.204+08:00 [INFO] 上一手牌，牌型: 4, 牌是：♣2,♣K,♣10,♣6,♣5
+
+2026-05-10T14:38:00.204+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:01.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:01.201+08:00 [INFO] 上一手牌，牌型: 4, 牌是：♣2,♣K,♣10,♣6,♣5
+
+2026-05-10T14:38:01.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:01.204+08:00 [INFO] Gardner Harvey不出
+
+2026-05-10T14:38:01.207+08:00 [INFO] 正在订阅 Channel: player_play_card_Scarlett Roob，当前玩家: Scarlett Roob
+2026-05-10T14:38:01.208+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63242->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.209+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.212+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.213+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.215+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.215+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.216+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.218+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.219+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.220+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.221+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.222+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.225+08:00 [INFO] 成功订阅 Channel: player_play_card_Scarlett Roob
+2026-05-10T14:38:01.226+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:01.232+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:02.200+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:02.201+08:00 [INFO] 上一手牌，牌型: 4, 牌是：♣2,♣K,♣10,♣6,♣5
+
+2026-05-10T14:38:02.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:03.201+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:03.201+08:00 [INFO] 上一手牌，牌型: 4, 牌是：♣2,♣K,♣10,♣6,♣5
+
+2026-05-10T14:38:03.201+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:03.202+08:00 [INFO] Scarlett Roob不出
+
+2026-05-10T14:38:03.203+08:00 [INFO] 正在订阅 Channel: player_play_card_Mrs. Edwin Langosh，当前玩家: Mrs. Edwin Langosh
+2026-05-10T14:38:03.203+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63244->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:03.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:03.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:03.207+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:03.208+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:03.209+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:03.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:03.211+08:00 [INFO] 成功订阅 Channel: player_play_card_Mrs. Edwin Langosh
+2026-05-10T14:38:03.218+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:03.696+08:00 [INFO] heartbeatCheck: 5.9320594s
+2026-05-10T14:38:04.201+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 6)
+
+2026-05-10T14:38:04.204+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:38:04.205+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:05.201+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 6)
+
+2026-05-10T14:38:05.201+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:38:05.206+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:06.201+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 6)
+
+2026-05-10T14:38:06.201+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:38:06.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:06.203+08:00 [INFO] Mrs. Edwin Langosh出了: ♣3,♠3 (2)
+
+2026-05-10T14:38:06.204+08:00 [INFO] 正在订阅 Channel: player_play_card_1，当前玩家: 1
+2026-05-10T14:38:06.204+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63251->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:06.205+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:06.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:06.212+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:06.213+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:06.214+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:06.214+08:00 [INFO] 成功订阅 Channel: player_play_card_1
+2026-05-10T14:38:06.215+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[2,4],\"card_type\":2,\"cards_num\":4,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:07.201+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:38:07.202+08:00 [INFO] 上一手牌，牌型: 2, 牌是：♣3,♠3
+
+2026-05-10T14:38:07.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:07.203+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:07.204+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:08.201+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:38:08.202+08:00 [INFO] 上一手牌，牌型: 2, 牌是：♣3,♠3
+
+2026-05-10T14:38:08.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:08.204+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:08.204+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:08.696+08:00 [INFO] heartbeatCheck: 10.9321444s
+2026-05-10T14:38:08.797+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[45,46]}"}（类型: 1）
+2026-05-10T14:38:08.803+08:00 [INFO] 用户 1 发送出牌消息: {"pid":0,"cardIds":[45,46],"pass":0}
+2026-05-10T14:38:09.204+08:00 [INFO] 
+1的回合 (当前手牌数: 6)
+
+2026-05-10T14:38:09.205+08:00 [INFO] 上一手牌，牌型: 2, 牌是：♣3,♠3
+
+2026-05-10T14:38:09.206+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:09.206+08:00 [INFO] 从队列收到消息: playCard
+2026-05-10T14:38:09.207+08:00 [INFO] 用户 1 接收出牌消息1: &{playCard {"pid":0,"cardIds":[45,46],"pass":0} 1}
+2026-05-10T14:38:09.208+08:00 [INFO] 用户 1 接收出牌消息2: {0 [45 46] 0}
+2026-05-10T14:38:09.208+08:00 [DEBU] [45,46]
+2026-05-10T14:38:09.209+08:00 [INFO] 1出了: ♦A,♣A (2)
+
+2026-05-10T14:38:09.209+08:00 [INFO] ♣Q,♥A,♠4,♥9
+2026-05-10T14:38:09.210+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:38:09.210+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63253->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:09.212+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:09.212+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:09.213+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:09.214+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:09.215+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:38:09.215+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:09.216+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[45,46],\"card_type\":2,\"cards_num\":4,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:10.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:10.201+08:00 [INFO] 上一手牌，牌型: 2, 牌是：♦A,♣A
+
+2026-05-10T14:38:10.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:11.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:11.201+08:00 [INFO] 上一手牌，牌型: 2, 牌是：♦A,♣A
+
+2026-05-10T14:38:11.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:11.203+08:00 [INFO] Gardner Harvey不出
+
+2026-05-10T14:38:11.203+08:00 [INFO] 正在订阅 Channel: player_play_card_Scarlett Roob，当前玩家: Scarlett Roob
+2026-05-10T14:38:11.203+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63259->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:11.205+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:11.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:11.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:11.212+08:00 [INFO] 成功订阅 Channel: player_play_card_Scarlett Roob
+2026-05-10T14:38:11.214+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:12.200+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:12.201+08:00 [INFO] 上一手牌，牌型: 2, 牌是：♦A,♣A
+
+2026-05-10T14:38:12.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:13.201+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:13.203+08:00 [INFO] 上一手牌，牌型: 2, 牌是：♦A,♣A
+
+2026-05-10T14:38:13.203+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:13.696+08:00 [INFO] heartbeatCheck: 4.8988921s
+2026-05-10T14:38:14.206+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:14.207+08:00 [INFO] 上一手牌，牌型: 2, 牌是：♦A,♣A
+
+2026-05-10T14:38:14.208+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:14.209+08:00 [INFO] Scarlett Roob不出
+
+2026-05-10T14:38:14.210+08:00 [INFO] 正在订阅 Channel: player_play_card_Mrs. Edwin Langosh，当前玩家: Mrs. Edwin Langosh
+2026-05-10T14:38:14.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63260->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.213+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.214+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.216+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.216+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.221+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.223+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.224+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.225+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.227+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.228+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.228+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.230+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.231+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:14.231+08:00 [INFO] 成功订阅 Channel: player_play_card_Mrs. Edwin Langosh
+2026-05-10T14:38:14.234+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:15.200+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:15.202+08:00 [INFO] 上一手牌，牌型: 2, 牌是：♦A,♣A
+
+2026-05-10T14:38:15.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:16.200+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:16.201+08:00 [INFO] 上一手牌，牌型: 2, 牌是：♦A,♣A
+
+2026-05-10T14:38:16.201+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:16.201+08:00 [INFO] Mrs. Edwin Langosh不出
+
+2026-05-10T14:38:16.203+08:00 [INFO] 正在订阅 Channel: player_play_card_1，当前玩家: 1
+2026-05-10T14:38:16.203+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63261->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:16.205+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:16.205+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:16.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:16.207+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:16.207+08:00 [INFO] 成功订阅 Channel: player_play_card_1
+2026-05-10T14:38:16.213+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":4,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:17.201+08:00 [INFO] 
+1的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:17.202+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:38:17.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:17.203+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:17.204+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:18.201+08:00 [INFO] 
+1的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:18.202+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:38:18.203+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:18.203+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:18.204+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:18.697+08:00 [INFO] heartbeatCheck: 9.89957s
+2026-05-10T14:38:19.201+08:00 [INFO] 
+1的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:19.201+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:38:19.206+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:19.206+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:19.206+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:20.035+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[8]}"}（类型: 1）
+2026-05-10T14:38:20.036+08:00 [INFO] 用户 1 发送出牌消息: {"pid":0,"cardIds":[8],"pass":0}
+2026-05-10T14:38:20.201+08:00 [INFO] 
+1的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:20.201+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:38:20.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:20.202+08:00 [INFO] 从队列收到消息: playCard
+2026-05-10T14:38:20.203+08:00 [INFO] 用户 1 接收出牌消息1: &{playCard {"pid":0,"cardIds":[8],"pass":0} 1}
+2026-05-10T14:38:20.204+08:00 [INFO] 用户 1 接收出牌消息2: {0 [8] 0}
+2026-05-10T14:38:20.205+08:00 [DEBU] [8]
+2026-05-10T14:38:20.210+08:00 [INFO] 1出了: ♠4 (1)
+
+2026-05-10T14:38:20.211+08:00 [INFO] ♣Q,♥A,♥9
+2026-05-10T14:38:20.212+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:38:20.212+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63263->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:20.214+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:20.215+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:20.216+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:38:20.219+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[8],\"card_type\":1,\"cards_num\":3,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:21.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:21.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠4
+
+2026-05-10T14:38:21.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:22.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:22.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠4
+
+2026-05-10T14:38:22.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:22.203+08:00 [INFO] Gardner Harvey出了: ♥6 (1)
+
+2026-05-10T14:38:22.203+08:00 [INFO] 正在订阅 Channel: player_play_card_Scarlett Roob，当前玩家: Scarlett Roob
+2026-05-10T14:38:22.204+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63268->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:22.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:22.207+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:22.208+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:22.209+08:00 [INFO] 成功订阅 Channel: player_play_card_Scarlett Roob
+2026-05-10T14:38:22.209+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:22.210+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[15],\"card_type\":1,\"cards_num\":4,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:23.201+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:23.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥6
+
+2026-05-10T14:38:23.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:23.696+08:00 [INFO] heartbeatCheck: 3.6612814s
+2026-05-10T14:38:24.202+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 5)
+
+2026-05-10T14:38:24.208+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥6
+
+2026-05-10T14:38:24.224+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:24.225+08:00 [INFO] Scarlett Roob出了: ♥7 (1)
+
+2026-05-10T14:38:24.230+08:00 [INFO] 正在订阅 Channel: player_play_card_Mrs. Edwin Langosh，当前玩家: Mrs. Edwin Langosh
+2026-05-10T14:38:24.231+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63270->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.231+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.233+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.234+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.234+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.237+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.238+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.240+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.242+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.244+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.245+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.246+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.247+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.248+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.250+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.252+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.260+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.262+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.263+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:24.264+08:00 [INFO] 成功订阅 Channel: player_play_card_Mrs. Edwin Langosh
+2026-05-10T14:38:24.266+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[19],\"card_type\":1,\"cards_num\":4,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:25.201+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:25.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥7
+
+2026-05-10T14:38:25.203+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:26.201+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:26.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥7
+
+2026-05-10T14:38:26.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:27.201+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:27.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥7
+
+2026-05-10T14:38:27.203+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:27.204+08:00 [INFO] Mrs. Edwin Langosh出了: ♥8 (1)
+
+2026-05-10T14:38:27.205+08:00 [INFO] 正在订阅 Channel: player_play_card_1，当前玩家: 1
+2026-05-10T14:38:27.205+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63272->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:27.207+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:27.208+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:27.210+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:27.210+08:00 [INFO] 成功订阅 Channel: player_play_card_1
+2026-05-10T14:38:27.213+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[23],\"card_type\":1,\"cards_num\":3,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:28.201+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:28.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:28.204+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:28.205+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:28.206+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:28.696+08:00 [INFO] heartbeatCheck: 8.661096s
+2026-05-10T14:38:29.200+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:29.200+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:29.201+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:29.202+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:29.202+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:30.201+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:30.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:30.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:30.203+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:30.204+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:31.201+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:31.203+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:31.204+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:31.204+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:31.205+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:32.201+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:32.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:32.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:32.203+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:32.205+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:33.201+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:33.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:33.205+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:33.206+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:33.208+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:33.696+08:00 [INFO] heartbeatCheck: 13.6611136s
+2026-05-10T14:38:34.201+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:34.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:34.201+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:34.203+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:34.203+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:35.200+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:35.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:35.204+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:35.205+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:35.206+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:36.201+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:36.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:36.204+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:36.205+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:36.207+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:37.201+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:37.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:37.201+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:37.202+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:37.203+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:37.223+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-10T14:38:37.225+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-10T14:38:38.201+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:38.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:38.205+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:38.206+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:38.207+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:38.701+08:00 [INFO] heartbeatCheck: 1.4777294s
+2026-05-10T14:38:39.200+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:39.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:39.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:39.202+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:39.203+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:40.181+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[27]}"}（类型: 1）
+2026-05-10T14:38:40.182+08:00 [INFO] 用户 1 发送出牌消息: {"pid":0,"cardIds":[27],"pass":0}
+2026-05-10T14:38:40.201+08:00 [INFO] 
+1的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:40.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥8
+
+2026-05-10T14:38:40.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:40.203+08:00 [INFO] 从队列收到消息: playCard
+2026-05-10T14:38:40.203+08:00 [INFO] 用户 1 接收出牌消息1: &{playCard {"pid":0,"cardIds":[27],"pass":0} 1}
+2026-05-10T14:38:40.205+08:00 [INFO] 用户 1 接收出牌消息2: {0 [27] 0}
+2026-05-10T14:38:40.205+08:00 [DEBU] [27]
+2026-05-10T14:38:40.206+08:00 [INFO] 1出了: ♥9 (1)
+
+2026-05-10T14:38:40.206+08:00 [INFO] ♣Q,♥A
+2026-05-10T14:38:40.206+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:38:40.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63275->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:40.212+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:40.213+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:40.214+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:40.217+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:40.217+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:38:40.218+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:40.219+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[27],\"card_type\":1,\"cards_num\":2,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:41.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:41.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥9
+
+2026-05-10T14:38:41.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:42.214+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:42.214+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥9
+
+2026-05-10T14:38:42.214+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:43.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:43.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥9
+
+2026-05-10T14:38:43.204+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:43.206+08:00 [INFO] Gardner Harvey出了: ♠9 (1)
+
+2026-05-10T14:38:43.209+08:00 [INFO] 正在订阅 Channel: player_play_card_Scarlett Roob，当前玩家: Scarlett Roob
+2026-05-10T14:38:43.210+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63284->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:43.213+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:43.215+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:43.218+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:43.220+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:43.222+08:00 [INFO] 成功订阅 Channel: player_play_card_Scarlett Roob
+2026-05-10T14:38:43.231+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[28],\"card_type\":1,\"cards_num\":3,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:43.696+08:00 [INFO] heartbeatCheck: 3.5155143s
+2026-05-10T14:38:44.201+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:44.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠9
+
+2026-05-10T14:38:44.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:45.201+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:45.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠9
+
+2026-05-10T14:38:45.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:46.200+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 4)
+
+2026-05-10T14:38:46.200+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠9
+
+2026-05-10T14:38:46.200+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:46.202+08:00 [INFO] Scarlett Roob出了: ♠J (1)
+
+2026-05-10T14:38:46.203+08:00 [INFO] 正在订阅 Channel: player_play_card_Mrs. Edwin Langosh，当前玩家: Mrs. Edwin Langosh
+2026-05-10T14:38:46.203+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63288->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:46.205+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:46.205+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:46.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:46.206+08:00 [INFO] 成功订阅 Channel: player_play_card_Mrs. Edwin Langosh
+2026-05-10T14:38:46.208+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[36],\"card_type\":1,\"cards_num\":3,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:47.204+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:47.207+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠J
+
+2026-05-10T14:38:47.208+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:48.201+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:48.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠J
+
+2026-05-10T14:38:48.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:48.203+08:00 [INFO] Mrs. Edwin Langosh出了: ♠Q (1)
+
+2026-05-10T14:38:48.208+08:00 [INFO] 正在订阅 Channel: player_play_card_1，当前玩家: 1
+2026-05-10T14:38:48.208+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63292->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:48.209+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:48.209+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:48.210+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:48.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:48.211+08:00 [INFO] 成功订阅 Channel: player_play_card_1
+2026-05-10T14:38:48.213+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[40],\"card_type\":1,\"cards_num\":2,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:48.696+08:00 [INFO] heartbeatCheck: 8.5156028s
+2026-05-10T14:38:49.201+08:00 [INFO] 
+1的回合 (当前手牌数: 2)
+
+2026-05-10T14:38:49.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠Q
+
+2026-05-10T14:38:49.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:49.203+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:49.204+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:50.201+08:00 [INFO] 
+1的回合 (当前手牌数: 2)
+
+2026-05-10T14:38:50.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠Q
+
+2026-05-10T14:38:50.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:50.202+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:38:50.202+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:38:50.755+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[47]}"}（类型: 1）
+2026-05-10T14:38:50.757+08:00 [INFO] 用户 1 发送出牌消息: {"pid":0,"cardIds":[47],"pass":0}
+2026-05-10T14:38:51.201+08:00 [INFO] 
+1的回合 (当前手牌数: 2)
+
+2026-05-10T14:38:51.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♠Q
+
+2026-05-10T14:38:51.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:51.202+08:00 [INFO] 从队列收到消息: playCard
+2026-05-10T14:38:51.204+08:00 [INFO] 用户 1 接收出牌消息1: &{playCard {"pid":0,"cardIds":[47],"pass":0} 1}
+2026-05-10T14:38:51.205+08:00 [INFO] 用户 1 接收出牌消息2: {0 [47] 0}
+2026-05-10T14:38:51.205+08:00 [DEBU] [47]
+2026-05-10T14:38:51.206+08:00 [INFO] 1出了: ♥A (1)
+
+2026-05-10T14:38:51.206+08:00 [INFO] ♣Q
+2026-05-10T14:38:51.207+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:38:51.207+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63293->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:51.208+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:51.209+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:51.210+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:51.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:51.211+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:38:51.213+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[47],\"card_type\":1,\"cards_num\":1,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:52.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:52.207+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥A
+
+2026-05-10T14:38:52.208+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:53.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:53.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥A
+
+2026-05-10T14:38:53.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:53.696+08:00 [INFO] heartbeatCheck: 2.9417213s
+2026-05-10T14:38:54.201+08:00 [INFO] 
+Gardner Harvey的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:54.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥A
+
+2026-05-10T14:38:54.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:54.204+08:00 [INFO] Gardner Harvey不出
+
+2026-05-10T14:38:54.204+08:00 [INFO] 正在订阅 Channel: player_play_card_Scarlett Roob，当前玩家: Scarlett Roob
+2026-05-10T14:38:54.205+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63296->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:54.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:54.208+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:54.214+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:54.215+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:54.216+08:00 [INFO] 成功订阅 Channel: player_play_card_Scarlett Roob
+2026-05-10T14:38:54.218+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":3,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:55.201+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:55.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥A
+
+2026-05-10T14:38:55.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:56.201+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:56.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥A
+
+2026-05-10T14:38:56.203+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:57.201+08:00 [INFO] 
+Scarlett Roob的回合 (当前手牌数: 3)
+
+2026-05-10T14:38:57.205+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥A
+
+2026-05-10T14:38:57.206+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:57.207+08:00 [INFO] Scarlett Roob不出
+
+2026-05-10T14:38:57.208+08:00 [INFO] 正在订阅 Channel: player_play_card_Mrs. Edwin Langosh，当前玩家: Mrs. Edwin Langosh
+2026-05-10T14:38:57.209+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63297->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:57.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:57.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:57.212+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:57.213+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:57.214+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:57.214+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:57.215+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:57.216+08:00 [INFO] 成功订阅 Channel: player_play_card_Mrs. Edwin Langosh
+2026-05-10T14:38:57.218+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":3,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:38:58.201+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 2)
+
+2026-05-10T14:38:58.202+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥A
+
+2026-05-10T14:38:58.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:58.696+08:00 [INFO] heartbeatCheck: 7.9418892s
+2026-05-10T14:38:59.201+08:00 [INFO] 
+Mrs. Edwin Langosh的回合 (当前手牌数: 2)
+
+2026-05-10T14:38:59.201+08:00 [INFO] 上一手牌，牌型: 1, 牌是：♥A
+
+2026-05-10T14:38:59.201+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:38:59.203+08:00 [INFO] Mrs. Edwin Langosh不出
+
+2026-05-10T14:38:59.203+08:00 [INFO] 正在订阅 Channel: player_play_card_1，当前玩家: 1
+2026-05-10T14:38:59.204+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63303->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:59.205+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:59.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:59.206+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:59.216+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:59.216+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:59.217+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:38:59.217+08:00 [INFO] 成功订阅 Channel: player_play_card_1
+2026-05-10T14:38:59.219+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":2,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:39:00.200+08:00 [INFO] 
+1的回合 (当前手牌数: 1)
+
+2026-05-10T14:39:00.201+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:39:00.202+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:39:00.203+08:00 [INFO] 用户 1 接收出牌消息1: <nil>
+2026-05-10T14:39:00.204+08:00 [INFO] 用户 1 接收出牌消息2: {0 [] 0}
+2026-05-10T14:39:01.106+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[38]}"}（类型: 1）
+2026-05-10T14:39:01.107+08:00 [INFO] 用户 1 发送出牌消息: {"pid":0,"cardIds":[38],"pass":0}
+2026-05-10T14:39:01.202+08:00 [INFO] 
+1的回合 (当前手牌数: 1)
+
+2026-05-10T14:39:01.203+08:00 [INFO] 上一手牌，牌型: 0, 牌是：不出
+
+2026-05-10T14:39:01.204+08:00 [INFO] 请选择要出的牌 (输入牌的序号，用逗号分隔，0表示不出): 
+2026-05-10T14:39:01.205+08:00 [INFO] 从队列收到消息: playCard
+2026-05-10T14:39:01.205+08:00 [INFO] 用户 1 接收出牌消息1: &{playCard {"pid":0,"cardIds":[38],"pass":0} 1}
+2026-05-10T14:39:01.206+08:00 [INFO] 用户 1 接收出牌消息2: {0 [38] 0}
+2026-05-10T14:39:01.206+08:00 [DEBU] [38]
+2026-05-10T14:39:01.207+08:00 [INFO] 1出了: ♣Q (1)
+
+2026-05-10T14:39:01.207+08:00 [INFO] 
+2026-05-10T14:39:01.208+08:00 [INFO] 正在订阅 Channel: player_play_card_Gardner Harvey，当前玩家: Gardner Harvey
+2026-05-10T14:39:01.208+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: read tcp 127.0.0.1:63304->127.0.0.1:6379: use of closed network connection 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:39:01.210+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:39:01.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:39:01.211+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:39:01.212+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:39:01.213+08:00 [ERRO] Receive 失败: Redis PubSub Receive failed: redis: client is closed 
+Stack:
+1.  game_user/internal/controller/room.(*Room).startMessageReceiver
+    D:/gowork/max2/max2/app/game_user/internal/controller/room/room.go:621
+
+2026-05-10T14:39:01.213+08:00 [INFO] 成功订阅 Channel: player_play_card_Gardner Harvey
+2026-05-10T14:39:01.215+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[38],\"card_type\":1,\"cards_num\":0,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}","from":""}
+2026-05-10T14:39:02.200+08:00 [INFO] 
+游戏结束！恭喜1！获胜
+
+2026-05-10T14:39:02.200+08:00 [INFO] 游戏每个用户结算信息：0, 8, 1006, 1
+
+2026-05-10T14:39:02.201+08:00 [INFO] 
+2026-05-10T14:39:02.201+08:00 [INFO] 用户 1 发送消息: {"type":"over","data":"[{\"winName\":\"1\",\"winner\":0,\"point\":1006,\"win\":8}]","from":""}
+2026-05-10T14:39:02.207+08:00 [INFO] 执行结算异步任务: Id:3 UserName:"1" Point:1006
+2026-05-10T14:39:02.208+08:00 [DEBU] Watch key "/service/default/default/user/latest/"
+2026-05-10T14:39:02.214+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc000481d40\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-10T14:39:02.216+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc000a8c630\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-10T14:39:02.496+08:00 [DEBU] {ec219ba1f520ae18f5ba595744786b44} Log sent successfully
+2026-05-10T14:39:03.696+08:00 [INFO] heartbeatCheck: 2.5898649s
+2026-05-10T14:39:08.696+08:00 [INFO] heartbeatCheck: 7.5895792s
+2026-05-10T14:39:09.515+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-10T14:39:09.517+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-10T14:39:09.519+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-10T14:39:09.520+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-10T15:09:02.496+08:00 [DEBU] resolver closed

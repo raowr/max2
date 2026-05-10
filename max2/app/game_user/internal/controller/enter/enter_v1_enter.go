@@ -1129,7 +1129,10 @@ func (c *Client) clearRoom(ctx context.Context) {
 				roomInfo.Rgtimer.Stop()
 				roomInfo.Rgtimer.Close() // 停止定时器（确保资源释放）
 			}
-			roomInfo.MsgCancel()
+			// 检查 MsgCancel 是否为 nil
+			if roomInfo.MsgCancel != nil {
+				roomInfo.MsgCancel()
+			}
 			delete(rm.Rooms, oldRoomID)
 			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userName, oldRoomID)
 		}

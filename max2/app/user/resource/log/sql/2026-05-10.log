@@ -103,3 +103,4 @@ Stack:
 2026-05-10T14:03:19.157+08:00 [DEBU] {f42df893021fae18e1e1d77a1d019a9c} [349 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=0 WHERE `id`=3
 2026-05-10T14:09:48.986+08:00 [DEBU] {a4fefe565d1fae182266e126211b695e} [361 ms] [default] [max2] [rows:0  ] UPDATE `users` SET `point`=0 WHERE `id`=3
 2026-05-10T14:16:05.598+08:00 [DEBU] {cc80de06b51fae185ce2bf1753bd53d2} [365 ms] [default] [max2] [rows:0  ] UPDATE `users` SET `point`=0 WHERE `id`=3
+2026-05-10T14:39:02.492+08:00 [DEBU] {ec219ba1f520ae18f5ba595744786b44} [266 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1006 WHERE `id`=3

@@ -31,6 +31,12 @@ func (c *ControllerV1) Set(ctx context.Context, req *v1.SetReq) (res *v1.SetRes,
 		return nil, err
 	}
 
+	_, err = userClient.SendSet(timeoutCtx, setReq)
+	if err != nil {
+		log.Printf("Failed to call SendSet: %v", err)
+		return nil, err
+	}
+
 	// 正确初始化返回值
 	res = &v1.SetRes{}
 	return res, nil

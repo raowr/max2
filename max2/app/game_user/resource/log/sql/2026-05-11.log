@@ -1,0 +1,3 @@
+2026-05-11T00:24:22.404+08:00 [DEBU] {4c8a649fe640ae186e37973e4962d8be} [279 ms] [default] [max2] [rows:17 ] SHOW TABLES
+2026-05-11T00:24:22.459+08:00 [DEBU] {e475cfb0e640ae186f37973e40b9345d} [ 49 ms] [default] [max2] [rows:4  ] SHOW FULL COLUMNS FROM `set_game`
+2026-05-11T00:24:22.510+08:00 [DEBU] {4497d2b3e640ae187037973ec67f15d3} [ 49 ms] [default] [max2] [rows:2  ] SELECT `id`,`name`,`key`,`value` FROM `set_game`
