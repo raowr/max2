@@ -9,7 +9,6 @@ import (
 	"game_user/internal/consts"
 	"game_user/internal/controller/log_game"
 	"game_user/internal/controller/settle"
-	"game_user/internal/message"
 	"game_user/internal/service"
 	"math/rand"
 	"strings"
@@ -686,20 +685,16 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	} else {
 		msg, _ := room.subClient.Receive(ctx)
-		msgJson, err := gjson.DecodeToJson(msg.String())
-		if err != nil {
-			g.Log().Errorf(ctx, "用户 %s 消息解码失败: %v", currentPlayer.Name, err)
+		msgData, success := ParseRedisSubscribeMessage(msg.String(), currentPlayer.Name, ctx)
+		if !success {
 			return
 		}
-		// 7. 最后在锁外发送消息
-		msgData := message.ChatMsg{}
-		msgJson.Scan(&msgData)
 		var reqData struct {
 			Pid     int   `json:"pid"`
 			CardIds []int `json:"cardIds"`
 			Pass    int   `json:"pass"`
 		}
-		err = gconv.Struct(msgData.Data, &reqData)
+		err := gconv.Struct(msgData.Data, &reqData)
 		if err != nil {
 			// 处理错误
 			g.Log().Errorf(ctx, "用户 %s 消息解码失败: %v", currentPlayer.Name, err)

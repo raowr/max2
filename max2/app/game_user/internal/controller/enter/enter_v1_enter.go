@@ -380,11 +380,8 @@ func (c *Client) roomFriendMsgLoop(ctx context.Context, roomID string) {
 			// 如果出错直接退出，等待下一次重启或手动干预
 			return
 		}
-
-		// 解析消息
-		var msgData message.ChatMsg
-		if err := json.Unmarshal([]byte(msg.String()), &msgData); err != nil {
-			g.Log().Errorf(ctx, "用户 %s 解析房间好友消息失败: %v", c.userName, err)
+		msgData, success := room.ParseRedisSubscribeMessage(msg.String(), c.userName, ctx)
+		if !success {
 			continue
 		}
 		switch msgData.Type {
@@ -955,16 +952,10 @@ func (c *Client) writeLoop(ctx context.Context) {
 			// 如果出错直接退出，等待下一次重启或手动干预
 			return
 		}
-
-		//如果成为房主
-		msgJson, err := gjson.DecodeToJson(msg.String())
-		if err != nil {
-			g.Log().Errorf(ctx, "用户 %s 消息解码失败: %v", c.userName, err)
-			return
+		msgData, success := room.ParseRedisSubscribeMessage(msg.String(), c.userName, ctx)
+		if !success {
+			continue
 		}
-		// 7. 最后在锁外发送消息
-		msgData := message.ChatMsg{}
-		msgJson.Scan(&msgData)
 		if msgData.Type == consts.LeaveRoom {
 			var players []*PlayerDTO
 			err := gconv.Struct(msgData.Data, &players)
@@ -1026,9 +1017,13 @@ func (c *Client) writeLoop(ctx context.Context) {
 			g.Log().Infof(ctx, "用户 %s 连接已关闭，跳过消息发送", c.userName)
 			return
 		}
-
-		if err := c.conn.WriteMessage(ghttp.WsMsgText, []byte(msg.String())); err != nil {
-			g.Log().Errorf(ctx, " writeLoop 用户 %s 消息发送失败: %v,消息内容: %s", c.userName, err, msg.String())
+		msgDataBytes, err := gjson.Encode(msgData)
+		if err != nil {
+			g.Log().Errorf(ctx, "用户 %s 消息编码失败: %v", c.userName, err)
+		}
+		g.Log().Infof(ctx, "用户 %s 发送消息: %s", c.userName, string(msgDataBytes))
+		if err := c.conn.WriteMessage(ghttp.WsMsgText, msgDataBytes); err != nil {
+			g.Log().Errorf(ctx, " writeLoop 用户 %s 消息发送失败: %v,消息内容: %s", c.userName, err, string(msgDataBytes))
 			return
 		}
 	}
