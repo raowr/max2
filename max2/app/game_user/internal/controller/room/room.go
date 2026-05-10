@@ -9,10 +9,12 @@ import (
 	"game_user/internal/consts"
 	"game_user/internal/controller/log_game"
 	"game_user/internal/controller/settle"
+	"game_user/internal/message"
 	"game_user/internal/service"
 	"math/rand"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/gogf/gf/v2/encoding/gjson"
@@ -82,6 +84,7 @@ func (rm *RoomManager) CreateRoom(roomType int) *Room {
 		Rgtimer:   gtimer.New(),
 		Status:    0, //未开始
 		Type:      roomType,
+		msgQueue:  make(chan *message.ChatMsg, 10), // 缓冲大小为 10
 	}
 
 	// 添加AI机器人
@@ -94,6 +97,8 @@ func (rm *RoomManager) CreateRoom(roomType int) *Room {
 
 	// 将玩家加入房间
 	//player.RoomID = roomID
+	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
+	room.Rgtimer.Stop() //先停止
 
 	// 保存房间
 	rm.Rooms[roomID] = room
@@ -500,12 +505,16 @@ func PlayOneGame(room *Room) {
 		}
 	}
 	//开始监听玩家出牌
-	sub, _, err := g.Redis().Subscribe(ctx, consts.PlayerMsgPrefix+room.Players[room.Current].Name)
-	if err != nil {
-		g.Log().Error(ctx, "writeLoop 订阅失败:", err)
-		return
+	// 修复资源泄漏：先关闭旧的订阅
+	// 检查是否已经启动了消息接收 goroutine
+	if atomic.CompareAndSwapInt32(&room.receiverStarted, 0, 1) {
+		g.Log().Infof(ctx, "房间 %s 启动消息接收 goroutine", room.ID)
+		room.msgCtx, room.MsgCancel = context.WithCancel(context.Background())
+		go room.startMessageReceiver(room.msgCtx, room.Players[room.Current].Name)
+	} else {
+		g.Log().Infof(ctx, "房间 %s 消息接收 goroutine 已启动，跳过", room.ID)
 	}
-	room.subClient = sub
+
 	room.pubClient = g.Redis()
 
 	// ... existing code ...
@@ -579,10 +588,50 @@ func PlayOneGame(room *Room) {
 
 	// 游戏主循环
 	// passCount := 0
-	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
+	// room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
 	// room.Rgtimer.Stop() //先停止
-	// room.Rgtimer.Start()
+	room.Rgtimer.Start()
 
+}
+
+// 在 startMessageReceiver 中（只启动一次）
+func (room *Room) startMessageReceiver(ctx context.Context, currentName string) {
+	defer func() {
+		g.Log().Error(ctx, "startMessageReceiver 退出:")
+	}()
+	// 使用 Pattern 订阅当前出牌玩家出牌消息
+	sub, _, err := g.Redis().Subscribe(ctx, consts.PlayerPlayCardPrefix+currentName)
+	if err != nil {
+		g.Log().Error(ctx, "Subscribe 失败:", err)
+		return
+	}
+	room.subClient = sub
+
+	for {
+		// 监听 ctx 是否已关闭 (调用 Close 方法时触发)
+		select {
+		case <-ctx.Done():
+			g.Log().Info(ctx, "startMessageReceiver 停止监听")
+			return
+		default:
+			// 继续执行后续功能
+		}
+		msg, err := room.subClient.Receive(ctx)
+		if err != nil {
+			g.Log().Error(ctx, "Receive 失败:", err)
+			continue
+		}
+
+		// 解析消息
+		msgData, success := ParseRedisSubscribeMessage(msg.String(), currentName, ctx)
+		if success && msgData != nil {
+			// 放入消息队列
+			select {
+			case room.msgQueue <- msgData:
+			default:
+			}
+		}
+	}
 }
 
 // 房间循环定时器
@@ -684,21 +733,34 @@ func (room *Room) GameLoop(ctx context.Context) {
 		}
 
 	} else {
-		msg, _ := room.subClient.Receive(ctx)
-		msgData, success := ParseRedisSubscribeMessage(msg.String(), currentPlayer.Name, ctx)
-		if !success {
-			return
+		// 非阻塞读取：读取一次消息，如果没有消息则跳过
+		var msgData *message.ChatMsg
+		var hasMessage bool
+
+		// 非阻塞读取消息队列（不会创建新 goroutine）
+		select {
+		case msgData = <-room.msgQueue:
+			hasMessage = true
+			g.Log().Infof(ctx, "从队列收到消息: %v", msgData.Type)
+		default:
+			// 没有消息，直接返回（下次循环再检查）
+			// return
 		}
+
 		var reqData struct {
 			Pid     int   `json:"pid"`
 			CardIds []int `json:"cardIds"`
 			Pass    int   `json:"pass"`
 		}
-		err := gconv.Struct(msgData.Data, &reqData)
-		if err != nil {
-			// 处理错误
-			g.Log().Errorf(ctx, "用户 %s 消息解码失败: %v", currentPlayer.Name, err)
+		g.Log().Infof(ctx, "用户 %s 接收出牌消息1: %v", currentPlayer.Name, msgData)
+		if hasMessage && msgData != nil {
+			err := gconv.Struct(msgData.Data, &reqData)
+			if err != nil {
+				// 处理错误
+				g.Log().Errorf(ctx, "用户 %s 消息解码失败: %v", currentPlayer.Name, err)
+			}
 		}
+		g.Log().Infof(ctx, "用户 %s 接收出牌消息2: %v", currentPlayer.Name, reqData)
 		currentPlayer.OutCardIds = reqData.CardIds
 		currentPlayer.Pass = reqData.Pass
 
@@ -951,6 +1013,23 @@ func (room *Room) GameLoop(ctx context.Context) {
 			mustPid = v.ID //必须出牌的玩家
 		}
 	}
+	//修复资源泄漏：先关闭旧的订阅
+	if room.subClient != nil {
+		_ = room.subClient.Close(ctx)
+	}
+
+	// 添加调试日志
+	channelName := consts.PlayerPlayCardPrefix + room.Players[room.Current].Name
+	g.Log().Infof(ctx, "正在订阅 Channel: %s，当前玩家: %s", channelName, room.Players[room.Current].Name)
+
+	//监听下一个玩家出牌
+	sub, _, err := g.Redis().Subscribe(ctx, channelName)
+	if err != nil {
+		g.Log().Error(ctx, "writeLoop 订阅失败:", err)
+		return
+	}
+	room.subClient = sub
+	g.Log().Infof(ctx, "成功订阅 Channel: %s", channelName)
 
 	//通知用户,出牌，
 	go func() {

@@ -5,6 +5,7 @@ import (
 	v1 "user/api/settle/v1"
 	"user/internal/dao"
 	"user/internal/library/liberr"
+	"user/internal/model/do"
 
 	"github.com/gogf/gf/contrib/rpc/grpcx/v2"
 )
@@ -19,7 +20,10 @@ func Register(s *grpcx.GrpcServer) {
 
 func (*Controller) SendSettle(ctx context.Context, req *v1.SendSettleReq) (res *v1.SendSettleRes, err error) {
 	//保存结算数据到数据库记录
-	_, err = dao.Users.Ctx(ctx).Where("id", req.Id).Update("point", req.Point)
+	data := &do.Users{
+		Point: req.Point,
+	}
+	_, err = dao.Users.Ctx(ctx).Where("id", req.Id).Update(data)
 	if err != nil {
 		liberr.ErrIsNil(ctx, err, "结算失败")
 	}

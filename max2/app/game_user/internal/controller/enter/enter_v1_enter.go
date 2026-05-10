@@ -273,7 +273,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		}
 		aiNum := len(roomInfo.Players)
 		for i := 0; i < 4-aiNum; i++ {
-			aiName := fmt.Sprintf("帅锅%d号", aiNum+i+1)
+			aiName := fake.Name()
 			roomInfo.CreatePlayer(aiName, room.AI)
 		}
 
@@ -736,6 +736,7 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 		From: c.userName,
 	}
 	_, err := c.pubClient.Publish(ctx, consts.PlayerPlayCardPrefix+player.UserName, c.encodeMessage(ctx, msgData))
+	g.Log().Infof(ctx, "用户 %s 发送出牌消息: %s", c.userName, gconv.String(reqData))
 	if err != nil {
 		g.Log().Errorf(ctx, "用户 %s 发送出牌消息失败: %v", c.userName, err)
 	}
@@ -1123,6 +1124,7 @@ func (c *Client) clearRoom(ctx context.Context) {
 				roomInfo.Rgtimer.Stop()
 				roomInfo.Rgtimer.Close() // 停止定时器（确保资源释放）
 			}
+			roomInfo.MsgCancel()
 			delete(rm.Rooms, oldRoomID)
 			g.Log().Infof(ctx, "用户 %s 清理旧房间: %s", c.userName, oldRoomID)
 		}

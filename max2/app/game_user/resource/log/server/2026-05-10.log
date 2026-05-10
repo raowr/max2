@@ -148,3 +148,378 @@
 | game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
 ----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
 
+2026-05-10T10:42:16.292+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T10:42:16.296+08:00 [INFO] pid[10916]: http server started listening on [:8010]
+2026-05-10T10:42:16.296+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T10:42:16.336+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T10:51:25.943+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T10:51:25.948+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T10:51:25.944+08:00 [INFO] pid[13024]: http server started listening on [:8010]
+2026-05-10T10:51:25.992+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T11:07:28.013+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T11:07:28.015+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T11:07:28.014+08:00 [INFO] pid[14748]: http server started listening on [:8010]
+2026-05-10T11:07:28.044+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T11:08:08.346+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T11:08:08.356+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T11:08:08.351+08:00 [INFO] pid[4064]: http server started listening on [:8010]
+2026-05-10T11:08:08.410+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T11:09:33.799+08:00 [INFO] pid[13836]: http server started listening on [:8010]
+2026-05-10T11:09:33.800+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T11:09:33.802+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T11:09:33.867+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T11:18:39.119+08:00 [INFO] pid[18792]: http server started listening on [:8010]
+2026-05-10T11:18:39.120+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T11:18:39.122+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T11:18:39.151+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T11:36:24.485+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T11:36:24.490+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T11:36:24.488+08:00 [INFO] pid[15516]: http server started listening on [:8010]
+2026-05-10T11:36:24.547+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T11:50:49.077+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T11:50:49.079+08:00 [INFO] pid[5512]: http server started listening on [:8010]
+2026-05-10T11:50:49.081+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T11:50:49.117+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T11:59:58.871+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T11:59:58.874+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T11:59:58.873+08:00 [INFO] pid[18056]: http server started listening on [:8010]
+2026-05-10T11:59:58.903+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T12:01:55.801+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T12:01:55.802+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T12:01:55.802+08:00 [INFO] pid[5348]: http server started listening on [:8010]
+2026-05-10T12:01:55.831+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T12:03:07.283+08:00 [INFO] pid[18852]: http server started listening on [:8010]
+2026-05-10T12:03:07.284+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T12:03:07.301+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T12:03:07.363+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T12:13:08.246+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T12:13:08.251+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T12:13:08.248+08:00 [INFO] pid[8568]: http server started listening on [:8010]
+2026-05-10T12:13:08.279+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T12:23:35.223+08:00 [INFO] pid[620]: http server started listening on [:8010]
+2026-05-10T12:23:35.223+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T12:23:35.230+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T12:23:35.257+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T12:49:59.283+08:00 [INFO] pid[13500]: http server started listening on [:8010]
+2026-05-10T12:49:59.283+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T12:49:59.287+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T12:49:59.317+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T12:54:01.235+08:00 [INFO] pid[18716]: http server started listening on [:8010]
+2026-05-10T12:54:01.235+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T12:54:01.242+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T12:54:01.279+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T12:59:35.739+08:00 [INFO] pid[19440]: http server started listening on [:8010]
+2026-05-10T12:59:35.739+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T12:59:35.749+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T12:59:35.779+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T13:34:54.036+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T13:34:54.039+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T13:34:54.038+08:00 [INFO] pid[14168]: http server started listening on [:8010]
+2026-05-10T13:34:54.066+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T13:39:09.541+08:00 [INFO] pid[13688]: http server started listening on [:8010]
+2026-05-10T13:39:09.541+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T13:39:09.545+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T13:39:09.580+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T13:42:33.754+08:00 [INFO] pid[19116]: http server started listening on [:8010]
+2026-05-10T13:42:33.754+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T13:42:33.758+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T13:42:33.804+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T13:46:42.348+08:00 [INFO] pid[12396]: http server started listening on [:8010]
+2026-05-10T13:46:42.349+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T13:46:42.353+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T13:46:42.394+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T13:56:33.080+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T13:56:33.086+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T13:56:33.082+08:00 [INFO] pid[12256]: http server started listening on [:8010]
+2026-05-10T13:56:33.131+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T13:58:16.045+08:00 [INFO] pid[10048]: http server started listening on [:8010]
+2026-05-10T13:58:16.046+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T13:58:16.049+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T13:58:16.089+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T14:07:16.874+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T14:07:16.874+08:00 [INFO] pid[11660]: http server started listening on [:8010]
+2026-05-10T14:07:16.876+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T14:07:16.916+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T14:11:13.274+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T14:11:13.276+08:00 [INFO] pid[10280]: http server started listening on [:8010]
+2026-05-10T14:11:13.279+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T14:11:13.307+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
+2026-05-10T14:11:31.112+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-10T14:11:31.114+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-10T14:11:31.114+08:00 [INFO] pid[12008]: http server started listening on [:8010]
+2026-05-10T14:11:31.143+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:game_user.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+|    SERVER     | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                          HANDLER                          |           MIDDLEWARE            |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec     |                                 |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | GET    | /enter     | game_user/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+| game_user.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI       | HOOK_BEFORE_SERVE               |
+----------------|---------|---------|--------|------------|-----------------------------------------------------------|----------------------------------
+
