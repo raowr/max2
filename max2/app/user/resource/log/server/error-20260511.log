@@ -1,0 +1,8 @@
+2026-05-11T21:38:03.500+08:00 {3095b0d46786ae18fa7f4729b490d15a} 200 "POST http 127.0.0.1:8020 /login HTTP/1.1" 133751.500, 127.0.0.1, "http://localhost:5173/", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0", -1, "", ""
+Stack:
+1. 登录失败2
+   1).  user/internal/controller/login.(*ControllerV1).Login
+        D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:123
+   2).  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+        D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+

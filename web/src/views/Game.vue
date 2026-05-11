@@ -296,6 +296,8 @@ import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
 import winBg from '@/assets/img/ui/win_bg.png'
 import loseBg from '@/assets/img/ui/lose_bg.png'
 
+import { reconnectWebSocket } from '@/utils/websocketReconnect';
+
 const state = reactive({
   deck: [],
   countdownPlayer: 0,
@@ -369,6 +371,9 @@ const handleResize = () => {
 
 onMounted(() => {
   initDeck()
+   // 页面刷新时自动重连
+  reconnectWebSocket(websocket);
+  
   const bgmUrl = new URL('@/assets/music/game_bg1.mp3', import.meta.url).href;
   audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
   // 添加用户交互事件监听器来初始化BGM

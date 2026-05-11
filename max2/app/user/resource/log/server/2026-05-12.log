@@ -1,0 +1,48 @@
+2026-05-12T00:29:31.954+08:00 [INFO] pid[12380]: http server started listening on [:8020]
+2026-05-12T00:29:31.954+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8020/swagger/
+2026-05-12T00:29:31.958+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8020/api.json
+
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| ADDRESS | METHOD |   ROUTE    |                          HANDLER                           |             MIDDLEWARE             |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec      |                                    |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | GET    | /hello     | user/internal/controller/hello.(*ControllerV1).Hello       | service.IMiddleware.MiddlewareCORS |
+|         |        |            |                                                            | ghttp.MiddlewareHandlerResponse    |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | POST   | /login     | user/internal/controller/login.(*ControllerV1).Login       | service.IMiddleware.MiddlewareCORS |
+|         |        |            |                                                            | ghttp.MiddlewareHandlerResponse    |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | POST   | /logout    | user/internal/controller/login.(*ControllerV1).Logout      | service.IMiddleware.MiddlewareCORS |
+|         |        |            |                                                            | ghttp.MiddlewareHandlerResponse    |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | POST   | /register  | user/internal/controller/register.(*ControllerV1).Register | service.IMiddleware.MiddlewareCORS |
+|         |        |            |                                                            | ghttp.MiddlewareHandlerResponse    |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI        | HOOK_BEFORE_SERVE                  |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+
+2026-05-12T00:30:31.992+08:00 [INFO] pid[8900]: http server started listening on [:8020]
+2026-05-12T00:30:31.993+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8020/swagger/
+2026-05-12T00:30:31.995+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8020/api.json
+
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| ADDRESS | METHOD |   ROUTE    |                          HANDLER                           |             MIDDLEWARE             |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec      |                                    |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | GET    | /hello     | user/internal/controller/hello.(*ControllerV1).Hello       | service.IMiddleware.MiddlewareCORS |
+|         |        |            |                                                            | ghttp.MiddlewareHandlerResponse    |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | POST   | /login     | user/internal/controller/login.(*ControllerV1).Login       | service.IMiddleware.MiddlewareCORS |
+|         |        |            |                                                            | ghttp.MiddlewareHandlerResponse    |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | POST   | /logout    | user/internal/controller/login.(*ControllerV1).Logout      | service.IMiddleware.MiddlewareCORS |
+|         |        |            |                                                            | ghttp.MiddlewareHandlerResponse    |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | POST   | /register  | user/internal/controller/register.(*ControllerV1).Register | service.IMiddleware.MiddlewareCORS |
+|         |        |            |                                                            | ghttp.MiddlewareHandlerResponse    |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+| :8020   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI        | HOOK_BEFORE_SERVE                  |
+----------|--------|------------|------------------------------------------------------------|-------------------------------------
+

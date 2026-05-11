@@ -1,1 +1,25 @@
 2026-05-11T00:21:26.356+08:00 [DEBU] {1cc8d797bd40ae185ebb5957bf239797} [439 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1002 WHERE `id`=3
+2026-05-11T21:38:03.488+08:00 [ERRO] {3095b0d46786ae18fa7f4729b490d15a} [  1 ms] [default] [max2] [rows:0  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5MTExNDgzfQ.yooeC1DWSwmI4aPUAh6UStf5iG0Ac-i4GhjELDqJENY' WHERE `id`=3
+Error: dial tcp 8.155.147.137:3306: connectex: A socket operation was attempted to an unreachable host. 
+Stack:
+1.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:120
+2.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-11T21:51:24.885+08:00 [DEBU] {542f252d2287ae18fc7f47291c9b9cf4} [1158 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5MTEyMjgzfQ.enLvzUAvNS1tQ-SdXIRSDeXFnt4-onRyBjE01TY-Y18' WHERE `id`=3
+2026-05-11T21:51:56.149+08:00 [DEBU] {5014e4762987ae18fd7f472907b109eb} [1131 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5MTEyMzE1fQ.xpQfBY8Hk2CuA_q6fs5KUyUGwdFikY9y0EtUmvsuTm0' WHERE `id`=3
+2026-05-11T21:57:43.826+08:00 [DEBU] {702268877a87ae18ba3e7e211c0b976c} [615 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
+2026-05-11T21:57:44.074+08:00 [DEBU] {702268877a87ae18ba3e7e211c0b976c} [246 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5MTEyNjYzfQ.HPFFRqO0aWreVIT5gG-lvkKa--2A1kv29q1XX7cWM28' WHERE `id`=3
+2026-05-11T21:59:57.255+08:00 [DEBU] {20c9c1269987ae18d9d72669ac88e0fc} [1171 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=990 WHERE `id`=3
+2026-05-11T22:01:42.612+08:00 [DEBU] {6c5d590eb287ae1826d82669a4647df0} [829 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1003 WHERE `id`=3
+2026-05-11T22:11:38.053+08:00 [DEBU] {946870bb3c88ae1874f823475fe97f4e} [717 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1000 WHERE `id`=3
+2026-05-11T22:26:22.306+08:00 [DEBU] {2cb3750f0a89ae189351da798c9aa73d} [3134 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1008 WHERE `id`=3
+2026-05-11T22:33:18.855+08:00 [DEBU] {4cf603996b89ae1854bc3976eef14892} [762 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1003 WHERE `id`=3
+2026-05-11T22:35:09.759+08:00 [DEBU] {906e972a8589ae1894bc3976f7621989} [1857 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1014 WHERE `id`=3
+2026-05-11T23:14:30.698+08:00 [DEBU] {0c59391dab8bae1841ef5b614ae1d493} [773 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1034 WHERE `id`=3
+2026-05-11T23:16:06.654+08:00 [DEBU] {948a8326c18bae187aef5b61f8753607} [2090 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1021 WHERE `id`=3
+2026-05-11T23:19:29.114+08:00 [DEBU] {fce4279af08bae18c8ef5b61990edaf9} [747 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1017 WHERE `id`=3
+2026-05-11T23:22:18.541+08:00 [DEBU] {b83e510b188cae1811f05b61157d8677} [771 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1024 WHERE `id`=3
+2026-05-11T23:24:18.109+08:00 [DEBU] {7c06aee3338cae184ff05b612a77c9b7} [746 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=1044 WHERE `id`=3
+2026-05-11T23:55:03.923+08:00 [DEBU] {ccbe8e91e18dae18bd3e7e218ff6062d} [1048 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiJj572XIiwiZXhwIjoxNzc5MTE5NzAyfQ.xnEu-SUQPUUv54Qpn_trVkabQUOwdlH_NUKaMr7lHSA' WHERE `id`=1

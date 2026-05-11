@@ -48,7 +48,7 @@ func (room *Room) CreatePlayer(name string, playerType PlayerType) *Player {
 		//UserId: 	 generateUserID(),//初始化用户ID
 	}
 	//如果是好友房初始化默认积分，如果是段位房使用玩家积累的积分
-	if room.Type == 1 {
+	if room.Type == 1 && playerType == Human {
 		userInfo := service.Cache().Get(ctx, "user:"+name)
 		entUser := Users{}
 		if userInfo == nil {
@@ -57,7 +57,7 @@ func (room *Room) CreatePlayer(name string, playerType PlayerType) *Player {
 		}
 		//缓存有，验证密码正确
 		if err := json.Unmarshal(userInfo.Bytes(), &entUser); err != nil {
-			g.Log().Errorf(ctx, "用户名或密码错误")
+			g.Log().Errorf(ctx, "用户信息解析错误")
 
 		}
 		player.Point = entUser.Point
@@ -618,7 +618,7 @@ func (room *Room) startMessageReceiver(ctx context.Context, currentName string) 
 		}
 		msg, err := room.subClient.Receive(ctx)
 		if err != nil {
-			g.Log().Error(ctx, "Receive 失败:", err)
+			// g.Log().Error(ctx, "Receive 失败:", err)
 			continue
 		}
 
@@ -1013,24 +1013,25 @@ func (room *Room) GameLoop(ctx context.Context) {
 			mustPid = v.ID //必须出牌的玩家
 		}
 	}
-	//修复资源泄漏：先关闭旧的订阅
-	if room.subClient != nil {
-		_ = room.subClient.Close(ctx)
-	}
 
 	// 添加调试日志
-	channelName := consts.PlayerPlayCardPrefix + room.Players[room.Current].Name
-	g.Log().Infof(ctx, "正在订阅 Channel: %s，当前玩家: %s", channelName, room.Players[room.Current].Name)
+	if room.Players[room.Current].Type == Human {
+		//修复资源泄漏：先关闭旧的订阅
+		if room.subClient != nil {
+			_ = room.subClient.Close(ctx)
+		}
+		channelName := consts.PlayerPlayCardPrefix + room.Players[room.Current].Name
+		g.Log().Infof(ctx, "正在订阅 Channel: %s，当前玩家: %s", channelName, room.Players[room.Current].Name)
 
-	//监听下一个玩家出牌
-	sub, _, err := g.Redis().Subscribe(ctx, channelName)
-	if err != nil {
-		g.Log().Error(ctx, "writeLoop 订阅失败:", err)
-		return
+		//监听下一个玩家出牌
+		sub, _, err := g.Redis().Subscribe(ctx, channelName)
+		if err != nil {
+			g.Log().Error(ctx, "writeLoop 订阅失败:", err)
+			return
+		}
+		room.subClient = sub
+		g.Log().Infof(ctx, "成功订阅 Channel: %s", channelName)
 	}
-	room.subClient = sub
-	g.Log().Infof(ctx, "成功订阅 Channel: %s", channelName)
-
 	//通知用户,出牌，
 	go func() {
 		data, _ := json.Marshal(struct {

@@ -56,15 +56,6 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 		}
 	)
 
-	// 升级HTTP连接为WebSocket
-	ws, err = wsUpGrader.Upgrade(r.Response.Writer, r.Request, nil)
-	if err != nil {
-		g.Log().Errorf(ctx, "WebSocket升级失败: %v", err)
-		r.Response.WriteHeader(http.StatusInternalServerError)
-		r.Response.Write([]byte("连接建立失败"))
-		return
-	}
-
 	// 获取或生成用户ID
 	userName := r.GetQuery("user_name").String()
 	token := r.GetQuery("token").String()
@@ -94,6 +85,15 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 	if err != nil || !jwtToken.Valid {
 		g.Log().Errorf(ctx, "token验证失败: %v", err)
 		ws.Close()
+		return
+	}
+
+	// 升级HTTP连接为WebSocket
+	ws, err = wsUpGrader.Upgrade(r.Response.Writer, r.Request, nil)
+	if err != nil {
+		g.Log().Errorf(ctx, "WebSocket升级失败: %v", err)
+		r.Response.WriteHeader(http.StatusInternalServerError)
+		r.Response.Write([]byte("连接建立失败"))
 		return
 	}
 
@@ -329,6 +329,7 @@ func (c *Client) handleCreateRoom(ctx context.Context) {
 	c.safeSendMessage(ctx, msgData)
 
 	//监听房间好友信息
+	go c.roomFriendMsgLoop(ctx, roomInfo.ID)
 
 	//发送日志 创建房间
 	log_game.SendLog(&log_gamev1.SendLogReq{
@@ -410,48 +411,52 @@ func (c *Client) validJoinRoom(ctx context.Context, data string) {
 	}
 	roomID := reqData.RoomID
 	if roomID == "" {
-		g.Log().Errorf(ctx, "用户 %s 加入房间ID为空", c.userName)
+		g.Log().Errorf(ctx, "用户 %s 加入房间ID为空", reqData.UserName)
 		return
 	}
 	roomInfo, ok := rm.Rooms[roomID]
 	if !ok {
-		g.Log().Errorf(ctx, "用户 %s 房间 %s 不存在", c.userName, roomID)
+		g.Log().Errorf(ctx, "用户 %s 房间 %s 不存在", reqData.UserName, roomID)
 		return
 	}
 	// 检查房间是否已满
 	if len(roomInfo.Players) >= 4 {
-		g.Log().Errorf(ctx, "用户 %s 房间 %s 已满", c.userName, roomID)
+		g.Log().Errorf(ctx, "用户 %s 房间 %s 已满", reqData.UserName, roomID)
 		return
 	}
 	// 检查房间是否正在游戏中
 	if roomInfo.IsPlaying {
-		g.Log().Errorf(ctx, "用户 %s 房间 %s 正在游戏中", c.userName, roomID)
+		g.Log().Errorf(ctx, "用户 %s 房间 %s 正在游戏中", reqData.UserName, roomID)
 		return
 	}
 	// 检查房间是否已开始游戏
 	if roomInfo.Status == 1 {
-		g.Log().Errorf(ctx, "用户 %s 房间 %s 已开始游戏", c.userName, roomID)
+		g.Log().Errorf(ctx, "用户 %s 房间 %s 已开始游戏", reqData.UserName, roomID)
 		return
 	}
 	//判断玩家已在房间
 	inRoom := false
+	var existingPlayer *room.Player // 用于存储已存在的玩家
 	for _, player := range roomInfo.Players {
-		if player.UserName == c.userName {
+		if reqData.UserName == player.UserName {
 			g.Log().Errorf(ctx, "用户 %s 已在房间 %s", c.userName, roomID)
 			inRoom = true
+			existingPlayer = player // 记录已存在的玩家
 			break
 		}
 	}
 	//不在房间再加入房间，在房间直接返回房间数据
 	var humanPlayer *room.Player
 	if !inRoom {
-		playerName := c.userName
+		playerName := reqData.UserName
 		humanPlayer = roomInfo.CreatePlayer(playerName, room.Human)
-		humanPlayer.UserName = c.userName
+		humanPlayer.UserName = reqData.UserName
 		c.pid = humanPlayer.ID
-		humanPlayer.Name = playerName + gconv.String(humanPlayer.ID)
+		humanPlayer.Name = reqData.UserName
 		rm.PlayerList[humanPlayer.UserName] = humanPlayer // 关联用户与玩家
 		// rm.JoinRoom(humanPlayer, roomID)
+	} else {
+		humanPlayer = existingPlayer
 	}
 
 	//记录玩家所在的房间
@@ -962,7 +967,8 @@ func (c *Client) writeLoop(ctx context.Context) {
 		if !success {
 			continue
 		}
-		if msgData.Type == consts.LeaveRoom {
+		//如果本身不是房主，不处理离开房间消息
+		if msgData.Type == consts.LeaveRoom && c.pid != 0 {
 			var players []*PlayerDTO
 			err := gconv.Struct(msgData.Data, &players)
 			if err != nil {

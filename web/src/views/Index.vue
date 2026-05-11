@@ -107,6 +107,8 @@ import { storage } from '@/utils/storage'
 import { useRoute, useRouter } from 'vue-router'
 import { websocket } from '@/utils/websocket'
 
+import { reconnectWebSocket } from '@/utils/websocketReconnect';
+
 const router = useRouter()
 const route = useRoute()
 const showSettingImage = ref(false)  // 弹出图片容器显示与隐藏
@@ -137,6 +139,9 @@ onMounted(() => {
   init()
   // 添加页面可见性变化监听
   document.addEventListener('visibilitychange', handleVisibilityChange)
+
+   // 页面刷新时自动重连
+  reconnectWebSocket(websocket);
 })
 // 组件卸载时移除监听
 onUnmounted(() => {

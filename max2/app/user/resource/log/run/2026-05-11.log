@@ -1,0 +1,8 @@
+2026-05-11T21:38:03.493+08:00 [ERRO] {3095b0d46786ae18fa7f4729b490d15a} UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5MTExNDgzfQ.yooeC1DWSwmI4aPUAh6UStf5iG0Ac-i4GhjELDqJENY' WHERE `id`=3: dial tcp 8.155.147.137:3306: connectex: A socket operation was attempted to an unreachable host. 
+Stack:
+1.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:122
+2.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-11T21:55:49.393+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894528270025987"

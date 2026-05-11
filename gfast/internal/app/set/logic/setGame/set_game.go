@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"gfast/api/v1/set"
+	serChace "gfast/internal/app/common/service"
 	"gfast/internal/app/set/dao"
 	"gfast/internal/app/set/service"
 	"gfast/internal/app/system/consts"
@@ -71,6 +72,7 @@ func (s *sSetGame) Update(ctx context.Context, req *set.SetGameUpdateReq) (err e
 				Value: req.Value,
 			}
 			_, e := dao.SetGame.Ctx(ctx).TX(tx).WherePri(req.Id).Update(data)
+			serChace.Cache().Set(ctx, req.Key, req.Value, 0)
 			if e == nil {
 				go func() {
 					res := client.PostContent(ctx, `http://api-service.svc/set`, g.Map{

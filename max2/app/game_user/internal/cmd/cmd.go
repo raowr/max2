@@ -24,8 +24,6 @@ var (
 		Usage: "main",
 		Brief: "start http and grpc servers",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
-			log_game.GetLogChan()  //启动日志异步任务通道
-			settle.GetSettleChan() //启动结算异步任务通道
 
 			var wg sync.WaitGroup
 

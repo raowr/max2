@@ -7,7 +7,8 @@ import (
 
 // SettleChan 结算信息通道，用于异步处理结算信息
 var (
-	SettleChan chan *v1.SendSettleReq
-	ctx        context.Context
-	cancel     context.CancelFunc
+	SettleChan   chan *v1.SendSettleReq
+	ctx          context.Context
+	cancel       context.CancelFunc
+	settleClient v1.SettleClient // 复用的 gRPC 客户端
 )

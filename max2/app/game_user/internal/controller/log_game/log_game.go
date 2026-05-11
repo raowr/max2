@@ -24,46 +24,57 @@ func (*Controller) SendLog(ctx context.Context, req *v1.SendLogReq) (res *v1.Sen
 	return nil, gerror.NewCode(gcode.CodeNotImplemented)
 }
 
-func SendLog(logInfo *v1.SendLogReq) {
-	LogChan <- logInfo
-}
-func GetLogChan() {
+// 全局变量
+var (
+	logClient v1.LogGameClient // 复用的 gRPC 客户端
+)
+
+// 初始化
+func init() {
+	grpcx.Resolver.Register(etcd.New("127.0.0.1:2379"))
 	ctx, cancel = context.WithCancel(context.Background())
 	LogChan = make(chan *v1.SendLogReq, 100)
-	grpcx.Resolver.Register(etcd.New("127.0.0.1:2379"))
+
+	// 创建复用的 gRPC 连接
+	conn := grpcx.Client.MustNewGrpcClientConn("log-service")
+	logClient = v1.NewLogGameClient(conn)
+
 	// 启动异步任务
-	go func() {
-		for {
-			select {
-			case <-ctx.Done():
-				g.Log().Infof(ctx, "日志异步任务通道收到退出信号，正在清理...")
-				return
-			default:
-				// 执行异步操作
-				logInfo := <-LogChan
-				g.Log().Infof(ctx, "执行日志异步任务: %v", logInfo)
-				sendLogToService(logInfo)
-			}
-		}
-	}()
+	go processLogChan()
 }
 
-// ShutdownLog 关闭日志系统
+func processLogChan() {
+	for {
+		select {
+		case <-ctx.Done():
+			g.Log().Infof(ctx, "日志异步任务通道收到退出信号，正在清理...")
+			return
+		case logInfo := <-LogChan: // 直接从通道读取，非阻塞时会等待
+			g.Log().Infof(ctx, "执行日志异步任务: %v", logInfo)
+			sendLogToService(logInfo)
+		}
+	}
+}
+
+func SendLog(logInfo *v1.SendLogReq) {
+	select {
+	case LogChan <- logInfo:
+		// 发送成功
+	default:
+		// 通道满，丢弃日志
+		g.Log().Warning(ctx, "日志通道已满，丢弃日志")
+	}
+}
+
 func ShutdownLog() {
 	if cancel != nil {
 		cancel()
 	}
 }
 
-// sendLogToService 发送日志到 log-service
 func sendLogToService(logInfo *v1.SendLogReq) {
-	ctx := gctx.New()
-	conn := grpcx.Client.MustNewGrpcClientConn("log-service")
-	client := v1.NewLogGameClient(conn)
-	_, err := client.SendLog(ctx, logInfo)
+	_, err := logClient.SendLog(gctx.New(), logInfo)
 	if err != nil {
 		g.Log().Error(ctx, err)
-		return
 	}
-	g.Log().Debug(ctx, "Log sent successfully")
 }
