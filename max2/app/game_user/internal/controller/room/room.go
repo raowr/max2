@@ -698,6 +698,14 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.OutStarTime = 0
 		room.passCount = 0
 		g.Log().Infof(ctx, "\n游戏结束！恭喜%s！获胜\n", winName)
+		//缓存当前房间信息
+		go func() {
+			roomJsonStr, err := json.Marshal(room)
+			if err != nil {
+				g.Log().Error(ctx, err)
+			}
+			service.Cache().Set(ctx, consts.RoomInfoPrefix+room.ID, roomJsonStr, 0)
+		}()
 		wg.Wait()
 		return
 	}
@@ -1032,6 +1040,16 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.subClient = sub
 		g.Log().Infof(ctx, "成功订阅 Channel: %s", channelName)
 	}
+
+	//缓存当前房间信息
+	go func() {
+		roomJsonStr, err := json.Marshal(room)
+		if err != nil {
+			g.Log().Error(ctx, err)
+		}
+		service.Cache().Set(ctx, consts.RoomInfoPrefix+room.ID, roomJsonStr, 0)
+	}()
+
 	//通知用户,出牌，
 	go func() {
 		data, _ := json.Marshal(struct {

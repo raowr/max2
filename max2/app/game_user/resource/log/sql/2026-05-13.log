@@ -1,0 +1,12 @@
+2026-05-13T00:36:40.019+08:00 [DEBU] {3c543d71bbdeae18b1c6860be934c3d4} [521 ms] [default] [max2] [rows:17 ] SHOW TABLES
+2026-05-13T00:36:40.081+08:00 [DEBU] {a0ba6c90bbdeae18b2c6860b215f8d7f} [ 60 ms] [default] [max2] [rows:4  ] SHOW FULL COLUMNS FROM `set_game`
+2026-05-13T00:36:40.139+08:00 [DEBU] {9c431694bbdeae18b3c6860bd5258f8f} [ 57 ms] [default] [max2] [rows:2  ] SELECT `id`,`name`,`key`,`value` FROM `set_game`
+2026-05-13T00:42:48.035+08:00 [DEBU] {7cea193111dfae18eb9b2a0a4bcedebc} [244 ms] [default] [max2] [rows:17 ] SHOW TABLES
+2026-05-13T00:42:48.095+08:00 [DEBU] {f419d23f11dfae18ec9b2a0a71659547} [ 59 ms] [default] [max2] [rows:4  ] SHOW FULL COLUMNS FROM `set_game`
+2026-05-13T00:42:48.150+08:00 [DEBU] {c8ff6e4311dfae18ed9b2a0a44b9b01b} [ 54 ms] [default] [max2] [rows:2  ] SELECT `id`,`name`,`key`,`value` FROM `set_game`
+2026-05-13T00:51:04.949+08:00 [DEBU] {9ccd07e084dfae181fd1b57cc0086f49} [302 ms] [default] [max2] [rows:17 ] SHOW TABLES
+2026-05-13T00:51:05.009+08:00 [DEBU] {789a79f284dfae1820d1b57c39a776f1} [ 55 ms] [default] [max2] [rows:4  ] SHOW FULL COLUMNS FROM `set_game`
+2026-05-13T00:51:05.069+08:00 [DEBU] {b084dbf584dfae1821d1b57cd95ab374} [ 58 ms] [default] [max2] [rows:2  ] SELECT `id`,`name`,`key`,`value` FROM `set_game`
+2026-05-13T00:58:36.847+08:00 [DEBU] {74a1b80feedfae18d72f22720605bad8} [429 ms] [default] [max2] [rows:17 ] SHOW TABLES
+2026-05-13T00:58:36.919+08:00 [DEBU] {28c8af29eedfae18d82f227244437bea} [ 67 ms] [default] [max2] [rows:4  ] SHOW FULL COLUMNS FROM `set_game`
+2026-05-13T00:58:36.984+08:00 [DEBU] {7c0db82deedfae18d92f2272631e21e8} [ 64 ms] [default] [max2] [rows:2  ] SELECT `id`,`name`,`key`,`value` FROM `set_game`

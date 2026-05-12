@@ -1,5 +1,5 @@
 // d:\gowork\max2\web\src\utils\websocketReconnect.js
-import storage from 'store';
+import { storage } from '@/utils/storage';
 
 /**
  * WebSocket 自动重连工具

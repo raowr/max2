@@ -71,25 +71,24 @@ type Room struct {
 	Deck            []Card
 	Landlord        *Player
 	Farmers         []*Player
-	Current         int    // 当前出牌玩家索引
-	LastCards       []Card // 上一手牌
-	LastPH          int    //上一手牌型
-	Turn            int    // 轮次
-	IsPlaying       bool   // 房间是否正在游戏中
-	Rgtimer         *gtimer.Timer
-	OutStarTime     int                   //出牌开始时间
-	passCount       int                   //不出次数
-	NextPlayerID    int                   //下一位出牌玩家
-	Status          int                   //房间状态 0 未开始 1 游戏中 2 结算中
-	mutex           sync.RWMutex          // 新增：保护 conn 等字段的并发访问
-	Type            int                   //房间类型 1比赛房，2好友房
-	subClient       gredis.Conn           // 订阅客户端
-	pubClient       *gredis.Redis         // 发布客户端
-	msgQueue        chan *message.ChatMsg // 消息队列
-	receiverStarted int32                 // 原子标志：0=未启动，1=已启动
-	msgCtx          context.Context       // 消息接收上下文
-	MsgCancel       context.CancelFunc    // 消息接收上下文取消函数
-
+	Current         int
+	LastCards       []Card
+	LastPH          int
+	Turn            int
+	IsPlaying       bool
+	Rgtimer         *gtimer.Timer `json:"-"` // 忽略
+	OutStarTime     int
+	passCount       int
+	NextPlayerID    int
+	Status          int
+	mutex           sync.RWMutex `json:"-"` // 忽略
+	Type            int
+	subClient       gredis.Conn           `json:"-"` // 忽略
+	pubClient       *gredis.Redis         `json:"-"` // 忽略
+	msgQueue        chan *message.ChatMsg `json:"-"` // 忽略
+	receiverStarted int32
+	msgCtx          context.Context    `json:"-"` // 忽略
+	MsgCancel       context.CancelFunc `json:"-"` // 忽略 ← 核心问题
 }
 
 // 房间管理器

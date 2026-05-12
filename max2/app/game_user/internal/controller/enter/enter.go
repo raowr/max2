@@ -13,7 +13,6 @@ import (
 	"github.com/gogf/gf/v2/database/gredis"
 	"github.com/gogf/gf/v2/os/gcache"
 	"github.com/gorilla/websocket"
-	"github.com/manveru/faker"
 )
 
 var (
@@ -22,7 +21,7 @@ var (
 	// 缓存键常量
 	cacheKeyPrefix = "ws:client:"
 
-	fake *faker.Faker
+	// fake *faker.Faker
 
 	err error
 )
@@ -74,15 +73,15 @@ func init() {
 	clientCache = gcache.New()
 
 	// 先尝试简体中文
-	fake, err = faker.New("zh-CN")
-	if err != nil {
-		// 如果失败，尝试 zh
-		fake, err = faker.New("zh")
-		if err != nil {
-			// 使用默认语言（英文）
-			fake, _ = faker.New("en")
-		}
-	}
+	// fake, err = faker.New("zh-CN")
+	// if err != nil {
+	// 	// 如果失败，尝试 zh
+	// 	fake, err = faker.New("zh")
+	// 	if err != nil {
+	// 		// 使用默认语言（英文）
+	// 		fake, _ = faker.New("en")
+	// 	}
+	// }
 
 }
 
