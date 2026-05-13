@@ -75,7 +75,7 @@
       <div class="avatar"></div>
       <div class="title"></div>
       <div class="nickname">
-        <p style="font-size: 25px; color: white;">帅哥</p>
+        <p style="font-size: 25px; color: white;">{{ userName }}</p>
       </div>
       <div class="star star-dark"></div>
       <div class="star star-1"></div>
@@ -90,7 +90,7 @@
       <div class="currency-bg diamond-bg"></div>
       <div class="currency-icon diamond-icon"></div>
       <p class="gold-amount">
-        9999
+        {{ point }}
       </p>
 
       <p class="diamond-amount">
@@ -108,6 +108,9 @@ import { useRoute, useRouter } from 'vue-router'
 import { websocket } from '@/utils/websocket'
 
 import { reconnectWebSocket } from '@/utils/websocketReconnect';
+
+const userName = ref('')
+const point = ref(0)
 
 const router = useRouter()
 const route = useRoute()
@@ -142,6 +145,12 @@ onMounted(() => {
 
    // 页面刷新时自动重连
   reconnectWebSocket(websocket);
+
+  var userInfo = storage.local.get('user')
+  userName.value = userInfo.username
+  point.value = userInfo.point
+
+  console.log(userName.value, point.value)
 })
 // 组件卸载时移除监听
 onUnmounted(() => {

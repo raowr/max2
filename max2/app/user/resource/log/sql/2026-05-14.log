@@ -1,0 +1,6 @@
+2026-05-14T00:00:35.040+08:00 [DEBU] {2cf77be8572baf184cb1814219d212d0} [642 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=883 WHERE `id`=3
+2026-05-14T00:11:19.027+08:00 [DEBU] {18d9dde0ed2baf1802b28142cb5eed63} [512 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=868 WHERE `id`=3
+2026-05-14T00:19:26.779+08:00 [DEBU] {c49acf7d5f2caf18b0b28142808f9465} [298 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=853 WHERE `id`=3
+2026-05-14T00:23:58.520+08:00 [DEBU] {ecfcbcbc9e2caf1835b38142fbb31531} [400 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=838 WHERE `id`=3
+2026-05-14T00:29:39.074+08:00 [DEBU] {88beac0bee2caf18b7b38142f2c0b083} [328 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=823 WHERE `id`=3
+2026-05-14T00:39:13.001+08:00 [DEBU] {d83f11aa732daf183bb481420c069011} [365 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=808 WHERE `id`=3

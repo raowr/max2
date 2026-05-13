@@ -27,6 +27,9 @@ var (
 
 			var wg sync.WaitGroup
 
+			// 初始化游戏配置缓存
+			set_game.InitCache()
+
 			// 在 goroutine 中启动 HTTP 服务器
 			wg.Add(1)
 			go func() {

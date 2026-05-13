@@ -2,7 +2,7 @@ package room
 
 import (
 	"context"
-	"game_user/internal/controller/set_game"
+	"game_user/internal/service"
 
 	"github.com/gogf/gf/v2/frame/g"
 )
@@ -16,14 +16,14 @@ func GetOutCardTimeout() int {
 // 每局抽水2(单位积分) /张
 func GetGameCommission() int64 {
 
-	commValue, _ := set_game.SetCache.Get(context.Background(), "comm")
+	commValue := service.Cache().Get(context.Background(), "comm")
 	return commValue.Int64()
 	//return g.Cfg().MustGet(context.Background(), "game.comm").Int64() //每局抽水2
 }
 
 // 初始化玩家积分
 func GetGameInitPoint() int64 {
-	pointValue, _ := set_game.SetCache.Get(context.Background(), "point")
+	pointValue := service.Cache().Get(context.Background(), "point")
 	return pointValue.Int64()
 	//return g.Cfg().MustGet(context.Background(), "game.point").Int64() //初始化积分(玩家初始进来送的积分)
 }

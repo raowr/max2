@@ -846,6 +846,11 @@ const handleMessage = (data) => {
     //     router.push({path:'/room'})
     //   },5000)
     // }
+
+    //修改玩家积分
+    var userInfo = storage.local.get('user')
+    userInfo.point = state.player1Point
+    storage.local.set('user', userInfo)
   }
   if (parsedData.type === "play") {
     showGameOverModal.value = false

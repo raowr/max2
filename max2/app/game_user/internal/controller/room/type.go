@@ -85,7 +85,7 @@ type Room struct {
 	Type            int
 	subClient       gredis.Conn           `json:"-"` // 忽略
 	pubClient       *gredis.Redis         `json:"-"` // 忽略
-	msgQueue        chan *message.ChatMsg `json:"-"` // 忽略
+	MsgQueue        chan *message.ChatMsg `json:"-"` // 忽略
 	receiverStarted int32
 	msgCtx          context.Context    `json:"-"` // 忽略
 	MsgCancel       context.CancelFunc `json:"-"` // 忽略 ← 核心问题

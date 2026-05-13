@@ -22,6 +22,7 @@ import (
 	"github.com/gogf/gf/v2/encoding/gjson"
 	"github.com/gogf/gf/v2/frame/g" // 修正：GFv2 正确导入路径
 	"github.com/gogf/gf/v2/net/ghttp"
+	"github.com/gogf/gf/v2/os/gtimer"
 	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/gorilla/websocket"
@@ -224,12 +225,6 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		g.Log().Error(ctx, err)
 	}
 	service.Cache().Set(ctx, consts.PlayerInfoPrefix+humanPlayer.UserName, playerJsonStr, 0)
-	//缓存当前房间信息
-	roomJsonStr, err := json.Marshal(roomInfo)
-	if err != nil {
-		g.Log().Error(ctx, err)
-	}
-	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
 
 	//发送日志 创建房间
 	log_game.SendLog(&log_gamev1.SendLogReq{
@@ -252,6 +247,13 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		roomInfo.CreatePlayer(aiName, room.AI)
 	}
 
+	//缓存当前房间信息
+	roomJsonStr, err := json.Marshal(roomInfo)
+	if err != nil {
+		g.Log().Error(ctx, err)
+	}
+	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
+
 	playerDTOs := getPlayers(roomInfo)
 
 	players, err := json.Marshal(playerDTOs)
@@ -269,27 +271,28 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		return
 	}
 	// 延迟添加额外AI（带上下文超时，避免协程泄漏）
-	go func(roomID string, userName string, clientPid int) {
+	go func(roomInfo *room.Room, userName string, clientPid int) {
 		// 使用Background上下文确保协程能执行完
 		localCtx := context.Background()
 		// 添加日志记录协程启动
-		g.Log().Infof(localCtx, "用户 %s 开始延迟添加AI到房间 %s", userName, roomID)
+		g.Log().Infof(localCtx, "用户 %s 开始延迟添加AI到房间 %s", userName, roomInfo.ID)
 
 		<-time.After(2 * time.Second)
 		rmMu.Lock()
 		defer rmMu.Unlock()
-
-		roomInfo, ok := rm.Rooms[roomID]
-		if !ok {
-			g.Log().Warningf(ctx, "房间 %s 已不存在，停止添加AI", roomID)
-			return
-		}
 		aiNum := len(roomInfo.Players)
 		for i := 0; i < 4-aiNum; i++ {
 			// aiName := fake.Name()
 			aiName := faker.ChineseName()
 			roomInfo.CreatePlayer(aiName, room.AI)
 		}
+
+		//缓存当前房间信息
+		roomJsonStr, err := json.Marshal(roomInfo)
+		if err != nil {
+			g.Log().Error(ctx, err)
+		}
+		service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
 
 		// 创建一个临时结构体，只包含可序列化的字段
 		playerDTOs := getPlayers(roomInfo)
@@ -305,7 +308,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 			From: c.userName,
 		}
 		c.safeSendMessage(ctx, msgData)
-	}(roomInfo.ID, c.userName, c.pid)
+	}(roomInfo, c.userName, c.pid)
 
 }
 
@@ -539,7 +542,7 @@ func (c *Client) handleLeaveRoom(ctx context.Context) {
 
 	//移除rm中用户列表
 	delete(rm.PlayerList, playerInfo.UserName)
-	service.Cache().Remove(ctx, consts.PlayerInfoPrefix+playerInfo.UserName)
+	// service.Cache().Remove(ctx, consts.PlayerInfoPrefix+playerInfo.UserName)
 
 	//缓存当前房间信息
 	roomJsonStr, err := json.Marshal(&roomInfo)
@@ -566,9 +569,8 @@ func (c *Client) handleLeaveRoom(ctx context.Context) {
 			g.Log().Errorf(ctx, "用户 %s 发送消息失败: %v", c.userName, err)
 		}
 	}
-
-	if len(roomInfo.Players) == 0 {
-		//房间没人清理房间
+	//房间没人清理房间,或者是段位房
+	if len(roomInfo.Players) == 0 || roomInfo.Type == 1 {
 		c.clearRoom(ctx)
 	}
 
@@ -589,18 +591,28 @@ func (c *Client) handleLeaveRoom(ctx context.Context) {
 
 // 处理开始游戏
 func (c *Client) handlePlay(ctx context.Context) {
-	rmMu.RLock()
-	player, ok := rm.PlayerList[c.userName]
-	if !ok {
-		rmMu.RUnlock()
-		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userName)
+	playerInfo := &room.Player{} // 或 new(room.Player)
+	jsonStr := service.Cache().Get(ctx, consts.PlayerInfoPrefix+c.userName).Bytes()
+	if err != nil {
+		g.Log().Error(ctx, err)
+	}
+	if err := json.Unmarshal(jsonStr, playerInfo); err != nil {
+		g.Log().Error(ctx, err)
+	}
+	// roomInfo, ok := rm.Rooms[player.RoomID]
+	roomInfoBytes := service.Cache().Get(ctx, consts.RoomInfoPrefix+playerInfo.RoomID).Bytes()
+	if roomInfoBytes == nil {
+		g.Log().Errorf(ctx, "用户 %s 房间 %s 不存在", c.userName, playerInfo.RoomID)
 		return
 	}
-	roomInfo, ok := rm.Rooms[player.RoomID]
-	rmMu.RUnlock()
-
-	if !ok {
-		g.Log().Errorf(ctx, "用户 %s 房间不存在", c.userName)
+	var roomInfo room.Room
+	if err = json.Unmarshal(roomInfoBytes, &roomInfo); err != nil {
+		g.Log().Errorf(ctx, "房间信息json错误: %v", err)
+		return
+	}
+	//判断是否为房主
+	if playerInfo.ID != 0 {
+		g.Log().Errorf(ctx, "用户 %s 不是房主", c.userName)
 		return
 	}
 
@@ -636,7 +648,14 @@ func (c *Client) handlePlay(ctx context.Context) {
 			}
 		}
 	}
-	room.PlayOneGame(roomInfo)
+
+	//初始化房间定时器
+	roomInfo.Rgtimer = gtimer.New()
+	roomInfo.Rgtimer.Add(context.Background(), 1*time.Second, roomInfo.GameLoop)
+	roomInfo.Rgtimer.Stop()
+	roomInfo.MsgQueue = make(chan *message.ChatMsg, 10)
+
+	room.PlayOneGame(&roomInfo)
 
 	//发送日志 开始游戏
 	log_game.SendLog(&log_gamev1.SendLogReq{
@@ -644,25 +663,36 @@ func (c *Client) handlePlay(ctx context.Context) {
 		Type:       int32(roomInfo.Type),
 		Status:     int32(roomInfo.Status),
 		UserID:     c.userName,
-		Point:      player.Point, //积分
-		Action:     consts.Play,  //行为
-		Remain:     "",           //剩余牌
-		OutCardIds: "",           //玩家单次打出的牌id
-		Text:       "",           //完整信息
+		Point:      playerInfo.Point, //积分
+		Action:     consts.Play,      //行为
+		Remain:     "",               //剩余牌
+		OutCardIds: "",               //玩家单次打出的牌id
+		Text:       "",               //完整信息
 	})
 }
 
 // 处理出牌
 func (c *Client) handlePlayCard(ctx context.Context, data string) {
 	rmMu.RLock()
-	player, ok := rm.PlayerList[c.userName]
-	rmMu.RUnlock()
-	if !ok {
-		g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", c.userName)
+	playerInfo := &room.Player{} // 或 new(room.Player)
+	jsonStr := service.Cache().Get(ctx, consts.PlayerInfoPrefix+c.userName).Bytes()
+	if err != nil {
+		g.Log().Error(ctx, err)
+	}
+	if err := json.Unmarshal(jsonStr, playerInfo); err != nil {
+		g.Log().Error(ctx, err)
+	}
+	// roomInfo, ok := rm.Rooms[player.RoomID]
+	roomInfoBytes := service.Cache().Get(ctx, consts.RoomInfoPrefix+playerInfo.RoomID).Bytes()
+	if roomInfoBytes == nil {
+		g.Log().Errorf(ctx, "用户 %s 房间 %s 不存在", c.userName, playerInfo.RoomID)
 		return
 	}
-	rmMu.RLock()
-	roomInfo := rm.Rooms[player.RoomID]
+	var roomInfo room.Room
+	if err = json.Unmarshal(roomInfoBytes, &roomInfo); err != nil {
+		g.Log().Errorf(ctx, "房间信息json错误: %v", err)
+		return
+	}
 	rmMu.RUnlock()
 	// 解析出牌数据（严格错误处理）
 	var reqData struct {
@@ -680,7 +710,7 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 	}
 
 	//如果不是人类出牌时间，返回
-	if player.ID != roomInfo.Current {
+	if playerInfo.ID != roomInfo.Current {
 		g.Log().Errorf(ctx, "用户 %s 不是该玩家出牌阶段", c.userName)
 		return
 	}
@@ -697,7 +727,7 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 		Data: gconv.String(reqData),
 		From: c.userName,
 	}
-	_, err := c.pubClient.Publish(ctx, consts.PlayerPlayCardPrefix+player.UserName, c.encodeMessage(ctx, msgData))
+	_, err := c.pubClient.Publish(ctx, consts.PlayerPlayCardPrefix+playerInfo.UserName, c.encodeMessage(ctx, msgData))
 	g.Log().Infof(ctx, "用户 %s 发送出牌消息: %s", c.userName, gconv.String(reqData))
 	if err != nil {
 		g.Log().Errorf(ctx, "用户 %s 发送出牌消息失败: %v", c.userName, err)
@@ -715,6 +745,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 	}
 	if err := json.Unmarshal(jsonStr, playerInfo); err != nil {
 		g.Log().Error(ctx, err)
+		return
 	}
 	// 1. 基础数据访问（假设是安全的）
 	// player, ok := rm.PlayerList[playerInfo.UserName]
@@ -1021,9 +1052,10 @@ func (c *Client) clearRoom(ctx context.Context) {
 		return
 	}
 
+	if roomInfo.Type == 1 || len(roomInfo.Players) <= 0 {
+		service.Cache().Remove(ctx, consts.RoomInfoPrefix+playerInfo.RoomID)
+	}
 	service.Cache().Remove(ctx, consts.PlayerInfoPrefix+c.userName)
-
-	service.Cache().Remove(ctx, consts.RoomInfoPrefix+playerInfo.RoomID)
 
 }
 

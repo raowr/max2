@@ -23,7 +23,6 @@ import (
 	"github.com/gogf/gf/v2/util/grand"
 
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/os/gtimer"
 	"github.com/gogf/gf/v2/util/gconv"
 )
 
@@ -81,10 +80,10 @@ func (rm *RoomManager) CreateRoom(roomType int) *Room {
 		ID:        roomID,
 		Players:   []*Player{},
 		IsPlaying: false,
-		Rgtimer:   gtimer.New(),
-		Status:    0, //未开始
-		Type:      roomType,
-		msgQueue:  make(chan *message.ChatMsg, 10), // 缓冲大小为 10
+		// Rgtimer:   gtimer.New(),
+		Status:   0, //未开始
+		Type:     roomType,
+		MsgQueue: make(chan *message.ChatMsg, 10), // 缓冲大小为 10
 	}
 
 	// 添加AI机器人
@@ -97,8 +96,8 @@ func (rm *RoomManager) CreateRoom(roomType int) *Room {
 
 	// 将玩家加入房间
 	//player.RoomID = roomID
-	room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
-	room.Rgtimer.Stop() //先停止
+	// room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
+	// room.Rgtimer.Stop() //先停止
 
 	// 保存房间
 	rm.Rooms[roomID] = room
@@ -627,7 +626,7 @@ func (room *Room) startMessageReceiver(ctx context.Context, currentName string) 
 		if success && msgData != nil {
 			// 放入消息队列
 			select {
-			case room.msgQueue <- msgData:
+			case room.MsgQueue <- msgData:
 			default:
 			}
 		}
@@ -692,6 +691,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 			}
 		}()
 		room.Rgtimer.Stop()
+		room.Rgtimer.Close()
 		room.IsPlaying = false
 		room.Status = 2 //结算中
 		room.LastCards = make([]Card, 0)
@@ -747,7 +747,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 		// 非阻塞读取消息队列（不会创建新 goroutine）
 		select {
-		case msgData = <-room.msgQueue:
+		case msgData = <-room.MsgQueue:
 			hasMessage = true
 			g.Log().Infof(ctx, "从队列收到消息: %v", msgData.Type)
 		default:

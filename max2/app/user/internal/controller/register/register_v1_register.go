@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"time"
+	"unicode/utf8"
 	"user/internal/dao"
 	"user/internal/library/liberr"
 	"user/internal/model/do"
@@ -18,6 +19,10 @@ import (
 )
 
 func (c *ControllerV1) Register(ctx context.Context, req *v1.RegisterReq) (res *v1.RegisterRes, err error) {
+	//校验用户名长度
+	if utf8.RuneCountInString(req.Username) < 1 || utf8.RuneCountInString(req.Username) > 12 {
+		liberr.ErrIsNil(ctx, err, "用户名长度必须在1-12之间")
+	}
 	// 校验密码是否一致
 	if req.Password != req.Password2 {
 		liberr.ErrIsNil(ctx, err, "密码不一致")
