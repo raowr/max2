@@ -1,0 +1,1052 @@
+2026-05-15T00:00:00.730+08:00 [INFO] heartbeatCheck: 23.8458809s
+2026-05-15T00:00:00.870+08:00 [INFO] heartbeatCheck: 20.9468776s
+2026-05-15T00:00:04.573+08:00 [INFO] heartbeatCheck: 5.6811198s
+2026-05-15T00:00:05.730+08:00 [INFO] heartbeatCheck: 28.8460249s
+2026-05-15T00:00:05.869+08:00 [INFO] heartbeatCheck: 25.9463659s
+2026-05-15T00:00:07.880+08:00 [INFO] 用户 c罗 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:00:07.884+08:00 [INFO] 用户 c罗 发送消息: {"type":"heartbeat","data":"pong","from":"c罗"}
+2026-05-15T00:00:09.570+08:00 [INFO] heartbeatCheck: 10.6781702s
+2026-05-15T00:00:09.879+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:00:09.880+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:00:10.730+08:00 [INFO] heartbeatCheck: 2.849314s
+2026-05-15T00:00:10.869+08:00 [INFO] heartbeatCheck: 30.9466088s
+2026-05-15T00:00:10.888+08:00 [INFO] 用户 梅西 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:00:10.891+08:00 [INFO] 用户 梅西 发送消息: {"type":"heartbeat","data":"pong","from":"梅西"}
+2026-05-15T00:00:14.570+08:00 [INFO] heartbeatCheck: 4.6912224s
+2026-05-15T00:00:15.730+08:00 [INFO] heartbeatCheck: 7.84927s
+2026-05-15T00:00:15.869+08:00 [INFO] heartbeatCheck: 4.9811692s
+2026-05-15T00:00:19.569+08:00 [INFO] heartbeatCheck: 9.6911659s
+2026-05-15T00:00:20.730+08:00 [INFO] heartbeatCheck: 12.8491986s
+2026-05-15T00:00:20.870+08:00 [INFO] heartbeatCheck: 9.9817447s
+2026-05-15T00:00:20.882+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:00:20.887+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:00:24.570+08:00 [INFO] heartbeatCheck: 3.6874554s
+2026-05-15T00:00:25.733+08:00 [INFO] heartbeatCheck: 17.8520314s
+2026-05-15T00:00:25.869+08:00 [INFO] heartbeatCheck: 14.9815004s
+2026-05-15T00:00:29.570+08:00 [INFO] heartbeatCheck: 8.687531s
+2026-05-15T00:00:30.730+08:00 [INFO] heartbeatCheck: 22.849108s
+2026-05-15T00:00:30.870+08:00 [INFO] heartbeatCheck: 19.9818888s
+2026-05-15T00:00:31.882+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:00:31.883+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:00:34.569+08:00 [INFO] heartbeatCheck: 2.6875645s
+2026-05-15T00:00:35.731+08:00 [INFO] heartbeatCheck: 27.8500136s
+2026-05-15T00:00:35.887+08:00 [INFO] heartbeatCheck: 24.9990806s
+2026-05-15T00:00:38.888+08:00 [INFO] 用户 c罗 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:00:38.899+08:00 [INFO] 用户 c罗 发送消息: {"type":"heartbeat","data":"pong","from":"c罗"}
+2026-05-15T00:00:39.570+08:00 [INFO] heartbeatCheck: 7.6877681s
+2026-05-15T00:00:40.729+08:00 [INFO] heartbeatCheck: 1.8410001s
+2026-05-15T00:00:40.870+08:00 [INFO] heartbeatCheck: 29.9818987s
+2026-05-15T00:00:41.888+08:00 [INFO] 用户 梅西 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:00:41.889+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:00:41.890+08:00 [INFO] 用户 梅西 发送消息: {"type":"heartbeat","data":"pong","from":"梅西"}
+2026-05-15T00:00:41.892+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:00:44.570+08:00 [INFO] heartbeatCheck: 2.6808025s
+2026-05-15T00:00:45.730+08:00 [INFO] heartbeatCheck: 6.8416934s
+2026-05-15T00:00:45.869+08:00 [INFO] heartbeatCheck: 3.9819424s
+2026-05-15T00:00:49.570+08:00 [INFO] heartbeatCheck: 7.6809098s
+2026-05-15T00:00:50.730+08:00 [INFO] heartbeatCheck: 11.84203s
+2026-05-15T00:00:50.869+08:00 [INFO] heartbeatCheck: 8.9822057s
+2026-05-15T00:00:52.891+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:00:52.893+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:00:54.569+08:00 [INFO] heartbeatCheck: 1.6787423s
+2026-05-15T00:00:55.730+08:00 [INFO] heartbeatCheck: 16.8413293s
+2026-05-15T00:00:55.869+08:00 [INFO] heartbeatCheck: 13.9822603s
+2026-05-15T00:00:59.570+08:00 [INFO] heartbeatCheck: 6.6788326s
+2026-05-15T00:01:00.730+08:00 [INFO] heartbeatCheck: 21.8414208s
+2026-05-15T00:01:00.869+08:00 [INFO] heartbeatCheck: 18.982275s
+2026-05-15T00:01:03.008+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:01:03.011+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:01:04.569+08:00 [INFO] heartbeatCheck: 1.5610635s
+2026-05-15T00:01:05.736+08:00 [INFO] heartbeatCheck: 26.8472422s
+2026-05-15T00:01:05.881+08:00 [INFO] heartbeatCheck: 23.9936839s
+2026-05-15T00:01:09.576+08:00 [INFO] heartbeatCheck: 6.5674294s
+2026-05-15T00:01:09.890+08:00 [INFO] 用户 c罗 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:01:09.891+08:00 [INFO] 用户 c罗 发送消息: {"type":"heartbeat","data":"pong","from":"c罗"}
+2026-05-15T00:01:10.730+08:00 [INFO] heartbeatCheck: 839.3902ms
+2026-05-15T00:01:10.870+08:00 [INFO] heartbeatCheck: 28.9829093s
+2026-05-15T00:01:13.156+08:00 [INFO] 用户 梅西 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:01:13.157+08:00 [INFO] 用户 梅西 发送消息: {"type":"heartbeat","data":"pong","from":"梅西"}
+2026-05-15T00:01:13.906+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:01:13.908+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:01:14.569+08:00 [INFO] heartbeatCheck: 662.8919ms
+2026-05-15T00:01:15.769+08:00 [INFO] heartbeatCheck: 5.8784488s
+2026-05-15T00:01:15.870+08:00 [INFO] heartbeatCheck: 2.7147621s
+2026-05-15T00:01:19.570+08:00 [INFO] heartbeatCheck: 5.6634423s
+2026-05-15T00:01:20.730+08:00 [INFO] heartbeatCheck: 10.8399956s
+2026-05-15T00:01:20.869+08:00 [INFO] heartbeatCheck: 7.7144855s
+2026-05-15T00:01:24.569+08:00 [INFO] heartbeatCheck: 10.6628732s
+2026-05-15T00:01:24.886+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:01:24.888+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:01:25.730+08:00 [INFO] heartbeatCheck: 15.8396753s
+2026-05-15T00:01:25.869+08:00 [INFO] heartbeatCheck: 12.7145077s
+2026-05-15T00:01:29.569+08:00 [INFO] heartbeatCheck: 4.6839731s
+2026-05-15T00:01:30.730+08:00 [INFO] heartbeatCheck: 20.8399453s
+2026-05-15T00:01:30.869+08:00 [INFO] heartbeatCheck: 17.714101s
+2026-05-15T00:01:34.577+08:00 [INFO] heartbeatCheck: 9.6910305s
+2026-05-15T00:01:34.921+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:01:34.933+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:01:35.730+08:00 [INFO] heartbeatCheck: 25.8400526s
+2026-05-15T00:01:35.870+08:00 [INFO] heartbeatCheck: 22.7151851s
+2026-05-15T00:01:39.572+08:00 [INFO] heartbeatCheck: 4.651359s
+2026-05-15T00:01:40.730+08:00 [INFO] heartbeatCheck: 30.8402749s
+2026-05-15T00:01:40.869+08:00 [INFO] heartbeatCheck: 27.7146575s
+2026-05-15T00:01:40.883+08:00 [INFO] 用户 c罗 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:01:40.885+08:00 [INFO] 用户 c罗 发送消息: {"type":"heartbeat","data":"pong","from":"c罗"}
+2026-05-15T00:01:43.880+08:00 [INFO] 用户 梅西 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:01:43.882+08:00 [INFO] 用户 梅西 发送消息: {"type":"heartbeat","data":"pong","from":"梅西"}
+2026-05-15T00:01:44.570+08:00 [INFO] heartbeatCheck: 9.648904s
+2026-05-15T00:01:45.730+08:00 [INFO] heartbeatCheck: 4.8469062s
+2026-05-15T00:01:45.870+08:00 [INFO] heartbeatCheck: 1.9892809s
+2026-05-15T00:01:45.892+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:01:45.896+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:01:49.569+08:00 [INFO] heartbeatCheck: 3.6782999s
+2026-05-15T00:01:50.729+08:00 [INFO] heartbeatCheck: 9.8466276s
+2026-05-15T00:01:50.869+08:00 [INFO] heartbeatCheck: 6.9890107s
+2026-05-15T00:01:54.570+08:00 [INFO] heartbeatCheck: 8.6787273s
+2026-05-15T00:01:55.730+08:00 [INFO] heartbeatCheck: 14.8475883s
+2026-05-15T00:01:55.869+08:00 [INFO] heartbeatCheck: 11.9888729s
+2026-05-15T00:01:56.888+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:01:56.893+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:01:59.569+08:00 [INFO] heartbeatCheck: 2.681176s
+2026-05-15T00:02:00.730+08:00 [INFO] heartbeatCheck: 19.8476892s
+2026-05-15T00:02:00.869+08:00 [INFO] heartbeatCheck: 16.9890923s
+2026-05-15T00:02:03.400+08:00 [INFO] {54837632017aaf18159c1e452cacf92e} 用户 1 连接成功
+2026-05-15T00:02:03.406+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-15T00:02:03.428+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.432+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.434+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.437+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.440+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.442+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.444+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.446+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.448+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.451+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.452+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.454+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.456+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.458+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.460+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.460+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.462+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.469+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.934+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-15T00:02:03.934+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-15T00:02:03.934+08:00 [INFO] {a88d9352017aaf18239c1e4519ee85e0} 用户 1 重连，关闭旧连接
+2026-05-15T00:02:03.936+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-15T00:02:03.937+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-15T00:02:03.937+08:00 [INFO] {a88d9352017aaf18239c1e4519ee85e0} 用户 1 连接成功
+2026-05-15T00:02:03.939+08:00 [INFO] heartbeatCheck: 0s
+2026-05-15T00:02:03.939+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.941+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.942+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.947+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.949+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.950+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.951+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.952+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.953+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.954+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.955+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.956+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.957+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.958+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.961+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.965+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:03.967+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:03.968+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:04.570+08:00 [INFO] heartbeatCheck: 7.6815736s
+2026-05-15T00:02:05.523+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-15T00:02:05.525+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleLeaveRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:480
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:191
+
+2026-05-15T00:02:05.527+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleLeaveRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:480
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:191
+
+2026-05-15T00:02:05.538+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:05.603+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:05.656+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:05.765+08:00 [INFO] heartbeatCheck: 24.8825823s
+2026-05-15T00:02:05.871+08:00 [INFO] heartbeatCheck: 21.9904332s
+2026-05-15T00:02:07.765+08:00 [INFO] 用户 1 接收消息: {"type":"createRoom","data":"","name":""}（类型: 1）
+2026-05-15T00:02:07.769+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).clearRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:962
+3.  game_user/internal/controller/enter.(*Client).handleCreateRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:320
+4.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:187
+
+2026-05-15T00:02:07.785+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).clearRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:962
+3.  game_user/internal/controller/enter.(*Client).handleCreateRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:320
+4.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:187
+
+2026-05-15T00:02:07.837+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-15T00:02:07.839+08:00 [INFO] 用户 1 发送消息: {"type":"createRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:07.842+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-15T00:02:07.842+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-15T00:02:07.854+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-15T00:02:07.884+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:02:07.884+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:02:08.939+08:00 [INFO] heartbeatCheck: 1.1754741s
+2026-05-15T00:02:08.950+08:00 [INFO] {f066147d027aaf183c9c1e4545b52555} 用户 1 连接成功
+2026-05-15T00:02:08.952+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-15T00:02:08.952+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:08.956+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:08.957+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:08.963+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:08.963+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:08.966+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:08.972+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:08.973+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:08.974+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:08.976+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:08.981+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:08.984+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:08.989+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:08.990+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:08.990+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:08.996+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:08.998+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:09.002+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:09.005+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:09.006+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:09.006+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:09.015+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:09.015+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:02:09.570+08:00 [INFO] heartbeatCheck: 1.6869917s
+2026-05-15T00:02:10.730+08:00 [INFO] heartbeatCheck: 29.8468987s
+2026-05-15T00:02:10.869+08:00 [INFO] heartbeatCheck: 26.9887164s
+2026-05-15T00:02:11.893+08:00 [INFO] 用户 c罗 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:02:11.896+08:00 [INFO] 用户 c罗 发送消息: {"type":"heartbeat","data":"pong","from":"c罗"}
+2026-05-15T00:02:13.992+08:00 [INFO] heartbeatCheck: 6.227932s
+2026-05-15T00:02:14.035+08:00 [INFO] heartbeatCheck: 5.0299503s
+2026-05-15T00:02:14.576+08:00 [INFO] heartbeatCheck: 6.6927919s
+2026-05-15T00:02:14.925+08:00 [INFO] 用户 梅西 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:02:14.928+08:00 [INFO] 用户 梅西 发送消息: {"type":"heartbeat","data":"pong","from":"梅西"}
+2026-05-15T00:02:15.731+08:00 [INFO] heartbeatCheck: 3.8379808s
+2026-05-15T00:02:15.872+08:00 [INFO] heartbeatCheck: 947.9057ms
+2026-05-15T00:02:18.885+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:02:18.887+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:02:18.939+08:00 [INFO] heartbeatCheck: 11.174906s
+2026-05-15T00:02:18.952+08:00 [INFO] heartbeatCheck: 9.947491s
+2026-05-15T00:02:18.991+08:00 [INFO] 用户 c罗 接收消息: {"type":"joinRoom","data":"{\"roomID\":\"O29HAR\"}","name":""}（类型: 1）
+2026-05-15T00:02:19.024+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:02:19.037+08:00 [INFO] 用户 1 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:19.043+08:00 [INFO] 用户 1 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:19.052+08:00 [INFO] 用户 c罗 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2}]","from":"c罗"}
+2026-05-15T00:02:19.191+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:02:19.192+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:02:19.575+08:00 [INFO] heartbeatCheck: 689.5608ms
+2026-05-15T00:02:20.734+08:00 [INFO] heartbeatCheck: 1.7435193s
+2026-05-15T00:02:20.875+08:00 [INFO] heartbeatCheck: 5.9509431s
+2026-05-15T00:02:23.961+08:00 [INFO] heartbeatCheck: 16.197443s
+2026-05-15T00:02:23.989+08:00 [INFO] heartbeatCheck: 4.9648432s
+2026-05-15T00:02:24.747+08:00 [INFO] heartbeatCheck: 5.8614908s
+2026-05-15T00:02:25.997+08:00 [INFO] heartbeatCheck: 11.0728354s
+2026-05-15T00:02:25.998+08:00 [INFO] heartbeatCheck: 7.0074383s
+2026-05-15T00:02:28.940+08:00 [INFO] heartbeatCheck: 21.1760932s
+2026-05-15T00:02:28.955+08:00 [INFO] heartbeatCheck: 9.9309505s
+2026-05-15T00:02:29.210+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:02:29.212+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:02:29.225+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:02:29.576+08:00 [INFO] heartbeatCheck: 10.690294s
+2026-05-15T00:02:29.878+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:02:29.880+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:02:30.730+08:00 [INFO] heartbeatCheck: 11.7397007s
+2026-05-15T00:02:30.870+08:00 [INFO] heartbeatCheck: 15.9454103s
+2026-05-15T00:02:30.919+08:00 [INFO] 用户 梅西 接收消息: {"type":"joinRoom","data":"{\"roomID\":\"O29HAR\"}","name":""}（类型: 1）
+2026-05-15T00:02:30.934+08:00 [INFO] 用户 1 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:30.934+08:00 [INFO] 用户 1 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:30.934+08:00 [INFO] 用户 c罗 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2}]","from":"c罗"}
+2026-05-15T00:02:30.965+08:00 [INFO] 用户 梅西 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2}]","from":"梅西"}
+2026-05-15T00:02:33.443+08:00 [INFO] 用户 梅西 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-15T00:02:33.508+08:00 [INFO] 用户 1 发送消息: {"type":"leaveRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:33.509+08:00 [INFO] 用户 1 发送消息: {"type":"leaveRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:33.511+08:00 [INFO] 用户 c罗 发送消息: {"type":"leaveRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2}]","from":"c罗"}
+2026-05-15T00:02:33.558+08:00 [INFO] 用户 梅西 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:33.559+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:33.562+08:00 [ERRO] 用户 梅西 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:33.943+08:00 [INFO] heartbeatCheck: 26.1794154s
+2026-05-15T00:02:33.960+08:00 [INFO] heartbeatCheck: 4.749981s
+2026-05-15T00:02:34.576+08:00 [INFO] heartbeatCheck: 4.6982262s
+2026-05-15T00:02:35.731+08:00 [INFO] heartbeatCheck: 16.7411054s
+2026-05-15T00:02:35.869+08:00 [INFO] heartbeatCheck: 2.3114634s
+2026-05-15T00:02:38.208+08:00 [INFO] 用户 梅西 接收消息: {"type":"joinRoom","data":"{\"roomID\":\"O29HAR\"}","name":""}（类型: 1）
+2026-05-15T00:02:38.241+08:00 [INFO] 用户 1 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:38.245+08:00 [INFO] 用户 1 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:38.274+08:00 [INFO] 用户 c罗 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2}]","from":"c罗"}
+2026-05-15T00:02:38.362+08:00 [INFO] 用户 梅西 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2}]","from":"梅西"}
+2026-05-15T00:02:38.940+08:00 [INFO] heartbeatCheck: 31.1763497s
+2026-05-15T00:02:38.957+08:00 [INFO] heartbeatCheck: 9.7472224s
+2026-05-15T00:02:39.579+08:00 [INFO] heartbeatCheck: 9.7006359s
+2026-05-15T00:02:39.884+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:02:39.899+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:02:40.751+08:00 [INFO] heartbeatCheck: 21.7604651s
+2026-05-15T00:02:40.870+08:00 [INFO] heartbeatCheck: 2.6626171s
+2026-05-15T00:02:43.945+08:00 [INFO] heartbeatCheck: 36.1815364s
+2026-05-15T00:02:43.962+08:00 [INFO] heartbeatCheck: 14.7528681s
+2026-05-15T00:02:44.599+08:00 [INFO] heartbeatCheck: 4.7160352s
+2026-05-15T00:02:45.769+08:00 [INFO] heartbeatCheck: 26.7792359s
+2026-05-15T00:02:45.870+08:00 [INFO] heartbeatCheck: 7.6625106s
+2026-05-15T00:02:46.052+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"joinRoom","data":"{\"roomID\":\"O29HAR\"}","name":""}（类型: 1）
+2026-05-15T00:02:46.090+08:00 [INFO] 用户 1 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":3,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:46.151+08:00 [INFO] 用户 1 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":3,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:02:46.153+08:00 [INFO] 用户 c罗 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":3,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"c罗"}
+2026-05-15T00:02:46.168+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":3,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"亚马尔"}
+2026-05-15T00:02:46.169+08:00 [INFO] 用户 梅西 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2},{\"ID\":1,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":2,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":3,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"梅西"}
+2026-05-15T00:02:48.830+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-15T00:02:48.964+08:00 [INFO] heartbeatCheck: 41.2007677s
+2026-05-15T00:02:48.965+08:00 [INFO] heartbeatCheck: 135.3246ms
+2026-05-15T00:02:49.040+08:00 [INFO] 用户 c罗 发送消息: {"type":"leaveRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"c罗"}
+2026-05-15T00:02:49.082+08:00 [INFO] 用户 梅西 发送消息: {"type":"leaveRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"梅西"}
+2026-05-15T00:02:49.129+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"leaveRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"亚马尔"}
+2026-05-15T00:02:49.149+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:02:49.182+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:49.193+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:02:49.579+08:00 [INFO] heartbeatCheck: 3.5272427s
+2026-05-15T00:02:50.730+08:00 [INFO] heartbeatCheck: 31.7393927s
+2026-05-15T00:02:50.869+08:00 [INFO] heartbeatCheck: 12.662082s
+2026-05-15T00:02:53.944+08:00 [INFO] heartbeatCheck: 46.1805584s
+2026-05-15T00:02:53.958+08:00 [INFO] heartbeatCheck: 4.8088218s
+2026-05-15T00:02:54.580+08:00 [INFO] heartbeatCheck: 8.5274809s
+2026-05-15T00:02:55.749+08:00 [INFO] heartbeatCheck: 36.7592036s
+2026-05-15T00:02:55.904+08:00 [INFO] heartbeatCheck: 17.6963768s
+2026-05-15T00:02:56.221+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:02:56.224+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:02:56.239+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:02:58.944+08:00 [INFO] heartbeatCheck: 51.1807871s
+2026-05-15T00:02:58.960+08:00 [INFO] heartbeatCheck: 2.7403732s
+2026-05-15T00:02:59.182+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:02:59.184+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:02:59.570+08:00 [INFO] heartbeatCheck: 387.1387ms
+2026-05-15T00:03:00.730+08:00 [INFO] heartbeatCheck: 41.740009s
+2026-05-15T00:03:00.869+08:00 [INFO] heartbeatCheck: 22.6619708s
+2026-05-15T00:03:03.942+08:00 [INFO] heartbeatCheck: 56.1787723s
+2026-05-15T00:03:03.959+08:00 [INFO] heartbeatCheck: 7.7331222s
+2026-05-15T00:03:04.569+08:00 [INFO] heartbeatCheck: 5.3867895s
+2026-05-15T00:03:05.739+08:00 [INFO] heartbeatCheck: 46.7488379s
+2026-05-15T00:03:05.875+08:00 [INFO] heartbeatCheck: 27.6674478s
+2026-05-15T00:03:06.291+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:06.293+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:03:06.304+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:03:08.952+08:00 [INFO] heartbeatCheck: 1m1.1880752s
+2026-05-15T00:03:08.952+08:00 [INFO] 用户 1 心跳超时（60秒），断开连接
+2026-05-15T00:03:08.969+08:00 [INFO] 用户 1 关闭连接，原因: 心跳超时
+2026-05-15T00:03:08.969+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-15T00:03:08.984+08:00 [INFO] 用户 1 连接已关闭，跳过重复关闭
+2026-05-15T00:03:08.985+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-15T00:03:09.000+08:00 [INFO] heartbeatCheck: 2.7085308s
+2026-05-15T00:03:09.304+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:09.316+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:03:09.570+08:00 [INFO] heartbeatCheck: 265.8736ms
+2026-05-15T00:03:10.739+08:00 [INFO] heartbeatCheck: 51.7487032s
+2026-05-15T00:03:10.909+08:00 [INFO] heartbeatCheck: 32.7014875s
+2026-05-15T00:03:13.952+08:00 [INFO] heartbeatCheck: 7.6616595s
+2026-05-15T00:03:13.986+08:00 [INFO] {3c3804a2117aaf18949c1e45c4b2d658} 用户 1 连接成功
+2026-05-15T00:03:14.001+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:03:14.001+08:00 [INFO] heartbeatCheck: 0s
+2026-05-15T00:03:14.003+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.019+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.021+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:03:14.034+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.036+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.037+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:03:14.050+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.052+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.053+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:03:14.054+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.067+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.068+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:03:14.070+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.071+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.084+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:03:14.087+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.088+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.101+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:03:14.102+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.104+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.104+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:03:14.119+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.121+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.121+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:03:14.135+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.137+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:03:14.570+08:00 [INFO] heartbeatCheck: 5.2653403s
+2026-05-15T00:03:15.739+08:00 [INFO] heartbeatCheck: 56.7491713s
+2026-05-15T00:03:15.939+08:00 [INFO] heartbeatCheck: 37.7312759s
+2026-05-15T00:03:18.953+08:00 [INFO] heartbeatCheck: 12.6619462s
+2026-05-15T00:03:19.004+08:00 [INFO] heartbeatCheck: 4.8833593s
+2026-05-15T00:03:19.054+08:00 [INFO] 用户 c罗 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:19.088+08:00 [INFO] 用户 c罗 发送消息: {"type":"heartbeat","data":"pong","from":"c罗"}
+2026-05-15T00:03:19.105+08:00 [INFO] 用户 梅西 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:19.152+08:00 [INFO] 用户 梅西 发送消息: {"type":"heartbeat","data":"pong","from":"梅西"}
+2026-05-15T00:03:19.356+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:19.373+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:03:19.590+08:00 [INFO] heartbeatCheck: 234.4943ms
+2026-05-15T00:03:20.794+08:00 [INFO] heartbeatCheck: 1.7402389s
+2026-05-15T00:03:21.009+08:00 [INFO] heartbeatCheck: 1.9034525s
+2026-05-15T00:03:24.005+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:24.039+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:03:24.053+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:03:24.054+08:00 [INFO] heartbeatCheck: 48.9835ms
+2026-05-15T00:03:24.055+08:00 [INFO] heartbeatCheck: 17.764565s
+2026-05-15T00:03:24.054+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-15T00:03:24.069+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-15T00:03:24.571+08:00 [INFO] heartbeatCheck: 5.2151452s
+2026-05-15T00:03:25.744+08:00 [INFO] heartbeatCheck: 6.690183s
+2026-05-15T00:03:25.827+08:00 [INFO] 用户 1 接收消息: {"type":"joinRoom","data":"{\"roomID\":\"O29HAR\"}","name":""}（类型: 1）
+2026-05-15T00:03:25.974+08:00 [INFO] heartbeatCheck: 6.868925s
+2026-05-15T00:03:26.012+08:00 [INFO] 用户 c罗 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}]","from":"c罗"}
+2026-05-15T00:03:26.061+08:00 [INFO] 用户 梅西 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}]","from":"梅西"}
+2026-05-15T00:03:26.077+08:00 [INFO] 用户 1 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:03:26.079+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}]","from":"亚马尔"}
+2026-05-15T00:03:26.112+08:00 [INFO] 用户 1 发送消息: {"type":"joinRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}]","from":"1"}
+2026-05-15T00:03:28.954+08:00 [INFO] heartbeatCheck: 22.6628278s
+2026-05-15T00:03:29.038+08:00 [INFO] heartbeatCheck: 3.2110037s
+2026-05-15T00:03:29.572+08:00 [INFO] heartbeatCheck: 10.2164498s
+2026-05-15T00:03:30.742+08:00 [INFO] heartbeatCheck: 11.6880869s
+2026-05-15T00:03:30.928+08:00 [INFO] heartbeatCheck: 11.8228573s
+2026-05-15T00:03:33.955+08:00 [INFO] heartbeatCheck: 27.6640929s
+2026-05-15T00:03:34.003+08:00 [INFO] heartbeatCheck: 8.1758329s
+2026-05-15T00:03:34.573+08:00 [INFO] heartbeatCheck: 15.2176696s
+2026-05-15T00:03:35.730+08:00 [INFO] heartbeatCheck: 16.675705s
+2026-05-15T00:03:35.897+08:00 [INFO] heartbeatCheck: 16.791757s
+2026-05-15T00:03:36.196+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:36.198+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:03:36.198+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:03:36.295+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:36.297+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:03:38.955+08:00 [INFO] heartbeatCheck: 32.664591s
+2026-05-15T00:03:39.022+08:00 [INFO] heartbeatCheck: 2.8400182s
+2026-05-15T00:03:39.661+08:00 [INFO] heartbeatCheck: 3.3660234s
+2026-05-15T00:03:41.044+08:00 [INFO] heartbeatCheck: 21.9383715s
+2026-05-15T00:03:41.046+08:00 [INFO] heartbeatCheck: 21.9913499s
+2026-05-15T00:03:43.957+08:00 [INFO] heartbeatCheck: 37.6664562s
+2026-05-15T00:03:44.009+08:00 [INFO] heartbeatCheck: 7.8268479s
+2026-05-15T00:03:44.679+08:00 [INFO] heartbeatCheck: 8.3839483s
+2026-05-15T00:03:45.414+08:00 [INFO] 用户 c罗 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-15T00:03:45.645+08:00 [ERRO] 用户 c罗 不是房主 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).handlePlay
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:579
+2.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:193
+
+2026-05-15T00:03:45.660+08:00 [INFO] 用户 c罗 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:03:45.842+08:00 [INFO] heartbeatCheck: 182.2243ms
+2026-05-15T00:03:46.049+08:00 [INFO] heartbeatCheck: 26.9441874s
+2026-05-15T00:03:46.132+08:00 [INFO] 用户 c罗 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"c罗"}
+2026-05-15T00:03:46.244+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:46.300+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:03:46.313+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:03:46.333+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:46.348+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:03:48.958+08:00 [INFO] heartbeatCheck: 42.6669554s
+2026-05-15T00:03:49.008+08:00 [INFO] heartbeatCheck: 2.7633813s
+2026-05-15T00:03:49.577+08:00 [INFO] heartbeatCheck: 3.2434905s
+2026-05-15T00:03:50.730+08:00 [INFO] heartbeatCheck: 5.0698374s
+2026-05-15T00:03:50.878+08:00 [INFO] heartbeatCheck: 31.7730663s
+2026-05-15T00:03:53.958+08:00 [INFO] heartbeatCheck: 47.6668385s
+2026-05-15T00:03:54.008+08:00 [INFO] heartbeatCheck: 7.7632794s
+2026-05-15T00:03:54.575+08:00 [INFO] heartbeatCheck: 8.2414146s
+2026-05-15T00:03:55.750+08:00 [INFO] heartbeatCheck: 10.0896703s
+2026-05-15T00:03:55.880+08:00 [INFO] heartbeatCheck: 36.7746139s
+2026-05-15T00:03:56.097+08:00 [INFO] 用户 梅西 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:56.101+08:00 [INFO] 用户 梅西 发送消息: {"type":"heartbeat","data":"pong","from":"梅西"}
+2026-05-15T00:03:56.331+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:56.333+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:03:56.334+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:03:56.367+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:03:56.369+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:03:59.028+08:00 [INFO] heartbeatCheck: 2.6973703s
+2026-05-15T00:03:59.061+08:00 [INFO] heartbeatCheck: 52.7706988s
+2026-05-15T00:03:59.764+08:00 [INFO] heartbeatCheck: 3.3968227s
+2026-05-15T00:04:00.730+08:00 [INFO] heartbeatCheck: 15.0696828s
+2026-05-15T00:04:00.871+08:00 [INFO] heartbeatCheck: 4.7739761s
+2026-05-15T00:04:03.955+08:00 [INFO] heartbeatCheck: 57.6638132s
+2026-05-15T00:04:04.007+08:00 [INFO] heartbeatCheck: 7.6764209s
+2026-05-15T00:04:04.614+08:00 [INFO] heartbeatCheck: 8.246179s
+2026-05-15T00:04:05.730+08:00 [INFO] heartbeatCheck: 20.0702831s
+2026-05-15T00:04:05.897+08:00 [INFO] heartbeatCheck: 9.799994s
+2026-05-15T00:04:06.342+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:04:06.345+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:04:06.348+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:04:06.390+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:04:06.394+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:04:08.952+08:00 [INFO] heartbeatCheck: 1m2.6616103s
+2026-05-15T00:04:08.952+08:00 [INFO] 用户 1 心跳超时（60秒），断开连接
+2026-05-15T00:04:08.953+08:00 [INFO] 用户 1 关闭连接，原因: 心跳超时
+2026-05-15T00:04:08.954+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-15T00:04:08.954+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-15T00:04:08.956+08:00 [INFO] 用户 1 连接已关闭，跳过重复关闭
+2026-05-15T00:04:09.002+08:00 [INFO] heartbeatCheck: 2.6605671s
+2026-05-15T00:04:09.570+08:00 [INFO] heartbeatCheck: 3.1805661s
+2026-05-15T00:04:10.730+08:00 [INFO] heartbeatCheck: 25.0696071s
+2026-05-15T00:04:10.869+08:00 [INFO] heartbeatCheck: 14.7720213s
+2026-05-15T00:04:13.976+08:00 [INFO] {405fab991f7aaf18c29c1e45365e90a1} 用户 1 连接成功
+2026-05-15T00:04:13.978+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-15T00:04:13.978+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:13.981+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:13.990+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:13.992+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:13.992+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:13.991+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-15T00:04:13.994+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:13.996+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:13.997+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-15T00:04:14.006+08:00 [INFO] heartbeatCheck: 7.6645857s
+2026-05-15T00:04:14.006+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.010+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:14.010+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.015+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:14.023+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.023+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.046+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:14.046+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.047+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.063+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:14.063+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.063+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.076+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:14.079+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.079+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.080+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:14.089+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.092+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.096+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:14.106+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.106+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.111+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.112+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O29HAR\",\"players\":[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2},{\"ID\":3,\"Name\":\"1\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"1\",\"RoomType\":2}],\"cards\":[],\"current\":0,\"playerPoint\":100,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":0,\"cardNum\":13},{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":2}","from":"1"}
+2026-05-15T00:04:14.595+08:00 [INFO] heartbeatCheck: 8.2055098s
+2026-05-15T00:04:15.060+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-15T00:04:15.064+08:00 [INFO] 用户 c罗 发送消息: {"type":"leaveRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"c罗"}
+2026-05-15T00:04:15.065+08:00 [INFO] 用户 梅西 发送消息: {"type":"leaveRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"梅西"}
+2026-05-15T00:04:15.111+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"leaveRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"梅西\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"梅西\",\"RoomType\":2},{\"ID\":2,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"亚马尔"}
+2026-05-15T00:04:15.156+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:15.161+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:04:15.171+08:00 [ERRO] 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:04:15.730+08:00 [INFO] heartbeatCheck: 30.0696429s
+2026-05-15T00:04:15.869+08:00 [INFO] heartbeatCheck: 19.7720112s
+2026-05-15T00:04:18.999+08:00 [INFO] heartbeatCheck: 3.8422023s
+2026-05-15T00:04:19.028+08:00 [INFO] heartbeatCheck: 12.686237s
+2026-05-15T00:04:19.575+08:00 [INFO] heartbeatCheck: 13.1853714s
+2026-05-15T00:04:20.771+08:00 [INFO] heartbeatCheck: 35.1108094s
+2026-05-15T00:04:20.870+08:00 [INFO] heartbeatCheck: 24.7727107s
+2026-05-15T00:04:22.924+08:00 [INFO] 用户 c罗 连接已关闭，读循环退出
+2026-05-15T00:04:22.925+08:00 [INFO] 用户 c罗 关闭连接，原因: 读循环退出
+2026-05-15T00:04:22.979+08:00 [INFO] 用户 c罗 心跳检测被取消: context canceled
+2026-05-15T00:04:22.985+08:00 [INFO] 用户 c罗 心跳检测退出
+2026-05-15T00:04:23.978+08:00 [INFO] heartbeatCheck: 8.8222889s
+2026-05-15T00:04:24.011+08:00 [INFO] heartbeatCheck: 17.6694636s
+2026-05-15T00:04:24.133+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:04:24.149+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:04:24.163+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:04:25.470+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:04:25.483+08:00 [INFO] heartbeatCheck: 12.9959ms
+2026-05-15T00:04:25.670+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"heartbeat","data":"pong","from":"亚马尔"}
+2026-05-15T00:04:25.971+08:00 [INFO] heartbeatCheck: 29.8738276s
+2026-05-15T00:04:26.670+08:00 [INFO] 用户 梅西 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-15T00:04:26.893+08:00 [INFO] 用户 c罗 连接已关闭，跳过消息发送
+2026-05-15T00:04:26.906+08:00 [INFO] 用户 c罗 writeLoop退出
+2026-05-15T00:04:26.977+08:00 [INFO] 用户 亚马尔 发送消息: {"type":"leaveRoom","data":"[{\"ID\":0,\"Name\":\"c罗\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"c罗\",\"RoomType\":2},{\"ID\":1,\"Name\":\"亚马尔\",\"RoomID\":\"O29HAR\",\"Type\":0,\"CardNum\":13,\"Point\":100,\"UserId\":\"亚马尔\",\"RoomType\":2}]","from":"亚马尔"}
+2026-05-15T00:04:27.126+08:00 [INFO] 用户 梅西 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:27.141+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:04:27.143+08:00 [ERRO] 用户 梅西 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:04:29.029+08:00 [INFO] heartbeatCheck: 4.8959031s
+2026-05-15T00:04:29.047+08:00 [INFO] heartbeatCheck: 22.7054455s
+2026-05-15T00:04:29.916+08:00 [INFO] heartbeatCheck: 4.4460544s
+2026-05-15T00:04:30.135+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-15T00:04:30.250+08:00 [INFO] 用户 亚马尔 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-15T00:04:30.251+08:00 [ERRO] unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:981
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:04:30.253+08:00 [ERRO] 用户 亚马尔 房间  不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*Client).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:986
+2.  game_user/internal/controller/enter.(*Client).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:691
+3.  game_user/internal/controller/enter.(*Client).readLoop
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:197
+
+2026-05-15T00:04:30.873+08:00 [INFO] heartbeatCheck: 3.7466868s
+2026-05-15T00:04:34.486+08:00 [INFO] heartbeatCheck: 10.352469s
+2026-05-15T00:04:34.501+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-15T00:04:34.715+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:04:34.719+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-15T00:04:34.752+08:00 [INFO] heartbeatCheck: 28.4108104s
+2026-05-15T00:04:34.767+08:00 [INFO] heartbeatCheck: 4.5176575s
+2026-05-15T00:04:35.869+08:00 [INFO] heartbeatCheck: 8.7432762s
+2026-05-15T00:04:39.151+08:00 [INFO] heartbeatCheck: 32.8092455s
+2026-05-15T00:04:39.153+08:00 [INFO] heartbeatCheck: 4.6514168s
+2026-05-15T00:04:39.600+08:00 [INFO] heartbeatCheck: 9.3497442s
+2026-05-15T00:04:40.907+08:00 [INFO] heartbeatCheck: 13.7813627s
+2026-05-15T00:04:41.728+08:00 [INFO] 用户 亚马尔 连接已关闭，读循环退出
+2026-05-15T00:04:41.823+08:00 [INFO] 用户 亚马尔 关闭连接，原因: 读循环退出
+2026-05-15T00:04:41.891+08:00 [INFO] 用户 亚马尔 心跳检测被取消: context canceled
+2026-05-15T00:04:41.894+08:00 [INFO] 用户 亚马尔 心跳检测退出
+2026-05-15T00:04:44.016+08:00 [INFO] heartbeatCheck: 37.6748317s
+2026-05-15T00:04:44.017+08:00 [INFO] heartbeatCheck: 9.5161056s
+2026-05-15T00:04:45.920+08:00 [INFO] heartbeatCheck: 18.7938431s
+2026-05-15T00:04:48.979+08:00 [INFO] heartbeatCheck: 14.4776518s
+2026-05-15T00:04:49.002+08:00 [INFO] heartbeatCheck: 42.6603718s
+2026-05-15T00:04:49.144+08:00 [INFO] 用户 梅西 连接已关闭，读循环退出
+2026-05-15T00:04:49.145+08:00 [INFO] 用户 梅西 关闭连接，原因: 读循环退出
+2026-05-15T00:04:49.146+08:00 [INFO] 用户 梅西 心跳检测被取消: context canceled
+2026-05-15T00:04:49.147+08:00 [INFO] 用户 梅西 心跳检测退出
+2026-05-15T00:04:49.571+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-15T00:04:49.572+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-15T00:04:49.573+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-15T00:04:49.578+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-15T00:04:49.572+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-15T00:04:49.580+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-15T00:04:49.579+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-15T00:04:49.581+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-15T00:06:13.159+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894816030878479"
+2026-05-15T00:06:13.305+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894816030878476"

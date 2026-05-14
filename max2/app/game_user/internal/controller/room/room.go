@@ -774,9 +774,9 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 		//记录开始出牌时间
 		now := int(time.Now().Unix())
-		if room.OutStarTime == 0 {
-			room.OutStarTime = now
-		}
+		// if room.OutStarTime == 0 {
+		// 	room.OutStarTime = now
+		// }
 		outCardTimeout := GetOutCardTimeout()
 		//玩家不操作逻辑
 		if len(currentPlayer.OutCardIds) <= 0 && //玩家还没出牌
@@ -1024,6 +1024,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	// 添加调试日志
 	if room.Players[room.Current].Type == Human {
+		now := int(time.Now().Unix())
+		room.OutStarTime = now
 		//修复资源泄漏：先关闭旧的订阅
 		if room.subClient != nil {
 			_ = room.subClient.Close(ctx)

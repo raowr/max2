@@ -283,7 +283,7 @@ const handleMessage = (data) => {
      }
   }
 
-    if (parsedData.type === "joinRoom") {
+    if (parsedData.type === "joinRoom" || parsedData.type === "leaveRoom") {
     try {
         // 解析JSON字符串
         const serverPlayers = JSON.parse(parsedData.data)

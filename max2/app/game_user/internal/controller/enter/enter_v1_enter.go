@@ -465,6 +465,7 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 	}
 	// c.safeSendMessage(ctx, msgData)
 	for _, player := range roomInfo.Players {
+		msgData.From = player.UserName
 		_, err := c.pubClient.Publish(ctx, consts.PlayerMsgPrefix+player.UserName, c.encodeMessage(ctx, msgData))
 		if err != nil {
 			g.Log().Errorf(ctx, "用户 %s 发送消息失败: %v", c.userName, err)
@@ -476,33 +477,12 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 func (c *Client) handleLeaveRoom(ctx context.Context) {
 	rmMu.Lock()
 	defer rmMu.Unlock()
-	playerInfo := &room.Player{} // 或 new(room.Player)
-	jsonStr := service.Cache().Get(ctx, consts.PlayerInfoPrefix+c.userName).Bytes()
-	if err != nil {
-		g.Log().Error(ctx, err)
-	}
-	if err := json.Unmarshal(jsonStr, playerInfo); err != nil {
-		g.Log().Error(ctx, err)
-	}
-	//移除房间内该玩家
-	// player, ok := rm.PlayerList[playerInfo.UserName]
-	// if !ok {
-	// 	g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", playerInfo.UserName)
-	// 	return
-	// }
-	isHomeowner := false
-	// roomInfo, ok := rm.Rooms[player.RoomID]
-	roomInfoBytes := service.Cache().Get(ctx, consts.RoomInfoPrefix+playerInfo.RoomID).Bytes()
-	if roomInfoBytes == nil {
-		g.Log().Errorf(ctx, "用户 %s 房间 %s 不存在", c.userName, playerInfo.RoomID)
-		return
-	}
-	var roomInfo room.Room
-	if err = json.Unmarshal(roomInfoBytes, &roomInfo); err != nil {
-		g.Log().Errorf(ctx, "房间信息json错误: %v", err)
+	playerInfo, roomInfo := c.getPlayerAndRoomInfo(ctx)
+	if playerInfo == nil || roomInfo == nil {
 		return
 	}
 	players := make([]*room.Player, 0) //临时玩家数组
+	var isHomeowner bool
 	for _, player := range roomInfo.Players {
 		if player.UserName != playerInfo.UserName {
 			players = append(players, player)
@@ -545,14 +525,14 @@ func (c *Client) handleLeaveRoom(ctx context.Context) {
 	// service.Cache().Remove(ctx, consts.PlayerInfoPrefix+playerInfo.UserName)
 
 	//缓存当前房间信息
-	roomJsonStr, err := json.Marshal(&roomInfo)
+	roomJsonStr, err := json.Marshal(roomInfo)
 	if err != nil {
 		g.Log().Error(ctx, err)
 	}
 	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
 
 	// 创建一个临时结构体，只包含可序列化的字段
-	playerDTOs := getPlayers(&roomInfo)
+	playerDTOs := getPlayers(roomInfo)
 	//如果时房主离开，还需要发房间信息到新房主
 
 	//应该通知到房间内每个人
@@ -564,15 +544,14 @@ func (c *Client) handleLeaveRoom(ctx context.Context) {
 		From: c.userName,
 	}
 	for _, player := range roomInfo.Players {
+		msgData.From = player.UserName
 		_, err := c.pubClient.Publish(ctx, consts.PlayerMsgPrefix+player.UserName, c.encodeMessage(ctx, msgData))
 		if err != nil {
 			g.Log().Errorf(ctx, "用户 %s 发送消息失败: %v", c.userName, err)
 		}
 	}
 	//房间没人清理房间,或者是段位房
-	if len(roomInfo.Players) == 0 || roomInfo.Type == 1 {
-		c.clearRoom(ctx)
-	}
+	c.clearRoom(ctx)
 
 	//发送日志 离开房间
 	log_game.SendLog(&log_gamev1.SendLogReq{
@@ -591,23 +570,8 @@ func (c *Client) handleLeaveRoom(ctx context.Context) {
 
 // 处理开始游戏
 func (c *Client) handlePlay(ctx context.Context) {
-	playerInfo := &room.Player{} // 或 new(room.Player)
-	jsonStr := service.Cache().Get(ctx, consts.PlayerInfoPrefix+c.userName).Bytes()
-	if err != nil {
-		g.Log().Error(ctx, err)
-	}
-	if err := json.Unmarshal(jsonStr, playerInfo); err != nil {
-		g.Log().Error(ctx, err)
-	}
-	// roomInfo, ok := rm.Rooms[player.RoomID]
-	roomInfoBytes := service.Cache().Get(ctx, consts.RoomInfoPrefix+playerInfo.RoomID).Bytes()
-	if roomInfoBytes == nil {
-		g.Log().Errorf(ctx, "用户 %s 房间 %s 不存在", c.userName, playerInfo.RoomID)
-		return
-	}
-	var roomInfo room.Room
-	if err = json.Unmarshal(roomInfoBytes, &roomInfo); err != nil {
-		g.Log().Errorf(ctx, "房间信息json错误: %v", err)
+	playerInfo, roomInfo := c.getPlayerAndRoomInfo(ctx)
+	if playerInfo == nil || roomInfo == nil {
 		return
 	}
 	//判断是否为房主
@@ -642,6 +606,7 @@ func (c *Client) handlePlay(ctx context.Context) {
 			From: c.userName,
 		}
 		for _, player := range roomInfo.Players {
+			msgData.From = player.UserName
 			_, err := c.pubClient.Publish(ctx, consts.PlayerMsgPrefix+player.UserName, c.encodeMessage(ctx, msgData))
 			if err != nil {
 				g.Log().Errorf(ctx, "用户 %s 发送消息失败: %v", c.userName, err)
@@ -655,7 +620,7 @@ func (c *Client) handlePlay(ctx context.Context) {
 	roomInfo.Rgtimer.Stop()
 	roomInfo.MsgQueue = make(chan *message.ChatMsg, 10)
 
-	room.PlayOneGame(&roomInfo)
+	room.PlayOneGame(roomInfo)
 
 	//发送日志 开始游戏
 	log_game.SendLog(&log_gamev1.SendLogReq{
@@ -674,23 +639,8 @@ func (c *Client) handlePlay(ctx context.Context) {
 // 处理出牌
 func (c *Client) handlePlayCard(ctx context.Context, data string) {
 	rmMu.RLock()
-	playerInfo := &room.Player{} // 或 new(room.Player)
-	jsonStr := service.Cache().Get(ctx, consts.PlayerInfoPrefix+c.userName).Bytes()
-	if err != nil {
-		g.Log().Error(ctx, err)
-	}
-	if err := json.Unmarshal(jsonStr, playerInfo); err != nil {
-		g.Log().Error(ctx, err)
-	}
-	// roomInfo, ok := rm.Rooms[player.RoomID]
-	roomInfoBytes := service.Cache().Get(ctx, consts.RoomInfoPrefix+playerInfo.RoomID).Bytes()
-	if roomInfoBytes == nil {
-		g.Log().Errorf(ctx, "用户 %s 房间 %s 不存在", c.userName, playerInfo.RoomID)
-		return
-	}
-	var roomInfo room.Room
-	if err = json.Unmarshal(roomInfoBytes, &roomInfo); err != nil {
-		g.Log().Errorf(ctx, "房间信息json错误: %v", err)
+	playerInfo, roomInfo := c.getPlayerAndRoomInfo(ctx)
+	if playerInfo == nil || roomInfo == nil {
 		return
 	}
 	rmMu.RUnlock()
@@ -738,31 +688,8 @@ func (c *Client) handlePlayCard(ctx context.Context, data string) {
 func (c *Client) handleGetInfo(ctx context.Context) {
 	rmMu.Lock()
 	defer rmMu.Unlock()
-	playerInfo := &room.Player{} // 或 new(room.Player)
-	jsonStr := service.Cache().Get(ctx, consts.PlayerInfoPrefix+c.userName).Bytes()
-	if err != nil {
-		g.Log().Error(ctx, err)
-	}
-	if err := json.Unmarshal(jsonStr, playerInfo); err != nil {
-		g.Log().Error(ctx, err)
-		return
-	}
-	// 1. 基础数据访问（假设是安全的）
-	// player, ok := rm.PlayerList[playerInfo.UserName]
-	// if !ok {
-	// 	g.Log().Errorf(ctx, "用户 %s 未找到玩家信息", playerInfo.UserName)
-	// 	return
-	// }
-
-	// roomInfo, ok := rm.Rooms[player.RoomID]
-	roomInfoBytes := service.Cache().Get(ctx, consts.RoomInfoPrefix+playerInfo.RoomID).Bytes()
-	if roomInfoBytes == nil {
-		g.Log().Errorf(ctx, "用户 %s 房间 %s 不存在", c.userName, playerInfo.RoomID)
-		return
-	}
-	var roomInfo room.Room
-	if err = json.Unmarshal(roomInfoBytes, &roomInfo); err != nil {
-		g.Log().Errorf(ctx, "房间信息json错误: %v", err)
+	playerInfo, roomInfo := c.getPlayerAndRoomInfo(ctx)
+	if playerInfo == nil || roomInfo == nil {
 		return
 	}
 
@@ -828,7 +755,7 @@ func (c *Client) handleGetInfo(ctx context.Context) {
 	lastPid := (current - 1 + 4) % 4
 
 	// 创建一个临时结构体，只包含可序列化的字段
-	playerDTOs := getPlayers(&roomInfo)
+	playerDTOs := getPlayers(roomInfo)
 
 	// 6. 序列化并推送（处理JSON错误）
 	resData, err := json.Marshal(struct {
@@ -1032,6 +959,19 @@ func (c *Client) closeConnection(reason string) {
 func (c *Client) clearRoom(ctx context.Context) {
 	// 清理当前用户关联的旧房间（优化：定向清理，避免全量遍历）
 
+	playerInfo, roomInfo := c.getPlayerAndRoomInfo(ctx)
+	if playerInfo == nil || roomInfo == nil {
+		return
+	}
+
+	if roomInfo.Type == 1 || len(roomInfo.Players) <= 0 {
+		service.Cache().Remove(ctx, consts.RoomInfoPrefix+playerInfo.RoomID)
+	}
+	service.Cache().Remove(ctx, consts.PlayerInfoPrefix+c.userName)
+
+}
+
+func (c *Client) getPlayerAndRoomInfo(ctx context.Context) (*room.Player, *room.Room) {
 	playerInfo := &room.Player{} // 或 new(room.Player)
 	jsonStr := service.Cache().Get(ctx, consts.PlayerInfoPrefix+c.userName).Bytes()
 	if err != nil {
@@ -1044,19 +984,14 @@ func (c *Client) clearRoom(ctx context.Context) {
 	roomInfoBytes := service.Cache().Get(ctx, consts.RoomInfoPrefix+playerInfo.RoomID).Bytes()
 	if roomInfoBytes == nil {
 		g.Log().Errorf(ctx, "用户 %s 房间 %s 不存在", c.userName, playerInfo.RoomID)
-		return
+		return nil, nil
 	}
 	var roomInfo room.Room
 	if err = json.Unmarshal(roomInfoBytes, &roomInfo); err != nil {
 		g.Log().Errorf(ctx, "房间信息json错误: %v", err)
-		return
+		return nil, nil
 	}
-
-	if roomInfo.Type == 1 || len(roomInfo.Players) <= 0 {
-		service.Cache().Remove(ctx, consts.RoomInfoPrefix+playerInfo.RoomID)
-	}
-	service.Cache().Remove(ctx, consts.PlayerInfoPrefix+c.userName)
-
+	return playerInfo, &roomInfo
 }
 
 /*

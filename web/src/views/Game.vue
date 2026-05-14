@@ -95,45 +95,7 @@
 
     <!--player2 信息结束 -->
 
-    <!--player4 信息 -->
-    <div class="player4-container" style="">
-      <!-- 修改为圆形倒计时 -->
-      <div v-if="state.countdownPlayer == 4"
-        style="position: absolute; top: -4%; left: 46%; transform: translateX(-50%); z-index: 999; text-align: center">
-        <svg :width="100" :height="100">
-          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
-          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer4 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'"
-            stroke-width="8" fill="transparent" :style="{
-              strokeDasharray: 283,
-              strokeDashoffset: 283 * (1 - countdownPlayer4 / state.outCardTimeout),
-              transition: 'stroke-dashoffset 1s linear'
-            }" />
-        </svg>
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-               font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
-          {{ countdownPlayer4 }}
-        </div>
-      </div>
-      <img src="@/assets/img/ui/chatlog.png" width="90px">
-      <img :src="player4touxiang" width="85px" style="position: absolute;bottom:36.2%;left:3.1%;border-radius: 25px;">
-      <div style="width:100px;height:40px;text-align:center;">
-        <p style="z-index:1;font-size:16px; color:white;">{{ state.player4Name }}</p>
-      </div>
-      <span v-show="player4pass"  style="
-            position: absolute;
-            left: 120%;
-            color: #FF6600;
-            font-size: 28px;
-            top: -28%;
-        ">过</span>
-      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:94%;top:0%'>
-      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:67%;left:112%;width: 60px;">
-        剩<span style="color:#FF6600;">{{ state.player4CardsNum }} </span>张</p>
-    </div>
-
-    <!--player4 信息结束 -->
-
-    <!--player3 信息 -->
+        <!--player3 信息 -->
     <div class="player3-container" style="">
       <!-- 修改为圆形倒计时 -->
       <div v-if="state.countdownPlayer == 3"
@@ -178,6 +140,46 @@
     </div>
 
     <!--player3 信息结束 -->
+
+    <!--player4 信息 -->
+    <div class="player4-container" style="">
+      <!-- 修改为圆形倒计时 -->
+      <div v-if="state.countdownPlayer == 4"
+        style="position: absolute; top: -4%; left: 46%; transform: translateX(-50%); z-index: 999; text-align: center">
+        <svg :width="100" :height="100">
+          <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
+          <circle cx="50" cy="50" r="45" :stroke="countdownPlayer4 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'"
+            stroke-width="8" fill="transparent" :style="{
+              strokeDasharray: 283,
+              strokeDashoffset: 283 * (1 - countdownPlayer4 / state.outCardTimeout),
+              transition: 'stroke-dashoffset 1s linear'
+            }" />
+        </svg>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+               font-size: 24px; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5)">
+          {{ countdownPlayer4 }}
+        </div>
+      </div>
+      <img src="@/assets/img/ui/chatlog.png" width="90px">
+      <img :src="player4touxiang" width="85px" style="position: absolute;bottom:36.2%;left:3.1%;border-radius: 25px;">
+      <div style="width:100px;height:40px;text-align:center;">
+        <p style="z-index:1;font-size:16px; color:white;">{{ state.player4Name }}</p>
+      </div>
+      <span v-show="player4pass"  style="
+            position: absolute;
+            left: 120%;
+            color: #FF6600;
+            font-size: 28px;
+            top: -28%;
+        ">过</span>
+      <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:94%;top:0%'>
+      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:67%;left:112%;width: 60px;">
+        剩<span style="color:#FF6600;">{{ state.player4CardsNum }} </span>张</p>
+    </div>
+
+    <!--player4 信息结束 -->
+
+
 
     <!--玩家身份信息 -->
     <div style="width:140px;height:40px;text-align:center;position: absolute;bottom:27%;left:3%;">
@@ -473,6 +475,8 @@ const handleMessage = (data) => {
       if (data.players[i].UserId == currentPlayerUid.value){
         currentPlayerId.value = data.players[i].ID
       }
+    }
+    for (let i = 0; i < data.players.length; i++) {
       //设置玩家名字
       switch (getPlayerPosition(data.players[i].ID) + 1) {
         case 1:
@@ -1224,9 +1228,13 @@ const resetAvatar = () => {
 
 const getPlayerPosition = (playerId) => {
   // 计算差值
-  const diff =playerId- currentPlayerId.value
-  // 当差值大于等于0，直接用，当差值小于0需要用4减去差值的绝对值
-  const position = diff >= 0 ? diff : 4 - Math.abs(diff)
+  // const diff =playerId- currentPlayerId.value
+  // // 当差值大于等于0，直接用，当差值小于0需要用4减去差值的绝对值
+  // const position = diff >= 0 ? diff : 4 - Math.abs(diff)
+  // return position
+
+  //座位号 = (目标玩家索引 - 当前玩家索引 + 总人数) % 总人数
+  const position = (playerId - currentPlayerId.value + 4) % 4
   return position
 }
 </script>
