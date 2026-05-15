@@ -1,3 +1,0 @@
-2026-05-15T00:06:12.810+08:00 [DEBU] {002ec1243b7aaf1812daac38be8611ce} [503 ms] [default] [max2] [rows:17 ] SHOW TABLES
-2026-05-15T00:06:12.906+08:00 [DEBU] {b0e6f6443b7aaf1813daac38a7137314} [ 93 ms] [default] [max2] [rows:4  ] SHOW FULL COLUMNS FROM `set_game`
-2026-05-15T00:06:13.005+08:00 [DEBU] {d01ba14a3b7aaf1814daac38dac089f4} [ 97 ms] [default] [max2] [rows:2  ] SELECT `id`,`name`,`key`,`value` FROM `set_game`

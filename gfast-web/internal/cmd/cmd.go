@@ -23,11 +23,15 @@ var (
 			s.AddStaticPath("/public", "./resource/public") // 映射公共目录
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
+				// 根路径重定向到 /index
+				group.GET("/", func(r *ghttp.Request) {
+					r.Response.RedirectTo("/index")
+				})
 				group.Bind(
 					index.NewV1(),
 				)
 			})
-			s.SetPort(8005)
+			// s.SetPort()
 			s.Run()
 			return nil
 		},

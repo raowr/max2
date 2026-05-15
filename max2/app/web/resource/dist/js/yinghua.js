@@ -145,16 +145,35 @@ function startSakura() {
     })
 }
 
+// 替换现有的 window.onresize 函数
 window.onresize = function() {
-    var canvasSnow = document.getElementById('canvas_snow');
-    if (canvasSnow) {  // 只有当元素存在时才执行后续操作
-        this.setTimeout(()=>{
-            canvasSnow.width = window.innerWidth;
-            canvasSnow.height = window.innerHeight;
-        },500)
+    resizeCanvas();
+};
 
+// 添加专门的横竖屏切换事件监听
+window.addEventListener('orientationchange', function() {
+    // 确保在方向改变后尺寸稳定
+    setTimeout(resizeCanvas, 100);
+});
+
+// 创建统一的 canvas 尺寸调整函数
+function resizeCanvas() {
+    var canvasSnow = document.getElementById('canvas_sakura');
+    if (canvasSnow) {
+        // 立即更新 canvas 尺寸，移除 500ms 延迟
+        canvasSnow.width = window.innerWidth;
+        canvasSnow.height = window.innerHeight;
+        
+        // 重新初始化樱花粒子，确保它们能适应新的屏幕尺寸
+        if (staticx) {
+            // 清除现有动画
+            window.cancelAnimationFrame(stop);
+            // 重新启动樱花动画
+            stopp(); // 先停止
+            setTimeout(startSakura, 50); // 再启动
+        }
     } else {
-        console.warn('未找到canvas_snow元素，无法设置尺寸');
+        console.warn('未找到canvas_sakura元素，无法设置尺寸');
     }
 }
 

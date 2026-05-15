@@ -1,0 +1,3 @@
+2026-05-15T22:21:16.113+08:00 [DEBU] {a09cd67d15c3af1867e0ac3801e3a0a9} [1134 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=757 WHERE `id`=3
+2026-05-15T23:45:37.833+08:00 [DEBU] {8c8ec92bb0c7af18a8b7d2720814dfc4} [516 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5NDY0NzM3fQ.v4fpcsQwxu8yf6VNZssrc9U5yk2c3iv2WvCkMeSgaD8' WHERE `id`=3
+2026-05-15T23:48:13.653+08:00 [DEBU] {ccec9c72d4c7af18dbe9ac38a413b2ce} [507 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=747 WHERE `id`=3

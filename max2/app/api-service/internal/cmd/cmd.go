@@ -19,7 +19,7 @@ var (
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			gsvc.SetRegistry(etcd.New(`127.0.0.1:2379`))
-			s := g.Server(`api-service.svc`)
+			s := g.Server()
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.Bind(

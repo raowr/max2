@@ -1,4 +1,0 @@
-2026-05-14T00:43:46.922+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894816030803798"
-2026-05-14T20:48:15.386+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894816030878313"
-2026-05-14T22:16:29.953+08:00 [WARN] keepalive exit, lease id: 7587894816030878313, retry register
-2026-05-14T22:16:29.973+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894816030878413"

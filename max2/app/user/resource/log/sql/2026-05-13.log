@@ -1,4 +1,0 @@
-2026-05-13T00:48:30.352+08:00 [DEBU] {e828a4de60dfae185a9c2a0ac43a6ee4} [325 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=902 WHERE `id`=3
-2026-05-13T23:48:03.332+08:00 [DEBU] {48f98c3ca82aaf18b85710523a8a40ac} [3329 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
-2026-05-13T23:48:03.523+08:00 [DEBU] {48f98c3ca82aaf18b85710523a8a40ac} [182 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=912 WHERE `id`=3
-2026-05-13T23:58:58.503+08:00 [DEBU] {4069356f412baf18d8b0814295b3635f} [614 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=898 WHERE `id`=3
