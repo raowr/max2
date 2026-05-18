@@ -91,7 +91,7 @@ export default {
         const vm = this;
 
         window.apkVersionHandler = function (filename) {
-            console.info(filename)
+            console.log(filename)
             // 关键修复：更新Vue的响应式数据，而不是直接操作DOM
             vm.downloadUrl = vm.downloadUrl + filename;
             vm.showDownloadButton = true; // 添加一个响应式属性来控制可见性
@@ -102,6 +102,7 @@ export default {
         script.type = 'text/javascript'
         script.src = import.meta.env.VITE_APP_APK_URL + 'output-metadata.js?' + new Date().getTime();
         document.body.appendChild(script)
+        console.log(script.src)
 
         //版本文件加载错误，使用默认
         script.onerror = function () {

@@ -1,19 +1,76 @@
 <template>
   <div class="loading-page" :style="backgroundStyle">
     <div class="loading-content">
+      <p class="loading-text">加载中... {{ progressPercentage }}%</p>
       <div class="progress-container">
         <div class="progress-bar" :style="{ width: progressPercentage + '%' }"></div>
       </div>
-      <p class="loading-text">加载中... {{ progressPercentage }}%</p>
       <!-- login Button -->
-      <div class="login-btn-container" v-if=isReady>
-        <img src="@/assets/img/ui/login.png" class="login-btn" alt="进入主页" @click="toIndex()">
+      <div class="login-btn-container" v-if="isReady">
+          <div class="login-group">
+              <img src="@/assets/img/ui/guest_login.png" class="login-btn" alt="游客进入" @click="toIndex()">
+          </div>
+          <div class="login-group">
+              <img src="@/assets/img/ui/user_login.png" class="login-btn" alt="登录游戏" @click="handleLoginButtonClick()">
+              <span class="register-text" @click="toRegister()">注册账号</span>
+          </div>
+      </div>
+    </div>
+     <!-- 登录弹窗 -->
+    <div class="modal-overlay" v-if="showLoginModal" @click="closeLoginModal">
+      <div class="modal-content" @click.stop>
+        <h3 class="modal-title">登录游戏</h3>
+        <form class="login-form" @submit.prevent="handleLogin">
+          <div class="form-group">
+            <label for="username">账号名</label>
+            <input type="text" id="username" v-model="loginForm.username" placeholder="请输入账号名" required>
+          </div>
+          <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" id="password" v-model="loginForm.password" placeholder="请输入密码" required>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" @click="closeLoginModal">取消</button>
+            <button type="submit" class="btn-confirm">确定</button>
+          </div>
+        </form>
+      </div>
+    </div>
+        <!-- 注册弹窗 -->
+    <div class="modal-overlay" v-if="showRegisterModal" @click="closeRegisterModal">
+      <div class="modal-content" @click.stop>
+        <h3 class="modal-title">注册账号</h3>
+        <form class="login-form" @submit.prevent="handleRegister">
+          <div class="form-group">
+            <label for="register-username">账号名</label>
+            <input type="text" id="register-username" v-model="registerForm.username" placeholder="请输入账号名" required>
+          </div>
+          <div class="form-group">
+            <label for="register-password">密码</label>
+            <input type="password" id="register-password" v-model="registerForm.password" placeholder="请输入密码" required>
+          </div>
+          <div class="form-group">
+            <label for="register-confirm-password">确认密码</label>
+            <input type="password" id="register-confirm-password" v-model="registerForm.confirmPassword" placeholder="请再次输入密码" required>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" @click="closeRegisterModal">取消</button>
+            <button type="submit" class="btn-confirm">确定</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { login, register } from '@/api/user'
+import { ElMessage, ElMessageBox } from 'element-plus';
+import { storage } from '@/utils/storage'
+import { websocket } from '@/utils/websocket'
+
+
+import { audioManager } from '@/utils/audio'
 
 // 1. 显式引入所有需要预加载的图片（确保 Vite 打包时包含这些资源）
 import cg4Img from '@/assets/img/cg/cg4.png';
@@ -144,6 +201,19 @@ export default {
   name: 'LoadingPage',
   data() {
     return {
+      // 登录弹窗状态
+      showLoginModal: false,
+      loginForm: {
+        username: '',
+        password: ''
+      },
+      // 注册弹窗状态
+      showRegisterModal: false,
+      registerForm: {
+        username: '',
+        password: '',
+        confirmPassword: ''
+      },
       // 所有需要预加载的图片路径（根据实际项目补充）
       imagePaths: [
         // cg4Img,       // 直接使用 import 后的变量
@@ -352,8 +422,268 @@ export default {
       }
     },
     toIndex() {
+        // 延迟连接 WebSocket，确保应用先加载
+        let wsUrl = import.meta.env.VITE_WS_URL;
+      setTimeout(() => {
+        if (wsUrl) {
+          console.log('user_id:', storage.local.get("user_id"))
+    // 初始化 WebSocket 配置（全局一次）
+          websocket.init({
+            url: wsUrl+"?user_id="+storage.local.get("user_id"), // 后端地址
+            reconnectInterval: 5000, // 5秒重连一次
+            heartbeatInterval: 10000 // 20秒一次心跳
+          });
+
+    // 启动连接（可在登录后再调用，这里直接启动作为示例）
+          websocket.connect();
+        } else {
+          console.warn('VITE_WS_URL is not defined, using default WebSocket URL')
+          // 可以在这里设置一个默认的 WebSocket URL
+          websocket.connect('ws://127.0.0.1:8000/enter')
+        }
+      }, 100)
       this.$router.push('/index');
     },
+    // 登录按钮点击处理
+    handleLoginButtonClick() {
+      const userData = storage.local.get('user');
+      
+      if (!userData) {
+        // 如果没有用户信息，弹出登录框
+        this.showLoginModal = true;
+        return;
+      }
+      // 如果有用户信息，尝试连接 websocket
+      const node = userData.node || userData.Node;
+      if (!node) {
+        ElMessage.error('用户信息不完整，请重新登录');
+        this.showLoginModal = true;
+        return;
+      }
+      // 尝试连接 websocket
+      this.tryConnectWebSocket(userData);
+    },
+       // 尝试连接 WebSocket
+    // 尝试连接 WebSocket（使用全局 websocket 实例）
+    tryConnectWebSocket(userData) {
+        // 从用户数据中提取参数
+        const node = userData.node || userData.Node;
+        const username = userData.username || userData.Username;
+        const token = userData.token || userData.Token;
+        
+        // 构建 WebSocket URL
+        const wsUrl = `ws://${node}/enter?user_name=${encodeURIComponent(username)}&token=${encodeURIComponent(token)}`;
+        
+        console.log('尝试连接 WebSocket:', wsUrl);
+
+        // 使用全局 websocket 实例
+        const ws = this.$websocket;
+
+        // 保存回调引用，用于后续移除
+        const openCallback = () => {
+            console.log('WebSocket 连接成功');
+            // 移除回调避免重复触发
+            ws.off('open', openCallback);
+            ws.off('error', errorCallback);
+            ws.off('close', closeCallback);
+            // 连接成功，跳转首页
+            this.$router.push('/index');
+        };
+
+        const errorCallback = (error) => {
+            console.error('WebSocket 连接错误:', error);
+            // 移除回调
+            ws.off('open', openCallback);
+            ws.off('error', errorCallback);
+            ws.off('close', closeCallback);
+            ElMessage.error('服务器连接失败，请重新登录');
+            this.showLoginModal = true;
+        };
+
+        const closeCallback = (event) => {
+            console.log('WebSocket 连接关闭:', event.code, event.reason);
+            // 移除回调
+            ws.off('open', openCallback);
+            ws.off('error', errorCallback);
+            ws.off('close', closeCallback);
+            // 如果不是正常关闭且还在 loading 页面
+            if (event.code !== 1000 && this.$route.path === '/loading') {
+                ElMessage.error('服务器连接异常，请重新登录');
+                this.showLoginModal = true;
+            }
+        };
+
+        // 注册回调
+        ws.on('open', openCallback);
+        ws.on('error', errorCallback);
+        ws.on('close', closeCallback);
+
+        // 初始化并连接
+        ws.init({
+            url: wsUrl,
+            reconnectInterval: 5000,
+            heartbeatInterval: 10000
+        }).connect();
+
+        // 超时处理
+        setTimeout(() => {
+            // 检查是否还在连接中
+            if (ws.isConnecting && this.$route.path === '/loading') {
+                ws.close();
+                ElMessage.error('连接超时，请重新登录');
+                this.showLoginModal = true;
+            }
+        }, 10000);
+    },
+    // 关闭登录弹窗
+    closeLoginModal() {
+      this.showLoginModal = false;
+      this.loginForm.username = '';
+      this.loginForm.password = '';
+    },
+    // 处理登录
+    handleLogin() {
+      console.log('登录信息:', this.loginForm);
+      // 这里可以添加登录逻辑
+      // 登录成功后关闭弹窗并跳转到游戏页面
+      // alert('登录成功！');
+      login(this.loginForm).then((res)=>{
+        console.log(res.data)
+        if(res.code === 0){
+          ElMessage.success('登录成功！');
+          //保存用户信息
+          storage.local.set('user', res.data);
+                    // 尝试连接 WebSocket
+          const userData = res.data;
+          if (userData) {
+            this.closeLoginModal();
+            this.tryConnectWebSocket(userData);
+          } else {
+            ElMessage.error('服务器信息获取失败');
+          }
+        }else{
+          ElMessage.error(res.message);
+        }
+      })
+      this.closeLoginModal();
+      // this.$router.push('/index');
+    },
+        // 关闭注册弹窗
+    closeRegisterModal() {
+      this.showRegisterModal = false;
+      this.registerForm.username = '';
+      this.registerForm.password = '';
+      this.registerForm.confirmPassword = '';
+    },
+    // 跳转到注册（显示注册弹窗）
+    toRegister() {
+      this.showRegisterModal = true;
+    },
+    // 处理注册
+    handleRegister() {
+      // 验证密码是否一致
+      if (this.registerForm.password !== this.registerForm.confirmPassword) {
+        ElMessage.error('两次输入的密码不一致！');
+        return;
+      }
+      console.log('注册信息:', this.registerForm);
+      // 这里可以添加注册逻辑
+      // alert('注册成功！');
+      let registerData = {
+        username: this.registerForm.username,
+        password: this.registerForm.password,
+        password2: this.registerForm.confirmPassword,
+      }
+      register(registerData).then((res)=>{
+        console.log(res.data)
+        if(res.code === 0){
+          ElMessage.success('注册成功！');
+        }else{
+          ElMessage.error(res.message);
+        }
+      })
+      this.closeRegisterModal();
+      // 注册成功后可以跳转到登录页面或直接登录
+    },
+    toLogin() {
+    // 添加登录逻辑或跳转到登录页面
+    // this.$router.push('/login');
+    console.log('登录游戏');
+    },
+       
+// ... existing code ...
+    async preloadAllAudios() {
+      console.log('开始预加载音频资源...');
+      const keys = Object.keys(this.audioResources);
+      let loadedCount = 0;
+      
+      // 分批加载，避免一次性请求过多资源
+      const batchSize = 5;
+      for (let i = 0; i < keys.length; i += batchSize) {
+        const batch = keys.slice(i, i + batchSize);
+        const promises = batch.map(musicPath => {
+          return new Promise((resolve) => {
+            const key = 'preload_' + musicPath;
+            try {
+              // 修改为：直接使用 audioResources 中导入的音频变量
+              // 这些导入的变量会自动解析为编译后的带 hash 的路径
+              let cardMusicUrl = this.audioResources[musicPath];
+              
+              // 如果是 true，表示需要处理（应该避免这种情况）
+              if (cardMusicUrl === true) {
+                console.warn(`音频路径未正确配置: ${musicPath}，请添加正确的导入语句`);
+                resolve();
+                return;
+              }
+              
+              // 调试信息，查看实际使用的音频路径
+              console.log(`预加载音频: ${musicPath}，URL: ${cardMusicUrl}`);
+              
+              // 存储预加载的 URL，用于后续检查
+              this.preloadedAudioUrls[key] = cardMusicUrl;
+              
+              // 创建一个临时的 Audio 对象进行预加载
+              const tempAudio = new Audio();
+              
+              // 设置加载完成事件
+              tempAudio.oncanplaythrough = () => {
+                loadedCount++;
+                this.preloadStatus.loaded = loadedCount;
+                console.log(`预加载完成: ${musicPath}, 进度: ${loadedCount}/${keys.length}`);
+                // 预加载完成后，使用 audioManager 正式加载
+                audioManager.preload(key, cardMusicUrl);
+                resolve();
+              };
+              
+              // 加载失败处理
+              tempAudio.onerror = () => {
+                console.error(`预加载失败: ${musicPath}，URL: ${cardMusicUrl}`);
+                // 失败也继续，避免阻塞其他资源加载
+                loadedCount++;
+                this.preloadStatus.loaded = loadedCount;
+                resolve();
+              };
+              
+              // 设置音频源并开始加载
+              tempAudio.src = cardMusicUrl;
+              tempAudio.load();
+            } catch (error) {
+              console.error(`预加载出错: ${musicPath}`);
+              loadedCount++;
+              this.preloadStatus.loaded = loadedCount;
+              resolve();
+            }
+          });
+        });
+        
+        // 等待当前批次加载完成
+        await Promise.all(promises);
+      }
+      
+      this.preloadStatus.isComplete = true;
+      console.log('所有音频资源预加载完成');
+    },
+// ... existing code ...
   }
 };
 </script>
@@ -377,7 +707,7 @@ export default {
   /* 2. 将加载内容定位到底部（默认居中，改为底部对齐） */
   align-items: flex-end;
   /* 垂直方向底部对齐 */
-  padding-bottom: 80px;
+  padding-bottom: 150px;
   /* 距离底部 80px（可调整数值控制"上一点"的距离） */
   transition: background-image 0.3s ease;
 }
@@ -443,10 +773,12 @@ export default {
 
 .login-btn-container {
   position: absolute;
-  bottom: 20px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+  display: flex;
+  gap: 20px; /* 按钮之间的间隔 */
 }
 
 .login-btn {
@@ -456,5 +788,130 @@ export default {
 
 .login-btn:hover {
   transform: scale(1.1);
+}
+.login-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.register-text {
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.register-text:hover {
+    color: #ffff00;
+}
+ 
+/* 弹窗遮罩层 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+ 
+/* 弹窗内容 */
+.modal-content {
+  background-color: #333;
+  border-radius: 12px;
+  padding: 30px;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+ 
+/* 弹窗标题 */
+.modal-title {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+ 
+/* 登录表单 */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+ 
+/* 表单组 */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+ 
+.form-group label {
+  color: #ffffff;
+  font-size: 14px;
+}
+ 
+.form-group input {
+  padding: 12px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background-color: #222;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+ 
+.form-group input:focus {
+  border-color: #4a90d9;
+}
+ 
+.form-group input::placeholder {
+  color: #666;
+}
+ 
+/* 表单按钮组 */
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+ 
+/* 按钮样式 */
+.btn-cancel,
+.btn-confirm {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+ 
+.btn-cancel {
+  background-color: #555;
+  color: #ffffff;
+}
+ 
+.btn-cancel:hover {
+  background-color: #666;
+}
+ 
+.btn-confirm {
+  background-color: #4a90d9;
+  color: #ffffff;
+}
+ 
+.btn-confirm:hover {
+  background-color: #3a80c9;
 }
 </style>

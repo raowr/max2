@@ -117,6 +117,8 @@ import { storage } from '@/utils/storage'
 import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
 import {useRoute,useRouter} from 'vue-router'
 
+import { reconnectWebSocket } from '@/utils/websocketReconnect';
+
 const route = useRoute()
 const router = useRouter()
 const getInitialPlayers = () => [
@@ -187,6 +189,8 @@ const playerId  = ref(0)
 const roomType = ref(0)
 onMounted(() => {
   init()
+   // 页面刷新时自动重连
+  reconnectWebSocket(websocket);
 })
 const init = async () => {
   // 动态解析音频路径
@@ -247,7 +251,7 @@ const handleMessage = (data) => {
   }
 
 
-  if (parsedData.type === "initRoom") {
+  if (parsedData.type === "initRoom" || parsedData.type === "createRoom") {
     try {
         // 解析JSON字符串
         const serverPlayers = JSON.parse(parsedData.data)
@@ -279,7 +283,7 @@ const handleMessage = (data) => {
      }
   }
 
-    if (parsedData.type === "joinRoom") {
+    if (parsedData.type === "joinRoom" || parsedData.type === "leaveRoom") {
     try {
         // 解析JSON字符串
         const serverPlayers = JSON.parse(parsedData.data)
@@ -616,7 +620,7 @@ body {
 
 .player-ready {
   position: absolute;
-  top: 50%;
+  top: 27%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
