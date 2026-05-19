@@ -1,0 +1,1 @@
+import{s as t}from"./index-BPyJgacf.js";function e(o){return t({url:"/api/v1/system/login",method:"post",data:o})}function r(){return t({url:"/api/v1/pub/captcha/get",method:"get"})}function u(){return t({url:"/api/v1/system/logout",method:"get"})}export{u as a,r as c,e as l};

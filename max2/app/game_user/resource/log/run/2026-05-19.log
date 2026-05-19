@@ -5378,3 +5378,10 @@ Stack:
 2026-05-19T01:01:57.526+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
 2026-05-19T01:01:57.526+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
 2026-05-19T01:01:57.527+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-19T01:31:01.278+08:00 [DEBU] resolver closed
+2026-05-19T15:53:25.266+08:00 [WARN] keepalive exit, lease id: 7587894926712581400, retry register
+2026-05-19T15:53:25.444+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894926712581563"
+2026-05-19T21:33:00.886+08:00 [WARN] keepalive exit, lease id: 7587894926712581563, retry register
+2026-05-19T21:33:01.418+08:00 [WARN] keepalive exit, lease id: 7587894926712581403, retry register
+2026-05-19T21:33:01.542+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894926712581594"
+2026-05-19T21:33:01.882+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894926712581592"

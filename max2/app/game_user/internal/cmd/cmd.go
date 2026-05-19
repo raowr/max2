@@ -36,6 +36,10 @@ var (
 				defer wg.Done()
 				gsvc.SetRegistry(etcd.New(`127.0.0.1:2379`))
 				s := g.Server(`game_user.svc`)
+				// 从配置文件读取服务地址
+				if addr := g.Cfg().MustGet(ctx, `server.game_user.svc.address`).String(); addr != "" {
+					s.SetAddr(addr)
+				}
 				// s := g.Server()
 				s.Group("/", func(group *ghttp.RouterGroup) {
 					group.Middleware(ghttp.MiddlewareHandlerResponse)

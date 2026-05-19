@@ -1,4 +1,0 @@
-2026-05-18T23:56:24.088+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894926712581392"
-2026-05-18T23:56:24.137+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894926712581395"
-2026-05-18T23:57:49.264+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894926712581400"
-2026-05-18T23:57:49.309+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894926712581403"

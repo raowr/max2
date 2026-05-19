@@ -1,1 +1,0 @@
-import{s as r}from"./index-meha6AAd.js";function s(t){return r({url:"/api/v1/user/list",method:"get",params:t})}function a(t){return r({url:"/api/v1/user/updatePoint",method:"post",data:t})}function u(t){return r({url:"/api/v1/user/updatePassword",method:"post",data:t})}export{a,s as g,u};
