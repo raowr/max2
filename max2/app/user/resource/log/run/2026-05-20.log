@@ -1,0 +1,9 @@
+2026-05-20T23:59:40.850+08:00 [WARN] keepalive exit, lease id: 7587894926712581590, retry register
+2026-05-20T23:59:40.871+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894969101129630"
+2026-05-20T23:59:40.883+08:00 [ERRO] {388822e23d51b118daff512e6a4d2047} UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5ODk3NTgwfQ.XC1q3lQqGG4xog5rU6Mc9TDEC7RG2gUWAhjv4MelMv8' WHERE `id`=3: context canceled 
+Stack:
+1.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:122
+2.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+

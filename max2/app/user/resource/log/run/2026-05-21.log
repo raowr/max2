@@ -1,0 +1,20 @@
+2026-05-21T00:14:54.319+08:00 [WARN] keepalive exit, lease id: 7587894969101129630, retry register
+2026-05-21T00:14:54.331+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894969101129671"
+2026-05-21T00:17:21.759+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546064"
+2026-05-21T00:18:40.150+08:00 [WARN] keepalive exit, lease id: 7587894971408546064, retry register
+2026-05-21T00:18:40.163+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546070"
+2026-05-21T00:20:11.772+08:00 [WARN] keepalive exit, lease id: 7587894971408546070, retry register
+2026-05-21T00:20:11.778+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546088"
+2026-05-21T00:30:25.249+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546093"
+2026-05-21T00:33:29.846+08:00 [WARN] keepalive exit, lease id: 7587894971408546093, retry register
+2026-05-21T00:33:29.854+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546112"
+2026-05-21T00:37:26.002+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546126"
+2026-05-21T00:38:14.105+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546129"
+2026-05-21T00:38:50.213+08:00 [WARN] keepalive exit, lease id: 7587894971408546129, retry register
+2026-05-21T00:38:50.222+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546135"
+2026-05-21T00:42:49.647+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546152"
+2026-05-21T00:43:15.875+08:00 [WARN] keepalive exit, lease id: 7587894971408546152, retry register
+2026-05-21T00:43:15.888+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546157"
+2026-05-21T00:53:28.829+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546163"
+2026-05-21T00:54:40.638+08:00 [WARN] keepalive exit, lease id: 7587894971408546163, retry register
+2026-05-21T00:54:40.651+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546177"

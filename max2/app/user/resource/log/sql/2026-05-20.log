@@ -1,0 +1,9 @@
+2026-05-20T23:56:12.489+08:00 [DEBU] {9495f0772a51b118d9ff512e242f6f21} [1796 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5ODk3MzcwfQ.2jiTMUiYe9ENl7WfOZSx7LL2D-iC23Z4wD3BbHwODbc' WHERE `id`=3
+2026-05-20T23:59:40.880+08:00 [ERRO] {388822e23d51b118daff512e6a4d2047} [  0 ms] [default] [max2] [rows:0  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5ODk3NTgwfQ.XC1q3lQqGG4xog5rU6Mc9TDEC7RG2gUWAhjv4MelMv8' WHERE `id`=3
+Error: context canceled 
+Stack:
+1.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:120
+2.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+

@@ -81,12 +81,12 @@ func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.Log
 	res.Point = entUser.Point
 	//选择游戏服务器
 	// 2. 获取全部节点
-	serviceGsvc := GetGameUserService()
-	if serviceGsvc == nil {
-		err = gerror.New("无法获取 game_user 服务")
-		return
-	}
-	endpoints := serviceGsvc.GetEndpoints()
+	// serviceGsvc := GetGameUserService()
+	// if serviceGsvc == nil {
+	// 	err = gerror.New("无法获取 game_user 服务")
+	// 	return
+	// }
+	endpoints := GetGameUserEndpoints()
 
 	// 3. 随机选一个
 	randomNode := endpoints[rand.Intn(len(endpoints))]

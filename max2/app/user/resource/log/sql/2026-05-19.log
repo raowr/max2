@@ -1,7 +1,0 @@
-2026-05-19T00:07:20.191+08:00 [DEBU] {602b1c019db4b018d4ff512e5aae432e} [752 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
-2026-05-19T00:07:20.484+08:00 [DEBU] {602b1c019db4b018d4ff512e5aae432e} [278 ms] [default] [max2] [rows:1  ] SELECT * FROM `users` WHERE `name`='1' LIMIT 1
-2026-05-19T00:07:20.944+08:00 [DEBU] {602b1c019db4b018d4ff512e5aae432e} [284 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5NzI1MjQwfQ.llz60XcdLvyvTk4cqkjU4BUCjwGX7AtugkaFVVNMs2g' WHERE `id`=3
-2026-05-19T00:44:32.713+08:00 [DEBU] {b0cbb9c8a4b6b018d7ff512ed114d944} [965 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzc5NzI3NDcxfQ.rI2O6sJHpXd3LBbDQvUrk7s5nCfZOjf2hYPTJekoRxs' WHERE `id`=3
-2026-05-19T00:47:14.555+08:00 [DEBU] {9001c18acab6b018f6ed157cb874f2f1} [648 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=734 WHERE `id`=3
-2026-05-19T00:57:15.992+08:00 [DEBU] {5089889456b7b01885ee157ce0049072} [689 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=719 WHERE `id`=3
-2026-05-19T01:01:01.271+08:00 [DEBU] {e0a3db0c8bb7b01821ef157c395bd56b} [610 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=704 WHERE `id`=3

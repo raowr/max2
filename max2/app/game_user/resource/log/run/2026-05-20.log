@@ -1,0 +1,142 @@
+2026-05-20T20:08:49.655+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894926712581639"
+2026-05-20T20:08:49.688+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894926712581642"
+2026-05-20T21:22:32.877+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894926712581649"
+2026-05-20T21:22:32.945+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894926712581652"
+2026-05-20T21:22:33.812+08:00 [INFO] {e05c62eac748b11856655713b785d7ae} 服务已注册到 etcd: 8.155.147.137:8010 (租约 TTL=15s，自动续约)
+2026-05-20T21:45:05.235+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894926712581664"
+2026-05-20T21:45:05.262+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894926712581661"
+2026-05-20T21:45:07.156+08:00 [INFO] {586539ee014ab11843cecb3798488e11} 服务已注册到 etcd: 8.155.147.137:8010 (租约 TTL=15s，自动续约)
+2026-05-20T21:45:40.382+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129476"
+2026-05-20T21:45:40.410+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129479"
+2026-05-20T21:45:42.350+08:00 [INFO] {249111c00a4ab11881e4665da0bfba84} 服务已注册到 etcd: 8.155.147.137:8010 (租约 TTL=15s，自动续约)
+2026-05-20T21:51:44.531+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129486"
+2026-05-20T21:51:44.556+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129489"
+2026-05-20T21:51:46.503+08:00 [INFO] {18e364d15f4ab11843cfb559f636e8cc} 服务已注册到 etcd: 8.155.147.137:8010 (租约 TTL=15s，自动续约)
+2026-05-20T21:59:58.189+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129501"
+2026-05-20T21:59:58.236+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129504"
+2026-05-20T22:00:00.127+08:00 [INFO] {3c85052fd24ab118732391029528ad3a} 服务已注册到 etcd: /service/default/default/game_user.svc/latest/8.155.147.137:8010 (租约 TTL=15s，自动续约)
+2026-05-20T22:13:33.998+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129513"
+2026-05-20T22:13:34.027+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129516"
+2026-05-20T22:13:35.958+08:00 [ERRO] {c4a2b605904bb1180568016e57e9aaae} game_user_svc.address 配置为空 
+Stack:
+1.  game_user/internal/cmd.init.func1.1
+    D:/gowork/max2/max2/app/game_user/internal/cmd/cmd.go:55
+
+2026-05-20T22:14:19.532+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129520"
+2026-05-20T22:14:19.565+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129523"
+2026-05-20T22:14:21.504+08:00 [INFO] {2448ae079b4bb1185c851f06ed47729d} 服务已注册到 etcd: /service/default/default/game_user.svc/latest/8.155.147.137:8010 (租约 TTL=15s，自动续约)
+2026-05-20T22:15:08.547+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129532"
+2026-05-20T22:15:08.570+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129535"
+2026-05-20T22:15:10.509+08:00 [ERRO] {ac1e2441a64bb1186ed9a95d555bb4b2} game_user_svc.address 配置为空 
+Stack:
+1.  game_user/internal/cmd.init.func1.1
+    D:/gowork/max2/max2/app/game_user/internal/cmd/cmd.go:55
+
+2026-05-20T22:16:17.074+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129542"
+2026-05-20T22:16:17.105+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129545"
+2026-05-20T22:16:19.017+08:00 [INFO] {508c235cb64bb118935a7529a9fc9f5d} game_user_svc.address 配置为空，不注册线上服务到 etcd
+2026-05-20T22:52:34.726+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129550"
+2026-05-20T22:52:34.769+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129553"
+2026-05-20T22:52:36.685+08:00 [INFO] {a01d49adb14db1184859951a13bc8f30} game_user_svc.address 配置为空，不注册线上服务到 etcd
+2026-05-20T23:05:34.320+08:00 [INFO] {24f0663c674eb1182de87c50934f7187} 自动注册模式：已设置 etcd registry
+2026-05-20T23:05:34.425+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129566"
+2026-05-20T23:05:36.374+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129569"
+2026-05-20T23:06:36.775+08:00 [INFO] {cce443b4754eb118ba38eb57bc8d6bee} 手动注册模式：HTTP 服务不会自动注册
+2026-05-20T23:06:36.896+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129572"
+2026-05-20T23:06:38.849+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129576"
+2026-05-20T23:06:40.787+08:00 [INFO] {cce443b4754eb118ba38eb57bc8d6bee} 手动注册公网 IP 成功: /service/default/default/game_user.svc/latest/8.155.147.137:8010 (租约 TTL=15s)
+2026-05-20T23:06:40.788+08:00 [WARN] {cce443b4754eb118ba38eb57bc8d6bee} 租约续约通道已关闭，服务将过期
+2026-05-20T23:09:37.048+08:00 [INFO] {cc7e63719f4eb11812274724c54a2a79} 手动注册模式：HTTP 服务不会自动注册
+2026-05-20T23:09:37.122+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129586"
+2026-05-20T23:09:39.075+08:00 [INFO] {cc7e63719f4eb11812274724c54a2a79} 手动注册公网 IP 成功: /service/default/default/game_user.svc/latest/8.155.147.137:8010 (租约 TTL=15s)
+2026-05-20T23:09:39.111+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129592"
+2026-05-20T23:11:51.322+08:00 [INFO] {447211a2be4eb118bbf92e38c37d6a29} 手动注册模式：HTTP 服务不会自动注册
+2026-05-20T23:11:51.384+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129597"
+2026-05-20T23:11:53.330+08:00 [INFO] {447211a2be4eb118bbf92e38c37d6a29} 手动注册公网 IP 成功: /service/default/default/game_user.svc/latest/8.155.147.137:8010 (租约 TTL=15s)
+2026-05-20T23:11:53.357+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129603"
+2026-05-20T23:15:38.777+08:00 [INFO] {20f65d84f34eb118067caf6bb0153bf5} 手动注册模式：HTTP 服务不会自动注册
+2026-05-20T23:15:38.843+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129610"
+2026-05-20T23:15:40.790+08:00 [INFO] {20f65d84f34eb118067caf6bb0153bf5} 手动注册公网 IP 成功: /service/default/default/game_user.svc/latest/8.155.147.137:8010
+2026-05-20T23:15:40.801+08:00 [INFO] {20f65d84f34eb118067caf6bb0153bf5} 已删除内网 IP 记录: /service/default/default/game_user.svc/latest/172.20.10.3:8010
+2026-05-20T23:15:40.824+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129618"
+2026-05-20T23:54:05.799+08:00 [ERRO] {8c6f57660d51b1180c7caf6b79227796} token不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:78
+
+2026-05-20T23:54:10.846+08:00 [ERRO] {bce810940e51b1180d7caf6be2c7ac37} token不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:78
+
+2026-05-20T23:56:06.422+08:00 [ERRO] {1443d87c2951b1180e7caf6bd5e2c967} token不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:78
+
+2026-05-20T23:56:11.465+08:00 [ERRO] {84c08fa92a51b1180f7caf6b02a16bc1} token不存在 
+Stack:
+1.  game_user/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/game_user/internal/controller/enter/enter_v1_enter.go:78
+
+2026-05-20T23:56:12.525+08:00 [INFO] {083986e82a51b118107caf6b79e48e30} 用户 1 连接成功
+2026-05-20T23:56:12.527+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-20T23:56:12.588+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-20T23:56:12.625+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O7JPD8\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O7JPD8\",\"Type\":0,\"CardNum\":13,\"Point\":704,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"惠高旻\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"裘迎荷\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"向海阳\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":704,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-20T23:56:16.534+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-20T23:56:16.552+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-20T23:56:16.540+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-20T23:56:16.541+08:00 [INFO] {c4f8edd62b51b118157caf6be48c907f} 用户 1 重连，关闭旧连接
+2026-05-20T23:56:16.559+08:00 [INFO] {c4f8edd62b51b118157caf6be48c907f} 用户 1 连接成功
+2026-05-20T23:56:16.567+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-20T23:56:16.572+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-20T23:56:16.574+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-20T23:56:16.602+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-20T23:56:16.602+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O7JPD8\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O7JPD8\",\"Type\":0,\"CardNum\":13,\"Point\":704,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"惠高旻\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"裘迎荷\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"向海阳\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":704,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-20T23:56:16.604+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-20T23:56:21.713+08:00 [INFO] heartbeatCheck: 5.1462762s
+2026-05-20T23:56:22.059+08:00 [INFO] {8002a30f2d51b1181a7caf6b978d97bf} 用户 1 连接成功
+2026-05-20T23:56:22.060+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-20T23:56:22.317+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-20T23:56:22.334+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O7JPD8\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O7JPD8\",\"Type\":0,\"CardNum\":13,\"Point\":704,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"惠高旻\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"裘迎荷\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"向海阳\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":704,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-20T23:56:26.566+08:00 [INFO] heartbeatCheck: 9.999457s
+2026-05-20T23:56:27.061+08:00 [INFO] heartbeatCheck: 4.7437889s
+2026-05-20T23:56:31.568+08:00 [INFO] heartbeatCheck: 15.0010293s
+2026-05-20T23:56:32.061+08:00 [INFO] heartbeatCheck: 9.7440312s
+2026-05-20T23:56:32.703+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-20T23:56:32.705+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-20T23:56:32.705+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-20T23:56:36.572+08:00 [INFO] heartbeatCheck: 20.0048707s
+2026-05-20T23:56:37.161+08:00 [INFO] heartbeatCheck: 4.457387s
+2026-05-20T23:56:41.567+08:00 [INFO] heartbeatCheck: 24.9999433s
+2026-05-20T23:56:42.062+08:00 [INFO] heartbeatCheck: 9.3589485s
+2026-05-20T23:56:42.715+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-20T23:56:42.717+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-20T23:56:42.718+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-20T23:56:46.567+08:00 [INFO] heartbeatCheck: 29.999701s
+2026-05-20T23:56:47.061+08:00 [INFO] heartbeatCheck: 4.3454847s
+2026-05-20T23:56:51.576+08:00 [INFO] heartbeatCheck: 35.0089013s
+2026-05-20T23:56:52.061+08:00 [INFO] heartbeatCheck: 9.3463495s
+2026-05-20T23:56:52.729+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-20T23:56:52.732+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-20T23:56:52.732+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-20T23:56:54.317+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-20T23:56:54.408+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-20T23:56:54.406+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-20T23:56:54.680+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-20T23:56:54.681+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-20T23:56:54.682+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-20T23:56:54.683+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-20T23:56:54.684+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-20T23:57:06.414+08:00 [INFO] {40000d743751b118227caf6b5c93c038} 用户 1 连接成功
+2026-05-20T23:57:06.415+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-20T23:57:06.461+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-20T23:57:06.473+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-20T23:57:06.475+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-20T23:57:06.476+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-20T23:57:06.482+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-20T23:57:11.426+08:00 [INFO] heartbeatCheck: 4.9654919s
+2026-05-20T23:57:15.521+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-20T23:57:15.521+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-20T23:57:15.522+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-20T23:57:15.522+08:00 [INFO] 用户 1 心跳检测退出

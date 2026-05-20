@@ -1,0 +1,100 @@
+2026-05-21T00:11:52.076+08:00 [INFO] {0c83c77d0552b1183cfd0a2d4db89ef4} 手动注册模式：HTTP 服务不会自动注册
+2026-05-21T00:11:52.196+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894969101129656"
+2026-05-21T00:11:54.495+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894969101129661"
+2026-05-21T00:11:54.498+08:00 [INFO] {0c83c77d0552b1183cfd0a2d4db89ef4} 手动注册公网 IP 成功: /service/default/default/game_user.svc/latest/8.155.147.137:8010
+2026-05-21T00:14:54.926+08:00 [INFO] {e08e183b3052b11842fd0a2dd4a087cc} 用户 1 连接成功
+2026-05-21T00:14:54.931+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-21T00:14:55.070+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-21T00:14:55.091+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O7JPD8\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O7JPD8\",\"Type\":0,\"CardNum\":13,\"Point\":704,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"惠高旻\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"裘迎荷\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"向海阳\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":704,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-21T00:14:59.932+08:00 [INFO] heartbeatCheck: 4.8671841s
+2026-05-21T00:15:04.932+08:00 [INFO] heartbeatCheck: 9.8673853s
+2026-05-21T00:15:05.130+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-21T00:15:05.132+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-21T00:15:09.932+08:00 [INFO] heartbeatCheck: 4.8018931s
+2026-05-21T00:15:14.932+08:00 [INFO] heartbeatCheck: 9.8019979s
+2026-05-21T00:15:15.149+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-21T00:15:15.153+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-21T00:15:19.030+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-21T00:15:19.031+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-21T00:15:19.032+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-21T00:15:19.033+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-21T00:17:17.874+08:00 [INFO] {38659e655152b1185bd267156fc2270b} 手动注册模式：HTTP 服务不会自动注册
+2026-05-21T00:17:17.942+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894971408546054"
+2026-05-21T00:17:19.886+08:00 [INFO] {38659e655152b1185bd267156fc2270b} 手动注册公网 IP 成功: /service/default/default/game_user.svc/latest/8.155.147.137:8010
+2026-05-21T00:17:19.914+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894971408546061"
+2026-05-21T00:17:46.878+08:00 [INFO] {08d143465852b11861d26715768e04c9} 用户 1 连接成功
+2026-05-21T00:17:46.881+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-21T00:17:46.955+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-21T00:17:46.967+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O7JPD8\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O7JPD8\",\"Type\":0,\"CardNum\":13,\"Point\":704,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"惠高旻\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"裘迎荷\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"向海阳\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":704,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-21T00:17:51.882+08:00 [INFO] heartbeatCheck: 4.9272925s
+2026-05-21T00:17:56.882+08:00 [INFO] heartbeatCheck: 9.9272728s
+2026-05-21T00:17:56.975+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-21T00:17:56.976+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-21T00:18:01.754+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-21T00:18:01.763+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-21T00:18:01.764+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-21T00:18:01.766+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-21T00:19:34.301+08:00 [INFO] {38a5d32f7152b11851453d0bd561f3bd} 手动注册模式：HTTP 服务不会自动注册
+2026-05-21T00:19:34.383+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894971408546073"
+2026-05-21T00:19:36.311+08:00 [INFO] {38a5d32f7152b11851453d0bd561f3bd} 手动注册公网 IP 成功: /service/default/default/game_user.svc/latest/8.155.147.137:8010
+2026-05-21T00:19:36.317+08:00 [INFO] {38a5d32f7152b11851453d0bd561f3bd} 已删除内网 IP 记录: /service/default/default/game_user.svc/latest/172.20.10.3:8010
+2026-05-21T00:19:36.347+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894971408546081"
+2026-05-21T00:30:51.578+08:00 [INFO] {947675c20e53b11877fad409316d0325} 手动注册模式：HTTP 服务不会自动注册
+2026-05-21T00:30:51.672+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894971408546097"
+2026-05-21T00:30:53.583+08:00 [INFO] {947675c20e53b11877fad409316d0325} 手动注册公网 IP 成功: /service/default/default/game_user.svc/latest/8.155.147.137:8010
+2026-05-21T00:30:53.587+08:00 [INFO] {947675c20e53b11877fad409316d0325} 已删除内网 IP 记录: /service/default/default/game_user.svc/latest/172.20.10.3:8010
+2026-05-21T00:30:53.611+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894971408546106"
+2026-05-21T00:33:58.478+08:00 [INFO] {e01900593a53b118cd17c35cbf95e25f} 自动注册模式：已设置 etcd registry
+2026-05-21T00:33:58.550+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894971408546116"
+2026-05-21T00:34:00.504+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894971408546120"
+2026-05-21T00:38:53.159+08:00 [INFO] {74c092197f53b118d317c35cd81c53c8} 用户 1 连接成功
+2026-05-21T00:38:53.166+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-21T00:38:53.184+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-21T00:38:53.259+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O7JPD8\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O7JPD8\",\"Type\":0,\"CardNum\":13,\"Point\":704,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"惠高旻\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"裘迎荷\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"向海阳\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":704,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-21T00:38:58.167+08:00 [INFO] heartbeatCheck: 4.9839338s
+2026-05-21T00:39:00.575+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-21T00:39:00.578+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-21T00:39:00.596+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-21T00:39:00.646+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-21T00:39:36.686+08:00 [INFO] {20a7f5238953b118f36a71142e71456c} 手动注册模式：HTTP 服务不会自动注册
+2026-05-21T00:39:36.748+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894971408546138"
+2026-05-21T00:39:38.692+08:00 [INFO] {20a7f5238953b118f36a71142e71456c} 手动注册公网 IP 成功: /service/default/default/game_user.svc/latest/8.155.147.137:8010
+2026-05-21T00:39:38.699+08:00 [INFO] {20a7f5238953b118f36a71142e71456c} 已删除内网 IP 记录: /service/default/default/game_user.svc/latest/172.20.10.3:8010
+2026-05-21T00:39:38.720+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894971408546148"
+2026-05-21T00:54:14.927+08:00 [INFO] {c4a53b915554b1189fd2316c049d1828} 自动注册模式：已设置 etcd registry
+2026-05-21T00:54:15.021+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894971408546169"
+2026-05-21T00:54:16.988+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894971408546172"
+2026-05-21T00:54:41.846+08:00 [INFO] {bc1d3cfc5b54b118a5d2316c31668ec0} 用户 1 连接成功
+2026-05-21T00:54:41.848+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-21T00:54:41.884+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-21T00:54:41.898+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O7JPD8\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O7JPD8\",\"Type\":0,\"CardNum\":13,\"Point\":704,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"惠高旻\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"裘迎荷\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"向海阳\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":704,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-21T00:54:42.622+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-21T00:54:42.634+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-21T00:54:42.639+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-21T00:54:42.640+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-21T00:54:42.645+08:00 [INFO] {8085c81b5c54b118aad2316c825de63a} 用户 1 重连，关闭旧连接
+2026-05-21T00:54:42.648+08:00 [INFO] {8085c81b5c54b118aad2316c825de63a} 用户 1 连接成功
+2026-05-21T00:54:42.725+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-21T00:54:42.737+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-21T00:54:42.817+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-21T00:54:42.818+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-21T00:54:42.823+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O7JPD8\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O7JPD8\",\"Type\":0,\"CardNum\":13,\"Point\":704,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"惠高旻\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"裘迎荷\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"向海阳\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":704,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-21T00:54:47.652+08:00 [INFO] heartbeatCheck: 4.9144125s
+2026-05-21T00:54:47.674+08:00 [INFO] {fc5002585d54b118afd2316ca30e3aee} 用户 1 连接成功
+2026-05-21T00:54:47.681+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-21T00:54:47.684+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-21T00:54:47.691+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O7JPD8\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O7JPD8\",\"Type\":0,\"CardNum\":13,\"Point\":704,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"惠高旻\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"裘迎荷\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"向海阳\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":704,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-21T00:54:47.698+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"O7JPD8\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"O7JPD8\",\"Type\":0,\"CardNum\":13,\"Point\":704,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"惠高旻\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"裘迎荷\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"向海阳\",\"RoomID\":\"O7JPD8\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":704,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-21T00:54:50.935+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-21T00:54:50.961+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-21T00:54:50.966+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-21T00:54:50.985+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-21T00:54:50.994+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-21T00:54:51.000+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-21T00:54:51.003+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-21T00:54:51.007+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-21T00:55:20.256+08:00 [INFO] {c063d67d6454b118ae76845e633805c9} 手动注册模式：HTTP 服务不会自动注册
+2026-05-21T00:55:20.354+08:00 [DEBU] etcd put success with key "/service/default/default/game_user.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894971408546182"
+2026-05-21T00:55:22.265+08:00 [INFO] {c063d67d6454b118ae76845e633805c9} 手动注册公网 IP 成功: /service/default/default/game_user.svc/latest/8.155.147.137:8010
+2026-05-21T00:55:22.270+08:00 [INFO] {c063d67d6454b118ae76845e633805c9} 已删除内网 IP 记录: /service/default/default/game_user.svc/latest/172.20.10.3:8010
+2026-05-21T00:55:22.300+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9010", value "{"protocol":"grpc"}", lease "7587894971408546190"
