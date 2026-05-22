@@ -1,0 +1,115 @@
+2026-05-21T00:14:54.319+08:00 [WARN] keepalive exit, lease id: 7587894969101129630, retry register
+2026-05-21T00:14:54.331+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894969101129671"
+2026-05-21T00:17:21.759+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546064"
+2026-05-21T00:18:40.150+08:00 [WARN] keepalive exit, lease id: 7587894971408546064, retry register
+2026-05-21T00:18:40.163+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546070"
+2026-05-21T00:20:11.772+08:00 [WARN] keepalive exit, lease id: 7587894971408546070, retry register
+2026-05-21T00:20:11.778+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546088"
+2026-05-21T00:30:25.249+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546093"
+2026-05-21T00:33:29.846+08:00 [WARN] keepalive exit, lease id: 7587894971408546093, retry register
+2026-05-21T00:33:29.854+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546112"
+2026-05-21T00:37:26.002+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546126"
+2026-05-21T00:38:14.105+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546129"
+2026-05-21T00:38:50.213+08:00 [WARN] keepalive exit, lease id: 7587894971408546129, retry register
+2026-05-21T00:38:50.222+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546135"
+2026-05-21T00:42:49.647+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546152"
+2026-05-21T00:43:15.875+08:00 [WARN] keepalive exit, lease id: 7587894971408546152, retry register
+2026-05-21T00:43:15.888+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546157"
+2026-05-21T00:53:28.829+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546163"
+2026-05-21T00:54:40.638+08:00 [WARN] keepalive exit, lease id: 7587894971408546163, retry register
+2026-05-21T00:54:40.651+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546177"
+2026-05-21T22:13:29.560+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546219"
+2026-05-21T22:14:12.968+08:00 [INFO] {c07124a82e9ab1183f56be1eb789d14e} etcd 注册中心初始化成功
+2026-05-21T22:14:12.971+08:00 [ERRO] {648f4ea82e9ab1184056be1e5c641591} 查询 game_user.svc 服务失败: service not found 
+Stack:
+1.  user/internal/controller/login.GetRandomGameUserNode
+    D:/gowork/max2/max2/app/user/internal/controller/login/login.go:39
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:83
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-21T22:14:25.529+08:00 [DEBU] {f8df88a72e9ab1183e56be1e337c276b} 发现服务节点: 
+2026-05-21T22:14:25.529+08:00 [WARN] keepalive exit, lease id: 7587894971408546219, retry register
+2026-05-21T22:14:25.541+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546223"
+2026-05-21T22:22:49.329+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546245"
+2026-05-21T22:23:10.290+08:00 [INFO] {909407c3ab9ab1188bf7e52ec0851f3a} etcd 注册中心初始化成功
+2026-05-21T22:23:10.294+08:00 [ERRO] {98e13ec3ab9ab1188cf7e52eb8018c83} 查询 game_user.svc 服务失败: service not found 
+Stack:
+1.  user/internal/controller/login.GetRandomGameUserNode
+    D:/gowork/max2/max2/app/user/internal/controller/login/login.go:39
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:83
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-21T22:23:19.629+08:00 [DEBU] {d82a70c2ab9ab1188af7e52e839f57df} 发现服务节点: 
+2026-05-21T22:23:19.629+08:00 [WARN] keepalive exit, lease id: 7587894971408546245, retry register
+2026-05-21T22:23:19.642+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546249"
+2026-05-21T22:23:45.212+08:00 [ERRO] {a88377e4b39ab1188ef7e52ef5e1411b} 查询 game_user.svc 服务失败: service not found 
+Stack:
+1.  user/internal/controller/login.GetRandomGameUserNode
+    D:/gowork/max2/max2/app/user/internal/controller/login/login.go:39
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:83
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-21T22:23:45.212+08:00 [DEBU] {4c5a4de4b39ab1188df7e52e9f7118ee} 发现服务节点: 
+2026-05-21T22:33:04.586+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546265"
+2026-05-21T22:34:02.309+08:00 [INFO] {2c386f92439bb1180852bd74d6bdbb2e} etcd 注册中心初始化成功
+2026-05-21T22:34:02.313+08:00 [ERRO] {3cd78d92439bb1180952bd7438d35de4} 查询 game_user.svc 服务失败: service not found 
+Stack:
+1.  user/internal/controller/login.GetRandomGameUserNode
+    D:/gowork/max2/max2/app/user/internal/controller/login/login.go:39
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:83
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-21T22:34:02.314+08:00 [DEBU] {20b3c991439bb1180752bd742a1f2dec} 发现服务节点: 
+2026-05-21T22:45:39.178+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546278"
+2026-05-21T22:46:15.781+08:00 [INFO] {e478be58ee9bb118875597742b367c9e} etcd 注册中心初始化成功
+2026-05-21T22:46:15.784+08:00 [ERRO] {2cb0e958ee9bb118885597742b79f3a5} 查询 game_user 服务失败: service not found 
+Stack:
+1.  user/internal/controller/login.GetRandomGameUserNode
+    D:/gowork/max2/max2/app/user/internal/controller/login/login.go:39
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:83
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-21T22:46:33.769+08:00 [WARN] keepalive exit, lease id: 7587894971408546278, retry register
+2026-05-21T22:46:33.774+08:00 [DEBU] {ecdd1058ee9bb118865597740dd442ae} 发现服务节点: 
+2026-05-21T22:46:33.786+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546282"
+2026-05-21T22:53:07.118+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546294"
+2026-05-21T22:53:32.594+08:00 [INFO] {40d2d00c549cb11829bec9019603ff3b} etcd 注册中心初始化成功
+2026-05-21T22:53:32.598+08:00 [ERRO] {a8e50e0d549cb1182abec901689cef8a} 查询 game_user.svc 服务失败: service not found 
+Stack:
+1.  user/internal/controller/login.GetRandomGameUserNode
+    D:/gowork/max2/max2/app/user/internal/controller/login/login.go:39
+2.  user/internal/controller/login.(*ControllerV1).Login
+    D:/gowork/max2/max2/app/user/internal/controller/login/login_v1_login.go:83
+3.  user/internal/logic/middleware.(*sMiddleware).MiddlewareCORS
+    D:/gowork/max2/max2/app/user/internal/logic/middleware/middleware.go:28
+
+2026-05-21T22:53:37.830+08:00 [DEBU] {eca0510c549cb11828bec901484491d7} 发现服务节点: 
+2026-05-21T23:17:23.762+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546302"
+2026-05-21T23:19:10.475+08:00 [WARN] {4485ab1dba9db118659ff87ad4dd0ab0} 未找到 game_user.svc 服务
+2026-05-21T23:19:19.502+08:00 [DEBU] {18c9351cba9db118649ff87aa0f5083a} 发现服务节点: 
+2026-05-21T23:19:19.502+08:00 [WARN] keepalive exit, lease id: 7587894971408546302, retry register
+2026-05-21T23:19:19.514+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546316"
+2026-05-21T23:31:24.359+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546360"
+2026-05-21T23:31:29.887+08:00 [WARN] {0c850446669eb1180203b47caa6a17a6} 未找到 game_user.svc 服务
+2026-05-21T23:31:48.551+08:00 [DEBU] {d88f0b45669eb1180103b47ca203e33d} 发现服务节点: 
+2026-05-21T23:31:48.552+08:00 [WARN] keepalive exit, lease id: 7587894971408546360, retry register
+2026-05-21T23:31:48.559+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546365"
+2026-05-21T23:39:42.805+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546417"
+2026-05-21T23:40:03.144+08:00 [DEBU] {9c578bc6dd9eb1182e8ae377c17c014f} 发现服务节点: 8.155.147.137:8010
+2026-05-21T23:40:14.002+08:00 [DEBU] {58e68cbbdd9eb1182d8ae377222a363e} 发现服务节点: 8.155.147.137:8010
+2026-05-21T23:40:14.005+08:00 [WARN] keepalive exit, lease id: 7587894971408546417, retry register
+2026-05-21T23:40:14.052+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546423"
+2026-05-21T23:50:14.765+08:00 [DEBU] {a075092e6c9fb118308ae3774c72e21c} 发现服务节点: 127.0.0.1:8010
+2026-05-21T23:50:22.457+08:00 [DEBU] {10b2262d6c9fb1182f8ae37779b5ff1e} 发现服务节点: 127.0.0.1:8010
+2026-05-21T23:50:22.457+08:00 [WARN] keepalive exit, lease id: 7587894971408546423, retry register
+2026-05-21T23:50:22.464+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408546487"

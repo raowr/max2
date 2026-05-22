@@ -2,20 +2,21 @@ package cmd
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/net/gsvc"
 	"sync"
 
-	"github.com/gogf/gf/contrib/registry/etcd/v2"
 	"github.com/gogf/gf/contrib/rpc/grpcx/v2"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
+	"github.com/zeromicro/go-zero/core/discov"
 	"google.golang.org/grpc"
 
 	"game_user/internal/controller/enter"
 	"game_user/internal/controller/log_game"
 	"game_user/internal/controller/set_game"
 	"game_user/internal/controller/settle"
+
+	"github.com/gogf/gf/contrib/registry/etcd/v2"
 )
 
 var (
@@ -24,56 +25,78 @@ var (
 		Usage: "main",
 		Brief: "start http and grpc servers",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
-
 			var wg sync.WaitGroup
 
-			// 初始化游戏配置缓存
 			set_game.InitCache()
 
-			// 在 goroutine 中启动 HTTP 服务器
+			// 1. HTTP 服务器
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				gsvc.SetRegistry(etcd.New(`127.0.0.1:2379`))
-				//s := g.Server(`game_user.svc`)
 				s := g.Server()
 				s.Group("/", func(group *ghttp.RouterGroup) {
 					group.Middleware(ghttp.MiddlewareHandlerResponse)
-					group.Bind(
-						enter.NewV1(),
-					)
+					group.Bind(enter.NewV1())
 				})
 				s.Run()
 			}()
 
-			// 在 goroutine 中启动 gRPC 服务器
+			// 2. gRPC 服务器
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-
-				// 使用配置文件中的设置或默认值
 				c := grpcx.Server.NewConfig()
 				if c.Address == "" {
-					c.Address = ":9000" // 默认 gRPC 端口
+					c.Address = ":9000"
 				}
-
 				grpcx.Resolver.Register(etcd.New("127.0.0.1:2379"))
 				c.Options = append(c.Options, []grpc.ServerOption{
-					grpcx.Server.ChainUnary(
-						grpcx.Server.UnaryValidate,
-					)}...,
-				)
+					grpcx.Server.ChainUnary(grpcx.Server.UnaryValidate),
+				}...)
 				gs := grpcx.Server.New(c)
 				set_game.Register(gs)
 				gs.Run()
 			}()
 
-			// 等待所有服务器完成（通常是无限期等待，直到收到中断信号）
+			// 3. 使用 go-zero Publisher 注册服务到 etcd
+			// 3. 使用 go-zero Publisher 注册服务到 etcd
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+
+				serverName := g.Cfg().MustGet(ctx, "server.name").String()
+				address := g.Cfg().MustGet(ctx, "game_user_svc.address").String()
+				if address == "" {
+					address = "127.0.0.1:8010"
+				}
+
+				// 正确的 key 格式: /discov/service_name/
+				key := "/discov/" + serverName + "/"
+
+				g.Log().Infof(ctx, "准备注册服务: serverName=%s, address=%s, key=%s", serverName, address, key)
+
+				// 创建 Publisher
+				publisher := discov.NewPublisher(
+					[]string{"127.0.0.1:2379"},
+					key,
+					address,
+				)
+
+				// 启动自动续期（阻塞）
+				g.Log().Info(ctx, "开始服务注册...")
+				if err := publisher.KeepAlive(); err != nil {
+					g.Log().Errorf(ctx, "服务注册失败: %v", err)
+					return
+				}
+
+				// 这里应该不会执行到，除非 KeepAlive 意外返回
+				g.Log().Warningf(ctx, "KeepAlive 意外返回，服务 [%s] 已停止", serverName)
+			}()
+
 			wg.Wait()
 
-			log_game.ShutdownLog()  // 服务器停止后关闭日志系统
-			settle.ShutdownSettle() // 服务器停止后关闭结算系统
-
+			log_game.ShutdownLog()
+			settle.ShutdownSettle()
 			return nil
 		},
 	}
