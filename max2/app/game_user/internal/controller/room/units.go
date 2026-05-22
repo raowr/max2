@@ -7,7 +7,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/grand"
 
-	"game_user/internal/message"
+	actionv1 "game_user/api/action/v1"
 )
 
 // Probability 判断指定百分比概率是否触发
@@ -27,7 +27,7 @@ func Probability(percent int) bool {
 // userName: 当前操作用户名（用于日志）
 // ctx: 上下文
 // 返回: 解析后的 ChatMsg，是否成功
-func ParseRedisSubscribeMessage(msgString string, userName string, ctx context.Context) (*message.ChatMsg, bool) {
+func ParseRedisSubscribeMessage(msgString string, userName string, ctx context.Context) (*actionv1.SendActionReq, bool) {
 	// 解析消息
 	msgJson, err := gjson.DecodeToJson(msgString)
 	if err != nil {
@@ -50,7 +50,7 @@ func ParseRedisSubscribeMessage(msgString string, userName string, ctx context.C
 	}
 
 	// 解析为 ChatMsg
-	msgData := &message.ChatMsg{}
+	msgData := &actionv1.SendActionReq{}
 	payloadJson.Scan(msgData)
 	return msgData, true
 }

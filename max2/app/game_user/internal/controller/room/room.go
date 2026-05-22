@@ -4,12 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	actionv1 "game_user/api/action/v1"
 	log_gamev1 "game_user/api/log_game/v1"
 	v1 "game_user/api/settle/v1"
 	"game_user/internal/consts"
 	"game_user/internal/controller/log_game"
 	"game_user/internal/controller/settle"
-	"game_user/internal/message"
 	"game_user/internal/service"
 	"math/rand"
 	"strings"
@@ -83,7 +83,7 @@ func (rm *RoomManager) CreateRoom(roomType int) *Room {
 		// Rgtimer:   gtimer.New(),
 		Status:   0, //未开始
 		Type:     roomType,
-		MsgQueue: make(chan *message.ChatMsg, 10), // 缓冲大小为 10
+		MsgQueue: make(chan *actionv1.SendActionReq, 10), // 缓冲大小为 10
 	}
 
 	// 添加AI机器人
@@ -742,7 +742,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	} else {
 		// 非阻塞读取：读取一次消息，如果没有消息则跳过
-		var msgData *message.ChatMsg
+		var msgData *actionv1.SendActionReq
 		var hasMessage bool
 
 		// 非阻塞读取消息队列（不会创建新 goroutine）
