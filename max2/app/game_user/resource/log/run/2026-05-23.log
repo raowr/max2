@@ -3582,3 +3582,87 @@ Stack:
 14. google.golang.org/grpc.(*Server).serveStreams.func2.1
     D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
 
+2026-05-23T23:14:16.048+08:00 [ERRO] Redis Client Do failed with arguments "[Set gFastV3Cache:comm 2]": dial tcp 127.0.0.1:6379: connectex: No connection could be made because the target machine actively refused it. 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  game_user/internal/controller/set_game.InitCache
+    D:/gowork/max2/max2/app/game_user/internal/controller/set_game/set_init.go:17
+3.  game_user/internal/cmd.init.func1
+    D:/gowork/max2/max2/app/game_user/internal/cmd/cmd.go:27
+4.  main.main
+    D:/gowork/max2/max2/app/game_user/main.go:16
+
+2026-05-23T23:14:16.554+08:00 [ERRO] Redis Client Do failed with arguments "[Set gFastV3Cache:point 100]": dial tcp 127.0.0.1:6379: connectex: No connection could be made because the target machine actively refused it. 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  game_user/internal/controller/set_game.InitCache
+    D:/gowork/max2/max2/app/game_user/internal/controller/set_game/set_init.go:17
+3.  game_user/internal/cmd.init.func1
+    D:/gowork/max2/max2/app/game_user/internal/cmd/cmd.go:27
+4.  main.main
+    D:/gowork/max2/max2/app/game_user/main.go:16
+
+2026-05-23T23:15:28.167+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587895036828668675"
+2026-05-23T23:18:14.872+08:00 [INFO] {ecb68b4ad63ab21830bb91403aaf5e48} 用户 1 玩家不在房间内
+2026-05-23T23:18:19.368+08:00 [INFO] {888caa59d73ab21833bb9140cc2df3cb} 用户 1 玩家不在房间内
+2026-05-23T23:18:19.630+08:00 [INFO] {80359a69d73ab21834bb91400cd4e9b7} 用户 1 玩家不在房间内
+2026-05-23T23:18:19.659+08:00 [INFO] 执行日志异步任务: RoomID:"YV7TKW" Type:1 UserID:"1" Point:780 Action:"initRoom"
+2026-05-23T23:18:19.690+08:00 [DEBU] Watch key "/service/default/default/log-service/latest/"
+2026-05-23T23:18:19.696+08:00 [INFO] 用户 1 开始延迟添加AI到房间 YV7TKW
+2026-05-23T23:18:23.202+08:00 [INFO] {94da743ed83ab21836bb9140076abc2c} 用户 1 玩家不在房间内
+2026-05-23T23:18:24.370+08:00 [INFO] {40c82b84d83ab21839bb9140353c63b1} 用户 1 玩家不在房间内
+2026-05-23T23:18:24.376+08:00 [INFO] {d86a8784d83ab2183abb914083704a17} 用户 1 玩家不在房间内
+2026-05-23T23:18:24.381+08:00 [INFO] {dcc5d284d83ab2183bbb914080d31b3b} 用户 1 玩家不在房间内
+2026-05-23T23:19:29.408+08:00 [INFO] {c41befa7e73ab21843bb914010107be1} 用户 1 玩家不在房间内
+2026-05-23T23:19:29.414+08:00 [INFO] {d4b304a9e73ab21844bb9140ed810448} 用户 1 玩家不在房间内
+2026-05-23T23:19:29.421+08:00 [INFO] {384e60a9e73ab21845bb9140e805cd74} 用户 1 玩家不在房间内
+2026-05-23T23:20:24.925+08:00 [INFO] {d4be9695f43ab2184cbb9140305ad2aa} 用户 1 玩家不在房间内
+2026-05-23T23:20:24.934+08:00 [INFO] {68084596f43ab2184dbb91404c2eabc0} 用户 1 玩家不在房间内
+2026-05-23T23:20:24.941+08:00 [INFO] {e405ad96f43ab2184ebb9140c0f52d82} 用户 1 玩家不在房间内
+2026-05-23T23:21:19.940+08:00 [INFO] {3c444664013bb21855bb914029ec684d} 用户 1 玩家不在房间内
+2026-05-23T23:21:19.947+08:00 [INFO] {2c334d65013bb21856bb91408b07003e} 用户 1 玩家不在房间内
+2026-05-23T23:21:19.955+08:00 [INFO] {0c7cce65013bb21857bb9140223f1fcb} 用户 1 玩家不在房间内
+2026-05-23T23:22:15.931+08:00 [INFO] {54a4116e0e3bb2185ebb9140b2ced5c8} 用户 1 玩家不在房间内
+2026-05-23T23:22:15.940+08:00 [INFO] {f4efb66e0e3bb2185fbb91406de455b0} 用户 1 玩家不在房间内
+2026-05-23T23:22:15.946+08:00 [INFO] {446f1e6f0e3bb21860bb9140a474f1fc} 用户 1 玩家不在房间内
+2026-05-23T23:23:10.929+08:00 [INFO] {0cd7a13b1b3bb21867bb914070fde3a7} 用户 1 玩家不在房间内
+2026-05-23T23:23:10.937+08:00 [INFO] {7009ce3c1b3bb21868bb91407d1cb934} 用户 1 玩家不在房间内
+2026-05-23T23:23:10.943+08:00 [INFO] {40ff343d1b3bb21869bb9140bf39c969} 用户 1 玩家不在房间内
+2026-05-23T23:24:14.904+08:00 [INFO] {1c092e1d2a3bb2186fbb9140051efe0a} 用户 1 玩家不在房间内
+2026-05-23T23:24:14.912+08:00 [INFO] {54580b222a3bb21871bb91403bef73f9} 用户 1 玩家不在房间内
+2026-05-23T23:24:14.924+08:00 [INFO] {6043a0222a3bb21872bb914085e9e9a0} 用户 1 玩家不在房间内
+2026-05-23T23:25:01.966+08:00 [INFO] {b04a7315353bb21877bb914098b231b2} 用户 1 玩家不在房间内
+2026-05-23T23:25:01.984+08:00 [INFO] {80906517353bb21879bb91409c189847} 用户 1 玩家不在房间内
+2026-05-23T23:25:02.075+08:00 [INFO] {18322118353bb2187abb9140d7cd58a7} 用户 1 玩家不在房间内
+2026-05-23T23:25:55.002+08:00 [INFO] {281ddb6a413bb21880bb91400953d335} 用户 1 玩家不在房间内
+2026-05-23T23:25:55.013+08:00 [INFO] {c8965270413bb21882bb9140098a2cd7} 用户 1 玩家不在房间内
+2026-05-23T23:25:55.037+08:00 [INFO] {f4fc3771413bb21883bb9140f13f24db} 用户 1 玩家不在房间内
+2026-05-23T23:26:52.924+08:00 [INFO] {882d18ec4e3bb2188abb91402b4b9d02} 用户 1 玩家不在房间内
+2026-05-23T23:26:52.930+08:00 [INFO] {30b09cec4e3bb2188bbb9140baf738a5} 用户 1 玩家不在房间内
+2026-05-23T23:26:52.939+08:00 [INFO] {e81b0aed4e3bb2188cbb91404cd7a684} 用户 1 玩家不在房间内
+2026-05-23T23:27:45.952+08:00 [INFO] {687f04445b3bb21893bb9140699cae64} 用户 1 玩家不在房间内
+2026-05-23T23:27:45.961+08:00 [INFO] {a0b576455b3bb21894bb91400481d34e} 用户 1 玩家不在房间内
+2026-05-23T23:27:45.966+08:00 [INFO] {5c52d2455b3bb21895bb91407d3bc4e2} 用户 1 玩家不在房间内
+2026-05-23T23:28:39.755+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587895036828668709"
+2026-05-23T23:29:15.975+08:00 [INFO] {6c364d3a703bb2189bbb9140d2b96774} 用户 1 玩家不在房间内
+2026-05-23T23:29:26.101+08:00 [INFO] {68184896723bb2189dbb914029a0e368} 用户 1 玩家不在房间内
+2026-05-23T23:29:26.115+08:00 [INFO] 执行日志异步任务: RoomID:"P6QXEP" Type:1 UserID:"1" Point:780 Action:"initRoom"
+2026-05-23T23:29:26.119+08:00 [DEBU] Watch key "/service/default/default/log-service/latest/"
+2026-05-23T23:29:26.201+08:00 [INFO] 用户 1 开始延迟添加AI到房间 P6QXEP
+2026-05-23T23:29:30.314+08:00 [INFO] {f0b47291733bb2189fbb914016fbdde7} 用户 1 玩家不在房间内
+2026-05-23T23:29:44.032+08:00 [INFO] {9032b2c2763bb218a1bb9140685c7b0c} 用户 1 玩家不在房间内
+2026-05-23T23:29:46.806+08:00 [INFO] {d8988a68773bb218a3bb9140c74b72b9} 用户 1 玩家不在房间内
+2026-05-23T23:29:51.561+08:00 [INFO] {b0a19981783bb218a4bb9140c8ee08f8} 用户 1 玩家不在房间内
+2026-05-23T23:29:51.570+08:00 [INFO] 用户 1 开始延迟添加AI到房间 Y5KUTB
+2026-05-23T23:30:03.117+08:00 [INFO] {d89cb2337b3bb218a6bb91402e60886f} 用户 1 玩家不在房间内
+2026-05-23T23:31:51.137+08:00 [INFO] {484e565a943bb218b2bb9140fba471fd} 用户 1 玩家不在房间内
+2026-05-23T23:31:57.211+08:00 [INFO] {2089a5c4953bb218b4bb9140f6f2490b} 用户 1 玩家不在房间内
+2026-05-23T23:32:02.423+08:00 [INFO] {bca436f8963bb218b6bb914065c3c304} 用户 1 玩家不在房间内
+2026-05-23T23:32:02.433+08:00 [INFO] 用户 1 开始延迟添加AI到房间 GEDF0G
+2026-05-23T23:32:09.137+08:00 [INFO] {64e4fa8b983bb218b8bb9140698721f4} 用户 1 玩家不在房间内
+2026-05-23T23:32:12.274+08:00 [INFO] {14a56a46993bb218b9bb91402de7aeca} 用户 1 玩家不在房间内
+2026-05-23T23:32:21.547+08:00 [INFO] {98efac6f9b3bb218bbbb9140e1e264d2} 用户 1 玩家不在房间内
+2026-05-23T23:32:22.741+08:00 [INFO] {80d06ab69b3bb218bdbb914072d1e19b} 用户 1 玩家不在房间内
+2026-05-23T23:32:25.936+08:00 [INFO] {b4865e739c3bb218bfbb914092b357cd} 用户 1 玩家不在房间内

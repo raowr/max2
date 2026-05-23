@@ -22,7 +22,7 @@ func Register(s *grpcx.GrpcServer) {
 }
 
 func (*Controller) SendLog(ctx context.Context, req *v1.SendLogReq) (res *v1.SendLogRes, err error) {
-	g.Log().Infof(ctx, "收到日志信息: %v", req.GetRoomID())
+	g.Log().Infof(ctx, "收到日志信息用户: %v,房间ID: %v", req.UserID, req.RoomID)
 	currentTime := gtime.Now()
 
 	// 创建一个新的上下文，不受原始 ctx 取消的影响

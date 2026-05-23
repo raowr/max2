@@ -55,8 +55,10 @@ func (c *Controller) SendAction(ctx context.Context, req *v1.SendActionReq) (res
 		c.handlePlayCard(ctx, req)
 	case consts.GetInfo:
 		c.handleGetInfo(ctx, req)
+	default:
+		return nil, gerror.NewCode(gcode.CodeNotImplemented) // ← 只在未匹配时返回错误
 	}
-	return nil, gerror.NewCode(gcode.CodeNotImplemented)
+	return nil, nil // ← 匹配到 case 时正常返回
 }
 
 // 处理房间初始化
@@ -687,16 +689,18 @@ func (c *Controller) clearRoom(ctx context.Context, req *v1.SendActionReq) {
 func (c *Controller) getPlayerAndRoomInfo(ctx context.Context, req *v1.SendActionReq) (*room.Player, *room.Room) {
 	playerInfo := &room.Player{} // 或 new(room.Player)
 	jsonStr := service.Cache().Get(ctx, consts.PlayerInfoPrefix+req.From).Bytes()
-	if err != nil {
-		g.Log().Error(ctx, err)
+	if len(jsonStr) == 0 || jsonStr == nil {
+		g.Log().Infof(ctx, "用户 %s 玩家不在房间内", req.From)
+		return nil, nil
 	}
 	if err := json.Unmarshal(jsonStr, playerInfo); err != nil {
-		g.Log().Error(ctx, err)
+		g.Log().Errorf(ctx, "用户 %s 玩家信息json错误: %v", req.From, err)
+		return nil, nil
 	}
 
 	roomInfoBytes := service.Cache().Get(ctx, consts.RoomInfoPrefix+playerInfo.RoomID).Bytes()
 	if roomInfoBytes == nil {
-		g.Log().Errorf(ctx, "用户 %s 房间 %s 不存在", req.From, playerInfo.RoomID)
+		g.Log().Infof(ctx, "用户 %s 房间 %s 不存在", req.From, playerInfo.RoomID)
 		return nil, nil
 	}
 	var roomInfo room.Room
