@@ -42,7 +42,7 @@
             "mode": "auto",
             "program": "D:/gowork/max2/max2/app/game"
         },
-                {
+        {
             "name": "log-service",
             "type": "go",
             "request": "launch",

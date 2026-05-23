@@ -1856,3 +1856,520 @@ Stack:
 2026-05-23T12:05:02.800+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
 2026-05-23T12:05:02.801+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
 2026-05-23T12:05:02.802+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-23T12:33:47.369+08:00 [DEBU] resolver closed
+2026-05-23T15:49:31.664+08:00 [INFO] {acbd4db65922b218ff916b406e750e89} 用户 1 连接成功
+2026-05-23T15:49:31.923+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-23T15:49:31.936+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-23T15:49:31.984+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-23T15:49:32.019+08:00 [DEBU] Watch key "/service/default/default/game_user/latest/"
+2026-05-23T15:49:32.106+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:8020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc00040d110\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-23T15:49:32.118+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:8020","ServerName":"game_user","Attributes":{"RawService":"\u003c0xc000971260\u003e","protocol":"grpc"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-23T15:49:33.025+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T15:49:33.997+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-23T15:49:34.003+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-23T15:49:34.475+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"8EPD7V\",\"Type\":0,\"CardNum\":13,\"Point\":730,\"UserId\":\"1\",\"RoomType\":1}]","from":"1"}
+2026-05-23T15:49:34.475+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T15:49:34.478+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-23T15:49:34.488+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-23T15:49:36.485+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"8EPD7V\",\"Type\":0,\"CardNum\":13,\"Point\":730,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"池怀梦\",\"RoomID\":\"8EPD7V\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"浦春冬\",\"RoomID\":\"8EPD7V\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"师易绿\",\"RoomID\":\"8EPD7V\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-23T15:49:36.924+08:00 [INFO] heartbeatCheck: 2.9265063s
+2026-05-23T15:49:37.479+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-23T15:49:37.486+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-23T15:49:37.488+08:00 [INFO] 执行操作异步任务: type:"leaveRoom"  from:"1"
+2026-05-23T15:49:41.923+08:00 [INFO] heartbeatCheck: 4.4369429s
+2026-05-23T15:49:46.923+08:00 [INFO] heartbeatCheck: 9.437079s
+2026-05-23T15:49:47.007+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:49:47.009+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:49:51.923+08:00 [INFO] heartbeatCheck: 4.916392s
+2026-05-23T15:49:56.923+08:00 [INFO] heartbeatCheck: 9.9163501s
+2026-05-23T15:49:58.007+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:49:58.008+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:50:01.923+08:00 [INFO] heartbeatCheck: 3.9163073s
+2026-05-23T15:50:06.923+08:00 [INFO] heartbeatCheck: 8.9167322s
+2026-05-23T15:50:09.007+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:50:09.009+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:50:11.923+08:00 [INFO] heartbeatCheck: 2.9169928s
+2026-05-23T15:50:16.923+08:00 [INFO] heartbeatCheck: 7.9165526s
+2026-05-23T15:50:20.007+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:50:20.010+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:50:21.923+08:00 [INFO] heartbeatCheck: 1.9155094s
+2026-05-23T15:50:26.923+08:00 [INFO] heartbeatCheck: 6.9158286s
+2026-05-23T15:50:31.007+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:50:31.009+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:50:31.923+08:00 [INFO] heartbeatCheck: 916.9993ms
+2026-05-23T15:50:36.923+08:00 [INFO] heartbeatCheck: 5.9164468s
+2026-05-23T15:50:41.923+08:00 [INFO] heartbeatCheck: 10.9167775s
+2026-05-23T15:50:42.006+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:50:42.008+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:50:46.923+08:00 [INFO] heartbeatCheck: 4.9173602s
+2026-05-23T15:50:51.923+08:00 [INFO] heartbeatCheck: 9.9172148s
+2026-05-23T15:50:53.006+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:50:53.009+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:50:56.923+08:00 [INFO] heartbeatCheck: 3.917703s
+2026-05-23T15:51:01.923+08:00 [INFO] heartbeatCheck: 8.9172801s
+2026-05-23T15:51:04.007+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:51:04.015+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:51:06.923+08:00 [INFO] heartbeatCheck: 2.9167252s
+2026-05-23T15:51:09.702+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T15:51:09.703+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-23T15:51:11.049+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T15:51:11.051+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:8020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc0008c3d70\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-23T15:51:11.923+08:00 [INFO] heartbeatCheck: 7.9159828s
+2026-05-23T15:51:15.007+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:51:15.010+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:51:16.923+08:00 [INFO] heartbeatCheck: 1.9164905s
+2026-05-23T15:51:21.923+08:00 [INFO] heartbeatCheck: 6.9161981s
+2026-05-23T15:51:25.014+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:51:25.015+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:51:26.924+08:00 [INFO] heartbeatCheck: 1.9103341s
+2026-05-23T15:51:31.923+08:00 [INFO] heartbeatCheck: 6.9090818s
+2026-05-23T15:51:35.128+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:51:35.148+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:51:36.923+08:00 [INFO] heartbeatCheck: 1.7949934s
+2026-05-23T15:51:41.923+08:00 [INFO] heartbeatCheck: 6.7954627s
+2026-05-23T15:51:45.220+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:51:45.222+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:51:46.923+08:00 [INFO] heartbeatCheck: 1.7034867s
+2026-05-23T15:51:51.541+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-23T15:51:51.542+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-23T15:51:51.923+08:00 [INFO] heartbeatCheck: 381.9378ms
+2026-05-23T15:51:55.224+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:51:55.226+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:51:55.283+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"0Z6MOJ\",\"Type\":0,\"CardNum\":13,\"Point\":730,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"荀澄邈\",\"RoomID\":\"0Z6MOJ\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"臧展鹏\",\"RoomID\":\"0Z6MOJ\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"司马鸿云\",\"RoomID\":\"0Z6MOJ\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-23T15:51:55.285+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T15:51:57.059+08:00 [INFO] heartbeatCheck: 1.8353372s
+2026-05-23T15:51:59.147+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-23T15:51:59.149+08:00 [INFO] 执行操作异步任务: type:"leaveRoom"  from:"1"
+2026-05-23T15:51:59.189+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-23T15:52:01.923+08:00 [INFO] heartbeatCheck: 2.7338268s
+2026-05-23T15:52:05.289+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:52:05.291+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:52:06.923+08:00 [INFO] heartbeatCheck: 1.6349949s
+2026-05-23T15:52:08.534+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T15:52:08.535+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-23T15:52:09.722+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T15:52:11.926+08:00 [INFO] heartbeatCheck: 6.637832s
+2026-05-23T15:52:15.294+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:52:15.296+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:52:16.923+08:00 [INFO] heartbeatCheck: 1.6291807s
+2026-05-23T15:52:21.923+08:00 [INFO] heartbeatCheck: 6.6296175s
+2026-05-23T15:52:25.299+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:52:25.301+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:52:26.923+08:00 [INFO] heartbeatCheck: 1.6249683s
+2026-05-23T15:52:31.924+08:00 [INFO] heartbeatCheck: 6.6259839s
+2026-05-23T15:52:36.020+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:52:36.029+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:52:36.924+08:00 [INFO] heartbeatCheck: 903.8136ms
+2026-05-23T15:52:41.923+08:00 [INFO] heartbeatCheck: 5.9031574s
+2026-05-23T15:52:46.923+08:00 [INFO] heartbeatCheck: 10.9028914s
+2026-05-23T15:52:47.007+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:52:47.009+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:52:51.923+08:00 [INFO] heartbeatCheck: 4.9163093s
+2026-05-23T15:52:56.923+08:00 [INFO] heartbeatCheck: 9.9165286s
+2026-05-23T15:52:58.007+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:52:58.009+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:53:01.923+08:00 [INFO] heartbeatCheck: 3.9161083s
+2026-05-23T15:53:06.923+08:00 [INFO] heartbeatCheck: 8.9165973s
+2026-05-23T15:53:09.006+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:53:09.008+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:53:11.923+08:00 [INFO] heartbeatCheck: 2.916965s
+2026-05-23T15:53:16.923+08:00 [INFO] heartbeatCheck: 7.9171261s
+2026-05-23T15:53:21.953+08:00 [INFO] heartbeatCheck: 12.9468729s
+2026-05-23T15:53:22.541+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:53:22.547+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:53:24.238+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-23T15:53:24.241+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-23T15:53:26.944+08:00 [INFO] heartbeatCheck: 2.7058348s
+2026-05-23T15:53:31.923+08:00 [INFO] heartbeatCheck: 7.6846772s
+2026-05-23T15:53:32.569+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:53:32.571+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:53:36.059+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"PVDIMK\",\"Type\":0,\"CardNum\":13,\"Point\":730,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"蔚鸿德\",\"RoomID\":\"PVDIMK\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-23T15:53:36.062+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T15:53:36.063+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:8020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc00098a300\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-23T15:53:36.923+08:00 [INFO] heartbeatCheck: 4.3551057s
+2026-05-23T15:53:38.062+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"PVDIMK\",\"Type\":0,\"CardNum\":13,\"Point\":730,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"蔚鸿德\",\"RoomID\":\"PVDIMK\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"鞠向南\",\"RoomID\":\"PVDIMK\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"游语堂\",\"RoomID\":\"PVDIMK\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-23T15:53:41.924+08:00 [INFO] heartbeatCheck: 9.3556084s
+2026-05-23T15:53:46.923+08:00 [INFO] heartbeatCheck: 14.3546808s
+2026-05-23T15:53:48.068+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:53:48.070+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:53:51.923+08:00 [INFO] heartbeatCheck: 3.8545927s
+2026-05-23T15:53:56.924+08:00 [INFO] heartbeatCheck: 8.8555986s
+2026-05-23T15:53:58.071+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:53:58.076+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:54:01.923+08:00 [INFO] heartbeatCheck: 3.8524726s
+2026-05-23T15:54:06.924+08:00 [INFO] heartbeatCheck: 8.8526658s
+2026-05-23T15:54:08.087+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:54:08.140+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:54:11.923+08:00 [INFO] heartbeatCheck: 3.8365183s
+2026-05-23T15:54:16.923+08:00 [INFO] heartbeatCheck: 8.8358599s
+2026-05-23T15:54:18.144+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:54:18.146+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:54:21.923+08:00 [INFO] heartbeatCheck: 3.779253s
+2026-05-23T15:54:26.923+08:00 [INFO] heartbeatCheck: 8.7793058s
+2026-05-23T15:54:28.150+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:54:28.153+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:54:31.923+08:00 [INFO] heartbeatCheck: 3.7731408s
+2026-05-23T15:54:36.936+08:00 [INFO] heartbeatCheck: 8.7863363s
+2026-05-23T15:54:38.158+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:54:38.160+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:54:41.923+08:00 [INFO] heartbeatCheck: 3.7652447s
+2026-05-23T15:54:46.971+08:00 [INFO] heartbeatCheck: 8.8131856s
+2026-05-23T15:54:48.164+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:54:48.179+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:54:51.923+08:00 [INFO] heartbeatCheck: 3.7588618s
+2026-05-23T15:54:56.923+08:00 [INFO] heartbeatCheck: 8.7589701s
+2026-05-23T15:54:58.189+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:54:58.195+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:55:01.923+08:00 [INFO] heartbeatCheck: 3.7350786s
+2026-05-23T15:55:06.923+08:00 [INFO] heartbeatCheck: 8.7345867s
+2026-05-23T15:55:08.198+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:55:08.201+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:55:11.923+08:00 [INFO] heartbeatCheck: 3.7247345s
+2026-05-23T15:55:16.923+08:00 [INFO] heartbeatCheck: 8.7247742s
+2026-05-23T15:55:18.204+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:55:18.206+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:55:21.923+08:00 [INFO] heartbeatCheck: 3.7189952s
+2026-05-23T15:55:26.923+08:00 [INFO] heartbeatCheck: 8.7192972s
+2026-05-23T15:55:28.209+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:55:28.211+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:55:31.923+08:00 [INFO] heartbeatCheck: 3.7139389s
+2026-05-23T15:55:36.923+08:00 [INFO] heartbeatCheck: 8.7141862s
+2026-05-23T15:55:38.220+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:55:38.237+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:55:41.923+08:00 [INFO] heartbeatCheck: 3.7045041s
+2026-05-23T15:55:46.923+08:00 [INFO] heartbeatCheck: 8.7047468s
+2026-05-23T15:55:48.259+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:55:48.303+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:55:51.923+08:00 [INFO] heartbeatCheck: 3.6636285s
+2026-05-23T15:55:56.936+08:00 [INFO] heartbeatCheck: 8.6772188s
+2026-05-23T15:55:58.322+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:55:58.328+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:56:01.923+08:00 [INFO] heartbeatCheck: 3.6011414s
+2026-05-23T15:56:06.923+08:00 [INFO] heartbeatCheck: 8.6009735s
+2026-05-23T15:56:08.338+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T15:56:08.343+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T15:56:11.955+08:00 [INFO] heartbeatCheck: 3.6174948s
+2026-05-23T15:56:16.941+08:00 [INFO] heartbeatCheck: 8.6025886s
+2026-05-23T15:56:17.876+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-23T15:56:17.877+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-23T15:56:17.879+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-23T15:56:17.880+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-23T16:29:00.994+08:00 [INFO] {a818e3688124b218cc73bc27ec28775b} 准备注册服务: serverName=gate_service.svc, address=127.0.0.1:8010, key=/discov/gate_service.svc/
+2026-05-23T16:29:01.049+08:00 [INFO] {a818e3688124b218cc73bc27ec28775b} 开始服务注册...
+2026-05-23T16:29:01.307+08:00 [WARN] {a818e3688124b218cc73bc27ec28775b} KeepAlive 意外返回，服务 [gate_service.svc] 已开始
+2026-05-23T16:29:01.342+08:00 [DEBU] etcd put success with key "/service/default/default/gate_service.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587894971408548418"
+2026-05-23T16:32:17.952+08:00 [INFO] {9cdb5f3eaf24b218cd73bc279d1e4fa3} 用户 1 连接成功
+2026-05-23T16:32:17.954+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-23T16:32:18.021+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-23T16:32:18.064+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-23T16:32:18.066+08:00 [DEBU] Watch key "/service/default/default/game_user/latest/"
+2026-05-23T16:32:18.410+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"RawService":"\u003c0xc0007f9c80\u003e","protocol":"grpc"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-23T16:32:18.438+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc00041d2f0\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-23T16:32:18.792+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T16:32:18.804+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"PVDIMK\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"PVDIMK\",\"Type\":0,\"CardNum\":13,\"Point\":730,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"蔚鸿德\",\"RoomID\":\"PVDIMK\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"鞠向南\",\"RoomID\":\"PVDIMK\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"游语堂\",\"RoomID\":\"PVDIMK\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":730,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-23T16:32:22.953+08:00 [INFO] heartbeatCheck: 4.9340478s
+2026-05-23T16:32:23.336+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-23T16:32:23.339+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-23T16:32:23.626+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"GL5FKN\",\"Type\":0,\"CardNum\":13,\"Point\":730,\"UserId\":\"1\",\"RoomType\":1}]","from":"1"}
+2026-05-23T16:32:23.656+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T16:32:25.734+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"GL5FKN\",\"Type\":0,\"CardNum\":13,\"Point\":730,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"颜鹏海\",\"RoomID\":\"GL5FKN\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"包立诚\",\"RoomID\":\"GL5FKN\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"束瑞渊\",\"RoomID\":\"GL5FKN\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-23T16:32:27.983+08:00 [INFO] heartbeatCheck: 4.6369263s
+2026-05-23T16:32:32.956+08:00 [INFO] heartbeatCheck: 9.620138s
+2026-05-23T16:32:35.757+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:32:35.762+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:32:37.998+08:00 [INFO] heartbeatCheck: 2.2403555s
+2026-05-23T16:32:42.953+08:00 [INFO] heartbeatCheck: 7.1959219s
+2026-05-23T16:32:45.772+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:32:45.776+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:32:47.953+08:00 [INFO] heartbeatCheck: 2.1819525s
+2026-05-23T16:32:52.953+08:00 [INFO] heartbeatCheck: 7.1813677s
+2026-05-23T16:32:55.789+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:32:55.792+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:32:57.954+08:00 [INFO] heartbeatCheck: 2.1642264s
+2026-05-23T16:33:02.954+08:00 [INFO] heartbeatCheck: 7.1640892s
+2026-05-23T16:33:05.831+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:33:05.856+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:33:07.982+08:00 [INFO] heartbeatCheck: 2.1515323s
+2026-05-23T16:33:12.953+08:00 [INFO] heartbeatCheck: 7.1226496s
+2026-05-23T16:33:15.874+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:33:15.877+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:33:17.954+08:00 [INFO] heartbeatCheck: 2.0801387s
+2026-05-23T16:33:22.953+08:00 [INFO] heartbeatCheck: 7.0786321s
+2026-05-23T16:33:25.891+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:33:25.902+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:33:27.953+08:00 [INFO] heartbeatCheck: 2.0616223s
+2026-05-23T16:33:32.980+08:00 [INFO] heartbeatCheck: 7.08847s
+2026-05-23T16:33:35.918+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:33:35.927+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:33:37.959+08:00 [INFO] heartbeatCheck: 2.0408197s
+2026-05-23T16:33:42.953+08:00 [INFO] heartbeatCheck: 7.0352331s
+2026-05-23T16:33:45.943+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:33:45.945+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:33:47.953+08:00 [INFO] heartbeatCheck: 2.0103084s
+2026-05-23T16:33:52.953+08:00 [INFO] heartbeatCheck: 7.0105295s
+2026-05-23T16:33:55.975+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:33:56.215+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:33:57.954+08:00 [INFO] heartbeatCheck: 1.9793415s
+2026-05-23T16:34:02.953+08:00 [INFO] heartbeatCheck: 6.9789494s
+2026-05-23T16:34:06.224+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:34:06.227+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:34:07.953+08:00 [INFO] heartbeatCheck: 1.729274s
+2026-05-23T16:34:12.953+08:00 [INFO] heartbeatCheck: 6.7291597s
+2026-05-23T16:34:16.237+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:34:16.239+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:34:17.953+08:00 [INFO] heartbeatCheck: 1.7165199s
+2026-05-23T16:34:22.955+08:00 [INFO] heartbeatCheck: 6.7178708s
+2026-05-23T16:34:26.252+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:34:26.254+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:34:27.953+08:00 [INFO] heartbeatCheck: 1.7009141s
+2026-05-23T16:34:32.953+08:00 [INFO] heartbeatCheck: 6.7014071s
+2026-05-23T16:34:36.261+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:34:36.263+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:34:37.953+08:00 [INFO] heartbeatCheck: 1.6922449s
+2026-05-23T16:34:42.959+08:00 [INFO] heartbeatCheck: 6.6982103s
+2026-05-23T16:34:46.281+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:34:46.283+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:34:47.959+08:00 [INFO] heartbeatCheck: 1.6782194s
+2026-05-23T16:34:52.957+08:00 [INFO] heartbeatCheck: 6.6770143s
+2026-05-23T16:34:56.301+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:34:56.303+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:34:57.954+08:00 [INFO] heartbeatCheck: 1.6530551s
+2026-05-23T16:35:02.967+08:00 [INFO] heartbeatCheck: 6.6662259s
+2026-05-23T16:35:06.313+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:35:06.319+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:35:07.954+08:00 [INFO] heartbeatCheck: 1.640389s
+2026-05-23T16:35:12.953+08:00 [INFO] heartbeatCheck: 6.6400976s
+2026-05-23T16:35:16.336+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:35:16.338+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:35:17.953+08:00 [INFO] heartbeatCheck: 1.6165708s
+2026-05-23T16:35:22.953+08:00 [INFO] heartbeatCheck: 6.6171032s
+2026-05-23T16:35:26.346+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:35:26.357+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:35:27.954+08:00 [INFO] heartbeatCheck: 1.608355s
+2026-05-23T16:35:32.953+08:00 [INFO] heartbeatCheck: 6.6071909s
+2026-05-23T16:35:36.363+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:35:36.366+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:35:37.954+08:00 [INFO] heartbeatCheck: 1.5903032s
+2026-05-23T16:35:42.953+08:00 [INFO] heartbeatCheck: 6.5897131s
+2026-05-23T16:35:46.377+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:35:46.378+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:35:47.953+08:00 [INFO] heartbeatCheck: 1.5766272s
+2026-05-23T16:35:52.955+08:00 [INFO] heartbeatCheck: 6.5777452s
+2026-05-23T16:35:56.388+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:35:56.389+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:35:57.953+08:00 [INFO] heartbeatCheck: 1.5655052s
+2026-05-23T16:36:02.953+08:00 [INFO] heartbeatCheck: 6.5651664s
+2026-05-23T16:36:06.404+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:36:06.406+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:36:07.953+08:00 [INFO] heartbeatCheck: 1.549838s
+2026-05-23T16:36:12.954+08:00 [INFO] heartbeatCheck: 6.5504951s
+2026-05-23T16:36:16.412+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:36:16.414+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:36:17.954+08:00 [INFO] heartbeatCheck: 1.5419204s
+2026-05-23T16:36:22.953+08:00 [INFO] heartbeatCheck: 6.5413849s
+2026-05-23T16:36:26.428+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:36:26.430+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:36:27.957+08:00 [INFO] heartbeatCheck: 1.5285629s
+2026-05-23T16:36:32.954+08:00 [INFO] heartbeatCheck: 6.525503s
+2026-05-23T16:36:36.439+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:36:36.441+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:36:37.953+08:00 [INFO] heartbeatCheck: 1.5141902s
+2026-05-23T16:36:42.953+08:00 [INFO] heartbeatCheck: 6.5135516s
+2026-05-23T16:36:46.453+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:36:46.455+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:36:47.953+08:00 [INFO] heartbeatCheck: 1.500551s
+2026-05-23T16:36:52.953+08:00 [INFO] heartbeatCheck: 6.5007622s
+2026-05-23T16:36:56.462+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:36:56.479+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:36:57.956+08:00 [INFO] heartbeatCheck: 1.4941966s
+2026-05-23T16:37:02.954+08:00 [INFO] heartbeatCheck: 6.4916353s
+2026-05-23T16:37:06.489+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:37:06.492+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:37:07.953+08:00 [INFO] heartbeatCheck: 1.4641705s
+2026-05-23T16:37:12.953+08:00 [INFO] heartbeatCheck: 6.4637596s
+2026-05-23T16:37:16.513+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:37:16.515+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:37:17.953+08:00 [INFO] heartbeatCheck: 1.4406202s
+2026-05-23T16:37:22.953+08:00 [INFO] heartbeatCheck: 6.4399975s
+2026-05-23T16:37:26.524+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:37:26.527+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:37:27.953+08:00 [INFO] heartbeatCheck: 1.4287493s
+2026-05-23T16:37:32.953+08:00 [INFO] heartbeatCheck: 6.4287358s
+2026-05-23T16:37:36.543+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:37:36.546+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:37:37.953+08:00 [INFO] heartbeatCheck: 1.4106876s
+2026-05-23T16:37:42.953+08:00 [INFO] heartbeatCheck: 6.4101658s
+2026-05-23T16:37:46.566+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:37:46.570+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:37:47.991+08:00 [INFO] heartbeatCheck: 1.4246613s
+2026-05-23T16:37:52.955+08:00 [INFO] heartbeatCheck: 6.38821s
+2026-05-23T16:37:56.585+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:37:56.587+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:37:57.956+08:00 [INFO] heartbeatCheck: 1.3716254s
+2026-05-23T16:38:02.974+08:00 [INFO] heartbeatCheck: 6.3887616s
+2026-05-23T16:38:06.598+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:38:06.600+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:38:07.957+08:00 [INFO] heartbeatCheck: 1.3602126s
+2026-05-23T16:38:12.981+08:00 [INFO] heartbeatCheck: 6.3841767s
+2026-05-23T16:38:16.608+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:38:16.611+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:38:17.977+08:00 [INFO] heartbeatCheck: 1.3687383s
+2026-05-23T16:38:22.954+08:00 [INFO] heartbeatCheck: 6.3462498s
+2026-05-23T16:38:26.645+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:38:26.846+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:38:27.999+08:00 [INFO] heartbeatCheck: 1.3540821s
+2026-05-23T16:38:32.972+08:00 [INFO] heartbeatCheck: 6.3269646s
+2026-05-23T16:38:36.867+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:38:36.879+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:38:37.973+08:00 [INFO] heartbeatCheck: 1.1061071s
+2026-05-23T16:38:42.960+08:00 [INFO] heartbeatCheck: 6.0921953s
+2026-05-23T16:38:46.888+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:38:46.891+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:38:47.953+08:00 [INFO] heartbeatCheck: 1.0657518s
+2026-05-23T16:38:53.023+08:00 [INFO] heartbeatCheck: 6.1348999s
+2026-05-23T16:38:56.914+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:38:56.920+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:38:57.956+08:00 [INFO] heartbeatCheck: 1.0426126s
+2026-05-23T16:39:03.385+08:00 [INFO] heartbeatCheck: 6.4720876s
+2026-05-23T16:39:04.463+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-23T16:39:04.466+08:00 [INFO] 执行操作异步任务: type:"leaveRoom"  from:"1"
+2026-05-23T16:39:04.614+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-23T16:39:05.045+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T16:39:05.049+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-23T16:39:05.084+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T16:39:06.931+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:39:06.934+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:39:08.007+08:00 [INFO] heartbeatCheck: 1.0763205s
+2026-05-23T16:39:13.341+08:00 [INFO] heartbeatCheck: 6.4104097s
+2026-05-23T16:39:16.987+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-23T16:39:16.987+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-23T16:39:16.993+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-23T16:39:16.996+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-23T16:39:55.773+08:00 [INFO] {5cf79ada1925b218fb73bc27dd249ad2} 用户 1 连接成功
+2026-05-23T16:39:55.775+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-23T16:39:55.843+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-23T16:39:55.846+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-23T16:39:56.314+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T16:40:00.626+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-23T16:40:00.627+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-23T16:40:00.732+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"36FB7C\",\"Type\":0,\"CardNum\":13,\"Point\":730,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"松向松\",\"RoomID\":\"36FB7C\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-23T16:40:00.776+08:00 [INFO] heartbeatCheck: 150.5303ms
+2026-05-23T16:40:00.760+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-23T16:40:00.760+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T16:40:00.914+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-23T16:40:02.813+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"36FB7C\",\"Type\":0,\"CardNum\":13,\"Point\":730,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"松向松\",\"RoomID\":\"36FB7C\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"包幻巧\",\"RoomID\":\"36FB7C\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"秦浩皛\",\"RoomID\":\"36FB7C\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-23T16:40:05.777+08:00 [INFO] heartbeatCheck: 5.1512535s
+2026-05-23T16:40:10.790+08:00 [INFO] heartbeatCheck: 10.1641755s
+2026-05-23T16:40:12.830+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:40:13.320+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:40:16.125+08:00 [INFO] heartbeatCheck: 3.2947859s
+2026-05-23T16:40:17.272+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-23T16:40:17.276+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-23T16:40:17.282+08:00 [INFO] 执行操作异步任务: type:"leaveRoom"  from:"1"
+2026-05-23T16:40:17.567+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T16:40:17.607+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-23T16:40:18.041+08:00 [ERRO] Not Implemented 
+Stack:
+1.  gate-service/internal/controller/action.sendService
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:56
+2.  gate-service/internal/controller/action.processActionChan
+    D:/gowork/max2/max2/app/gate-service/internal/controller/action/action.go:49
+
+2026-05-23T16:40:20.880+08:00 [INFO] heartbeatCheck: 3.6039524s
+2026-05-23T16:40:23.424+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-23T16:40:23.434+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-23T16:40:25.869+08:00 [INFO] heartbeatCheck: 2.4449675s
+2026-05-23T16:40:28.788+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-23T16:40:28.788+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-23T16:40:28.789+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-23T16:40:28.790+08:00 [INFO] 用户 1 心跳检测退出

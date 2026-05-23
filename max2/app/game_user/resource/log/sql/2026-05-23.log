@@ -10,3 +10,6 @@
 2026-05-23T11:58:10.968+08:00 [DEBU] {90891bd6b915b2180ec4b863510b2893} [297 ms] [default] [max2] [rows:17 ] SHOW TABLES
 2026-05-23T11:58:11.047+08:00 [DEBU] {24651ce8b915b2180fc4b863b58eaafb} [ 75 ms] [default] [max2] [rows:4  ] SHOW FULL COLUMNS FROM `set_game`
 2026-05-23T11:58:11.106+08:00 [DEBU] {c4a4c4ecb915b21810c4b8635477c34d} [ 56 ms] [default] [max2] [rows:2  ] SELECT `id`,`name`,`key`,`value` FROM `set_game`
+2026-05-23T16:30:19.109+08:00 [DEBU] {2417057e9324b21863426404b5e4d1ca} [425 ms] [default] [max2] [rows:17 ] SHOW TABLES
+2026-05-23T16:30:19.177+08:00 [DEBU] {d8aa149a9324b218644264042b15ce32} [ 49 ms] [default] [max2] [rows:4  ] SHOW FULL COLUMNS FROM `set_game`
+2026-05-23T16:30:19.231+08:00 [DEBU] {309f159d9324b218654264042161ed82} [ 52 ms] [default] [max2] [rows:2  ] SELECT `id`,`name`,`key`,`value` FROM `set_game`

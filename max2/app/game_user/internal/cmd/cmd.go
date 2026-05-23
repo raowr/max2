@@ -32,7 +32,7 @@ var (
 				defer wg.Done()
 				c := grpcx.Server.NewConfig()
 				if c.Address == "" {
-					c.Address = ":8020"
+					c.Address = ":9020"
 				}
 				grpcx.Resolver.Register(etcd.New("127.0.0.1:2379"))
 				c.Options = append(c.Options, []grpc.ServerOption{

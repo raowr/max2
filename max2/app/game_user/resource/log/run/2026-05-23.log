@@ -2857,3 +2857,728 @@ Stack:
 14. google.golang.org/grpc.(*Server).serveStreams.func2.1
     D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
 
+2026-05-23T12:33:29.155+08:00 [DEBU] resolver closed
+2026-05-23T15:49:32.847+08:00 [ERRO] {a8de0cd55922b21801926b40066364f3} unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:694
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:49:32.957+08:00 [ERRO] {a8de0cd55922b21801926b40066364f3} 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:699
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:49:34.143+08:00 [ERRO] {2c2f4c4d5a22b21802926b40928b37ed} unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:694
+2.  game_user/internal/controller/action.(*Controller).clearRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:675
+3.  game_user/internal/controller/action.(*Controller).handleInitRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:66
+4.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:45
+5.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+11. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+12. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+13. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+14. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+15. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:49:34.162+08:00 [ERRO] {2c2f4c4d5a22b21802926b40928b37ed} 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:699
+2.  game_user/internal/controller/action.(*Controller).clearRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:675
+3.  game_user/internal/controller/action.(*Controller).handleInitRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:66
+4.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:45
+5.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+11. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+12. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+13. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+14. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+15. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:49:34.471+08:00 [INFO] 用户 1 开始延迟添加AI到房间 8EPD7V
+2026-05-23T15:50:10.010+08:00 [WARN] keepalive exit, lease id: 7587894971408548115, retry register
+2026-05-23T15:51:07.868+08:00 [ERRO] keepalive retry register failed, will retry in 1s: etcd grant failed with keepalive ttl "10s": context deadline exceeded
+1. etcd grant failed with keepalive ttl "10s"
+2. context deadline exceeded
+
+2026-05-23T15:51:11.045+08:00 [ERRO] {e02584957022b2180c926b400fc4c6c2} unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:694
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:51:11.047+08:00 [ERRO] {e02584957022b2180c926b400fc4c6c2} 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:699
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:51:11.051+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:8020", value "{"protocol":"grpc"}", lease "7587894971408548380"
+2026-05-23T15:51:55.276+08:00 [ERRO] {14d849537a22b21811926b40e2c813ad} unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:694
+2.  game_user/internal/controller/action.(*Controller).clearRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:675
+3.  game_user/internal/controller/action.(*Controller).handleInitRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:66
+4.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:45
+5.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+11. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+12. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+13. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+14. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+15. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:51:55.279+08:00 [ERRO] {14d849537a22b21811926b40e2c813ad} 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:699
+2.  game_user/internal/controller/action.(*Controller).clearRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:675
+3.  game_user/internal/controller/action.(*Controller).handleInitRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:66
+4.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:45
+5.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+11. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+12. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+13. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+14. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+15. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:52:09.718+08:00 [ERRO] {98cc23487e22b21815926b4080b19486} unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:694
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:52:09.720+08:00 [ERRO] {98cc23487e22b21815926b4080b19486} 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:699
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:53:36.042+08:00 [WARN] keepalive exit, lease id: 7587894971408548380, retry register
+2026-05-23T15:53:36.052+08:00 [ERRO] {202f9be88f22b2181d926b40f93e190c} unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:694
+2.  game_user/internal/controller/action.(*Controller).clearRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:675
+3.  game_user/internal/controller/action.(*Controller).handleInitRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:66
+4.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:45
+5.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+11. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+12. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+13. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+14. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+15. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:53:36.053+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:8020", value "{"protocol":"grpc"}", lease "7587894971408548391"
+2026-05-23T15:53:36.055+08:00 [ERRO] {202f9be88f22b2181d926b40f93e190c} 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:699
+2.  game_user/internal/controller/action.(*Controller).clearRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:675
+3.  game_user/internal/controller/action.(*Controller).handleInitRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:66
+4.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:45
+5.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+11. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+12. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+13. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+14. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+15. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T15:53:36.059+08:00 [INFO] 用户 1 开始延迟添加AI到房间 PVDIMK
+2026-05-23T15:57:07.956+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:8040","ServerName":"log-service","Attributes":{"protocol":"grpc","RawService":"\u003c0xc000a0c420\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-23T15:57:07.979+08:00 [INFO] 执行日志异步任务: RoomID:"8MU4HK"  Type:1  UserID:"1"  Point:704  Action:"initRoom"
+2026-05-23T15:57:07.985+08:00 [INFO] 执行日志异步任务: RoomID:"8MU4HK"  Type:1  UserID:"1"  Point:704  Action:"leaveRoom"
+2026-05-23T15:57:07.989+08:00 [INFO] 执行日志异步任务: RoomID:"AHSL6B"  Type:1  UserID:"1"  Point:704  Action:"initRoom"
+2026-05-23T15:57:07.995+08:00 [INFO] 执行日志异步任务: RoomID:"AHSL6B"  Type:1  UserID:"1"  Point:704  Action:"leaveRoom"
+2026-05-23T15:57:08.000+08:00 [INFO] 执行日志异步任务: RoomID:"8066J1"  Type:1  UserID:"1"  Point:704  Action:"initRoom"
+2026-05-23T15:57:08.006+08:00 [INFO] 执行日志异步任务: RoomID:"8066J1"  Type:1  UserID:"1"  Point:704  Action:"leaveRoom"
+2026-05-23T15:57:08.012+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  UserID:"1"  Point:704  Action:"initRoom"
+2026-05-23T15:57:08.020+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"showCard"  Remain:"♦2,♣4,♣K,♠8,♦8,♥2,♣7,♠5,♥K,♦3,♥4,♦Q,♠10"
+2026-05-23T15:57:08.025+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"showCard"  Remain:"牌型：4,具体的牌：[[♦A,♦K,♦10,♦9,♦6] [♥A,♥Q,♥J,♥9,♥8]];牌型：2,具体的牌：[[♦4,♠4]];牌型：1,具体的牌：[[♥5]]"
+2026-05-23T15:57:08.030+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"showCard"  Remain:"牌型：1,具体的牌：[[♦5] [♣3] [♠7]];牌型：4,具体的牌：[[♠2,♠A,♠K,♠Q,♠9] [♣Q,♣9,♣8,♣6,♣5]]"
+2026-05-23T15:57:08.034+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"showCard"  Remain:"牌型：1,具体的牌：[[♣A] [♣2]];牌型：5,具体的牌：[[♦J,♣J,♠J,♥6,♠6]];牌型：2,具体的牌：[[♦7,♥7] [♣10,♥10] [♥3,♠3]]"
+2026-05-23T15:57:08.037+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"play"
+2026-05-23T15:57:08.041+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"outCard"  Remain:"♦2,♣4,♣K,♠8,♦8,♥2,♣7,♠5,♥K,♥4,♦Q,♠10"  OutCardIds:"♦3"
+2026-05-23T15:57:08.044+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"outCard"  Remain:"牌型：4,具体的牌：[[♦A,♦K,♦10,♦9,♦6] [♥A,♥Q,♥J,♥9,♥8]];牌型：2,具体的牌：[[♦4,♠4]];牌型：1,具体的牌：[]"  OutCardIds:"♥5"
+2026-05-23T15:57:08.052+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"outCard"  Remain:"牌型：4,具体的牌：[[♠2,♠A,♠K,♠Q,♠9] [♣Q,♣9,♣8,♣6,♣5]];牌型：1,具体的牌：[[♦5] [♣3]]"  OutCardIds:"♠7"
+2026-05-23T15:57:08.060+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"outCard"  Remain:"牌型：5,具体的牌：[[♦J,♣J,♠J,♥6,♠6]];牌型：2,具体的牌：[[♦7,♥7] [♣10,♥10] [♥3,♠3]];牌型：1,具体的牌：[[♣2]]"  OutCardIds:"♣A"
+2026-05-23T15:57:08.069+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"outCard"  Remain:"♣4,♣K,♠8,♦8,♥2,♣7,♠5,♥K,♥4,♦Q,♠10"  OutCardIds:"♦2"
+2026-05-23T15:57:08.074+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：1,具体的牌：[];牌型：4,具体的牌：[[♦A,♦K,♦10,♦9,♦6] [♥A,♥Q,♥J,♥9,♥8]];牌型：2,具体的牌：[[♦4,♠4]]"
+2026-05-23T15:57:08.077+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♠2,♠A,♠K,♠Q,♠9] [♣Q,♣9,♣8,♣6,♣5]];牌型：1,具体的牌：[[♦5] [♣3]]"
+2026-05-23T15:57:08.080+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"outCard"  Remain:"牌型：5,具体的牌：[[♦J,♣J,♠J,♥6,♠6]];牌型：2,具体的牌：[[♦7,♥7] [♣10,♥10] [♥3,♠3]];牌型：1,具体的牌：[]"  OutCardIds:"♣2"
+2026-05-23T15:57:08.083+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"outCard"  Remain:"♣4,♣K,♠8,♦8,♣7,♠5,♥K,♥4,♦Q,♠10"  OutCardIds:"♥2"
+2026-05-23T15:57:08.087+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♦A,♦K,♦10,♦9,♦6] [♥A,♥Q,♥J,♥9,♥8]];牌型：2,具体的牌：[[♦4,♠4]];牌型：1,具体的牌：[]"
+2026-05-23T15:57:08.090+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♠2,♠A,♠K,♠Q,♠9] [♣Q,♣9,♣8,♣6,♣5]];牌型：1,具体的牌：[[♦5] [♣3]]"
+2026-05-23T15:57:08.095+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：2,具体的牌：[[♦7,♥7] [♣10,♥10] [♥3,♠3]];牌型：1,具体的牌：[];牌型：5,具体的牌：[[♦J,♣J,♠J,♥6,♠6]]"
+2026-05-23T15:57:08.099+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"outCard"  Remain:"♣K,♠8,♦8,♣7,♠5,♥K,♦Q,♠10"  OutCardIds:"♣4,♥4"
+2026-05-23T15:57:08.103+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"outCard"  Remain:"牌型：4,具体的牌：[[♦A,♦K,♦10,♦9,♦6] [♥A,♥Q,♥J,♥9,♥8]];牌型：2,具体的牌：[];牌型：1,具体的牌：[]"  OutCardIds:"♦4,♠4"
+2026-05-23T15:57:08.106+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♠2,♠A,♠K,♠Q,♠9] [♣Q,♣9,♣8,♣6,♣5]];牌型：1,具体的牌：[[♦5] [♣3]]"
+2026-05-23T15:57:08.110+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"outCard"  Remain:"牌型：5,具体的牌：[[♦J,♣J,♠J,♥6,♠6]];牌型：2,具体的牌：[[♣10,♥10] [♥3,♠3]];牌型：1,具体的牌：[]"  OutCardIds:"♦7,♥7"
+2026-05-23T15:57:08.122+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"outCard"  Remain:"♣K,♣7,♠5,♥K,♦Q,♠10"  OutCardIds:"♦8,♠8"
+2026-05-23T15:57:08.133+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♦A,♦K,♦10,♦9,♦6] [♥A,♥Q,♥J,♥9,♥8]];牌型：2,具体的牌：[];牌型：1,具体的牌：[]"
+2026-05-23T15:57:08.138+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♠2,♠A,♠K,♠Q,♠9] [♣Q,♣9,♣8,♣6,♣5]];牌型：1,具体的牌：[[♦5] [♣3]]"
+2026-05-23T15:57:08.143+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"outCard"  Remain:"牌型：5,具体的牌：[[♦J,♣J,♠J,♥6,♠6]];牌型：2,具体的牌：[[♥3,♠3]];牌型：1,具体的牌：[]"  OutCardIds:"♣10,♥10"
+2026-05-23T15:57:08.151+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"outCard"  Remain:"♣7,♠5,♦Q,♠10"  OutCardIds:"♣K,♥K"
+2026-05-23T15:57:08.155+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♦A,♦K,♦10,♦9,♦6] [♥A,♥Q,♥J,♥9,♥8]];牌型：2,具体的牌：[];牌型：1,具体的牌：[]"
+2026-05-23T15:57:08.161+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♠2,♠A,♠K,♠Q,♠9] [♣Q,♣9,♣8,♣6,♣5]];牌型：1,具体的牌：[[♦5] [♣3]]"
+2026-05-23T15:57:08.166+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：5,具体的牌：[[♦J,♣J,♠J,♥6,♠6]];牌型：2,具体的牌：[[♥3,♠3]];牌型：1,具体的牌：[]"
+2026-05-23T15:57:08.170+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"outCard"  Remain:"♣7,♦Q,♠10"  OutCardIds:"♠5"
+2026-05-23T15:57:08.174+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♦A,♦K,♦10,♦9,♦6] [♥A,♥Q,♥J,♥9,♥8]];牌型：2,具体的牌：[];牌型：1,具体的牌：[]"
+2026-05-23T15:57:08.177+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♠2,♠A,♠K,♠Q,♠9] [♣Q,♣9,♣8,♣6,♣5]];牌型：1,具体的牌：[[♦5] [♣3]]"
+2026-05-23T15:57:08.181+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：5,具体的牌：[[♦J,♣J,♠J,♥6,♠6]];牌型：2,具体的牌：[[♥3,♠3]];牌型：1,具体的牌：[]"
+2026-05-23T15:57:08.186+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"outCard"  Remain:"♦Q,♠10"  OutCardIds:"♣7"
+2026-05-23T15:57:08.190+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♦A,♦K,♦10,♦9,♦6] [♥A,♥Q,♥J,♥9,♥8]];牌型：2,具体的牌：[];牌型：1,具体的牌：[]"
+2026-05-23T15:57:08.193+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♠2,♠A,♠K,♠Q,♠9] [♣Q,♣9,♣8,♣6,♣5]];牌型：1,具体的牌：[[♦5] [♣3]]"
+2026-05-23T15:57:08.197+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"outCard"  Remain:"牌型：2,具体的牌：[[♥6,♠6] [♣J,♠J] [♥3,♠3]]"  OutCardIds:"♦J"
+2026-05-23T15:57:08.201+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"outCard"  Remain:"♠10"  OutCardIds:"♦Q"
+2026-05-23T15:57:08.205+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♦A,♦K,♦10,♦9,♦6] [♥A,♥Q,♥J,♥9,♥8]];牌型：2,具体的牌：[];牌型：1,具体的牌：[]"
+2026-05-23T15:57:08.209+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：4,具体的牌：[[♠2,♠A,♠K,♠Q,♠9] [♣Q,♣9,♣8,♣6,♣5]];牌型：1,具体的牌：[[♦5] [♣3]]"
+2026-05-23T15:57:08.213+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  Action:"pass"  Remain:"牌型：2,具体的牌：[[♥6,♠6] [♣J,♠J] [♥3,♠3]]"
+2026-05-23T15:57:08.218+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:1  UserID:"1"  Point:704  Action:"outCard"  OutCardIds:"♠10"
+2026-05-23T15:57:08.221+08:00 [INFO] 执行日志异步任务: RoomID:"9Q9PUA"  Type:1  Status:2  UserID:"1"  Point:730  Action:"over"
+2026-05-23T15:57:08.225+08:00 [INFO] 执行日志异步任务: RoomID:"9W75UJ"  Type:1  UserID:"1"  Point:730  Action:"initRoom"
+2026-05-23T15:57:08.231+08:00 [INFO] 执行日志异步任务: RoomID:"9W75UJ"  Type:1  UserID:"1"  Point:730  Action:"leaveRoom"
+2026-05-23T15:57:08.238+08:00 [INFO] 执行日志异步任务: RoomID:"XHP964"  Type:2  UserID:"1"  Point:100  Action:"initRoom"
+2026-05-23T15:57:08.242+08:00 [INFO] 执行日志异步任务: RoomID:"XHP964"  Type:2  UserID:"1"  Point:100  Action:"leaveRoom"
+2026-05-23T15:57:08.247+08:00 [INFO] 执行日志异步任务: RoomID:"8EPD7V"  Type:1  UserID:"1"  Point:730  Action:"initRoom"
+2026-05-23T15:57:08.250+08:00 [INFO] 执行日志异步任务: RoomID:"8EPD7V"  Type:1  UserID:"1"  Point:730  Action:"leaveRoom"
+2026-05-23T15:57:08.252+08:00 [INFO] 执行日志异步任务: RoomID:"0Z6MOJ"  Type:1  UserID:"1"  Point:730  Action:"initRoom"
+2026-05-23T15:57:08.256+08:00 [INFO] 执行日志异步任务: RoomID:"0Z6MOJ"  Type:1  UserID:"1"  Point:730  Action:"leaveRoom"
+2026-05-23T15:57:08.260+08:00 [INFO] 执行日志异步任务: RoomID:"PVDIMK"  Type:1  UserID:"1"  Point:730  Action:"initRoom"
+2026-05-23T16:30:19.645+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587894971408548424"
+2026-05-23T16:32:23.569+08:00 [INFO] 执行日志异步任务: RoomID:"GL5FKN"  Type:1  UserID:"1"  Point:730  Action:"initRoom"
+2026-05-23T16:32:23.581+08:00 [DEBU] Watch key "/service/default/default/log-service/latest/"
+2026-05-23T16:32:23.614+08:00 [INFO] 用户 1 开始延迟添加AI到房间 GL5FKN
+2026-05-23T16:32:23.894+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:8040","ServerName":"log-service","Attributes":{"protocol":"grpc","RawService":"\u003c0xc00002b830\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-23T16:32:23.927+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:8040","ServerName":"log-service","Attributes":{"protocol":"grpc","RawService":"\u003c0xc0003e6240\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-23T16:39:05.042+08:00 [INFO] 执行日志异步任务: RoomID:"GL5FKN"  Type:1  UserID:"1"  Point:730  Action:"leaveRoom"
+2026-05-23T16:39:05.045+08:00 [ERRO] last connection error: connection error: desc = "transport: Error while dialing: dial tcp 172.20.10.3:8040: connectex: No connection could be made because the target machine actively refused it." 
+Stack:
+1.  game_user/internal/controller/log_game.sendLogToService
+    D:/gowork/max2/max2/app/game_user/internal/controller/log_game/log_game.go:78
+2.  game_user/internal/controller/log_game.processLogChan
+    D:/gowork/max2/max2/app/game_user/internal/controller/log_game/log_game.go:54
+
+2026-05-23T16:39:05.060+08:00 [ERRO] {6c53760d0e25b218f973bc27f774e94f} unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:694
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T16:39:05.067+08:00 [ERRO] {6c53760d0e25b218f973bc27f774e94f} 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:699
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T16:39:27.392+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:8040","ServerName":"log-service","Attributes":{"RawService":"\u003c0xc0003e7500\u003e","protocol":"grpc"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-23T16:39:56.281+08:00 [ERRO] {5cfc39e11925b218fd73bc27d5129621} unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:694
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T16:39:56.290+08:00 [ERRO] {5cfc39e11925b218fd73bc27d5129621} 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:699
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T16:40:00.655+08:00 [ERRO] {383377fe1a25b218fe73bc270c599b0d} unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:694
+2.  game_user/internal/controller/action.(*Controller).clearRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:675
+3.  game_user/internal/controller/action.(*Controller).handleInitRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:66
+4.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:45
+5.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+11. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+12. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+13. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+14. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+15. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T16:40:00.659+08:00 [ERRO] {383377fe1a25b218fe73bc270c599b0d} 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:699
+2.  game_user/internal/controller/action.(*Controller).clearRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:675
+3.  game_user/internal/controller/action.(*Controller).handleInitRoom
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:66
+4.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:45
+5.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+11. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+12. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+13. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+14. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+15. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T16:40:00.722+08:00 [INFO] 执行日志异步任务: RoomID:"36FB7C"  Type:1  UserID:"1"  Point:730  Action:"initRoom"
+2026-05-23T16:40:00.758+08:00 [INFO] 用户 1 开始延迟添加AI到房间 36FB7C
+2026-05-23T16:40:17.519+08:00 [INFO] 执行日志异步任务: RoomID:"36FB7C"  Type:1  UserID:"1"  Point:730  Action:"leaveRoom"
+2026-05-23T16:40:17.952+08:00 [ERRO] {e8f7ecfb1e25b2180174bc2727274b8e} unexpected end of JSON input 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:694
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+
+2026-05-23T16:40:17.987+08:00 [ERRO] {e8f7ecfb1e25b2180174bc2727274b8e} 用户 1 房间  不存在 
+Stack:
+1.  game_user/internal/controller/action.(*Controller).getPlayerAndRoomInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:699
+2.  game_user/internal/controller/action.(*Controller).handleGetInfo
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:553
+3.  game_user/internal/controller/action.(*Controller).SendAction
+    D:/gowork/max2/max2/app/game_user/internal/controller/action/action.go:57
+4.  game_user/api/action/v1._Action_SendAction_Handler.func1
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:105
+5.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+6.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+7.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+8.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+9.  google.golang.org/grpc.getChainUnaryHandler.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1242
+10. google.golang.org/grpc.chainUnaryInterceptors.func1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1233
+11. game_user/api/action/v1._Action_SendAction_Handler
+    D:/gowork/max2/max2/app/game_user/api/action/v1/action_grpc.pb.go:107
+12. google.golang.org/grpc.(*Server).processUnaryRPC
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1429
+13. google.golang.org/grpc.(*Server).handleStream
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1855
+14. google.golang.org/grpc.(*Server).serveStreams.func2.1
+    D:/gowork/pkg/mod/google.golang.org/grpc@v1.79.3/server.go:1064
+

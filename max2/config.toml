@@ -1,0 +1,16 @@
+[viewer]
+    paths       = ["resource/template"]
+    defaultFile = "index.html"
+    delimiters  =  ["${", "}"]
+    [viewer.data]
+        name    = "gf"
+        version = "1.10.0"
+[gfcli.build]
+name = "gf"
+arch = "all"
+system = "all"
+mod = "none"
+packSrc = "resource,manifest"
+version = "v1.0.0"
+output = "./bin"
+extra = ""
