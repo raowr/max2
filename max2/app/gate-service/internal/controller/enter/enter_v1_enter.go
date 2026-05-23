@@ -17,6 +17,7 @@ import (
 
 	"github.com/gogf/gf/v2/encoding/gjson"
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/gorilla/websocket"
@@ -202,6 +203,7 @@ func (c *Client) readLoop(ctx context.Context) {
 			}
 
 			if validTypes[msg.Type] {
+				msg.From = c.userName
 				// 有效类型：发送到 sendAction
 				action.SendAction(msg)
 			} else {
@@ -217,12 +219,88 @@ func (c *Client) readLoop(ctx context.Context) {
 	}
 }
 
+// 写消息循环：发送消息到客户端
 func (c *Client) writeLoop(ctx context.Context) {
+	defer g.Log().Infof(ctx, "用户 %s writeLoop退出", c.userName)
+	sub, _, err := c.subClient.Subscribe(ctx, consts.PlayerMsgPrefix+c.userName)
+	if err != nil {
+		g.Log().Error(ctx, "writeLoop 订阅失败:", err)
+		return
+	}
+	// 确保在函数退出时关闭订阅
+	defer func() {
+		_ = sub.Close(ctx)
+	}()
 
+	// 循环接收消息
+	for {
+		// 监听 ctx 是否已关闭 (调用 Close 方法时触发)
+		select {
+		case <-ctx.Done():
+			g.Log().Info(ctx, "writeLoop 停止监听")
+			return
+		default:
+			// 继续执行后续功能
+		}
+
+		// Receive 接收消息
+		msg, err := sub.Receive(ctx)
+		if err != nil {
+			// 如果是 Context 被取消导致的错误，直接退出
+			if ctx.Err() != nil {
+				return
+			}
+			// 其它错误（如网络断开），可以考虑简单的重试或记录日志
+			g.Log().Error(ctx, "Casbin Watcher 接收消息错误:", err)
+			// 如果出错直接退出，等待下一次重启或手动干预
+			return
+		}
+		msgData, success := ParseRedisSubscribeMessage(msg.String(), c.userName, ctx)
+		if !success {
+			continue
+		}
+
+		// 检查连接是否已关闭
+		c.mutex.RLock()
+		conn := c.conn
+		c.mutex.RUnlock()
+		if conn == nil {
+			g.Log().Infof(ctx, "用户 %s 连接已关闭，跳过消息发送", c.userName)
+			return
+		}
+		msgDataBytes, err := gjson.Encode(msgData)
+		if err != nil {
+			g.Log().Errorf(ctx, "用户 %s 消息编码失败: %v", c.userName, err)
+		}
+		g.Log().Infof(ctx, "用户 %s 发送消息: %s", c.userName, string(msgDataBytes))
+		if err := c.conn.WriteMessage(ghttp.WsMsgText, msgDataBytes); err != nil {
+			g.Log().Errorf(ctx, " writeLoop 用户 %s 消息发送失败: %v,消息内容: %s", c.userName, err, string(msgDataBytes))
+			return
+		}
+	}
 }
 
+// 心跳检测：超时断开连接
 func (c *Client) heartbeatCheck(ctx context.Context) {
-
+	ticker := time.NewTicker(5 * time.Second)
+	defer ticker.Stop()
+	defer g.Log().Infof(ctx, "用户 %s 心跳检测退出", c.userName)
+	g.Log().Infof(ctx, "heartbeatCheck: %v", time.Since(c.heartbeat))
+	for {
+		select {
+		case <-ticker.C:
+			g.Log().Infof(ctx, "heartbeatCheck: %v", time.Since(c.heartbeat))
+			if time.Since(c.heartbeat) > 60*time.Second {
+				g.Log().Infof(ctx, "用户 %s 心跳超时（60秒），断开连接", c.userName)
+				//c.conn.Close()
+				c.closeConnection("心跳超时")
+				return
+			}
+		case <-ctx.Done():
+			g.Log().Infof(ctx, "用户 %s 心跳检测被取消: %v", c.userName, ctx.Err())
+			return
+		}
+	}
 }
 
 // 处理心跳

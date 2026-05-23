@@ -11,8 +11,8 @@ service Action{
 }
 
 message SendActionReq {
-    string Type = 1;
-    string Data = 2;
-    string From=3;
+    string type = 1 [json_name = "type"];
+    string data = 2 [json_name = "data"];
+    string from = 3 [json_name = "from"];
 }
 message SendActionRes {}

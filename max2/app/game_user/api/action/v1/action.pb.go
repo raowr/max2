@@ -26,9 +26,9 @@ const (
 
 type SendActionReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          string                 `protobuf:"bytes,1,opt,name=Type,proto3" json:"Type,omitempty"`
-	Data          string                 `protobuf:"bytes,2,opt,name=Data,proto3" json:"Data,omitempty"`
-	From          string                 `protobuf:"bytes,3,opt,name=From,proto3" json:"From,omitempty"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Data          string                 `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	From          string                 `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -126,9 +126,9 @@ const file_action_v1_action_proto_rawDesc = "" +
 	"\n" +
 	"\x16action/v1/action.proto\x12\taction.v1\"K\n" +
 	"\rSendActionReq\x12\x12\n" +
-	"\x04Type\x18\x01 \x01(\tR\x04Type\x12\x12\n" +
-	"\x04Data\x18\x02 \x01(\tR\x04Data\x12\x12\n" +
-	"\x04From\x18\x03 \x01(\tR\x04From\"\x0f\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x12\x12\n" +
+	"\x04data\x18\x02 \x01(\tR\x04data\x12\x12\n" +
+	"\x04from\x18\x03 \x01(\tR\x04from\"\x0f\n" +
 	"\rSendActionRes2L\n" +
 	"\x06Action\x12B\n" +
 	"\n" +

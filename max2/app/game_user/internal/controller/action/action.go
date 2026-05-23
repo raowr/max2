@@ -64,11 +64,13 @@ func (c *Controller) handleInitRoom(ctx context.Context, req *v1.SendActionReq) 
 	rmMu.Lock()
 	defer rmMu.Unlock()
 	c.clearRoom(ctx, req)
+
 	// 创建新房间和玩家
 	roomInfo := rm.CreateRoom(1) //创建比赛房
 	humanPlayer := roomInfo.CreatePlayer(req.From, room.Human)
 	humanPlayer.UserName = req.From
 	rm.PlayerList[humanPlayer.UserName] = humanPlayer // 关联用户与玩家
+
 	//缓存当前玩家信息
 	playerJsonStr, err := json.Marshal(humanPlayer)
 	if err != nil {
@@ -92,7 +94,6 @@ func (c *Controller) handleInitRoom(ctx context.Context, req *v1.SendActionReq) 
 	// 创建AI玩家，随机ai人数
 	aiCount := grand.N(0, 3)
 	for i := 0; i < aiCount; i++ {
-		// aiName := fake.Name()
 		aiName := faker.ChineseName()
 		roomInfo.CreatePlayer(aiName, room.AI)
 	}
@@ -105,59 +106,72 @@ func (c *Controller) handleInitRoom(ctx context.Context, req *v1.SendActionReq) 
 	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
 
 	playerDTOs := getPlayers(roomInfo)
-
 	players, err := json.Marshal(playerDTOs)
 	if err != nil {
 		g.Log().Errorf(ctx, "用户 %s 序列化玩家列表失败: %v", req.From, err)
 		return
 	}
+
 	msgData := &v1.SendActionReq{
 		Type: consts.InitRoom,
 		Data: gconv.String(players),
 		From: req.From,
 	}
 	c.safeSendMessage(ctx, msgData)
+
 	if aiCount >= 3 {
 		return
 	}
-	// 延迟添加额外AI（带上下文超时，避免协程泄漏）
+
+	// 延迟添加额外AI（使用独立上下文，不阻塞主请求）
 	go func(roomInfo *room.Room, userName string) {
-		// 使用Background上下文确保协程能执行完
-		localCtx := context.Background()
-		// 添加日志记录协程启动
+		// 创建独立的上下文，不受原始请求影响
+		localCtx, localCancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer localCancel()
+
 		g.Log().Infof(localCtx, "用户 %s 开始延迟添加AI到房间 %s", userName, roomInfo.ID)
 
-		<-time.After(2 * time.Second)
+		// 使用 select 避免阻塞
+		select {
+		case <-time.After(2 * time.Second):
+			// 继续执行
+		case <-localCtx.Done():
+			g.Log().Warningf(localCtx, "延迟操作超时，房间: %s", roomInfo.ID)
+			return
+		}
+
 		rmMu.Lock()
 		defer rmMu.Unlock()
+
 		aiNum := len(roomInfo.Players)
 		for i := 0; i < 4-aiNum; i++ {
-			// aiName := fake.Name()
 			aiName := faker.ChineseName()
 			roomInfo.CreatePlayer(aiName, room.AI)
 		}
 
-		//缓存当前房间信息
+		//缓存当前房间信息（使用 localCtx）
 		roomJsonStr, err := json.Marshal(roomInfo)
 		if err != nil {
-			g.Log().Error(ctx, err)
+			g.Log().Error(localCtx, err)
+			return
 		}
-		service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
+		service.Cache().Set(localCtx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
 
 		// 创建一个临时结构体，只包含可序列化的字段
 		playerDTOs := getPlayers(roomInfo)
-
 		players, err := json.Marshal(playerDTOs)
 		if err != nil {
-			g.Log().Errorf(ctx, "用户 %s 序列化玩家列表失败: %v", req.From, err)
+			g.Log().Errorf(localCtx, "用户 %s 序列化玩家列表失败: %v", userName, err)
 			return
 		}
+
 		msgData := &v1.SendActionReq{
 			Type: consts.InitRoom,
 			Data: gconv.String(players),
-			From: req.From,
+			From: userName,
 		}
-		c.safeSendMessage(ctx, msgData)
+		c.safeSendMessage(localCtx, msgData)
+
 	}(roomInfo, req.From)
 
 }
