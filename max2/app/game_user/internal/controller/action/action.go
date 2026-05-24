@@ -67,6 +67,13 @@ func (c *Controller) handleInitRoom(ctx context.Context, req *v1.SendActionReq) 
 	defer rmMu.Unlock()
 	c.clearRoom(ctx, req)
 
+	_, oldRoomInfo := c.getPlayerAndRoomInfo(ctx, req)
+	if oldRoomInfo != nil && oldRoomInfo.IsPlaying {
+			g.Log().Infof(ctx, "用户 %s 已在房间 %s 中，不能创建新房间", req.From, oldRoomInfo.ID)
+			return
+		}
+	}
+
 	// 创建新房间和玩家
 	roomInfo := rm.CreateRoom(1) //创建比赛房
 	humanPlayer := roomInfo.CreatePlayer(req.From, room.Human)
@@ -184,6 +191,11 @@ func (c *Controller) handleCreateRoom(ctx context.Context, req *v1.SendActionReq
 	defer rmMu.Unlock()
 	// 清理当前用户关联的旧房间（优化：定向清理，避免全量遍历）
 	c.clearRoom(ctx, req)
+	_, oldRoomInfo := c.getPlayerAndRoomInfo(ctx, req)
+	if oldRoomInfo != nil && oldRoomInfo.IsPlaying {
+		g.Log().Infof(ctx, "用户 %s 已在房间 %s 中，不能创建新房间", req.From, oldRoomInfo.ID)
+		return
+	}
 
 	roomInfo := rm.CreateRoom(2) //创建好友房
 	// c.safeSendToRoomChan(ctx, roomInfo)

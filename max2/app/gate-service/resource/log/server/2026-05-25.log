@@ -1,0 +1,105 @@
+2026-05-25T01:06:00.538+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-25T01:06:00.540+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-25T01:06:00.541+08:00 [INFO] pid[12440]: http server started listening on [:8010]
+2026-05-25T01:06:00.571+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:gate_service.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+|      SERVER      | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                           HANDLER                            |           MIDDLEWARE            |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec        |                                 |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | GET    | /enter     | gate-service/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+
+2026-05-25T01:11:17.300+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-25T01:11:17.301+08:00 [INFO] pid[17784]: http server started listening on [:8010]
+2026-05-25T01:11:17.301+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-25T01:11:17.337+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:gate_service.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+|      SERVER      | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                           HANDLER                            |           MIDDLEWARE            |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec        |                                 |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | GET    | /enter     | gate-service/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+
+2026-05-25T01:14:53.929+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-25T01:14:53.931+08:00 [INFO] pid[10132]: http server started listening on [:8010]
+2026-05-25T01:14:53.931+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-25T01:14:53.962+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:gate_service.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+|      SERVER      | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                           HANDLER                            |           MIDDLEWARE            |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec        |                                 |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | GET    | /enter     | gate-service/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+
+2026-05-25T01:19:33.650+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-25T01:19:33.652+08:00 [INFO] pid[5084]: http server started listening on [:8010]
+2026-05-25T01:19:33.652+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-25T01:19:33.696+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:gate_service.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+|      SERVER      | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                           HANDLER                            |           MIDDLEWARE            |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec        |                                 |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | GET    | /enter     | gate-service/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+
+2026-05-25T01:37:36.536+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-25T01:37:36.540+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-25T01:37:36.539+08:00 [INFO] pid[21160]: http server started listening on [:8010]
+2026-05-25T01:37:36.593+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:gate_service.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+|      SERVER      | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                           HANDLER                            |           MIDDLEWARE            |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec        |                                 |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | GET    | /enter     | gate-service/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+
+2026-05-25T01:41:31.438+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-25T01:41:31.441+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-25T01:41:31.441+08:00 [INFO] pid[11572]: http server started listening on [:8010]
+2026-05-25T01:41:31.494+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:gate_service.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+|      SERVER      | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                           HANDLER                            |           MIDDLEWARE            |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec        |                                 |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | GET    | /enter     | gate-service/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+
+2026-05-25T01:51:53.940+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-25T01:51:53.961+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-25T01:51:53.955+08:00 [INFO] pid[9540]: http server started listening on [:8010]
+2026-05-25T01:51:54.085+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:gate_service.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+|      SERVER      | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                           HANDLER                            |           MIDDLEWARE            |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec        |                                 |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | GET    | /enter     | gate-service/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+

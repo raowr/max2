@@ -103,6 +103,7 @@ func (c *ControllerV1) Enter(ctx context.Context, req *v1.EnterReq) (res *v1.Ent
 		cancel:    cancel,
 		subClient: g.Redis(),
 		pubClient: g.Redis(),
+		heartbeat: time.Now(),
 	}
 
 	// 加锁更新客户端连接（重连逻辑）
@@ -222,15 +223,16 @@ func (c *Client) readLoop(ctx context.Context) {
 // 写消息循环：发送消息到客户端
 func (c *Client) writeLoop(ctx context.Context) {
 	defer g.Log().Infof(ctx, "用户 %s writeLoop退出", c.userName)
-	sub, _, err := c.subClient.Subscribe(ctx, consts.PlayerMsgPrefix+c.userName)
+	var err error
+	c.sub, _, err = c.subClient.Subscribe(ctx, consts.PlayerMsgPrefix+c.userName)
 	if err != nil {
 		g.Log().Error(ctx, "writeLoop 订阅失败:", err)
 		return
 	}
 	// 确保在函数退出时关闭订阅
-	defer func() {
-		_ = sub.Close(ctx)
-	}()
+	// defer func() {
+	// 	_ = c.sub.Close(ctx)
+	// }()
 
 	// 循环接收消息
 	for {
@@ -244,10 +246,11 @@ func (c *Client) writeLoop(ctx context.Context) {
 		}
 
 		// Receive 接收消息
-		msg, err := sub.Receive(ctx)
+		msg, err := c.sub.Receive(ctx)
 		if err != nil {
 			// 如果是 Context 被取消导致的错误，直接退出
 			if ctx.Err() != nil {
+				g.Log().Info(ctx, "ctx Watcher 接收消息错误:", ctx.Err())
 				return
 			}
 			// 其它错误（如网络断开），可以考虑简单的重试或记录日志
@@ -346,6 +349,12 @@ func (c *Client) closeConnection(reason string) {
 	defer rmMu.Unlock()
 	logCtx := context.Background()
 	g.Log().Infof(logCtx, "用户 %s 关闭连接，原因: %s", c.userName, reason)
+
+	// 关闭订阅者
+	if c.sub != nil {
+		_ = c.sub.Close(logCtx)
+		c.sub = nil
+	}
 
 	// 先取消上下文
 	if c.cancel != nil {

@@ -36,6 +36,7 @@ type Client struct {
 	closed    int32              // 添加原子关闭标记
 	subClient *gredis.Redis      // 订阅客户端
 	pubClient *gredis.Redis      // 发布客户端
+	sub       gredis.Conn        // 添加：订阅者对象
 }
 
 // 全局房间管理器及并发安全锁（核心优化：解决全局资源竞争）

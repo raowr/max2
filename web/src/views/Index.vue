@@ -170,44 +170,133 @@ const logout = () => {
 
 const userIdShow = ref(false)  // 玩家di显示与隐藏
 onMounted(() => {
-  init()
   // 添加页面可见性变化监听
   document.addEventListener('visibilitychange', handleVisibilityChange)
 
-   // 页面刷新时自动重连
-  reconnectWebSocket(websocket);
-
+  // 获取用户信息
   var userInfo = storage.local.get('user')
   userName.value = userInfo.username
   point.value = userInfo.point
-
   console.log(userName.value, point.value)
+
+  // 如果 WebSocket 已经连接，直接发送 getInfo
+  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
+    console.log('WebSocket 已连接，直接发送 getInfo');
+    init();
+  } else {
+    // 否则先重连，连接成功后再发送
+    console.log('WebSocket 未连接，先重连');
+    reconnectWebSocket(websocket);
+    // 监听连接成功事件
+    const handleOpen = () => {
+      websocket.off('open', handleOpen); // 只执行一次
+      init();
+    };
+    websocket.on('open', handleOpen);
+  }
 })
 // 组件卸载时移除监听
 onUnmounted(() => {
   document.removeEventListener('visibilitychange', handleVisibilityChange)
+    // 移除 WebSocket 回调，避免内存泄漏和消息冲突
+  websocket.off('message', handleMessage)
+  // 清除连接状态定时检查
+  if (statusCheckInterval) {
+    clearInterval(statusCheckInterval);
+    statusCheckInterval = null;
+  }
 })
+// d:\gowork\max2\web\src\views\Index.vue
+
+// 连接状态定时检查（用于调试）
+let statusCheckInterval = null;
+
 const init = async () => {
   try {
-    // 动态解析音频路径（替换字符串路径为 new URL() 构造的 URL）
     const bgmUrl = new URL('@/assets/music/yuanshanshaonian.mp3', import.meta.url).href;
-    audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
+    audioManager.preload('bgm', bgmUrl);
     audioManager.playBGM('bgm')
-
   } catch (error) {
     console.error('初始化背景音乐失败:', error);
   }
-  //当前重连
-  websocket.on('open', () => {
-    console.log('index on open');
-    // 连接成功后再执行 toggleReady
-    websocket.send({ "type": "getInfo", "data": "", "name": "" })
-  });
-  // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
-  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
-    console.log('index play on open');
-    websocket.send({ "type": "getInfo", "data": "", "name": "" })
+
+ // 添加关闭事件监听，定位连接关闭原因
+  const handleClose = (event) => {
+    console.error('index WebSocket 连接关闭！代码:', event.code, '原因:', event.reason);
+    websocket.off('close', handleClose);
+  };
+  websocket.on('close', handleClose);
+ 
+  // 添加错误事件监听
+  const handleError = (error) => {
+    console.error('index WebSocket 错误:', error);
+    websocket.off('error', handleError);
+  };
+  websocket.on('error', handleError);
+ 
+  // 启动连接状态定时检查（每500ms检查一次）
+  const checkConnectionStatus = () => {
+    if (websocket.ws) {
+      console.log('index 连接状态定时检查:', websocket.ws.readyState, '(0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED)');
+    }
+  };
+  statusCheckInterval = setInterval(checkConnectionStatus, 500);
+
+ const sendGetInfo = (retryCount = 0) => {
+  console.log('index sending getInfo (retry:', retryCount, ')');
+  
+  // 检查连接状态
+  if (!websocket.ws || websocket.ws.readyState !== WebSocket.OPEN) {
+    console.log('index WebSocket not open, waiting...');
+    // 如果还没到最大重试次数，继续重试
+    if (retryCount < 5) {
+      setTimeout(() => sendGetInfo(retryCount + 1), 100);
+    }
+    return;
   }
+  
+  websocket.send({ "type": "getInfo", "data": "", "name": "" });
+  
+  // 设置超时检查，如果500ms内没收到响应就重试
+  const timeout = setTimeout(() => {
+    if (retryCount < 5) {
+      console.log('index getInfo 超时，重试 (retry:', retryCount + 1, ')');
+      sendGetInfo(retryCount + 1);
+    }
+  }, 500);
+  
+  // 在收到 getInfo 响应时清除超时
+  const handleMessageOnce = (data) => {
+    try {
+      const parsedData = typeof data === 'string' ? JSON.parse(data) : data;
+      if (parsedData.type === "getInfo") {
+        clearTimeout(timeout);
+        websocket.off('message', handleMessageOnce);
+        console.log('index getInfo 响应已收到，取消重试');
+      }
+    } catch (e) {}
+  };
+  websocket.on('message', handleMessageOnce);
+};
+
+  // 监听 open 事件（处理未来的连接打开）
+  websocket.on('open', sendGetInfo);
+
+  // 立即检查当前连接状态
+  if (websocket.ws) {
+    console.log('index WebSocket 状态:', websocket.ws.readyState, '(0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED)');
+    if (websocket.ws.readyState === WebSocket.OPEN) {
+      // 已连接，立即发送
+      sendGetInfo();
+    } else if (websocket.ws.readyState === WebSocket.CONNECTING) {
+      // 正在连接中，等待 open 事件触发 sendGetInfo
+      console.log('index WebSocket 正在连接中，等待 open 事件');
+    } else {
+      // 未连接或已关闭，等待 reconnectWebSocket 重新连接
+      console.log('index WebSocket 未连接，等待重连');
+    }
+  }
+
   websocket.on('message', handleMessage)
 }
 

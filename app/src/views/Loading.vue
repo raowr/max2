@@ -399,6 +399,7 @@ export default {
 
       // 新增：预加载音频
       this.audioPaths.forEach(path => {
+        // console.log('预加载音频资源...',path);
         const audio = new Audio();
         audio.src = path;
         // 音频加载完成事件（可使用 canplaythrough 确保可播放）
@@ -652,7 +653,7 @@ export default {
               }
               
               // 调试信息，查看实际使用的音频路径
-              console.log(`预加载音频: ${musicPath}，URL: ${cardMusicUrl}`);
+              // console.log(`预加载音频: ${musicPath}，URL: ${cardMusicUrl}`);
               
               // 存储预加载的 URL，用于后续检查
               this.preloadedAudioUrls[key] = cardMusicUrl;
@@ -664,7 +665,7 @@ export default {
               tempAudio.oncanplaythrough = () => {
                 loadedCount++;
                 this.preloadStatus.loaded = loadedCount;
-                console.log(`预加载完成: ${musicPath}, 进度: ${loadedCount}/${keys.length}`);
+                // console.log(`预加载完成: ${musicPath}, 进度: ${loadedCount}/${keys.length}`);
                 // 预加载完成后，使用 audioManager 正式加载
                 audioManager.preload(key, cardMusicUrl);
                 resolve();
