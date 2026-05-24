@@ -250,7 +250,7 @@ func (c *Client) writeLoop(ctx context.Context) {
 		if err != nil {
 			// 如果是 Context 被取消导致的错误，直接退出
 			if ctx.Err() != nil {
-				g.Log().Info(ctx, "ctx Watcher 接收消息错误:", ctx.Err())
+				g.Log().Error(ctx, "ctx Watcher 接收消息错误:", ctx.Err())
 				return
 			}
 			// 其它错误（如网络断开），可以考虑简单的重试或记录日志

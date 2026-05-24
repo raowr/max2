@@ -69,9 +69,8 @@ func (c *Controller) handleInitRoom(ctx context.Context, req *v1.SendActionReq) 
 
 	_, oldRoomInfo := c.getPlayerAndRoomInfo(ctx, req)
 	if oldRoomInfo != nil && oldRoomInfo.IsPlaying {
-			g.Log().Infof(ctx, "用户 %s 已在房间 %s 中，不能创建新房间", req.From, oldRoomInfo.ID)
-			return
-		}
+		g.Log().Infof(ctx, "用户 %s 已在房间 %s 中，不能创建新房间", req.From, oldRoomInfo.ID)
+		return
 	}
 
 	// 创建新房间和玩家
