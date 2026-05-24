@@ -1,1 +1,1269 @@
 2026-05-24T00:02:25.949+08:00 [DEBU] resolver closed
+2026-05-24T11:01:24.750+08:00 [INFO] {1ceeaa663561b2187ea9a56e4993eeaa} 准备注册服务: serverName=gate_service.svc, address=127.0.0.1:8010, key=/discov/gate_service.svc/
+2026-05-24T11:01:24.752+08:00 [INFO] {1ceeaa663561b2187ea9a56e4993eeaa} 开始服务注册...
+2026-05-24T11:01:27.539+08:00 [DEBU] etcd put success with key "/service/default/default/gate_service.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587895047684156674"
+2026-05-24T11:01:27.600+08:00 [WARN] {1ceeaa663561b2187ea9a56e4993eeaa} KeepAlive 意外返回，服务 [gate_service.svc] 已开始
+2026-05-24T11:09:53.057+08:00 [INFO] {44e93eb1ab61b2187fa9a56e331655d8} 用户 1 连接成功
+2026-05-24T11:09:53.163+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-24T11:09:53.232+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T11:09:53.257+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T11:09:53.425+08:00 [DEBU] Watch key "/service/default/default/game_user/latest/"
+2026-05-24T11:09:53.527+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc000383d40\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-24T11:09:53.565+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc0000c3440\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-24T11:09:55.283+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-24T11:09:55.284+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-24T11:09:55.459+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"S9O4BC\",\"Type\":0,\"CardNum\":13,\"Point\":780,\"UserId\":\"1\",\"RoomType\":1}]","from":"1"}
+2026-05-24T11:09:57.447+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"S9O4BC\",\"Type\":0,\"CardNum\":13,\"Point\":780,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"夏侯德昌\",\"RoomID\":\"S9O4BC\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"惠鸿博\",\"RoomID\":\"S9O4BC\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"沈昌勋\",\"RoomID\":\"S9O4BC\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T11:09:58.164+08:00 [INFO] heartbeatCheck: 2.8809176s
+2026-05-24T11:10:00.200+08:00 [INFO] 用户 1 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-24T11:10:00.203+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T11:10:00.205+08:00 [INFO] 执行操作异步任务: type:"play"  from:"1"
+2026-05-24T11:10:00.352+08:00 [INFO] 用户 1 发送消息: {"type":"showCard","data":"{\"cards\":[16,19,48,50,27,13,52,15,9,40,6,4,35],\"current\":2,\"playerPoint\":780,\"outCardTimeout\":30}"}
+2026-05-24T11:10:00.611+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T11:10:00.672+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"S9O4BC\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"S9O4BC\",\"Type\":0,\"CardNum\":13,\"Point\":780,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"夏侯德昌\",\"RoomID\":\"S9O4BC\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"惠鸿博\",\"RoomID\":\"S9O4BC\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"沈昌勋\",\"RoomID\":\"S9O4BC\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":780,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-24T11:10:02.813+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[1,3],\"card_type\":2,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:10:03.165+08:00 [INFO] heartbeatCheck: 2.962615s
+2026-05-24T11:10:05.939+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[29,32],\"card_type\":2,\"cards_num\":11,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:10:08.183+08:00 [INFO] heartbeatCheck: 7.9801649s
+2026-05-24T11:10:13.164+08:00 [INFO] heartbeatCheck: 12.9611519s
+2026-05-24T11:10:15.956+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:10:15.961+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:10:18.164+08:00 [INFO] heartbeatCheck: 2.2081737s
+2026-05-24T11:10:23.168+08:00 [INFO] heartbeatCheck: 7.212722s
+2026-05-24T11:10:26.240+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:10:26.380+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:10:27.025+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:10:27.029+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:10:28.189+08:00 [INFO] heartbeatCheck: 1.1639241s
+2026-05-24T11:10:28.822+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:10:30.888+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[37,38],\"card_type\":2,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:10:33.297+08:00 [INFO] heartbeatCheck: 6.2722181s
+2026-05-24T11:10:34.593+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:10:38.185+08:00 [INFO] heartbeatCheck: 11.1602316s
+2026-05-24T11:10:38.919+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:10:43.163+08:00 [INFO] heartbeatCheck: 16.1386265s
+2026-05-24T11:10:48.164+08:00 [INFO] heartbeatCheck: 21.1395797s
+2026-05-24T11:10:48.935+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:10:48.938+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:10:51.178+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:10:51.179+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:10:52.220+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:10:53.164+08:00 [INFO] heartbeatCheck: 1.9863812s
+2026-05-24T11:10:55.110+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[2],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:10:58.087+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[7],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:10:58.164+08:00 [INFO] heartbeatCheck: 6.9863493s
+2026-05-24T11:11:00.097+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[12],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:11:03.164+08:00 [INFO] heartbeatCheck: 11.9865902s
+2026-05-24T11:11:08.163+08:00 [INFO] heartbeatCheck: 16.9861079s
+2026-05-24T11:11:10.107+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:11:10.108+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:11:13.163+08:00 [INFO] heartbeatCheck: 3.0571418s
+2026-05-24T11:11:18.164+08:00 [INFO] heartbeatCheck: 8.0575677s
+2026-05-24T11:11:20.121+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:11:20.123+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:11:23.164+08:00 [INFO] heartbeatCheck: 3.0444039s
+2026-05-24T11:11:28.175+08:00 [INFO] heartbeatCheck: 8.0552652s
+2026-05-24T11:11:30.130+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:11:30.147+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:11:30.202+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:11:33.163+08:00 [INFO] heartbeatCheck: 3.0339576s
+2026-05-24T11:11:33.202+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[14],\"card_type\":1,\"cards_num\":9,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:11:35.186+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[28],\"card_type\":1,\"cards_num\":9,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:11:37.201+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[39],\"card_type\":1,\"cards_num\":9,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:11:38.164+08:00 [INFO] heartbeatCheck: 8.0340886s
+2026-05-24T11:11:43.163+08:00 [INFO] heartbeatCheck: 13.0338253s
+2026-05-24T11:11:47.215+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:11:47.217+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:11:48.163+08:00 [INFO] heartbeatCheck: 948.681ms
+2026-05-24T11:11:53.163+08:00 [INFO] heartbeatCheck: 5.9485431s
+2026-05-24T11:11:57.226+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:11:57.228+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:11:58.163+08:00 [INFO] heartbeatCheck: 937.5078ms
+2026-05-24T11:12:03.163+08:00 [INFO] heartbeatCheck: 5.9373459s
+2026-05-24T11:12:07.188+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:12:08.164+08:00 [INFO] heartbeatCheck: 10.9382246s
+2026-05-24T11:12:09.186+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[51],\"card_type\":1,\"cards_num\":8,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:12:12.185+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":9,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:12:13.164+08:00 [INFO] heartbeatCheck: 15.9382108s
+2026-05-24T11:12:14.206+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":9,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:12:18.163+08:00 [INFO] heartbeatCheck: 20.9374953s
+2026-05-24T11:12:23.163+08:00 [INFO] heartbeatCheck: 25.9375616s
+2026-05-24T11:12:24.221+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:12:24.223+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:12:28.164+08:00 [INFO] heartbeatCheck: 3.9428355s
+2026-05-24T11:12:33.164+08:00 [INFO] heartbeatCheck: 8.9425386s
+2026-05-24T11:12:34.229+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:12:34.231+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:12:38.164+08:00 [INFO] heartbeatCheck: 3.9358979s
+2026-05-24T11:12:43.164+08:00 [INFO] heartbeatCheck: 8.9355657s
+2026-05-24T11:12:44.192+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:12:47.186+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[8],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:12:48.164+08:00 [INFO] heartbeatCheck: 13.9355075s
+2026-05-24T11:12:49.186+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[30],\"card_type\":1,\"cards_num\":8,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:12:52.193+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[49],\"card_type\":1,\"cards_num\":8,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:12:53.164+08:00 [INFO] heartbeatCheck: 18.935693s
+2026-05-24T11:12:58.164+08:00 [INFO] heartbeatCheck: 23.9361693s
+2026-05-24T11:13:02.199+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:13:02.207+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:13:03.163+08:00 [INFO] heartbeatCheck: 964.9072ms
+2026-05-24T11:13:05.338+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:13:05.339+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:13:05.490+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:13:08.163+08:00 [INFO] heartbeatCheck: 2.8259084s
+2026-05-24T11:13:08.516+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:13:10.489+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":8,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:13:13.164+08:00 [INFO] heartbeatCheck: 7.8263925s
+2026-05-24T11:13:13.516+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[5],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:13:18.164+08:00 [INFO] heartbeatCheck: 12.8260793s
+2026-05-24T11:13:23.164+08:00 [INFO] heartbeatCheck: 17.8266224s
+2026-05-24T11:13:23.526+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:13:23.528+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:13:28.164+08:00 [INFO] heartbeatCheck: 4.6371914s
+2026-05-24T11:13:33.164+08:00 [INFO] heartbeatCheck: 9.6376616s
+2026-05-24T11:13:33.567+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:13:33.571+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:13:38.164+08:00 [INFO] heartbeatCheck: 4.5970408s
+2026-05-24T11:13:43.163+08:00 [INFO] heartbeatCheck: 9.5968695s
+2026-05-24T11:13:43.489+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:13:45.513+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[23],\"card_type\":1,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:13:48.164+08:00 [INFO] heartbeatCheck: 14.5970579s
+2026-05-24T11:13:48.489+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[41],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:13:51.499+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:13:53.164+08:00 [INFO] heartbeatCheck: 19.5979329s
+2026-05-24T11:13:58.163+08:00 [INFO] heartbeatCheck: 24.5968052s
+2026-05-24T11:14:01.515+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:14:01.529+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:14:02.984+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:14:02.985+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:14:03.164+08:00 [INFO] heartbeatCheck: 179.178ms
+2026-05-24T11:14:03.594+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:05.593+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:07.587+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[10,11],\"card_type\":2,\"cards_num\":5,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:08.164+08:00 [INFO] heartbeatCheck: 5.1792298s
+2026-05-24T11:14:10.599+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:11.405+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:14:11.409+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:14:11.602+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:13.204+08:00 [INFO] heartbeatCheck: 1.7999639s
+2026-05-24T11:14:14.595+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:17.591+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[18,20],\"card_type\":2,\"cards_num\":3,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:18.165+08:00 [INFO] heartbeatCheck: 6.7605471s
+2026-05-24T11:14:20.598+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:23.166+08:00 [INFO] heartbeatCheck: 11.7615792s
+2026-05-24T11:14:26.589+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:14:26.589+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:14:27.595+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:28.163+08:00 [INFO] heartbeatCheck: 1.5739s
+2026-05-24T11:14:30.586+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:33.164+08:00 [INFO] heartbeatCheck: 6.5743194s
+2026-05-24T11:14:33.590+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[21,24],\"card_type\":2,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:36.639+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:14:38.164+08:00 [INFO] heartbeatCheck: 11.5746937s
+2026-05-24T11:14:38.206+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[50,52]}"}（类型: 1）
+2026-05-24T11:14:38.208+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[50,52]}"  from:"1"
+2026-05-24T11:14:38.595+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[50,52],\"card_type\":2,\"cards_num\":11,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:14:41.589+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:14:43.164+08:00 [INFO] heartbeatCheck: 4.958961s
+2026-05-24T11:14:44.595+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:14:46.640+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:14:48.164+08:00 [INFO] heartbeatCheck: 9.9583472s
+2026-05-24T11:14:52.423+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[6,9,4,13,19]}"}（类型: 1）
+2026-05-24T11:14:52.424+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[6,9,4,13,19]}"  from:"1"
+2026-05-24T11:14:52.598+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[6,9,4,13,19],\"card_type\":3,\"cards_num\":6,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:14:53.164+08:00 [INFO] heartbeatCheck: 740.8083ms
+2026-05-24T11:14:55.586+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[42,43,44,46,47],\"card_type\":5,\"cards_num\":1,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:14:57.590+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:14:58.164+08:00 [INFO] heartbeatCheck: 5.7407302s
+2026-05-24T11:14:59.600+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:15:00.991+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:15:00.995+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:15:01.594+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":1,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:15:03.163+08:00 [INFO] heartbeatCheck: 2.1717504s
+2026-05-24T11:15:04.587+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[31],\"card_type\":1,\"cards_num\":0,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:15:05.585+08:00 [INFO] 用户 1 发送消息: {"type":"over","data":"[{\"winName\":\"1\",\"winner\":0,\"point\":772,\"win\":-6}]"}
+2026-05-24T11:15:08.184+08:00 [INFO] heartbeatCheck: 7.1927325s
+2026-05-24T11:15:13.163+08:00 [INFO] heartbeatCheck: 12.1719484s
+2026-05-24T11:15:15.590+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:15:15.605+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:15:18.164+08:00 [INFO] heartbeatCheck: 2.5738978s
+2026-05-24T11:15:23.164+08:00 [INFO] heartbeatCheck: 7.5735512s
+2026-05-24T11:15:25.620+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:15:25.624+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:15:28.165+08:00 [INFO] heartbeatCheck: 2.5445686s
+2026-05-24T11:15:33.164+08:00 [INFO] heartbeatCheck: 7.5439824s
+2026-05-24T11:15:35.638+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:15:35.644+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:15:38.164+08:00 [INFO] heartbeatCheck: 2.5261331s
+2026-05-24T11:15:43.164+08:00 [INFO] heartbeatCheck: 7.5258565s
+2026-05-24T11:15:45.655+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:15:45.658+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:15:48.168+08:00 [INFO] heartbeatCheck: 2.5135788s
+2026-05-24T11:15:53.165+08:00 [INFO] heartbeatCheck: 7.509878s
+2026-05-24T11:15:55.677+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:15:55.713+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:15:58.164+08:00 [INFO] heartbeatCheck: 2.4875759s
+2026-05-24T11:16:03.163+08:00 [INFO] heartbeatCheck: 7.4868048s
+2026-05-24T11:16:05.727+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:16:05.729+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:16:08.164+08:00 [INFO] heartbeatCheck: 2.4362468s
+2026-05-24T11:16:13.163+08:00 [INFO] heartbeatCheck: 7.4358888s
+2026-05-24T11:16:15.734+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:16:15.738+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:16:18.163+08:00 [INFO] heartbeatCheck: 2.4293647s
+2026-05-24T11:16:23.164+08:00 [INFO] heartbeatCheck: 7.4298971s
+2026-05-24T11:16:25.746+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:16:25.748+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:16:28.163+08:00 [INFO] heartbeatCheck: 2.4185404s
+2026-05-24T11:16:33.163+08:00 [INFO] heartbeatCheck: 7.4187068s
+2026-05-24T11:16:35.752+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:16:35.754+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:16:38.164+08:00 [INFO] heartbeatCheck: 2.4119461s
+2026-05-24T11:16:43.164+08:00 [INFO] heartbeatCheck: 7.4123945s
+2026-05-24T11:16:45.772+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:16:45.789+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:16:48.164+08:00 [INFO] heartbeatCheck: 2.3915352s
+2026-05-24T11:16:53.164+08:00 [INFO] heartbeatCheck: 7.3914515s
+2026-05-24T11:16:55.811+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:16:55.814+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:16:58.165+08:00 [INFO] heartbeatCheck: 2.3535707s
+2026-05-24T11:17:03.163+08:00 [INFO] heartbeatCheck: 7.3522985s
+2026-05-24T11:17:05.821+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:17:05.824+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:17:08.163+08:00 [INFO] heartbeatCheck: 2.3427292s
+2026-05-24T11:17:13.164+08:00 [INFO] heartbeatCheck: 7.3435441s
+2026-05-24T11:17:15.833+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:17:15.834+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:17:18.164+08:00 [INFO] heartbeatCheck: 2.3319347s
+2026-05-24T11:17:23.164+08:00 [INFO] heartbeatCheck: 7.3317703s
+2026-05-24T11:17:24.686+08:00 [INFO] 用户 1 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-24T11:17:24.691+08:00 [INFO] 执行操作异步任务: type:"play"  from:"1"
+2026-05-24T11:17:24.710+08:00 [INFO] 用户 1 发送消息: {"type":"showCard","data":"{\"cards\":[48,18,30,44,47,5,33,41,6,13,1,2,31],\"current\":0,\"playerPoint\":772,\"outCardTimeout\":30}"}
+2026-05-24T11:17:25.714+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[1],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:17:27.715+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[27],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:17:28.165+08:00 [INFO] heartbeatCheck: 3.4789342s
+2026-05-24T11:17:29.710+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[29],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:17:32.721+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[32],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:17:33.163+08:00 [INFO] heartbeatCheck: 8.4777676s
+2026-05-24T11:17:38.164+08:00 [INFO] heartbeatCheck: 13.4778971s
+2026-05-24T11:17:42.726+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:17:42.728+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:17:43.163+08:00 [INFO] heartbeatCheck: 437.1947ms
+2026-05-24T11:17:48.164+08:00 [INFO] heartbeatCheck: 5.4384203s
+2026-05-24T11:17:52.737+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:17:52.739+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:17:53.164+08:00 [INFO] heartbeatCheck: 427.2134ms
+2026-05-24T11:17:58.164+08:00 [INFO] heartbeatCheck: 5.4272919s
+2026-05-24T11:18:02.712+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:18:03.164+08:00 [INFO] heartbeatCheck: 10.4270693s
+2026-05-24T11:18:05.722+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[35],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:18:08.164+08:00 [INFO] heartbeatCheck: 15.4271559s
+2026-05-24T11:18:08.711+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[45],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:18:11.739+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[46],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:18:13.164+08:00 [INFO] heartbeatCheck: 20.4271402s
+2026-05-24T11:18:18.163+08:00 [INFO] heartbeatCheck: 25.4267127s
+2026-05-24T11:18:21.755+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:18:21.766+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:18:23.164+08:00 [INFO] heartbeatCheck: 1.4086252s
+2026-05-24T11:18:28.163+08:00 [INFO] heartbeatCheck: 6.4085167s
+2026-05-24T11:18:31.771+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:18:31.774+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:18:33.163+08:00 [INFO] heartbeatCheck: 1.3927874s
+2026-05-24T11:18:38.164+08:00 [INFO] heartbeatCheck: 6.3931964s
+2026-05-24T11:18:41.711+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:18:43.164+08:00 [INFO] heartbeatCheck: 11.393261s
+2026-05-24T11:18:43.711+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:18:45.719+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[52],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:18:48.164+08:00 [INFO] heartbeatCheck: 16.3935061s
+2026-05-24T11:18:48.717+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:18:53.164+08:00 [INFO] heartbeatCheck: 21.3931331s
+2026-05-24T11:18:58.163+08:00 [INFO] heartbeatCheck: 26.3927018s
+2026-05-24T11:18:58.737+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:18:58.738+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:19:03.164+08:00 [INFO] heartbeatCheck: 4.4269694s
+2026-05-24T11:19:08.164+08:00 [INFO] heartbeatCheck: 9.4268099s
+2026-05-24T11:19:08.750+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:19:08.752+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:19:13.164+08:00 [INFO] heartbeatCheck: 4.4141433s
+2026-05-24T11:19:18.163+08:00 [INFO] heartbeatCheck: 9.4135969s
+2026-05-24T11:19:18.723+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:19:20.710+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:19:23.164+08:00 [INFO] heartbeatCheck: 14.414308s
+2026-05-24T11:19:23.710+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[3],\"card_type\":1,\"cards_num\":9,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:19:25.729+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[4],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:19:28.164+08:00 [INFO] heartbeatCheck: 19.4138786s
+2026-05-24T11:19:33.163+08:00 [INFO] heartbeatCheck: 24.4137069s
+2026-05-24T11:19:35.747+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:19:35.749+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:19:38.164+08:00 [INFO] heartbeatCheck: 2.4175046s
+2026-05-24T11:19:43.163+08:00 [INFO] heartbeatCheck: 7.417164s
+2026-05-24T11:19:45.759+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:19:45.764+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:19:48.164+08:00 [INFO] heartbeatCheck: 2.4046379s
+2026-05-24T11:19:53.164+08:00 [INFO] heartbeatCheck: 7.4045507s
+2026-05-24T11:19:55.721+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:19:57.711+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[42],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:19:58.164+08:00 [INFO] heartbeatCheck: 12.4045529s
+2026-05-24T11:19:59.711+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":9,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:20:02.719+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[49],\"card_type\":1,\"cards_num\":9,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:20:03.164+08:00 [INFO] heartbeatCheck: 17.4040388s
+2026-05-24T11:20:08.164+08:00 [INFO] heartbeatCheck: 22.4049025s
+2026-05-24T11:20:12.731+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:20:12.738+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:20:13.164+08:00 [INFO] heartbeatCheck: 433.2968ms
+2026-05-24T11:20:18.165+08:00 [INFO] heartbeatCheck: 5.4348142s
+2026-05-24T11:20:22.756+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:20:22.760+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:20:23.164+08:00 [INFO] heartbeatCheck: 408.5208ms
+2026-05-24T11:20:28.163+08:00 [INFO] heartbeatCheck: 5.4077852s
+2026-05-24T11:20:32.524+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:20:33.163+08:00 [INFO] heartbeatCheck: 10.4076969s
+2026-05-24T11:20:34.411+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":10,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:20:37.410+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":9,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:20:38.163+08:00 [INFO] heartbeatCheck: 15.4076223s
+2026-05-24T11:20:39.645+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[43,39,23,15,7],\"card_type\":4,\"cards_num\":4,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:20:43.164+08:00 [INFO] heartbeatCheck: 20.407995s
+2026-05-24T11:20:48.163+08:00 [INFO] heartbeatCheck: 25.4076072s
+2026-05-24T11:20:49.667+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:20:49.669+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:20:53.164+08:00 [INFO] heartbeatCheck: 3.4976646s
+2026-05-24T11:20:58.164+08:00 [INFO] heartbeatCheck: 8.4980464s
+2026-05-24T11:20:59.685+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:20:59.687+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:21:03.164+08:00 [INFO] heartbeatCheck: 3.4795001s
+2026-05-24T11:21:08.164+08:00 [INFO] heartbeatCheck: 8.4789234s
+2026-05-24T11:21:09.700+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:21:09.702+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:21:09.827+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:21:11.810+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[37,38,40,50,51],\"card_type\":5,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:21:13.164+08:00 [INFO] heartbeatCheck: 3.4638716s
+2026-05-24T11:21:14.812+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":9,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:21:16.817+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":4,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:21:18.164+08:00 [INFO] heartbeatCheck: 8.4638131s
+2026-05-24T11:21:23.164+08:00 [INFO] heartbeatCheck: 13.4637996s
+2026-05-24T11:21:26.822+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:21:26.824+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:21:28.164+08:00 [INFO] heartbeatCheck: 1.3425334s
+2026-05-24T11:21:33.164+08:00 [INFO] heartbeatCheck: 6.3424408s
+2026-05-24T11:21:36.839+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:21:36.842+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:21:38.164+08:00 [INFO] heartbeatCheck: 1.3253471s
+2026-05-24T11:21:43.164+08:00 [INFO] heartbeatCheck: 6.3250288s
+2026-05-24T11:21:46.813+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:21:48.164+08:00 [INFO] heartbeatCheck: 11.3254909s
+2026-05-24T11:21:49.812+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[8,9,16,19,22],\"card_type\":3,\"cards_num\":0,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:21:50.810+08:00 [INFO] 用户 1 发送消息: {"type":"over","data":"[{\"winName\":\"1\",\"winner\":0,\"point\":758,\"win\":-12}]"}
+2026-05-24T11:21:53.163+08:00 [INFO] heartbeatCheck: 16.3245445s
+2026-05-24T11:21:58.163+08:00 [INFO] heartbeatCheck: 21.3247381s
+2026-05-24T11:22:00.820+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:22:00.829+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:22:03.164+08:00 [INFO] heartbeatCheck: 2.3438371s
+2026-05-24T11:22:08.163+08:00 [INFO] heartbeatCheck: 7.3435213s
+2026-05-24T11:22:10.837+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:22:10.839+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:22:13.163+08:00 [INFO] heartbeatCheck: 2.3266496s
+2026-05-24T11:22:18.163+08:00 [INFO] heartbeatCheck: 7.3266395s
+2026-05-24T11:22:20.853+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:22:20.855+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:22:23.164+08:00 [INFO] heartbeatCheck: 2.3110152s
+2026-05-24T11:22:28.164+08:00 [INFO] heartbeatCheck: 7.3108278s
+2026-05-24T11:22:30.864+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:22:30.866+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:22:33.164+08:00 [INFO] heartbeatCheck: 2.3006925s
+2026-05-24T11:22:38.164+08:00 [INFO] heartbeatCheck: 7.3006894s
+2026-05-24T11:22:40.874+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:22:40.877+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:22:43.164+08:00 [INFO] heartbeatCheck: 2.28946s
+2026-05-24T11:22:48.164+08:00 [INFO] heartbeatCheck: 7.2898501s
+2026-05-24T11:22:50.884+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:22:50.888+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:22:53.169+08:00 [INFO] heartbeatCheck: 2.2845216s
+2026-05-24T11:22:58.164+08:00 [INFO] heartbeatCheck: 7.2799136s
+2026-05-24T11:23:00.901+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:23:00.904+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:23:03.163+08:00 [INFO] heartbeatCheck: 2.2621422s
+2026-05-24T11:23:08.164+08:00 [INFO] heartbeatCheck: 7.2629333s
+2026-05-24T11:23:10.922+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:23:10.925+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:23:13.163+08:00 [INFO] heartbeatCheck: 2.2417365s
+2026-05-24T11:23:18.164+08:00 [INFO] heartbeatCheck: 7.2429326s
+2026-05-24T11:23:20.936+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:23:20.939+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:23:23.164+08:00 [INFO] heartbeatCheck: 2.2280848s
+2026-05-24T11:23:28.163+08:00 [INFO] heartbeatCheck: 7.2276442s
+2026-05-24T11:23:30.944+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:23:30.974+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:23:33.164+08:00 [INFO] heartbeatCheck: 2.2204688s
+2026-05-24T11:23:38.163+08:00 [INFO] heartbeatCheck: 7.219492s
+2026-05-24T11:23:40.980+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:23:40.983+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:23:43.164+08:00 [INFO] heartbeatCheck: 2.1843232s
+2026-05-24T11:23:48.163+08:00 [INFO] heartbeatCheck: 7.1833931s
+2026-05-24T11:23:50.993+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:23:50.994+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:23:53.165+08:00 [INFO] heartbeatCheck: 2.1718633s
+2026-05-24T11:23:58.163+08:00 [INFO] heartbeatCheck: 7.1707866s
+2026-05-24T11:24:01.013+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:24:01.014+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:24:03.164+08:00 [INFO] heartbeatCheck: 2.1515023s
+2026-05-24T11:24:08.164+08:00 [INFO] heartbeatCheck: 7.1515782s
+2026-05-24T11:24:11.024+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:24:11.027+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:24:13.164+08:00 [INFO] heartbeatCheck: 2.1397689s
+2026-05-24T11:24:18.164+08:00 [INFO] heartbeatCheck: 7.1392176s
+2026-05-24T11:24:21.032+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:24:21.034+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:24:23.164+08:00 [INFO] heartbeatCheck: 2.132085s
+2026-05-24T11:24:28.163+08:00 [INFO] heartbeatCheck: 7.1311377s
+2026-05-24T11:24:31.039+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:24:31.042+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:24:33.195+08:00 [INFO] heartbeatCheck: 2.1559043s
+2026-05-24T11:24:38.163+08:00 [INFO] heartbeatCheck: 7.1240574s
+2026-05-24T11:24:41.059+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:24:41.062+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:24:43.164+08:00 [INFO] heartbeatCheck: 2.1059519s
+2026-05-24T11:24:48.164+08:00 [INFO] heartbeatCheck: 7.1059607s
+2026-05-24T11:24:51.080+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:24:51.081+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:24:53.163+08:00 [INFO] heartbeatCheck: 2.0829886s
+2026-05-24T11:24:58.163+08:00 [INFO] heartbeatCheck: 7.082823s
+2026-05-24T11:25:01.087+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:25:01.104+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:25:03.163+08:00 [INFO] heartbeatCheck: 2.0777203s
+2026-05-24T11:25:08.164+08:00 [INFO] heartbeatCheck: 7.0783264s
+2026-05-24T11:25:11.110+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:25:11.112+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:25:13.163+08:00 [INFO] heartbeatCheck: 2.0542358s
+2026-05-24T11:25:18.164+08:00 [INFO] heartbeatCheck: 7.054689s
+2026-05-24T11:25:21.121+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:25:21.127+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:25:23.164+08:00 [INFO] heartbeatCheck: 2.0428975s
+2026-05-24T11:25:28.163+08:00 [INFO] heartbeatCheck: 7.0422664s
+2026-05-24T11:25:31.133+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:25:31.135+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:25:33.163+08:00 [INFO] heartbeatCheck: 2.0301594s
+2026-05-24T11:25:38.163+08:00 [INFO] heartbeatCheck: 7.0299911s
+2026-05-24T11:25:41.138+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:25:41.140+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:25:43.163+08:00 [INFO] heartbeatCheck: 2.0250817s
+2026-05-24T11:25:48.163+08:00 [INFO] heartbeatCheck: 7.0249363s
+2026-05-24T11:25:51.152+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:25:51.154+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:25:53.163+08:00 [INFO] heartbeatCheck: 2.0127089s
+2026-05-24T11:25:58.165+08:00 [INFO] heartbeatCheck: 7.0141451s
+2026-05-24T11:26:01.167+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:26:01.169+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:26:03.164+08:00 [INFO] heartbeatCheck: 1.9977785s
+2026-05-24T11:26:08.163+08:00 [INFO] heartbeatCheck: 6.9973233s
+2026-05-24T11:26:11.177+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:26:11.183+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:26:13.163+08:00 [INFO] heartbeatCheck: 1.9859596s
+2026-05-24T11:26:18.163+08:00 [INFO] heartbeatCheck: 6.9860648s
+2026-05-24T11:26:21.231+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:26:21.267+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:26:23.163+08:00 [INFO] heartbeatCheck: 1.9321195s
+2026-05-24T11:26:28.163+08:00 [INFO] heartbeatCheck: 6.9320354s
+2026-05-24T11:26:31.275+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:26:31.291+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:26:33.164+08:00 [INFO] heartbeatCheck: 1.8893743s
+2026-05-24T11:26:38.164+08:00 [INFO] heartbeatCheck: 6.8894531s
+2026-05-24T11:26:41.308+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:26:41.311+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:26:43.163+08:00 [INFO] heartbeatCheck: 1.855177s
+2026-05-24T11:26:48.164+08:00 [INFO] heartbeatCheck: 6.8559643s
+2026-05-24T11:26:51.326+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:26:51.331+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:26:53.163+08:00 [INFO] heartbeatCheck: 1.8370633s
+2026-05-24T11:26:58.165+08:00 [INFO] heartbeatCheck: 6.8382944s
+2026-05-24T11:27:01.341+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:27:01.344+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:27:03.164+08:00 [INFO] heartbeatCheck: 1.8227651s
+2026-05-24T11:27:08.184+08:00 [INFO] heartbeatCheck: 6.8420939s
+2026-05-24T11:27:11.347+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:27:11.349+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:27:13.164+08:00 [INFO] heartbeatCheck: 1.8173558s
+2026-05-24T11:27:18.164+08:00 [INFO] heartbeatCheck: 6.8175788s
+2026-05-24T11:27:21.353+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:27:21.356+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:27:23.163+08:00 [INFO] heartbeatCheck: 1.8106157s
+2026-05-24T11:27:28.164+08:00 [INFO] heartbeatCheck: 6.8113773s
+2026-05-24T11:27:31.365+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:27:31.369+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:27:33.164+08:00 [INFO] heartbeatCheck: 1.7995697s
+2026-05-24T11:27:38.163+08:00 [INFO] heartbeatCheck: 6.7988733s
+2026-05-24T11:27:41.386+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:27:41.390+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:27:43.164+08:00 [INFO] heartbeatCheck: 1.7783285s
+2026-05-24T11:27:48.164+08:00 [INFO] heartbeatCheck: 6.7779903s
+2026-05-24T11:27:51.398+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:27:51.403+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:27:53.165+08:00 [INFO] heartbeatCheck: 1.7662256s
+2026-05-24T11:27:58.164+08:00 [INFO] heartbeatCheck: 6.7655359s
+2026-05-24T11:28:01.412+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:28:01.423+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:28:03.164+08:00 [INFO] heartbeatCheck: 1.7522375s
+2026-05-24T11:28:08.163+08:00 [INFO] heartbeatCheck: 6.7517694s
+2026-05-24T11:28:11.430+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:28:11.433+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:28:13.164+08:00 [INFO] heartbeatCheck: 1.7338339s
+2026-05-24T11:28:18.164+08:00 [INFO] heartbeatCheck: 6.733717s
+2026-05-24T11:28:21.437+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:28:21.439+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:28:23.163+08:00 [INFO] heartbeatCheck: 1.726728s
+2026-05-24T11:28:28.163+08:00 [INFO] heartbeatCheck: 6.7269518s
+2026-05-24T11:28:31.456+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:28:31.459+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:28:33.164+08:00 [INFO] heartbeatCheck: 1.708243s
+2026-05-24T11:28:38.164+08:00 [INFO] heartbeatCheck: 6.7079872s
+2026-05-24T11:28:41.478+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:28:41.482+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:28:43.164+08:00 [INFO] heartbeatCheck: 1.6862838s
+2026-05-24T11:28:48.164+08:00 [INFO] heartbeatCheck: 6.6861695s
+2026-05-24T11:28:51.495+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:28:51.498+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:28:53.164+08:00 [INFO] heartbeatCheck: 1.6697084s
+2026-05-24T11:28:58.164+08:00 [INFO] heartbeatCheck: 6.6692726s
+2026-05-24T11:29:01.507+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:29:01.511+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:29:03.163+08:00 [INFO] heartbeatCheck: 1.6571967s
+2026-05-24T11:29:08.163+08:00 [INFO] heartbeatCheck: 6.6569226s
+2026-05-24T11:29:11.526+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:29:11.529+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:29:13.163+08:00 [INFO] heartbeatCheck: 1.637278s
+2026-05-24T11:29:18.163+08:00 [INFO] heartbeatCheck: 6.637406s
+2026-05-24T11:29:21.540+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:29:21.543+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:29:23.163+08:00 [INFO] heartbeatCheck: 1.6229458s
+2026-05-24T11:29:28.163+08:00 [INFO] heartbeatCheck: 6.6229726s
+2026-05-24T11:29:31.557+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:29:31.567+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:29:33.164+08:00 [INFO] heartbeatCheck: 1.6068568s
+2026-05-24T11:29:38.164+08:00 [INFO] heartbeatCheck: 6.6071935s
+2026-05-24T11:29:41.576+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:29:41.578+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:29:43.164+08:00 [INFO] heartbeatCheck: 1.5883096s
+2026-05-24T11:29:48.163+08:00 [INFO] heartbeatCheck: 6.5877307s
+2026-05-24T11:29:51.582+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:29:51.584+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:29:53.163+08:00 [INFO] heartbeatCheck: 1.5817353s
+2026-05-24T11:29:58.164+08:00 [INFO] heartbeatCheck: 6.5821833s
+2026-05-24T11:30:01.594+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:30:01.598+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:30:03.164+08:00 [INFO] heartbeatCheck: 1.5698197s
+2026-05-24T11:30:08.164+08:00 [INFO] heartbeatCheck: 6.5707238s
+2026-05-24T11:30:11.611+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:30:11.618+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:30:13.163+08:00 [INFO] heartbeatCheck: 1.5521774s
+2026-05-24T11:30:18.163+08:00 [INFO] heartbeatCheck: 6.5522203s
+2026-05-24T11:30:21.637+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:30:21.639+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:30:23.164+08:00 [INFO] heartbeatCheck: 1.5269562s
+2026-05-24T11:30:28.164+08:00 [INFO] heartbeatCheck: 6.5267817s
+2026-05-24T11:30:31.655+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:30:31.657+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:30:33.164+08:00 [INFO] heartbeatCheck: 1.509354s
+2026-05-24T11:30:38.164+08:00 [INFO] heartbeatCheck: 6.5088321s
+2026-05-24T11:30:41.668+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:30:41.670+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:30:43.164+08:00 [INFO] heartbeatCheck: 1.4955751s
+2026-05-24T11:30:48.163+08:00 [INFO] heartbeatCheck: 6.4951599s
+2026-05-24T11:30:51.685+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:30:51.687+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:30:53.164+08:00 [INFO] heartbeatCheck: 1.4794092s
+2026-05-24T11:30:58.164+08:00 [INFO] heartbeatCheck: 6.4788609s
+2026-05-24T11:31:01.692+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:31:01.710+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:31:03.164+08:00 [INFO] heartbeatCheck: 1.4719012s
+2026-05-24T11:31:08.163+08:00 [INFO] heartbeatCheck: 6.4717119s
+2026-05-24T11:31:11.726+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:31:11.728+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:31:13.164+08:00 [INFO] heartbeatCheck: 1.4380414s
+2026-05-24T11:31:18.163+08:00 [INFO] heartbeatCheck: 6.4373995s
+2026-05-24T11:31:21.739+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:31:21.743+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:31:23.164+08:00 [INFO] heartbeatCheck: 1.425771s
+2026-05-24T11:31:28.164+08:00 [INFO] heartbeatCheck: 6.4256106s
+2026-05-24T11:31:31.751+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:31:31.754+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:31:33.163+08:00 [INFO] heartbeatCheck: 1.4119982s
+2026-05-24T11:31:38.164+08:00 [INFO] heartbeatCheck: 6.4121837s
+2026-05-24T11:31:41.764+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:31:41.767+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:31:43.164+08:00 [INFO] heartbeatCheck: 1.3996335s
+2026-05-24T11:31:48.164+08:00 [INFO] heartbeatCheck: 6.3995211s
+2026-05-24T11:31:51.783+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:31:51.785+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:31:53.164+08:00 [INFO] heartbeatCheck: 1.381091s
+2026-05-24T11:31:58.164+08:00 [INFO] heartbeatCheck: 6.3812607s
+2026-05-24T11:32:01.796+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:32:01.798+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:32:03.163+08:00 [INFO] heartbeatCheck: 1.3677301s
+2026-05-24T11:32:08.164+08:00 [INFO] heartbeatCheck: 6.3679617s
+2026-05-24T11:32:11.809+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:32:11.815+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:32:13.164+08:00 [INFO] heartbeatCheck: 1.3560207s
+2026-05-24T11:32:18.163+08:00 [INFO] heartbeatCheck: 6.3553995s
+2026-05-24T11:32:21.828+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:32:21.834+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:32:23.164+08:00 [INFO] heartbeatCheck: 1.3359618s
+2026-05-24T11:32:28.164+08:00 [INFO] heartbeatCheck: 6.335838s
+2026-05-24T11:32:31.841+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:32:31.849+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:32:33.164+08:00 [INFO] heartbeatCheck: 1.3235249s
+2026-05-24T11:32:38.164+08:00 [INFO] heartbeatCheck: 6.322913s
+2026-05-24T11:32:41.869+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:32:41.876+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:32:43.164+08:00 [INFO] heartbeatCheck: 1.2957527s
+2026-05-24T11:32:48.164+08:00 [INFO] heartbeatCheck: 6.2957598s
+2026-05-24T11:32:51.891+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:32:51.894+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:32:53.163+08:00 [INFO] heartbeatCheck: 1.2719282s
+2026-05-24T11:32:58.163+08:00 [INFO] heartbeatCheck: 6.2720875s
+2026-05-24T11:33:01.904+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:33:01.907+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:33:03.164+08:00 [INFO] heartbeatCheck: 1.2591577s
+2026-05-24T11:33:08.163+08:00 [INFO] heartbeatCheck: 6.2589748s
+2026-05-24T11:33:11.916+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:33:11.919+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:33:13.164+08:00 [INFO] heartbeatCheck: 1.2487984s
+2026-05-24T11:33:18.164+08:00 [INFO] heartbeatCheck: 6.2488054s
+2026-05-24T11:33:21.936+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:33:21.941+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:33:23.163+08:00 [INFO] heartbeatCheck: 1.2272876s
+2026-05-24T11:33:28.163+08:00 [INFO] heartbeatCheck: 6.2273885s
+2026-05-24T11:33:31.949+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:33:31.950+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:33:33.185+08:00 [INFO] heartbeatCheck: 1.235992s
+2026-05-24T11:33:38.178+08:00 [INFO] heartbeatCheck: 6.2295369s
+2026-05-24T11:33:41.968+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:33:41.974+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:33:43.164+08:00 [INFO] heartbeatCheck: 1.1955427s
+2026-05-24T11:33:48.164+08:00 [INFO] heartbeatCheck: 6.1953948s
+2026-05-24T11:33:51.981+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:33:51.982+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:33:53.163+08:00 [INFO] heartbeatCheck: 1.1820705s
+2026-05-24T11:33:58.163+08:00 [INFO] heartbeatCheck: 6.1819223s
+2026-05-24T11:34:01.989+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:34:02.005+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:34:03.163+08:00 [INFO] heartbeatCheck: 1.1742921s
+2026-05-24T11:34:08.164+08:00 [INFO] heartbeatCheck: 6.1746077s
+2026-05-24T11:34:12.012+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:34:12.017+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:34:13.164+08:00 [INFO] heartbeatCheck: 1.1522258s
+2026-05-24T11:34:18.165+08:00 [INFO] heartbeatCheck: 6.1530228s
+2026-05-24T11:34:22.036+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:34:22.039+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:34:23.164+08:00 [INFO] heartbeatCheck: 1.1285362s
+2026-05-24T11:34:28.164+08:00 [INFO] heartbeatCheck: 6.1284356s
+2026-05-24T11:34:32.043+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:34:32.045+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:34:33.164+08:00 [INFO] heartbeatCheck: 1.1209697s
+2026-05-24T11:34:38.164+08:00 [INFO] heartbeatCheck: 6.1210979s
+2026-05-24T11:34:42.059+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:34:42.061+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:34:43.165+08:00 [INFO] heartbeatCheck: 1.1070034s
+2026-05-24T11:34:48.163+08:00 [INFO] heartbeatCheck: 6.1058822s
+2026-05-24T11:34:52.079+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:34:52.080+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:34:53.163+08:00 [INFO] heartbeatCheck: 1.0839031s
+2026-05-24T11:34:58.163+08:00 [INFO] heartbeatCheck: 6.0839588s
+2026-05-24T11:35:02.096+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:35:02.098+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:35:03.164+08:00 [INFO] heartbeatCheck: 1.0679497s
+2026-05-24T11:35:08.164+08:00 [INFO] heartbeatCheck: 6.0681566s
+2026-05-24T11:35:12.106+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:35:12.109+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:35:13.164+08:00 [INFO] heartbeatCheck: 1.0581472s
+2026-05-24T11:35:18.164+08:00 [INFO] heartbeatCheck: 6.0582238s
+2026-05-24T11:35:22.125+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:35:22.127+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:35:23.164+08:00 [INFO] heartbeatCheck: 1.0386245s
+2026-05-24T11:35:28.164+08:00 [INFO] heartbeatCheck: 6.0386556s
+2026-05-24T11:35:32.137+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:35:32.146+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:35:33.164+08:00 [INFO] heartbeatCheck: 1.0269757s
+2026-05-24T11:35:38.164+08:00 [INFO] heartbeatCheck: 6.0266202s
+2026-05-24T11:35:42.156+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:35:42.158+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:35:43.164+08:00 [INFO] heartbeatCheck: 1.0072923s
+2026-05-24T11:35:48.163+08:00 [INFO] heartbeatCheck: 6.007157s
+2026-05-24T11:35:52.171+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:35:52.174+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:35:53.200+08:00 [INFO] heartbeatCheck: 1.0287096s
+2026-05-24T11:35:58.164+08:00 [INFO] heartbeatCheck: 5.992523s
+2026-05-24T11:36:02.183+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:36:02.184+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:36:03.164+08:00 [INFO] heartbeatCheck: 981.327ms
+2026-05-24T11:36:08.164+08:00 [INFO] heartbeatCheck: 5.9810622s
+2026-05-24T11:36:12.199+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:36:12.202+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:36:13.163+08:00 [INFO] heartbeatCheck: 963.9444ms
+2026-05-24T11:36:18.164+08:00 [INFO] heartbeatCheck: 5.9642724s
+2026-05-24T11:36:22.220+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:36:22.224+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:36:23.163+08:00 [INFO] heartbeatCheck: 943.1189ms
+2026-05-24T11:36:28.164+08:00 [INFO] heartbeatCheck: 5.943708s
+2026-05-24T11:36:32.241+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:36:32.244+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:36:33.164+08:00 [INFO] heartbeatCheck: 922.7382ms
+2026-05-24T11:36:38.226+08:00 [INFO] heartbeatCheck: 5.9241813s
+2026-05-24T11:36:42.258+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:36:42.259+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:36:43.164+08:00 [INFO] heartbeatCheck: 906.436ms
+2026-05-24T11:36:48.164+08:00 [INFO] heartbeatCheck: 5.9066018s
+2026-05-24T11:36:52.278+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:36:52.279+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:36:53.163+08:00 [INFO] heartbeatCheck: 885.8794ms
+2026-05-24T11:36:58.163+08:00 [INFO] heartbeatCheck: 5.8858688s
+2026-05-24T11:37:02.290+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:37:02.299+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:37:03.164+08:00 [INFO] heartbeatCheck: 874.0836ms
+2026-05-24T11:37:08.166+08:00 [INFO] heartbeatCheck: 5.8760804s
+2026-05-24T11:37:12.307+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:37:12.309+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:37:13.164+08:00 [INFO] heartbeatCheck: 857.0886ms
+2026-05-24T11:37:18.164+08:00 [INFO] heartbeatCheck: 5.8571753s
+2026-05-24T11:37:22.314+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:37:22.316+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:37:23.164+08:00 [INFO] heartbeatCheck: 850.1894ms
+2026-05-24T11:37:28.164+08:00 [INFO] heartbeatCheck: 5.8499933s
+2026-05-24T11:37:32.322+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:37:32.324+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:37:33.176+08:00 [INFO] heartbeatCheck: 854.681ms
+2026-05-24T11:37:38.164+08:00 [INFO] heartbeatCheck: 5.8421181s
+2026-05-24T11:37:42.332+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:37:42.340+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:37:43.165+08:00 [INFO] heartbeatCheck: 832.9657ms
+2026-05-24T11:37:48.164+08:00 [INFO] heartbeatCheck: 5.8323873s
+2026-05-24T11:37:52.355+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:37:52.359+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:37:53.163+08:00 [INFO] heartbeatCheck: 808.305ms
+2026-05-24T11:37:58.163+08:00 [INFO] heartbeatCheck: 5.8084514s
+2026-05-24T11:38:02.369+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:38:02.372+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:38:03.164+08:00 [INFO] heartbeatCheck: 794.1769ms
+2026-05-24T11:38:08.165+08:00 [INFO] heartbeatCheck: 5.7952573s
+2026-05-24T11:38:09.487+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-24T11:38:09.491+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-24T11:38:09.492+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-24T11:38:09.493+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-24T11:38:33.413+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc0005d88a0\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-24T11:45:34.288+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc0007085d0\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-24T11:46:07.404+08:00 [INFO] {e4cf8500a663b2181aaaa56ee63cc229} 用户 1 连接成功
+2026-05-24T11:46:07.405+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-24T11:46:07.455+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T11:46:07.458+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T11:46:09.976+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-24T11:46:09.977+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-24T11:46:10.013+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-24T11:46:10.099+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"XTPO0G\",\"Type\":0,\"CardNum\":13,\"Point\":758,\"UserId\":\"1\",\"RoomType\":1}]","from":"1"}
+2026-05-24T11:46:10.132+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-24T11:46:12.021+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"XTPO0G\",\"Type\":0,\"CardNum\":13,\"Point\":758,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"郁振家\",\"RoomID\":\"XTPO0G\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"逄鸿博\",\"RoomID\":\"XTPO0G\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"高德泽\",\"RoomID\":\"XTPO0G\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T11:46:12.405+08:00 [INFO] heartbeatCheck: 2.4295258s
+2026-05-24T11:46:13.643+08:00 [INFO] 用户 1 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-24T11:46:13.643+08:00 [INFO] 执行操作异步任务: type:"play"  from:"1"
+2026-05-24T11:46:13.688+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T11:46:13.748+08:00 [INFO] 用户 1 发送消息: {"type":"showCard","data":"{\"cards\":[27,10,48,32,23,38,20,19,14,52,37,36,39],\"current\":2,\"playerPoint\":758,\"outCardTimeout\":30}"}
+2026-05-24T11:46:13.791+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T11:46:13.814+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"XTPO0G\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"XTPO0G\",\"Type\":0,\"CardNum\":13,\"Point\":758,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"郁振家\",\"RoomID\":\"XTPO0G\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"逄鸿博\",\"RoomID\":\"XTPO0G\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"高德泽\",\"RoomID\":\"XTPO0G\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":758,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-24T11:46:15.735+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[41,25,17,5,1],\"card_type\":4,\"cards_num\":8,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:46:17.406+08:00 [INFO] heartbeatCheck: 3.7175569s
+2026-05-24T11:46:19.745+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[42,43,44,21,22],\"card_type\":5,\"cards_num\":8,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:46:22.406+08:00 [INFO] heartbeatCheck: 8.7179395s
+2026-05-24T11:46:23.073+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:46:23.075+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:46:23.741+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:46:26.738+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[45,46,47,3,4],\"card_type\":5,\"cards_num\":8,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:46:27.405+08:00 [INFO] heartbeatCheck: 4.3324605s
+2026-05-24T11:46:29.735+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":8,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:46:32.406+08:00 [INFO] heartbeatCheck: 9.3326576s
+2026-05-24T11:46:32.757+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":8,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:46:37.405+08:00 [INFO] heartbeatCheck: 14.3320993s
+2026-05-24T11:46:39.998+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:46:40.000+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:46:40.738+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:46:42.406+08:00 [INFO] heartbeatCheck: 2.4077494s
+2026-05-24T11:46:44.734+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[7],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:46:47.406+08:00 [INFO] heartbeatCheck: 7.4079212s
+2026-05-24T11:46:49.734+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[31],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:46:51.746+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[40],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:46:52.405+08:00 [INFO] heartbeatCheck: 12.4072907s
+2026-05-24T11:46:57.407+08:00 [INFO] heartbeatCheck: 17.4085945s
+2026-05-24T11:47:01.032+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[48]}"}（类型: 1）
+2026-05-24T11:47:01.037+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[48]}"  from:"1"
+2026-05-24T11:47:01.741+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[48],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:47:02.405+08:00 [INFO] heartbeatCheck: 1.3733978s
+2026-05-24T11:47:03.735+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[51],\"card_type\":1,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:47:06.735+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:47:07.407+08:00 [INFO] heartbeatCheck: 6.3749881s
+2026-05-24T11:47:11.749+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:47:12.408+08:00 [INFO] heartbeatCheck: 11.3765691s
+2026-05-24T11:47:12.895+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[52]}"}（类型: 1）
+2026-05-24T11:47:12.896+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[52]}"  from:"1"
+2026-05-24T11:47:13.738+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[52],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:47:17.411+08:00 [INFO] heartbeatCheck: 4.5158652s
+2026-05-24T11:47:17.735+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:47:21.736+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:47:22.406+08:00 [INFO] heartbeatCheck: 9.5105728s
+2026-05-24T11:47:24.748+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:47:27.412+08:00 [INFO] heartbeatCheck: 14.5165779s
+2026-05-24T11:47:31.177+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[10,14,19,23,27]}"}（类型: 1）
+2026-05-24T11:47:31.177+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[10,14,19,23,27]}"  from:"1"
+2026-05-24T11:47:31.739+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[10,14,19,23,27],\"card_type\":3,\"cards_num\":6,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:47:32.406+08:00 [INFO] heartbeatCheck: 1.229536s
+2026-05-24T11:47:34.738+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:47:37.405+08:00 [INFO] heartbeatCheck: 6.2288039s
+2026-05-24T11:47:38.737+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[33,34,35,11,12],\"card_type\":5,\"cards_num\":2,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:47:41.749+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:47:42.405+08:00 [INFO] heartbeatCheck: 11.22903s
+2026-05-24T11:47:42.823+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:47:42.824+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:47:43.740+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":1,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:47:46.734+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:47:47.406+08:00 [INFO] heartbeatCheck: 4.5828075s
+2026-05-24T11:47:50.734+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[2],\"card_type\":1,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:47:52.406+08:00 [INFO] heartbeatCheck: 9.5829118s
+2026-05-24T11:47:55.748+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[8],\"card_type\":1,\"cards_num\":6,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:47:57.304+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[20]}"}（类型: 1）
+2026-05-24T11:47:57.304+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[20]}"  from:"1"
+2026-05-24T11:47:57.406+08:00 [INFO] heartbeatCheck: 102.5878ms
+2026-05-24T11:47:57.757+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[20],\"card_type\":1,\"cards_num\":5,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:02.406+08:00 [INFO] heartbeatCheck: 5.1029376s
+2026-05-24T11:48:02.739+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[24],\"card_type\":1,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:48:06.737+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:48:07.406+08:00 [INFO] heartbeatCheck: 10.1029031s
+2026-05-24T11:48:11.752+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[29],\"card_type\":1,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:48:12.405+08:00 [INFO] heartbeatCheck: 15.1024313s
+2026-05-24T11:48:13.644+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[32]}"}（类型: 1）
+2026-05-24T11:48:13.645+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[32]}"  from:"1"
+2026-05-24T11:48:13.740+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[32],\"card_type\":1,\"cards_num\":4,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:17.405+08:00 [INFO] heartbeatCheck: 3.7611659s
+2026-05-24T11:48:17.739+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:19.733+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:22.405+08:00 [INFO] heartbeatCheck: 8.7613209s
+2026-05-24T11:48:22.747+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:24.127+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[36]}"}（类型: 1）
+2026-05-24T11:48:24.128+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[36]}"  from:"1"
+2026-05-24T11:48:24.753+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[36],\"card_type\":1,\"cards_num\":3,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:26.746+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:27.406+08:00 [INFO] heartbeatCheck: 3.2788874s
+2026-05-24T11:48:30.738+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:32.410+08:00 [INFO] heartbeatCheck: 8.2823005s
+2026-05-24T11:48:34.749+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:35.483+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[39]}"}（类型: 1）
+2026-05-24T11:48:35.485+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[39]}"  from:"1"
+2026-05-24T11:48:35.743+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[39],\"card_type\":1,\"cards_num\":2,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:37.406+08:00 [INFO] heartbeatCheck: 1.9266335s
+2026-05-24T11:48:38.734+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:42.406+08:00 [INFO] heartbeatCheck: 6.9261762s
+2026-05-24T11:48:43.734+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:48:45.746+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[49],\"card_type\":1,\"cards_num\":4,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:48:47.406+08:00 [INFO] heartbeatCheck: 11.9265323s
+2026-05-24T11:48:47.468+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:48:47.470+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:48:47.746+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":2,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:48:50.736+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:48:52.406+08:00 [INFO] heartbeatCheck: 4.9379239s
+2026-05-24T11:48:53.735+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:48:57.405+08:00 [INFO] heartbeatCheck: 9.9373685s
+2026-05-24T11:48:58.746+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[9],\"card_type\":1,\"cards_num\":3,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:49:02.006+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[38]}"}（类型: 1）
+2026-05-24T11:49:02.006+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[38]}"  from:"1"
+2026-05-24T11:49:02.406+08:00 [INFO] heartbeatCheck: 400.4591ms
+2026-05-24T11:49:02.763+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[38],\"card_type\":1,\"cards_num\":1,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:49:05.735+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:49:07.406+08:00 [INFO] heartbeatCheck: 5.4001461s
+2026-05-24T11:49:08.739+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:49:11.743+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[50],\"card_type\":1,\"cards_num\":2,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:49:12.405+08:00 [INFO] heartbeatCheck: 10.3999063s
+2026-05-24T11:49:13.026+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:49:13.033+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:49:13.740+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:49:15.734+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:49:17.405+08:00 [INFO] heartbeatCheck: 4.3792993s
+2026-05-24T11:49:18.742+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:49:22.406+08:00 [INFO] heartbeatCheck: 9.3795382s
+2026-05-24T11:49:23.747+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[26,28],\"card_type\":2,\"cards_num\":0,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:49:24.733+08:00 [INFO] 用户 1 发送消息: {"type":"over","data":"[{\"winName\":\"1\",\"winner\":0,\"point\":755,\"win\":-1}]"}
+2026-05-24T11:49:26.498+08:00 [INFO] 用户 1 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-24T11:49:26.499+08:00 [INFO] 执行操作异步任务: type:"play"  from:"1"
+2026-05-24T11:49:26.506+08:00 [INFO] 用户 1 发送消息: {"type":"showCard","data":"{\"cards\":[42,13,17,36,37,11,49,5,16,50,23,1,12],\"current\":0,\"playerPoint\":755,\"outCardTimeout\":30}"}
+2026-05-24T11:49:27.406+08:00 [INFO] heartbeatCheck: 908.8467ms
+2026-05-24T11:49:32.405+08:00 [INFO] heartbeatCheck: 5.9085637s
+2026-05-24T11:49:36.521+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:49:36.534+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:49:37.405+08:00 [INFO] heartbeatCheck: 884.7734ms
+2026-05-24T11:49:42.406+08:00 [INFO] heartbeatCheck: 5.885168s
+2026-05-24T11:49:46.538+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:49:46.541+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:49:47.406+08:00 [INFO] heartbeatCheck: 867.5057ms
+2026-05-24T11:49:52.405+08:00 [INFO] heartbeatCheck: 5.8671917s
+2026-05-24T11:49:56.552+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T11:49:56.554+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T11:49:57.406+08:00 [INFO] heartbeatCheck: 854.4165ms
+2026-05-24T11:49:57.515+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[1],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:50:00.507+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[3],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:50:02.405+08:00 [INFO] heartbeatCheck: 5.8538583s
+2026-05-24T11:50:04.507+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[8],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:50:06.521+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[22],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:50:07.405+08:00 [INFO] heartbeatCheck: 10.8539007s
+2026-05-24T11:50:12.407+08:00 [INFO] heartbeatCheck: 15.8553674s
+2026-05-24T11:50:15.645+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[36]}"}（类型: 1）
+2026-05-24T11:50:15.646+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[36]}"  from:"1"
+2026-05-24T11:50:16.512+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[36],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:50:17.405+08:00 [INFO] heartbeatCheck: 1.7597747s
+2026-05-24T11:50:19.507+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[47],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:50:22.407+08:00 [INFO] heartbeatCheck: 6.7615898s
+2026-05-24T11:50:22.510+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[52],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:50:25.524+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:50:27.411+08:00 [INFO] heartbeatCheck: 11.7659966s
+2026-05-24T11:50:27.970+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:50:27.971+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:50:28.510+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":1,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:50:32.406+08:00 [INFO] heartbeatCheck: 4.4356867s
+2026-05-24T11:50:32.509+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:50:36.511+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[2],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:50:37.406+08:00 [INFO] heartbeatCheck: 9.4359727s
+2026-05-24T11:50:39.524+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[35],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:50:41.646+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[37]}"}（类型: 1）
+2026-05-24T11:50:41.647+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[37]}"  from:"1"
+2026-05-24T11:50:42.405+08:00 [INFO] heartbeatCheck: 759.3247ms
+2026-05-24T11:50:42.513+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[37],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:50:45.511+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:50:47.406+08:00 [INFO] heartbeatCheck: 5.7596455s
+2026-05-24T11:50:49.508+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[41],\"card_type\":1,\"cards_num\":9,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:50:51.516+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[46],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T11:50:52.406+08:00 [INFO] heartbeatCheck: 10.7598806s
+2026-05-24T11:50:57.405+08:00 [INFO] heartbeatCheck: 15.7592467s
+2026-05-24T11:50:58.192+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[50]}"}（类型: 1）
+2026-05-24T11:50:58.192+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[50]}"  from:"1"
+2026-05-24T11:50:58.520+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[50],\"card_type\":1,\"cards_num\":9,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:51:00.518+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:51:02.405+08:00 [INFO] heartbeatCheck: 4.2135617s
+2026-05-24T11:51:02.506+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":9,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:51:05.521+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":10,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:51:06.353+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[5,11,13,17,23]}"}（类型: 1）
+2026-05-24T11:51:06.355+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[5,11,13,17,23]}"  from:"1"
+2026-05-24T11:51:06.518+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[5,11,13,17,23],\"card_type\":3,\"cards_num\":4,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:51:07.406+08:00 [INFO] heartbeatCheck: 1.0531549s
+2026-05-24T11:51:11.506+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[38,34,30,18,14],\"card_type\":4,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T11:51:12.405+08:00 [INFO] heartbeatCheck: 6.0526416s
+2026-05-24T11:51:14.512+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[51,43,39,27,15],\"card_type\":4,\"cards_num\":4,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:16.518+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":10,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:17.405+08:00 [INFO] heartbeatCheck: 11.0524502s
+2026-05-24T11:51:18.047+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:51:18.050+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:51:18.513+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":4,\"code\":0,\"current\":1,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:21.506+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:22.405+08:00 [INFO] heartbeatCheck: 4.3581862s
+2026-05-24T11:51:24.506+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[9,10],\"card_type\":2,\"cards_num\":2,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:27.409+08:00 [INFO] heartbeatCheck: 9.3620668s
+2026-05-24T11:51:28.524+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":10,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:29.212+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T11:51:29.213+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T11:51:29.512+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":4,\"code\":0,\"current\":1,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:31.506+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:32.406+08:00 [INFO] heartbeatCheck: 3.194306s
+2026-05-24T11:51:36.506+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[26],\"card_type\":1,\"cards_num\":1,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:37.406+08:00 [INFO] heartbeatCheck: 8.1940158s
+2026-05-24T11:51:38.518+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":10,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:42.410+08:00 [INFO] heartbeatCheck: 13.1982271s
+2026-05-24T11:51:43.193+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[42]}"}（类型: 1）
+2026-05-24T11:51:43.195+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[42]}"  from:"1"
+2026-05-24T11:51:43.514+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[42],\"card_type\":1,\"cards_num\":3,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:51:47.405+08:00 [INFO] heartbeatCheck: 4.2123148s
+2026-05-24T11:51:47.513+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T11:51:50.506+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[45],\"card_type\":1,\"cards_num\":0,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T11:51:51.506+08:00 [INFO] 用户 1 发送消息: {"type":"over","data":"[{\"winName\":\"1\",\"winner\":0,\"point\":750,\"win\":-3}]"}
+2026-05-24T11:51:52.406+08:00 [INFO] heartbeatCheck: 9.2127372s
+2026-05-24T11:51:57.405+08:00 [INFO] heartbeatCheck: 14.2121687s
+2026-05-24T11:51:59.819+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-24T11:51:59.819+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-24T11:51:59.869+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"MI8SN9\",\"Type\":0,\"CardNum\":13,\"Point\":750,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"伍浩气\",\"RoomID\":\"MI8SN9\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T11:52:01.869+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"MI8SN9\",\"Type\":0,\"CardNum\":13,\"Point\":750,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"伍浩气\",\"RoomID\":\"MI8SN9\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"章昌茂\",\"RoomID\":\"MI8SN9\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"牛振锐\",\"RoomID\":\"MI8SN9\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T11:52:02.406+08:00 [INFO] heartbeatCheck: 2.5874912s
+2026-05-24T11:52:03.770+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-24T11:52:03.771+08:00 [INFO] 执行操作异步任务: type:"leaveRoom"  from:"1"
+2026-05-24T11:52:03.788+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T11:52:03.843+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T11:52:07.405+08:00 [INFO] heartbeatCheck: 3.6175251s
+2026-05-24T11:52:08.665+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-24T11:52:08.666+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-24T11:52:08.667+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-24T11:52:08.667+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-24T11:57:44.064+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"RawService":"\u003c0xc0003b0120\u003e","protocol":"grpc"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-24T12:03:55.853+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc00081c780\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-24T12:04:23.282+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc00081cf60\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-24T12:04:51.312+08:00 [INFO] {40d9b6aeab64b2183caaa56e44940f3c} 用户 1 连接成功
+2026-05-24T12:04:51.322+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-24T12:04:51.389+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T12:04:51.390+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T12:04:56.320+08:00 [INFO] heartbeatCheck: 4.9307392s
+2026-05-24T12:04:56.354+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-24T12:04:56.365+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-24T12:04:56.410+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"KABR44\",\"Type\":0,\"CardNum\":13,\"Point\":750,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"戚鸿光\",\"RoomID\":\"KABR44\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"王运骏\",\"RoomID\":\"KABR44\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T12:04:56.411+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-24T12:04:56.414+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-24T12:04:58.411+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"KABR44\",\"Type\":0,\"CardNum\":13,\"Point\":750,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"戚鸿光\",\"RoomID\":\"KABR44\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"王运骏\",\"RoomID\":\"KABR44\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"贝迎荷\",\"RoomID\":\"KABR44\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T12:05:00.093+08:00 [INFO] 用户 1 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-24T12:05:00.094+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T12:05:00.096+08:00 [INFO] 执行操作异步任务: type:"play"  from:"1"
+2026-05-24T12:05:00.229+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T12:05:00.232+08:00 [INFO] 用户 1 发送消息: {"type":"showCard","data":"{\"cards\":[41,2,45,28,37,35,7,1,5,3,11,29,50],\"current\":0,\"playerPoint\":750,\"outCardTimeout\":30}"}
+2026-05-24T12:05:00.292+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"KABR44\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"KABR44\",\"Type\":0,\"CardNum\":13,\"Point\":750,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"戚鸿光\",\"RoomID\":\"KABR44\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"王运骏\",\"RoomID\":\"KABR44\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"贝迎荷\",\"RoomID\":\"KABR44\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":750,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-24T12:05:01.320+08:00 [INFO] heartbeatCheck: 1.2266153s
+2026-05-24T12:05:06.320+08:00 [INFO] heartbeatCheck: 6.2263706s
+2026-05-24T12:05:10.325+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:05:10.326+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:05:11.321+08:00 [INFO] heartbeatCheck: 996.5544ms
+2026-05-24T12:05:14.428+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[1,2,3,5,7]}"}（类型: 1）
+2026-05-24T12:05:14.430+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[1,2,3,5,7]}"  from:"1"
+2026-05-24T12:05:15.185+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[1,2,3,5,7],\"card_type\":5,\"cards_num\":8,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:05:16.181+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:05:16.321+08:00 [INFO] heartbeatCheck: 1.8921715s
+2026-05-24T12:05:18.180+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:05:20.195+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[9,10,12,23,24],\"card_type\":5,\"cards_num\":8,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:05:21.320+08:00 [INFO] heartbeatCheck: 6.8913598s
+2026-05-24T12:05:25.819+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T12:05:25.822+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T12:05:26.184+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":8,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:05:26.321+08:00 [INFO] heartbeatCheck: 501.6739ms
+2026-05-24T12:05:29.183+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:05:31.185+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:05:31.320+08:00 [INFO] heartbeatCheck: 5.5007796s
+2026-05-24T12:05:32.194+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[13],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:05:36.321+08:00 [INFO] heartbeatCheck: 10.5020069s
+2026-05-24T12:05:37.974+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[45]}"}（类型: 1）
+2026-05-24T12:05:37.976+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[45]}"  from:"1"
+2026-05-24T12:05:38.187+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[45],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:05:41.185+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[46],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:05:41.320+08:00 [INFO] heartbeatCheck: 3.3461166s
+2026-05-24T12:05:43.183+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:05:44.189+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[47],\"card_type\":1,\"cards_num\":6,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:05:46.321+08:00 [INFO] heartbeatCheck: 8.3465458s
+2026-05-24T12:05:49.302+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T12:05:49.303+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T12:05:50.187+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:05:51.320+08:00 [INFO] heartbeatCheck: 2.0178693s
+2026-05-24T12:05:53.182+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[51],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:05:55.186+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:05:56.194+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:05:56.320+08:00 [INFO] heartbeatCheck: 7.0182807s
+2026-05-24T12:05:59.484+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T12:05:59.486+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T12:06:00.187+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":1,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:06:01.182+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[52,48,36,20,8],\"card_type\":4,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:06:01.320+08:00 [INFO] heartbeatCheck: 1.8362544s
+2026-05-24T12:06:04.183+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:06:06.320+08:00 [INFO] heartbeatCheck: 6.8364601s
+2026-05-24T12:06:08.188+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:06:10.568+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T12:06:10.569+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T12:06:11.186+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":7,\"code\":0,\"current\":1,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:06:11.320+08:00 [INFO] heartbeatCheck: 752.6448ms
+2026-05-24T12:06:12.182+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[14],\"card_type\":1,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:06:14.185+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[16],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T12:06:16.194+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[18],\"card_type\":1,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:06:16.320+08:00 [INFO] heartbeatCheck: 5.7527552s
+2026-05-24T12:06:21.321+08:00 [INFO] heartbeatCheck: 10.7533495s
+2026-05-24T12:06:23.168+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[50]}"}（类型: 1）
+2026-05-24T12:06:23.169+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[50]}"  from:"1"
+2026-05-24T12:06:24.191+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[50],\"card_type\":1,\"cards_num\":6,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:06:26.183+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:06:26.320+08:00 [INFO] heartbeatCheck: 3.1522787s
+2026-05-24T12:06:27.187+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:06:29.206+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:06:30.065+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[28,29,35,37,41]}"}（类型: 1）
+2026-05-24T12:06:30.072+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[28,29,35,37,41]}"  from:"1"
+2026-05-24T12:06:30.183+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[28,29,35,37,41],\"card_type\":3,\"cards_num\":1,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:06:31.330+08:00 [INFO] heartbeatCheck: 1.2649092s
+2026-05-24T12:06:32.182+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:06:35.180+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:06:36.320+08:00 [INFO] heartbeatCheck: 6.2547561s
+2026-05-24T12:06:37.190+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:06:41.236+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[11]}"}（类型: 1）
+2026-05-24T12:06:41.237+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[11]}"  from:"1"
+2026-05-24T12:06:41.320+08:00 [INFO] heartbeatCheck: 84.1566ms
+2026-05-24T12:06:42.186+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[11],\"card_type\":1,\"cards_num\":0,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:06:43.183+08:00 [INFO] 用户 1 发送消息: {"type":"over","data":"[{\"winName\":\"1\",\"winner\":0,\"point\":770,\"win\":22}]"}
+2026-05-24T12:06:46.321+08:00 [INFO] heartbeatCheck: 5.0847133s
+2026-05-24T12:06:51.320+08:00 [INFO] heartbeatCheck: 10.0840503s
+2026-05-24T12:06:51.425+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-24T12:06:51.429+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-24T12:06:51.489+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"4FOSOW\",\"Type\":0,\"CardNum\":13,\"Point\":770,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"上官向秋\",\"RoomID\":\"4FOSOW\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"康又琴\",\"RoomID\":\"4FOSOW\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T12:06:52.873+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-24T12:06:52.875+08:00 [INFO] 执行操作异步任务: type:"leaveRoom"  from:"1"
+2026-05-24T12:06:52.910+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T12:06:52.969+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T12:06:53.491+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"4FOSOW\",\"Type\":0,\"CardNum\":13,\"Point\":770,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"上官向秋\",\"RoomID\":\"4FOSOW\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"康又琴\",\"RoomID\":\"4FOSOW\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"芮起运\",\"RoomID\":\"4FOSOW\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T12:06:56.321+08:00 [INFO] heartbeatCheck: 3.4110459s
+2026-05-24T12:07:01.320+08:00 [INFO] heartbeatCheck: 8.4104018s
+2026-05-24T12:07:03.501+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:07:03.508+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:07:06.320+08:00 [INFO] heartbeatCheck: 2.8197795s
+2026-05-24T12:07:11.320+08:00 [INFO] heartbeatCheck: 7.8192201s
+2026-05-24T12:07:13.521+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:07:13.522+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:07:16.320+08:00 [INFO] heartbeatCheck: 2.7997721s
+2026-05-24T12:07:21.320+08:00 [INFO] heartbeatCheck: 7.7996606s
+2026-05-24T12:07:23.543+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:07:23.548+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:07:26.321+08:00 [INFO] heartbeatCheck: 2.7782974s
+2026-05-24T12:07:31.320+08:00 [INFO] heartbeatCheck: 7.7777009s
+2026-05-24T12:07:33.905+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:07:33.909+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:07:36.320+08:00 [INFO] heartbeatCheck: 2.4155949s
+2026-05-24T12:07:41.320+08:00 [INFO] heartbeatCheck: 7.415901s
+2026-05-24T12:07:44.904+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:07:44.908+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:07:46.320+08:00 [INFO] heartbeatCheck: 1.416698s
+2026-05-24T12:07:51.320+08:00 [INFO] heartbeatCheck: 6.4171174s
+2026-05-24T12:07:55.903+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:07:55.905+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:07:56.321+08:00 [INFO] heartbeatCheck: 417.904ms
+2026-05-24T12:08:01.320+08:00 [INFO] heartbeatCheck: 5.4175212s
+2026-05-24T12:08:06.321+08:00 [INFO] heartbeatCheck: 10.417814s
+2026-05-24T12:08:06.903+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:08:06.907+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:08:11.320+08:00 [INFO] heartbeatCheck: 4.4176856s
+2026-05-24T12:08:16.320+08:00 [INFO] heartbeatCheck: 9.4172486s
+2026-05-24T12:08:17.906+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:08:17.910+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:08:21.320+08:00 [INFO] heartbeatCheck: 3.4142574s
+2026-05-24T12:08:26.320+08:00 [INFO] heartbeatCheck: 8.4148668s
+2026-05-24T12:08:29.008+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:08:29.017+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:08:31.320+08:00 [INFO] heartbeatCheck: 2.3115162s
+2026-05-24T12:08:31.568+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-24T12:08:31.569+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-24T12:08:31.571+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-24T12:08:31.571+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-24T12:08:40.524+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"RawService":"\u003c0xc000705350\u003e","protocol":"grpc"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-24T12:14:04.516+08:00 [INFO] {c4088c7c2c65b21858aaa56e49a13002} 用户 1 连接成功
+2026-05-24T12:14:04.517+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-24T12:14:04.593+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T12:14:04.596+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T12:14:07.248+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-24T12:14:07.249+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-24T12:14:07.325+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-24T12:14:07.331+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-24T12:14:07.337+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"PESOP7\",\"Type\":0,\"CardNum\":13,\"Point\":770,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"干鹏飞\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"杭辰阳\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"茅子轩\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T12:14:09.518+08:00 [INFO] heartbeatCheck: 2.2710751s
+2026-05-24T12:14:09.735+08:00 [INFO] 用户 1 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-24T12:14:09.739+08:00 [INFO] 执行操作异步任务: type:"play"  from:"1"
+2026-05-24T12:14:09.795+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T12:14:09.845+08:00 [INFO] 用户 1 发送消息: {"type":"showCard","data":"{\"cards\":[34,8,22,6,52,44,27,25,16,5,50,31,30],\"current\":3,\"playerPoint\":770,\"outCardTimeout\":30}"}
+2026-05-24T12:14:09.850+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T12:14:09.940+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"PESOP7\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"PESOP7\",\"Type\":0,\"CardNum\":13,\"Point\":770,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"干鹏飞\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"杭辰阳\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"茅子轩\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":770,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-24T12:14:13.809+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[46,47,48,1,3],\"card_type\":5,\"cards_num\":8,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:14:14.518+08:00 [INFO] heartbeatCheck: 4.7229787s
+2026-05-24T12:14:19.518+08:00 [INFO] heartbeatCheck: 9.7227091s
+2026-05-24T12:14:21.215+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T12:14:21.217+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T12:14:21.800+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:14:23.801+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:14:24.542+08:00 [INFO] heartbeatCheck: 3.3270857s
+2026-05-24T12:14:24.797+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:14:25.808+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[10],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:14:29.518+08:00 [INFO] heartbeatCheck: 8.3035948s
+2026-05-24T12:14:30.579+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[16]}"}（类型: 1）
+2026-05-24T12:14:30.580+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[16]}"  from:"1"
+2026-05-24T12:14:30.800+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[16],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:14:33.802+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[29],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:14:34.518+08:00 [INFO] heartbeatCheck: 3.9394236s
+2026-05-24T12:14:36.799+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[33],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T12:14:39.519+08:00 [INFO] heartbeatCheck: 8.940431s
+2026-05-24T12:14:39.812+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[39],\"card_type\":1,\"cards_num\":6,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:14:43.170+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[44]}"}（类型: 1）
+2026-05-24T12:14:43.171+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[44]}"  from:"1"
+2026-05-24T12:14:43.805+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[44],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:14:44.518+08:00 [INFO] heartbeatCheck: 1.347811s
+2026-05-24T12:14:47.801+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[45],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:14:49.518+08:00 [INFO] heartbeatCheck: 6.3476131s
+2026-05-24T12:14:50.798+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:14:53.808+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[49],\"card_type\":1,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:14:54.518+08:00 [INFO] heartbeatCheck: 11.3480485s
+2026-05-24T12:14:56.334+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[50]}"}（类型: 1）
+2026-05-24T12:14:56.335+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[50]}"  from:"1"
+2026-05-24T12:14:56.805+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[50],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:14:57.797+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:14:59.518+08:00 [INFO] heartbeatCheck: 3.1842733s
+2026-05-24T12:14:59.799+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:15:02.809+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:15:04.519+08:00 [INFO] heartbeatCheck: 8.1844605s
+2026-05-24T12:15:09.518+08:00 [INFO] heartbeatCheck: 13.1843737s
+2026-05-24T12:15:10.348+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[5,6,8,25,27]}"}（类型: 1）
+2026-05-24T12:15:10.348+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[5,6,8,25,27]}"  from:"1"
+2026-05-24T12:15:10.804+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[5,6,8,25,27],\"card_type\":5,\"cards_num\":5,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:15:13.798+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[37,38,40,13,14],\"card_type\":5,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:15:14.519+08:00 [INFO] heartbeatCheck: 4.1712579s
+2026-05-24T12:15:15.800+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:15:17.809+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:15:19.518+08:00 [INFO] heartbeatCheck: 9.1702993s
+2026-05-24T12:15:21.294+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T12:15:21.295+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T12:15:21.803+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":1,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:15:24.518+08:00 [INFO] heartbeatCheck: 3.2245136s
+2026-05-24T12:15:26.797+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[41],\"card_type\":1,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-24T12:15:29.518+08:00 [INFO] heartbeatCheck: 8.2237581s
+2026-05-24T12:15:30.797+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[42],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T12:15:33.814+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T12:15:34.518+08:00 [INFO] heartbeatCheck: 13.224474s
+2026-05-24T12:15:39.316+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[52]}"}（类型: 1）
+2026-05-24T12:15:39.317+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[52]}"  from:"1"
+2026-05-24T12:15:39.518+08:00 [INFO] heartbeatCheck: 201.2744ms
+2026-05-24T12:15:39.871+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[52],\"card_type\":1,\"cards_num\":4,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:15:42.804+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:15:44.518+08:00 [INFO] heartbeatCheck: 5.2018158s
+2026-05-24T12:15:46.797+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:15:48.808+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:15:49.518+08:00 [INFO] heartbeatCheck: 10.2016475s
+2026-05-24T12:15:54.518+08:00 [INFO] heartbeatCheck: 15.2018504s
+2026-05-24T12:15:56.444+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[30,31]}"}（类型: 1）
+2026-05-24T12:15:56.445+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[30,31]}"  from:"1"
+2026-05-24T12:15:56.800+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[30,31],\"card_type\":2,\"cards_num\":2,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:15:57.798+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:15:58.800+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:15:59.518+08:00 [INFO] heartbeatCheck: 3.0746204s
+2026-05-24T12:15:59.808+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:16:04.518+08:00 [INFO] heartbeatCheck: 8.0747829s
+2026-05-24T12:16:09.520+08:00 [INFO] heartbeatCheck: 13.0769791s
+2026-05-24T12:16:09.815+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:16:09.845+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:16:10.333+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[22]}"}（类型: 1）
+2026-05-24T12:16:10.335+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[22]}"  from:"1"
+2026-05-24T12:16:11.003+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[22],\"card_type\":1,\"cards_num\":1,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:16:13.002+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:16:14.519+08:00 [INFO] heartbeatCheck: 4.1858862s
+2026-05-24T12:16:15.998+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[28],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-24T12:16:18.009+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[36],\"card_type\":1,\"cards_num\":4,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:16:19.484+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-24T12:16:19.489+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"pass\":1}"  from:"1"
+2026-05-24T12:16:19.518+08:00 [INFO] heartbeatCheck: 33.9192ms
+2026-05-24T12:16:20.013+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":1,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:16:22.999+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:16:24.518+08:00 [INFO] heartbeatCheck: 5.0335217s
+2026-05-24T12:16:25.999+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":10,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:16:27.011+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[32],\"card_type\":1,\"cards_num\":3,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-24T12:16:29.307+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[34]}"}（类型: 1）
+2026-05-24T12:16:29.308+08:00 [INFO] 执行操作异步任务: type:"playCard"  data:"{\"pid\":0,\"cardIds\":[34]}"  from:"1"
+2026-05-24T12:16:29.518+08:00 [INFO] heartbeatCheck: 211.2427ms
+2026-05-24T12:16:29.999+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":0,\"cardIds\":[34],\"card_type\":1,\"cards_num\":0,\"code\":0,\"current\":1,\"mustPid\":0,\"outCardTimeout\":30}"}
+2026-05-24T12:16:30.997+08:00 [INFO] 用户 1 发送消息: {"type":"over","data":"[{\"winName\":\"1\",\"winner\":0,\"point\":786,\"win\":18}]"}
+2026-05-24T12:16:32.475+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-24T12:16:32.504+08:00 [INFO] 执行操作异步任务: type:"initRoom"  from:"1"
+2026-05-24T12:16:32.558+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"4YBYD5\",\"Type\":0,\"CardNum\":13,\"Point\":786,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"别思菱\",\"RoomID\":\"4YBYD5\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"谷昌茂\",\"RoomID\":\"4YBYD5\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T12:16:34.518+08:00 [INFO] heartbeatCheck: 2.0435022s
+2026-05-24T12:16:34.559+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"4YBYD5\",\"Type\":0,\"CardNum\":13,\"Point\":786,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"别思菱\",\"RoomID\":\"4YBYD5\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"谷昌茂\",\"RoomID\":\"4YBYD5\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"敖景天\",\"RoomID\":\"4YBYD5\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-24T12:16:35.287+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-24T12:16:35.288+08:00 [INFO] 执行操作异步任务: type:"leaveRoom"  from:"1"
+2026-05-24T12:16:35.335+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T12:16:35.599+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T12:16:39.518+08:00 [INFO] heartbeatCheck: 4.1832716s
+2026-05-24T12:16:44.518+08:00 [INFO] heartbeatCheck: 9.1835635s
+2026-05-24T12:16:44.577+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:16:44.579+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:16:49.518+08:00 [INFO] heartbeatCheck: 4.9408118s
+2026-05-24T12:16:50.523+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-24T12:16:50.524+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-24T12:16:50.525+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-24T12:16:50.525+08:00 [INFO] 用户 1 心跳检测退出

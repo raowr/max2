@@ -1,0 +1,7 @@
+2026-05-24T11:15:05.927+08:00 [DEBU] {6c969d84f461b218bbe50955831214ac} [291 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
+2026-05-24T11:15:06.045+08:00 [DEBU] {6c969d84f461b218bbe50955831214ac} [115 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=772 WHERE `id`=3
+2026-05-24T11:21:51.168+08:00 [DEBU] {94880cde5262b21806e60955349f51fb} [350 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=758 WHERE `id`=3
+2026-05-24T11:49:25.130+08:00 [DEBU] {34b4a3f3d363b2183bbb6f2080e16cf2} [374 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=755 WHERE `id`=3
+2026-05-24T11:51:51.822+08:00 [DEBU] {d091d61ff663b21891bb6f209894bfff} [309 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=750 WHERE `id`=3
+2026-05-24T12:06:43.730+08:00 [DEBU] {a877d4bbc564b218ba77221b437f71a8} [536 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=770 WHERE `id`=3
+2026-05-24T12:16:32.021+08:00 [DEBU] {0c795e984e65b2189ea3f92118782cbb} [1006 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=786 WHERE `id`=3

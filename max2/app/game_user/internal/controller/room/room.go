@@ -699,7 +699,9 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.passCount = 0
 		g.Log().Infof(ctx, "\n游戏结束！恭喜%s！获胜\n", winName)
 		//缓存当前房间信息
+		wg.Add(1)
 		go func() {
+			defer wg.Done()
 			roomJsonStr, err := json.Marshal(room)
 			if err != nil {
 				g.Log().Error(ctx, err)
@@ -718,20 +720,24 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	var indices []int
 	var selectedCards []Card
+
+	// 记录开始出牌时间
+	now := int(time.Now().Unix())
+	if room.OutStarTime == 0 {
+		room.OutStarTime = now
+	}
+
 	if currentPlayer.Type == AI {
 		// AI决策，随机秒数
 		//thingTime := grand.N(1,5)
 		//time.Sleep(time.Duration(thingTime) * time.Second) // 模拟思考时间
 		//记录开始出牌时间
-		now := int(time.Now().Unix())
-		if room.OutStarTime == 0 {
-			room.OutStarTime = now
-		}
-		thinkTime := grand.N(1, 2) //模拟思考秒数
+
+		thinkTime := grand.N(1, 5) //模拟思考秒数
 		if now-room.OutStarTime < thinkTime {
 			return
 		}
-		room.OutStarTime = 0
+		// room.OutStarTime = 0
 		room.LastPH, selectedCards = aiDecideCards(currentPlayer, room.Landlord, room.LastPH, room.LastCards)
 		// selectedCards = getSelectedCards(currentPlayer, indices)
 		if len(selectedCards) > 0 {
@@ -772,11 +778,6 @@ func (room *Room) GameLoop(ctx context.Context) {
 		currentPlayer.OutCardIds = reqData.CardIds
 		currentPlayer.Pass = reqData.Pass
 
-		//记录开始出牌时间
-		now := int(time.Now().Unix())
-		// if room.OutStarTime == 0 {
-		// 	room.OutStarTime = now
-		// }
 		outCardTimeout := GetOutCardTimeout()
 		//玩家不操作逻辑
 		if len(currentPlayer.OutCardIds) <= 0 && //玩家还没出牌
@@ -1009,7 +1010,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 			OutCardIds: showCards(selectedCards),
 		})
 	}
-	room.OutStarTime = 0 //人类出牌时间恢复为0
+	room.OutStarTime = now
+	// room.OutStarTime = 0 //人类出牌时间恢复为0
 	currentPlayer.OutCardIds = make([]int, 0)
 	// 下一个玩家
 	room.Current = (room.Current + 1) % 4
@@ -1024,8 +1026,6 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	// 添加调试日志
 	if room.Players[room.Current].Type == Human {
-		now := int(time.Now().Unix())
-		room.OutStarTime = now
 		//修复资源泄漏：先关闭旧的订阅
 		if room.subClient != nil {
 			_ = room.subClient.Close(ctx)
