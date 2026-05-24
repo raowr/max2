@@ -658,6 +658,21 @@ export default {
 
       if (this.loadedCount === this.totalFiles) {
         this.isReady = true
+        const userData = storage.local.get('user');
+      
+      if (!userData) {
+        // 如果没有用户信息
+        console.log('没有用户信息');
+        return;
+      }
+      // 如果有用户信息，尝试连接 websocket
+      const node = userData.node || userData.Node;
+      if (!node) {
+        console.log('用户信息不完整');
+        return;
+      }
+      // 尝试连接 websocket
+      this.tryConnectWebSocket(userData);
       }
     },
     toIndex() {
@@ -746,7 +761,7 @@ export default {
             ws.off('error', errorCallback);
             ws.off('close', closeCallback);
             // 如果不是正常关闭且还在 loading 页面
-            if (event.code !== 1000 && this.$route.path === '/loading') {
+            if (event.code !== 1000 && this.$route.path === '/') {
                 ElMessage.error('服务器连接异常，请重新登录');
                 this.showLoginModal = true;
             }

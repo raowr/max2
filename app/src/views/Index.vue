@@ -40,14 +40,25 @@
     </div>
     <!--  右边设置栏 -->
     <div class="right-settings">
-      <div class="setting-btn btn-set" @click="toggleSettingImage()"></div>
+      <div class="setting-btn btn-set"  @click="toggleLogoutModal()"></div>
       <div class="setting-btn btn-guide"  @click="toggleGuideModal()"></div>
-      <div class="setting-btn btn-trophy"></div>
+      <div class="setting-btn btn-trophy"  @click="toggleSettingImage()"></div>
       <!-- 弹出图片容器 -->
       <div v-if="showSettingImage" class="setting-image-container">
         <img src="@/assets/img/creator.jpg" alt="设置图片" class="setting-image">
         <!-- 可选：点击图片外部关闭 -->
         <div class="setting-image-overlay" @click="toggleSettingImage()"></div>
+      </div>
+            <!-- 退出登录弹窗 -->
+      <div v-if="showLogoutModal" class="logout-modal-container">
+        <div class="logout-modal-content">
+          <p>确定要退出登录吗？</p>
+          <div class="logout-modal-buttons">
+            <button class="logout-btn cancel-btn" @click="toggleLogoutModal()">取消</button>
+            <button class="logout-btn exit-btn" @click="logout()">退出</button>
+          </div>
+        </div>
+        <div class="logout-modal-overlay" @click="toggleLogoutModal()"></div>
       </div>
             <!-- 规则说明弹窗 -->
       <div v-if="showGuideModal" class="guide-modal-container">
@@ -116,6 +127,7 @@ const router = useRouter()
 const route = useRoute()
 const showSettingImage = ref(false)  // 弹出图片容器显示与隐藏
 const showGuideModal = ref(false)   // 规则说明弹窗显示与隐藏
+const showLogoutModal = ref(false)   // 退出登录弹窗显示与隐藏
 // 页面可见性变化处理函数
 const handleVisibilityChange = () => {
   if (document.hidden) {
@@ -135,6 +147,25 @@ const toggleSettingImage = () => {
 }
 const toggleGuideModal = () => {
   showGuideModal.value = !showGuideModal.value
+}
+const toggleLogoutModal = () => {
+  showLogoutModal.value = !showLogoutModal.value
+}
+const logout = () => {
+  showLogoutModal.value = false
+    // 断开 websocket 连接
+  if (websocket && websocket.close) {
+    websocket.close()
+  }
+  // 删除用户信息
+  // 彻底清除用户信息（同时使用 remove 和 set(null) 确保清除）
+  storage.local.set('user', null)
+  storage.local.remove('user')
+    // 也清除相关的用户ID
+  storage.local.set('user_id', null)
+  storage.local.remove('user_id')
+  // 跳转到登录页面
+  router.push('/')
 }
 
 const userIdShow = ref(false)  // 玩家di显示与隐藏
@@ -781,6 +812,70 @@ const toRoom = () => {
   z-index: 9;
 }
 
+/* 退出登录弹窗样式 */
+.logout-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logout-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.logout-modal-content {
+  position: relative;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  padding: 40px 60px;
+  text-align: center;
+  z-index: 2;
+  border: 2px solid gold;
+}
+.logout-modal-content p {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+.logout-modal-buttons {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+.logout-btn {
+  padding: 12px 40px;
+  border: none;
+  border-radius: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.cancel-btn {
+  background: #666;
+  color: white;
+}
+.cancel-btn:hover {
+  background: #888;
+}
+.exit-btn {
+  background: gold;
+  color: #333;
+}
+.exit-btn:hover {
+  background: #ffcc00;
+  transform: scale(1.05);
+}
 
 /* 横屏模式专属样式 */
 @media (max-width: 998px) {
