@@ -1267,3 +1267,322 @@
 2026-05-24T12:16:50.524+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
 2026-05-24T12:16:50.525+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
 2026-05-24T12:16:50.525+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-24T12:37:02.335+08:00 [INFO] {103668496d66b2180d6cb114353de51f} 准备注册服务: serverName=gate_service.svc, address=127.0.0.1:8010, key=/discov/gate_service.svc/
+2026-05-24T12:37:02.336+08:00 [INFO] {103668496d66b2180d6cb114353de51f} 开始服务注册...
+2026-05-24T12:37:02.368+08:00 [WARN] {103668496d66b2180d6cb114353de51f} KeepAlive 意外返回，服务 [gate_service.svc] 已开始
+2026-05-24T12:37:02.418+08:00 [DEBU] etcd put success with key "/service/default/default/gate_service.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587895049128812819"
+2026-05-24T12:38:00.304+08:00 [INFO] {48a209c47a66b2180e6cb114b44dec0a} 用户 1 连接成功
+2026-05-24T12:38:00.311+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-24T12:38:00.328+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T12:38:00.364+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T12:38:00.456+08:00 [DEBU] Watch key "/service/default/default/game_user/latest/"
+2026-05-24T12:38:00.606+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc0006d7470\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-24T12:38:00.611+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc000531860\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-24T12:38:00.914+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"PESOP7\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"PESOP7\",\"Type\":0,\"CardNum\":0,\"Point\":786,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"干鹏飞\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":5,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"杭辰阳\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":10,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"茅子轩\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":3,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":1,\"playerPoint\":786,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":5},{\"id\":2,\"cardNum\":10},{\"id\":3,\"cardNum\":3}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":0,\"status\":2,\"type\":1}","from":"1"}
+2026-05-24T12:38:05.389+08:00 [INFO] heartbeatCheck: 5.0614652s
+2026-05-24T12:38:10.514+08:00 [INFO] heartbeatCheck: 10.1864713s
+2026-05-24T12:38:11.725+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:38:11.933+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:38:15.433+08:00 [INFO] heartbeatCheck: 3.7081255s
+2026-05-24T12:38:20.312+08:00 [INFO] heartbeatCheck: 8.5873385s
+2026-05-24T12:38:21.949+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:38:21.953+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:38:25.314+08:00 [INFO] heartbeatCheck: 3.3643319s
+2026-05-24T12:38:29.520+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-24T12:38:29.521+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-24T12:38:29.524+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-24T12:38:29.525+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-24T12:39:07.240+08:00 [INFO] {4cf2335e8a66b218136cb114f237acbc} 用户 1 连接成功
+2026-05-24T12:39:07.243+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-24T12:39:07.372+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T12:39:07.375+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T12:39:07.406+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"PESOP7\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"PESOP7\",\"Type\":0,\"CardNum\":0,\"Point\":786,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"干鹏飞\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":5,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"杭辰阳\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":10,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"茅子轩\",\"RoomID\":\"PESOP7\",\"Type\":1,\"CardNum\":3,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":1,\"playerPoint\":786,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":5},{\"id\":2,\"cardNum\":10},{\"id\":3,\"cardNum\":3}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":0,\"status\":2,\"type\":1}","from":"1"}
+2026-05-24T12:39:07.407+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-24T12:39:07.416+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-24T12:39:12.244+08:00 [INFO] heartbeatCheck: 4.9447822s
+2026-05-24T12:39:17.245+08:00 [INFO] heartbeatCheck: 9.9453174s
+2026-05-24T12:39:17.415+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:39:17.417+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:39:22.244+08:00 [INFO] heartbeatCheck: 4.8287627s
+2026-05-24T12:39:27.244+08:00 [INFO] heartbeatCheck: 9.8291631s
+2026-05-24T12:39:27.435+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:39:27.438+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:39:32.244+08:00 [INFO] heartbeatCheck: 4.8081868s
+2026-05-24T12:39:37.244+08:00 [INFO] heartbeatCheck: 9.8082587s
+2026-05-24T12:39:37.452+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:39:37.477+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:39:42.293+08:00 [INFO] heartbeatCheck: 4.8413533s
+2026-05-24T12:39:46.986+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-24T12:39:46.993+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-24T12:39:47.014+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-24T12:39:47.015+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-24T12:40:48.721+08:00 [INFO] {a4fc05f4a166b218196cb11409d2c985} 用户 1 连接成功
+2026-05-24T12:40:48.742+08:00 [INFO] heartbeatCheck: 2562047h47m16.854775807s
+2026-05-24T12:40:48.808+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-24T12:40:48.835+08:00 [INFO] 执行操作异步任务: type:"getInfo"  from:"1"
+2026-05-24T12:40:53.747+08:00 [INFO] heartbeatCheck: 4.9389078s
+2026-05-24T12:40:58.729+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:40:58.733+08:00 [INFO] 用户 1 连接已关闭，跳过消息发送
+2026-05-24T12:40:58.735+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:40:58.735+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-24T12:40:58.744+08:00 [INFO] heartbeatCheck: 15.3673ms
+2026-05-24T12:41:03.748+08:00 [INFO] heartbeatCheck: 5.0195468s
+2026-05-24T12:41:08.788+08:00 [INFO] heartbeatCheck: 10.059667s
+2026-05-24T12:41:08.789+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-24T12:41:08.806+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-24T12:41:13.808+08:00 [INFO] heartbeatCheck: 5.0197665s
+2026-05-24T12:41:19.053+08:00 [INFO] heartbeatCheck: 10.2647197s
+2026-05-24T12:41:20.767+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-24T12:41:20.769+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-24T12:41:20.769+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-24T12:41:20.770+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-24T12:41:52.321+08:00 [ERRO] {8c9e0db3b066b2181e6cb11411ca7810} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:41:57.456+08:00 [ERRO] {dc1661ffb166b2181f6cb114378d6ac2} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:02.509+08:00 [ERRO] {6c05922bb366b218206cb114cfa50573} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:03.266+08:00 [ERRO] {bccd3b5ab366b218216cb114de9b9a9f} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:09.385+08:00 [ERRO] {78a9c2c6b466b218226cb11454d59733} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:16.772+08:00 [ERRO] {908f167db666b218236cb114b77b780f} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:22.929+08:00 [ERRO] {e03068edb766b218246cb1142ffd04fb} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:29.435+08:00 [ERRO] {b44f6e70b966b218256cb1140f0c5a30} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:34.906+08:00 [ERRO] {1c371cb8ba66b218266cb11479af8752} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:40.924+08:00 [ERRO] {8890d01ebc66b218276cb114dc816fda} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:46.926+08:00 [ERRO] {3c267f84bd66b218286cb114d76fb6b0} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:52.935+08:00 [ERRO] {d03d99eabe66b218296cb114f39cbd88} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:42:57.964+08:00 [ERRO] {48735f16c066b2182a6cb11402d83c47} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:12.995+08:00 [ERRO] {acba6796c366b2182b6cb114677b6481} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:16.402+08:00 [ERRO] {14fa7b61c466b2182c6cb1140b49d2bc} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:18.050+08:00 [ERRO] {088f95c3c466b2182d6cb1142eedf850} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:20.952+08:00 [ERRO] {4cb3a770c566b2182e6cb114eee30a96} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:21.438+08:00 [ERRO] {b037ac8dc566b2182f6cb1145aa005b3} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:23.104+08:00 [ERRO] {a87568f0c566b218306cb114ce6289d7} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:23.398+08:00 [ERRO] {40cf9102c666b218316cb114444b9999} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:25.202+08:00 [ERRO] {e059dd6dc666b218326cb1140834ec69} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:26.001+08:00 [ERRO] {3420209dc666b218336cb114484ab9cf} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:26.502+08:00 [ERRO] {f46876bbc666b218346cb114f6cdf44e} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:26.704+08:00 [ERRO] {80889bc7c666b218356cb114f156b32c} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:28.162+08:00 [ERRO] {c47e821ec766b218366cb11459d2d55b} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:28.445+08:00 [ERRO] {502b4d2fc766b218376cb114bd4234b3} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:29.594+08:00 [ERRO] {4049dc73c766b218386cb114d6843d56} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:30.231+08:00 [ERRO] {ec9ecd99c766b218396cb11447cfb247} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:31.060+08:00 [ERRO] {fcbe34cbc766b2183a6cb1144527e73d} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:31.201+08:00 [ERRO] {e4e3a1d3c766b2183b6cb11477211dcd} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:31.587+08:00 [ERRO] {0007a6eac766b2183c6cb1149bc68929} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:31.758+08:00 [ERRO] {800be0f4c766b2183d6cb114959c45df} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:32.519+08:00 [ERRO] {540b3422c866b2183e6cb11427446f9f} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:33.315+08:00 [ERRO] {58efa851c866b2183f6cb11496781d44} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:33.517+08:00 [ERRO] {ac36bb5dc866b218406cb1149ab86d85} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:34.764+08:00 [ERRO] {2c370ea8c866b218416cb11427643738} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:35.314+08:00 [ERRO] {cc4eccc8c866b218426cb114ea6eea62} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:36.284+08:00 [ERRO] {6825a702c966b218436cb1145b4007fc} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:36.686+08:00 [ERRO] {300d941ac966b218446cb1141fea5873} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:37.106+08:00 [ERRO] {0853a833c966b218456cb114caa251fc} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:37.718+08:00 [ERRO] {9c87f257c966b218466cb11456d65a97} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:38.728+08:00 [ERRO] {0cfd4d94c966b218476cb1145ddef69f} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:40.064+08:00 [ERRO] {44f3f2e3c966b218486cb1147ea909bd} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:41.341+08:00 [ERRO] {64f80d30ca66b218496cb114849c8a05} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:42.074+08:00 [ERRO] {e4b3ce5bca66b2184a6cb114bf5ce613} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:42.748+08:00 [ERRO] {2459e483ca66b2184b6cb114f6d9ce9f} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:45.187+08:00 [ERRO] {40644915cb66b2184c6cb114717e1c38} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:48.781+08:00 [ERRO] {7c8380ebcb66b2184d6cb1142e5e1ed2} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:51.742+08:00 [ERRO] {c0f1f99bcc66b2184e6cb114d1223580} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+
+2026-05-24T12:43:56.643+08:00 [ERRO] {243c77bfcd66b2184f6cb1147ce2eaac} 用户不存在 
+Stack:
+1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
+

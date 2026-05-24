@@ -9111,3 +9111,29 @@
 2026-05-24T12:16:31.008+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9030","ServerName":"user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc0006d30e0\u003e"},"BalancerAttributes":null,"Metadata":null}]
 2026-05-24T12:16:32.553+08:00 [INFO] 用户 1 开始延迟添加AI到房间 4YBYD5
 2026-05-24T12:16:35.619+08:00 [INFO] {00cb5faa4f65b2186caaa56ef81cca05} 用户 1 玩家不在房间内
+2026-05-24T12:35:29.926+08:00 [ERRO] Redis Client Do failed with arguments "[Set gFastV3Cache:comm 2]": dial tcp 127.0.0.1:6379: connectex: No connection could be made because the target machine actively refused it. 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  game_user/internal/controller/set_game.InitCache
+    D:/gowork/max2/max2/app/game_user/internal/controller/set_game/set_init.go:17
+3.  game_user/internal/cmd.init.func1
+    D:/gowork/max2/max2/app/game_user/internal/cmd/cmd.go:27
+4.  main.main
+    D:/gowork/max2/max2/app/game_user/main.go:16
+
+2026-05-24T12:35:30.440+08:00 [ERRO] Redis Client Do failed with arguments "[Set gFastV3Cache:point 100]": dial tcp 127.0.0.1:6379: connectex: No connection could be made because the target machine actively refused it. 
+Stack:
+1.  github.com/tiger1103/gfast-cache/cache.(*GfCache).Set
+    D:/gowork/pkg/mod/github.com/tiger1103/gfast-cache@v1.0.12/cache/cache.go:146
+2.  game_user/internal/controller/set_game.InitCache
+    D:/gowork/max2/max2/app/game_user/internal/controller/set_game/set_init.go:17
+3.  game_user/internal/cmd.init.func1
+    D:/gowork/max2/max2/app/game_user/internal/cmd/cmd.go:27
+4.  main.main
+    D:/gowork/max2/max2/app/game_user/main.go:16
+
+2026-05-24T12:35:30.503+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587895049128812802"
+2026-05-24T12:36:00.974+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587895049128812805"
+2026-05-24T12:36:14.080+08:00 [DEBU] etcd put success with key "/service/default/default/game_user/latest/172.20.10.3:9020", value "{"protocol":"grpc"}", lease "7587895049128812809"
+2026-05-24T12:40:49.352+08:00 [INFO] {24471506a266b2181b6cb1140e2caf11} 用户 1 玩家不在房间内

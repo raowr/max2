@@ -5,3 +5,5 @@
 2026-05-24T11:51:51.822+08:00 [DEBU] {d091d61ff663b21891bb6f209894bfff} [309 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=750 WHERE `id`=3
 2026-05-24T12:06:43.730+08:00 [DEBU] {a877d4bbc564b218ba77221b437f71a8} [536 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=770 WHERE `id`=3
 2026-05-24T12:16:32.021+08:00 [DEBU] {0c795e984e65b2189ea3f92118782cbb} [1006 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=786 WHERE `id`=3
+2026-05-24T12:39:07.046+08:00 [DEBU] {e876b4358a66b21836a08e54d00b3bf9} [415 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
+2026-05-24T12:39:07.199+08:00 [DEBU] {e876b4358a66b21836a08e54d00b3bf9} [150 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzgwMjAyMzQ2fQ.sXuqXL7ZQMK3MePA7XJe-DpfEj3c-LqbCMtlamqPq8A' WHERE `id`=3

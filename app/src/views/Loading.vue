@@ -496,7 +496,7 @@ export default {
             ws.off('open', openCallback);
             ws.off('error', errorCallback);
             ws.off('close', closeCallback);
-            ElMessage.error('服务器连接失败，请重新登录');
+            ElMessage.error('登录已过期，请重新登录');
             this.showLoginModal = true;
         };
 

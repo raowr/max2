@@ -1,1 +1,4 @@
 2026-05-24T11:04:17.776+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9030", value "{"protocol":"grpc"}", lease "7587895047684156689"
+2026-05-24T12:36:30.395+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9030", value "{"protocol":"grpc"}", lease "7587895049128812813"
+2026-05-24T12:39:06.607+08:00 [DEBU] {7c39ab388a66b21837a08e545335a371} 发现服务节点: 127.0.0.1:8010
+2026-05-24T12:39:06.610+08:00 [DEBU] {e876b4358a66b21836a08e54d00b3bf9} 发现服务节点: 127.0.0.1:8010
