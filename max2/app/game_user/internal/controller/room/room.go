@@ -733,7 +733,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		//time.Sleep(time.Duration(thingTime) * time.Second) // 模拟思考时间
 		//记录开始出牌时间
 
-		thinkTime := grand.N(1, 5) //模拟思考秒数
+		thinkTime := grand.N(2, 5) //模拟思考秒数
 		if now-room.OutStarTime < thinkTime {
 			return
 		}

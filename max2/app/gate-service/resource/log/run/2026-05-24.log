@@ -1586,3 +1586,4 @@ Stack:
 1.  gate-service/internal/controller/enter.(*ControllerV1).Enter
     D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:64
 
+2026-05-24T13:10:49.492+08:00 [DEBU] resolver closed
