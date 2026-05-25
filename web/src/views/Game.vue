@@ -511,10 +511,13 @@ const handleMessage = (data) => {
         switch (getPlayerPosition(data.cardsNum[i].ID) + 1) {
           case 2:
             state.player2CardsNum = data.cardsNum[i].cardNum
+            break;
           case 3:
             state.player3CardsNum = data.cardsNum[i].cardNum
+            break;
           case 4:
             state.player4CardsNum = data.cardsNum[i].cardNum
+            break;
         }
       }
       // 更新倒计时时长（如果服务端提供）
@@ -536,16 +539,16 @@ const handleMessage = (data) => {
       }
       switch (getPlayerPosition(data.lastPid)) {
         case 0:
-          state.lastmsg = "玩家1出了：" + cardsMsg
+          state.lastmsg = "玩家1:"+state.player1Name+"出了：" + cardsMsg
           break;
         case 1:
-          state.lastmsg = "玩家2出了：" + cardsMsg
+          state.lastmsg = "玩家2"+state.player2Name+"出了：" + cardsMsg
           break;
         case 2:
-          state.lastmsg = "玩家3出了：" + cardsMsg
+          state.lastmsg = "玩家3"+state.player3Name+"出了：" + cardsMsg
           break;
         case 3:
-          state.lastmsg = "玩家4出了：" + cardsMsg
+          state.lastmsg = "玩家4"+state.player4Name+"出了：" + cardsMsg
           break;
       }
     } else {
