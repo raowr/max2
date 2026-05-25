@@ -40,14 +40,25 @@
     </div>
     <!--  右边设置栏 -->
     <div class="right-settings">
-      <div class="setting-btn btn-set" @click="toggleSettingImage()"></div>
+      <div class="setting-btn btn-set"  @click="toggleLogoutModal()"></div>
       <div class="setting-btn btn-guide"  @click="toggleGuideModal()"></div>
-      <div class="setting-btn btn-trophy"></div>
+      <div class="setting-btn btn-trophy"  @click="toggleSettingImage()"></div>
       <!-- 弹出图片容器 -->
       <div v-if="showSettingImage" class="setting-image-container">
         <img src="@/assets/img/creator.jpg" alt="设置图片" class="setting-image">
         <!-- 可选：点击图片外部关闭 -->
         <div class="setting-image-overlay" @click="toggleSettingImage()"></div>
+      </div>
+            <!-- 退出登录弹窗 -->
+      <div v-if="showLogoutModal" class="logout-modal-container">
+        <div class="logout-modal-content">
+          <p>确定要退出登录吗？</p>
+          <div class="logout-modal-buttons">
+            <button class="logout-btn cancel-btn" @click="toggleLogoutModal()">取消</button>
+            <button class="logout-btn exit-btn" @click="logout()">退出</button>
+          </div>
+        </div>
+        <div class="logout-modal-overlay" @click="toggleLogoutModal()"></div>
       </div>
             <!-- 规则说明弹窗 -->
       <div v-if="showGuideModal" class="guide-modal-container">
@@ -116,6 +127,7 @@ const router = useRouter()
 const route = useRoute()
 const showSettingImage = ref(false)  // 弹出图片容器显示与隐藏
 const showGuideModal = ref(false)   // 规则说明弹窗显示与隐藏
+const showLogoutModal = ref(false)   // 退出登录弹窗显示与隐藏
 // 页面可见性变化处理函数
 const handleVisibilityChange = () => {
   if (document.hidden) {
@@ -136,47 +148,155 @@ const toggleSettingImage = () => {
 const toggleGuideModal = () => {
   showGuideModal.value = !showGuideModal.value
 }
+const toggleLogoutModal = () => {
+  showLogoutModal.value = !showLogoutModal.value
+}
+const logout = () => {
+  showLogoutModal.value = false
+    // 断开 websocket 连接
+  if (websocket && websocket.close) {
+    websocket.close()
+  }
+  // 删除用户信息
+  // 彻底清除用户信息（同时使用 remove 和 set(null) 确保清除）
+  storage.local.set('user', null)
+  storage.local.remove('user')
+    // 也清除相关的用户ID
+  storage.local.set('user_id', null)
+  storage.local.remove('user_id')
+  // 跳转到登录页面
+  router.push('/')
+}
 
 const userIdShow = ref(false)  // 玩家di显示与隐藏
 onMounted(() => {
-  init()
   // 添加页面可见性变化监听
   document.addEventListener('visibilitychange', handleVisibilityChange)
 
-   // 页面刷新时自动重连
-  reconnectWebSocket(websocket);
-
+  // 获取用户信息
   var userInfo = storage.local.get('user')
   userName.value = userInfo.username
   point.value = userInfo.point
-
   console.log(userName.value, point.value)
+
+  // 如果 WebSocket 已经连接，直接发送 getInfo
+  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
+    console.log('WebSocket 已连接，直接发送 getInfo');
+    init();
+  } else {
+    // 否则先重连，连接成功后再发送
+    console.log('WebSocket 未连接，先重连');
+    reconnectWebSocket(websocket);
+    // 监听连接成功事件
+    const handleOpen = () => {
+      websocket.off('open', handleOpen); // 只执行一次
+      init();
+    };
+    websocket.on('open', handleOpen);
+  }
 })
 // 组件卸载时移除监听
 onUnmounted(() => {
   document.removeEventListener('visibilitychange', handleVisibilityChange)
+    // 移除 WebSocket 回调，避免内存泄漏和消息冲突
+  websocket.off('message', handleMessage)
+  // 清除连接状态定时检查
+  if (statusCheckInterval) {
+    clearInterval(statusCheckInterval);
+    statusCheckInterval = null;
+  }
 })
+// d:\gowork\max2\web\src\views\Index.vue
+
+// 连接状态定时检查（用于调试）
+let statusCheckInterval = null;
+
 const init = async () => {
   try {
-    // 动态解析音频路径（替换字符串路径为 new URL() 构造的 URL）
     const bgmUrl = new URL('@/assets/music/yuanshanshaonian.mp3', import.meta.url).href;
-    audioManager.preload('bgm', bgmUrl); // 使用解析后的 URL
+    audioManager.preload('bgm', bgmUrl);
     audioManager.playBGM('bgm')
-
   } catch (error) {
     console.error('初始化背景音乐失败:', error);
   }
-  //当前重连
-  websocket.on('open', () => {
-    console.log('index on open');
-    // 连接成功后再执行 toggleReady
-    websocket.send({ "type": "getInfo", "data": "", "name": "" })
-  });
-  // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
-  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
-    console.log('index play on open');
-    websocket.send({ "type": "getInfo", "data": "", "name": "" })
+
+ // 添加关闭事件监听，定位连接关闭原因
+  const handleClose = (event) => {
+    console.error('index WebSocket 连接关闭！代码:', event.code, '原因:', event.reason);
+    websocket.off('close', handleClose);
+  };
+  websocket.on('close', handleClose);
+ 
+  // 添加错误事件监听
+  const handleError = (error) => {
+    console.error('index WebSocket 错误:', error);
+    websocket.off('error', handleError);
+  };
+  websocket.on('error', handleError);
+ 
+  // 启动连接状态定时检查（每500ms检查一次）
+  const checkConnectionStatus = () => {
+    if (websocket.ws) {
+      console.log('index 连接状态定时检查:', websocket.ws.readyState, '(0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED)');
+    }
+  };
+  statusCheckInterval = setInterval(checkConnectionStatus, 500);
+
+ const sendGetInfo = (retryCount = 0) => {
+  console.log('index sending getInfo (retry:', retryCount, ')');
+  
+  // 检查连接状态
+  if (!websocket.ws || websocket.ws.readyState !== WebSocket.OPEN) {
+    console.log('index WebSocket not open, waiting...');
+    // 如果还没到最大重试次数，继续重试
+    if (retryCount < 5) {
+      setTimeout(() => sendGetInfo(retryCount + 1), 100);
+    }
+    return;
   }
+  
+  websocket.send({ "type": "getInfo", "data": "", "name": "" });
+  
+  // 设置超时检查，如果500ms内没收到响应就重试
+  const timeout = setTimeout(() => {
+    if (retryCount < 5) {
+      console.log('index getInfo 超时，重试 (retry:', retryCount + 1, ')');
+      sendGetInfo(retryCount + 1);
+    }
+  }, 500);
+  
+  // 在收到 getInfo 响应时清除超时
+  const handleMessageOnce = (data) => {
+    try {
+      const parsedData = typeof data === 'string' ? JSON.parse(data) : data;
+      if (parsedData.type === "getInfo") {
+        clearTimeout(timeout);
+        websocket.off('message', handleMessageOnce);
+        console.log('index getInfo 响应已收到，取消重试');
+      }
+    } catch (e) {}
+  };
+  websocket.on('message', handleMessageOnce);
+};
+
+  // 监听 open 事件（处理未来的连接打开）
+  websocket.on('open', sendGetInfo);
+
+  // 立即检查当前连接状态
+  if (websocket.ws) {
+    console.log('index WebSocket 状态:', websocket.ws.readyState, '(0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED)');
+    if (websocket.ws.readyState === WebSocket.OPEN) {
+      // 已连接，立即发送
+      sendGetInfo();
+    } else if (websocket.ws.readyState === WebSocket.CONNECTING) {
+      // 正在连接中，等待 open 事件触发 sendGetInfo
+      console.log('index WebSocket 正在连接中，等待 open 事件');
+    } else {
+      // 未连接或已关闭，等待 reconnectWebSocket 重新连接
+      console.log('index WebSocket 未连接，等待重连');
+    }
+  }
+
   websocket.on('message', handleMessage)
 }
 
@@ -781,6 +901,70 @@ const toRoom = () => {
   z-index: 9;
 }
 
+/* 退出登录弹窗样式 */
+.logout-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logout-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.logout-modal-content {
+  position: relative;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  padding: 40px 60px;
+  text-align: center;
+  z-index: 2;
+  border: 2px solid gold;
+}
+.logout-modal-content p {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+.logout-modal-buttons {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+.logout-btn {
+  padding: 12px 40px;
+  border: none;
+  border-radius: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.cancel-btn {
+  background: #666;
+  color: white;
+}
+.cancel-btn:hover {
+  background: #888;
+}
+.exit-btn {
+  background: gold;
+  color: #333;
+}
+.exit-btn:hover {
+  background: #ffcc00;
+  transform: scale(1.05);
+}
 
 /* 横屏模式专属样式 */
 @media (max-width: 998px) {

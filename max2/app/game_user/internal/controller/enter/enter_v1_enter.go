@@ -10,6 +10,7 @@ import (
 
 	"github.com/gogf/gf/v2/util/grand"
 
+	actionv1 "game_user/api/action/v1"
 	v1 "game_user/api/enter/v1"
 	log_gamev1 "game_user/api/log_game/v1"
 	"game_user/internal/consts"
@@ -618,7 +619,7 @@ func (c *Client) handlePlay(ctx context.Context) {
 	roomInfo.Rgtimer = gtimer.New()
 	roomInfo.Rgtimer.Add(context.Background(), 1*time.Second, roomInfo.GameLoop)
 	roomInfo.Rgtimer.Stop()
-	roomInfo.MsgQueue = make(chan *message.ChatMsg, 10)
+	roomInfo.MsgQueue = make(chan *actionv1.SendActionReq, 10)
 
 	room.PlayOneGame(roomInfo)
 

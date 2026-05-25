@@ -1,0 +1,18 @@
+// protoc --go_out=plugins=grpc:. *.proto
+
+syntax = "proto3";
+
+package action.v1;
+
+option go_package = "api/action/v1;v1";
+
+service Action{
+    rpc SendAction(SendActionReq) returns (SendActionRes) {}
+}
+
+message SendActionReq {
+    string type = 1;
+    string data = 2;
+    string from=3;
+}
+message SendActionRes {}

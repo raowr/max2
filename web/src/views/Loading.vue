@@ -637,7 +637,7 @@ export default {
 
       // 新增：预加载音频
       this.audioPaths.forEach(path => {
-        console.log('预加载音频资源...',path);
+        // console.log('预加载音频资源...',path);
         const audio = new Audio();
         audio.src = path;
         // 音频加载完成事件（可使用 canplaythrough 确保可播放）
@@ -658,6 +658,21 @@ export default {
 
       if (this.loadedCount === this.totalFiles) {
         this.isReady = true
+        const userData = storage.local.get('user');
+      
+      if (!userData) {
+        // 如果没有用户信息
+        console.log('没有用户信息');
+        return;
+      }
+      // 如果有用户信息，尝试连接 websocket
+      const node = userData.node || userData.Node;
+      if (!node) {
+        console.log('用户信息不完整');
+        return;
+      }
+      // 尝试连接 websocket
+      this.tryConnectWebSocket(userData);
       }
     },
     toIndex() {
@@ -735,7 +750,7 @@ export default {
             ws.off('open', openCallback);
             ws.off('error', errorCallback);
             ws.off('close', closeCallback);
-            ElMessage.error('服务器连接失败，请重新登录');
+            ElMessage.error('登录已过期，请重新登录');
             this.showLoginModal = true;
         };
 
@@ -746,7 +761,7 @@ export default {
             ws.off('error', errorCallback);
             ws.off('close', closeCallback);
             // 如果不是正常关闭且还在 loading 页面
-            if (event.code !== 1000 && this.$route.path === '/loading') {
+            if (event.code !== 1000 && this.$route.path === '/') {
                 ElMessage.error('服务器连接异常，请重新登录');
                 this.showLoginModal = true;
             }
@@ -876,7 +891,7 @@ export default {
               }
               
               // 调试信息，查看实际使用的音频路径
-              console.log(`预加载音频: ${musicPath}，URL: ${cardMusicUrl}`);
+              // console.log(`预加载音频: ${musicPath}，URL: ${cardMusicUrl}`);
               
               // 存储预加载的 URL，用于后续检查
               this.preloadedAudioUrls[key] = cardMusicUrl;
@@ -888,7 +903,7 @@ export default {
               tempAudio.oncanplaythrough = () => {
                 loadedCount++;
                 this.preloadStatus.loaded = loadedCount;
-                console.log(`预加载完成: ${musicPath}, 进度: ${loadedCount}/${keys.length}`);
+                // console.log(`预加载完成: ${musicPath}, 进度: ${loadedCount}/${keys.length}`);
                 // 预加载完成后，使用 audioManager 正式加载
                 audioManager.preload(key, cardMusicUrl);
                 resolve();

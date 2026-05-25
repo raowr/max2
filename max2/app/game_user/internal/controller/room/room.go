@@ -4,17 +4,16 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	actionv1 "game_user/api/action/v1"
 	log_gamev1 "game_user/api/log_game/v1"
 	v1 "game_user/api/settle/v1"
 	"game_user/internal/consts"
 	"game_user/internal/controller/log_game"
 	"game_user/internal/controller/settle"
-	"game_user/internal/message"
 	"game_user/internal/service"
 	"math/rand"
 	"strings"
 	"sync"
-	"sync/atomic"
 	"time"
 
 	"github.com/gogf/gf/v2/encoding/gjson"
@@ -83,7 +82,7 @@ func (rm *RoomManager) CreateRoom(roomType int) *Room {
 		// Rgtimer:   gtimer.New(),
 		Status:   0, //未开始
 		Type:     roomType,
-		MsgQueue: make(chan *message.ChatMsg, 10), // 缓冲大小为 10
+		MsgQueue: make(chan *actionv1.SendActionReq, 10), // 缓冲大小为 10
 	}
 
 	// 添加AI机器人
@@ -506,13 +505,7 @@ func PlayOneGame(room *Room) {
 	//开始监听玩家出牌
 	// 修复资源泄漏：先关闭旧的订阅
 	// 检查是否已经启动了消息接收 goroutine
-	if atomic.CompareAndSwapInt32(&room.receiverStarted, 0, 1) {
-		g.Log().Infof(ctx, "房间 %s 启动消息接收 goroutine", room.ID)
-		room.msgCtx, room.MsgCancel = context.WithCancel(context.Background())
-		go room.startMessageReceiver(room.msgCtx, room.Players[room.Current].Name)
-	} else {
-		g.Log().Infof(ctx, "房间 %s 消息接收 goroutine 已启动，跳过", room.ID)
-	}
+	go room.startMessageReceiver(room.Players[room.Current].Name)
 
 	room.pubClient = g.Redis()
 
@@ -594,14 +587,14 @@ func PlayOneGame(room *Room) {
 }
 
 // 在 startMessageReceiver 中（只启动一次）
-func (room *Room) startMessageReceiver(ctx context.Context, currentName string) {
+func (room *Room) startMessageReceiver(currentName string) {
 	defer func() {
-		g.Log().Error(ctx, "startMessageReceiver 退出:")
+		g.Log().Error(ctx, "room startMessageReceiver 退出:")
 	}()
 	// 使用 Pattern 订阅当前出牌玩家出牌消息
 	sub, _, err := g.Redis().Subscribe(ctx, consts.PlayerPlayCardPrefix+currentName)
 	if err != nil {
-		g.Log().Error(ctx, "Subscribe 失败:", err)
+		g.Log().Error(ctx, "room startMessageReceiver Subscribe 失败:", err)
 		return
 	}
 	room.subClient = sub
@@ -617,8 +610,19 @@ func (room *Room) startMessageReceiver(ctx context.Context, currentName string) 
 		}
 		msg, err := room.subClient.Receive(ctx)
 		if err != nil {
-			// g.Log().Error(ctx, "Receive 失败:", err)
-			continue
+			// 如果是 Context 被取消导致的错误，直接退出
+			if ctx.Err() != nil {
+				g.Log().Error(ctx, "room ctx Watcher 接收消息错误:", ctx.Err())
+			}
+			// 其它错误（如网络断开），可以考虑简单的重试或记录日志
+			g.Log().Error(ctx, "room Casbin Watcher 接收消息错误:", err)
+			// 如果出错直接退出，等待下一次重启或手动干预
+			if room.Status == 1 || room.IsPlaying {
+				continue
+			} else {
+				return
+			}
+
 		}
 
 		// 解析消息
@@ -690,6 +694,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 				}
 			}
 		}()
+
 		room.Rgtimer.Stop()
 		room.Rgtimer.Close()
 		room.IsPlaying = false
@@ -697,9 +702,15 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.LastCards = make([]Card, 0)
 		room.OutStarTime = 0
 		room.passCount = 0
+		//修复资源泄漏：先关闭旧的订阅
+		if room.subClient != nil {
+			_ = room.subClient.Close(ctx)
+		}
 		g.Log().Infof(ctx, "\n游戏结束！恭喜%s！获胜\n", winName)
 		//缓存当前房间信息
+		wg.Add(1)
 		go func() {
+			defer wg.Done()
 			roomJsonStr, err := json.Marshal(room)
 			if err != nil {
 				g.Log().Error(ctx, err)
@@ -718,20 +729,24 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	var indices []int
 	var selectedCards []Card
+
+	// 记录开始出牌时间
+	now := int(time.Now().Unix())
+	if room.OutStarTime == 0 {
+		room.OutStarTime = now
+	}
+
 	if currentPlayer.Type == AI {
 		// AI决策，随机秒数
 		//thingTime := grand.N(1,5)
 		//time.Sleep(time.Duration(thingTime) * time.Second) // 模拟思考时间
 		//记录开始出牌时间
-		now := int(time.Now().Unix())
-		if room.OutStarTime == 0 {
-			room.OutStarTime = now
-		}
-		thinkTime := grand.N(1, 2) //模拟思考秒数
+
+		thinkTime := grand.N(2, 5) //模拟思考秒数
 		if now-room.OutStarTime < thinkTime {
 			return
 		}
-		room.OutStarTime = 0
+		// room.OutStarTime = 0
 		room.LastPH, selectedCards = aiDecideCards(currentPlayer, room.Landlord, room.LastPH, room.LastCards)
 		// selectedCards = getSelectedCards(currentPlayer, indices)
 		if len(selectedCards) > 0 {
@@ -742,7 +757,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	} else {
 		// 非阻塞读取：读取一次消息，如果没有消息则跳过
-		var msgData *message.ChatMsg
+		var msgData *actionv1.SendActionReq
 		var hasMessage bool
 
 		// 非阻塞读取消息队列（不会创建新 goroutine）
@@ -772,11 +787,6 @@ func (room *Room) GameLoop(ctx context.Context) {
 		currentPlayer.OutCardIds = reqData.CardIds
 		currentPlayer.Pass = reqData.Pass
 
-		//记录开始出牌时间
-		now := int(time.Now().Unix())
-		// if room.OutStarTime == 0 {
-		// 	room.OutStarTime = now
-		// }
 		outCardTimeout := GetOutCardTimeout()
 		//玩家不操作逻辑
 		if len(currentPlayer.OutCardIds) <= 0 && //玩家还没出牌
@@ -1009,7 +1019,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 			OutCardIds: showCards(selectedCards),
 		})
 	}
-	room.OutStarTime = 0 //人类出牌时间恢复为0
+	room.OutStarTime = now
+	// room.OutStarTime = 0 //人类出牌时间恢复为0
 	currentPlayer.OutCardIds = make([]int, 0)
 	// 下一个玩家
 	room.Current = (room.Current + 1) % 4
@@ -1024,8 +1035,6 @@ func (room *Room) GameLoop(ctx context.Context) {
 
 	// 添加调试日志
 	if room.Players[room.Current].Type == Human {
-		now := int(time.Now().Unix())
-		room.OutStarTime = now
 		//修复资源泄漏：先关闭旧的订阅
 		if room.subClient != nil {
 			_ = room.subClient.Close(ctx)

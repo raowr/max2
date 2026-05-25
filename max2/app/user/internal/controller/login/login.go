@@ -10,7 +10,7 @@ import (
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 
-// GetRandomGameUserNode 直接从 etcd 查询 game_user.svc 的随机节点地址
+// GetRandomGameUserNode 直接从 etcd 查询 gate_service.svc 的随机节点地址
 func GetRandomGameUserNode() string {
 	rand.Seed(time.Now().UnixNano())
 
@@ -26,7 +26,7 @@ func GetRandomGameUserNode() string {
 	defer cli.Close()
 
 	// 查询服务（go-zero 写入的 key 格式是 /discov/service_name/address/lease_id）
-	prefix := "/discov/game_user.svc/"
+	prefix := "/discov/gate_service.svc/"
 	resp, err := cli.Get(context.Background(), prefix, clientv3.WithPrefix())
 	if err != nil {
 		g.Log().Errorf(gctx.New(), "查询 etcd 失败: %v", err)
@@ -34,7 +34,7 @@ func GetRandomGameUserNode() string {
 	}
 
 	if len(resp.Kvs) == 0 {
-		g.Log().Warning(gctx.New(), "未找到 game_user.svc 服务")
+		g.Log().Warning(gctx.New(), "未找到 gate_service.svc 服务")
 		return ""
 	}
 
@@ -46,7 +46,7 @@ func GetRandomGameUserNode() string {
 		// key := string(kv.Key)
 		value := string(kv.Value)
 
-		// key 格式: /discov/game_user.svc/8.155.147.137:8010/lease_id
+		// key 格式: /discov/gate_service.svc/8.155.147.137:8010/lease_id
 		// value 就是地址: 8.155.147.137:8010
 		if !seen[value] {
 			seen[value] = true
@@ -56,7 +56,7 @@ func GetRandomGameUserNode() string {
 	}
 
 	if len(nodes) == 0 {
-		g.Log().Warning(gctx.New(), "game_user.svc 服务没有可用节点")
+		g.Log().Warning(gctx.New(), "gate_service.svc 服务没有可用节点")
 		return ""
 	}
 

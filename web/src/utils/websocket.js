@@ -37,7 +37,17 @@ class WebSocketService {
   connect() {
     if (this.isConnecting || !this.url) return;
     this.isConnecting = true;
-
+    // 先关闭现有连接，避免连接泄漏和状态混乱
+    if (this.ws) {
+      try {
+        if (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING) {
+          this.ws.close(1000, '重新连接');
+        }
+      } catch (e) {
+        console.warn('关闭旧连接失败:', e);
+      }
+      this.ws = null;
+    }
     try {
       this.ws = new WebSocket(this.url);
 
@@ -63,6 +73,7 @@ class WebSocketService {
 
       this.ws.onclose = (event) => {
         console.log('WebSocket 关闭，代码:', event.code);
+         console.log('WebSocket 关闭，代码:', event.code, '原因:', event.reason);
         this.isConnecting = false;
         this.callbacks.close.forEach(cb => cb(event));
         this.stopHeartbeat();

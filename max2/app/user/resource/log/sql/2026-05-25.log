@@ -1,0 +1,2 @@
+2026-05-25T08:25:22.122+08:00 [DEBU] {74e1c3fb45a7b218e5baee61707de8a3} [306 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
+2026-05-25T08:25:22.244+08:00 [DEBU] {74e1c3fb45a7b218e5baee61707de8a3} [120 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=667 WHERE `id`=3

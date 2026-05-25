@@ -1,0 +1,1 @@
+2026-05-25T08:06:04.588+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9030", value "{"protocol":"grpc"}", lease "7587895049128813864"
