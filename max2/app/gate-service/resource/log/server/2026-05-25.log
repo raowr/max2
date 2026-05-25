@@ -118,3 +118,33 @@
 | gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
 -------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
 
+2026-05-25T20:15:45.909+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-25T20:15:45.911+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-25T20:15:45.912+08:00 [INFO] pid[5720]: http server started listening on [:8010]
+2026-05-25T20:15:45.955+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:gate_service.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+|      SERVER      | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                           HANDLER                            |           MIDDLEWARE            |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec        |                                 |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | GET    | /enter     | gate-service/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+
+2026-05-25T20:50:57.619+08:00 [INFO] pid[13256]: http server started listening on [:8010]
+2026-05-25T20:50:57.619+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-25T20:50:57.643+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-25T20:50:57.722+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:gate_service.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+|      SERVER      | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                           HANDLER                            |           MIDDLEWARE            |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec        |                                 |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | GET    | /enter     | gate-service/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+

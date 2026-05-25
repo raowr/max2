@@ -99,7 +99,7 @@
     <div class="player3-container" style="">
       <!-- 修改为圆形倒计时 -->
       <div v-if="state.countdownPlayer == 3"
-        style="position: absolute; top: 0%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
+        style="position: absolute; top: -9%; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center">
         <svg :width="100" :height="100">
           <circle cx="50" cy="50" r="45" stroke="#eee" stroke-width="8" fill="transparent" />
           <circle cx="50" cy="50" r="45" :stroke="countdownPlayer3 > (state.outCardTimeout / 3) ? '#4CAF50' : '#ff5722'"
@@ -375,16 +375,59 @@ const handleResize = () => {
 };
 
 const fetchGameDataFromWebSocket = () => {
-  // 原有的 WebSocket 请求逻辑
-  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
-    websocket.send({ type: "getInfo", data: "", name: "" });
-  } else {
-    // 等待 open 事件
-    const onOpen = () => {
-      websocket.send({ type: "getInfo", data: "", name: "" });
-      websocket.off('open', onOpen);
+  const sendGetInfo = (retryCount = 0) => {
+    console.log('game sending getInfo (retry:', retryCount, ')');
+    
+    // 检查连接状态
+    if (!websocket.ws || websocket.ws.readyState !== WebSocket.OPEN) {
+      console.log('game WebSocket not open, waiting...');
+      // 如果还没到最大重试次数，继续重试
+      if (retryCount < 5) {
+        setTimeout(() => sendGetInfo(retryCount + 1), 100);
+      }
+      return;
+    }
+    
+    websocket.send({ "type": "getInfo", "data": "", "name": "" });
+    
+    // 设置超时检查，如果500ms内没收到响应就重试
+    const timeout = setTimeout(() => {
+      if (retryCount < 5) {
+        console.log('game getInfo 超时，重试 (retry:', retryCount + 1, ')');
+        sendGetInfo(retryCount + 1);
+      }
+    }, 500);
+    
+    // 在收到 getInfo 响应时清除超时
+    const handleMessageOnce = (data) => {
+      try {
+        const parsedData = typeof data === 'string' ? JSON.parse(data) : data;
+        if (parsedData.type === "getInfo") {
+          clearTimeout(timeout);
+          websocket.off('message', handleMessageOnce);
+          console.log('game getInfo 响应已收到，取消重试');
+        }
+      } catch (e) {}
     };
-    websocket.on('open', onOpen);
+    websocket.on('message', handleMessageOnce);
+  };
+
+  // 监听 open 事件（处理未来的连接打开）
+  websocket.on('open', sendGetInfo);
+
+  // 立即检查当前连接状态
+  if (websocket.ws) {
+    console.log('game WebSocket 状态:', websocket.ws.readyState, '(0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED)');
+    if (websocket.ws.readyState === WebSocket.OPEN) {
+      // 已连接，立即发送
+      sendGetInfo();
+    } else if (websocket.ws.readyState === WebSocket.CONNECTING) {
+      // 正在连接中，等待 open 事件触发 sendGetInfo
+      console.log('game WebSocket 正在连接中，等待 open 事件');
+    } else {
+      // 未连接或已关闭，等待 reconnectWebSocket 重新连接
+      console.log('game WebSocket 未连接，等待重连');
+    }
   }
 }
 
@@ -518,7 +561,7 @@ const initGameWithData =(data) =>{
       state.cards = data.cards.sort((a, b) => b - a);
       //设置牌数
       for (let i = 0; i < data.cardsNum.length; i++) {
-        switch (getPlayerPosition(data.cardsNum[i].ID) + 1) {
+        switch (getPlayerPosition(data.cardsNum[i].id) + 1) {
           case 2:
             state.player2CardsNum = data.cardsNum[i].cardNum
             break;
@@ -1396,6 +1439,8 @@ const getPlayerPosition = (playerId) => {
   top: 5%;
   left: 40%;
   width: 90px;
+  height: 90px;
+
 }
 
 /* 弃牌堆容器样式 */

@@ -249,7 +249,7 @@ const init = async () => {
   if (!websocket.ws || websocket.ws.readyState !== WebSocket.OPEN) {
     console.log('index WebSocket not open, waiting...');
     // 如果还没到最大重试次数，继续重试
-    if (retryCount < 3) {
+    if (retryCount < 5) {
       setTimeout(() => sendGetInfo(retryCount + 1), 100);
     }
     return;
@@ -259,7 +259,7 @@ const init = async () => {
   
   // 设置超时检查，如果500ms内没收到响应就重试
   const timeout = setTimeout(() => {
-    if (retryCount < 3) {
+    if (retryCount < 5) {
       console.log('index getInfo 超时，重试 (retry:', retryCount + 1, ')');
       sendGetInfo(retryCount + 1);
     }
@@ -351,7 +351,9 @@ const handleMessage = (data) => {
     data = JSON.parse(parsedData.data)
     //如果游戏中跳到游戏界面
     if (data.isPlaying && route.name !== "Game") {
+      storage.local.set('roomInfo', JSON.stringify(data))
       router.push('/game')  // 跳转到游戏页面
+      // router.push({ name: 'Game', params: data })
     }
   }
 }

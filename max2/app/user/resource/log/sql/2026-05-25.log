@@ -1,2 +1,14 @@
 2026-05-25T08:25:22.122+08:00 [DEBU] {74e1c3fb45a7b218e5baee61707de8a3} [306 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
 2026-05-25T08:25:22.244+08:00 [DEBU] {74e1c3fb45a7b218e5baee61707de8a3} [120 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=667 WHERE `id`=3
+2026-05-25T08:34:52.059+08:00 [DEBU] {54c9b6a2caa7b21845fffb44d47940b4} [413 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=654 WHERE `id`=3
+2026-05-25T08:40:53.529+08:00 [DEBU] {9c3561db1ea8b218a1fffb447d69945b} [280 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=640 WHERE `id`=3
+2026-05-25T20:54:36.309+08:00 [DEBU] {601290b128d0b218966ed00ddf6d631c} [220 ms] [default] [max2] [rows:5  ] SHOW FULL COLUMNS FROM `users`
+2026-05-25T20:54:36.466+08:00 [DEBU] {601290b128d0b218966ed00ddf6d631c} [155 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `token`='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MCwiVXNlcm5hbWUiOiIxIiwiZXhwIjoxNzgwMzE4NDc2fQ.6fiET8nG1Xbex-p_ZyWxVvF8Kqm6kYAYClgp4VPfC9U' WHERE `id`=3
+2026-05-25T21:01:49.418+08:00 [DEBU] {6c7f89758dd0b218f247a017614095d8} [642 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=625 WHERE `id`=3
+2026-05-25T21:10:32.225+08:00 [DEBU] {60a6943e07d1b2185648a017db2be29d} [412 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=610 WHERE `id`=3
+2026-05-25T21:17:02.761+08:00 [DEBU] {a839643362d1b2189a557e59a4959c3f} [278 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=595 WHERE `id`=3
+2026-05-25T21:20:29.223+08:00 [DEBU] {6455544a92d1b2180c567e593b3bce39} [215 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=587 WHERE `id`=3
+2026-05-25T22:52:25.236+08:00 [DEBU] {c8c8a24396d6b218904b06124a07d72b} [1583 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=575 WHERE `id`=3
+2026-05-25T22:59:58.523+08:00 [DEBU] {48459efaffd6b2183827d4079467b427} [833 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=570 WHERE `id`=3
+2026-05-25T23:04:34.075+08:00 [DEBU] {301e254040d7b218bb27d407161e6a10} [355 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=560 WHERE `id`=3
+2026-05-25T23:44:43.087+08:00 [DEBU] {586973fb70d9b2182528d4076eac24af} [926 ms] [default] [max2] [rows:1  ] UPDATE `users` SET `point`=546 WHERE `id`=3

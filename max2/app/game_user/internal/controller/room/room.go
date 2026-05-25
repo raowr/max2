@@ -505,7 +505,7 @@ func PlayOneGame(room *Room) {
 	//开始监听玩家出牌
 	// 修复资源泄漏：先关闭旧的订阅
 	// 检查是否已经启动了消息接收 goroutine
-	go room.startMessageReceiver(room.Players[room.Current].Name)
+	go room.startMessageReceiver()
 
 	room.pubClient = g.Redis()
 
@@ -587,18 +587,10 @@ func PlayOneGame(room *Room) {
 }
 
 // 在 startMessageReceiver 中（只启动一次）
-func (room *Room) startMessageReceiver(currentName string) {
+func (room *Room) startMessageReceiver() {
 	defer func() {
 		g.Log().Error(ctx, "room startMessageReceiver 退出:")
 	}()
-	// 使用 Pattern 订阅当前出牌玩家出牌消息
-	sub, _, err := g.Redis().Subscribe(ctx, consts.PlayerPlayCardPrefix+currentName)
-	if err != nil {
-		g.Log().Error(ctx, "room startMessageReceiver Subscribe 失败:", err)
-		return
-	}
-	room.subClient = sub
-
 	for {
 		// 监听 ctx 是否已关闭 (调用 Close 方法时触发)
 		select {
@@ -608,14 +600,30 @@ func (room *Room) startMessageReceiver(currentName string) {
 		default:
 			// 继续执行后续功能
 		}
-		msg, err := room.subClient.Receive(ctx)
+		// 使用 Pattern 订阅当前出牌玩家出牌消息
+		var currentName string
+		if room.subClient == nil {
+			currentName = room.Players[room.Current].Name
+			sub, _, err := g.Redis().Subscribe(ctx, consts.PlayerPlayCardPrefix+currentName)
+			if err != nil {
+				g.Log().Error(ctx, "room startMessageReceiver Subscribe 失败:", err)
+				return
+			}
+			room.subClient = sub
+		}
+
+		room.mutex.RLock()
+		subClient := room.subClient
+		room.mutex.RUnlock()
+
+		msg, err := subClient.Receive(ctx)
 		if err != nil {
 			// 如果是 Context 被取消导致的错误，直接退出
 			if ctx.Err() != nil {
-				g.Log().Error(ctx, "room ctx Watcher 接收消息错误:", ctx.Err())
+				g.Log().Infof(ctx, "room ctx Watcher 订阅关闭:", ctx.Err())
 			}
 			// 其它错误（如网络断开），可以考虑简单的重试或记录日志
-			g.Log().Error(ctx, "room Casbin Watcher 接收消息错误:", err)
+			g.Log().Infof(ctx, "room Casbin Watcher 订阅关闭:", err)
 			// 如果出错直接退出，等待下一次重启或手动干预
 			if room.Status == 1 || room.IsPlaying {
 				continue
@@ -703,9 +711,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.OutStarTime = 0
 		room.passCount = 0
 		//修复资源泄漏：先关闭旧的订阅
-		if room.subClient != nil {
-			_ = room.subClient.Close(ctx)
-		}
+		room.subClientClose()
 		g.Log().Infof(ctx, "\n游戏结束！恭喜%s！获胜\n", winName)
 		//缓存当前房间信息
 		wg.Add(1)
@@ -1033,24 +1039,8 @@ func (room *Room) GameLoop(ctx context.Context) {
 		}
 	}
 
-	// 添加调试日志
-	if room.Players[room.Current].Type == Human {
-		//修复资源泄漏：先关闭旧的订阅
-		if room.subClient != nil {
-			_ = room.subClient.Close(ctx)
-		}
-		channelName := consts.PlayerPlayCardPrefix + room.Players[room.Current].Name
-		g.Log().Infof(ctx, "正在订阅 Channel: %s，当前玩家: %s", channelName, room.Players[room.Current].Name)
-
-		//监听下一个玩家出牌
-		sub, _, err := g.Redis().Subscribe(ctx, channelName)
-		if err != nil {
-			g.Log().Error(ctx, "writeLoop 订阅失败:", err)
-			return
-		}
-		room.subClient = sub
-		g.Log().Infof(ctx, "成功订阅 Channel: %s", channelName)
-	}
+	//修复资源泄漏：先关闭旧的订阅
+	room.subClientClose()
 
 	//缓存当前房间信息
 	go func() {
@@ -1152,6 +1142,16 @@ func (room *Room) safeSendRoomMessage(msgType string, data any) {
 // 提供给外部使用
 func (room *Room) SendRoomMessage(msgType string, data any) {
 	room.safeSendRoomMessage(msgType, data)
+}
+
+func (room *Room) subClientClose() {
+	room.mutex.Lock()
+	old := room.subClient
+	room.subClient = nil
+	room.mutex.Unlock()
+	if old != nil {
+		_ = old.Close(ctx) // 在锁外关闭，避免死锁或长时间持锁
+	}
 }
 
 // 显示房间列表
