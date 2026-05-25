@@ -18,15 +18,3 @@ max2/app/gate-service/resource
 # 排除 Go 调试二进制文件
 __debug_bin*
 *.exe*
-
-max2/app/game_user/
-max2/app/api-service/linux_amd64
-max2/app/game/linux_amd64
-max2/app/game_user/linux_amd64
-max2/app/gate-service/linux_amd64
-max2/app/log-service/linux_amd64
-max2/app/user/linux_amd64
-max2/app/web/linux_amd64
-gfast/linux_amd64
-gfast-web/linux_amd64
-app/android/app/build/outputs
