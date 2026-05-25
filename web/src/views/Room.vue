@@ -277,6 +277,7 @@ const handleMessage = (data) => {
       //房间类型
       roomType.value = data.type
      if (data.isPlaying && route.name !== "Game") {
+       storage.local.set('roomInfo', JSON.stringify(data))
         router.push('/game')  // 跳转到游戏页面
      }else {
          initPlayers(data.players)

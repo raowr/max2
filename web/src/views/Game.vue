@@ -374,7 +374,22 @@ const handleResize = () => {
   scaleFactor.value = screenWidth.value < 998 ? 0.6 : 1; // 更新缩放比例
 };
 
+const fetchGameDataFromWebSocket = () => {
+  // 原有的 WebSocket 请求逻辑
+  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
+    websocket.send({ type: "getInfo", data: "", name: "" });
+  } else {
+    // 等待 open 事件
+    const onOpen = () => {
+      websocket.send({ type: "getInfo", data: "", name: "" });
+      websocket.off('open', onOpen);
+    };
+    websocket.on('open', onOpen);
+  }
+}
+
 onMounted(() => {
+
   initDeck()
    // 页面刷新时自动重连
   reconnectWebSocket(websocket);
@@ -395,23 +410,25 @@ onMounted(() => {
   // 添加多种交互方式的支持
   document.addEventListener('click', initBGMOnInteraction)
   document.addEventListener('touchstart', initBGMOnInteraction)
-  websocket.on('open', () => {
-    console.log('game on open');
-    // 连接成功后再执行 toggleReady
-    websocket.send({ "type": "getInfo", "data": "", "name": "" })
-  });
-  websocket.on('error', () => {
-    console.log('on error');
-  });
-  websocket.on('close', () => {
-    console.log('on close');
-  });
 
-  // 检查当前连接状态，如果已经连接，则直接执行 toggleReady
-  if (websocket.ws && websocket.ws.readyState === WebSocket.OPEN) {
-    console.log('game play on open');
-     websocket.send({ "type": "getInfo", "data": "", "name": "" })
+  // 1. 尝试从 localStorage 读取缓存的游戏数据
+  const cachedData = storage.local.get('roomInfo');
+  if (cachedData) {
+    try {
+      const gameData = JSON.parse(cachedData);
+      console.log('使用缓存数据初始化游戏');
+      initGameWithData(gameData);
+      // 清除缓存，避免下次进入时重复使用（可选）
+      storage.local.remove('roomInfo');
+      // 不需要再发送 getInfo
+    } catch (e) {
+      console.error('解析缓存数据失败', e);
+      fetchGameDataFromWebSocket();
+    }
+  } else {
+    fetchGameDataFromWebSocket();
   }
+
   websocket.on('message', handleMessage)
   window.addEventListener('resize', handleResize)
 
@@ -461,14 +478,7 @@ const initDeck = () => {
   // console.log(state.deck);
 }
 
-const handleMessage = (data) => {
-  // 处理接收到的消息
-  console.log('Received message:', data)
-  const parsedData = JSON.parse(data)
-  if (parsedData.type == "getInfo") {
-    data = JSON.parse(parsedData.data)
-    console.log("getInfo", data);
-    //房间类型
+const initGameWithData =(data) =>{
     roomType.value = data.type
     //确定玩家pid
     for (let i = 0; i < data.players.length; i++) {
@@ -497,7 +507,7 @@ const handleMessage = (data) => {
     //先确定差值1-0
     // 假如：玩家id：1，玩家就是确定在底部0位置，2号玩家：4-|(2-1)|,读作：4减去2-1的绝对值
     //当减去差值大于等于0，直接用，当减去差值小于0需要用4减去差值的绝对值
-    
+
     //是否游戏中
     if (data.isPlaying) {
       state.outCards = (data.outCards)
@@ -539,30 +549,40 @@ const handleMessage = (data) => {
       }
       switch (getPlayerPosition(data.lastPid)) {
         case 0:
-          state.lastmsg = "玩家1:"+state.player1Name+"出了：" + cardsMsg
+          state.lastmsg = "座位1 "+state.player1Name+"出了：" + cardsMsg
           break;
         case 1:
-          state.lastmsg = "玩家2"+state.player2Name+"出了：" + cardsMsg
+          state.lastmsg = "座位2 "+state.player2Name+"出了：" + cardsMsg
           break;
         case 2:
-          state.lastmsg = "玩家3"+state.player3Name+"出了：" + cardsMsg
+          state.lastmsg = "座位3 "+state.player3Name+"出了：" + cardsMsg
           break;
         case 3:
-          state.lastmsg = "玩家4"+state.player4Name+"出了：" + cardsMsg
+          state.lastmsg = "座位4 "+state.player4Name+"出了：" + cardsMsg
           break;
       }
     } else {
       switch (data.status) {
-      //   case 0://未开始
-      //     websocket.send({ "type": "play", "data": "", "name": "" })
-      //     break;
+          //   case 0://未开始
+          //     websocket.send({ "type": "play", "data": "", "name": "" })
+          //     break;
         case 2://结算中
           console.log("结算中");
           router.push('/index')  // 跳转到首页路由
           break;
       }
-      
+
     }
+}
+
+const handleMessage = (data) => {
+  // 处理接收到的消息
+  console.log('Received message:', data)
+  const parsedData = JSON.parse(data)
+  if (parsedData.type == "getInfo") {
+    data = JSON.parse(parsedData.data)
+    console.log("getInfo", data);
+    initGameWithData(data)
   }
   if (parsedData.type == "showCard") {
 
@@ -622,7 +642,7 @@ const handleMessage = (data) => {
               }
             }
           }
-          state.lastmsg = "玩家1出了：" + cardsMsg
+          state.lastmsg = "座位1 "+state.player1Name+"出了：" + cardsMsg
 
           // 过滤掉state.cards中存在于data.cards的牌
           state.cards = state.cards.filter(item =>
@@ -653,7 +673,7 @@ const handleMessage = (data) => {
             }
           }
         }
-        state.lastmsg = "玩家2出了：" + cardsMsg
+        state.lastmsg = "座位2 "+state.player2Name+"出了：" + cardsMsg
                 //隐藏过
         player2pass.value = false
         break
@@ -668,7 +688,7 @@ const handleMessage = (data) => {
             }
           }
         }
-        state.lastmsg = "玩家3出了：" + cardsMsg
+        state.lastmsg = "座位3 "+state.player3Name+"出了：" + cardsMsg
         //隐藏过
         player3pass.value = false
         break
@@ -683,7 +703,7 @@ const handleMessage = (data) => {
             }
           }
         }
-        state.lastmsg = "玩家4出了：" + cardsMsg
+        state.lastmsg = "座位4 "+state.player4Name+"出了：" + cardsMsg
         //隐藏过
         player4pass.value = false
         break

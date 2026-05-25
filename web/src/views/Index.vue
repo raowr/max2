@@ -351,7 +351,9 @@ const handleMessage = (data) => {
     data = JSON.parse(parsedData.data)
     //如果游戏中跳到游戏界面
     if (data.isPlaying && route.name !== "Game") {
+      storage.local.set('roomInfo', JSON.stringify(data))
       router.push('/game')  // 跳转到游戏页面
+      // router.push({ name: 'Game', params: data })
     }
   }
 }
