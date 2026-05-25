@@ -103,3 +103,18 @@
 | gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
 -------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
 
+2026-05-25T08:05:45.264+08:00 [INFO] swagger ui is serving at address: http://127.0.0.1:8010/swagger/
+2026-05-25T08:05:45.266+08:00 [INFO] pid[8600]: http server started listening on [:8010]
+2026-05-25T08:05:45.266+08:00 [INFO] openapi specification is serving at address: http://127.0.0.1:8010/api.json
+2026-05-25T08:05:45.294+08:00 [DEBU] service register: &{Head: Deployment: Namespace: Name:gate_service.svc Version: Endpoints:172.20.10.3:8010 Metadata:map[insecure:true protocol:http]}
+
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+|      SERVER      | DOMAIN  | ADDRESS | METHOD |   ROUTE    |                           HANDLER                            |           MIDDLEWARE            |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /api.json  | github.com/gogf/gf/v2/net/ghttp.(*Server).openapiSpec        |                                 |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | GET    | /enter     | gate-service/internal/controller/enter.(*ControllerV1).Enter | ghttp.MiddlewareHandlerResponse |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+| gate_service.svc | default | :8010   | ALL    | /swagger/* | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI          | HOOK_BEFORE_SERVE               |
+-------------------|---------|---------|--------|------------|--------------------------------------------------------------|----------------------------------
+

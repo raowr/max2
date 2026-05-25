@@ -1300,3 +1300,567 @@ Stack:
 2026-05-25T01:52:56.728+08:00 [INFO] 用户 1 心跳检测退出
 2026-05-25T01:52:56.733+08:00 [INFO] ctx Watcher 接收消息错误:%!(EXTRA *errors.errorString=context canceled)
 2026-05-25T01:52:56.735+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:05:45.237+08:00 [INFO] {88d4230c34a6b21827cf4a175206b6ef} 准备注册服务: serverName=gate_service.svc, address=127.0.0.1:8010, key=/discov/gate_service.svc/
+2026-05-25T08:05:45.239+08:00 [INFO] {88d4230c34a6b21827cf4a175206b6ef} 开始服务注册...
+2026-05-25T08:05:45.257+08:00 [WARN] {88d4230c34a6b21827cf4a175206b6ef} KeepAlive 意外返回，服务 [gate_service.svc] 已开始
+2026-05-25T08:05:45.300+08:00 [DEBU] etcd put success with key "/service/default/default/gate_service.svc/latest/172.20.10.3:8010", value "{"insecure":true,"protocol":"http"}", lease "7587895049128813861"
+2026-05-25T08:07:12.999+08:00 [INFO] {7c6c6a7a48a6b21828cf4a172b3e1758} 用户 1 连接成功
+2026-05-25T08:07:13.003+08:00 [INFO] heartbeatCheck: 4.0021ms
+2026-05-25T08:07:13.053+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:13.057+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:13.067+08:00 [DEBU] Watch key "/service/default/default/game_user/latest/"
+2026-05-25T08:07:13.288+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc0002b9200\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-25T08:07:13.340+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc00047b740\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-25T08:07:13.570+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:14.034+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:14.310+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:14.359+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:14.545+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:14.546+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:15.042+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:15.045+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:15.543+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:15.544+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:18.004+08:00 [INFO] heartbeatCheck: 2.4604764s
+2026-05-25T08:07:23.003+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:07:23.004+08:00 [INFO] heartbeatCheck: 998.7µs
+2026-05-25T08:07:23.006+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:07:28.003+08:00 [INFO] heartbeatCheck: 4.9999823s
+2026-05-25T08:07:33.003+08:00 [INFO] heartbeatCheck: 9.9999219s
+2026-05-25T08:07:33.019+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:07:33.022+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:07:38.004+08:00 [INFO] heartbeatCheck: 4.985309s
+2026-05-25T08:07:40.564+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-25T08:07:40.565+08:00 [INFO] 执行操作异步任务: type:"initRoom" from:"1"
+2026-05-25T08:07:40.589+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"HXF5H6\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1}]","from":"1"}
+2026-05-25T08:07:42.597+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"HXF5H6\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"容笑容\",\"RoomID\":\"HXF5H6\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"游沛凝\",\"RoomID\":\"HXF5H6\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"冉昆颉\",\"RoomID\":\"HXF5H6\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-25T08:07:43.003+08:00 [INFO] heartbeatCheck: 2.4395796s
+2026-05-25T08:07:46.475+08:00 [INFO] 用户 1 接收消息: {"type":"leaveRoom","data":"","name":""}（类型: 1）
+2026-05-25T08:07:46.476+08:00 [INFO] 执行操作异步任务: type:"leaveRoom" from:"1"
+2026-05-25T08:07:46.535+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:46.593+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:47.011+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:47.013+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:47.514+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:47.520+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:48.004+08:00 [INFO] heartbeatCheck: 490.0498ms
+2026-05-25T08:07:48.023+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:48.024+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:48.526+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:48.527+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:49.036+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:49.036+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:50.708+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:07:50.822+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:07:50.994+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:07:50.998+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:07:51.028+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:07:51.068+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:07:56.313+08:00 [INFO] {fccc649052a6b2183acf4a17ab6d6464} 用户 1 连接成功
+2026-05-25T08:07:56.322+08:00 [INFO] heartbeatCheck: 8.2521ms
+2026-05-25T08:07:56.429+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:56.429+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:56.926+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:56.926+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:57.439+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:57.440+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:57.941+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:57.941+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:58.443+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:58.446+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:07:58.944+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:07:58.944+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:01.322+08:00 [INFO] heartbeatCheck: 2.3783973s
+2026-05-25T08:08:06.322+08:00 [INFO] heartbeatCheck: 7.3781945s
+2026-05-25T08:08:07.998+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-25T08:08:07.999+08:00 [INFO] 执行操作异步任务: type:"initRoom" from:"1"
+2026-05-25T08:08:08.084+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-25T08:08:10.085+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-25T08:08:11.322+08:00 [INFO] heartbeatCheck: 3.3240996s
+2026-05-25T08:08:11.597+08:00 [INFO] 用户 1 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-25T08:08:11.598+08:00 [INFO] 执行操作异步任务: type:"play" from:"1"
+2026-05-25T08:08:11.634+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:08:11.689+08:00 [INFO] 用户 1 发送消息: {"type":"showCard","data":"{\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":3,\"playerPoint\":682,\"outCardTimeout\":30}"}
+2026-05-25T08:08:11.901+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:11.926+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-25T08:08:15.829+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[1],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:08:16.322+08:00 [INFO] heartbeatCheck: 4.6885952s
+2026-05-25T08:08:17.421+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:08:17.425+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:08:17.428+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:08:17.442+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:08:17.432+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:08:17.446+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:08:24.867+08:00 [INFO] {64a1813559a6b21845cf4a17ffaa4fa3} 用户 1 连接成功
+2026-05-25T08:08:24.880+08:00 [INFO] heartbeatCheck: 13.0054ms
+2026-05-25T08:08:24.887+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:08:24.888+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:25.382+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:08:25.383+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:25.425+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":20,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":12}],\"isPlaying\":true,\"outCards\":[1],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:08:25.461+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:08:25.463+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:25.497+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":20,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":12}],\"isPlaying\":true,\"outCards\":[1],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:08:29.888+08:00 [INFO] heartbeatCheck: 4.4273274s
+2026-05-25T08:08:31.319+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:08:31.322+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:08:31.323+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:08:31.324+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:08:31.325+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:08:31.326+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:08:38.741+08:00 [INFO] {ccdcb7715ca6b2184acf4a1760869c7b} 用户 1 连接成功
+2026-05-25T08:08:38.743+08:00 [INFO] heartbeatCheck: 1.0924ms
+2026-05-25T08:08:38.788+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:08:38.789+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:39.287+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:08:39.290+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:39.296+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":6,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":12}],\"isPlaying\":true,\"outCards\":[1],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:08:39.326+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:08:39.329+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:39.372+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":6,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":12}],\"isPlaying\":true,\"outCards\":[1],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:08:43.743+08:00 [INFO] heartbeatCheck: 4.4177038s
+2026-05-25T08:08:44.797+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:08:44.798+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:08:44.803+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:08:44.834+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:08:44.834+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:08:44.837+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:08:51.155+08:00 [INFO] {64aa6b555fa6b2184fcf4a172ea03b04} 用户 1 连接成功
+2026-05-25T08:08:51.159+08:00 [INFO] heartbeatCheck: 3.5255ms
+2026-05-25T08:08:51.194+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:08:51.197+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:51.679+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:08:51.682+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:51.687+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":2,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":27,\"cardsNum\":[{\"id\":1,\"cardNum\":12},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":12}],\"isPlaying\":true,\"outCards\":[5],\"mustPid\":1,\"lastPid\":1,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:08:51.713+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:08:51.713+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:08:51.730+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":2,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":27,\"cardsNum\":[{\"id\":1,\"cardNum\":12},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":12}],\"isPlaying\":true,\"outCards\":[5],\"mustPid\":1,\"lastPid\":1,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:08:52.822+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[17],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-25T08:08:56.159+08:00 [INFO] heartbeatCheck: 4.4463298s
+2026-05-25T08:08:57.854+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[18],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:08:58.562+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:08:58.562+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:08:58.564+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:08:58.564+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:08:58.565+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:08:58.568+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:09:04.386+08:00 [INFO] {8c8d436a62a6b21854cf4a17f0ea5049} 用户 1 连接成功
+2026-05-25T08:09:04.441+08:00 [INFO] heartbeatCheck: 55.0026ms
+2026-05-25T08:09:04.444+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:04.448+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:04.903+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:04.904+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:04.918+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":23,\"cardsNum\":[{\"id\":1,\"cardNum\":12},{\"id\":2,\"cardNum\":12},{\"id\":3,\"cardNum\":11}],\"isPlaying\":true,\"outCards\":[18],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:04.957+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:04.967+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:04.993+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":23,\"cardsNum\":[{\"id\":1,\"cardNum\":12},{\"id\":2,\"cardNum\":12},{\"id\":3,\"cardNum\":11}],\"isPlaying\":true,\"outCards\":[18],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:08.264+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:09:08.265+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:09:08.266+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:09:08.269+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:09:08.271+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:09:08.315+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:09:12.677+08:00 [INFO] {2cca535864a6b21859cf4a17b46d502b} 用户 1 连接成功
+2026-05-25T08:09:12.679+08:00 [INFO] heartbeatCheck: 1.9975ms
+2026-05-25T08:09:12.774+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:12.776+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:12.828+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":15,\"cardsNum\":[{\"id\":1,\"cardNum\":12},{\"id\":2,\"cardNum\":12},{\"id\":3,\"cardNum\":11}],\"isPlaying\":true,\"outCards\":[18],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:17.548+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:09:17.562+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:09:17.571+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:09:17.573+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:09:17.598+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:09:17.609+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:09:22.816+08:00 [INFO] {b8a69cb366a6b2185ccf4a173b51ca84} 用户 1 连接成功
+2026-05-25T08:09:22.817+08:00 [INFO] heartbeatCheck: 0s
+2026-05-25T08:09:22.833+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:22.843+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:23.328+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:23.329+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:23.342+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":4,\"cardsNum\":[{\"id\":1,\"cardNum\":12},{\"id\":2,\"cardNum\":12},{\"id\":3,\"cardNum\":11}],\"isPlaying\":true,\"outCards\":[18],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:23.377+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:23.442+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:23.466+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":4,\"cardsNum\":[{\"id\":1,\"cardNum\":12},{\"id\":2,\"cardNum\":12},{\"id\":3,\"cardNum\":11}],\"isPlaying\":true,\"outCards\":[18],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:27.817+08:00 [INFO] heartbeatCheck: 4.439469s
+2026-05-25T08:09:27.929+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:09:29.398+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:29.399+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:29.430+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":1,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":28,\"cardsNum\":[{\"id\":1,\"cardNum\":12},{\"id\":2,\"cardNum\":12},{\"id\":3,\"cardNum\":11}],\"isPlaying\":true,\"outCards\":[18],\"mustPid\":3,\"lastPid\":0,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:29.471+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:29.473+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:29.493+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":1,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":28,\"cardsNum\":[{\"id\":1,\"cardNum\":12},{\"id\":2,\"cardNum\":12},{\"id\":3,\"cardNum\":11}],\"isPlaying\":true,\"outCards\":[18],\"mustPid\":3,\"lastPid\":0,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:31.922+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[31],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-25T08:09:32.817+08:00 [INFO] heartbeatCheck: 3.346235s
+2026-05-25T08:09:34.862+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:34.863+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:34.903+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":12,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":2,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":27,\"cardsNum\":[{\"id\":1,\"cardNum\":11},{\"id\":2,\"cardNum\":12},{\"id\":3,\"cardNum\":11}],\"isPlaying\":true,\"outCards\":[31],\"mustPid\":1,\"lastPid\":1,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:34.960+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:34.965+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:35.005+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[32],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-25T08:09:35.048+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":3,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":29,\"cardsNum\":[{\"id\":1,\"cardNum\":11},{\"id\":2,\"cardNum\":11},{\"id\":3,\"cardNum\":11}],\"isPlaying\":true,\"outCards\":[32],\"mustPid\":2,\"lastPid\":2,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:37.817+08:00 [INFO] heartbeatCheck: 2.8571622s
+2026-05-25T08:09:38.937+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[43],\"card_type\":1,\"cards_num\":10,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:09:42.816+08:00 [INFO] heartbeatCheck: 7.8564139s
+2026-05-25T08:09:44.764+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:09:44.767+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:09:44.773+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:09:44.775+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:09:44.775+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:09:44.776+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:09:51.384+08:00 [INFO] {8091775b6da6b21865cf4a17cb731204} 用户 1 连接成功
+2026-05-25T08:09:51.389+08:00 [INFO] heartbeatCheck: 5.0011ms
+2026-05-25T08:09:51.443+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:51.460+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:51.911+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:51.912+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:51.926+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":10,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":17,\"cardsNum\":[{\"id\":1,\"cardNum\":11},{\"id\":2,\"cardNum\":11},{\"id\":3,\"cardNum\":10}],\"isPlaying\":true,\"outCards\":[43],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:51.965+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:09:51.967+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:09:51.981+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":11,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":10,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":17,\"cardsNum\":[{\"id\":1,\"cardNum\":11},{\"id\":2,\"cardNum\":11},{\"id\":3,\"cardNum\":10}],\"isPlaying\":true,\"outCards\":[43],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:09:56.391+08:00 [INFO] heartbeatCheck: 4.4263327s
+2026-05-25T08:10:01.390+08:00 [INFO] heartbeatCheck: 9.4252699s
+2026-05-25T08:10:02.088+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:10:02.100+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:10:06.391+08:00 [INFO] heartbeatCheck: 4.3028982s
+2026-05-25T08:10:08.941+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:10:10.183+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:10:10.184+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:10:10.186+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:10:10.186+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:10:10.187+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:10:10.187+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:11:08.028+08:00 [INFO] {8c3826337fa6b2186bcf4a1711e7f2da} 用户 1 连接成功
+2026-05-25T08:11:08.031+08:00 [INFO] heartbeatCheck: 3.0056ms
+2026-05-25T08:11:08.069+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:11:08.112+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:11:08.137+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":10,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":9,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":9,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":18,\"cardsNum\":[{\"id\":1,\"cardNum\":10},{\"id\":2,\"cardNum\":9},{\"id\":3,\"cardNum\":9}],\"isPlaying\":true,\"outCards\":[16],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:11:08.202+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:11:08.203+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:11:08.250+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":10,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":9,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":9,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":18,\"cardsNum\":[{\"id\":1,\"cardNum\":10},{\"id\":2,\"cardNum\":9},{\"id\":3,\"cardNum\":9}],\"isPlaying\":true,\"outCards\":[16],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:11:12.613+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[21]}"}（类型: 1）
+2026-05-25T08:11:12.615+08:00 [INFO] 执行操作异步任务: type:"playCard" data:"{\"pid\":0,\"cardIds\":[21]}" from:"1"
+2026-05-25T08:11:13.033+08:00 [INFO] heartbeatCheck: 419.6365ms
+2026-05-25T08:11:18.032+08:00 [INFO] heartbeatCheck: 5.4188094s
+2026-05-25T08:11:18.268+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:11:18.271+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:11:23.069+08:00 [INFO] heartbeatCheck: 4.8016954s
+2026-05-25T08:11:28.035+08:00 [INFO] heartbeatCheck: 9.7669701s
+2026-05-25T08:11:28.280+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:11:28.285+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:11:33.032+08:00 [INFO] heartbeatCheck: 4.7517207s
+2026-05-25T08:11:33.391+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc00094eff0\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-25T08:11:38.090+08:00 [INFO] heartbeatCheck: 9.8100843s
+2026-05-25T08:11:39.895+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:11:39.896+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:11:39.901+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:11:39.901+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:11:39.902+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:11:39.903+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:11:55.032+08:00 [INFO] {14847d258aa6b21872cf4a173b792551} 用户 1 连接成功
+2026-05-25T08:11:55.033+08:00 [INFO] heartbeatCheck: 1.5277ms
+2026-05-25T08:11:55.106+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:11:55.108+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:11:55.587+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:11:55.589+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:11:55.617+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":10,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":9,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":9,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":0,\"cardsNum\":[{\"id\":1,\"cardNum\":10},{\"id\":2,\"cardNum\":9},{\"id\":3,\"cardNum\":9}],\"isPlaying\":true,\"outCards\":[16],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:11:55.682+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:11:55.691+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:11:55.837+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":10,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":9,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":9,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":0,\"cardsNum\":[{\"id\":1,\"cardNum\":10},{\"id\":2,\"cardNum\":9},{\"id\":3,\"cardNum\":9}],\"isPlaying\":true,\"outCards\":[16],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:12:00.034+08:00 [INFO] heartbeatCheck: 4.3514734s
+2026-05-25T08:12:05.035+08:00 [INFO] heartbeatCheck: 9.3526016s
+2026-05-25T08:12:05.853+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:12:05.855+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:12:10.034+08:00 [INFO] heartbeatCheck: 4.1812372s
+2026-05-25T08:12:10.575+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:12:10.578+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:12:10.580+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:12:10.582+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:12:10.584+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:12:10.586+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:12:15.542+08:00 [INFO] {38e8c0eb8ea6b21878cf4a173c6a359b} 用户 1 连接成功
+2026-05-25T08:12:15.548+08:00 [INFO] heartbeatCheck: 5.5402ms
+2026-05-25T08:12:15.604+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:12:15.607+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:12:15.656+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"EZ0309\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"EZ0309\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"訾涵亮\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":10,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"韦怜南\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":9,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"殳烨伟\",\"RoomID\":\"EZ0309\",\"Type\":1,\"CardNum\":9,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[42,8,20,29,30,19,7,6,36,10,45,35,21],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":0,\"cardsNum\":[{\"id\":1,\"cardNum\":10},{\"id\":2,\"cardNum\":9},{\"id\":3,\"cardNum\":9}],\"isPlaying\":true,\"outCards\":[16],\"mustPid\":3,\"lastPid\":3,\"status\":1,\"type\":1}","from":"1"}
+2026-05-25T08:12:20.549+08:00 [INFO] heartbeatCheck: 4.9446117s
+2026-05-25T08:12:25.549+08:00 [INFO] heartbeatCheck: 9.9447539s
+2026-05-25T08:12:30.551+08:00 [INFO] heartbeatCheck: 14.9466488s
+2026-05-25T08:12:35.549+08:00 [INFO] heartbeatCheck: 19.9444756s
+2026-05-25T08:12:40.549+08:00 [INFO] heartbeatCheck: 24.9444273s
+2026-05-25T08:12:45.548+08:00 [INFO] heartbeatCheck: 29.9441607s
+2026-05-25T08:12:45.933+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:12:45.950+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:12:50.549+08:00 [INFO] heartbeatCheck: 4.6157494s
+2026-05-25T08:12:55.548+08:00 [INFO] heartbeatCheck: 9.6153113s
+2026-05-25T08:13:00.549+08:00 [INFO] heartbeatCheck: 14.6155113s
+2026-05-25T08:13:05.548+08:00 [INFO] heartbeatCheck: 19.6153318s
+2026-05-25T08:13:10.549+08:00 [INFO] heartbeatCheck: 24.6155097s
+2026-05-25T08:13:15.549+08:00 [INFO] heartbeatCheck: 29.6154622s
+2026-05-25T08:13:15.973+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:13:15.975+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:13:20.549+08:00 [INFO] heartbeatCheck: 4.5754189s
+2026-05-25T08:13:25.548+08:00 [INFO] heartbeatCheck: 9.5750165s
+2026-05-25T08:13:27.839+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:13:27.842+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:13:27.854+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:13:27.855+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:13:27.859+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:13:27.860+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:13:35.435+08:00 [INFO] {04550886a1a6b2187dcf4a177b12c22a} 用户 1 连接成功
+2026-05-25T08:13:35.489+08:00 [INFO] heartbeatCheck: 53.7596ms
+2026-05-25T08:13:35.497+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:13:35.549+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:13:35.955+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:13:35.964+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:13:36.456+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:13:36.457+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:13:36.971+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:13:36.972+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:13:37.491+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:13:37.492+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:13:37.988+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:13:37.991+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:13:38.222+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-25T08:13:38.239+08:00 [INFO] 执行操作异步任务: type:"initRoom" from:"1"
+2026-05-25T08:13:38.305+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"ON3XZV\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"匡运凯\",\"RoomID\":\"ON3XZV\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"刁运杰\",\"RoomID\":\"ON3XZV\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-25T08:13:40.332+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"ON3XZV\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"匡运凯\",\"RoomID\":\"ON3XZV\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"刁运杰\",\"RoomID\":\"ON3XZV\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"屈紫安\",\"RoomID\":\"ON3XZV\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-25T08:13:40.495+08:00 [INFO] heartbeatCheck: 2.2732797s
+2026-05-25T08:13:41.454+08:00 [INFO] 用户 1 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-25T08:13:41.455+08:00 [INFO] 执行操作异步任务: type:"play" from:"1"
+2026-05-25T08:13:41.503+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:13:41.508+08:00 [INFO] 用户 1 发送消息: {"type":"showCard","data":"{\"cards\":[35,39,3,15,37,10,41,11,46,18,20,33,40],\"current\":1,\"playerPoint\":682,\"outCardTimeout\":30}"}
+2026-05-25T08:13:41.524+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:13:41.619+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"ON3XZV\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"ON3XZV\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"匡运凯\",\"RoomID\":\"ON3XZV\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"刁运杰\",\"RoomID\":\"ON3XZV\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"屈紫安\",\"RoomID\":\"ON3XZV\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-25T08:13:45.499+08:00 [INFO] heartbeatCheck: 3.9952756s
+2026-05-25T08:13:47.523+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[21,17,13,5,1],\"card_type\":4,\"cards_num\":8,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-25T08:13:49.536+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-25T08:13:50.501+08:00 [INFO] heartbeatCheck: 8.9980442s
+2026-05-25T08:13:53.525+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[50,30,14,6,2],\"card_type\":4,\"cards_num\":8,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:13:55.490+08:00 [INFO] heartbeatCheck: 13.9865888s
+2026-05-25T08:13:58.342+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"cardIds\":[37,39,40,11,10]}"}（类型: 1）
+2026-05-25T08:13:58.344+08:00 [INFO] 执行操作异步任务: type:"playCard" data:"{\"pid\":0,\"cardIds\":[37,39,40,11,10]}" from:"1"
+2026-05-25T08:14:00.490+08:00 [INFO] heartbeatCheck: 2.1481162s
+2026-05-25T08:14:03.556+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:14:03.568+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:14:05.490+08:00 [INFO] heartbeatCheck: 1.9338566s
+2026-05-25T08:14:10.490+08:00 [INFO] heartbeatCheck: 6.934434s
+2026-05-25T08:14:13.611+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:14:13.613+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:14:15.490+08:00 [INFO] heartbeatCheck: 1.8789948s
+2026-05-25T08:14:20.490+08:00 [INFO] heartbeatCheck: 6.8792945s
+2026-05-25T08:14:23.514+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:14:25.490+08:00 [INFO] heartbeatCheck: 11.8791242s
+2026-05-25T08:14:26.509+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":8,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:14:30.490+08:00 [INFO] heartbeatCheck: 16.879283s
+2026-05-25T08:14:30.510+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:14:32.545+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[12],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:14:35.490+08:00 [INFO] heartbeatCheck: 21.8785955s
+2026-05-25T08:14:40.489+08:00 [INFO] heartbeatCheck: 26.8782227s
+2026-05-25T08:14:42.553+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:14:42.561+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:14:45.490+08:00 [INFO] heartbeatCheck: 2.9374176s
+2026-05-25T08:14:50.490+08:00 [INFO] heartbeatCheck: 7.9376034s
+2026-05-25T08:14:52.564+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:14:52.566+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:14:55.490+08:00 [INFO] heartbeatCheck: 2.9267403s
+2026-05-25T08:15:00.489+08:00 [INFO] heartbeatCheck: 7.9261278s
+2026-05-25T08:15:02.511+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:15:04.508+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[19],\"card_type\":1,\"cards_num\":7,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-25T08:15:05.490+08:00 [INFO] heartbeatCheck: 12.9266501s
+2026-05-25T08:15:06.509+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[36],\"card_type\":1,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-25T08:15:08.539+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[44],\"card_type\":1,\"cards_num\":6,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:15:10.490+08:00 [INFO] heartbeatCheck: 17.9263734s
+2026-05-25T08:15:15.492+08:00 [INFO] heartbeatCheck: 22.9287953s
+2026-05-25T08:15:18.557+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:15:18.559+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:15:20.490+08:00 [INFO] heartbeatCheck: 1.9327119s
+2026-05-25T08:15:25.510+08:00 [INFO] heartbeatCheck: 6.9532052s
+2026-05-25T08:15:28.568+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:15:28.569+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:15:30.490+08:00 [INFO] heartbeatCheck: 1.9226816s
+2026-05-25T08:15:35.491+08:00 [INFO] heartbeatCheck: 6.9239077s
+2026-05-25T08:15:38.510+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:15:40.490+08:00 [INFO] heartbeatCheck: 11.9228226s
+2026-05-25T08:15:42.507+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[48],\"card_type\":1,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-25T08:15:45.489+08:00 [INFO] heartbeatCheck: 16.9223144s
+2026-05-25T08:15:46.508+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-25T08:15:48.528+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[49],\"card_type\":1,\"cards_num\":5,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:15:50.490+08:00 [INFO] heartbeatCheck: 21.9225594s
+2026-05-25T08:15:55.490+08:00 [INFO] heartbeatCheck: 26.9230724s
+2026-05-25T08:15:58.541+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:15:58.544+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:16:00.490+08:00 [INFO] heartbeatCheck: 1.9489789s
+2026-05-25T08:16:05.490+08:00 [INFO] heartbeatCheck: 6.9491708s
+2026-05-25T08:16:08.553+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:16:08.556+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:16:10.490+08:00 [INFO] heartbeatCheck: 1.9370839s
+2026-05-25T08:16:15.490+08:00 [INFO] heartbeatCheck: 6.9372066s
+2026-05-25T08:16:18.510+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:16:20.490+08:00 [INFO] heartbeatCheck: 11.9375621s
+2026-05-25T08:16:20.508+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":6,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:16:24.510+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":12,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:16:25.489+08:00 [INFO] heartbeatCheck: 16.9367693s
+2026-05-25T08:16:27.537+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[16],\"card_type\":1,\"cards_num\":4,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:16:30.490+08:00 [INFO] heartbeatCheck: 21.9368881s
+2026-05-25T08:16:35.490+08:00 [INFO] heartbeatCheck: 26.9371718s
+2026-05-25T08:16:37.568+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:16:37.790+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:16:40.496+08:00 [INFO] heartbeatCheck: 2.9286319s
+2026-05-25T08:16:45.490+08:00 [INFO] heartbeatCheck: 7.9223625s
+2026-05-25T08:16:47.804+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:16:47.826+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:16:50.491+08:00 [INFO] heartbeatCheck: 2.6860448s
+2026-05-25T08:16:55.489+08:00 [INFO] heartbeatCheck: 7.684992s
+2026-05-25T08:16:57.510+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:16:59.513+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[27],\"card_type\":1,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-25T08:17:00.490+08:00 [INFO] heartbeatCheck: 12.6856393s
+2026-05-25T08:17:01.510+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[45],\"card_type\":1,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-25T08:17:04.522+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[47],\"card_type\":1,\"cards_num\":3,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:17:05.489+08:00 [INFO] heartbeatCheck: 17.6850046s
+2026-05-25T08:17:10.489+08:00 [INFO] heartbeatCheck: 22.6848573s
+2026-05-25T08:17:14.543+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:17:14.547+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:17:15.490+08:00 [INFO] heartbeatCheck: 947.3293ms
+2026-05-25T08:17:20.490+08:00 [INFO] heartbeatCheck: 5.9476462s
+2026-05-25T08:17:24.563+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:17:24.567+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:17:25.490+08:00 [INFO] heartbeatCheck: 927.2924ms
+2026-05-25T08:17:30.490+08:00 [INFO] heartbeatCheck: 5.9274555s
+2026-05-25T08:17:33.904+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-25T08:17:33.906+08:00 [INFO] 执行操作异步任务: type:"playCard" data:"{\"pid\":0,\"pass\":1}" from:"1"
+2026-05-25T08:17:34.517+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:17:35.490+08:00 [INFO] heartbeatCheck: 1.5857104s
+2026-05-25T08:17:36.510+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":1,\"cardIds\":null,\"card_type\":0,\"cards_num\":5,\"code\":0,\"current\":2,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:17:38.515+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":11,\"code\":0,\"current\":3,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:17:40.490+08:00 [INFO] heartbeatCheck: 6.5861231s
+2026-05-25T08:17:41.517+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[23],\"card_type\":1,\"cards_num\":2,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:17:42.927+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-25T08:17:42.928+08:00 [INFO] 执行操作异步任务: type:"playCard" data:"{\"pid\":0,\"pass\":1}" from:"1"
+2026-05-25T08:17:45.490+08:00 [INFO] heartbeatCheck: 2.5637793s
+2026-05-25T08:17:50.490+08:00 [INFO] heartbeatCheck: 7.5639534s
+2026-05-25T08:17:51.529+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:17:51.531+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:17:55.490+08:00 [INFO] heartbeatCheck: 3.9612427s
+2026-05-25T08:17:56.709+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:17:56.710+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:17:56.712+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:17:56.713+08:00 [INFO] 用户 1 心跳检测退出
+2026-05-25T08:17:56.714+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:17:56.714+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:18:35.559+08:00 [DEBU] client conn updated with addresses [{"Addr":"172.20.10.3:9020","ServerName":"game_user","Attributes":{"protocol":"grpc","RawService":"\u003c0xc00094e630\u003e"},"BalancerAttributes":null,"Metadata":null}]
+2026-05-25T08:19:15.682+08:00 [INFO] {30ade8bdf0a6b21898cf4a17d336e367} 用户 1 连接成功
+2026-05-25T08:19:15.686+08:00 [INFO] heartbeatCheck: 3.8971ms
+2026-05-25T08:19:15.738+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:19:15.757+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:19:16.224+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:19:16.226+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:19:16.726+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:19:16.727+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:19:17.231+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:19:17.231+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:19:17.734+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:19:17.736+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:19:18.234+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:19:18.237+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:19:20.704+08:00 [INFO] heartbeatCheck: 2.4693378s
+2026-05-25T08:19:21.898+08:00 [INFO] 用户 1 接收消息: {"type":"initRoom","data":"","name":""}（类型: 1）
+2026-05-25T08:19:21.901+08:00 [INFO] 执行操作异步任务: type:"initRoom" from:"1"
+2026-05-25T08:19:21.993+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"52CT3B\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"嵇天宇\",\"RoomID\":\"52CT3B\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"邴思菱\",\"RoomID\":\"52CT3B\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-25T08:19:24.003+08:00 [INFO] 用户 1 发送消息: {"type":"initRoom","data":"[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"52CT3B\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"嵇天宇\",\"RoomID\":\"52CT3B\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"邴思菱\",\"RoomID\":\"52CT3B\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"通鸿宝\",\"RoomID\":\"52CT3B\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}]","from":"1"}
+2026-05-25T08:19:24.627+08:00 [INFO] 用户 1 接收消息: {"type":"play","data":"","name":""}（类型: 1）
+2026-05-25T08:19:24.635+08:00 [INFO] 执行操作异步任务: type:"play" from:"1"
+2026-05-25T08:19:24.669+08:00 [INFO] 用户 1 接收消息: {"type":"getInfo","data":"","name":""}（类型: 1）
+2026-05-25T08:19:24.691+08:00 [INFO] 执行操作异步任务: type:"getInfo" from:"1"
+2026-05-25T08:19:24.692+08:00 [INFO] 用户 1 发送消息: {"type":"showCard","data":"{\"cards\":[46,43,23,10,44,38,3,6,29,39,21,8,25],\"current\":2,\"playerPoint\":682,\"outCardTimeout\":30}"}
+2026-05-25T08:19:24.835+08:00 [INFO] 用户 1 发送消息: {"type":"getInfo","data":"{\"roomId\":\"52CT3B\",\"players\":[{\"ID\":0,\"Name\":\"1\",\"RoomID\":\"52CT3B\",\"Type\":0,\"CardNum\":13,\"Point\":682,\"UserId\":\"1\",\"RoomType\":1},{\"ID\":1,\"Name\":\"嵇天宇\",\"RoomID\":\"52CT3B\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":2,\"Name\":\"邴思菱\",\"RoomID\":\"52CT3B\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1},{\"ID\":3,\"Name\":\"通鸿宝\",\"RoomID\":\"52CT3B\",\"Type\":1,\"CardNum\":13,\"Point\":0,\"UserId\":\"\",\"RoomType\":1}],\"cards\":[],\"current\":0,\"playerPoint\":682,\"outCardTimeout\":30,\"remainOutCardTimeout\":30,\"cardsNum\":[{\"id\":1,\"cardNum\":13},{\"id\":2,\"cardNum\":13},{\"id\":3,\"cardNum\":13}],\"isPlaying\":false,\"outCards\":[],\"mustPid\":0,\"lastPid\":3,\"status\":0,\"type\":1}","from":"1"}
+2026-05-25T08:19:25.698+08:00 [INFO] heartbeatCheck: 1.0290053s
+2026-05-25T08:19:29.683+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":2,\"cardIds\":[1,5,9,16,19],\"card_type\":3,\"cards_num\":8,\"code\":0,\"current\":3,\"mustPid\":2,\"outCardTimeout\":30}"}
+2026-05-25T08:19:30.687+08:00 [INFO] heartbeatCheck: 6.0176763s
+2026-05-25T08:19:32.690+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":3,\"cardIds\":[30,33,37,41,47],\"card_type\":3,\"cards_num\":8,\"code\":0,\"current\":0,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:19:35.687+08:00 [INFO] heartbeatCheck: 11.0177789s
+2026-05-25T08:19:37.302+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-25T08:19:37.304+08:00 [INFO] 执行操作异步任务: type:"playCard" data:"{\"pid\":0,\"pass\":1}" from:"1"
+2026-05-25T08:19:40.690+08:00 [INFO] heartbeatCheck: 3.3877755s
+2026-05-25T08:19:42.709+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:19:42.713+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:19:45.687+08:00 [INFO] heartbeatCheck: 2.9779727s
+2026-05-25T08:19:50.686+08:00 [INFO] heartbeatCheck: 7.9772348s
+2026-05-25T08:19:52.724+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:19:52.728+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:19:55.686+08:00 [INFO] heartbeatCheck: 2.9622174s
+2026-05-25T08:20:00.686+08:00 [INFO] heartbeatCheck: 7.9623489s
+2026-05-25T08:20:02.690+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":0,\"cardIds\":[],\"card_type\":0,\"cards_num\":13,\"code\":0,\"current\":1,\"mustPid\":3,\"outCardTimeout\":30}"}
+2026-05-25T08:20:05.686+08:00 [INFO] heartbeatCheck: 12.9623307s
+2026-05-25T08:20:06.686+08:00 [INFO] 用户 1 发送消息: {"type":"outCard","data":"{\"pid\":1,\"cardIds\":[36,32,28,24,12],\"card_type\":4,\"cards_num\":8,\"code\":0,\"current\":2,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-25T08:20:08.689+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":2,\"cardIds\":null,\"card_type\":0,\"cards_num\":8,\"code\":0,\"current\":3,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-25T08:20:10.686+08:00 [INFO] heartbeatCheck: 17.9622297s
+2026-05-25T08:20:11.694+08:00 [INFO] 用户 1 发送消息: {"type":"pass","data":"{\"pid\":3,\"cardIds\":null,\"card_type\":0,\"cards_num\":8,\"code\":0,\"current\":0,\"mustPid\":1,\"outCardTimeout\":30}"}
+2026-05-25T08:20:15.427+08:00 [INFO] 用户 1 接收消息: {"type":"playCard","data":"{\"pid\":0,\"pass\":1}"}（类型: 1）
+2026-05-25T08:20:15.428+08:00 [INFO] 执行操作异步任务: type:"playCard" data:"{\"pid\":0,\"pass\":1}" from:"1"
+2026-05-25T08:20:15.686+08:00 [INFO] heartbeatCheck: 260.3511ms
+2026-05-25T08:20:20.687+08:00 [INFO] heartbeatCheck: 5.260762s
+2026-05-25T08:20:21.701+08:00 [INFO] 用户 1 接收消息: {"type":"heartbeat","data":"ping"}（类型: 1）
+2026-05-25T08:20:21.703+08:00 [INFO] 用户 1 发送消息: {"type":"heartbeat","data":"pong","from":"1"}
+2026-05-25T08:20:25.688+08:00 [INFO] heartbeatCheck: 3.9871466s
+2026-05-25T08:20:28.730+08:00 [INFO] 用户 1 连接已关闭，读循环退出
+2026-05-25T08:20:28.732+08:00 [INFO] 用户 1 关闭连接，原因: 读循环退出
+2026-05-25T08:20:28.733+08:00 [ERRO] ctx Watcher 接收消息错误: context canceled 
+Stack:
+1.  gate-service/internal/controller/enter.(*Client).writeLoop
+    D:/gowork/max2/max2/app/gate-service/internal/controller/enter/enter_v1_enter.go:253
+
+2026-05-25T08:20:28.734+08:00 [INFO] 用户 1 writeLoop退出
+2026-05-25T08:20:28.733+08:00 [INFO] 用户 1 心跳检测被取消: context canceled
+2026-05-25T08:20:28.737+08:00 [INFO] 用户 1 心跳检测退出

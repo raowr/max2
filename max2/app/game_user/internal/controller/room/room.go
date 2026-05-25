@@ -14,7 +14,6 @@ import (
 	"math/rand"
 	"strings"
 	"sync"
-	"sync/atomic"
 	"time"
 
 	"github.com/gogf/gf/v2/encoding/gjson"
@@ -506,13 +505,7 @@ func PlayOneGame(room *Room) {
 	//开始监听玩家出牌
 	// 修复资源泄漏：先关闭旧的订阅
 	// 检查是否已经启动了消息接收 goroutine
-	if atomic.CompareAndSwapInt32(&room.receiverStarted, 0, 1) {
-		g.Log().Infof(ctx, "房间 %s 启动消息接收 goroutine", room.ID)
-		room.msgCtx, room.MsgCancel = context.WithCancel(context.Background())
-		go room.startMessageReceiver(room.msgCtx, room.Players[room.Current].Name)
-	} else {
-		g.Log().Infof(ctx, "房间 %s 消息接收 goroutine 已启动，跳过", room.ID)
-	}
+	go room.startMessageReceiver(room.Players[room.Current].Name)
 
 	room.pubClient = g.Redis()
 
@@ -594,14 +587,14 @@ func PlayOneGame(room *Room) {
 }
 
 // 在 startMessageReceiver 中（只启动一次）
-func (room *Room) startMessageReceiver(ctx context.Context, currentName string) {
+func (room *Room) startMessageReceiver(currentName string) {
 	defer func() {
-		g.Log().Error(ctx, "startMessageReceiver 退出:")
+		g.Log().Error(ctx, "room startMessageReceiver 退出:")
 	}()
 	// 使用 Pattern 订阅当前出牌玩家出牌消息
 	sub, _, err := g.Redis().Subscribe(ctx, consts.PlayerPlayCardPrefix+currentName)
 	if err != nil {
-		g.Log().Error(ctx, "Subscribe 失败:", err)
+		g.Log().Error(ctx, "room startMessageReceiver Subscribe 失败:", err)
 		return
 	}
 	room.subClient = sub
@@ -617,8 +610,19 @@ func (room *Room) startMessageReceiver(ctx context.Context, currentName string) 
 		}
 		msg, err := room.subClient.Receive(ctx)
 		if err != nil {
-			// g.Log().Error(ctx, "Receive 失败:", err)
-			continue
+			// 如果是 Context 被取消导致的错误，直接退出
+			if ctx.Err() != nil {
+				g.Log().Error(ctx, "room ctx Watcher 接收消息错误:", ctx.Err())
+			}
+			// 其它错误（如网络断开），可以考虑简单的重试或记录日志
+			g.Log().Error(ctx, "room Casbin Watcher 接收消息错误:", err)
+			// 如果出错直接退出，等待下一次重启或手动干预
+			if room.Status == 1 || room.IsPlaying {
+				continue
+			} else {
+				return
+			}
+
 		}
 
 		// 解析消息
@@ -690,6 +694,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 				}
 			}
 		}()
+
 		room.Rgtimer.Stop()
 		room.Rgtimer.Close()
 		room.IsPlaying = false
@@ -697,6 +702,10 @@ func (room *Room) GameLoop(ctx context.Context) {
 		room.LastCards = make([]Card, 0)
 		room.OutStarTime = 0
 		room.passCount = 0
+		//修复资源泄漏：先关闭旧的订阅
+		if room.subClient != nil {
+			_ = room.subClient.Close(ctx)
+		}
 		g.Log().Infof(ctx, "\n游戏结束！恭喜%s！获胜\n", winName)
 		//缓存当前房间信息
 		wg.Add(1)

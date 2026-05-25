@@ -66,29 +66,27 @@ type Player struct {
 
 // 房间结构体
 type Room struct {
-	ID              string
-	Players         []*Player
-	Deck            []Card
-	Landlord        *Player
-	Farmers         []*Player
-	Current         int
-	LastCards       []Card
-	LastPH          int
-	Turn            int
-	IsPlaying       bool
-	Rgtimer         *gtimer.Timer `json:"-"` // 忽略
-	OutStarTime     int
-	passCount       int
-	NextPlayerID    int
-	Status          int
-	mutex           sync.RWMutex `json:"-"` // 忽略
-	Type            int
-	subClient       gredis.Conn            `json:"-"` // 忽略
-	pubClient       *gredis.Redis          `json:"-"` // 忽略
-	MsgQueue        chan *v1.SendActionReq `json:"-"` // 忽略
-	receiverStarted int32
-	msgCtx          context.Context    `json:"-"` // 忽略
-	MsgCancel       context.CancelFunc `json:"-"` // 忽略 ← 核心问题
+	ID           string
+	Players      []*Player
+	Deck         []Card
+	Landlord     *Player
+	Farmers      []*Player
+	Current      int
+	LastCards    []Card
+	LastPH       int
+	Turn         int
+	IsPlaying    bool
+	Rgtimer      *gtimer.Timer `json:"-"` // 忽略
+	OutStarTime  int
+	passCount    int
+	NextPlayerID int
+	Status       int
+	mutex        sync.RWMutex `json:"-"` // 忽略
+	Type         int
+	subClient    gredis.Conn            `json:"-"` // 忽略
+	pubClient    *gredis.Redis          `json:"-"` // 忽略
+	MsgQueue     chan *v1.SendActionReq `json:"-"` // 忽略
+	MsgCancel    context.CancelFunc     `json:"-"` // 忽略 ← 核心问题
 }
 
 // 房间管理器
