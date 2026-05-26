@@ -68,8 +68,8 @@ func (c *Controller) handleInitRoom(ctx context.Context, req *v1.SendActionReq) 
 
 	//判断是否可以创建房间
 	_, oldRoomInfo := c.getPlayerAndRoomInfo(ctx, req)
-	if oldRoomInfo != nil && oldRoomInfo.IsPlaying {
-		g.Log().Infof(ctx, "用户 %s 已在房间 %s 中，不能创建新房间", req.From, oldRoomInfo.ID)
+	if oldRoomInfo != nil && (oldRoomInfo.Status == 1 || oldRoomInfo.IsPlaying) {
+		g.Log().Infof(ctx, "用户 %s 已在房间 %s 进行中，不能创建新房间", req.From, oldRoomInfo.ID)
 		return
 	}
 
@@ -193,8 +193,8 @@ func (c *Controller) handleCreateRoom(ctx context.Context, req *v1.SendActionReq
 
 	//判断是否可以创建房间
 	_, oldRoomInfo := c.getPlayerAndRoomInfo(ctx, req)
-	if oldRoomInfo != nil && oldRoomInfo.IsPlaying {
-		g.Log().Infof(ctx, "用户 %s 已在房间 %s 中，不能创建新房间", req.From, oldRoomInfo.ID)
+	if oldRoomInfo != nil && (oldRoomInfo.Status == 1 || oldRoomInfo.IsPlaying) {
+		g.Log().Infof(ctx, "用户 %s 已在房间 %s 进行中，不能创建新房间", req.From, oldRoomInfo.ID)
 		return
 	}
 
