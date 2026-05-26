@@ -5,9 +5,17 @@ import {  RouterView } from 'vue-router'
 <template>
 <div>
   <RouterView />
+  <GlobalToast />
 </div>
 
 </template>
+
+<script>
+import GlobalToast from '@/components/Toast.vue'
+export default {
+  components: { GlobalToast }
+}
+</script>
 
 <style scoped>
 

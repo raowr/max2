@@ -22,3 +22,4 @@ max2/app/web/resource/log
 __debug_bin*
 *.exe*
 max2/app/game_user/linux_amd64
+max2/app/gate-service/linux_amd64

@@ -443,3 +443,15 @@ export const reformUrl = (url='',r='',c='') => {
     return `${customUrl}?r=${r}&c=${c}`
 }
 
+/**
+ * Toast 消息提示工具函数
+ * @param {string} text - 提示内容
+ * @param {number} duration - 显示时长（毫秒），默认4000
+ * @param {string} position - 位置 'top' | 'center'，默认'top'
+ */
+export const toast = (text, duration = 4000, position = 'top') => {
+    window.dispatchEvent(new CustomEvent('show-toast', {
+        detail: { text, duration, position }
+    }))
+}
+

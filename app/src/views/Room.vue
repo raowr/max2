@@ -116,6 +116,7 @@ import full15418 from '@/assets/img/lihui/full15418.png';
 import { storage } from '@/utils/storage'
 import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
 import {useRoute,useRouter} from 'vue-router'
+import { toast } from '@/utils/tools'
 
 import { reconnectWebSocket } from '@/utils/websocketReconnect';
 
@@ -308,6 +309,11 @@ const handleMessage = (data) => {
       router.push('/game')  // 跳转到游戏页面
       // router.push({path:'/game'})
     }
+  }
+  if (parsedData.type == "healthTip") {
+    data = JSON.parse(parsedData.data)
+    var msg  = '游戏一定很精彩，但是今日你已在线'+data.hour+'小时,请注意休息！！！'
+    toast(msg,5000)
   }
 
 }

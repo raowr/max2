@@ -13,6 +13,7 @@ import (
 
 	"gate-service/internal/consts"
 	"gate-service/internal/controller/action"
+	"gate-service/internal/controller/health"
 	"gate-service/internal/service"
 
 	"github.com/gogf/gf/v2/encoding/gjson"
@@ -162,6 +163,17 @@ func (c *Client) readLoop(ctx context.Context) {
 
 		// 只要成功接收到消息，无论后续处理是否成功，都更新心跳
 		c.heartbeat = time.Now()
+
+		// 增加用户在线时长
+		if isTip, hour := health.AddPlayTimeForUser(ctx, c.userName, 1); isTip {
+			// 提醒用户
+			healthTip := &actionv1.SendActionReq{
+				Type: consts.HealthTip,
+				Data: fmt.Sprintf("{\"hour\":%d}", hour),
+				From: c.userName,
+			}
+			c.safeSendMessage(ctx, healthTip)
+		}
 
 		// 解析消息（严格错误处理）
 		var msg *actionv1.SendActionReq

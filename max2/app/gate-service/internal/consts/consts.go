@@ -11,6 +11,7 @@ const (
 	PlayCard             = "playCard"
 	GetInfo              = "getInfo"
 	Heartbeat            = "heartbeat"
+	HealthTip            = "healthTip"
 	ChatSessionName      = "ChatName"
 	ChatSessionNameTemp  = "ChatNameTemp"
 	ChatSessionNameError = "ChatNameError"
@@ -23,6 +24,8 @@ const (
 	RoomInfoPrefix       = "room:info:"
 	RoomFriendMsgPrefix  = "room:friend:msg:"
 	PlayerPlayCardPrefix = "player:play:card:" //redis中玩家出牌的牌
+	PlayTimePrefix       = "playtime:"
+	LastRemindPrefix     = "last_remind:"
 )
 
 var JwtKey = "db03d23b03ec405793b38f10592a2f34" // jwt密钥
