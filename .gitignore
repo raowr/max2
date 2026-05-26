@@ -21,3 +21,4 @@ max2/app/web/resource/log
 # 排除 Go 调试二进制文件
 __debug_bin*
 *.exe*
+max2/app/game_user/linux_amd64

@@ -477,23 +477,23 @@ func (c *Controller) handlePlay(ctx context.Context, req *v1.SendActionReq) {
 	roomInfo.IsPlaying = true
 	roomInfo.Status = 1 //游戏中
 	rmMu.Unlock()
-	//如果时好友房,通知房间内每个人开始游戏
-	if roomInfo.Type == 2 {
-		// roomInfo.SendRoomMessage(consts.Play, "")
-		msgData := &v1.SendActionReq{
-			Type: consts.Play, //此处有修改注意，客户端跳转
-			Data: "",
-			From: req.From,
+
+	msgData := &v1.SendActionReq{
+		Type: consts.Play, //此处有修改注意，客户端跳转
+		Data: "",
+		From: req.From,
+	}
+	//通知房间内每个人开始游戏
+	for _, player := range roomInfo.Players {
+		if player.Type != room.Human {
+			continue
 		}
-		for _, player := range roomInfo.Players {
-			msgData.From = player.UserName
-			_, err := c.pubClient.Publish(ctx, consts.PlayerMsgPrefix+player.UserName, c.encodeMessage(ctx, msgData))
-			if err != nil {
-				g.Log().Errorf(ctx, "用户 %s 发送消息失败: %v", req.From, err)
-			}
+		msgData.From = player.UserName
+		_, err := c.pubClient.Publish(ctx, consts.PlayerMsgPrefix+player.UserName, c.encodeMessage(ctx, msgData))
+		if err != nil {
+			g.Log().Errorf(ctx, "用户 %s 发送消息失败: %v", req.From, err)
 		}
 	}
-
 	//初始化房间定时器
 	roomInfo.Rgtimer = gtimer.New()
 	roomInfo.Rgtimer.Add(context.Background(), 1*time.Second, roomInfo.GameLoop)

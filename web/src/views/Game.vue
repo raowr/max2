@@ -628,6 +628,8 @@ const handleMessage = (data) => {
     initGameWithData(data)
   }
   if (parsedData.type == "showCard") {
+    
+    showGameOverModal.value = false
 
     resetAvatar()
 

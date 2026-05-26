@@ -1,6 +1,0 @@
-2026-05-25T08:06:04.588+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9030", value "{"protocol":"grpc"}", lease "7587895049128813864"
-2026-05-25T20:09:51.659+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9030", value "{"protocol":"grpc"}", lease "7587895078059454978"
-2026-05-25T20:14:38.117+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9030", value "{"protocol":"grpc"}", lease "7587895078059454982"
-2026-05-25T20:50:14.833+08:00 [DEBU] etcd put success with key "/service/default/default/user/latest/172.20.10.3:9030", value "{"protocol":"grpc"}", lease "7587895078059455032"
-2026-05-25T20:54:36.008+08:00 [DEBU] {302064b428d0b218976ed00da5504c48} 发现服务节点: 127.0.0.1:8010
-2026-05-25T20:54:36.011+08:00 [DEBU] {601290b128d0b218966ed00ddf6d631c} 发现服务节点: 127.0.0.1:8010
