@@ -74,7 +74,7 @@ func (c *Controller) handleInitRoom(ctx context.Context, req *v1.SendActionReq) 
 	}
 
 	// 创建新房间和玩家
-	roomInfo := rm.CreateRoom(1) //创建比赛房
+	roomInfo := rm.CreateRoom(1) //创建段位房
 	humanPlayer := roomInfo.CreatePlayer(req.From, room.Human)
 	humanPlayer.UserName = req.From
 	rm.PlayerList[humanPlayer.UserName] = humanPlayer // 关联用户与玩家
