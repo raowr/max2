@@ -973,7 +973,7 @@ const playSound = (musicPath) => {
 
 // 添加重新开始游戏的方法
 const restartGame = () => {
-  showGameOverModal.value = false
+  // showGameOverModal.value = false
   websocket.send({ "type": "play", "data": "", "name": "" })
 }
 
