@@ -358,7 +358,7 @@ const handleMessage = (data) => {
     console.log("在线时间：",data)
     console.log("在线时间：",data.hour)
     let msg  = '游戏一定很精彩，但是今日你已在线'+data.hour+'小时了,请注意休息！！！'
-    ElMessage.error(msg);
+    ElMessage.warning(msg);
   }
 }
 const toRoom = () => {

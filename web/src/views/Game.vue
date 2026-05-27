@@ -934,7 +934,7 @@ const handleMessage = (data) => {
   if (parsedData.type == "healthTip") {
     data = JSON.parse(parsedData.data)
     let msg  = '游戏一定很精彩，但是今日你已在线'+data.hour+'小时,请注意休息！！！'
-    ElMessage.error(msg);
+    ElMessage.warning(msg);
   }
 }
 
