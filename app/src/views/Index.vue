@@ -117,7 +117,7 @@ import { audioManager } from '@/utils/audio'
 import { storage } from '@/utils/storage'
 import { useRoute, useRouter } from 'vue-router'
 import { websocket } from '@/utils/websocket'
-import { toast } from '@/utils/tools'
+import { ElMessage, ElMessageBox } from 'element-plus';
 
 import { reconnectWebSocket } from '@/utils/websocketReconnect';
 
@@ -171,7 +171,6 @@ const logout = () => {
 
 const userIdShow = ref(false)  // 玩家di显示与隐藏
 onMounted(() => {
-//  toast('游戏一定很精彩，但是今日你在线已达到8小时,请注意休息！！', 5000)
   // 添加页面可见性变化监听
   document.addEventListener('visibilitychange', handleVisibilityChange)
 
@@ -203,15 +202,11 @@ onUnmounted(() => {
     // 移除 WebSocket 回调，避免内存泄漏和消息冲突
   websocket.off('message', handleMessage)
   // 清除连接状态定时检查
-  if (statusCheckInterval) {
-    clearInterval(statusCheckInterval);
-    statusCheckInterval = null;
-  }
 })
 // d:\gowork\max2\web\src\views\Index.vue
 
 // 连接状态定时检查（用于调试）
-let statusCheckInterval = null;
+
 
 const init = async () => {
   try {
@@ -237,12 +232,12 @@ const init = async () => {
   websocket.on('error', handleError);
  
   // 启动连接状态定时检查（每500ms检查一次）
-  const checkConnectionStatus = () => {
-    if (websocket.ws) {
-      console.log('index 连接状态定时检查:', websocket.ws.readyState, '(0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED)');
-    }
-  };
-  statusCheckInterval = setInterval(checkConnectionStatus, 500);
+  // const checkConnectionStatus = () => {
+  //   if (websocket.ws) {
+  //     console.log('index 连接状态定时检查:', websocket.ws.readyState, '(0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED)');
+  //   }
+  // };
+  // statusCheckInterval = setInterval(checkConnectionStatus, 500);
 
  const sendGetInfo = (retryCount = 0) => {
   console.log('index sending getInfo (retry:', retryCount, ')');
@@ -362,8 +357,8 @@ const handleMessage = (data) => {
     data = JSON.parse(parsedData.data)
     console.log("在线时间：",data)
     console.log("在线时间：",data.hour)
-    var msg  = '游戏一定很精彩，但是今日你已在线'+data.hour+'小时了,请注意休息！！！'
-    toast(msg,5000)
+    let msg  = '游戏一定很精彩，但是今日你已在线'+data.hour+'小时了,请注意休息！！！'
+    ElMessage.warning(msg);
   }
 }
 const toRoom = () => {

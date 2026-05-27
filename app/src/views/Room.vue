@@ -116,7 +116,7 @@ import full15418 from '@/assets/img/lihui/full15418.png';
 import { storage } from '@/utils/storage'
 import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
 import {useRoute,useRouter} from 'vue-router'
-import { toast } from '@/utils/tools'
+import { ElMessage, ElMessageBox } from 'element-plus';
 
 import { reconnectWebSocket } from '@/utils/websocketReconnect';
 
@@ -304,16 +304,16 @@ const handleMessage = (data) => {
       }
   }
   if (parsedData.type === "play") {
-    // 非房主&不在游戏页 操作跳到游戏页
-    if (playerId.value !== 0 && route.name !== "Game") {
+    // 不在游戏页 操作跳到游戏页
+    if (route.name !== "Game") {
       router.push('/game')  // 跳转到游戏页面
       // router.push({path:'/game'})
     }
   }
   if (parsedData.type == "healthTip") {
     data = JSON.parse(parsedData.data)
-    var msg  = '游戏一定很精彩，但是今日你已在线'+data.hour+'小时,请注意休息！！！'
-    toast(msg,5000)
+    let msg  = '游戏一定很精彩，但是今日你已在线'+data.hour+'小时,请注意休息！！！'
+    ElMessage.warning(msg);
   }
 
 }
@@ -384,8 +384,8 @@ const toGame = () => {
   if (isReady()) {
     // websocket.send({"type":"toGame","data":"","name":""})
     websocket.send({ "type": "play", "data": "", "name": "" })
-    //路由跳到游戏页面
-    router.push({path:'/game'})
+    //路由跳到游戏页面，不能立即跳，要等play返回才能跳
+    // router.push({path:'/game'})
   }
 
 }

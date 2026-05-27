@@ -1119,14 +1119,13 @@ const startCountdown = (pid, remainOutCardTimeout) => {
   }
 }
 
-const resetCountdown = () => {
-  countdown.value = 30
-  if (!timer) startCountdown()
-}
-
 
 onBeforeUnmount(() => {
-  clearInterval(timer)
+  // 清理所有倒计时定时器
+  clearInterval(timer1)
+  clearInterval(timer2)
+  clearInterval(timer3)
+  clearInterval(timer4)
 })
 
 
