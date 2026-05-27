@@ -203,15 +203,11 @@ onUnmounted(() => {
     // 移除 WebSocket 回调，避免内存泄漏和消息冲突
   websocket.off('message', handleMessage)
   // 清除连接状态定时检查
-  if (statusCheckInterval) {
-    clearInterval(statusCheckInterval);
-    statusCheckInterval = null;
-  }
 })
 // d:\gowork\max2\web\src\views\Index.vue
 
 // 连接状态定时检查（用于调试）
-let statusCheckInterval = null;
+
 
 const init = async () => {
   try {
@@ -237,12 +233,12 @@ const init = async () => {
   websocket.on('error', handleError);
  
   // 启动连接状态定时检查（每500ms检查一次）
-  const checkConnectionStatus = () => {
-    if (websocket.ws) {
-      console.log('index 连接状态定时检查:', websocket.ws.readyState, '(0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED)');
-    }
-  };
-  statusCheckInterval = setInterval(checkConnectionStatus, 500);
+  // const checkConnectionStatus = () => {
+  //   if (websocket.ws) {
+  //     console.log('index 连接状态定时检查:', websocket.ws.readyState, '(0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED)');
+  //   }
+  // };
+  // statusCheckInterval = setInterval(checkConnectionStatus, 500);
 
  const sendGetInfo = (retryCount = 0) => {
   console.log('index sending getInfo (retry:', retryCount, ')');

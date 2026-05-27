@@ -721,7 +721,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 			if err != nil {
 				g.Log().Error(ctx, err)
 			}
-			service.Cache().Set(ctx, consts.RoomInfoPrefix+room.ID, roomJsonStr, 0)
+			service.Cache().Set(ctx, consts.RoomInfoPrefix+room.ID, roomJsonStr, 24*time.Hour)
 		}()
 		wg.Wait()
 		return
@@ -1048,7 +1048,7 @@ func (room *Room) GameLoop(ctx context.Context) {
 		if err != nil {
 			g.Log().Error(ctx, err)
 		}
-		service.Cache().Set(ctx, consts.RoomInfoPrefix+room.ID, roomJsonStr, 0)
+		service.Cache().Set(ctx, consts.RoomInfoPrefix+room.ID, roomJsonStr, 24*time.Hour)
 	}()
 
 	//通知用户,出牌，

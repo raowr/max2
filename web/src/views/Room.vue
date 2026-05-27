@@ -304,8 +304,8 @@ const handleMessage = (data) => {
       }
   }
   if (parsedData.type === "play") {
-    // 非房主&不在游戏页 操作跳到游戏页
-    if (playerId.value !== 0 && route.name !== "Game") {
+    // 不在游戏页 操作跳到游戏页
+    if (route.name !== "Game") {
       router.push('/game')  // 跳转到游戏页面
       // router.push({path:'/game'})
     }
@@ -384,8 +384,8 @@ const toGame = () => {
   if (isReady()) {
     // websocket.send({"type":"toGame","data":"","name":""})
     websocket.send({ "type": "play", "data": "", "name": "" })
-    //路由跳到游戏页面
-    router.push({path:'/game'})
+    //路由跳到游戏页面，不能立即跳，要等play返回才能跳
+    // router.push({path:'/game'})
   }
 
 }
