@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="992b7c79-c234-43e9-8f21-aadab89c7b3a" name="Changes" comment="注册外网ip">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/components/Toast.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/utils/tools.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/utils/tools.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/views/Game.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/views/Game.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/views/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/views/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/views/Room.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/views/Room.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

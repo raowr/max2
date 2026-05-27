@@ -292,7 +292,7 @@ import { websocket } from '@/utils/websocket'
 import { cardUtil, CARD_TYPE } from '@/utils/card';
 import { storage } from '@/utils/storage'
 import { getTouxiang } from '@/utils/touxiang'//随机返回一个头像
-import { toast } from '@/utils/tools'
+import { ElMessage, ElMessageBox } from 'element-plus';
 // 导入背景图片（新增代码）
 import winBg from '@/assets/img/ui/win_bg.png'
 import loseBg from '@/assets/img/ui/lose_bg.png'
@@ -933,8 +933,8 @@ const handleMessage = (data) => {
   }
   if (parsedData.type == "healthTip") {
     data = JSON.parse(parsedData.data)
-    var msg  = '游戏一定很精彩，但是今日你已在线'+data.hour+'小时,请注意休息！！！'
-    toast(msg,5000)
+    let msg  = '游戏一定很精彩，但是今日你已在线'+data.hour+'小时,请注意休息！！！'
+    ElMessage.error(msg);
   }
 }
 
