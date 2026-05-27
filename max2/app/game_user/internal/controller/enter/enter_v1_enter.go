@@ -225,7 +225,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 	if err != nil {
 		g.Log().Error(ctx, err)
 	}
-	service.Cache().Set(ctx, consts.PlayerInfoPrefix+humanPlayer.UserName, playerJsonStr, 0)
+	service.Cache().Set(ctx, consts.PlayerInfoPrefix+humanPlayer.UserName, playerJsonStr, 24*time.Hour)
 
 	//发送日志 创建房间
 	log_game.SendLog(&log_gamev1.SendLogReq{
@@ -253,7 +253,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 	if err != nil {
 		g.Log().Error(ctx, err)
 	}
-	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
+	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 24*time.Hour)
 
 	playerDTOs := getPlayers(roomInfo)
 
@@ -293,7 +293,7 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 		if err != nil {
 			g.Log().Error(ctx, err)
 		}
-		service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
+		service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 24*time.Hour)
 
 		// 创建一个临时结构体，只包含可序列化的字段
 		playerDTOs := getPlayers(roomInfo)
@@ -335,14 +335,14 @@ func (c *Client) handleCreateRoom(ctx context.Context) {
 		g.Log().Error(ctx, err)
 	}
 
-	service.Cache().Set(ctx, consts.PlayerInfoPrefix+humanPlayer.UserName, jsonStr, 0)
+	service.Cache().Set(ctx, consts.PlayerInfoPrefix+humanPlayer.UserName, jsonStr, 24*time.Hour)
 
 	//缓存当前房间信息
 	roomJsonStr, err := json.Marshal(roomInfo)
 	if err != nil {
 		g.Log().Error(ctx, err)
 	}
-	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
+	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 24*time.Hour)
 
 	// 推送玩家列表（处理JSON错误）
 	playerDTOs := getPlayers(roomInfo)
@@ -447,14 +447,14 @@ func (c *Client) handleJoinRoom(ctx context.Context, data string) {
 	if err != nil {
 		g.Log().Error(ctx, err)
 	}
-	service.Cache().Set(ctx, consts.PlayerInfoPrefix+humanPlayer.UserName, jsonStr, 0)
+	service.Cache().Set(ctx, consts.PlayerInfoPrefix+humanPlayer.UserName, jsonStr, 24*time.Hour)
 
 	//缓存当前房间信息
 	roomJsonStr, err := json.Marshal(&roomInfo)
 	if err != nil {
 		g.Log().Error(ctx, err)
 	}
-	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
+	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 24*time.Hour)
 
 	playerDTOs := getPlayers(&roomInfo)
 
@@ -530,7 +530,7 @@ func (c *Client) handleLeaveRoom(ctx context.Context) {
 	if err != nil {
 		g.Log().Error(ctx, err)
 	}
-	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 0)
+	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 24*time.Hour)
 
 	// 创建一个临时结构体，只包含可序列化的字段
 	playerDTOs := getPlayers(roomInfo)
