@@ -473,9 +473,11 @@ func (c *Controller) handlePlay(ctx context.Context, req *v1.SendActionReq) {
 		return
 	}
 
+	now := int(time.Now().Unix())
 	rmMu.Lock()
 	roomInfo.IsPlaying = true
 	roomInfo.Status = 1 //游戏中
+	roomInfo.OutStarTime = now
 	rmMu.Unlock()
 
 	msgData := &v1.SendActionReq{
