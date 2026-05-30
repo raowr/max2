@@ -535,24 +535,6 @@ func PlayOneGame(room *Room) {
 				})
 				msgType := "showCard"
 
-				// // 先加锁保护MsgChan的访问
-				// room.mutex.RLock()
-				// msgChan := humanPlayer.MsgChan
-				// room.mutex.RUnlock()
-
-				// // 直接向人类玩家的消息通道发送消息，而不是发送给所有玩家
-				// if msgChan != nil {
-				// 	select {
-				// 	case msgChan <- RoomMsg{
-				// 		Type: msgType,
-				// 		Data: gconv.String(data),
-				// 	}:
-				// 		// 发送成功
-				// 	default:
-				// 		g.Log().Warningf(ctx, "发送给玩家 %s 的手牌消息阻塞（通道满）", humanPlayer.Name)
-				// 	}
-				// }
-
 				//发送玩家牌信息
 				msg := RoomMsg{
 					Type: msgType,
@@ -570,20 +552,6 @@ func PlayOneGame(room *Room) {
 		}
 		room.showPlayerCards(player)
 	}
-	// ... existing code ...
-	// ... existing code ...
-
-	// g.Log().Infof(ctx,"\n底牌是:", showCards(room.Deck))
-	// g.Log().Infof(ctx,"地主是:", room.Landlord.Name)
-	// g.Log().Infof(ctx,"游戏开始!")
-
-	// 显示地主的牌
-	// showPlayerCards(room.Landlord)
-
-	// 游戏主循环
-	// passCount := 0
-	// room.Rgtimer.Add(context.Background(), 1*time.Second, room.GameLoop)
-	// room.Rgtimer.Stop() //先停止
 	room.Rgtimer.Start()
 
 }
@@ -1045,37 +1013,33 @@ func (room *Room) GameLoop(ctx context.Context) {
 	room.subClientClose()
 
 	//缓存当前房间信息
-	go func() {
-		roomJsonStr, err := json.Marshal(room)
-		if err != nil {
-			g.Log().Error(ctx, err)
-		}
-		service.Cache().Set(ctx, consts.RoomInfoPrefix+room.ID, roomJsonStr, 24*time.Hour)
-	}()
+	roomJsonStr, err := json.Marshal(room)
+	if err != nil {
+		g.Log().Error(ctx, err)
+	}
+	service.Cache().Set(ctx, consts.RoomInfoPrefix+room.ID, roomJsonStr, 24*time.Hour)
 
 	//通知用户,出牌，
-	go func() {
-		data, _ := json.Marshal(struct {
-			Pid            int   `json:"pid"`
-			CardIds        []int `json:"cardIds"`
-			CardType       int   `json:"card_type"`
-			CardsNum       int   `json:"cards_num"`      //剩余牌数
-			Code           int   `json:"code"`           //0成功,非零失败
-			Current        int   `json:"current"`        //当前出牌玩家
-			MustPid        int   `json:"mustPid"`        //必须出牌的玩家ID
-			OutCardTimeout int   `json:"outCardTimeout"` //出牌最大时间(单位秒) /s
-		}{
-			Pid:            currentPlayer.ID,
-			CardIds:        indices,
-			CardType:       cardType,
-			CardsNum:       currentPlayer.CardNum,
-			Code:           0,
-			Current:        room.Current,
-			MustPid:        mustPid,
-			OutCardTimeout: GetOutCardTimeout(), //出牌最大时间(单位秒) /s
-		})
-		room.safeSendRoomMessage(msgType, data)
-	}()
+	data, _ := json.Marshal(struct {
+		Pid            int   `json:"pid"`
+		CardIds        []int `json:"cardIds"`
+		CardType       int   `json:"card_type"`
+		CardsNum       int   `json:"cards_num"`      //剩余牌数
+		Code           int   `json:"code"`           //0成功,非零失败
+		Current        int   `json:"current"`        //当前出牌玩家
+		MustPid        int   `json:"mustPid"`        //必须出牌的玩家ID
+		OutCardTimeout int   `json:"outCardTimeout"` //出牌最大时间(单位秒) /s
+	}{
+		Pid:            currentPlayer.ID,
+		CardIds:        indices,
+		CardType:       cardType,
+		CardsNum:       currentPlayer.CardNum,
+		Code:           0,
+		Current:        room.Current,
+		MustPid:        mustPid,
+		OutCardTimeout: GetOutCardTimeout(), //出牌最大时间(单位秒) /s
+	})
+	room.safeSendRoomMessage(msgType, data)
 
 }
 
@@ -1094,50 +1058,19 @@ func (room *Room) safeSendRoomMessage(msgType string, data any) {
 		if player.Type == AI {
 			continue
 		}
-		// 为每个玩家单独创建一个goroutine发送消息
-		go func(p *Player) {
-
-			//发送玩家牌信息
-			msg := RoomMsg{
-				Type: msgType,
-				Data: gconv.String(data),
-			}
-			msgBytes, err := gjson.Encode(msg)
-			if err != nil {
-				g.Log().Errorf(ctx, "用户 %s 消息编码失败: %v", player.UserName, err)
-			}
-			_, err = room.pubClient.Publish(ctx, consts.PlayerMsgPrefix+player.UserName, msgBytes)
-			if err != nil {
-				g.Log().Errorf(ctx, "用户 %s 发送消息失败: %v", player.UserName, err)
-			}
-
-			// // 在访问MsgChan之前获取读锁
-			// room.mutex.RLock()
-			// msgChan := p.MsgChan // 保存MsgChan的引用
-			// room.mutex.RUnlock() // 立即释放锁，避免长时间持有
-
-			// // 检查玩家消息通道是否存在
-			// if msgChan != nil {
-			// 	// 使用函数包装发送操作并添加recover
-			// 	func() {
-			// 		defer func() {
-			// 			if r := recover(); r != nil {
-			// 				g.Log().Errorf(ctx, "发送给玩家 %s 的消息发生panic: %v", p.Name, r)
-			// 			}
-			// 		}()
-
-			// 		select {
-			// 		case msgChan <- RoomMsg{
-			// 			Type: msgType,
-			// 			Data: dataStr,
-			// 		}:
-			// 			// 发送成功
-			// 		default:
-			// 			g.Log().Warningf(ctx, "玩家 %s 的消息发送阻塞（通道满）", p.Name)
-			// 		}
-			// 	}()
-			// }
-		}(player) // 注意这里使用闭包捕获player变量
+		//发送玩家牌信息
+		msg := RoomMsg{
+			Type: msgType,
+			Data: gconv.String(data),
+		}
+		msgBytes, err := gjson.Encode(msg)
+		if err != nil {
+			g.Log().Errorf(ctx, "用户 %s 消息编码失败: %v", player.UserName, err)
+		}
+		_, err = room.pubClient.Publish(ctx, consts.PlayerMsgPrefix+player.UserName, msgBytes)
+		if err != nil {
+			g.Log().Errorf(ctx, "用户 %s 发送消息失败: %v", player.UserName, err)
+		}
 	}
 }
 

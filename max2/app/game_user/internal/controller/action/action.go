@@ -502,6 +502,13 @@ func (c *Controller) handlePlay(ctx context.Context, req *v1.SendActionReq) {
 
 	room.PlayOneGame(roomInfo)
 
+	//缓存当前房间信息
+	roomJsonStr, err := json.Marshal(roomInfo)
+	if err != nil {
+		g.Log().Error(ctx, err)
+	}
+	service.Cache().Set(ctx, consts.RoomInfoPrefix+roomInfo.ID, roomJsonStr, 24*time.Hour)
+
 	//发送日志 开始游戏
 	log_game.SendLog(&log_gamev1.SendLogReq{
 		RoomID:     roomInfo.ID,
@@ -541,7 +548,7 @@ func (c *Controller) handlePlayCard(ctx context.Context, req *v1.SendActionReq) 
 
 	//如果不是人类出牌时间，返回
 	if playerInfo.ID != roomInfo.Current {
-		g.Log().Errorf(ctx, "用户 %s 不是该玩家出牌阶段", req.From)
+		g.Log().Errorf(ctx, "用户 %s 不是该玩家出牌阶段 playerInfo.ID: %d, roomInfo.Current: %d", req.From, playerInfo.ID, roomInfo.Current)
 		return
 	}
 
