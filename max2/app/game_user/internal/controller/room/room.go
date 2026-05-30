@@ -509,6 +509,8 @@ func PlayOneGame(room *Room) {
 
 	room.pubClient = g.Redis()
 
+	room.subClient = g.Redis()
+
 	// ... existing code ...
 	// 显示玩家的牌（除了底牌）
 	for _, player := range room.Players {
@@ -602,21 +604,21 @@ func (room *Room) startMessageReceiver() {
 		}
 		// 使用 Pattern 订阅当前出牌玩家出牌消息
 		var currentName string
-		if room.subClient == nil {
+		if room.subConn == nil {
 			currentName = room.Players[room.Current].Name
-			sub, _, err := g.Redis().Subscribe(ctx, consts.PlayerPlayCardPrefix+currentName)
+			sub, _, err := room.subClient.Subscribe(ctx, consts.PlayerPlayCardPrefix+currentName)
 			if err != nil {
 				g.Log().Error(ctx, "room startMessageReceiver Subscribe 失败:", err)
 				return
 			}
-			room.subClient = sub
+			room.subConn = sub
 		}
 
 		room.mutex.RLock()
-		subClient := room.subClient
+		subConn := room.subConn
 		room.mutex.RUnlock()
 
-		msg, err := subClient.Receive(ctx)
+		msg, err := subConn.Receive(ctx)
 		if err != nil {
 			// 如果是 Context 被取消导致的错误，直接退出
 			if ctx.Err() != nil {
@@ -1146,8 +1148,8 @@ func (room *Room) SendRoomMessage(msgType string, data any) {
 
 func (room *Room) subClientClose() {
 	room.mutex.Lock()
-	old := room.subClient
-	room.subClient = nil
+	old := room.subConn
+	room.subConn = nil
 	room.mutex.Unlock()
 	if old != nil {
 		_ = old.Close(ctx) // 在锁外关闭，避免死锁或长时间持锁

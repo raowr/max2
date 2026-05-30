@@ -83,7 +83,8 @@ type Room struct {
 	Status       int
 	mutex        sync.RWMutex `json:"-"` // 忽略
 	Type         int
-	subClient    gredis.Conn            `json:"-"` // 忽略
+	subConn      gredis.Conn            `json:"-"` // 忽略
+	subClient    *gredis.Redis          `json:"-"` // 忽略
 	pubClient    *gredis.Redis          `json:"-"` // 忽略
 	MsgQueue     chan *v1.SendActionReq `json:"-"` // 忽略
 	MsgCancel    context.CancelFunc     `json:"-"` // 忽略 ← 核心问题
