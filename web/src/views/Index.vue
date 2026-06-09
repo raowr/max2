@@ -30,7 +30,7 @@
     <!--  底部按钮 -->
     <div class="bottom-buttons" style="display: flex">
       <a href=""></a>
-      <div class="btn btn-1"></div>
+      <div class="btn btn-1" @click="toDownload()"></div>
       <div class="btn btn-2"></div>
       <div class="btn btn-3"></div>
       <div class="btn btn-4"></div>
@@ -365,6 +365,10 @@ const toRoom = () => {
   websocket.send({ "type": "initRoom", "data": "", "name": "" });
   router.push({ path: '/room' })
 }
+
+const toDownload = () => {
+  router.push({ path: '/download' })
+}
 </script>
 
 
@@ -535,7 +539,7 @@ const toRoom = () => {
 }
 
 .bottom-buttons .btn-1 {
-  background: url("@/assets/img/ui/btn1.png");
+  background: url("@/assets/img/ui/btn7.png");
   background-size: 100% 100%;
   left: 55%;
 }
