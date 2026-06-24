@@ -13,6 +13,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:background">@null</item>
+            <!-- 👇 把下面这一行加在这里 -->
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 

@@ -90,7 +90,7 @@
             top: -40%;
         ">过</span>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:-95%;top:-2%'>
-      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:96%;left:-75%;">剩<span style="color:#FF6600;">{{ state.player2CardsNum }} </span>张</p>
+      <p style="z-index:1;font-size:16px; color:white;position: absolute;top:96%;left:-75%;">剩<span style="color: #FFFFFF;"> {{ state.player2CardsNum }} </span>张</p>
     </div>
 
     <!--player2 信息结束 -->
@@ -132,7 +132,7 @@
         ">过</span>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:100px;'>
       <p style="position: absolute;font-size:16px; color:white;top:90px;left:118px;width: 60px;">
-        剩<span style="color:#FF6600;">{{ state.player3CardsNum }} </span>张</p>
+        剩<span style="color:#FFFFFF;"> {{ state.player3CardsNum }} </span>张</p>
       <div style="position: absolute;width:105px;height:40px;text-align:center;top:90px;">
         <p style="z-index:1;font-size:16px; color:white;">{{ state.player3Name }}</p>
       </div>
@@ -174,7 +174,7 @@
         ">过</span>
       <img src='@/assets/img/54.png' width='80px' style='position: absolute;z-index:1;left:94%;top:0%'>
       <p style="z-index:1;font-size:16px; color:white;position: absolute;top:67%;left:112%;width: 60px;">
-        剩<span style="color:#FF6600;">{{ state.player4CardsNum }} </span>张</p>
+        剩<span style="color:#FFFFFF;"> {{ state.player4CardsNum }} </span>张</p>
     </div>
 
     <!--player4 信息结束 -->
