@@ -11,6 +11,7 @@ import (
 
 	"gate-service/internal/controller/action"
 	"gate-service/internal/controller/enter"
+	"gate-service/internal/middleware"
 )
 
 var (
@@ -26,6 +27,7 @@ var (
 				defer wg.Done()
 				s := g.Server()
 				s.Group("/", func(group *ghttp.RouterGroup) {
+					group.Middleware(middleware.RateLimit(1000, 2000)) // 每秒1000个请求，突发容量2000
 					group.Middleware(ghttp.MiddlewareHandlerResponse)
 					group.Bind(
 						enter.NewV1(),

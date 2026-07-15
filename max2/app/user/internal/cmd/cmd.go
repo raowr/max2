@@ -15,6 +15,7 @@ import (
 	"user/internal/controller/login"
 	"user/internal/controller/register"
 	"user/internal/controller/settle"
+	"user/internal/middleware"
 	"user/internal/service"
 )
 
@@ -30,6 +31,7 @@ var (
 				defer wg.Done()
 				s := g.Server()
 				s.Group("/", func(group *ghttp.RouterGroup) {
+					group.Middleware(middleware.RateLimit(1000, 2000)) // 每秒1000个请求，突发容量2000
 					//跨域处理，安全起见正式环境请注释该行
 					group.Middleware(service.Middleware().MiddlewareCORS)
 					group.Middleware(ghttp.MiddlewareHandlerResponse)
