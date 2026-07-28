@@ -17,6 +17,10 @@ func GetLogChan() {
 	ctx, cancel = context.WithCancel(context.Background())
 	LogChan = make(chan LogInfo, 100)
 	grpcx.Resolver.Register(etcd.New("127.0.0.1:2379"))
+
+	conn := grpcx.Client.MustNewGrpcClientConn("log-service")
+	logClient = v1.NewLogGameClient(conn)
+
 	// 启动异步任务
 	go func() {
 		for {
@@ -44,8 +48,8 @@ func ShutdownLog() {
 // sendLogToService 发送日志到 log-service
 func sendLogToService(logInfo LogInfo) {
 	ctx := gctx.New()
-	conn := grpcx.Client.MustNewGrpcClientConn("log-service")
-	client := v1.NewLogGameClient(conn)
+	// conn := grpcx.Client.MustNewGrpcClientConn("log-service")
+	// client := v1.NewLogGameClient(conn)
 
 	req := &v1.SendLogReq{
 		RoomID:     logInfo.RoomID,
@@ -59,7 +63,7 @@ func sendLogToService(logInfo LogInfo) {
 		Text:       logInfo.Text,
 	}
 
-	_, err := client.SendLog(ctx, req)
+	_, err := logClient.SendLog(ctx, req)
 	if err != nil {
 		g.Log().Error(ctx, err)
 		return
