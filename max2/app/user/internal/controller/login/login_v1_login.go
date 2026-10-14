@@ -7,15 +7,13 @@ import (
 	"time"
 
 	v1 "user/api/login/v1"
+	"user/internal/consts"
+	"user/internal/dao"
+	"user/internal/library/libUtils"
 	"user/internal/model/do"
 	"user/internal/model/entity"
 	"user/internal/service"
 
-	"user/internal/dao"
-
-	"user/internal/consts"
-
-	"github.com/gogf/gf/v2/crypto/gmd5"
 	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
@@ -87,14 +85,8 @@ func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.Log
 		password = entUser.Password
 	}
 
-	// ========== 3. 密码验证 ==========
-	reqPassword, err := gmd5.Encrypt(req.Password)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		err = gerror.New("用户名或密码错误")
-		return
-	}
-	if password != reqPassword {
+	// ========== 3. 密码验证（随机盐 MD5） ==========
+	if !libUtils.VerifyPassword(password, req.Password) {
 		// 密码错误计数 +1
 		newCount := pwdErrCount.Int() + 1
 		service.Cache().Set(ctx, "pwd_err:"+req.Username, newCount, 5*time.Minute)

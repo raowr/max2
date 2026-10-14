@@ -14,10 +14,11 @@ import (
 	"gfast/internal/app/user/model/do"
 	"gfast/internal/app/user/model/entity"
 
-	"github.com/gogf/gf/v2/crypto/gmd5"
 	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
+
+	"gfast/library/libUtils"
 )
 
 func init() {
@@ -100,7 +101,7 @@ func (s *sUser) UserUpdatePassword(ctx context.Context, req *user.UserUpdatePass
 	err = g.DB().Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		err = g.Try(ctx, func(ctx context.Context) {
 			var encryptErr error
-			password, encryptErr = gmd5.Encrypt(req.Password)
+			password, encryptErr = libUtils.HashPassword(req.Password)
 			liberr.ErrIsNil(ctx, encryptErr, "密码加密失败")
 			data := do.Users{
 				Id:       req.Id,

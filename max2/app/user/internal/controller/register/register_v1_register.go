@@ -6,11 +6,11 @@ import (
 	"time"
 	"unicode/utf8"
 	"user/internal/dao"
+	"user/internal/library/libUtils"
 	"user/internal/library/liberr"
 	"user/internal/model/do"
 	"user/internal/model/entity"
 
-	"github.com/gogf/gf/v2/crypto/gmd5"
 	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/frame/g"
 
@@ -60,8 +60,8 @@ func (c *ControllerV1) Register(ctx context.Context, req *v1.RegisterReq) (res *
 	//如果注册成功，返回成功
 	err = g.DB().Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		err = g.Try(ctx, func(ctx context.Context) {
-			//注册用户
-			password, err := gmd5.Encrypt(req.Password)
+			//注册用户：随机盐 MD5 存储
+			password, err := libUtils.HashPassword(req.Password)
 			if err != nil {
 				panic(err)
 			}

@@ -9,6 +9,9 @@ package libUtils
 
 import (
 	"context"
+	"crypto/rand"
+	"crypto/subtle"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"net"
@@ -29,8 +32,44 @@ import (
 	"user/internal/consts"
 )
 
-// EncryptPassword 密码加密
-func EncryptPassword(password, salt string) string {
+const (
+	// passwordHashPrefix 加盐密码的存储格式前缀：$md5$<saltHex>$<hashHex>
+	passwordHashPrefix = "$md5$"
+	// passwordSaltLen 随机盐的字节数（hex 编码后为 32 字符）
+	passwordSaltLen = 16
+)
+
+// HashPassword 生成随机盐并返回加盐密码的存储串，格式：$md5$<saltHex>$<hashHex>
+func HashPassword(password string) (string, error) {
+	salt, err := generatePasswordSalt()
+	if err != nil {
+		return "", err
+	}
+	return passwordHashPrefix + salt + "$" + hashPasswordWithSalt(password, salt), nil
+}
+
+// VerifyPassword 校验明文密码与加盐存储串是否匹配
+func VerifyPassword(stored, password string) bool {
+	// 按 "$" 切分：["", "md5", salt, hash]
+	parts := strings.Split(stored, "$")
+	if len(parts) != 4 || parts[1] != "md5" {
+		return false
+	}
+	want := hashPasswordWithSalt(password, parts[2])
+	return subtle.ConstantTimeCompare([]byte(want), []byte(parts[3])) == 1
+}
+
+// generatePasswordSalt 使用 crypto/rand 生成随机盐，返回 hex 编码
+func generatePasswordSalt() (string, error) {
+	b := make([]byte, passwordSaltLen)
+	if _, err := rand.Read(b); err != nil {
+		return "", err
+	}
+	return hex.EncodeToString(b), nil
+}
+
+// hashPasswordWithSalt 加盐哈希：md5(md5(password) + md5(salt))
+func hashPasswordWithSalt(password, salt string) string {
 	return gmd5.MustEncryptString(gmd5.MustEncryptString(password) + gmd5.MustEncryptString(salt))
 }
 
