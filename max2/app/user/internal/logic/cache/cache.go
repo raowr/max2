@@ -11,6 +11,7 @@ import (
 
 	"github.com/tiger1103/gfast-cache/cache"
 
+	"github.com/gogf/gf/v2/database/gredis"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
 )
@@ -42,4 +43,8 @@ func New() *sCache {
 type sCache struct {
 	*cache.GfCache
 	prefix string
+}
+
+func (s *sCache) Redis() *gredis.Redis { // ← 加这个方法
+	return g.Redis()
 }
