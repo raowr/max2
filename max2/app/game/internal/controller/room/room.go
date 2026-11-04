@@ -900,6 +900,8 @@ func (room *Room) safeSendRoomMessage(msgType string, data any) {
 
 	// 遍历每个玩家，分别发送消息
 	for _, player := range players {
+
+		//只有人类玩家才发送消息
 		if player.Type != Human {
 			continue
 		}
