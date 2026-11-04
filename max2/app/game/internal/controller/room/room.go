@@ -900,6 +900,9 @@ func (room *Room) safeSendRoomMessage(msgType string, data any) {
 
 	// 遍历每个玩家，分别发送消息
 	for _, player := range players {
+		if player.Type != Human {
+			continue
+		}
 		// 为每个玩家单独创建一个goroutine发送消息
 		go func(p *Player) {
 			// 在访问MsgChan之前获取读锁

@@ -541,10 +541,10 @@ func (c *Client) handlePlay(ctx context.Context) {
 	roomInfo.IsPlaying = true
 	roomInfo.Status = 1 //游戏中
 	rmMu.Unlock()
-	//如果时好友房,通知房间内每个人开始游戏
-	if roomInfo.Type == 2 {
-		roomInfo.SendRoomMessage(consts.Play, "")
-	}
+
+	//通知房间内每个人开始游戏
+	roomInfo.SendRoomMessage(consts.Play, "")
+
 	room.PlayOneGame(roomInfo)
 
 	//发送日志 开始游戏

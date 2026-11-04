@@ -11,7 +11,14 @@ import (
 )
 
 func SendLog(logInfo LogInfo) {
-	LogChan <- logInfo
+	if LogChan == nil {
+		return
+	}
+	select {
+	case LogChan <- logInfo:
+	default:
+		g.Log().Warningf(context.Background(), "LogChan 已满，丢弃日志: %+v", logInfo)
+	}
 }
 func GetLogChan() {
 	ctx, cancel = context.WithCancel(context.Background())
