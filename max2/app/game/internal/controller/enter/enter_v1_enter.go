@@ -201,12 +201,14 @@ func (c *Client) handleInitRoom(ctx context.Context) {
 	c.clearRoom(ctx)
 	// 创建新房间和玩家
 	roomInfo := rm.CreateRoom(1) //创建比赛房
-	c.safeSendToRoomChan(ctx, roomInfo)
+
 	playerName := "美女"
 	humanPlayer := roomInfo.CreatePlayer(playerName, room.Human)
 	humanPlayer.UserId = c.userID
 	c.pid = humanPlayer.ID
 	rm.PlayerList[humanPlayer.UserId] = humanPlayer // 关联用户与玩家
+
+	c.safeSendToRoomChan(ctx, roomInfo)
 
 	//发送日志 创建房间
 	log.SendLog(log.LogInfo{
@@ -292,13 +294,14 @@ func (c *Client) handleCreateRoom(ctx context.Context) {
 	c.clearRoom(ctx)
 
 	roomInfo := rm.CreateRoom(2) //创建比赛房
-	c.safeSendToRoomChan(ctx, roomInfo)
 
 	playerName := "美女"
 	humanPlayer := roomInfo.CreatePlayer(playerName, room.Human)
 	humanPlayer.UserId = c.userID
 	c.pid = humanPlayer.ID
 	rm.PlayerList[humanPlayer.UserId] = humanPlayer // 关联用户与玩家
+
+	c.safeSendToRoomChan(ctx, roomInfo)
 
 	// 推送玩家列表（处理JSON错误）
 	playerDTOs := getPlayers(roomInfo)
