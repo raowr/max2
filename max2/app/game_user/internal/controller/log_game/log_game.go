@@ -3,6 +3,7 @@ package log_game
 import (
 	"context"
 	v1 "game_user/api/log_game/v1"
+	"time"
 
 	"github.com/gogf/gf/contrib/registry/etcd/v2"
 	"github.com/gogf/gf/contrib/rpc/grpcx/v2"
@@ -73,7 +74,9 @@ func ShutdownLog() {
 }
 
 func sendLogToService(logInfo *v1.SendLogReq) {
-	_, err := logClient.SendLog(gctx.New(), logInfo)
+	ctx, cancel := context.WithTimeout(gctx.New(), 2*time.Second)
+	defer cancel()
+	_, err := logClient.SendLog(ctx, logInfo)
 	if err != nil {
 		g.Log().Error(ctx, err)
 	}

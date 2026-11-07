@@ -3,6 +3,7 @@ package log
 import (
 	"context"
 	v1 "game/api/log_game/v1"
+	"time"
 
 	"github.com/gogf/gf/contrib/registry/etcd/v2"
 	"github.com/gogf/gf/contrib/rpc/grpcx/v2"
@@ -54,9 +55,12 @@ func ShutdownLog() {
 
 // sendLogToService 发送日志到 log-service
 func sendLogToService(logInfo LogInfo) {
-	ctx := gctx.New()
+	// ctx := gctx.New()
 	// conn := grpcx.Client.MustNewGrpcClientConn("log-service")
 	// client := v1.NewLogGameClient(conn)
+
+	ctx, cancel := context.WithTimeout(gctx.New(), 2*time.Second)
+	defer cancel()
 
 	req := &v1.SendLogReq{
 		RoomID:     logInfo.RoomID,
